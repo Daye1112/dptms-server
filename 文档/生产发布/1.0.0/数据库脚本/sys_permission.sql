@@ -1,0 +1,52 @@
+/*==============================================================*/
+/* DBMS name:      MySQL 5.0                                    */
+/* Created on:     20/07/03 00:44:41                            */
+/*==============================================================*/
+
+
+/*==============================================================*/
+/* Table: SYS_PERMISSION                                        */
+/*==============================================================*/
+CREATE TABLE SYS_PERMISSION
+(
+   ID                   BIGINT NOT NULL AUTO_INCREMENT,
+   PER_NAME             VARCHAR(64),
+   PER_CODE             VARCHAR(64),
+   PER_GROUP            VARCHAR(64),
+   PER_URL              VARCHAR(256),
+   ORG_ID               BIGINT,
+   REMARK               VARCHAR(256),
+   ISVALID              TINYINT,
+   CREATE_TIME          DATETIME,
+   CREATE_BY            BIGINT,
+   UPDATE_TIME          DATETIME,
+   UPDATE_BY            BIGINT,
+   PRIMARY KEY (ID)
+);
+
+ALTER TABLE SYS_PERMISSION COMMENT '权限表';
+
+ALTER TABLE SYS_PERMISSION MODIFY COLUMN ID BIGINT COMMENT 'id';
+
+ALTER TABLE SYS_PERMISSION MODIFY COLUMN PER_NAME VARCHAR(64) COMMENT '权限名';
+
+ALTER TABLE SYS_PERMISSION MODIFY COLUMN PER_CODE VARCHAR(64) COMMENT '权限码';
+
+ALTER TABLE SYS_PERMISSION MODIFY COLUMN PER_GROUP VARCHAR(64) COMMENT '权限组';
+
+ALTER TABLE SYS_PERMISSION MODIFY COLUMN PER_URL VARCHAR(256) COMMENT '权限url';
+
+ALTER TABLE SYS_PERMISSION MODIFY COLUMN ORG_ID BIGINT COMMENT '组织id';
+
+ALTER TABLE SYS_PERMISSION MODIFY COLUMN REMARK VARCHAR(256) COMMENT '备注';
+
+ALTER TABLE SYS_PERMISSION MODIFY COLUMN ISVALID TINYINT COMMENT '是否有效';
+
+ALTER TABLE SYS_PERMISSION MODIFY COLUMN CREATE_TIME DATETIME COMMENT '创建时间';
+
+ALTER TABLE SYS_PERMISSION MODIFY COLUMN CREATE_BY BIGINT COMMENT '创建者';
+
+ALTER TABLE SYS_PERMISSION MODIFY COLUMN UPDATE_TIME DATETIME COMMENT '更新时间';
+
+ALTER TABLE SYS_PERMISSION MODIFY COLUMN UPDATE_BY BIGINT COMMENT '更新者';
+

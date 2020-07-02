@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.mrdarren</groupId>
+    <artifactId>dptms-server</artifactId>
+    <version>1.0.0</version>
+    <description>拂晓-项目组管理系统</description>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>dptms-parent</module>
+        <module>dptms-common-core</module>
+        <module>dptms-system-manage</module>
+        <module>dptms-spi</module>
+        <module>dptms-monitor-manage</module>
+        <module>dptms-auth</module>
+        <module>dptms-config</module>
+        <module>dptms-eureka</module>
+        <module>dptms-gateway</module>
+        <module>dptms-file-manage</module>
+    </modules>
+
+
+</project>
