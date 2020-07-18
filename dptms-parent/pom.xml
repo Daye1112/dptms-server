@@ -7,11 +7,11 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.1.RELEASE</version>
+        <version>2.2.2.RELEASE</version>
         <relativePath/>
     </parent>
 
-    <groupId>com.mrdarren</groupId>
+    <groupId>com.darren1112</groupId>
     <artifactId>dptms-parent</artifactId>
     <version>1.0.0</version>
     <description>整个项目的父模块</description>
@@ -24,12 +24,14 @@
 
         <spring-cloud.version>Hoxton.RELEASE</spring-cloud.version>
 
+        <lombok.version>1.18.10</lombok.version>
+
         <target.dir>D:\dptms\shell</target.dir>
     </properties>
 
     <dependencyManagement>
         <dependencies>
-            <!-- Spring cloud Begin -->
+            <!-- [Spring cloud] Start -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
@@ -37,7 +39,23 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <!-- Spring cloud End -->
+            <!-- [Spring cloud] End -->
+
+            <!-- [lombok] Start -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+            <!-- [lombok] End -->
+
+            <!-- [dptms] Start-->
+            <dependency>
+                <groupId>com.darren1112</groupId>
+                <artifactId>dptms-common-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!-- [dptms] End-->
         </dependencies>
     </dependencyManagement>
 

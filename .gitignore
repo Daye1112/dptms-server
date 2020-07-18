@@ -19,5 +19,5 @@ hs_err_pid*
 .idea/
 *.iml
 **/target/
-ulearning-logs/
+dptms-logs/
 /**/rebel.xml
