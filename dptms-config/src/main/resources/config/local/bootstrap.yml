@@ -1,0 +1,26 @@
+# 服务配置
+spring:
+  application:
+    name: dptms-config
+  # config路径配置
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/config/master/
+  profiles:
+    active: native
+# 注册中心配置
+eureka:
+  instance:
+    hostname: 127.0.0.1
+    instance-id: ${eureka.instance.hostname}:${server.port}
+    home-page-url-path: /
+    lease-expiration-duration-in-seconds: 90
+    lease-renewal-interval-in-seconds: 30
+    metadata-map:
+      management.context-path: /actuator
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9001/eureka/
+    registry-fetch-interval-seconds: 5
