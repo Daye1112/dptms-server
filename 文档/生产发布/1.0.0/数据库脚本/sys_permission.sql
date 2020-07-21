@@ -1,52 +1,52 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     20/07/03 00:44:41                            */
+/* Created on:     20/07/20 00:23:18                            */
 /*==============================================================*/
 
 
 /*==============================================================*/
-/* Table: SYS_PERMISSION                                        */
+/* Table: sys_permission                                        */
 /*==============================================================*/
-CREATE TABLE SYS_PERMISSION
+create table sys_permission
 (
-   ID                   BIGINT NOT NULL AUTO_INCREMENT,
-   PER_NAME             VARCHAR(64),
-   PER_CODE             VARCHAR(64),
-   PER_GROUP            VARCHAR(64),
-   PER_URL              VARCHAR(256),
-   ORG_ID               BIGINT,
-   REMARK               VARCHAR(256),
-   ISVALID              TINYINT,
-   CREATE_TIME          DATETIME,
-   CREATE_BY            BIGINT,
-   UPDATE_TIME          DATETIME,
-   UPDATE_BY            BIGINT,
-   PRIMARY KEY (ID)
+   id                   bigint not null auto_increment,
+   per_name             varchar(64),
+   per_code             varchar(64),
+   per_group            varchar(64),
+   per_url              varchar(256),
+   org_id               bigint,
+   remark               varchar(256),
+   isvalid              tinyint,
+   create_time          datetime,
+   create_by            bigint,
+   update_time          datetime,
+   update_by            bigint,
+   primary key (id)
 );
 
-ALTER TABLE SYS_PERMISSION COMMENT '权限表';
+alter table sys_permission comment '权限表';
 
-ALTER TABLE SYS_PERMISSION MODIFY COLUMN ID BIGINT COMMENT 'id';
+alter table sys_permission modify column id bigint auto_increment comment 'id';
 
-ALTER TABLE SYS_PERMISSION MODIFY COLUMN PER_NAME VARCHAR(64) COMMENT '权限名';
+alter table sys_permission modify column per_name varchar(64) comment '权限名';
 
-ALTER TABLE SYS_PERMISSION MODIFY COLUMN PER_CODE VARCHAR(64) COMMENT '权限码';
+alter table sys_permission modify column per_code varchar(64) comment '权限码';
 
-ALTER TABLE SYS_PERMISSION MODIFY COLUMN PER_GROUP VARCHAR(64) COMMENT '权限组';
+alter table sys_permission modify column per_group varchar(64) comment '权限组';
 
-ALTER TABLE SYS_PERMISSION MODIFY COLUMN PER_URL VARCHAR(256) COMMENT '权限url';
+alter table sys_permission modify column per_url varchar(256) comment '权限url';
 
-ALTER TABLE SYS_PERMISSION MODIFY COLUMN ORG_ID BIGINT COMMENT '组织id';
+alter table sys_permission modify column org_id bigint comment '组织id';
 
-ALTER TABLE SYS_PERMISSION MODIFY COLUMN REMARK VARCHAR(256) COMMENT '备注';
+alter table sys_permission modify column remark varchar(256) comment '备注';
 
-ALTER TABLE SYS_PERMISSION MODIFY COLUMN ISVALID TINYINT COMMENT '是否有效';
+alter table sys_permission modify column isvalid tinyint comment '是否有效';
 
-ALTER TABLE SYS_PERMISSION MODIFY COLUMN CREATE_TIME DATETIME COMMENT '创建时间';
+alter table sys_permission modify column create_time datetime comment '创建时间';
 
-ALTER TABLE SYS_PERMISSION MODIFY COLUMN CREATE_BY BIGINT COMMENT '创建者';
+alter table sys_permission modify column create_by bigint comment '创建者';
 
-ALTER TABLE SYS_PERMISSION MODIFY COLUMN UPDATE_TIME DATETIME COMMENT '更新时间';
+alter table sys_permission modify column update_time datetime comment '更新时间';
 
-ALTER TABLE SYS_PERMISSION MODIFY COLUMN UPDATE_BY BIGINT COMMENT '更新者';
+alter table sys_permission modify column update_by bigint comment '更新者';
 

@@ -63,7 +63,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.darren1112.config.ConfigApplication</mainClass>
+                    <mainClass>com.darren1112.dptms.config.ConfigApplication</mainClass>
                     <!--<skip>true</skip>-->
                 </configuration>
             </plugin>

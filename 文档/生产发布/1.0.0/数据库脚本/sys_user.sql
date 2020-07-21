@@ -1,67 +1,67 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     20/07/03 00:44:41                            */
+/* Created on:     20/07/20 00:23:18                            */
 /*==============================================================*/
 
 
 /*==============================================================*/
-/* Table: SYS_USER                                              */
+/* Table: sys_user                                              */
 /*==============================================================*/
-CREATE TABLE SYS_USER
+create table sys_user
 (
-   ID                   BIGINT NOT NULL AUTO_INCREMENT,
-   USERNAME             VARCHAR(64),
-   PASSWORD             VARCHAR(128),
-   REAL_NAME            VARCHAR(64),
-   GENDER               TINYINT,
-   PHONE_NUMER          VARCHAR(32),
-   EMAIL                VARCHAR(64),
-   LAST_LOGIN_TIME      DATETIME,
-   PWD_UPDATE_TIME      DATETIME,
-   FILE_ID              BIGINT,
-   ORG_ID               BIGINT,
-   REMARK               VARCHAR(256),
-   ISVALID              TINYINT,
-   CREATE_TIME          DATETIME,
-   CREATE_BY            BIGINT,
-   UPDATE_TIME          DATETIME,
-   UPDATE_BY            BIGINT,
-   PRIMARY KEY (ID)
+   id                   bigint not null auto_increment,
+   username             varchar(64),
+   password             varchar(128),
+   real_name            varchar(64),
+   gender               tinyint,
+   phone_numer          varchar(32),
+   email                varchar(64),
+   last_login_time      datetime,
+   pwd_update_time      datetime,
+   file_id              bigint,
+   org_id               bigint,
+   remark               varchar(256),
+   isvalid              tinyint,
+   create_time          datetime,
+   create_by            bigint,
+   update_time          datetime,
+   update_by            bigint,
+   primary key (id)
 );
 
-ALTER TABLE SYS_USER COMMENT '用户表';
+alter table sys_user comment '用户表';
 
-ALTER TABLE SYS_USER MODIFY COLUMN ID BIGINT COMMENT 'id';
+alter table sys_user modify column id bigint auto_increment comment 'id';
 
-ALTER TABLE SYS_USER MODIFY COLUMN USERNAME VARCHAR(64) COMMENT '用户名';
+alter table sys_user modify column username varchar(64) comment '用户名';
 
-ALTER TABLE SYS_USER MODIFY COLUMN PASSWORD VARCHAR(128) COMMENT '密码';
+alter table sys_user modify column password varchar(128) comment '密码';
 
-ALTER TABLE SYS_USER MODIFY COLUMN REAL_NAME VARCHAR(64) COMMENT '姓名';
+alter table sys_user modify column real_name varchar(64) comment '姓名';
 
-ALTER TABLE SYS_USER MODIFY COLUMN GENDER TINYINT COMMENT '性别 1：男 2：女';
+alter table sys_user modify column gender tinyint comment '性别 1：男 2：女';
 
-ALTER TABLE SYS_USER MODIFY COLUMN PHONE_NUMER VARCHAR(32) COMMENT '联系电话';
+alter table sys_user modify column phone_numer varchar(32) comment '联系电话';
 
-ALTER TABLE SYS_USER MODIFY COLUMN EMAIL VARCHAR(64) COMMENT '邮箱';
+alter table sys_user modify column email varchar(64) comment '邮箱';
 
-ALTER TABLE SYS_USER MODIFY COLUMN LAST_LOGIN_TIME DATETIME COMMENT '上次登录时间';
+alter table sys_user modify column last_login_time datetime comment '上次登录时间';
 
-ALTER TABLE SYS_USER MODIFY COLUMN PWD_UPDATE_TIME DATETIME COMMENT '密码更新时间';
+alter table sys_user modify column pwd_update_time datetime comment '密码更新时间';
 
-ALTER TABLE SYS_USER MODIFY COLUMN FILE_ID BIGINT COMMENT '头像文件id';
+alter table sys_user modify column file_id bigint comment '头像文件id';
 
-ALTER TABLE SYS_USER MODIFY COLUMN ORG_ID BIGINT COMMENT '组织id';
+alter table sys_user modify column org_id bigint comment '组织id';
 
-ALTER TABLE SYS_USER MODIFY COLUMN REMARK VARCHAR(256) COMMENT '备注';
+alter table sys_user modify column remark varchar(256) comment '备注';
 
-ALTER TABLE SYS_USER MODIFY COLUMN ISVALID TINYINT COMMENT '是否有效';
+alter table sys_user modify column isvalid tinyint comment '是否有效';
 
-ALTER TABLE SYS_USER MODIFY COLUMN CREATE_TIME DATETIME COMMENT '创建时间';
+alter table sys_user modify column create_time datetime comment '创建时间';
 
-ALTER TABLE SYS_USER MODIFY COLUMN CREATE_BY BIGINT COMMENT '创建者';
+alter table sys_user modify column create_by bigint comment '创建者';
 
-ALTER TABLE SYS_USER MODIFY COLUMN UPDATE_TIME DATETIME COMMENT '更新时间';
+alter table sys_user modify column update_time datetime comment '更新时间';
 
-ALTER TABLE SYS_USER MODIFY COLUMN UPDATE_BY BIGINT COMMENT '更新者';
+alter table sys_user modify column update_by bigint comment '更新者';
 

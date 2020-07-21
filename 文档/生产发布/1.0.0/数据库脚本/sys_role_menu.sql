@@ -1,43 +1,43 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     20/07/03 00:44:41                            */
+/* Created on:     20/07/20 00:23:18                            */
 /*==============================================================*/
 
 
 /*==============================================================*/
-/* Table: SYS_ROLE_MENU                                         */
+/* Table: sys_role_menu                                         */
 /*==============================================================*/
-CREATE TABLE SYS_ROLE_MENU
+create table sys_role_menu
 (
-   ID                   BIGINT NOT NULL AUTO_INCREMENT,
-   MENU_ID              BIGINT,
-   ROLE_ID              BIGINT,
-   REMARK               VARCHAR(256),
-   ISVALID              TINYINT,
-   CREATE_TIME          DATETIME,
-   CREATE_BY            BIGINT,
-   UPDATE_TIME          DATETIME,
-   UPDATE_BY            BIGINT,
-   PRIMARY KEY (ID)
+   id                   bigint not null auto_increment,
+   menu_id              bigint,
+   role_id              bigint,
+   remark               varchar(256),
+   isvalid              tinyint,
+   create_time          datetime,
+   create_by            bigint,
+   update_time          datetime,
+   update_by            bigint,
+   primary key (id)
 );
 
-ALTER TABLE SYS_ROLE_MENU COMMENT '角色菜单表';
+alter table sys_role_menu comment '角色菜单表';
 
-ALTER TABLE SYS_ROLE_MENU MODIFY COLUMN ID BIGINT COMMENT 'id';
+alter table sys_role_menu modify column id bigint auto_increment comment 'id';
 
-ALTER TABLE SYS_ROLE_MENU MODIFY COLUMN MENU_ID BIGINT COMMENT '菜单id';
+alter table sys_role_menu modify column menu_id bigint comment '菜单id';
 
-ALTER TABLE SYS_ROLE_MENU MODIFY COLUMN ROLE_ID BIGINT COMMENT '角色id';
+alter table sys_role_menu modify column role_id bigint comment '角色id';
 
-ALTER TABLE SYS_ROLE_MENU MODIFY COLUMN REMARK VARCHAR(256) COMMENT '备注';
+alter table sys_role_menu modify column remark varchar(256) comment '备注';
 
-ALTER TABLE SYS_ROLE_MENU MODIFY COLUMN ISVALID TINYINT COMMENT '是否有效';
+alter table sys_role_menu modify column isvalid tinyint comment '是否有效';
 
-ALTER TABLE SYS_ROLE_MENU MODIFY COLUMN CREATE_TIME DATETIME COMMENT '创建时间';
+alter table sys_role_menu modify column create_time datetime comment '创建时间';
 
-ALTER TABLE SYS_ROLE_MENU MODIFY COLUMN CREATE_BY BIGINT COMMENT '创建者';
+alter table sys_role_menu modify column create_by bigint comment '创建者';
 
-ALTER TABLE SYS_ROLE_MENU MODIFY COLUMN UPDATE_TIME DATETIME COMMENT '更新时间';
+alter table sys_role_menu modify column update_time datetime comment '更新时间';
 
-ALTER TABLE SYS_ROLE_MENU MODIFY COLUMN UPDATE_BY BIGINT COMMENT '更新者';
+alter table sys_role_menu modify column update_by bigint comment '更新者';
 

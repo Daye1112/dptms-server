@@ -1,52 +1,52 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     20/07/03 00:44:41                            */
+/* Created on:     20/07/20 00:23:18                            */
 /*==============================================================*/
 
 
 /*==============================================================*/
-/* Table: SYS_MENU                                              */
+/* Table: sys_menu                                              */
 /*==============================================================*/
-CREATE TABLE SYS_MENU
+create table sys_menu
 (
-   ID                   BIGINT NOT NULL AUTO_INCREMENT,
-   MENU_NAME            VARCHAR(64),
-   MENU_CODE            VARCHAR(64),
-   MENU_TYPE            TINYINT,
-   MENU_PARENT_ID       BIGINT,
-   ORG_ID               BIGINT,
-   REMARK               VARCHAR(256),
-   ISVALID              TINYINT,
-   CREATE_TIME          DATETIME,
-   CREATE_BY            BIGINT,
-   UPDATE_TIME          DATETIME,
-   UPDATE_BY            BIGINT,
-   PRIMARY KEY (ID)
+   id                   bigint not null auto_increment,
+   menu_name            varchar(64),
+   menu_code            varchar(64),
+   menu_type            tinyint,
+   menu_parent_id       bigint,
+   org_id               bigint,
+   remark               varchar(256),
+   isvalid              tinyint,
+   create_time          datetime,
+   create_by            bigint,
+   update_time          datetime,
+   update_by            bigint,
+   primary key (id)
 );
 
-ALTER TABLE SYS_MENU COMMENT '菜单表';
+alter table sys_menu comment '菜单表';
 
-ALTER TABLE SYS_MENU MODIFY COLUMN ID BIGINT COMMENT 'id';
+alter table sys_menu modify column id bigint auto_increment comment 'id';
 
-ALTER TABLE SYS_MENU MODIFY COLUMN MENU_NAME VARCHAR(64) COMMENT '菜单名称';
+alter table sys_menu modify column menu_name varchar(64) comment '菜单名称';
 
-ALTER TABLE SYS_MENU MODIFY COLUMN MENU_CODE VARCHAR(64) COMMENT '菜单编号';
+alter table sys_menu modify column menu_code varchar(64) comment '菜单编号';
 
-ALTER TABLE SYS_MENU MODIFY COLUMN MENU_TYPE TINYINT COMMENT '菜单类型 1：普通页 2：新窗口 3：iframe';
+alter table sys_menu modify column menu_type tinyint comment '菜单类型 1：普通页 2：新窗口 3：iframe';
 
-ALTER TABLE SYS_MENU MODIFY COLUMN MENU_PARENT_ID BIGINT COMMENT '父节点id';
+alter table sys_menu modify column menu_parent_id bigint comment '父节点id';
 
-ALTER TABLE SYS_MENU MODIFY COLUMN ORG_ID BIGINT COMMENT '组织id';
+alter table sys_menu modify column org_id bigint comment '组织id';
 
-ALTER TABLE SYS_MENU MODIFY COLUMN REMARK VARCHAR(256) COMMENT '备注';
+alter table sys_menu modify column remark varchar(256) comment '备注';
 
-ALTER TABLE SYS_MENU MODIFY COLUMN ISVALID TINYINT COMMENT '是否有效';
+alter table sys_menu modify column isvalid tinyint comment '是否有效';
 
-ALTER TABLE SYS_MENU MODIFY COLUMN CREATE_TIME DATETIME COMMENT '创建时间';
+alter table sys_menu modify column create_time datetime comment '创建时间';
 
-ALTER TABLE SYS_MENU MODIFY COLUMN CREATE_BY BIGINT COMMENT '创建者';
+alter table sys_menu modify column create_by bigint comment '创建者';
 
-ALTER TABLE SYS_MENU MODIFY COLUMN UPDATE_TIME DATETIME COMMENT '更新时间';
+alter table sys_menu modify column update_time datetime comment '更新时间';
 
-ALTER TABLE SYS_MENU MODIFY COLUMN UPDATE_BY BIGINT COMMENT '更新者';
+alter table sys_menu modify column update_by bigint comment '更新者';
 

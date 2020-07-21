@@ -1,43 +1,43 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     20/07/03 00:44:41                            */
+/* Created on:     20/07/20 00:23:18                            */
 /*==============================================================*/
 
 
 /*==============================================================*/
-/* Table: SYS_ORGANIZATION                                      */
+/* Table: sys_organization                                      */
 /*==============================================================*/
-CREATE TABLE SYS_ORGANIZATION
+create table sys_organization
 (
-   ID                   BIGINT NOT NULL AUTO_INCREMENT,
-   ORG_NAME             VARCHAR(64),
-   ORG_CODE             VARCHAR(64),
-   REMARK               VARCHAR(256),
-   ISVALID              TINYINT,
-   CREATE_TIME          DATETIME,
-   CREATE_BY            BIGINT,
-   UPDATE_TIME          DATETIME,
-   UPDATE_BY            BIGINT,
-   PRIMARY KEY (ID)
+   id                   bigint not null auto_increment,
+   org_name             varchar(64),
+   org_code             varchar(64),
+   remark               varchar(256),
+   isvalid              tinyint,
+   create_time          datetime,
+   create_by            bigint,
+   update_time          datetime,
+   update_by            bigint,
+   primary key (id)
 );
 
-ALTER TABLE SYS_ORGANIZATION COMMENT '组织表';
+alter table sys_organization comment '组织表';
 
-ALTER TABLE SYS_ORGANIZATION MODIFY COLUMN ID BIGINT COMMENT 'id';
+alter table sys_organization modify column id bigint auto_increment comment 'id';
 
-ALTER TABLE SYS_ORGANIZATION MODIFY COLUMN ORG_NAME VARCHAR(64) COMMENT '组织名称';
+alter table sys_organization modify column org_name varchar(64) comment '组织名称';
 
-ALTER TABLE SYS_ORGANIZATION MODIFY COLUMN ORG_CODE VARCHAR(64) COMMENT '组织编号';
+alter table sys_organization modify column org_code varchar(64) comment '组织编号';
 
-ALTER TABLE SYS_ORGANIZATION MODIFY COLUMN REMARK VARCHAR(256) COMMENT '备注';
+alter table sys_organization modify column remark varchar(256) comment '备注';
 
-ALTER TABLE SYS_ORGANIZATION MODIFY COLUMN ISVALID TINYINT COMMENT '是否有效';
+alter table sys_organization modify column isvalid tinyint comment '是否有效';
 
-ALTER TABLE SYS_ORGANIZATION MODIFY COLUMN CREATE_TIME DATETIME COMMENT '创建时间';
+alter table sys_organization modify column create_time datetime comment '创建时间';
 
-ALTER TABLE SYS_ORGANIZATION MODIFY COLUMN CREATE_BY BIGINT COMMENT '创建者';
+alter table sys_organization modify column create_by bigint comment '创建者';
 
-ALTER TABLE SYS_ORGANIZATION MODIFY COLUMN UPDATE_TIME DATETIME COMMENT '更新时间';
+alter table sys_organization modify column update_time datetime comment '更新时间';
 
-ALTER TABLE SYS_ORGANIZATION MODIFY COLUMN UPDATE_BY BIGINT COMMENT '更新者';
+alter table sys_organization modify column update_by bigint comment '更新者';
 

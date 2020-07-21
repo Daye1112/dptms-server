@@ -24,6 +24,11 @@
 
         <spring-cloud.version>Hoxton.RELEASE</spring-cloud.version>
 
+        <fastjson.version>1.2.54</fastjson.version>
+        <jasypt.version>2.1.0</jasypt.version>
+        <druid.version>1.1.10</druid.version>
+        <mysql.version>5.1.47</mysql.version>
+        <mybatis.version>2.1.0</mybatis.version>
         <lombok.version>1.18.10</lombok.version>
 
         <target.dir>D:\dptms\shell</target.dir>
@@ -41,6 +46,27 @@
             </dependency>
             <!-- [Spring cloud] End -->
 
+            <!-- [数据源依赖] Start -->
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+            <!-- [数据源依赖] End -->
+
+            <!-- [Plugins] Start -->
+            <!-- [jasypt] Start -->
+            <dependency>
+                <groupId>com.github.ulisesbocchio</groupId>
+                <artifactId>jasypt-spring-boot-starter</artifactId>
+                <version>${jasypt.version}</version>
+            </dependency>
+            <!-- [jasypt] End -->
             <!-- [lombok] Start -->
             <dependency>
                 <groupId>org.projectlombok</groupId>
@@ -48,11 +74,59 @@
                 <version>${lombok.version}</version>
             </dependency>
             <!-- [lombok] End -->
+            <!-- [fastjson] Start -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+            <!-- [fastjson] End -->
+            <!-- [Plugins] End -->
 
             <!-- [dptms] Start-->
             <dependency>
                 <groupId>com.darren1112</groupId>
+                <artifactId>dptms-auth</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.darren1112</groupId>
                 <artifactId>dptms-common-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.darren1112</groupId>
+                <artifactId>dptms-config</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.darren1112</groupId>
+                <artifactId>dptms-eureka</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.darren1112</groupId>
+                <artifactId>dptms-file-manage</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.darren1112</groupId>
+                <artifactId>dptms-gateway</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.darren1112</groupId>
+                <artifactId>dptms-monitor-manage</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.darren1112</groupId>
+                <artifactId>dptms-spi</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.darren1112</groupId>
+                <artifactId>dptms-system-manage</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!-- [dptms] End-->
