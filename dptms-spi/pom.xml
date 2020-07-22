@@ -13,5 +13,15 @@
     <artifactId>dptms-spi</artifactId>
     <description>存放entity、dto、vo等模型模块</description>
 
-
+    <dependencies>
+        <!-- [Plugins] Start -->
+        <!-- [lombok] Start -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- [lombok] End -->
+        <!-- [Plugins] End -->
+    </dependencies>
 </project>

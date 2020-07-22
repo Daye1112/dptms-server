@@ -14,7 +14,7 @@ create table sys_user
    password             varchar(128),
    real_name            varchar(64),
    gender               tinyint,
-   phone_numer          varchar(32),
+   phone_number         varchar(32),
    email                varchar(64),
    last_login_time      datetime,
    pwd_update_time      datetime,
@@ -41,7 +41,7 @@ alter table sys_user modify column real_name varchar(64) comment '姓名';
 
 alter table sys_user modify column gender tinyint comment '性别 1：男 2：女';
 
-alter table sys_user modify column phone_numer varchar(32) comment '联系电话';
+alter table sys_user modify column phone_number varchar(32) comment '联系电话';
 
 alter table sys_user modify column email varchar(64) comment '邮箱';
 
