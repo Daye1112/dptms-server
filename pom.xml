@@ -21,6 +21,7 @@
         <module>dptms-eureka</module>
         <module>dptms-gateway</module>
         <module>dptms-file-manage</module>
+        <module>dptms-common-component</module>
     </modules>
 
 

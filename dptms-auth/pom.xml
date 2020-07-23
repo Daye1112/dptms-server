@@ -89,7 +89,7 @@
         <!-- [dptms] Start-->
         <dependency>
             <groupId>com.darren1112</groupId>
-            <artifactId>dptms-common-core</artifactId>
+            <artifactId>dptms-common-component</artifactId>
         </dependency>
         <!-- [dptms] End-->
     </dependencies>

@@ -12,7 +12,9 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
  */
 @EnableCaching
 @EnableEurekaClient
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {
+        "com.darren1112.dptms.auth",
+        "com.darren1112.dptms.common.component"})
 public class AuthApplication {
 
     public static void main(String[] args) {

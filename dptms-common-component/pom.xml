@@ -10,11 +10,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>dptms-common-core</artifactId>
-    <description>公共模块</description>
+    <artifactId>dptms-common-component</artifactId>
 
     <dependencies>
-        <!-- [Spring Boot] Start -->
+        <!-- Spring Boot Begin -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -24,15 +23,21 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <!-- [Spring Boot] End -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis-reactive</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <!-- Spring Boot End -->
 
         <!-- [Plugins] Start -->
-        <!-- [jasypt] Start -->
-        <dependency>
-            <groupId>com.github.ulisesbocchio</groupId>
-            <artifactId>jasypt-spring-boot-starter</artifactId>
-        </dependency>
-        <!-- [jasypt] End -->
         <!-- [lombok] Start -->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -40,24 +45,12 @@
             <optional>true</optional>
         </dependency>
         <!-- [lombok] End -->
-        <!-- [hutool] Start-->
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
-        </dependency>
-        <!--[ hutool] End-->
-        <!-- [lang] Start -->
-        <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-        </dependency>
-        <!-- [lang] End -->
         <!-- [Plugins] End -->
 
         <!-- [dptms] Start-->
         <dependency>
             <groupId>com.darren1112</groupId>
-            <artifactId>dptms-spi</artifactId>
+            <artifactId>dptms-common-core</artifactId>
         </dependency>
         <!-- [dptms] End-->
     </dependencies>

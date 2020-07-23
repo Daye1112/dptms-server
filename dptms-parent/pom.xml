@@ -30,6 +30,8 @@
         <mysql.version>5.1.47</mysql.version>
         <mybatis.version>2.1.0</mybatis.version>
         <lombok.version>1.18.10</lombok.version>
+        <hutool.version>5.0.6</hutool.version>
+        <commons-lang.version>2.6</commons-lang.version>
 
         <target.dir>D:\dptms\shell</target.dir>
     </properties>
@@ -81,6 +83,20 @@
                 <version>${fastjson.version}</version>
             </dependency>
             <!-- [fastjson] End -->
+            <!-- [hutool] Start-->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+            <!--[ hutool] End-->
+            <!-- [lang] Start -->
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>${commons-lang.version}</version>
+            </dependency>
+            <!-- [lang] End -->
             <!-- [Plugins] End -->
 
             <!-- [dptms] Start-->
@@ -127,6 +143,11 @@
             <dependency>
                 <groupId>com.darren1112</groupId>
                 <artifactId>dptms-system-manage</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.darren1112</groupId>
+                <artifactId>dptms-common-component</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!-- [dptms] End-->
