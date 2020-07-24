@@ -1,4 +1,0 @@
-#jasypt加密的密匙
-jasypt:
-  encryptor:
-    password: 请联系管理员
