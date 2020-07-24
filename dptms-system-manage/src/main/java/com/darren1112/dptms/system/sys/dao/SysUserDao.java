@@ -1,4 +1,4 @@
-package com.darren1112.dptms.auth.dao;
+package com.darren1112.dptms.system.sys.dao;
 
 import com.darren1112.dptms.spi.sys.dto.SysUserDto;
 import com.darren1112.dptms.spi.sys.entity.SysUserEntity;
@@ -33,15 +33,5 @@ public interface SysUserDao {
      * @date 20/07/23 02:26
      */
     void update(SysUserDto sysUserDto);
-
-    /**
-     * 根据用户名查询用户信息
-     *
-     * @param username 用户名
-     * @return 用户信息
-     * @author luyuhao
-     * @date 20/07/23 02:49
-     */
-    SysUserDto getByUsername(@Param("username") String username);
 
 }

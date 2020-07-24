@@ -2,9 +2,12 @@ package com.darren1112.dptms.auth.service.impl;
 
 import com.darren1112.dptms.auth.dao.SysUserDao;
 import com.darren1112.dptms.auth.service.SysUserService;
-import com.darren1112.dptms.spi.auth.dto.SysUserDto;
+import com.darren1112.dptms.spi.sys.dto.SysUserDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 系统用户Service
@@ -13,6 +16,8 @@ import org.springframework.stereotype.Service;
  * @date 2020/07/23 02:43
  */
 @Service
+@CacheConfig(cacheNames = "sysUser")
+@Transactional(rollbackFor = Throwable.class, readOnly = true)
 public class SysUserServiceImpl implements SysUserService {
 
     @Autowired
@@ -27,6 +32,7 @@ public class SysUserServiceImpl implements SysUserService {
      * @date 20/07/23 02:58
      */
     @Override
+    @Cacheable(keyGenerator = "keyGenerator")
     public SysUserDto getByUsername(String username) {
         return sysUserDao.getByUsername(username);
     }

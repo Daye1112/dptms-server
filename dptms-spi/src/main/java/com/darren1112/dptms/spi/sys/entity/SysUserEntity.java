@@ -1,4 +1,4 @@
-package com.darren1112.dptms.spi.auth.entity;
+package com.darren1112.dptms.spi.sys.entity;
 
 import com.darren1112.dptms.spi.common.entity.BaseEntity;
 import lombok.Data;
