@@ -10,17 +10,22 @@ spring:
           search-locations: classpath:/config/master/
   profiles:
     active: native
+
+server:
+  port: 9002
+
 # 注册中心配置
 eureka:
   instance:
-    hostname: 127.0.0.1
-    instance-id: ${eureka.instance.hostname}:${server.port}
     home-page-url-path: /
-    lease-expiration-duration-in-seconds: 90
-    lease-renewal-interval-in-seconds: 30
+    lease-renewal-interval-in-seconds: 20
     metadata-map:
       management.context-path: /actuator
   client:
+    user: ENC(33eOEuFfefOr9r9N0lUcPz+WYjBYT6k3)
+    password: ENC(91dtK4v9kstfY/+sKH3GbuF6AytSfKvm)
     serviceUrl:
-      defaultZone: http://localhost:9001/eureka/
-    registry-fetch-interval-seconds: 5
+      defaultZone: http://${eureka.client.user}:${eureka.client.password}@localhost:9001/eureka/
+    instance-info-replication-interval-seconds: 30
+    register-with-eureka: true
+    fetch-registry: true

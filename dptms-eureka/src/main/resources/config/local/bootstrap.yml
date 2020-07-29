@@ -1,6 +1,10 @@
 spring:
   application:
     name: dptms-eureka
+  security:
+    user:
+      name: ENC(33eOEuFfefOr9r9N0lUcPz+WYjBYT6k3)
+      password: ENC(91dtK4v9kstfY/+sKH3GbuF6AytSfKvm)
 
 server:
   port: 9001
@@ -17,4 +21,4 @@ eureka:
     fetch-registry: false
     instance-info-replication-interval-seconds: 30
     service-url:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${server.port}/eureka/

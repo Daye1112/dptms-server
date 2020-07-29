@@ -6,7 +6,6 @@ info:
     version: "@project.version@"
 
 server:
-  port: 9002
   tomcat:
     basedir: ./dptms-logs/${spring.application.name}/tomcat
     accesslog:

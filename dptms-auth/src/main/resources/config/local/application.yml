@@ -6,7 +6,6 @@ info:
     version: "@project.version@"
 #服务器配置
 server:
-  port: 9003
   tomcat:
     basedir: ./dptms-logs/${spring.application.name}/tomcat
     accesslog:
@@ -18,8 +17,7 @@ server:
       prefix: ${spring.application.name}
       rotate: true
       suffix: .log
-  servlet:
-    context-path: /auth
+
 #日志配置
 logging:
   config: classpath:config/local/logback.xml
