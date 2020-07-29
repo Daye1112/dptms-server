@@ -64,6 +64,12 @@ spring:
     password: ENC(1XUbqRThqaIzV/joSjHX/GJtQ+lWeqYlSTXtgnVHlfiE9OLASPIh+w==)
     #连接超时时间
     timeout: 5000
+    jedis:
+      pool:
+        min-idle: 8
+        max-idle: 500
+        max-active: 2000
+        max-wait: 10000
 
 # mybatis配置
 mybatis:

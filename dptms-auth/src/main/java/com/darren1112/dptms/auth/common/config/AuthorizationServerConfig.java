@@ -13,14 +13,8 @@ import org.springframework.security.oauth2.config.annotation.configurers.ClientD
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
-import org.springframework.security.oauth2.provider.OAuth2RequestFactory;
-import org.springframework.security.oauth2.provider.password.ResourceOwnerPasswordTokenGranter;
-import org.springframework.security.oauth2.provider.request.DefaultOAuth2RequestFactory;
-import org.springframework.security.oauth2.provider.token.DefaultAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
-import org.springframework.security.oauth2.provider.token.DefaultUserAuthenticationConverter;
 import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
 import java.util.UUID;
@@ -49,16 +43,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
-                .withClient("app-a")
-                .secret(passwordEncoder.encode("app-a-1234"))
-                .authorizedGrantTypes("refresh_token", "authorization_code")
-                .accessTokenValiditySeconds(3600)
-                .scopes("all")
-                .and()
-                .withClient("app-b")
-                .secret(passwordEncoder.encode("app-b-1234"))
-                .authorizedGrantTypes("refresh_token", "authorization_code")
-                .accessTokenValiditySeconds(7200)
+                .withClient("dptms")
+                .secret(passwordEncoder.encode("123456"))
+                .authorizedGrantTypes("password", "refresh_token")
                 .scopes("all");
     }
 
@@ -66,8 +53,10 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
         endpoints.tokenStore(tokenStore())
                 .userDetailsService(userDetailService)
-                .authenticationManager(authenticationManager);
+                .authenticationManager(authenticationManager)
+                .tokenServices(defaultTokenServices());
     }
+
 
     @Bean
     public TokenStore tokenStore() {
@@ -77,13 +66,14 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         return redisTokenStore;
     }
 
-    @Bean
     @Primary
+    @Bean
     public DefaultTokenServices defaultTokenServices() {
         DefaultTokenServices tokenServices = new DefaultTokenServices();
-
         tokenServices.setTokenStore(tokenStore());
         tokenServices.setSupportRefreshToken(true);
+        tokenServices.setAccessTokenValiditySeconds(60 * 60 * 24);
+        tokenServices.setRefreshTokenValiditySeconds(60 * 60 * 24 * 7);
         return tokenServices;
     }
 }
