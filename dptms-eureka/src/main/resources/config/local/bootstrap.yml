@@ -1,3 +1,20 @@
 spring:
   application:
     name: dptms-eureka
+
+server:
+  port: 9001
+
+eureka:
+  #关闭自我保护机制-开发环境开启
+  server:
+    enable-self-preservation: false
+  instance:
+    hostname: 127.0.0.1
+    instance-id: ${eureka.instance.hostname}:${server.port}
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    instance-info-replication-interval-seconds: 30
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/

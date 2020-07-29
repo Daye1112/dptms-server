@@ -6,7 +6,6 @@ info:
     version: "@project.version@"
 
 server:
-  port: 9001
   tomcat:
     basedir: ./dptms-logs/${spring.application.name}/tomcat
     accesslog:
@@ -18,20 +17,6 @@ server:
       prefix: ${spring.application.name}
       rotate: true
       suffix: .log
-
-
-eureka:
-  #关闭自我保护机制-开发环境开启
-  server:
-    enable-self-preservation: false
-  instance:
-    hostname: 127.0.0.1
-    instance-id: ${eureka.instance.hostname}:${server.port}
-  client:
-    register-with-eureka: false
-    fetch-registry: false
-    service-url:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
 
 logging:
   config: classpath:config/local/logback.xml
