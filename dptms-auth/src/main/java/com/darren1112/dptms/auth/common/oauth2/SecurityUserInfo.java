@@ -36,6 +36,26 @@ public class SecurityUserInfo implements UserDetails {
      */
     private Collection<GrantedAuthority> authorities;
 
+    /**
+     * 是否未过期
+     */
+    private boolean accountNonExpired = true;
+
+    /**
+     * 是否未锁定
+     */
+    private boolean accountNonLocked = true;
+
+    /**
+     * 密码是否未过期
+     */
+    private boolean credentialsNonExpired = true;
+
+    /**
+     * 账号是否可用
+     */
+    private boolean enabled = true;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
@@ -53,21 +73,21 @@ public class SecurityUserInfo implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return true;
+        return accountNonExpired;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return accountNonLocked;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true;
+        return credentialsNonExpired;
     }
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return enabled;
     }
 }
