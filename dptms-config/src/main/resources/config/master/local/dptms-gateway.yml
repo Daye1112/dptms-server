@@ -1,0 +1,27 @@
+zuul:
+  routes:
+    auth:
+      path: /auth/**
+      stripPrefix: false
+      serviceId: dptms-auth
+      sensitiveHeaders: "*"
+  retryable: true
+  ignored-services: "*"
+  ribbon:
+    eager-load:
+      enabled: true
+
+#hystrix的超时时间
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 90000
+#ribbon的超时时间
+ribbon:
+  ReadTimeout: 20000
+  ConnectTimeout: 20000
