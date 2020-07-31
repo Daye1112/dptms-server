@@ -1,0 +1,9 @@
+dptms:
+  auth:
+    accessTokenExpiredSeconds: 86400
+    refreshTokenExpiredSeconds: 604800
+    clients:
+      - client: dptms
+        secret: 123456
+        grantType: password,authorization_code,refresh_token
+        scope: all

@@ -4,20 +4,22 @@ import com.darren1112.dptms.common.util.EnvironmentAwareUtil;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 
 /**
  * @author luyuhao
  * @date 2020/07/25 01:34
  */
 @EnableCaching
-@EnableEurekaClient
+@EnableDiscoveryClient
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 @SpringBootApplication(scanBasePackages = {
         "com.darren1112.dptms.system",
         "com.darren1112.dptms.common.component"})
 public class SystemManageApplication {
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         EnvironmentAwareUtil.adjust();
         SpringApplication.run(SystemManageApplication.class, args);
     }

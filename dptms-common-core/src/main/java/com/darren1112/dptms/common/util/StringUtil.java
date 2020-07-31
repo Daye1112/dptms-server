@@ -38,7 +38,7 @@ public class StringUtil extends StringUtils {
      * @return longList
      */
     public static List<Long> strArrToLongList(String[] strArr) {
-        if (isArrEmpty(strArr)) {
+        if (CollectionUtil.isEmpty(strArr)) {
             return Collections.emptyList();
         }
         List<Long> res = new ArrayList<>();
@@ -56,20 +56,6 @@ public class StringUtil extends StringUtils {
      */
     public static boolean isNotEmpty(@Nullable Object str) {
         return !isEmpty(str);
-    }
-
-    /**
-     * 数组是否为null
-     */
-    public static <T> boolean isArrEmpty(T[] strArr) {
-        return strArr == null || strArr.length < 1;
-    }
-
-    /**
-     * 数组是否不为null
-     */
-    public static <T> boolean isArrNotEmpty(T[] strArr) {
-        return !isArrEmpty(strArr);
     }
 
     /**
@@ -102,7 +88,7 @@ public class StringUtil extends StringUtils {
         }
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         String temp = "1.jpg";
         List<String> stringList = strToList(temp, ",");
         System.out.println(stringList);

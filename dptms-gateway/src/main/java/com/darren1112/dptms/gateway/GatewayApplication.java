@@ -4,7 +4,7 @@ import com.darren1112.dptms.common.util.EnvironmentAwareUtil;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 
 /**
@@ -15,7 +15,7 @@ import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
  */
 @EnableZuulProxy
 @EnableCaching
-@EnableEurekaClient
+@EnableDiscoveryClient
 @SpringBootApplication(scanBasePackages = {
         "com.darren1112.dptms.gateway",
         "com.darren1112.dptms.common.component"})

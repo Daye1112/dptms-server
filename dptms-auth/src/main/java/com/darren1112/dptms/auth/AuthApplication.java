@@ -4,14 +4,14 @@ import com.darren1112.dptms.common.util.EnvironmentAwareUtil;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * @author luyuhao
  * @date 2020/07/18 22:19
  */
 @EnableCaching
-@EnableEurekaClient
+@EnableDiscoveryClient
 @SpringBootApplication(scanBasePackages = {
         "com.darren1112.dptms.auth",
         "com.darren1112.dptms.common.component"})

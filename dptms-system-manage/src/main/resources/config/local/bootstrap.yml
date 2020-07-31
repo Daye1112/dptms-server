@@ -15,6 +15,12 @@ server:
   servlet:
     context-path: /system-manage
 
+security:
+  oauth2:
+    resource:
+      id: ${spring.application.name}
+      user-info-uri: http://localhost:9000/auth/user
+
 #服务注册中心配置
 eureka:
   instance:

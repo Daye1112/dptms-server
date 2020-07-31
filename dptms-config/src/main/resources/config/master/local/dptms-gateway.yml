@@ -5,6 +5,11 @@ zuul:
       stripPrefix: false
       serviceId: dptms-auth
       sensitiveHeaders: "*"
+    system-manage:
+      path: /system-manage/**
+      stripPrefix: false
+      serviceId: dptms-system-manage
+      sensitiveHeaders: "*"
   retryable: true
   ignored-services: "*"
   ribbon:
