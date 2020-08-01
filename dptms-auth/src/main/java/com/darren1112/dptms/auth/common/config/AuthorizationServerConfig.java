@@ -1,5 +1,6 @@
 package com.darren1112.dptms.auth.common.config;
 
+import com.darren1112.dptms.auth.common.oauth2.ExceptionTranslator;
 import com.darren1112.dptms.auth.common.properties.AuthProperties;
 import com.darren1112.dptms.auth.common.properties.ClientProperties;
 import com.darren1112.dptms.common.exception.BadRequestException;
@@ -51,6 +52,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Autowired
     private AuthProperties authProperties;
 
+    @Autowired
+    private ExceptionTranslator exceptionTranslator;
+
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         ClientProperties[] clientArr = authProperties.getClients();
@@ -78,11 +82,13 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
         endpoints.tokenStore(tokenStore())
                 .userDetailsService(userDetailService)
                 .authenticationManager(authenticationManager)
-                .tokenServices(defaultTokenServices());
+                .tokenServices(defaultTokenServices())
+                .exceptionTranslator(exceptionTranslator);
     }
 
 

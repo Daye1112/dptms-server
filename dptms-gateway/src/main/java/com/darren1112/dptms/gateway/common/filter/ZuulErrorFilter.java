@@ -1,0 +1,79 @@
+package com.darren1112.dptms.gateway.common.filter;
+
+import com.darren1112.dptms.common.enums.MicroErrorCodeEnum;
+import com.darren1112.dptms.common.message.JsonResult;
+import com.darren1112.dptms.common.util.ResponseUtil;
+import com.netflix.zuul.context.RequestContext;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.cloud.netflix.zuul.filters.post.SendErrorFilter;
+import org.springframework.stereotype.Component;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+import static org.springframework.cloud.netflix.zuul.filters.support.FilterConstants.ERROR_TYPE;
+import static org.springframework.cloud.netflix.zuul.filters.support.FilterConstants.SEND_ERROR_FILTER_ORDER;
+
+/**
+ * 网关异常拦截处理
+ *
+ * @author luyuhao
+ * @since 2019/12/19 9:35
+ */
+@Slf4j
+@Component
+public class ZuulErrorFilter extends SendErrorFilter {
+    @Override
+    public String filterType() {
+        return ERROR_TYPE;
+    }
+
+    @Override
+    public int filterOrder() {
+        return SEND_ERROR_FILTER_ORDER - 1;
+    }
+
+    @Override
+    public boolean shouldFilter() {
+        return getRequestContext().getThrowable() != null;
+    }
+
+    @Override
+    public Object run() {
+        try {
+            RequestContext ctx = getRequestContext();
+            if (ctx.getThrowable() != null) {
+                ctx.setSendZuulResponse(false);
+                // Throwable throwable = ctx.getThrowable();
+
+                //阻止SendErrorFilter
+                ctx.set(SEND_ERROR_FILTER_RAN, true);
+
+                errorInfo();
+            }
+        } catch (Exception e) {
+            log.error("zuul异常处理异常", e);
+        }
+        return null;
+    }
+
+    /**
+     * 访问异常时进行response处理，给予提示
+     */
+    private void errorInfo() throws IOException {
+        ResponseUtil.setJsonResult(getResponse(), JsonResult.buildErrorEnum(MicroErrorCodeEnum.SERVER_DOWN));
+    }
+
+    private RequestContext getRequestContext() {
+        return RequestContext.getCurrentContext();
+    }
+
+    private HttpServletRequest getRequest() {
+        return getRequestContext().getRequest();
+    }
+
+    private HttpServletResponse getResponse() {
+        return getRequestContext().getResponse();
+    }
+}

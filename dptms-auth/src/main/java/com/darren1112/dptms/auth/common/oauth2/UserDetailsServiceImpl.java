@@ -48,10 +48,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
      * @date 20/07/26 20:20
      */
     private SecurityUserInfo convertTo(SysUserDto sysUserDto) {
-        if (Objects.isNull(sysUserDto)) {
-            return null;
-        }
         SecurityUserInfo securityUserInfo = new SecurityUserInfo();
+        if (Objects.isNull(sysUserDto)) {
+            return securityUserInfo;
+        }
         securityUserInfo.setId(sysUserDto.getId());
         securityUserInfo.setPassword(sysUserDto.getPassword());
         securityUserInfo.setUsername(sysUserDto.getUsername());

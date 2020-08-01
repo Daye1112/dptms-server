@@ -45,6 +45,12 @@ public class ResponseEntityUtil {
                 .body(body);
     }
 
+    public static <T> ResponseEntity<T> unauthorized(T body) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .header(HttpHeaders.CONTENT_TYPE, APPLICATION_JSON_UTF8_VALUE)
+                .body(body);
+    }
+
     public static <T> ResponseEntity<T> ok(HttpHeaders headers, T body) {
         return ResponseEntity.ok()
                 .headers(headers)

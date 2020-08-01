@@ -88,9 +88,27 @@ public class StringUtil extends StringUtils {
         }
     }
 
-    public static void main(String[] args) {
-        String temp = "1.jpg";
-        List<String> stringList = strToList(temp, ",");
-        System.out.println(stringList);
+    /**
+     * 判断字符串中是否包含子串
+     * 无视大小写
+     *
+     * @param str    字符串
+     * @param subStr 子串
+     * @return true/false
+     * @author luyuhao
+     * @date 20/08/02 01:43
+     */
+    public static boolean containsIgnoreCase(String str, String subStr) {
+        if (str == null || subStr == null) {
+            return false;
+        }
+        int len = subStr.length();
+        int max = str.length() - len;
+        for (int i = 0; i <= max; i++) {
+            if (str.regionMatches(true, i, subStr, 0, len)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
