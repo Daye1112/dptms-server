@@ -1,6 +1,6 @@
-package com.darren1112.dptms.spi.sys.entity;
+package com.darren1112.dptms.common.spi.sys.entity;
 
-import com.darren1112.dptms.spi.common.entity.BaseEntity;
+import com.darren1112.dptms.common.spi.common.entity.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

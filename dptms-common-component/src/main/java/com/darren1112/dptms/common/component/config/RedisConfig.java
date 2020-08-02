@@ -59,9 +59,9 @@ public class RedisConfig extends CachingConfigurerSupport {
         redisTemplate.setHashValueSerializer(fastJsonRedisSerializer);
 
         // TODO 建议使用这种方式，小范围指定白名单
-        ParserConfig.getGlobalInstance().addAccept("com.darren1112.dptms.spi.sys.dto");
-        ParserConfig.getGlobalInstance().addAccept("com.darren1112.dptms.spi.sys.entity");
-        ParserConfig.getGlobalInstance().addAccept("com.darren1112.dptms.spi.common.entity");
+        ParserConfig.getGlobalInstance().addAccept("com.darren1112.dptms.common.spi.sys.dto");
+        ParserConfig.getGlobalInstance().addAccept("com.darren1112.dptms.common.spi.sys.entity");
+        ParserConfig.getGlobalInstance().addAccept("com.darren1112.dptms.common.spi.common.entity");
 
         //使用StringRedisSerializer来序列化和反序列化redis的key
         redisTemplate.setKeySerializer(new StringRedisSerializer());

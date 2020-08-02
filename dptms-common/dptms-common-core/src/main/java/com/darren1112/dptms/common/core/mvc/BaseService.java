@@ -1,8 +1,8 @@
 package com.darren1112.dptms.common.core.mvc;
 
 
-import com.darren1112.dptms.spi.common.dto.PageBean;
-import com.darren1112.dptms.spi.common.dto.PageParam;
+import com.darren1112.dptms.common.spi.common.dto.PageBean;
+import com.darren1112.dptms.common.spi.common.dto.PageParam;
 
 import java.util.List;
 

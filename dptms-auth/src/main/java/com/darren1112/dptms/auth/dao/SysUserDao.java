@@ -1,7 +1,7 @@
 package com.darren1112.dptms.auth.dao;
 
-import com.darren1112.dptms.spi.sys.dto.SysUserDto;
-import com.darren1112.dptms.spi.sys.entity.SysUserEntity;
+import com.darren1112.dptms.common.spi.sys.dto.SysUserDto;
+import com.darren1112.dptms.common.spi.sys.entity.SysUserEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;

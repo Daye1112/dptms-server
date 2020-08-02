@@ -1,6 +1,6 @@
-package com.darren1112.dptms.spi.sys.dto;
+package com.darren1112.dptms.common.spi.sys.dto;
 
-import com.darren1112.dptms.spi.sys.entity.SysUserEntity;
+import com.darren1112.dptms.common.spi.sys.entity.SysUserEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

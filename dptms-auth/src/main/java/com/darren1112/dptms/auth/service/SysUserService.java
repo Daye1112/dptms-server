@@ -1,6 +1,6 @@
 package com.darren1112.dptms.auth.service;
 
-import com.darren1112.dptms.spi.sys.dto.SysUserDto;
+import com.darren1112.dptms.common.spi.sys.dto.SysUserDto;
 
 /**
  * 系统用户Service

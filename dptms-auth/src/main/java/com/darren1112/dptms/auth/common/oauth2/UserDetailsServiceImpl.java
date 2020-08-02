@@ -1,7 +1,7 @@
 package com.darren1112.dptms.auth.common.oauth2;
 
 import com.darren1112.dptms.auth.service.SysUserService;
-import com.darren1112.dptms.spi.sys.dto.SysUserDto;
+import com.darren1112.dptms.common.spi.sys.dto.SysUserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

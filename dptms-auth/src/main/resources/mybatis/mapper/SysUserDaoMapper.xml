@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.darren1112.dptms.auth.dao.SysUserDao">
     <insert id="insert" keyColumn="id" keyProperty="id"
-            parameterType="com.darren1112.dptms.spi.sys.entity.SysUserEntity" useGeneratedKeys="true">
+            parameterType="com.darren1112.dptms.common.spi.sys.entity.SysUserEntity" useGeneratedKeys="true">
         INSERT INTO sys_user (username, `password`, real_name,
                               gender, phone_number, email, pwd_update_time, file_id,
                               org_id, remark, isvalid,
@@ -13,7 +13,7 @@
                 #{orgId,jdbcType=BIGINT}, #{remark,jdbcType=VARCHAR}, 1,
                 now(), #{createBy,jdbcType=BIGINT}, now(), #{updateBy,jdbcType=BIGINT})
     </insert>
-    <update id="update" parameterType="com.darren1112.dptms.spi.sys.dto.SysUserDto">
+    <update id="update" parameterType="com.darren1112.dptms.common.spi.sys.dto.SysUserDto">
         UPDATE sys_user
         <set>
             update_time = now(),
@@ -58,7 +58,7 @@
         AND isvalid = 1
     </update>
 
-    <select id="getByUsername" resultType="com.darren1112.dptms.spi.sys.dto.SysUserDto">
+    <select id="getByUsername" resultType="com.darren1112.dptms.common.spi.sys.dto.SysUserDto">
         SELECT id,
                username,
                password,

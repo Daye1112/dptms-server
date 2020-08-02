@@ -1,4 +1,4 @@
-package com.darren1112.dptms.spi.common.entity;
+package com.darren1112.dptms.common.spi.common.entity;
 
 import lombok.Data;
 
