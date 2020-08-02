@@ -1,6 +1,6 @@
 package com.darren1112.dptms.auth.common.enums;
 
-import com.darren1112.dptms.common.exception.enums.BaseEnum;
+import com.darren1112.dptms.common.core.exception.enums.BaseEnum;
 import org.springframework.http.HttpStatus;
 
 /**

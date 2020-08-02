@@ -1,7 +1,7 @@
 package com.darren1112.dptms.common.component.redis;
 
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.darren1112.dptms.common.util.JsonUtil;
+import com.darren1112.dptms.common.core.util.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.SerializationException;

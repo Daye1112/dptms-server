@@ -1,8 +1,8 @@
 package com.darren1112.dptms.gateway.common.filter;
 
-import com.darren1112.dptms.common.enums.MicroErrorCodeEnum;
-import com.darren1112.dptms.common.message.JsonResult;
-import com.darren1112.dptms.common.util.ResponseUtil;
+import com.darren1112.dptms.common.core.enums.MicroErrorCodeEnum;
+import com.darren1112.dptms.common.core.message.JsonResult;
+import com.darren1112.dptms.common.core.util.ResponseUtil;
 import com.darren1112.dptms.gateway.common.util.ZuulRequestUtil;
 import com.netflix.zuul.context.RequestContext;
 import lombok.extern.slf4j.Slf4j;

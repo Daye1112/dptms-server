@@ -1,7 +1,7 @@
 package com.darren1112.dptms.common.component.exception;
 
-import com.darren1112.dptms.common.enums.MicroErrorCodeEnum;
-import com.darren1112.dptms.common.exception.ServerErrorException;
+import com.darren1112.dptms.common.core.enums.MicroErrorCodeEnum;
+import com.darren1112.dptms.common.core.exception.ServerErrorException;
 import feign.Response;
 import feign.codec.ErrorDecoder;
 import lombok.extern.slf4j.Slf4j;

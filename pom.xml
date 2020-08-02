@@ -12,9 +12,7 @@
 
     <modules>
         <module>dptms-parent</module>
-        <module>dptms-common-core</module>
         <module>dptms-system-manage</module>
-        <module>dptms-spi</module>
         <module>dptms-monitor-manage</module>
         <module>dptms-auth</module>
         <module>dptms-config</module>
@@ -22,6 +20,7 @@
         <module>dptms-gateway</module>
         <module>dptms-file-manage</module>
         <module>dptms-common-component</module>
+        <module>dptms-common</module>
     </modules>
 
 

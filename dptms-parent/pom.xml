@@ -107,11 +107,6 @@
             </dependency>
             <dependency>
                 <groupId>com.darren1112</groupId>
-                <artifactId>dptms-common-core</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.darren1112</groupId>
                 <artifactId>dptms-config</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -137,17 +132,32 @@
             </dependency>
             <dependency>
                 <groupId>com.darren1112</groupId>
-                <artifactId>dptms-spi</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.darren1112</groupId>
                 <artifactId>dptms-system-manage</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.darren1112</groupId>
                 <artifactId>dptms-common-component</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.darren1112</groupId>
+                <artifactId>dptms-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.darren1112</groupId>
+                <artifactId>dptms-common-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.darren1112</groupId>
+                <artifactId>dptms-spi</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.darren1112</groupId>
+                <artifactId>dptms-common-web-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!-- [dptms] End-->

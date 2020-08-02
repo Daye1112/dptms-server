@@ -3,10 +3,9 @@ package com.darren1112.dptms.auth.common.config;
 import com.darren1112.dptms.auth.common.oauth2.ExceptionTranslator;
 import com.darren1112.dptms.auth.common.properties.AuthProperties;
 import com.darren1112.dptms.auth.common.properties.ClientProperties;
-import com.darren1112.dptms.common.exception.BadRequestException;
-import com.darren1112.dptms.common.util.CollectionUtil;
-import com.darren1112.dptms.common.util.StringUtil;
-import org.apache.commons.lang.StringUtils;
+import com.darren1112.dptms.common.core.exception.BadRequestException;
+import com.darren1112.dptms.common.core.util.CollectionUtil;
+import com.darren1112.dptms.common.core.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -24,7 +23,6 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
-import org.springframework.util.CollectionUtils;
 
 import java.util.UUID;
 

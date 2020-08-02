@@ -1,10 +1,10 @@
 package com.darren1112.dptms.auth.controller;
 
 import com.darren1112.dptms.auth.service.SysUserService;
-import com.darren1112.dptms.common.exception.BadRequestException;
-import com.darren1112.dptms.common.message.JsonResult;
-import com.darren1112.dptms.common.util.ResponseEntityUtil;
-import com.darren1112.dptms.common.util.StringUtil;
+import com.darren1112.dptms.common.core.exception.BadRequestException;
+import com.darren1112.dptms.common.core.message.JsonResult;
+import com.darren1112.dptms.common.core.util.ResponseEntityUtil;
+import com.darren1112.dptms.common.core.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

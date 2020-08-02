@@ -1,8 +1,8 @@
 package com.darren1112.dptms.common.component.oauth2;
 
-import com.darren1112.dptms.common.enums.CommonErrorCodeEnum;
-import com.darren1112.dptms.common.message.JsonResult;
-import com.darren1112.dptms.common.util.ResponseUtil;
+import com.darren1112.dptms.common.core.enums.CommonErrorCodeEnum;
+import com.darren1112.dptms.common.core.message.JsonResult;
+import com.darren1112.dptms.common.core.util.ResponseUtil;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 

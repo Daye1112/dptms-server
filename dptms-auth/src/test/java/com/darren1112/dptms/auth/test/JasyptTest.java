@@ -1,6 +1,6 @@
 package com.darren1112.dptms.auth.test;
 
-import com.darren1112.dptms.common.util.EnvironmentAwareUtil;
+import com.darren1112.dptms.common.core.util.EnvironmentAwareUtil;
 import org.jasypt.encryption.StringEncryptor;
 import org.junit.BeforeClass;
 import org.junit.Test;

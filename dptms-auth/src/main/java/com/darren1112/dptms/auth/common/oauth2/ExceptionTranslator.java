@@ -1,9 +1,9 @@
 package com.darren1112.dptms.auth.common.oauth2;
 
 import com.darren1112.dptms.auth.common.enums.AuthErrorCodeEnum;
-import com.darren1112.dptms.common.message.JsonResult;
-import com.darren1112.dptms.common.util.ResponseEntityUtil;
-import com.darren1112.dptms.common.util.StringUtil;
+import com.darren1112.dptms.common.core.message.JsonResult;
+import com.darren1112.dptms.common.core.util.ResponseEntityUtil;
+import com.darren1112.dptms.common.core.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.http.ResponseEntity;

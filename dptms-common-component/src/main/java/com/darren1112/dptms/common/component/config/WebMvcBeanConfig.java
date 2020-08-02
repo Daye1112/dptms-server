@@ -1,6 +1,6 @@
 package com.darren1112.dptms.common.component.config;
 
-import com.darren1112.dptms.common.util.DateUtil;
+import com.darren1112.dptms.common.core.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.context.annotation.Configuration;
