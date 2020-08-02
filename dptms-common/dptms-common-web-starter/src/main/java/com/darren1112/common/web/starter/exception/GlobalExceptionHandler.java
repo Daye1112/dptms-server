@@ -1,4 +1,4 @@
-package com.darren1112.dptms.common.component.exception;
+package com.darren1112.common.web.starter.exception;
 
 import com.darren1112.dptms.common.core.enums.MicroErrorCodeEnum;
 import com.darren1112.dptms.common.core.exception.BaseException;

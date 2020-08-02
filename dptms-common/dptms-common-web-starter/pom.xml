@@ -11,6 +11,43 @@
     <packaging>jar</packaging>
 
     <artifactId>dptms-common-web-starter</artifactId>
+    <description>web配置starter</description>
 
+    <dependencies>
+        <!-- Spring Boot Begin -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!-- Spring Boot End -->
 
+        <!-- [Spring Cloud] Start -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-oauth2</artifactId>
+        </dependency>
+        <!-- [Spring Cloud] End -->
+
+        <!-- [Plugins] Start -->
+        <!-- [lombok] Start -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- [lombok] End -->
+        <!-- [Plugins] End -->
+
+        <!-- [dptms] Start-->
+        <dependency>
+            <groupId>com.darren1112</groupId>
+            <artifactId>dptms-common-core</artifactId>
+        </dependency>
+        <!-- [dptms] End-->
+    </dependencies>
 </project>

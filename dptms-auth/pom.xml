@@ -96,6 +96,10 @@
             <groupId>com.darren1112</groupId>
             <artifactId>dptms-common-component</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.darren1112</groupId>
+            <artifactId>dptms-common-web-starter</artifactId>
+        </dependency>
         <!-- [dptms] End-->
     </dependencies>
 

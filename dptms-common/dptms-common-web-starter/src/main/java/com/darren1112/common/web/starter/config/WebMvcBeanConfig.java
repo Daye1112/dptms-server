@@ -1,4 +1,4 @@
-package com.darren1112.dptms.common.component.config;
+package com.darren1112.common.web.starter.config;
 
 import com.darren1112.dptms.common.core.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +18,6 @@ import java.util.Date;
  * @author luyuhao
  * @date 2020/1/6 18:41
  */
-@Configuration
-@AutoConfigureAfter(WebMvcConfig.class)
 public class WebMvcBeanConfig {
     @Autowired
     private RequestMappingHandlerAdapter handlerAdapter;

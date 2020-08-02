@@ -39,7 +39,7 @@ public class ZuulHeaderValidInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String zuulTokenValue = request.getHeader(gatewayProperties.getZuulTokenKey());
         String realZuulTokenValue = new String(Base64Utils.encode(gatewayProperties.getZuulTokenValue().getBytes()));
-        if(StringUtil.equal(zuulTokenValue, realZuulTokenValue)){
+        if (StringUtil.equal(zuulTokenValue, realZuulTokenValue)) {
             return true;
         } else {
             JsonResult jsonResult = JsonResult.buildErrorEnum(MicroErrorCodeEnum.INVALID_ACCESS);
