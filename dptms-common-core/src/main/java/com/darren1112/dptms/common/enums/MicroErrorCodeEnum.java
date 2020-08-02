@@ -17,7 +17,8 @@ public enum MicroErrorCodeEnum implements BaseEnum {
     SYSTEM_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "业务处理异常!"),
     HAS_NO_PERMISSION(HttpStatus.FORBIDDEN, "权限不足!"),
     SERVER_DOWN(HttpStatus.INTERNAL_SERVER_ERROR, "服务正在重启或正在维护，请稍后再试!"),
-    FILE_UPLOAD_ERROR(HttpStatus.BAD_REQUEST, "文件上传失败!")
+    FILE_UPLOAD_ERROR(HttpStatus.BAD_REQUEST, "文件上传失败!"),
+    INVALID_ACCESS(HttpStatus.BAD_REQUEST, "无效访问，请通过网关访问资源"),
     ;
 
     private Integer code;

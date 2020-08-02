@@ -1,0 +1,4 @@
+dptms:
+  gateway:
+    zuulTokenKey: zuulToken
+    zuulTokenValue: dptms:zuul:123456

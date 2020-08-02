@@ -111,4 +111,18 @@ public class StringUtil extends StringUtils {
         }
         return false;
     }
+
+    /**
+     * 字符串比较
+     *
+     * @param str1 字符串1
+     * @param str2 字符串2
+     * @return true/false
+     * @author luyuhao
+     * @date 20/08/02 19:52
+     */
+    public static boolean equal(String str1, String str2) {
+        return Objects.equals(str1, str2);
+    }
+
 }
