@@ -1,7 +1,7 @@
 package com.darren1112.dptms.common.component.config;
 
 import com.darren1112.dptms.common.component.exception.GlobalExceptionHandler;
-import com.darren1112.dptms.common.component.intercept.ZuulHeaderValidIntercepor;
+import com.darren1112.dptms.common.component.intercept.ZuulHeaderValidInterceptor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -24,7 +24,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebMvcConfig implements WebMvcConfigurer {
 
     @Autowired
-    private ZuulHeaderValidIntercepor zuulHeaderValidIntercepor;
+    private ZuulHeaderValidInterceptor zuulHeaderValidInterceptor;
 
     @Bean
     @ConditionalOnMissingBean(value = PasswordEncoder.class)
@@ -43,7 +43,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(zuulHeaderValidIntercepor);
+        registry.addInterceptor(zuulHeaderValidInterceptor);
     }
 
     @Bean
