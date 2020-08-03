@@ -1,6 +1,6 @@
 package com.darren1112.dptms.gateway.common.filter;
 
-import com.darren1112.dptms.common.component.properties.GatewayProperties;
+import com.darren1112.dptms.gateway.common.properties.GatewayProperties;
 import com.darren1112.dptms.gateway.common.util.ZuulRequestUtil;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;

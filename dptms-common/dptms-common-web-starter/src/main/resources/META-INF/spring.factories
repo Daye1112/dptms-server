@@ -1,4 +1,4 @@
 # Auto Configure
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.darren1112.common.web.starter.config.WebMvcConfig,\
-com.darren1112.common.web.starter.config.WebMvcBeanConfig
+com.darren1112.dptms.common.web.starter.config.WebMvcAutoConfig,\
+com.darren1112.dptms.common.web.starter.config.WebMvcBeanAutoConfig

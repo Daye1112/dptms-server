@@ -160,6 +160,11 @@
                 <artifactId>dptms-common-web-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.darren1112</groupId>
+                <artifactId>dptms-common-security-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <!-- [dptms] End-->
         </dependencies>
     </dependencyManagement>

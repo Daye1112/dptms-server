@@ -1,6 +1,6 @@
-package com.darren1112.common.web.starter.config;
+package com.darren1112.dptms.common.web.starter.config;
 
-import com.darren1112.common.web.starter.exception.GlobalExceptionHandler;
+import com.darren1112.dptms.common.web.starter.exception.GlobalExceptionHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
@@ -17,7 +17,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @date 2019/12/6 9:32
  */
 @Slf4j
-public class WebMvcConfig implements WebMvcConfigurer {
+public class WebMvcAutoConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

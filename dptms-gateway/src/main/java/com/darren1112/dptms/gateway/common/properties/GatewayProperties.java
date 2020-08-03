@@ -1,4 +1,4 @@
-package com.darren1112.dptms.common.component.properties;
+package com.darren1112.dptms.gateway.common.properties;
 
 import lombok.Data;
 import org.springframework.boot.SpringBootConfiguration;

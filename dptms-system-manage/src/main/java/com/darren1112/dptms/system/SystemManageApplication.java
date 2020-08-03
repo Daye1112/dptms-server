@@ -13,7 +13,6 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
  */
 @EnableCaching
 @EnableDiscoveryClient
-@EnableGlobalMethodSecurity(prePostEnabled = true)
 @SpringBootApplication(scanBasePackages = {
         "com.darren1112.dptms.system",
         "com.darren1112.dptms.common.component"})

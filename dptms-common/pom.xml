@@ -18,6 +18,7 @@
         <module>dptms-spi</module>
         <module>dptms-common-core</module>
         <module>dptms-common-web-starter</module>
+        <module>dptms-common-security-starter</module>
     </modules>
 
 </project>

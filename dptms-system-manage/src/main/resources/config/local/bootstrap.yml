@@ -9,6 +9,9 @@ spring:
         service-id: dptms-config
       name: dptms-common, dptms-jdbc, ${spring.application.name}
       label: local
+  main:
+    allow-bean-definition-overriding: true
+
 
 server:
   port: 9004

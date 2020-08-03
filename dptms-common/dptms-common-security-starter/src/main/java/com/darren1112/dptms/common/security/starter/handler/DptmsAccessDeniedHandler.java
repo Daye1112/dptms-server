@@ -1,4 +1,4 @@
-package com.darren1112.dptms.common.component.oauth2;
+package com.darren1112.dptms.common.security.starter.handler;
 
 import com.darren1112.dptms.common.core.enums.CommonErrorCodeEnum;
 import com.darren1112.dptms.common.core.message.JsonResult;

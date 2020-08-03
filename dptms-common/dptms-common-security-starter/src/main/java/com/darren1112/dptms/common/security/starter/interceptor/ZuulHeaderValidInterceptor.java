@@ -1,10 +1,10 @@
-package com.darren1112.dptms.common.component.intercept;
+package com.darren1112.dptms.common.security.starter.interceptor;
 
-import com.darren1112.dptms.common.component.properties.GatewayProperties;
 import com.darren1112.dptms.common.core.enums.MicroErrorCodeEnum;
 import com.darren1112.dptms.common.core.message.JsonResult;
 import com.darren1112.dptms.common.core.util.ResponseUtil;
 import com.darren1112.dptms.common.core.util.StringUtil;
+import com.darren1112.dptms.common.security.starter.properties.GatewayProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Base64Utils;
@@ -19,7 +19,6 @@ import javax.servlet.http.HttpServletResponse;
  * @author luyuhao
  * @date 2020/08/02 18:41
  */
-@Component
 public class ZuulHeaderValidInterceptor implements HandlerInterceptor {
 
     @Autowired
