@@ -19,6 +19,7 @@
         <module>dptms-common-core</module>
         <module>dptms-common-web-starter</module>
         <module>dptms-common-security-starter</module>
+        <module>dptms-common-redis-starter</module>
     </modules>
 
 </project>

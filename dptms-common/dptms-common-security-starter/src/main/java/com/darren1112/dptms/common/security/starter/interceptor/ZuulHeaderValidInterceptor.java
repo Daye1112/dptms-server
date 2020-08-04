@@ -5,8 +5,6 @@ import com.darren1112.dptms.common.core.message.JsonResult;
 import com.darren1112.dptms.common.core.util.ResponseUtil;
 import com.darren1112.dptms.common.core.util.StringUtil;
 import com.darren1112.dptms.common.security.starter.properties.GatewayProperties;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.util.Base64Utils;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -21,8 +19,11 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class ZuulHeaderValidInterceptor implements HandlerInterceptor {
 
-    @Autowired
     private GatewayProperties gatewayProperties;
+
+    public ZuulHeaderValidInterceptor(GatewayProperties gatewayProperties) {
+        this.gatewayProperties = gatewayProperties;
+    }
 
     /**
      * 处理方法

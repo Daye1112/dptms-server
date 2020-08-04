@@ -4,7 +4,10 @@ import com.darren1112.dptms.common.security.starter.handler.DptmsAccessDeniedHan
 import com.darren1112.dptms.common.security.starter.handler.DptmsAuthenticationEntryPoint;
 import com.darren1112.dptms.common.security.starter.properties.GatewayProperties;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 
@@ -14,16 +17,15 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
  * @author luyuhao
  * @date 2020/08/04 01:52
  */
-public class SecurityResourceServerAutoConfig  extends ResourceServerConfigurerAdapter {
+@EnableResourceServer
+@EnableAutoConfiguration(exclude = UserDetailsServiceAutoConfiguration.class)
+public class SecurityResourceServerAutoConfig extends ResourceServerConfigurerAdapter {
 
     @Autowired
     private DptmsAccessDeniedHandler accessDeniedHandler;
 
     @Autowired
     private DptmsAuthenticationEntryPoint authenticationEntryPoint;
-
-    @Autowired
-    private GatewayProperties gatewayProperties;
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
@@ -39,6 +41,4 @@ public class SecurityResourceServerAutoConfig  extends ResourceServerConfigurerA
         resources.authenticationEntryPoint(authenticationEntryPoint)
                 .accessDeniedHandler(accessDeniedHandler);
     }
-
-
 }

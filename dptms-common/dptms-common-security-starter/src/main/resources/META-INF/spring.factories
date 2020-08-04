@@ -1,5 +1,4 @@
 # Auto Configure
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 com.darren1112.dptms.common.security.starter.config.SecurityAutoConfig,\
-com.darren1112.dptms.common.security.starter.config.SecurityWebAutoConfig,\
-com.darren1112.dptms.common.security.starter.config.SecurityResourceServerAutoConfig
+com.darren1112.dptms.common.security.starter.config.SecurityWebAutoConfig

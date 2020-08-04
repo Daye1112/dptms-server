@@ -1,4 +1,4 @@
-package com.darren1112.dptms.common.component.redis;
+package com.darren1112.dptms.common.redis.starter.serializer;
 
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.darren1112.dptms.common.core.util.JsonUtil;

@@ -106,11 +106,15 @@
         <!-- [dptms] Start-->
         <dependency>
             <groupId>com.darren1112</groupId>
-            <artifactId>dptms-common-component</artifactId>
+            <artifactId>dptms-common-core</artifactId>
         </dependency>
         <dependency>
             <groupId>com.darren1112</groupId>
             <artifactId>dptms-common-web-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.darren1112</groupId>
+            <artifactId>dptms-common-redis-starter</artifactId>
         </dependency>
         <!-- [dptms] End-->
     </dependencies>

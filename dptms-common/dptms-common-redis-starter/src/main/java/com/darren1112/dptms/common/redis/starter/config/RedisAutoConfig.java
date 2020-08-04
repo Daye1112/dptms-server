@@ -1,8 +1,9 @@
-package com.darren1112.dptms.common.component.config;
+package com.darren1112.dptms.common.redis.starter.config;
 
 import com.alibaba.fastjson.parser.ParserConfig;
-import com.darren1112.dptms.common.component.redis.FastJsonRedisSerializer;
-import com.darren1112.dptms.common.component.redis.StringRedisSerializer;
+import com.darren1112.dptms.common.redis.starter.constant.AcceptPackageConstant;
+import com.darren1112.dptms.common.redis.starter.serializer.FastJsonRedisSerializer;
+import com.darren1112.dptms.common.redis.starter.serializer.StringRedisSerializer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -12,7 +13,6 @@ import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisOperations;
@@ -26,14 +26,13 @@ import java.time.Duration;
  * ConditionalOnClass 自动配置
  *
  * @author luyuhao
- * @date 19/12/06 20:24
+ * @date 2020/08/05 01:16
  */
 @Slf4j
-@Configuration
 @EnableCaching
 @ConditionalOnClass(RedisOperations.class)
 @EnableConfigurationProperties(RedisProperties.class)
-public class RedisConfig extends CachingConfigurerSupport {
+public class RedisAutoConfig extends CachingConfigurerSupport {
 
     /**
      * 设置 redis 数据默认过期时间，默认1天
@@ -59,9 +58,9 @@ public class RedisConfig extends CachingConfigurerSupport {
         redisTemplate.setHashValueSerializer(fastJsonRedisSerializer);
 
         // TODO 建议使用这种方式，小范围指定白名单
-        ParserConfig.getGlobalInstance().addAccept("com.darren1112.dptms.common.spi.sys.dto");
-        ParserConfig.getGlobalInstance().addAccept("com.darren1112.dptms.common.spi.sys.entity");
-        ParserConfig.getGlobalInstance().addAccept("com.darren1112.dptms.common.spi.common.entity");
+        for (String acceptItem : AcceptPackageConstant.ACCEPT_ITEMS) {
+            ParserConfig.getGlobalInstance().addAccept(acceptItem);
+        }
 
         //使用StringRedisSerializer来序列化和反序列化redis的key
         redisTemplate.setKeySerializer(new StringRedisSerializer());

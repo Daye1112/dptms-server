@@ -14,11 +14,9 @@ import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
  * @date 2020/07/31 02:12
  */
 @EnableZuulProxy
-@EnableCaching
 @EnableDiscoveryClient
 @SpringBootApplication(scanBasePackages = {
-        "com.darren1112.dptms.gateway",
-        "com.darren1112.dptms.common.component"})
+        "com.darren1112.dptms.gateway"})
 public class GatewayApplication {
 
     public static void main(String[] args) {

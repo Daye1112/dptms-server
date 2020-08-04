@@ -51,6 +51,7 @@
         <dependency>
             <groupId>com.darren1112</groupId>
             <artifactId>dptms-common-core</artifactId>
+            <optional>true</optional>
         </dependency>
         <!-- [dptms] End-->
     </dependencies>

@@ -1,4 +1,4 @@
-package com.darren1112.dptms.common.component.redis;
+package com.darren1112.dptms.common.redis.starter.serializer;
 
 import cn.hutool.core.lang.Assert;
 import com.alibaba.fastjson.JSON;

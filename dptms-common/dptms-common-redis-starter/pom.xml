@@ -3,14 +3,15 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>dptms-parent</artifactId>
+        <artifactId>dptms-common</artifactId>
         <groupId>com.darren1112</groupId>
         <version>1.0.0</version>
-        <relativePath>../dptms-parent/pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+    <packaging>jar</packaging>
 
-    <artifactId>dptms-common-component</artifactId>
+    <artifactId>dptms-common-redis-starter</artifactId>
+    <description>Redis自动配置starter</description>
 
     <dependencies>
         <!-- Spring Boot Begin -->
@@ -43,10 +44,6 @@
         <!-- Spring Boot End -->
 
         <!-- [Spring Cloud] Start -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
-        </dependency>
         <!-- [Spring Cloud] End -->
 
         <!-- [Plugins] Start -->
@@ -63,6 +60,7 @@
         <dependency>
             <groupId>com.darren1112</groupId>
             <artifactId>dptms-common-core</artifactId>
+            <optional>true</optional>
         </dependency>
         <!-- [dptms] End-->
     </dependencies>
