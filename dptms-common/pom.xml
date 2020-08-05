@@ -20,6 +20,7 @@
         <module>dptms-common-web-starter</module>
         <module>dptms-common-security-starter</module>
         <module>dptms-common-redis-starter</module>
+        <module>dptms-common-doc-starter</module>
     </modules>
 
 </project>

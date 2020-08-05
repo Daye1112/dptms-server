@@ -32,6 +32,7 @@
         <lombok.version>1.18.10</lombok.version>
         <hutool.version>5.0.6</hutool.version>
         <commons-lang.version>2.6</commons-lang.version>
+        <knife4j.version>2.0.2</knife4j.version>
 
         <target.dir>D:\dptms\shell</target.dir>
     </properties>
@@ -97,6 +98,18 @@
                 <version>${commons-lang.version}</version>
             </dependency>
             <!-- [lang] End -->
+            <!-- [swagger2] Start -->
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-micro-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
+            <!-- [swagger2] End -->
             <!-- [Plugins] End -->
 
             <!-- [dptms] Start-->
@@ -163,6 +176,11 @@
             <dependency>
                 <groupId>com.darren1112</groupId>
                 <artifactId>dptms-common-redis-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.darren1112</groupId>
+                <artifactId>dptms-common-doc-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!-- [dptms] End-->
