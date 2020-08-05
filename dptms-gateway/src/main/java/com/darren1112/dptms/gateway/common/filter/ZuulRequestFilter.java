@@ -1,6 +1,6 @@
 package com.darren1112.dptms.gateway.common.filter;
 
-import com.darren1112.dptms.gateway.common.properties.GatewayProperties;
+import com.darren1112.dptms.gateway.common.properties.SecurityProperties;
 import com.darren1112.dptms.gateway.common.util.ZuulRequestUtil;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 public class ZuulRequestFilter extends ZuulFilter {
 
     @Autowired
-    private GatewayProperties gatewayProperties;
+    private SecurityProperties securityProperties;
 
     /**
      * 过滤器类型
@@ -81,8 +81,8 @@ public class ZuulRequestFilter extends ZuulFilter {
 
         log.info("请求URI：{}，请求Method：{}，请求IP：{}，ServiceId：{}", uri, method, host, serviceId);
 
-        byte[] value = Base64Utils.encode(gatewayProperties.getZuulTokenValue().getBytes());
-        ctx.addZuulRequestHeader(gatewayProperties.getZuulTokenKey(), new String(value));
+        byte[] value = Base64Utils.encode(securityProperties.getHeaderValue().getBytes());
+        ctx.addZuulRequestHeader(securityProperties.getHeaderKey(), new String(value));
         return null;
     }
 }

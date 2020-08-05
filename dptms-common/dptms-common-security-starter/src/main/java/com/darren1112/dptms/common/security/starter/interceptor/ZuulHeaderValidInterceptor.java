@@ -4,7 +4,7 @@ import com.darren1112.dptms.common.core.enums.MicroErrorCodeEnum;
 import com.darren1112.dptms.common.core.message.JsonResult;
 import com.darren1112.dptms.common.core.util.ResponseUtil;
 import com.darren1112.dptms.common.core.util.StringUtil;
-import com.darren1112.dptms.common.security.starter.properties.GatewayProperties;
+import com.darren1112.dptms.common.security.starter.properties.SecurityProperties;
 import org.springframework.util.Base64Utils;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -19,10 +19,10 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class ZuulHeaderValidInterceptor implements HandlerInterceptor {
 
-    private GatewayProperties gatewayProperties;
+    private SecurityProperties securityProperties;
 
-    public ZuulHeaderValidInterceptor(GatewayProperties gatewayProperties) {
-        this.gatewayProperties = gatewayProperties;
+    public ZuulHeaderValidInterceptor(SecurityProperties securityProperties) {
+        this.securityProperties = securityProperties;
     }
 
     /**
@@ -37,8 +37,8 @@ public class ZuulHeaderValidInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        String zuulTokenValue = request.getHeader(gatewayProperties.getZuulTokenKey());
-        String realZuulTokenValue = new String(Base64Utils.encode(gatewayProperties.getZuulTokenValue().getBytes()));
+        String zuulTokenValue = request.getHeader(securityProperties.getHeaderKey());
+        String realZuulTokenValue = new String(Base64Utils.encode(securityProperties.getHeaderValue().getBytes()));
         if (StringUtil.equal(zuulTokenValue, realZuulTokenValue)) {
             return true;
         } else {

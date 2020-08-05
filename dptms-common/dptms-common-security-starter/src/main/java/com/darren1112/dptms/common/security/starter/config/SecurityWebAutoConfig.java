@@ -1,7 +1,7 @@
 package com.darren1112.dptms.common.security.starter.config;
 
 import com.darren1112.dptms.common.security.starter.interceptor.ZuulHeaderValidInterceptor;
-import com.darren1112.dptms.common.security.starter.properties.GatewayProperties;
+import com.darren1112.dptms.common.security.starter.properties.SecurityProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -18,11 +18,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class SecurityWebAutoConfig implements WebMvcConfigurer {
 
     @Autowired
-    private GatewayProperties gatewayProperties;
+    private SecurityProperties securityProperties;
 
     @Bean
     public ZuulHeaderValidInterceptor zuulHeaderValidInterceptor(){
-        return new ZuulHeaderValidInterceptor(gatewayProperties);
+        return new ZuulHeaderValidInterceptor(securityProperties);
     }
 
     @Override

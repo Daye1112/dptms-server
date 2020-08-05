@@ -2,13 +2,12 @@ package com.darren1112.dptms.common.security.starter.config;
 
 import com.darren1112.dptms.common.security.starter.handler.DptmsAccessDeniedHandler;
 import com.darren1112.dptms.common.security.starter.handler.DptmsAuthenticationEntryPoint;
-import com.darren1112.dptms.common.security.starter.properties.GatewayProperties;
+import com.darren1112.dptms.common.security.starter.properties.SecurityProperties;
 import feign.RequestInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,11 +23,11 @@ import org.springframework.util.Base64Utils;
  * @date 2020/08/04 01:35
  */
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-@EnableConfigurationProperties(GatewayProperties.class)
+@EnableConfigurationProperties(SecurityProperties.class)
 public class SecurityAutoConfig {
 
     @Autowired
-    private GatewayProperties gatewayProperties;
+    private SecurityProperties securityProperties;
 
     @Bean
     @ConditionalOnMissingBean(name = "accessDeniedHandler")
@@ -59,8 +58,8 @@ public class SecurityAutoConfig {
     public RequestInterceptor requestInterceptor() {
         return requestTemplate -> {
             // 添加 Zuul Token
-            String zuulToken = new String(Base64Utils.encode(gatewayProperties.getZuulTokenValue().getBytes()));
-            requestTemplate.header(gatewayProperties.getZuulTokenKey(), zuulToken);
+            String zuulToken = new String(Base64Utils.encode(securityProperties.getHeaderValue().getBytes()));
+            requestTemplate.header(securityProperties.getHeaderKey(), zuulToken);
 
             Object details = SecurityContextHolder.getContext().getAuthentication().getDetails();
             if (details instanceof OAuth2AuthenticationDetails) {

@@ -1,4 +1,4 @@
-package com.darren1112.dptms.common.security.starter.properties;
+package com.darren1112.dptms.gateway.common.properties;
 
 import lombok.Data;
 import org.springframework.boot.SpringBootConfiguration;
@@ -12,17 +12,19 @@ import org.springframework.stereotype.Component;
  * @date 2020/08/02 18:22
  */
 @Data
-@ConfigurationProperties(prefix = "dptms.gateway")
-public class GatewayProperties {
+@Component
+@SpringBootConfiguration
+@ConfigurationProperties(prefix = "dptms.security")
+public class SecurityProperties {
 
     /**
      * zuul的headers传递的key
      */
-    private String zuulTokenKey;
+    private String headerKey;
 
     /**
      * zuul的headers传递的value
      */
-    private String zuulTokenValue;
+    private String headerValue;
 
 }

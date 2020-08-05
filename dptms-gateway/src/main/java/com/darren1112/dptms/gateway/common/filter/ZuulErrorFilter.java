@@ -43,6 +43,7 @@ public class ZuulErrorFilter extends SendErrorFilter {
         try {
             RequestContext ctx = ZuulRequestUtil.getRequestContext();
             if (ctx.getThrowable() != null) {
+                log.error("请求失败，失败原因：" + ctx.getThrowable().getMessage());
                 ctx.setSendZuulResponse(false);
                 //阻止SendErrorFilter
                 ctx.set(SEND_ERROR_FILTER_RAN, true);

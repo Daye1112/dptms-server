@@ -2,7 +2,6 @@ package com.darren1112.dptms.common.security.starter.config;
 
 import com.darren1112.dptms.common.security.starter.handler.DptmsAccessDeniedHandler;
 import com.darren1112.dptms.common.security.starter.handler.DptmsAuthenticationEntryPoint;
-import com.darren1112.dptms.common.security.starter.properties.GatewayProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;

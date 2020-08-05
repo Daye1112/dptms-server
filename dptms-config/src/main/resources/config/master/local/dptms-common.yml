@@ -1,4 +1,4 @@
 dptms:
-  gateway:
-    zuulTokenKey: zuulToken
-    zuulTokenValue: dptms:zuul:123456
+  security:
+    headerKey: ENC(p1Ia8OBJVjVav94UmW74cD7ligIh4rJN)
+    headerValue: ENC(lVwbBZy5a7g1mAAnmZ7tnLwsfCeQVVVJ7EGNQSVRthE=)
