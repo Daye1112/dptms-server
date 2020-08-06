@@ -21,6 +21,7 @@
         <module>dptms-common-security-starter</module>
         <module>dptms-common-redis-starter</module>
         <module>dptms-common-doc-starter</module>
+        <module>dptms-common-doc-gateway-starter</module>
     </modules>
 
 </project>

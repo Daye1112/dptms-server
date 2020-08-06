@@ -30,3 +30,9 @@ hystrix:
 ribbon:
   ReadTimeout: 20000
   ConnectTimeout: 20000
+
+dptms:
+  doc:
+    gateway:
+      enable: true
+      resources: ${zuul.routes.auth.serviceId}, ${zuul.routes.system-manage.serviceId}

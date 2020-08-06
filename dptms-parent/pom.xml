@@ -33,6 +33,8 @@
         <hutool.version>5.0.6</hutool.version>
         <commons-lang.version>2.6</commons-lang.version>
         <knife4j.version>2.0.2</knife4j.version>
+        <springfox.version>2.9.2</springfox.version>
+        <swagger.version>1.5.21</swagger.version>
 
         <target.dir>D:\dptms\shell</target.dir>
     </properties>
@@ -109,6 +111,27 @@
                 <artifactId>knife4j-spring-boot-starter</artifactId>
                 <version>${knife4j.version}</version>
             </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${springfox.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>io.swagger</groupId>
+                        <artifactId>swagger-models</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-bean-validators</artifactId>
+                <version>${springfox.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-models</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
             <!-- [swagger2] End -->
             <!-- [Plugins] End -->
 
@@ -181,6 +204,11 @@
             <dependency>
                 <groupId>com.darren1112</groupId>
                 <artifactId>dptms-common-doc-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.darren1112</groupId>
+                <artifactId>dptms-common-doc-gateway-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!-- [dptms] End-->
