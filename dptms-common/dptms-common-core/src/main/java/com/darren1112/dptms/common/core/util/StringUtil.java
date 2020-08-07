@@ -125,4 +125,16 @@ public class StringUtil extends StringUtils {
         return Objects.equals(str1, str2);
     }
 
+    /**
+     * 字符串比较，无视大小写
+     *
+     * @param str1 字符串1
+     * @param str2 字符串2
+     * @return true/false
+     * @author luyuhao
+     * @date 2020/8/7 14:43
+     */
+    public static boolean equalsIgnoreCase(String str1, String str2) {
+        return str1 == null ? str2 == null : str1.equalsIgnoreCase(str2);
+    }
 }

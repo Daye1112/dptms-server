@@ -59,6 +59,12 @@
             <artifactId>fastjson</artifactId>
         </dependency>
         <!-- [fastjson] End -->
+        <!-- [reactor] Start -->
+        <dependency>
+            <groupId>io.projectreactor</groupId>
+            <artifactId>reactor-core</artifactId>
+        </dependency>
+        <!-- [reactor] End -->
         <!-- [Plugins] End -->
 
         <!-- [dptms] Start-->

@@ -14,3 +14,5 @@ dptms:
     name: MrDarren
     email: ludaye1112@163.com
     version: "@project.version@"
+  security:
+    anonUris: /v2/api-docs

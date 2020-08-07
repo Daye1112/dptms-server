@@ -1,5 +1,6 @@
 package com.darren1112.dptms.common.doc.gateway.starter.config;
 
+import com.darren1112.dptms.common.doc.gateway.starter.controller.DocGatewayController;
 import com.darren1112.dptms.common.doc.gateway.starter.properties.DocGatewayProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -7,6 +8,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.cloud.netflix.zuul.filters.RouteLocator;
 import org.springframework.context.annotation.Bean;
 import springfox.documentation.swagger.web.SecurityConfiguration;
+import springfox.documentation.swagger.web.SwaggerResourcesProvider;
 import springfox.documentation.swagger.web.UiConfiguration;
 
 /**
@@ -34,5 +36,11 @@ public class DocGatewayAutoConfig {
     @Bean
     public DocGatewayResourceConfig docGatewayResourceConfig() {
         return new DocGatewayResourceConfig(routeLocator, docGatewayProperties);
+    }
+
+    @Bean
+    public DocGatewayController docGatewayController(SwaggerResourcesProvider swaggerResources) {
+        return new DocGatewayController(securityConfiguration, uiConfiguration,
+                swaggerResources, docGatewayProperties);
     }
 }

@@ -5,6 +5,8 @@ import com.darren1112.dptms.common.core.exception.BadRequestException;
 import com.darren1112.dptms.common.core.message.JsonResult;
 import com.darren1112.dptms.common.core.util.ResponseEntityUtil;
 import com.darren1112.dptms.common.core.util.StringUtil;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +26,7 @@ import java.security.Principal;
  * @date 2020/07/20 00:06
  */
 @Slf4j
+@Api(tags = "认证管理", description = "认证管理接口")
 @RestController
 @RequestMapping(value = "/")
 public class AuthController {
@@ -34,9 +37,10 @@ public class AuthController {
     @Autowired
     private ConsumerTokenServices consumerTokenServices;
 
+    @ApiOperation(value = "测试接口")
     @GetMapping("oauth/test")
     public String testOauth() {
-        return "oauth";
+        return "forward:/oauth/token";
     }
 
     @GetMapping("user")

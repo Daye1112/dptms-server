@@ -1,11 +1,11 @@
 zuul:
   routes:
-    auth:
+    dptms-auth:
       path: /auth/**
       stripPrefix: false
       serviceId: dptms-auth
       sensitiveHeaders: "*"
-    system-manage:
+    dptms-system-manage:
       path: /system-manage/**
       stripPrefix: false
       serviceId: dptms-system-manage
@@ -35,4 +35,4 @@ dptms:
   doc:
     gateway:
       enable: true
-      resources: ${zuul.routes.auth.serviceId}, ${zuul.routes.system-manage.serviceId}
+      resources: ${zuul.routes.dptms-auth.serviceId}, ${zuul.routes.dptms-system-manage.serviceId}
