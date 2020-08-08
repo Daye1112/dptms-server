@@ -9,7 +9,7 @@ import com.darren1112.dptms.common.core.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.AccessDeniedException;
+//import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -39,16 +39,16 @@ public class GlobalExceptionHandler {
                 Optional.ofNullable(message).orElse(MicroErrorCodeEnum.SERVER_DOWN.getMessage())));
     }
 
-    /**
-     * 权限不足异常处理
-     */
-    @ExceptionHandler(AccessDeniedException.class)
-    public ResponseEntity handleAccessDeniedException(AccessDeniedException ae) {
-        log.error("系统捕捉AccessDeniedException异常并处理 ==> " + ae.getMessage(), ae);
-        String message = StringUtil.isContainChinese(ae.getMessage()) ? ae.getMessage() : null;
-        return ResponseEntityUtil.forbidden(JsonResult.buildErrorMsg(HttpStatus.FORBIDDEN.value(),
-                Optional.ofNullable(message).orElse(MicroErrorCodeEnum.HAS_NO_PERMISSION.getMessage())));
-    }
+//    /**
+//     * 权限不足异常处理
+//     */
+//    @ExceptionHandler(AccessDeniedException.class)
+//    public ResponseEntity handleAccessDeniedException(AccessDeniedException ae) {
+//        log.error("系统捕捉AccessDeniedException异常并处理 ==> " + ae.getMessage(), ae);
+//        String message = StringUtil.isContainChinese(ae.getMessage()) ? ae.getMessage() : null;
+//        return ResponseEntityUtil.forbidden(JsonResult.buildErrorMsg(HttpStatus.FORBIDDEN.value(),
+//                Optional.ofNullable(message).orElse(MicroErrorCodeEnum.HAS_NO_PERMISSION.getMessage())));
+//    }
 
     /**
      * 文件上传异常处理

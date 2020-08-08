@@ -22,7 +22,6 @@ import org.springframework.util.Base64Utils;
  * @author luyuhao
  * @date 2020/08/04 01:35
  */
-@EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableConfigurationProperties(SecurityProperties.class)
 public class SecurityAutoConfig {
 

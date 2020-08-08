@@ -11,10 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.provider.token.ConsumerTokenServices;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
@@ -38,12 +35,12 @@ public class AuthController {
     private ConsumerTokenServices consumerTokenServices;
 
     @ApiOperation(value = "测试接口")
-    @GetMapping("oauth/test")
-    public String testOauth() {
+    @GetMapping("/test")
+    public String testOauth(String username, String password, String grant_type) {
         return "forward:/oauth/token";
     }
 
-    @GetMapping("user")
+    @GetMapping("/user")
     public Principal currentUser(Principal principal) {
         return principal;
     }

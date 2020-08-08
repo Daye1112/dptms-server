@@ -56,13 +56,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.requestMatchers()
-                .antMatchers("/auth/oauth/**")
+                .antMatchers("/oauth/**")
                 .and()
                 // 不创建会话
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/auth/oauth/**").authenticated()
+                .antMatchers("/oauth/**").authenticated()
                 // .and()
                 // .formLogin()
                 // .failureHandler(loginFailureHandler)
