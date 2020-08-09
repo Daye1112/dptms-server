@@ -15,8 +15,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 @EnableCaching
 @EnableSecurityResourceServer
 @EnableDiscoveryClient
-@SpringBootApplication(scanBasePackages = {
-        "com.darren1112.dptms.system"})
+@SpringBootApplication
 public class SystemManageApplication {
 
     public static void main(String[] args) {

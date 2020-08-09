@@ -15,8 +15,7 @@ import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
  */
 @EnableZuulProxy
 @EnableDiscoveryClient
-@SpringBootApplication(scanBasePackages = {
-        "com.darren1112.dptms.gateway"})
+@SpringBootApplication
 public class GatewayApplication {
 
     public static void main(String[] args) {
