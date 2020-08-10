@@ -5,7 +5,7 @@ import com.darren1112.dptms.common.security.starter.annotation.EnableSecurityRes
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 /**
  * @author luyuhao
@@ -13,7 +13,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  */
 @EnableCaching
 @EnableSecurityResourceServer
-@EnableDiscoveryClient
+@EnableEurekaClient
 @SpringBootApplication
 public class AuthApplication {
 

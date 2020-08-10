@@ -39,6 +39,7 @@ public class SecurityResourceServerAutoConfig extends ResourceServerConfigurerAd
                 .requestMatchers().antMatchers("/**")
                 .and()
                 .authorizeRequests()
+                .antMatchers("/actuator/**").permitAll()
                 .antMatchers(anonUris).permitAll()
                 .antMatchers("/**").authenticated();
     }

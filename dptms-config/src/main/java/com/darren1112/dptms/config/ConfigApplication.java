@@ -4,15 +4,15 @@ import com.darren1112.dptms.common.core.util.EnvironmentAwareUtil;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.config.ConfigFileApplicationListener;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.config.server.EnableConfigServer;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 /**
  * @author luyuhao
  * @date 2020/07/19 22:09
  */
 @EnableConfigServer
-@EnableDiscoveryClient
+@EnableEurekaClient
 @SpringBootApplication
 public class ConfigApplication {
 
