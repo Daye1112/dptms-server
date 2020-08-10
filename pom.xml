@@ -20,6 +20,7 @@
         <module>dptms-gateway</module>
         <module>dptms-file-manage</module>
         <module>dptms-common</module>
+        <module>dptms-admin</module>
     </modules>
 
 

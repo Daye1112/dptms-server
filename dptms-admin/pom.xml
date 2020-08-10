@@ -10,8 +10,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>dptms-monitor-manage</artifactId>
-    <description>监控服务模块</description>
+    <artifactId>dptms-admin</artifactId>
+    <description>SBA服务监控面板</description>
 
     <dependencies>
         <!-- [Spring Boot] Start -->
@@ -29,16 +29,20 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-cache</artifactId>
+            <groupId>de.codecentric</groupId>
+            <artifactId>spring-boot-admin-server</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis-reactive</artifactId>
+            <groupId>de.codecentric</groupId>
+            <artifactId>spring-boot-admin-server-ui</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
+            <groupId>de.codecentric</groupId>
+            <artifactId>spring-boot-admin-starter-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>de.codecentric</groupId>
+            <artifactId>spring-boot-admin-server-cloud</artifactId>
         </dependency>
         <!-- [Spring Boot] End -->
 
@@ -49,40 +53,14 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-config</artifactId>
+            <artifactId>spring-cloud-starter-security</artifactId>
         </dependency>
         <!-- [Spring Cloud] End -->
 
         <!-- [数据源依赖] Start -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid-spring-boot-starter</artifactId>
-        </dependency>
         <!-- [数据源依赖] End -->
 
         <!-- [Plugins] Start -->
-        <!-- [lombok] Start -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <!-- [lombok] End -->
-        <!-- [fastjson] Start -->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-        </dependency>
-        <!-- [fastjson] End -->
         <!-- [Plugins] End -->
 
         <!-- [dptms] Start-->
@@ -90,18 +68,6 @@
             <groupId>com.darren1112</groupId>
             <artifactId>dptms-common-core</artifactId>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>com.darren1112</groupId>-->
-            <!--<artifactId>dptms-common-web-starter</artifactId>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>com.darren1112</groupId>-->
-            <!--<artifactId>dptms-common-redis-starter</artifactId>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>com.darren1112</groupId>-->
-            <!--<artifactId>dptms-common-doc-starter</artifactId>-->
-        <!--</dependency>-->
         <!-- [dptms] End-->
     </dependencies>
 
@@ -112,7 +78,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.darren1112.dptms.monitor.MonitorManageApplication</mainClass>
+                    <mainClass>com.darren1112.dptms.admin.AdminApplication</mainClass>
                     <!--<skip>true</skip>-->
                 </configuration>
             </plugin>

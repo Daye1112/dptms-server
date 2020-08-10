@@ -1,4 +1,4 @@
-package com.darren1112.dptms.monitor.common.config;
+package com.darren1112.dptms.admin.common.config;
 
 import de.codecentric.boot.admin.server.config.AdminServerProperties;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,11 +13,11 @@ import org.springframework.security.web.authentication.SavedRequestAwareAuthenti
  * @date 2020/08/09 23:08
  */
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final String adminContextPath;
 
-    public SecurityConfig(AdminServerProperties adminServerProperties) {
+    public WebSecurityConfig(AdminServerProperties adminServerProperties) {
         this.adminContextPath = adminServerProperties.getContextPath();
     }
 
