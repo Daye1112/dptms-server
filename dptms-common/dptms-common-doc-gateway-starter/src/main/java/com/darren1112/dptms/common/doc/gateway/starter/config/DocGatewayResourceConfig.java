@@ -11,7 +11,6 @@ import springfox.documentation.swagger.web.SwaggerResource;
 import springfox.documentation.swagger.web.SwaggerResourcesProvider;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -36,10 +35,10 @@ public class DocGatewayResourceConfig implements SwaggerResourcesProvider {
         //获取所有router
         List<SwaggerResource> resources = new ArrayList<>();
         List<Route> routes = routeLocator.getRoutes();
-        String[] accessResource = docGatewayProperties.getResources();
-        if (CollectionUtil.isNotEmpty(accessResource) && CollectionUtil.isNotEmpty(routes)) {
-            List<String> accessResourceList = Arrays.asList(accessResource);
-            routes.stream().filter(item -> accessResourceList.contains(item.getId()))
+        String[] unAccessResource = docGatewayProperties.getUnResources();
+        List<String> unAccessResourceList = CollectionUtil.arrayToList(unAccessResource);
+        if (CollectionUtil.isNotEmpty(routes)) {
+            routes.stream().filter(item -> !unAccessResourceList.contains(item.getId()))
                     .forEach(item -> resources.add(swaggerResource(item.getId(),
                             item.getFullPath().replace("**", SUFFIX))));
         }
@@ -55,4 +54,6 @@ public class DocGatewayResourceConfig implements SwaggerResourcesProvider {
         swaggerResource.setSwaggerVersion("2.0");
         return swaggerResource;
     }
+
+
 }

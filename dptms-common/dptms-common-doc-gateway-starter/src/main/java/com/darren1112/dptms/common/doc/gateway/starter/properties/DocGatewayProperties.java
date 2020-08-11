@@ -19,8 +19,8 @@ public class DocGatewayProperties {
     private Boolean enable;
 
     /**
-     * 需要暴露doc的服务列表，多个值时用逗号分隔
+     * 不需要暴露doc的服务列表，多个值时用逗号分隔
      * 如，dptms-auth, dptms-system-manage
      */
-    private String[] resources;
+    private String[] unResources;
 }

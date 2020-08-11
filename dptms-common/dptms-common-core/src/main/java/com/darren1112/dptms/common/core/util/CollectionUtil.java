@@ -1,10 +1,12 @@
 package com.darren1112.dptms.common.core.util;
 
-import cn.hutool.core.util.ArrayUtil;
 import org.springframework.lang.Nullable;
 import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * 集合工具类
@@ -29,13 +31,13 @@ public class CollectionUtil extends CollectionUtils {
     /**
      * 判断数组为空
      *
-     * @param arr 数组
+     * @param array 数组
      * @return true/false
      * @author luyuhao
      * @date 20/08/01 03:53
      */
-    public static <T> boolean isEmpty(T[] arr) {
-        return ArrayUtil.isEmpty(arr);
+    public static <T> boolean isEmpty(T[] array) {
+        return array == null || array.length == 0;
     }
 
     /**
@@ -48,5 +50,20 @@ public class CollectionUtil extends CollectionUtils {
      */
     public static <T> boolean isNotEmpty(T[] arr) {
         return !isEmpty(arr);
+    }
+
+    /**
+     * 数组转list
+     *
+     * @param array 数组
+     * @return list
+     * @author luyuhao
+     * @date 2020/8/11 14:24
+     */
+    public static <T> List<T> arrayToList(T[] array) {
+        if (isEmpty(array)) {
+            return new ArrayList<>();
+        }
+        return Arrays.asList(array);
     }
 }

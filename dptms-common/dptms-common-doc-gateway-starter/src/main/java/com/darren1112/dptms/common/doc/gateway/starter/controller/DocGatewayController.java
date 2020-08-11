@@ -11,7 +11,6 @@ import reactor.core.publisher.Mono;
 import springfox.documentation.swagger.web.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,11 +45,11 @@ public class DocGatewayController {
     public Mono<ResponseEntity<List<SwaggerResource>>> swaggerResources() {
         List<SwaggerResource> swaggerResources = this.swaggerResources.get();
         List<SwaggerResource> filterList = new ArrayList<>();
-        String[] resources = docGatewayProperties.getResources();
-        if (CollectionUtil.isNotEmpty(resources)) {
-            List<String> resourceList = Arrays.asList(resources);
+        String[] unResources = docGatewayProperties.getUnResources();
+        if (CollectionUtil.isNotEmpty(unResources)) {
+            List<String> resourceList = CollectionUtil.arrayToList(unResources);
             swaggerResources.stream()
-                    .filter(item -> resourceList.contains(item.getName()))
+                    .filter(item -> !resourceList.contains(item.getName()))
                     .forEach(filterList::add);
             return Mono.just(ResponseEntityUtil.ok(filterList));
         }
