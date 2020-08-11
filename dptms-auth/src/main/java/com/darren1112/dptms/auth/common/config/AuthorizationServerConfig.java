@@ -72,11 +72,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                         .scopes(clientProperties.getScope());
             }
         }
-        // clients.inMemory()
-        //         .withClient("dptms")
-        //         .secret(passwordEncoder.encode("123456"))
-        //         .authorizedGrantTypes("password", "refresh_token")
-        //         .scopes("all");
     }
 
     @Override

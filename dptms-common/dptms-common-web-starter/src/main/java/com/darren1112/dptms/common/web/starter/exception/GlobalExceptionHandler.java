@@ -39,17 +39,6 @@ public class GlobalExceptionHandler {
                 Optional.ofNullable(message).orElse(MicroErrorCodeEnum.SERVER_DOWN.getMessage())));
     }
 
-//    /**
-//     * 权限不足异常处理
-//     */
-//    @ExceptionHandler(AccessDeniedException.class)
-//    public ResponseEntity handleAccessDeniedException(AccessDeniedException ae) {
-//        log.error("系统捕捉AccessDeniedException异常并处理 ==> " + ae.getMessage(), ae);
-//        String message = StringUtil.isContainChinese(ae.getMessage()) ? ae.getMessage() : null;
-//        return ResponseEntityUtil.forbidden(JsonResult.buildErrorMsg(HttpStatus.FORBIDDEN.value(),
-//                Optional.ofNullable(message).orElse(MicroErrorCodeEnum.HAS_NO_PERMISSION.getMessage())));
-//    }
-
     /**
      * 文件上传异常处理
      */

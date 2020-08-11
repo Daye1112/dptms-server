@@ -4,6 +4,7 @@ import com.alibaba.fastjson.parser.ParserConfig;
 import com.darren1112.dptms.common.redis.starter.constant.AcceptPackageConstant;
 import com.darren1112.dptms.common.redis.starter.serializer.FastJsonRedisSerializer;
 import com.darren1112.dptms.common.redis.starter.serializer.StringRedisSerializer;
+import com.darren1112.dptms.common.redis.starter.util.RedisUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -93,5 +94,10 @@ public class RedisAutoConfig extends CachingConfigurerSupport {
             }
             return sb.toString();
         };
+    }
+
+    @Bean
+    public RedisUtil redisUtil(){
+        return new RedisUtil();
     }
 }
