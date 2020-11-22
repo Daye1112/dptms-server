@@ -1,6 +1,6 @@
 package com.darren1112.dptms.common.spi.sys.entity;
 
-import com.darren1112.dptms.common.spi.common.entity.BaseEntity;
+import com.darren1112.dptms.common.spi.common.base.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -25,6 +25,11 @@ public class SysUserEntity extends BaseEntity {
      * 密码
      */
     private String password;
+
+    /**
+     * 盐
+     */
+    private String salt;
 
     /**
      * 姓名
@@ -65,4 +70,9 @@ public class SysUserEntity extends BaseEntity {
      * 组织id
      */
     private Long orgId;
+
+    /**
+     * 是否被锁定 0：否 1：是
+     */
+    private Integer isLocked;
 }

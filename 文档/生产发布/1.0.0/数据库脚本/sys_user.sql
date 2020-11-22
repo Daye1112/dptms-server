@@ -12,6 +12,7 @@ create table sys_user
    id                   bigint not null auto_increment,
    username             varchar(64),
    password             varchar(128),
+   salt                 varchar(128),
    real_name            varchar(64),
    gender               tinyint,
    phone_number         varchar(32),
@@ -20,6 +21,7 @@ create table sys_user
    pwd_update_time      datetime,
    file_id              bigint,
    org_id               bigint,
+   is_locked            tinyint,
    remark               varchar(256),
    isvalid              tinyint,
    create_time          datetime,
@@ -37,6 +39,8 @@ alter table sys_user modify column username varchar(64) comment '用户名';
 
 alter table sys_user modify column password varchar(128) comment '密码';
 
+alter table sys_user modify column salt varchar(128) comment '盐';
+
 alter table sys_user modify column real_name varchar(64) comment '姓名';
 
 alter table sys_user modify column gender tinyint comment '性别 1：男 2：女';
@@ -52,6 +56,8 @@ alter table sys_user modify column pwd_update_time datetime comment '密码更�
 alter table sys_user modify column file_id bigint comment '头像文件id';
 
 alter table sys_user modify column org_id bigint comment '组织id';
+
+alter table sys_user modify column is_locked tinyint comment '是否被锁定 0：否 1：是';
 
 alter table sys_user modify column remark varchar(256) comment '备注';
 

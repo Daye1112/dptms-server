@@ -36,6 +36,7 @@
         <springfox.version>2.9.2</springfox.version>
         <swagger.version>1.5.21</swagger.version>
         <spring-boot-admin.version>2.1.6</spring-boot-admin.version>
+        <ip2region.version>1.7.2</ip2region.version>
 
         <target.dir>D:\dptms\shell</target.dir>
     </properties>
@@ -157,6 +158,13 @@
                 <version>${swagger.version}</version>
             </dependency>
             <!-- [swagger2] End -->
+            <!-- [ip2region] Start -->
+            <dependency>
+                <groupId>org.lionsoul</groupId>
+                <artifactId>ip2region</artifactId>
+                <version>${ip2region.version}</version>
+            </dependency>
+            <!-- [ip2region] End -->
             <!-- [Plugins] End -->
 
             <!-- [dptms] Start-->

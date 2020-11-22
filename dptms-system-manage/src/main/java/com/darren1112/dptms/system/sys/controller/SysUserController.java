@@ -1,7 +1,6 @@
 package com.darren1112.dptms.system.sys.controller;
 
 import com.darren1112.dptms.common.core.message.JsonResult;
-import com.darren1112.dptms.common.core.util.RequestUtil;
 import com.darren1112.dptms.common.core.util.ResponseEntityUtil;
 import com.darren1112.dptms.system.sys.service.SysUserService;
 import io.swagger.annotations.Api;
@@ -41,6 +40,6 @@ public class SysUserController {
     @ApiOperation("获取用户信息")
     @GetMapping("/user")
     public ResponseEntity<JsonResult<Principal>> currentUser(Principal principal) {
-        return ResponseEntityUtil.ok(JsonResult.buildData(principal));
+        return ResponseEntityUtil.ok(JsonResult.buildSuccessData(principal));
     }
 }

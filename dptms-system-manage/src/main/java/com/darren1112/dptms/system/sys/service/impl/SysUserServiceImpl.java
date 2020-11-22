@@ -1,6 +1,6 @@
 package com.darren1112.dptms.system.sys.service.impl;
 
-import com.darren1112.dptms.common.core.mvc.BaseService;
+import com.darren1112.dptms.common.core.base.BaseService;
 import com.darren1112.dptms.system.sys.dao.SysUserDao;
 import com.darren1112.dptms.system.sys.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;

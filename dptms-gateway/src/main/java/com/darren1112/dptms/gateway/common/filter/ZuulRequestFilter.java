@@ -1,5 +1,6 @@
 package com.darren1112.dptms.gateway.common.filter;
 
+import com.darren1112.dptms.common.core.util.IpUtil;
 import com.darren1112.dptms.gateway.common.properties.SecurityProperties;
 import com.darren1112.dptms.gateway.common.util.ZuulRequestUtil;
 import com.netflix.zuul.ZuulFilter;
@@ -75,7 +76,7 @@ public class ZuulRequestFilter extends ZuulFilter {
         HttpServletRequest request = ZuulRequestUtil.getRequest();
 
         String serviceId = ctx.get(FilterConstants.SERVICE_ID_KEY).toString();
-        String host = request.getRemoteHost();
+        String host = IpUtil.getIp(request);
         String method = request.getMethod();
         String uri = request.getRequestURI();
 

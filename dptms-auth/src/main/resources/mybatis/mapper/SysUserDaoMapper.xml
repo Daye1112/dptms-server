@@ -15,45 +15,50 @@
     </insert>
     <update id="update" parameterType="com.darren1112.dptms.common.spi.sys.dto.SysUserDto">
         UPDATE sys_user
-        <set>
-            update_time = now(),
-            <if test="username != null and username != ''">
-                username = #{username,jdbcType=VARCHAR},
-            </if>
-            <if test="password != null and password != ''">
-                `password` = #{password,jdbcType=VARCHAR},
-            </if>
-            <if test="realName != null and realName != ''">
-                real_name = #{realName,jdbcType=VARCHAR},
-            </if>
-            <if test="gender != null">
-                gender = #{gender,jdbcType=TINYINT},
-            </if>
-            <if test="phoneNumber != null and phoneNumber != ''">
-                phone_number = #{phoneNumer,jdbcType=VARCHAR},
-            </if>
-            <if test="email != null and email != ''">
-                email = #{email,jdbcType=VARCHAR},
-            </if>
-            <if test="lastLoginTime != null">
-                last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="pwdUpdateTime != null">
-                pwd_update_time = #{pwdUpdateTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="fileId != null">
-                file_id = #{fileId,jdbcType=BIGINT},
-            </if>
-            <if test="orgId != null">
-                org_id = #{orgId,jdbcType=BIGINT},
-            </if>
-            <if test="remark != null and remark != ''">
-                remark = #{remark,jdbcType=VARCHAR},
-            </if>
-            <if test="updateBy != null">
-                update_by = #{updateBy,jdbcType=BIGINT},
-            </if>
-        </set>
+        SET
+        update_time = now()
+        <if test="username != null and username != ''">
+            ,username = #{username,jdbcType=VARCHAR}
+        </if>
+        <if test="password != null and password != ''">
+            ,`password` = #{password,jdbcType=VARCHAR}
+        </if>
+        <if test="salt != null and salt != ''">
+            ,salt = #{salt,jdbcType=VARCHAR}
+        </if>
+        <if test="realName != null and realName != ''">
+            ,real_name = #{realName,jdbcType=VARCHAR}
+        </if>
+        <if test="gender != null">
+            ,gender = #{gender,jdbcType=TINYINT}
+        </if>
+        <if test="phoneNumber != null and phoneNumber != ''">
+            ,phone_number = #{phoneNumer,jdbcType=VARCHAR}
+        </if>
+        <if test="email != null and email != ''">
+            ,email = #{email,jdbcType=VARCHAR}
+        </if>
+        <if test="lastLoginTime != null">
+            ,last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="pwdUpdateTime != null">
+            ,pwd_update_time = #{pwdUpdateTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="fileId != null">
+            ,file_id = #{fileId,jdbcType=BIGINT}
+        </if>
+        <if test="orgId != null">
+            ,org_id = #{orgId,jdbcType=BIGINT}
+        </if>
+        <if test="isLocked != null">
+            ,is_locked = #{isLocked,jdbcType=TINYINT}
+        </if>
+        <if test="remark != null and remark != ''">
+            ,remark = #{remark,jdbcType=VARCHAR}
+        </if>
+        <if test="updateBy != null">
+            ,update_by = #{updateBy,jdbcType=BIGINT}
+        </if>
         WHERE id = #{id,jdbcType=BIGINT}
         AND isvalid = 1
     </update>
@@ -62,20 +67,22 @@
         SELECT id,
                username,
                password,
-               real_name AS realName,
+               salt,
+               real_name       AS realName,
                gender,
-               phone_number AS phoneNumber,
+               phone_number    AS phoneNumber,
                email,
                last_login_time AS lastLoginTime,
                pwd_update_time AS pwdUpdateTime,
-               file_id AS fileId,
-               org_id AS orgId,
+               file_id         AS fileId,
+               org_id          AS orgId,
+               is_locked       AS isLocked,
                remark,
                isvalid,
-               create_time AS createTime,
-               create_by AS createBy,
-               update_time AS updateTime,
-               update_by AS updateBy
+               create_time     AS createTime,
+               create_by       AS createBy,
+               update_time     AS updateTime,
+               update_by       AS updateBy
         FROM sys_user
         WHERE username = #{username}
           AND isvalid = 1
