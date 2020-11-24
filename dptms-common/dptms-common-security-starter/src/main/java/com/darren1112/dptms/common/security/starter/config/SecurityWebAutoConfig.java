@@ -1,5 +1,6 @@
 package com.darren1112.dptms.common.security.starter.config;
 
+import com.darren1112.dptms.common.security.starter.interceptor.SecurityValidInterceptor;
 import com.darren1112.dptms.common.security.starter.interceptor.ZuulHeaderValidInterceptor;
 import com.darren1112.dptms.common.security.starter.properties.SecurityProperties;
 import lombok.extern.slf4j.Slf4j;
@@ -21,12 +22,18 @@ public class SecurityWebAutoConfig implements WebMvcConfigurer {
     private SecurityProperties securityProperties;
 
     @Bean
-    public ZuulHeaderValidInterceptor zuulHeaderValidInterceptor(){
+    public ZuulHeaderValidInterceptor zuulHeaderValidInterceptor() {
         return new ZuulHeaderValidInterceptor(securityProperties);
+    }
+
+    @Bean
+    public SecurityValidInterceptor securityValidInterceptor() {
+        return new SecurityValidInterceptor();
     }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(zuulHeaderValidInterceptor());
+        registry.addInterceptor(securityValidInterceptor());
     }
 }

@@ -2,12 +2,14 @@ package com.darren1112.dptms.auth.common.security;
 
 import com.darren1112.dptms.auth.common.constants.AccountConstant;
 import com.darren1112.dptms.auth.common.enums.AuthErrorCodeEnum;
+import com.darren1112.dptms.auth.common.properties.AuthProperties;
 import com.darren1112.dptms.auth.common.security.base.BaseUserDetails;
 import com.darren1112.dptms.auth.service.SysUserService;
 import com.darren1112.dptms.common.core.exception.BadRequestException;
 import com.darren1112.dptms.common.core.exception.BaseException;
 import com.darren1112.dptms.common.core.util.Md5Util;
 import com.darren1112.dptms.common.redis.starter.util.RedisUtil;
+import com.darren1112.dptms.common.security.starter.util.TokenUtil;
 import com.darren1112.dptms.common.spi.common.dto.LoginParam;
 import com.darren1112.dptms.common.spi.common.entity.ActiveUser;
 import com.darren1112.dptms.common.spi.sys.dto.SysUserDto;
@@ -32,7 +34,13 @@ public class SecurityUserDetails extends BaseUserDetails {
     private RedisUtil redisUtil;
 
     @Autowired
+    private TokenUtil tokenUtil;
+
+    @Autowired
     private SysUserService sysUserService;
+
+    @Autowired
+    private AuthProperties authProperties;
 
     /**
      * 前置处理
@@ -95,7 +103,10 @@ public class SecurityUserDetails extends BaseUserDetails {
         String refreshToken = UUID.randomUUID().toString();
         activeUser.setAccessToken(accessToken);
         activeUser.setRefreshToken(refreshToken);
-        // TODO 存放到redis中
+        // 存放到redis中
+        if (!tokenUtil.saveToken(activeUser, authProperties.getAccessTokenExpired(), authProperties.getRefreshTokenExpired())) {
+            throw new BadRequestException(AuthErrorCodeEnum.SAVE_TOKEN_ERROR);
+        }
     }
 
     /**
