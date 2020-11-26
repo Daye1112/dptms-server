@@ -1,25 +1,26 @@
-package com.darren1112.dptms.common.core.enums;
+package com.darren1112.dptms.gateway.common.enums;
 
 import com.darren1112.dptms.common.core.exception.enums.BaseEnum;
 import org.springframework.http.HttpStatus;
 
 /**
- * 通用错误码
+ * 网关错误码
  *
  * @author luyuhao
  * @date 2020/08/02 02:44
  */
-public enum CommonErrorCodeEnum implements BaseEnum {
+public enum GatewayErrorCodeEnum implements BaseEnum {
 
     /**
-     * 服务统一错误状态码
+     * 网关错误状态码
      */
+    NOT_LOGIN(HttpStatus.UNAUTHORIZED, "请先登录"),
     ;
 
     private Integer code;
     private String message;
 
-    CommonErrorCodeEnum(HttpStatus httpStatus, String message) {
+    GatewayErrorCodeEnum(HttpStatus httpStatus, String message) {
         this.code = httpStatus.value();
         this.message = message;
     }

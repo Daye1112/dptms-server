@@ -1,9 +1,9 @@
-package com.darren1112.dptms.common.security.starter.util;
+package com.darren1112.dptms.common.redis.starter.util;
 
 import com.darren1112.dptms.common.core.constants.RedisConstant;
-import com.darren1112.dptms.common.redis.starter.util.RedisUtil;
 import com.darren1112.dptms.common.spi.common.entity.ActiveUser;
-import lombok.AllArgsConstructor;
+
+import java.util.Optional;
 
 /**
  * token 工具类
@@ -11,10 +11,13 @@ import lombok.AllArgsConstructor;
  * @author luyuhao
  * @date 2020/11/25 00:20
  */
-@AllArgsConstructor
 public class TokenUtil {
 
     private RedisUtil redisUtil;
+
+    public TokenUtil(RedisUtil redisUtil) {
+        this.redisUtil = redisUtil;
+    }
 
     /**
      * 保存token
@@ -29,10 +32,22 @@ public class TokenUtil {
         String accessToken = activeUser.getAccessToken();
         String refreshToken = activeUser.getRefreshToken();
         // 设置accessToken
-        if(!redisUtil.set(RedisConstant.PREFIX + accessToken, refreshToken, accessTokenExpire)){
+        if (!redisUtil.set(RedisConstant.PREFIX + accessToken, refreshToken, accessTokenExpire)) {
             return false;
         }
         // 设置refreshToken
         return redisUtil.set(RedisConstant.PREFIX + refreshToken, activeUser, refreshTokenExpire);
+    }
+
+    /**
+     * 获取刷新token
+     *
+     * @param accessToken 访问token
+     * @return 刷新token
+     * @author luyuhao
+     * @date 20/11/27 00:45
+     */
+    public String getRefreshToken(String accessToken) {
+        return Optional.ofNullable(redisUtil.get(RedisConstant.PREFIX + accessToken)).map(Object::toString).orElse(null);
     }
 }

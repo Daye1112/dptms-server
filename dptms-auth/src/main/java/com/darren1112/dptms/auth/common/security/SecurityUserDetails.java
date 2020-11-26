@@ -9,7 +9,7 @@ import com.darren1112.dptms.common.core.exception.BadRequestException;
 import com.darren1112.dptms.common.core.exception.BaseException;
 import com.darren1112.dptms.common.core.util.Md5Util;
 import com.darren1112.dptms.common.redis.starter.util.RedisUtil;
-import com.darren1112.dptms.common.security.starter.util.TokenUtil;
+import com.darren1112.dptms.common.redis.starter.util.TokenUtil;
 import com.darren1112.dptms.common.spi.common.dto.LoginParam;
 import com.darren1112.dptms.common.spi.common.entity.ActiveUser;
 import com.darren1112.dptms.common.spi.sys.dto.SysUserDto;
@@ -99,8 +99,8 @@ public class SecurityUserDetails extends BaseUserDetails {
     @Override
     public void afterHandler(ActiveUser activeUser, HttpServletRequest request, HttpServletResponse response) throws BaseException {
         // 后置处理
-        String accessToken = UUID.randomUUID().toString();
-        String refreshToken = UUID.randomUUID().toString();
+        String accessToken = UUID.randomUUID().toString().replaceAll("-", "");
+        String refreshToken = UUID.randomUUID().toString().replaceAll("-", "");
         activeUser.setAccessToken(accessToken);
         activeUser.setRefreshToken(refreshToken);
         // 存放到redis中

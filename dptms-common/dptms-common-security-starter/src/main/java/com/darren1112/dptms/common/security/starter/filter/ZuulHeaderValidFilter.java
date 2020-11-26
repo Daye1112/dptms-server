@@ -1,4 +1,4 @@
-package com.darren1112.dptms.common.security.starter.interceptor;
+package com.darren1112.dptms.common.security.starter.filter;
 
 import com.darren1112.dptms.common.core.enums.MicroErrorCodeEnum;
 import com.darren1112.dptms.common.core.message.JsonResult;
@@ -6,45 +6,36 @@ import com.darren1112.dptms.common.core.util.ResponseUtil;
 import com.darren1112.dptms.common.core.util.StringUtil;
 import com.darren1112.dptms.common.security.starter.properties.SecurityProperties;
 import org.springframework.util.Base64Utils;
-import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.filter.OncePerRequestFilter;
 
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
- * 网关header校验拦截器
- *
  * @author luyuhao
- * @date 2020/08/02 18:41
+ * @date 2020/11/27 00:12
  */
-public class ZuulHeaderValidInterceptor implements HandlerInterceptor {
+public class ZuulHeaderValidFilter extends OncePerRequestFilter {
 
     private SecurityProperties securityProperties;
 
-    public ZuulHeaderValidInterceptor(SecurityProperties securityProperties) {
+    public ZuulHeaderValidFilter(SecurityProperties securityProperties) {
         this.securityProperties = securityProperties;
     }
 
-    /**
-     * 处理方法
-     *
-     * @param request  请求域
-     * @param response 响应域
-     * @param handler  Object
-     * @return true/false
-     * @author luyuhao
-     * @date 20/08/02 18:54
-     */
+    @SuppressWarnings("NullableProblems")
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
         String zuulTokenValue = request.getHeader(securityProperties.getHeaderKey());
         String realZuulTokenValue = new String(Base64Utils.encode(securityProperties.getHeaderValue().getBytes()));
-        if (StringUtil.equal(zuulTokenValue, realZuulTokenValue)) {
-            return true;
-        } else {
+        if (!StringUtil.equal(zuulTokenValue, realZuulTokenValue)) {
             JsonResult jsonResult = JsonResult.buildErrorEnum(MicroErrorCodeEnum.INVALID_ACCESS);
             ResponseUtil.setJsonResult(response, jsonResult);
-            return false;
+            return;
         }
+        chain.doFilter(request, response);
     }
 }

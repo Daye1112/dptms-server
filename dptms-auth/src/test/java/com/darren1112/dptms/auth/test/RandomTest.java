@@ -17,5 +17,6 @@ public class RandomTest {
         System.out.println(uuid.getLeastSignificantBits());
         System.out.println(uuid.getMostSignificantBits());
         System.out.println(uuid.toString());
+        System.out.println(uuid.toString().replaceAll("-", ""));
     }
 }

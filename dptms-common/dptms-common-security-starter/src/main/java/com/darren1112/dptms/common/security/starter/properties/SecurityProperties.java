@@ -27,6 +27,6 @@ public class SecurityProperties {
      * 免认证资源路径，支持通配符
      * 多个值时使用逗号分隔
      */
-    private String[] anonUris;
+    private String anonUris;
 
 }

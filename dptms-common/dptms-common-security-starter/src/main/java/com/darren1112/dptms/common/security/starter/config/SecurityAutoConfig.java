@@ -1,10 +1,10 @@
 package com.darren1112.dptms.common.security.starter.config;
 
-import com.darren1112.dptms.common.redis.starter.util.RedisUtil;
+import com.darren1112.dptms.common.security.starter.filter.ZuulHeaderValidFilter;
 import com.darren1112.dptms.common.security.starter.properties.SecurityProperties;
-import com.darren1112.dptms.common.security.starter.util.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 
 /**
@@ -20,8 +20,18 @@ public class SecurityAutoConfig {
     private SecurityProperties securityProperties;
 
     @Bean
-    public TokenUtil tokenUtil(RedisUtil redisUtil) {
-        return new TokenUtil(redisUtil);
+    public ZuulHeaderValidFilter zuulHeaderValidFilter() {
+        return new ZuulHeaderValidFilter(securityProperties);
     }
 
+    @Bean
+    public FilterRegistrationBean zuulHeaderValidFilterBean() {
+        FilterRegistrationBean<ZuulHeaderValidFilter> filterRegistrationBean = new FilterRegistrationBean<>();
+        filterRegistrationBean.setFilter(zuulHeaderValidFilter());
+        filterRegistrationBean.addUrlPatterns("/**");
+        //order的数值越小 则优先级越高
+        filterRegistrationBean.setOrder(0);
+        filterRegistrationBean.setName("zuulHeaderValidFilter");
+        return filterRegistrationBean;
+    }
 }

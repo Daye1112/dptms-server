@@ -1,7 +1,9 @@
 package com.darren1112.dptms.auth.controller;
 
 import com.darren1112.dptms.auth.common.security.SecurityUserDetails;
+import com.darren1112.dptms.common.core.constants.SecurityConstant;
 import com.darren1112.dptms.common.core.message.JsonResult;
+import com.darren1112.dptms.common.core.util.CookieUtil;
 import com.darren1112.dptms.common.core.util.ResponseEntityUtil;
 import com.darren1112.dptms.common.spi.common.dto.LoginParam;
 import com.darren1112.dptms.common.spi.common.entity.ActiveUser;
@@ -48,6 +50,9 @@ public class AuthController {
                                                         HttpServletRequest request,
                                                         HttpServletResponse response) {
         ActiveUser activeUser = securityUserDetails.loginHandler(loginParam, request, response);
+        //设置cookie
+        CookieUtil.setCookie(SecurityConstant.ACCESS_TOKEN_KEY, activeUser.getAccessToken(), response);
+        CookieUtil.setCookie(SecurityConstant.REFRESH_TOKEN_KEY, activeUser.getRefreshToken(), response);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(activeUser));
     }
     //

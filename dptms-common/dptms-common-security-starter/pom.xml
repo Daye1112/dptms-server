@@ -54,11 +54,6 @@
             <artifactId>dptms-common-core</artifactId>
             <optional>true</optional>
         </dependency>
-        <dependency>
-            <groupId>com.darren1112</groupId>
-            <artifactId>dptms-common-redis-starter</artifactId>
-            <optional>true</optional>
-        </dependency>
         <!-- [dptms] End-->
     </dependencies>
 </project>
