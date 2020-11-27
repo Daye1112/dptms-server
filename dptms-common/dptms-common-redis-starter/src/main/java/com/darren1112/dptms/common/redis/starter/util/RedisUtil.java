@@ -21,8 +21,11 @@ public class RedisUtil {
 
     private static final long EXPIRED = -2;
 
-    @Autowired
     private RedisTemplate<Object, Object> redisTemplate;
+
+    public RedisUtil(RedisTemplate<Object, Object> redisTemplate) {
+        this.redisTemplate = redisTemplate;
+    }
 
     /**
      * 清空redis

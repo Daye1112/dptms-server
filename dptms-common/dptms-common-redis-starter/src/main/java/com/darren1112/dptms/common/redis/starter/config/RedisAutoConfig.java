@@ -15,6 +15,7 @@ import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisOperations;
@@ -98,12 +99,12 @@ public class RedisAutoConfig extends CachingConfigurerSupport {
     }
 
     @Bean
-    public RedisUtil redisUtil() {
-        return new RedisUtil();
+    public RedisUtil redisUtil(RedisTemplate<Object, Object> redisTemplate) {
+        return new RedisUtil(redisTemplate);
     }
 
     @Bean
-    public TokenUtil tokenUtil() {
-        return new TokenUtil(redisUtil());
+    public TokenUtil tokenUtil(RedisUtil redisUtil) {
+        return new TokenUtil(redisUtil);
     }
 }

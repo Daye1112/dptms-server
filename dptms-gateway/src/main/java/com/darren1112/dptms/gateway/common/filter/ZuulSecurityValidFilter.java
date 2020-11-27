@@ -4,6 +4,7 @@ import com.darren1112.dptms.common.core.constants.SecurityConstant;
 import com.darren1112.dptms.common.core.util.CookieUtil;
 import com.darren1112.dptms.common.core.util.StringUtil;
 import com.darren1112.dptms.common.redis.starter.util.TokenUtil;
+import com.darren1112.dptms.common.spi.common.entity.ActiveUser;
 import com.darren1112.dptms.gateway.common.constants.ZuulConstant;
 import com.darren1112.dptms.gateway.common.enums.GatewayErrorCodeEnum;
 import com.darren1112.dptms.gateway.common.util.ZuulRequestUtil;
@@ -15,6 +16,7 @@ import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Objects;
 
 /**
  * 安全验证过滤器
@@ -68,6 +70,10 @@ public class ZuulSecurityValidFilter extends ZuulFilter {
 
     /**
      * 执行内容
+     * 1. accessToken和refreshToken均无效 => 打回
+     * 2. accessToken和refreshToken均有效 => 放行
+     * 3. accessToken无效, refreshToken有效 => 刷新token，重置cookie
+     * 4. accessToken有效, refreshToken无效 => 打回
      *
      * @return Object
      * @author luyuhao
@@ -84,12 +90,25 @@ public class ZuulSecurityValidFilter extends ZuulFilter {
             accessToken = request.getHeader(SecurityConstant.ACCESS_TOKEN_KEY);
             refreshToken = request.getHeader(SecurityConstant.REFRESH_TOKEN_KEY);
         }
+        // 非空验证
         if (StringUtil.isBlank(accessToken) || StringUtil.isBlank(refreshToken)) {
             ZuulRequestUtil.returnError(GatewayErrorCodeEnum.NOT_LOGIN);
             return null;
         }
         // TODO token存在，校验是否合法
         String redisRefreshToken = tokenUtil.getRefreshToken(accessToken);
+        ActiveUser activeUser = tokenUtil.getActiveUser(refreshToken);
+
+        if(StringUtil.isBlank(redisRefreshToken) && Objects.isNull(activeUser)){
+            // accessToken和refreshToken均无效 => 打回
+        }else if(redisRefreshToken.equals(refreshToken) && Objects.nonNull(activeUser)){
+            // accessToken和refreshToken均有效 => 放行
+        }else if(StringUtil.isBlank(redisRefreshToken) && Objects.nonNull(activeUser)){
+            // accessToken无效, refreshToken有效 => 刷新accessToken，重置cookie
+        } else{
+            // accessToken有效, refreshToken无效 => 刷新refreshToken，重置cookie
+        }
+        // refresh token快失效，延长有效期
         return null;
     }
 }

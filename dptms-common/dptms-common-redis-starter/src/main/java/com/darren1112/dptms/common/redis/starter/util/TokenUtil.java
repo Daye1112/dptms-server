@@ -1,6 +1,7 @@
 package com.darren1112.dptms.common.redis.starter.util;
 
 import com.darren1112.dptms.common.core.constants.RedisConstant;
+import com.darren1112.dptms.common.core.util.JsonUtil;
 import com.darren1112.dptms.common.spi.common.entity.ActiveUser;
 
 import java.util.Optional;
@@ -36,7 +37,7 @@ public class TokenUtil {
             return false;
         }
         // 设置refreshToken
-        return redisUtil.set(RedisConstant.PREFIX + refreshToken, activeUser, refreshTokenExpire);
+        return redisUtil.set(RedisConstant.PREFIX + refreshToken, JsonUtil.toJsonString(activeUser), refreshTokenExpire);
     }
 
     /**
@@ -49,5 +50,20 @@ public class TokenUtil {
      */
     public String getRefreshToken(String accessToken) {
         return Optional.ofNullable(redisUtil.get(RedisConstant.PREFIX + accessToken)).map(Object::toString).orElse(null);
+    }
+
+    /**
+     * 获取用户信息
+     *
+     * @param refreshToken refreshToken
+     * @return {@link ActiveUser 用户信息}
+     * @author luyuhao
+     * @date 20/11/28 01:22
+     */
+    public ActiveUser getActiveUser(String refreshToken) {
+        return Optional.ofNullable(redisUtil.get(RedisConstant.PREFIX + refreshToken))
+                .map(Object::toString)
+                .map(item -> JsonUtil.parseObject(item, ActiveUser.class))
+                .orElse(null);
     }
 }
