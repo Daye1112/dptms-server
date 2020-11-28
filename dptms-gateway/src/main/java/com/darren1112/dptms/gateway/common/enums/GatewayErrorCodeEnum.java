@@ -15,6 +15,7 @@ public enum GatewayErrorCodeEnum implements BaseEnum {
      * 网关错误状态码
      */
     NOT_LOGIN(HttpStatus.UNAUTHORIZED, "请先登录"),
+    TOKEN_VALID_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "token校验异常，请联系管理员")
     ;
 
     private Integer code;

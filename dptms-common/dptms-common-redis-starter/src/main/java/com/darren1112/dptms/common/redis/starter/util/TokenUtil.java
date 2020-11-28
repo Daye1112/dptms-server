@@ -79,7 +79,7 @@ public class TokenUtil {
      */
     public String refreshAccessToken(String refreshToken, long accessTokenExpire) {
         String newAccessToken = UUID.randomUUID().toString().replaceAll("-", "");
-        redisUtil.set(newAccessToken, refreshToken, accessTokenExpire);
+        redisUtil.set(RedisConstant.PREFIX + newAccessToken, refreshToken, accessTokenExpire);
         return newAccessToken;
     }
 }

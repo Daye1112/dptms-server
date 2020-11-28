@@ -73,6 +73,7 @@ public class ZuulRequestFilter extends ZuulFilter {
      */
     @Override
     public Object run() throws ZuulException {
+        log.info("ZuulRequestFilter");
         RequestContext ctx = ZuulRequestUtil.getRequestContext();
         HttpServletRequest request = ZuulRequestUtil.getRequest();
 

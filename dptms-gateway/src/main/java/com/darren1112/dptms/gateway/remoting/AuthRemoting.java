@@ -20,11 +20,11 @@ public interface AuthRemoting {
      * ------------------------ AuthController ------------------------
      * 刷新accessToken
      *
-     * @param refreshToken 熟悉token
+     * @param refreshToken refreshToken
      * @return newAccessToken
      * @author luyuhao
      * @date 2020/11/28 11:16
      */
     @PostMapping("/refreshAccessToken")
-    JsonResult<String> teacherLogin(@RequestParam("refreshToken") String refreshToken);
+    JsonResult<String> refreshAccessToken(@RequestParam("refreshToken") String refreshToken);
 }

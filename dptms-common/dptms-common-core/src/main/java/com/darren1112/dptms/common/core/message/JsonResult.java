@@ -1,6 +1,7 @@
 package com.darren1112.dptms.common.core.message;
 
 import com.darren1112.dptms.common.core.exception.enums.BaseEnum;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import org.springframework.http.HttpStatus;
@@ -13,7 +14,6 @@ import java.io.Serializable;
  * @author luyuhao
  * @since 2019/12/5 9:36
  */
-//@ApiModel("统一响应类")
 @Data
 @Accessors(chain = true)
 public class JsonResult<T> implements Serializable {
@@ -24,17 +24,17 @@ public class JsonResult<T> implements Serializable {
     /**
      * http状态码
      */
-//    @ApiModelProperty("http状态码")
+    @ApiModelProperty("http状态码")
     private Integer code;
     /**
      * 返回信息
      */
-//    @ApiModelProperty("返回信息")
+    @ApiModelProperty("返回信息")
     private String message;
     /**
      * 数据
      */
-//    @ApiModelProperty("返回数据")
+    @ApiModelProperty("返回数据")
     private T data;
 
     public JsonResult(Integer code, String message, T data) {
