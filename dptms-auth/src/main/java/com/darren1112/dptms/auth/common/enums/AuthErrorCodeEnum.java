@@ -16,7 +16,11 @@ public enum AuthErrorCodeEnum implements BaseEnum {
      */
     LOCKED(HttpStatus.BAD_REQUEST, "用户已被锁定，请联系管理员"),
     LOGIN_FAILURE(HttpStatus.BAD_REQUEST, "用户名或密码错误"),
-    SAVE_TOKEN_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "token保存异常，请联系管理员");
+    SAVE_TOKEN_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "token保存异常，请联系管理员"),
+    USERNAME_NOT_NULL(HttpStatus.BAD_REQUEST, "账号不能为空"),
+    PASSWORD_NOT_NULL(HttpStatus.BAD_REQUEST, "密码不能为空"),
+    LOGIN_TYPE_NOT_NULL(HttpStatus.BAD_REQUEST, "登录类型不能为空")
+    ;
 
     private Integer code;
     private String message;

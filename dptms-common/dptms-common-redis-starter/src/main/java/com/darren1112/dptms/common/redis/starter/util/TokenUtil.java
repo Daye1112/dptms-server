@@ -5,6 +5,7 @@ import com.darren1112.dptms.common.core.util.JsonUtil;
 import com.darren1112.dptms.common.spi.common.entity.ActiveUser;
 
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * token 工具类
@@ -24,14 +25,14 @@ public class TokenUtil {
      * 保存token
      *
      * @param activeUser         用户信息
+     * @param accessToken        accessToken
+     * @param refreshToken       refreshToken
      * @param accessTokenExpire  accessToken过期时间
      * @param refreshTokenExpire refreshToken过期时间
      * @author luyuhao
      * @date 20/11/25 00:25
      */
-    public boolean saveToken(ActiveUser activeUser, long accessTokenExpire, long refreshTokenExpire) {
-        String accessToken = activeUser.getAccessToken();
-        String refreshToken = activeUser.getRefreshToken();
+    public boolean saveToken(ActiveUser activeUser, String accessToken, String refreshToken, long accessTokenExpire, long refreshTokenExpire) {
         // 设置accessToken
         if (!redisUtil.set(RedisConstant.PREFIX + accessToken, refreshToken, accessTokenExpire)) {
             return false;
@@ -65,5 +66,20 @@ public class TokenUtil {
                 .map(Object::toString)
                 .map(item -> JsonUtil.parseObject(item, ActiveUser.class))
                 .orElse(null);
+    }
+
+    /**
+     * 刷新accessToken
+     *
+     * @param refreshToken      refreshToken
+     * @param accessTokenExpire accessToken过期时间
+     * @return new accessToken
+     * @author luyuhao
+     * @date 2020/11/28 10:50
+     */
+    public String refreshAccessToken(String refreshToken, long accessTokenExpire) {
+        String newAccessToken = UUID.randomUUID().toString().replaceAll("-", "");
+        redisUtil.set(newAccessToken, refreshToken, accessTokenExpire);
+        return newAccessToken;
     }
 }

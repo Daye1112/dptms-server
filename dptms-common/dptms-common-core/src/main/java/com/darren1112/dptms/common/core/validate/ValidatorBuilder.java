@@ -11,7 +11,7 @@ import com.darren1112.dptms.common.core.validate.validator.ValidatorHolder;
  */
 public class ValidatorBuilder {
 
-    public static ValidatorHolder build(){
+    public static ValidatorHolder build() {
         return new ValidatorHolder();
     }
 }

@@ -5,8 +5,10 @@ import com.darren1112.dptms.auth.common.enums.AuthErrorCodeEnum;
 import com.darren1112.dptms.auth.common.properties.AuthProperties;
 import com.darren1112.dptms.auth.common.security.base.BaseUserDetails;
 import com.darren1112.dptms.auth.service.SysUserService;
+import com.darren1112.dptms.common.core.constants.SecurityConstant;
 import com.darren1112.dptms.common.core.exception.BadRequestException;
 import com.darren1112.dptms.common.core.exception.BaseException;
+import com.darren1112.dptms.common.core.util.CookieUtil;
 import com.darren1112.dptms.common.core.util.Md5Util;
 import com.darren1112.dptms.common.redis.starter.util.RedisUtil;
 import com.darren1112.dptms.common.redis.starter.util.TokenUtil;
@@ -28,10 +30,7 @@ import java.util.UUID;
  * @date 2020/11/22 17:13
  */
 @Component
-public class SecurityUserDetails extends BaseUserDetails {
-
-    @Autowired
-    private RedisUtil redisUtil;
+public class PasswordLoginHandler extends BaseUserDetails {
 
     @Autowired
     private TokenUtil tokenUtil;
@@ -101,12 +100,13 @@ public class SecurityUserDetails extends BaseUserDetails {
         // 后置处理
         String accessToken = UUID.randomUUID().toString().replaceAll("-", "");
         String refreshToken = UUID.randomUUID().toString().replaceAll("-", "");
-        activeUser.setAccessToken(accessToken);
-        activeUser.setRefreshToken(refreshToken);
         // 存放到redis中
-        if (!tokenUtil.saveToken(activeUser, authProperties.getAccessTokenExpired(), authProperties.getRefreshTokenExpired())) {
+        if (!tokenUtil.saveToken(activeUser, accessToken, refreshToken, authProperties.getAccessTokenExpired(), authProperties.getRefreshTokenExpired())) {
             throw new BadRequestException(AuthErrorCodeEnum.SAVE_TOKEN_ERROR);
         }
+        //设置cookie
+        CookieUtil.setCookie(SecurityConstant.ACCESS_TOKEN_KEY, accessToken, response);
+        CookieUtil.setCookie(SecurityConstant.REFRESH_TOKEN_KEY, refreshToken, response);
     }
 
     /**

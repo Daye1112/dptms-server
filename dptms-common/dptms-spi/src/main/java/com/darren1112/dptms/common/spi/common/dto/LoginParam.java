@@ -20,4 +20,9 @@ public class LoginParam {
      * 密码
      */
     private String password;
+
+    /**
+     * 登录类型 1：账号密码登录
+     */
+    private Integer LoginType;
 }

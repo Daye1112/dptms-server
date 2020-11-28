@@ -1,8 +1,6 @@
 package com.darren1112.dptms.common.core.validate.validator;
 
-import com.darren1112.dptms.common.core.exception.enums.BaseEnum;
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import com.darren1112.dptms.common.core.validate.result.ValidatorResult;
 
 /**
  * 校验类context
@@ -10,18 +8,19 @@ import lombok.Data;
  * @author luyuhao
  * @date 20/01/07 01:05
  */
-@Data
-@AllArgsConstructor
 public class ValidatorContext {
 
-    /**
-     * 校验结果
-     */
-    private Boolean checkResult;
+    private ValidatorResult validatorResult;
 
-    /**
-     * 错误信息枚举
-     */
-    private BaseEnum baseEnum;
+    public ValidatorContext() {
+        this.validatorResult = new ValidatorResult(true);
+    }
 
+    public ValidatorResult getValidatorResult() {
+        return validatorResult;
+    }
+
+    public void setValidatorResult(ValidatorResult validatorResult) {
+        this.validatorResult = validatorResult;
+    }
 }

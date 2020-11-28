@@ -1,10 +1,12 @@
 package com.darren1112.dptms.auth.controller;
 
-import com.darren1112.dptms.auth.common.security.SecurityUserDetails;
-import com.darren1112.dptms.common.core.constants.SecurityConstant;
+import com.darren1112.dptms.auth.common.enums.AuthErrorCodeEnum;
+import com.darren1112.dptms.auth.common.security.PasswordLoginHandler;
 import com.darren1112.dptms.common.core.message.JsonResult;
-import com.darren1112.dptms.common.core.util.CookieUtil;
 import com.darren1112.dptms.common.core.util.ResponseEntityUtil;
+import com.darren1112.dptms.common.core.validate.ValidatorBuilder;
+import com.darren1112.dptms.common.core.validate.validator.callback.common.NotEmptyValidatorCallback;
+import com.darren1112.dptms.common.core.validate.validator.callback.common.NotNullValidatorCallback;
 import com.darren1112.dptms.common.spi.common.dto.LoginParam;
 import com.darren1112.dptms.common.spi.common.entity.ActiveUser;
 import io.swagger.annotations.Api;
@@ -32,7 +34,7 @@ import javax.servlet.http.HttpServletResponse;
 public class AuthController {
 
     @Autowired
-    private SecurityUserDetails securityUserDetails;
+    private PasswordLoginHandler passwordLoginHandler;
 
     /**
      * 登录系统
@@ -49,10 +51,12 @@ public class AuthController {
     public ResponseEntity<JsonResult<ActiveUser>> login(LoginParam loginParam,
                                                         HttpServletRequest request,
                                                         HttpServletResponse response) {
-        ActiveUser activeUser = securityUserDetails.loginHandler(loginParam, request, response);
-        //设置cookie
-        CookieUtil.setCookie(SecurityConstant.ACCESS_TOKEN_KEY, activeUser.getAccessToken(), response);
-        CookieUtil.setCookie(SecurityConstant.REFRESH_TOKEN_KEY, activeUser.getRefreshToken(), response);
+        ValidatorBuilder.build()
+                .on(loginParam.getUsername(), new NotEmptyValidatorCallback(AuthErrorCodeEnum.USERNAME_NOT_NULL))
+                .on(loginParam.getPassword(), new NotEmptyValidatorCallback(AuthErrorCodeEnum.PASSWORD_NOT_NULL))
+                .on(loginParam.getLoginType(), new NotNullValidatorCallback(AuthErrorCodeEnum.LOGIN_TYPE_NOT_NULL))
+                .doValidate().checkResult();
+        ActiveUser activeUser = passwordLoginHandler.loginHandler(loginParam, request, response);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(activeUser));
     }
     //

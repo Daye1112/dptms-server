@@ -74,6 +74,7 @@ public class ZuulSecurityValidFilter extends ZuulFilter {
      * 2. accessToken和refreshToken均有效 => 放行
      * 3. accessToken无效, refreshToken有效 => 刷新token，重置cookie
      * 4. accessToken有效, refreshToken无效 => 打回
+     * 5. 适当延长refreshToken有效期
      *
      * @return Object
      * @author luyuhao
@@ -99,16 +100,36 @@ public class ZuulSecurityValidFilter extends ZuulFilter {
         String redisRefreshToken = tokenUtil.getRefreshToken(accessToken);
         ActiveUser activeUser = tokenUtil.getActiveUser(refreshToken);
 
-        if(StringUtil.isBlank(redisRefreshToken) && Objects.isNull(activeUser)){
-            // accessToken和refreshToken均无效 => 打回
-        }else if(redisRefreshToken.equals(refreshToken) && Objects.nonNull(activeUser)){
-            // accessToken和refreshToken均有效 => 放行
-        }else if(StringUtil.isBlank(redisRefreshToken) && Objects.nonNull(activeUser)){
-            // accessToken无效, refreshToken有效 => 刷新accessToken，重置cookie
-        } else{
-            // accessToken有效, refreshToken无效 => 刷新refreshToken，重置cookie
+        if (!tokenValidHandle(refreshToken, redisRefreshToken, activeUser)) {
+            ZuulRequestUtil.returnError(GatewayErrorCodeEnum.NOT_LOGIN);
+            return null;
         }
         // refresh token快失效，延长有效期
         return null;
     }
+
+    /**
+     * token校验处理
+     *
+     * @param refreshToken      refreshToken
+     * @param redisRefreshToken redis中的refreshToken
+     * @param activeUser        redis中的activeUser
+     * @return true/false
+     * @author luyuhao
+     * @date 2020/11/28 10:47
+     */
+    private boolean tokenValidHandle(String refreshToken, String redisRefreshToken, ActiveUser activeUser) {
+        if (redisRefreshToken.equals(refreshToken) && Objects.nonNull(activeUser)) {
+            // accessToken和refreshToken均有效 => 放行
+            return true;
+        } else if (StringUtil.isBlank(redisRefreshToken) && Objects.nonNull(activeUser)) {
+            // accessToken无效, refreshToken有效 => 刷新accessToken，重置cookie
+            return true;
+        } else {
+            // accessToken和refreshToken均无效 => 打回
+            // accessToken有效, refreshToken无效 => 打回
+            return false;
+        }
+    }
+
 }

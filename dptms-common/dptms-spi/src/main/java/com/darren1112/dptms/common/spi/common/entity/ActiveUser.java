@@ -58,14 +58,4 @@ public class ActiveUser {
      */
     private Long orgId;
 
-    /**
-     * 访问token
-     */
-    private String accessToken;
-
-    /**
-     * 刷新token
-     */
-    private String refreshToken;
-
 }

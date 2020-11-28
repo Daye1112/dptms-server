@@ -1,11 +1,16 @@
 package com.darren1112.dptms.common.core.validate.validator;
 
 
-import com.darren1112.dptms.common.core.exception.enums.BaseEnum;
-import com.darren1112.dptms.common.core.util.StringUtil;
+import com.darren1112.dptms.common.core.util.CollectionUtil;
+import com.darren1112.dptms.common.core.validate.element.ValidatorElement;
 import com.darren1112.dptms.common.core.validate.handler.ValidateHandler;
+import com.darren1112.dptms.common.core.validate.result.ValidatorResult;
+import com.darren1112.dptms.common.core.validate.validator.callback.ValidatorCallback;
+import com.darren1112.dptms.common.core.validate.validator.callback.common.NotNullValidatorCallback;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -16,78 +21,55 @@ import java.util.List;
  */
 public class ValidatorHolder {
 
-    /**
-     * context集合
-     */
-    private List<ValidatorContext> validatorContexts;
+    private ValidatorContext context;
 
-    /**
-     * 校验结果
-     */
-    private Boolean result;
+    private List<ValidatorElement> elements;
 
-    /**
-     * 若result = true，保存错误信息
-     */
-    private BaseEnum baseEnum;
+    private ValidatorDelegator delegator;
 
-    /**
-     * 初始化
-     */
     public ValidatorHolder() {
-        this.validatorContexts = new ArrayList<>();
-        this.result = true;
-        this.baseEnum = null;
+        this.context = new ValidatorContext();
+        this.elements = new LinkedList<>();
+        this.delegator = new ValidatorDelegator();
     }
 
-    /**
-     * 校验链
-     */
-    public ValidatorHolder on(Boolean checkResult, BaseEnum baseEnum) {
-        if (checkResult != null && baseEnum != null) {
-            addContext(checkResult, baseEnum);
+    public ValidatorHolder on(Object target) {
+        ValidatorElement element = new ValidatorElement(target);
+        if (needCreateDefaultValidatorCallback(element.getValidators())) {
+            element.addValidators(0, createDefaultValidatorCallback());
         }
+        elements.add(element);
         return this;
     }
 
-    /**
-     * 校验链-空值判断
-     */
-    public ValidatorHolder ofNull(Object checkObj, BaseEnum baseEnum) {
-        addContext(StringUtil.isEmpty(checkObj), baseEnum);
+    public ValidatorHolder on(Object target, ValidatorCallback... validators) {
+        ValidatorElement element = new ValidatorElement(target);
+        element.addValidators(Arrays.asList(validators));
+        if (needCreateDefaultValidatorCallback(element.getValidators())) {
+            element.addValidators(0, createDefaultValidatorCallback());
+        }
+        elements.add(element);
         return this;
     }
 
-    /**
-     * 添加待校验属性和错误信息
-     */
-    private void addContext(Boolean checkResult, BaseEnum baseEnum) {
-        validatorContexts.add(new ValidatorContext(checkResult, baseEnum));
+    private List<ValidatorCallback> createDefaultValidatorCallback() {
+        return Collections.singletonList(new NotNullValidatorCallback());
     }
 
-    /**
-     * 校验
-     */
+    private boolean needCreateDefaultValidatorCallback(List<ValidatorCallback> validators) {
+        return CollectionUtil.isEmpty(validators);
+    }
+
     public ValidatorHolder doValidate() {
-        for (ValidatorContext validatorContext : validatorContexts) {
-            if (validatorContext.getCheckResult()) {
-                result = false;
-                baseEnum = validatorContext.getBaseEnum();
-                break;
-            }
-        }
+        delegator.doValidate(context, elements);
         return this;
+    }
+
+    public ValidatorResult result() {
+        return context.getValidatorResult();
     }
 
     public void checkResult() {
-        ValidateHandler.checkValidator(this);
-    }
-
-    public Boolean getResult() {
-        return result;
-    }
-
-    public BaseEnum getBaseEnum() {
-        return baseEnum;
+        ValidateHandler.checkValidator(this.context.getValidatorResult());
     }
 }
