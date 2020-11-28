@@ -22,7 +22,7 @@ public class UrlUtil {
      * @return true:是; false:否
      */
     public static boolean matchUri(String path, String... patterns) {
-        if (patterns == null) {
+        if (CollectionUtil.isEmpty(patterns)) {
             return false;
         }
         for (String pattern : patterns) {
@@ -33,7 +33,7 @@ public class UrlUtil {
         return false;
     }
 
-    public static String getPath(String url){
+    public static String getPath(String url) {
         String path;
         try {
             URL parseUrl = new URL(url);

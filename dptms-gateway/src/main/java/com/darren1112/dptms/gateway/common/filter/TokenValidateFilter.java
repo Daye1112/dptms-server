@@ -32,7 +32,7 @@ import java.util.Objects;
  */
 @Slf4j
 @Component
-public class TokenValidFilter extends OncePerRequestFilter {
+public class TokenValidateFilter extends OncePerRequestFilter {
 
 
     @Autowired
@@ -52,7 +52,6 @@ public class TokenValidFilter extends OncePerRequestFilter {
      * @date 20/08/02 14:45
      */
     private boolean shouldNotFilter(String uri) {
-        log.info("TokenValidFilter" );
         //白名单校验
         return UrlUtil.matchUri(uri, securityProperties.getAnonUris())
                 || UrlUtil.matchUri(uri, FileConstant.STATIC_PATTERNS);

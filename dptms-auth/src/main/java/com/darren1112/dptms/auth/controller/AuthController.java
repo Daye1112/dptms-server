@@ -45,24 +45,6 @@ public class AuthController {
     private AuthProperties authProperties;
 
     /**
-     * 刷新accessToken
-     *
-     * @param refreshToken 熟悉token
-     * @return refreshToken
-     * @author luyuhao
-     * @date 2020/11/28 11:16
-     */
-    @ApiOperation("刷新accessToken")
-    @PostMapping("/refreshAccessToken")
-    public ResponseEntity<JsonResult<String>> refreshAccessToken(String refreshToken) {
-        ValidatorBuilder.build()
-                .on(refreshToken, new NotEmptyValidatorCallback(AuthErrorCodeEnum.REFRESH_TOKEN_NOT_NULL))
-                .doValidate().checkResult();
-        String accessToken = tokenUtil.refreshAccessToken(refreshToken, authProperties.getAccessTokenExpired());
-        return ResponseEntityUtil.ok(JsonResult.buildSuccessData(accessToken));
-    }
-
-    /**
      * 登录系统
      *
      * @param loginParam 登录参数
@@ -84,5 +66,23 @@ public class AuthController {
                 .doValidate().checkResult();
         ActiveUser activeUser = passwordLoginHandler.loginHandler(loginParam, request, response);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(activeUser));
+    }
+
+    /**
+     * 刷新accessToken
+     *
+     * @param refreshToken 熟悉token
+     * @return refreshToken
+     * @author luyuhao
+     * @date 2020/11/28 11:16
+     */
+    @ApiOperation("刷新accessToken")
+    @PostMapping("/refreshAccessToken")
+    public ResponseEntity<JsonResult<String>> refreshAccessToken(String refreshToken) {
+        ValidatorBuilder.build()
+                .on(refreshToken, new NotEmptyValidatorCallback(AuthErrorCodeEnum.REFRESH_TOKEN_NOT_NULL))
+                .doValidate().checkResult();
+        String accessToken = tokenUtil.refreshAccessToken(refreshToken, authProperties.getAccessTokenExpired());
+        return ResponseEntityUtil.ok(JsonResult.buildSuccessData(accessToken));
     }
 }

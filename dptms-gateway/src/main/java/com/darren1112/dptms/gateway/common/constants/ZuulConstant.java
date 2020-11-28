@@ -11,11 +11,7 @@ import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 public class ZuulConstant {
 
     /**
-     * zuul安全校验过滤器order
-     */
-    public static final int ZUUL_PERMISSION_VALID_FILTER_ORDER = FilterConstants.PRE_DECORATION_FILTER_ORDER + 1;
-    /**
      * zuul请求过滤器order
      */
-    public static final int ZUUL_REQUEST_FILTER_ORDER = FilterConstants.PRE_DECORATION_FILTER_ORDER + 2;
+    public static final int ZUUL_REQUEST_FILTER_ORDER = FilterConstants.PRE_DECORATION_FILTER_ORDER + 1;
 }
