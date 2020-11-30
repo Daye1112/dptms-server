@@ -3,11 +3,11 @@
 <mapper namespace="com.darren1112.dptms.auth.dao.SysUserDao">
     <insert id="insert" keyColumn="id" keyProperty="id"
             parameterType="com.darren1112.dptms.common.spi.sys.entity.SysUserEntity" useGeneratedKeys="true">
-        INSERT INTO sys_user (username, `password`, real_name,
+        INSERT INTO sys_user (username, `password`, salt, real_name,
                               gender, phone_number, email, pwd_update_time, file_id,
                               org_id, remark, isvalid,
                               create_time, create_by, update_time, update_by)
-        VALUES (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR},
+        VALUES (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR},
                 #{gender,jdbcType=TINYINT}, #{phoneNumber,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},
                 now(), #{fileId,jdbcType=BIGINT},
                 #{orgId,jdbcType=BIGINT}, #{remark,jdbcType=VARCHAR}, 1,

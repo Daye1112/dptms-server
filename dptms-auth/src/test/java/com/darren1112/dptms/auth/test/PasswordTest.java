@@ -1,8 +1,6 @@
 package com.darren1112.dptms.auth.test;
 
 import cn.hutool.crypto.digest.MD5;
-import org.apache.commons.codec.digest.Md5Crypt;
-import org.apache.tomcat.util.security.MD5Encoder;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

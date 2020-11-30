@@ -3,6 +3,7 @@ package com.darren1112.dptms.system.sys.dao;
 import com.darren1112.dptms.common.spi.sys.dto.SysUserDto;
 import com.darren1112.dptms.common.spi.sys.entity.SysUserEntity;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -33,4 +34,13 @@ public interface SysUserDao {
      */
     void update(SysUserDto sysUserDto);
 
+    /**
+     * 根据id查询用户
+     *
+     * @param id id
+     * @return {@link SysUserDto}
+     * @author luyuhao
+     * @date 20/11/30 23:12
+     */
+    SysUserDto getById(@Param("id") Long id);
 }

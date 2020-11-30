@@ -3,7 +3,9 @@ package com.darren1112.dptms.auth.controller;
 import com.darren1112.dptms.auth.common.enums.AuthErrorCodeEnum;
 import com.darren1112.dptms.auth.common.properties.AuthProperties;
 import com.darren1112.dptms.auth.common.security.PasswordLoginHandler;
+import com.darren1112.dptms.common.core.constants.SecurityConstant;
 import com.darren1112.dptms.common.core.message.JsonResult;
+import com.darren1112.dptms.common.core.util.CookieUtil;
 import com.darren1112.dptms.common.core.util.ResponseEntityUtil;
 import com.darren1112.dptms.common.core.validate.ValidatorBuilder;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotEmptyValidatorCallback;
@@ -78,11 +80,13 @@ public class AuthController {
      */
     @ApiOperation("刷新accessToken")
     @PostMapping("/refreshAccessToken")
-    public ResponseEntity<JsonResult<String>> refreshAccessToken(String refreshToken) {
+    public ResponseEntity<JsonResult<String>> refreshAccessToken(String refreshToken,
+                                                                 HttpServletResponse response) {
         ValidatorBuilder.build()
                 .on(refreshToken, new NotEmptyValidatorCallback(AuthErrorCodeEnum.REFRESH_TOKEN_NOT_NULL))
                 .doValidate().checkResult();
         String accessToken = tokenUtil.refreshAccessToken(refreshToken, authProperties.getAccessTokenExpired());
+        CookieUtil.setCookie(SecurityConstant.ACCESS_TOKEN_KEY, accessToken, response);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(accessToken));
     }
 }
