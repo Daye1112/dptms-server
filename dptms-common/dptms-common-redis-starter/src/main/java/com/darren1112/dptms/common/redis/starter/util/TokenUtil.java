@@ -1,6 +1,5 @@
 package com.darren1112.dptms.common.redis.starter.util;
 
-import com.darren1112.dptms.common.core.constants.RedisConstant;
 import com.darren1112.dptms.common.core.util.JsonUtil;
 import com.darren1112.dptms.common.spi.common.entity.ActiveUser;
 
@@ -33,12 +32,15 @@ public class TokenUtil {
      * @date 20/11/25 00:25
      */
     public boolean saveToken(ActiveUser activeUser, String accessToken, String refreshToken, long accessTokenExpire, long refreshTokenExpire) {
-        // 设置accessToken
-        if (!redisUtil.set(RedisConstant.PREFIX + accessToken, refreshToken, accessTokenExpire)) {
+        try {
+            // 设置accessToken
+            redisUtil.set(accessToken, refreshToken, accessTokenExpire);
+            // 设置refreshToken
+            redisUtil.set(refreshToken, JsonUtil.toJsonString(activeUser), refreshTokenExpire);
+            return true;
+        } catch (Exception e) {
             return false;
         }
-        // 设置refreshToken
-        return redisUtil.set(RedisConstant.PREFIX + refreshToken, JsonUtil.toJsonString(activeUser), refreshTokenExpire);
     }
 
     /**
@@ -50,7 +52,7 @@ public class TokenUtil {
      * @date 20/11/27 00:45
      */
     public String getRefreshToken(String accessToken) {
-        return Optional.ofNullable(redisUtil.get(RedisConstant.PREFIX + accessToken)).map(Object::toString).orElse(null);
+        return Optional.ofNullable(redisUtil.get(accessToken)).map(Object::toString).orElse(null);
     }
 
     /**
@@ -62,7 +64,7 @@ public class TokenUtil {
      * @date 20/11/28 01:22
      */
     public ActiveUser getActiveUser(String refreshToken) {
-        return Optional.ofNullable(redisUtil.get(RedisConstant.PREFIX + refreshToken))
+        return Optional.ofNullable(redisUtil.get(refreshToken))
                 .map(Object::toString)
                 .map(item -> JsonUtil.parseObject(item, ActiveUser.class))
                 .orElse(null);
@@ -79,7 +81,7 @@ public class TokenUtil {
      */
     public String refreshAccessToken(String refreshToken, long accessTokenExpire) {
         String newAccessToken = UUID.randomUUID().toString().replaceAll("-", "");
-        redisUtil.set(RedisConstant.PREFIX + newAccessToken, refreshToken, accessTokenExpire);
+        redisUtil.set(newAccessToken, refreshToken, accessTokenExpire);
         return newAccessToken;
     }
 }

@@ -8,5 +8,4 @@ package com.darren1112.dptms.common.core.constants;
  */
 public class RedisConstant {
 
-    public static final String PREFIX = "DPTMS_";
 }

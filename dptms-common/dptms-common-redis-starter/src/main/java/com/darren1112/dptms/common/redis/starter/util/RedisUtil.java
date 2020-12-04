@@ -125,7 +125,7 @@ public class RedisUtil {
      * @return 值
      */
     public Object get(String key) {
-        return key == null ? null : redisTemplate.opsForValue().get(systemPrefix + key);
+        return redisTemplate.opsForValue().get(systemPrefix + key);
     }
 
     /**
@@ -517,13 +517,12 @@ public class RedisUtil {
      * @param key   键
      * @param value 值
      */
-    public boolean lSet(String key, List<Object> value) {
+    public void lSet(String key, List<Object> value) {
         try {
-            redisTemplate.opsForList().rightPushAll(key, value);
-            return true;
+            redisTemplate.opsForList().rightPushAll(systemPrefix + key, value);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
-            return false;
+            throw new RuntimeException(e.getMessage(), e);
         }
     }
 
@@ -534,16 +533,15 @@ public class RedisUtil {
      * @param value 值
      * @param time  时间(秒)
      */
-    public boolean lSet(String key, List<Object> value, long time) {
+    public void lSet(String key, List<Object> value, long time) {
         try {
-            redisTemplate.opsForList().rightPushAll(key, value);
+            redisTemplate.opsForList().rightPushAll(systemPrefix + key, value);
             if (time > 0) {
-                expire(key, time);
+                expire(systemPrefix + key, time);
             }
-            return true;
         } catch (Exception e) {
             log.error(e.getMessage(), e);
-            return false;
+            throw new RuntimeException(e.getMessage(), e);
         }
     }
 
@@ -554,13 +552,12 @@ public class RedisUtil {
      * @param index 索引
      * @param value 值
      */
-    public boolean lUpdateIndex(String key, long index, Object value) {
+    public void lUpdateIndex(String key, long index, Object value) {
         try {
-            redisTemplate.opsForList().set(key, index, value);
-            return true;
+            redisTemplate.opsForList().set(systemPrefix + key, index, value);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
-            return false;
+            throw new RuntimeException(e.getMessage(), e);
         }
     }
 
@@ -574,11 +571,40 @@ public class RedisUtil {
      */
     public long lRemove(String key, long count, Object value) {
         try {
-            return Optional.ofNullable(redisTemplate.opsForList().remove(key, count, value))
+            return Optional.ofNullable(redisTemplate.opsForList().remove(systemPrefix + key, count, value))
                     .orElse(EXPIRED);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
-            return EXPIRED;
+            throw new RuntimeException(e.getMessage(), e);
+        }
+    }
+
+    /**
+     * 加锁
+     *
+     * @param key    key
+     * @param value  值
+     * @param second 过期时间
+     * @return true/false
+     * @author luyuhao
+     * @date 20/12/04 21:51
+     */
+    public boolean tryLock(String key, Object value, long second) {
+        return Optional.ofNullable(redisTemplate.opsForValue().setIfAbsent(systemPrefix + key, value, second, TimeUnit.SECONDS)).orElse(false);
+    }
+
+    /**
+     * 释放锁
+     *
+     * @param key   key
+     * @param value value
+     * @author luyuhao
+     * @date 20/12/04 21:59
+     */
+    public void releaseLock(String key, Object value) {
+        Object object = get(key);
+        if (object != null && object.equals(value)) {
+            delete(key);
         }
     }
 }
