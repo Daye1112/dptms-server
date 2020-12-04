@@ -2,11 +2,13 @@ package com.darren1112.dptms.common.redis.starter.config;
 
 import com.alibaba.fastjson.parser.ParserConfig;
 import com.darren1112.dptms.common.redis.starter.constant.AcceptPackageConstant;
+import com.darren1112.dptms.common.redis.starter.properties.DptmsRedisProperties;
 import com.darren1112.dptms.common.redis.starter.serializer.FastJsonRedisSerializer;
 import com.darren1112.dptms.common.redis.starter.serializer.StringRedisSerializer;
 import com.darren1112.dptms.common.redis.starter.util.RedisUtil;
 import com.darren1112.dptms.common.redis.starter.util.TokenUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
@@ -15,7 +17,6 @@ import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisOperations;
@@ -34,8 +35,11 @@ import java.time.Duration;
 @Slf4j
 @EnableCaching
 @ConditionalOnClass(RedisOperations.class)
-@EnableConfigurationProperties(RedisProperties.class)
+@EnableConfigurationProperties({RedisProperties.class, DptmsRedisProperties.class})
 public class RedisAutoConfig extends CachingConfigurerSupport {
+
+    @Autowired
+    private DptmsRedisProperties dptmsRedisProperties;
 
     /**
      * 设置 redis 数据默认过期时间，默认1天
@@ -100,7 +104,7 @@ public class RedisAutoConfig extends CachingConfigurerSupport {
 
     @Bean
     public RedisUtil redisUtil(RedisTemplate<Object, Object> redisTemplate) {
-        return new RedisUtil(redisTemplate);
+        return new RedisUtil(redisTemplate, dptmsRedisProperties.getSystemPrefix());
     }
 
     @Bean
