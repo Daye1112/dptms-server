@@ -1,8 +1,8 @@
 package com.darren1112.dptms.gateway.common.filter;
 
 import com.darren1112.dptms.common.core.util.IpUtil;
+import com.darren1112.dptms.common.security.starter.properties.SecurityProperties;
 import com.darren1112.dptms.gateway.common.constants.ZuulConstant;
-import com.darren1112.dptms.gateway.common.properties.SecurityProperties;
 import com.darren1112.dptms.gateway.common.util.ZuulRequestUtil;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;

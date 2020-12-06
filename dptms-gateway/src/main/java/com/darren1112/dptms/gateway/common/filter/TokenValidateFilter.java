@@ -7,14 +7,12 @@ import com.darren1112.dptms.common.core.util.CookieUtil;
 import com.darren1112.dptms.common.core.util.ResponseUtil;
 import com.darren1112.dptms.common.core.util.StringUtil;
 import com.darren1112.dptms.common.core.util.UrlUtil;
-import com.darren1112.dptms.common.redis.starter.util.TokenUtil;
-import com.darren1112.dptms.common.spi.common.entity.ActiveUser;
-import com.darren1112.dptms.gateway.common.enums.GatewayErrorCodeEnum;
-import com.darren1112.dptms.gateway.common.properties.SecurityProperties;
+import com.darren1112.dptms.common.security.starter.properties.SecurityProperties;
 import com.darren1112.dptms.gateway.remoting.AuthRemoting;
+import com.darren1112.dptms.common.security.starter.util.TokenUtil;
+import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
+import com.darren1112.dptms.gateway.common.enums.GatewayErrorCodeEnum;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -31,18 +29,19 @@ import java.util.Objects;
  * @date 2020/11/26 23:28
  */
 @Slf4j
-@Component
 public class TokenValidateFilter extends OncePerRequestFilter {
 
-
-    @Autowired
     private TokenUtil tokenUtil;
 
-    @Autowired
     private SecurityProperties securityProperties;
 
-    @Autowired
     private AuthRemoting authRemoting;
+
+    public TokenValidateFilter(TokenUtil tokenUtil, SecurityProperties securityProperties, AuthRemoting authRemoting) {
+        this.tokenUtil = tokenUtil;
+        this.securityProperties = securityProperties;
+        this.authRemoting = authRemoting;
+    }
 
     /**
      * 是否需要过滤
@@ -100,12 +99,11 @@ public class TokenValidateFilter extends OncePerRequestFilter {
                 return;
             }
             // TODO 【暂不需要】refresh token快失效，延长有效期
+            chain.doFilter(request, response);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             ResponseUtil.setJsonResult(response, JsonResult.buildErrorEnum(GatewayErrorCodeEnum.TOKEN_VALID_ERROR));
-            return;
         }
-        chain.doFilter(request, response);
     }
 
     /**

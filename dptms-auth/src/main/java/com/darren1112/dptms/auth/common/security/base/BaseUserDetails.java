@@ -4,7 +4,8 @@ import com.darren1112.dptms.auth.common.security.UserDetailsService;
 import com.darren1112.dptms.common.core.exception.BadRequestException;
 import com.darren1112.dptms.common.core.exception.BaseException;
 import com.darren1112.dptms.common.spi.common.dto.LoginParam;
-import com.darren1112.dptms.common.spi.common.entity.ActiveUser;
+import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author luyuhao
  * @date 2020/11/22 17:11
  */
+@Slf4j
 public abstract class BaseUserDetails implements UserDetailsService {
 
     /**
@@ -44,6 +46,7 @@ public abstract class BaseUserDetails implements UserDetailsService {
             throw be;
         } catch (Exception e) {
             // 未知异常处理
+            log.error(e.getMessage(), e);
             throw exceptionHandler(e);
         }
     }

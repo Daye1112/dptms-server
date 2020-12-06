@@ -5,6 +5,7 @@ import com.darren1112.dptms.common.core.message.JsonResult;
 import com.darren1112.dptms.common.core.util.ResponseUtil;
 import com.darren1112.dptms.common.core.util.StringUtil;
 import com.darren1112.dptms.common.security.starter.properties.SecurityProperties;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.Base64Utils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -18,6 +19,7 @@ import java.io.IOException;
  * @author luyuhao
  * @date 2020/11/27 00:12
  */
+@Slf4j
 public class ZuulHeaderValidFilter extends OncePerRequestFilter {
 
     private SecurityProperties securityProperties;

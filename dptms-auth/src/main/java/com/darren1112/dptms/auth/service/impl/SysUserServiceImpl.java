@@ -32,7 +32,7 @@ public class SysUserServiceImpl implements SysUserService {
      * @date 20/07/23 02:58
      */
     @Override
-    @Cacheable(keyGenerator = "keyGenerator")
+    @Cacheable(keyGenerator = "keyGenerator", unless = "#result == null")
     public SysUserDto getByUsername(String username) {
         return sysUserDao.getByUsername(username);
     }

@@ -36,23 +36,23 @@ public class BaseEntity {
      * 创建时间
      */
     @ApiModelProperty("创建时间")
-    private Date createTime;
+    private Date ctime;
 
     /**
      * 创建者
      */
     @ApiModelProperty("创建者")
-    private Long createBy;
+    private Long creater;
 
     /**
      * 更新时间
      */
     @ApiModelProperty("更新时间")
-    private Date updateTime;
+    private Date mtime;
 
     /**
      * 更新者
      */
     @ApiModelProperty("更新者")
-    private Long updateBy;
+    private Long updater;
 }

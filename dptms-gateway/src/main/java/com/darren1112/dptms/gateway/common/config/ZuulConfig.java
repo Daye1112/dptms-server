@@ -1,5 +1,11 @@
 package com.darren1112.dptms.gateway.common.config;
 
+import com.darren1112.dptms.common.security.starter.properties.SecurityProperties;
+import com.darren1112.dptms.common.security.starter.util.TokenUtil;
+import com.darren1112.dptms.gateway.common.filter.PermissionValidateFilter;
+import com.darren1112.dptms.gateway.common.filter.TokenValidateFilter;
+import com.darren1112.dptms.gateway.remoting.AuthRemoting;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
@@ -38,5 +44,29 @@ public class ZuulConfig {
         config.setMaxAge(7200L);
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
+    }
+
+    @Bean
+    public FilterRegistrationBean tokenValidateFilterBean(TokenUtil tokenUtil, SecurityProperties securityProperties, AuthRemoting authRemoting) {
+        TokenValidateFilter tokenValidateFilter = new TokenValidateFilter(tokenUtil, securityProperties, authRemoting);
+        FilterRegistrationBean<TokenValidateFilter> filterRegistrationBean = new FilterRegistrationBean<>();
+        filterRegistrationBean.setFilter(tokenValidateFilter);
+        filterRegistrationBean.addUrlPatterns("/*");
+        //order的数值越小 则优先级越高
+        filterRegistrationBean.setOrder(0);
+        filterRegistrationBean.setName("tokenValidateFilter");
+        return filterRegistrationBean;
+    }
+
+    @Bean
+    public FilterRegistrationBean permissionValidateFilterBean(TokenUtil tokenUtil, SecurityProperties securityProperties) {
+        PermissionValidateFilter permissionValidateFilter = new PermissionValidateFilter(securityProperties, tokenUtil);
+        FilterRegistrationBean<PermissionValidateFilter> filterRegistrationBean = new FilterRegistrationBean<>();
+        filterRegistrationBean.setFilter(permissionValidateFilter);
+        filterRegistrationBean.addUrlPatterns("/*");
+        //order的数值越小 则优先级越高
+        filterRegistrationBean.setOrder(1);
+        filterRegistrationBean.setName("permissionValidateFilter");
+        return filterRegistrationBean;
     }
 }

@@ -1,7 +1,8 @@
-package com.darren1112.dptms.common.redis.starter.util;
+package com.darren1112.dptms.common.security.starter.util;
 
 import com.darren1112.dptms.common.core.util.JsonUtil;
-import com.darren1112.dptms.common.spi.common.entity.ActiveUser;
+import com.darren1112.dptms.common.redis.starter.util.RedisUtil;
+import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 
 import java.util.Optional;
 import java.util.UUID;

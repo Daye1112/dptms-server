@@ -5,18 +5,17 @@
             parameterType="com.darren1112.dptms.common.spi.sys.entity.SysUserEntity" useGeneratedKeys="true">
         INSERT INTO sys_user (username, `password`, salt, real_name,
                               gender, phone_number, email, pwd_update_time, file_id,
-                              org_id, remark, isvalid,
-                              create_time, create_by, update_time, update_by)
-        VALUES (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR},
+                              remark, isvalid, ctime, creater, mtime, updater)
+        VALUES (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR},
+                #{realName,jdbcType=VARCHAR},
                 #{gender,jdbcType=TINYINT}, #{phoneNumber,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},
-                now(), #{fileId,jdbcType=BIGINT},
-                #{orgId,jdbcType=BIGINT}, #{remark,jdbcType=VARCHAR}, 1,
-                now(), #{createBy,jdbcType=BIGINT}, now(), #{updateBy,jdbcType=BIGINT})
+                now(), #{fileId,jdbcType=BIGINT}, #{remark,jdbcType=VARCHAR}, 1,
+                now(), #{creater,jdbcType=BIGINT}, now(), #{updater,jdbcType=BIGINT})
     </insert>
     <update id="update" parameterType="com.darren1112.dptms.common.spi.sys.dto.SysUserDto">
         UPDATE sys_user
         SET
-        update_time = now()
+        mtime = now()
         <if test="username != null and username != ''">
             ,username = #{username,jdbcType=VARCHAR}
         </if>
@@ -47,9 +46,6 @@
         <if test="fileId != null">
             ,file_id = #{fileId,jdbcType=BIGINT}
         </if>
-        <if test="orgId != null">
-            ,org_id = #{orgId,jdbcType=BIGINT}
-        </if>
         <if test="isLocked != null">
             ,is_locked = #{isLocked,jdbcType=TINYINT}
         </if>
@@ -57,7 +53,7 @@
             ,remark = #{remark,jdbcType=VARCHAR}
         </if>
         <if test="updateBy != null">
-            ,update_by = #{updateBy,jdbcType=BIGINT}
+            ,updater = #{updater,jdbcType=BIGINT}
         </if>
         WHERE id = #{id,jdbcType=BIGINT}
         AND isvalid = 1
@@ -68,21 +64,20 @@
                username,
                password,
                salt,
-               real_name       AS realName,
+               real_name       AS realname,
                gender,
-               phone_number    AS phoneNumber,
+               phone_number    AS phonenumber,
                email,
-               last_login_time AS lastLoginTime,
-               pwd_update_time AS pwdUpdateTime,
-               file_id         AS fileId,
-               org_id          AS orgId,
-               is_locked       AS isLocked,
+               last_login_time AS lastlogintime,
+               pwd_update_time AS pwdupdatetime,
+               file_id         AS fileid,
+               is_locked       AS islocked,
                remark,
                isvalid,
-               create_time     AS createTime,
-               create_by       AS createBy,
-               update_time     AS updateTime,
-               update_by       AS updateBy
+               ctime,
+               creater,
+               mtime,
+               updater
         FROM sys_user
         WHERE username = #{username}
           AND isvalid = 1

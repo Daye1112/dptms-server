@@ -6,7 +6,6 @@ import com.darren1112.dptms.common.redis.starter.properties.DptmsRedisProperties
 import com.darren1112.dptms.common.redis.starter.serializer.FastJsonRedisSerializer;
 import com.darren1112.dptms.common.redis.starter.serializer.StringRedisSerializer;
 import com.darren1112.dptms.common.redis.starter.util.RedisUtil;
-import com.darren1112.dptms.common.redis.starter.util.TokenUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -107,8 +106,4 @@ public class RedisAutoConfig extends CachingConfigurerSupport {
         return new RedisUtil(redisTemplate, dptmsRedisProperties.getSystemPrefix());
     }
 
-    @Bean
-    public TokenUtil tokenUtil(RedisUtil redisUtil) {
-        return new TokenUtil(redisUtil);
-    }
 }

@@ -3,14 +3,15 @@ package com.darren1112.dptms.gateway.common.filter;
 import com.darren1112.dptms.common.core.constants.FileConstant;
 import com.darren1112.dptms.common.core.constants.SecurityConstant;
 import com.darren1112.dptms.common.core.message.JsonResult;
-import com.darren1112.dptms.common.core.util.*;
-import com.darren1112.dptms.common.redis.starter.util.TokenUtil;
-import com.darren1112.dptms.common.spi.common.entity.ActiveUser;
+import com.darren1112.dptms.common.core.util.CookieUtil;
+import com.darren1112.dptms.common.core.util.ResponseUtil;
+import com.darren1112.dptms.common.core.util.StringUtil;
+import com.darren1112.dptms.common.core.util.UrlUtil;
+import com.darren1112.dptms.common.security.starter.properties.SecurityProperties;
+import com.darren1112.dptms.common.security.starter.util.TokenUtil;
+import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 import com.darren1112.dptms.gateway.common.enums.GatewayErrorCodeEnum;
-import com.darren1112.dptms.gateway.common.properties.SecurityProperties;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -27,14 +28,16 @@ import java.util.Objects;
  * @date 2020/11/29 02:16
  */
 @Slf4j
-@Component
-public class PermissionValidateFilter  extends OncePerRequestFilter {
+public class PermissionValidateFilter extends OncePerRequestFilter {
 
-    @Autowired
     private SecurityProperties securityProperties;
 
-    @Autowired
     private TokenUtil tokenUtil;
+
+    public PermissionValidateFilter(SecurityProperties securityProperties, TokenUtil tokenUtil) {
+        this.securityProperties = securityProperties;
+        this.tokenUtil = tokenUtil;
+    }
 
     /**
      * 是否需要过滤
@@ -65,7 +68,7 @@ public class PermissionValidateFilter  extends OncePerRequestFilter {
         }
         // 获取redis中的用户信息
         ActiveUser activeUser = tokenUtil.getActiveUser(refreshToken);
-        if(Objects.isNull(activeUser)){
+        if (Objects.isNull(activeUser)) {
             ResponseUtil.setJsonResult(response, JsonResult.buildErrorEnum(GatewayErrorCodeEnum.NOT_LOGIN));
             return;
         }

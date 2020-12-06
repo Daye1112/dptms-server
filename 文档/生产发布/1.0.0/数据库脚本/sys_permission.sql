@@ -1,52 +1,19 @@
-/*==============================================================*/
-/* DBMS name:      MySQL 5.0                                    */
-/* Created on:     20/07/20 00:23:18                            */
-/*==============================================================*/
-
-
-/*==============================================================*/
-/* Table: sys_permission                                        */
-/*==============================================================*/
-create table sys_permission
+CREATE TABLE sys_permission
 (
-   id                   bigint not null auto_increment,
-   per_name             varchar(64),
-   per_code             varchar(64),
-   per_group            varchar(64),
-   per_url              varchar(256),
-   org_id               bigint,
-   remark               varchar(256),
-   isvalid              tinyint,
-   create_time          datetime,
-   create_by            bigint,
-   update_time          datetime,
-   update_by            bigint,
-   primary key (id)
+  id        BIGINT NOT NULL AUTO_INCREMENT COMMENT 'id',
+  per_name  VARCHAR(64) COMMENT '权限名',
+  per_code  VARCHAR(64) COMMENT '权限码',
+  per_group VARCHAR(64) COMMENT '权限组',
+  per_url   VARCHAR(256) COMMENT '权限url',
+  remark    VARCHAR(256) COMMENT '备注',
+  isvalid   TINYINT COMMENT '是否有效',
+  ctime     DATETIME COMMENT '创建时间',
+  creater   BIGINT COMMENT '创建者',
+  mtime     DATETIME COMMENT '更新时间',
+  updater   BIGINT COMMENT '更新者',
+  PRIMARY KEY (id)
 );
 
-alter table sys_permission comment '权限表';
-
-alter table sys_permission modify column id bigint auto_increment comment 'id';
-
-alter table sys_permission modify column per_name varchar(64) comment '权限名';
-
-alter table sys_permission modify column per_code varchar(64) comment '权限码';
-
-alter table sys_permission modify column per_group varchar(64) comment '权限组';
-
-alter table sys_permission modify column per_url varchar(256) comment '权限url';
-
-alter table sys_permission modify column org_id bigint comment '组织id';
-
-alter table sys_permission modify column remark varchar(256) comment '备注';
-
-alter table sys_permission modify column isvalid tinyint comment '是否有效';
-
-alter table sys_permission modify column create_time datetime comment '创建时间';
-
-alter table sys_permission modify column create_by bigint comment '创建者';
-
-alter table sys_permission modify column update_time datetime comment '更新时间';
-
-alter table sys_permission modify column update_by bigint comment '更新者';
+ALTER TABLE sys_permission
+  COMMENT '权限表';
 

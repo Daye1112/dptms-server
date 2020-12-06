@@ -1,4 +1,4 @@
-package com.darren1112.dptms.common.spi.common.entity;
+package com.darren1112.dptms.common.spi.common.dto;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -61,11 +61,5 @@ public class ActiveUser {
      */
     @ApiModelProperty("头像文件id")
     private Long fileId;
-
-    /**
-     * 组织id
-     */
-    @ApiModelProperty("组织id")
-    private Long orgId;
 
 }

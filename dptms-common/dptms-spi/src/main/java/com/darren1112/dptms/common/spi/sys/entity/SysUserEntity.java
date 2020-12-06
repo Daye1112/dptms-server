@@ -78,12 +78,6 @@ public class SysUserEntity extends BaseEntity {
     private Long fileId;
 
     /**
-     * 组织id
-     */
-    @ApiModelProperty("组织id")
-    private Long orgId;
-
-    /**
      * 是否被锁定 0：否 1：是
      */
     @ApiModelProperty("是否被锁定 0：否 1：是")
