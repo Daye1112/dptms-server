@@ -82,4 +82,12 @@
         WHERE username = #{username}
           AND isvalid = 1
     </select>
+    <!--更新登录时间-->
+    <update id="updateLastLoginTime">
+        UPDATE sys_user
+        SET mtime           = now(),
+            last_login_time = now()
+        WHERE isvalid = 1
+          AND id = #{id}
+    </update>
 </mapper>

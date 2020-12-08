@@ -97,6 +97,9 @@ public class PasswordLoginHandler extends BaseUserDetails {
     @Override
     public void afterHandler(ActiveUser activeUser, HttpServletRequest request, HttpServletResponse response) throws BaseException {
         // 后置处理
+        // 更新登录时间
+        sysUserService.updateLoginTime(activeUser.getId());
+        // 生成token
         String accessToken = UUID.randomUUID().toString().replaceAll("-", "");
         String refreshToken = UUID.randomUUID().toString().replaceAll("-", "");
         // 存放到redis中

@@ -1,89 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.darren1112.dptms.system.sys.dao.SysUserDao">
-    <insert id="insert" keyColumn="id" keyProperty="id"
-            parameterType="com.darren1112.dptms.common.spi.sys.entity.SysUserEntity" useGeneratedKeys="true">
-        INSERT INTO sys_user (username, `password`, salt, real_name,
-                              gender, phone_number, email, pwd_update_time, file_id,
-                              org_id, remark, isvalid,
-                              create_time, create_by, update_time, update_by)
-        VALUES (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR},
-                #{realName,jdbcType=VARCHAR},
-                #{gender,jdbcType=TINYINT}, #{phoneNumber,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},
-                now(), #{fileId,jdbcType=BIGINT},
-                #{orgId,jdbcType=BIGINT}, #{remark,jdbcType=VARCHAR}, 1,
-                now(), #{createBy,jdbcType=BIGINT}, now(), #{updateBy,jdbcType=BIGINT})
-    </insert>
-    <update id="update" parameterType="com.darren1112.dptms.common.spi.sys.dto.SysUserDto">
-        UPDATE sys_user
-        SET
-        update_time = now()
-        <if test="username != null and username != ''">
-            ,username = #{username,jdbcType=VARCHAR}
-        </if>
-        <if test="password != null and password != ''">
-            ,`password` = #{password,jdbcType=VARCHAR}
-        </if>
-        <if test="salt != null and salt != ''">
-            ,salt = #{salt,jdbcType=VARCHAR}
-        </if>
-        <if test="realName != null and realName != ''">
-            ,real_name = #{realName,jdbcType=VARCHAR}
-        </if>
-        <if test="gender != null">
-            ,gender = #{gender,jdbcType=TINYINT}
-        </if>
-        <if test="phoneNumber != null and phoneNumber != ''">
-            ,phone_number = #{phoneNumer,jdbcType=VARCHAR}
-        </if>
-        <if test="email != null and email != ''">
-            ,email = #{email,jdbcType=VARCHAR}
-        </if>
-        <if test="lastLoginTime != null">
-            ,last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP}
-        </if>
-        <if test="pwdUpdateTime != null">
-            ,pwd_update_time = #{pwdUpdateTime,jdbcType=TIMESTAMP}
-        </if>
-        <if test="fileId != null">
-            ,file_id = #{fileId,jdbcType=BIGINT}
-        </if>
-        <if test="orgId != null">
-            ,org_id = #{orgId,jdbcType=BIGINT}
-        </if>
-        <if test="isLocked != null">
-            ,is_locked = #{isLocked,jdbcType=TINYINT}
-        </if>
-        <if test="remark != null and remark != ''">
-            ,remark = #{remark,jdbcType=VARCHAR}
-        </if>
-        <if test="updateBy != null">
-            ,update_by = #{updateBy,jdbcType=BIGINT}
-        </if>
-        WHERE id = #{id,jdbcType=BIGINT}
-        AND isvalid = 1
-    </update>
-    <!--根据id查询用户-->
+
     <select id="getById" resultType="com.darren1112.dptms.common.spi.sys.dto.SysUserDto">
         SELECT id,
                username,
                password,
                salt,
-               real_name       AS realName,
+               real_name       AS realname,
                gender,
-               phone_number    AS phoneNumber,
+               phone_number    AS phonenumber,
                email,
-               last_login_time AS lastLoginTime,
-               pwd_update_time AS pwdUpdateTime,
-               file_id         AS fileId,
-               org_id          AS orgId,
-               is_locked       AS isLocked,
+               last_login_time AS lastlogintime,
+               pwd_update_time AS pwdupdatetime,
+               file_id         AS fileid,
+               is_locked       AS islocked,
                remark,
                isvalid,
-               create_time     AS createBy,
-               create_by       AS createBy,
-               update_time     AS updateTime,
-               update_by       AS updateBy
+               ctime,
+               creater,
+               mtime,
+               updater
         FROM sys_user
         WHERE isvalid = 1
           AND id = #{id}

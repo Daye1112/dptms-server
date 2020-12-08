@@ -19,4 +19,13 @@ public interface SysUserService {
      * @date 20/07/23 02:58
      */
     SysUserDto getByUsername(String username);
+
+    /**
+     * 更新登录时间
+     *
+     * @param id 用户id
+     * @author luyuhao
+     * @date 20/12/09 01:02
+     */
+    void updateLoginTime(Long id);
 }

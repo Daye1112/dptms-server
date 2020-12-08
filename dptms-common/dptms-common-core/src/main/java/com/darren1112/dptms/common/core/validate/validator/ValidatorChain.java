@@ -28,6 +28,7 @@ public class ValidatorChain {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public void doValidate(ValidatorContext context, Object target) {
         for (ValidatorCallback validator : validators) {
             if (!validator.validate(context, target)) {

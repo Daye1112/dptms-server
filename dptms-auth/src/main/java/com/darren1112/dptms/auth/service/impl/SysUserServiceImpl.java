@@ -5,6 +5,7 @@ import com.darren1112.dptms.auth.service.SysUserService;
 import com.darren1112.dptms.common.spi.sys.dto.SysUserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,5 +36,19 @@ public class SysUserServiceImpl implements SysUserService {
     @Cacheable(keyGenerator = "keyGenerator", unless = "#result == null")
     public SysUserDto getByUsername(String username) {
         return sysUserDao.getByUsername(username);
+    }
+
+    /**
+     * 更新登录时间
+     *
+     * @param id 用户id
+     * @author luyuhao
+     * @date 20/12/09 01:02
+     */
+    @Override
+    @CacheEvict(allEntries = true)
+    @Transactional(rollbackFor = Throwable.class)
+    public void updateLoginTime(Long id) {
+        sysUserDao.updateLastLoginTime(id);
     }
 }

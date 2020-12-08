@@ -44,4 +44,12 @@ public interface SysUserDao {
      */
     SysUserDto getByUsername(@Param("username") String username);
 
+    /**
+     * 更新登录时间
+     *
+     * @param id 用户id
+     * @author luyuhao
+     * @date 20/12/09 01:02
+     */
+    void updateLastLoginTime(@Param("id") Long id);
 }
