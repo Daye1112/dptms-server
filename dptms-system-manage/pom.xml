@@ -9,6 +9,7 @@
         <relativePath>../dptms-parent/pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+    <packaging>jar</packaging>
 
     <name>dptms-system-manage</name>
     <artifactId>dptms-system-manage</artifactId>
@@ -101,11 +102,11 @@
         </dependency>
         <dependency>
             <groupId>com.darren1112</groupId>
-            <artifactId>dptms-common-security-starter</artifactId>
+            <artifactId>dptms-common-redis-starter</artifactId>
         </dependency>
         <dependency>
             <groupId>com.darren1112</groupId>
-            <artifactId>dptms-common-redis-starter</artifactId>
+            <artifactId>dptms-common-security-starter</artifactId>
         </dependency>
         <dependency>
             <groupId>com.darren1112</groupId>

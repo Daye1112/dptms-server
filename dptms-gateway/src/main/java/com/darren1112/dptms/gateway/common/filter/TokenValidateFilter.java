@@ -8,10 +8,10 @@ import com.darren1112.dptms.common.core.util.ResponseUtil;
 import com.darren1112.dptms.common.core.util.StringUtil;
 import com.darren1112.dptms.common.core.util.UrlUtil;
 import com.darren1112.dptms.common.security.starter.properties.SecurityProperties;
-import com.darren1112.dptms.gateway.remoting.AuthRemoting;
 import com.darren1112.dptms.common.security.starter.util.TokenUtil;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 import com.darren1112.dptms.gateway.common.enums.GatewayErrorCodeEnum;
+import com.darren1112.dptms.gateway.remoting.AuthRemoting;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -79,12 +79,8 @@ public class TokenValidateFilter extends OncePerRequestFilter {
         try {
             // token校验
             // 优先处理cookie中携带的cookie
-            String accessToken = CookieUtil.getCookie(SecurityConstant.ACCESS_TOKEN_KEY, request);
-            String refreshToken = CookieUtil.getCookie(SecurityConstant.REFRESH_TOKEN_KEY, request);
-            if (StringUtil.isBlank(accessToken) || StringUtil.isBlank(refreshToken)) {
-                accessToken = request.getHeader(SecurityConstant.ACCESS_TOKEN_KEY);
-                refreshToken = request.getHeader(SecurityConstant.REFRESH_TOKEN_KEY);
-            }
+            String accessToken = tokenUtil.getAccessTokenFromRequest();
+            String refreshToken = tokenUtil.getRefreshAccessTokenFromRequest();
             // 非空验证
             if (StringUtil.isBlank(accessToken) || StringUtil.isBlank(refreshToken)) {
                 ResponseUtil.setJsonResult(response, JsonResult.buildErrorEnum(GatewayErrorCodeEnum.NOT_LOGIN));
@@ -99,6 +95,9 @@ public class TokenValidateFilter extends OncePerRequestFilter {
                 return;
             }
             // TODO 【暂不需要】refresh token快失效，延长有效期
+            // 设置token为request参数
+            request.setAttribute(SecurityConstant.ACCESS_TOKEN_SERVER_KEY, accessToken);
+            request.setAttribute(SecurityConstant.REFRESH_TOKEN_SERVER_KEY, refreshToken);
             chain.doFilter(request, response);
         } catch (Exception e) {
             log.error(e.getMessage(), e);

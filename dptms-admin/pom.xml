@@ -9,6 +9,7 @@
         <relativePath>../dptms-parent/pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+    <packaging>jar</packaging>
 
     <artifactId>dptms-admin</artifactId>
     <description>SBA服务监控面板</description>

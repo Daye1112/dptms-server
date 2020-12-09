@@ -248,15 +248,6 @@
     </dependencyManagement>
 
     <build>
-        <resources>
-            <resource>
-                <filtering>false</filtering>
-                <directory>src/main/resources</directory>
-                <includes>
-                    <include>**/*.*</include>
-                </includes>
-            </resource>
-        </resources>
         <plugins>
             <!-- 打包时跳过测试 -->
             <plugin>

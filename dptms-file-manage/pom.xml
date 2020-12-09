@@ -9,6 +9,7 @@
         <relativePath>../dptms-parent/pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+    <packaging>jar</packaging>
 
     <artifactId>dptms-file-manage</artifactId>
     <description>文件管理服务模块</description>

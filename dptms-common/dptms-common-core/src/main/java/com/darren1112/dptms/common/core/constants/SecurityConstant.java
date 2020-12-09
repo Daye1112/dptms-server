@@ -16,6 +16,14 @@ public class SecurityConstant {
      * refresh token交互的key
      */
     public static final String REFRESH_TOKEN_KEY = "DptmsRefreshToken";
+    /**
+     * access token 服务交互的key
+     */
+    public static final String ACCESS_TOKEN_SERVER_KEY = "accessToken";
+    /**
+     * refresh token 服务交互的key
+     */
+    public static final String REFRESH_TOKEN_SERVER_KEY = "refreshToken";
 
 
 }

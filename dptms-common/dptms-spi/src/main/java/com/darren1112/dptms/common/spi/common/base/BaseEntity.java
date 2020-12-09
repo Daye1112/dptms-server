@@ -3,6 +3,7 @@ package com.darren1112.dptms.common.spi.common.base;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -12,7 +13,7 @@ import java.util.Date;
  * @date 2020/07/23 02:19
  */
 @Data
-public class BaseEntity {
+public class BaseEntity implements Serializable {
 
     /**
      * id

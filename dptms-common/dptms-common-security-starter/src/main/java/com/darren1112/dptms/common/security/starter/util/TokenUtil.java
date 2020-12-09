@@ -1,6 +1,10 @@
 package com.darren1112.dptms.common.security.starter.util;
 
+import com.darren1112.dptms.common.core.constants.SecurityConstant;
+import com.darren1112.dptms.common.core.util.CookieUtil;
 import com.darren1112.dptms.common.core.util.JsonUtil;
+import com.darren1112.dptms.common.core.util.RequestUtil;
+import com.darren1112.dptms.common.core.util.StringUtil;
 import com.darren1112.dptms.common.redis.starter.util.RedisUtil;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 
@@ -72,6 +76,21 @@ public class TokenUtil {
     }
 
     /**
+     * 获取用户信息
+     *
+     * @return {@link ActiveUser 用户信息}
+     * @author luyuhao
+     * @date 20/11/28 01:22
+     */
+    public ActiveUser getActiveUser() {
+        String refreshToken = getRefreshAccessTokenFromRequest();
+        return Optional.ofNullable(redisUtil.get(refreshToken))
+                .map(Object::toString)
+                .map(item -> JsonUtil.parseObject(item, ActiveUser.class))
+                .orElse(null);
+    }
+
+    /**
      * 刷新accessToken
      *
      * @param refreshToken      refreshToken
@@ -84,5 +103,35 @@ public class TokenUtil {
         String newAccessToken = UUID.randomUUID().toString().replaceAll("-", "");
         redisUtil.set(newAccessToken, refreshToken, accessTokenExpire);
         return newAccessToken;
+    }
+
+    /**
+     * 从request中获取accessToken
+     *
+     * @return {@link String accessToken}
+     * @author luyuhao
+     * @date 20/12/10 02:34
+     */
+    public String getAccessTokenFromRequest() {
+        String accessToken = CookieUtil.getCookie(SecurityConstant.ACCESS_TOKEN_KEY, RequestUtil.getHttpServletRequest());
+        if (StringUtil.isBlank(accessToken)) {
+            accessToken = RequestUtil.getHeaderByName(SecurityConstant.ACCESS_TOKEN_KEY);
+        }
+        return accessToken;
+    }
+
+    /**
+     * 从request中获取refreshAccessToken
+     *
+     * @return {@link String refreshAccessToken}
+     * @author luyuhao
+     * @date 20/12/10 02:34
+     */
+    public String getRefreshAccessTokenFromRequest() {
+        String refreshAccessToken = CookieUtil.getCookie(SecurityConstant.REFRESH_TOKEN_KEY, RequestUtil.getHttpServletRequest());
+        if (StringUtil.isBlank(refreshAccessToken)) {
+            refreshAccessToken = RequestUtil.getHeaderByName(SecurityConstant.REFRESH_TOKEN_KEY);
+        }
+        return refreshAccessToken;
     }
 }
