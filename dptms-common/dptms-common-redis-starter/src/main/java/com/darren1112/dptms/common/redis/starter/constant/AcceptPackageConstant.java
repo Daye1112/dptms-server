@@ -11,6 +11,7 @@ public class AcceptPackageConstant {
     public static final String[] ACCEPT_ITEMS = {
             "com.darren1112.dptms.common.spi.sys.dto",
             "com.darren1112.dptms.common.spi.sys.entity",
-            "com.darren1112.dptms.common.spi.common.entity"
+            "com.darren1112.dptms.common.spi.common.entity",
+            "com.darren1112.dptms.common.spi.common.dto"
     };
 }

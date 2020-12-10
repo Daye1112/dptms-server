@@ -4,6 +4,7 @@ import com.darren1112.dptms.common.spi.common.base.BaseEntity;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
  * 组织Entity
@@ -12,6 +13,7 @@ import lombok.EqualsAndHashCode;
  * @date 20/08/16 01:35
  */
 @Data
+@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public class SysOrganizationEntity extends BaseEntity {
 

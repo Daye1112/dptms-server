@@ -9,4 +9,51 @@
         VALUES (#{perName}, #{perCode}, #{perGroup}, #{perUrl}, #{remark}, 1, now(),
                 #{creater}, now(), #{updater})
     </insert>
+    <!--分页查询权限-->
+    <select id="listPage" resultType="com.darren1112.dptms.common.spi.sys.dto.SysPermissionDto">
+        SELECT id,
+               per_name  AS pername,
+               per_code  AS percode,
+               per_group AS pergroup,
+               per_url   AS perUrl,
+               remark,
+               isvalid,
+               ctime,
+               creater,
+               mtime,
+               updater
+        FROM sys_permission
+        WHERE isvalid = 1
+        <if test="param.perName != null and param.perName != ''">
+            AND per_name LIKE concat('%', #{param.perName}, '%')
+        </if>
+        <if test="param.perCode != null and param.perCode != ''">
+            AND per_code LIKE concat('%', #{param.perCode}, '%')
+        </if>
+        <if test="param.perGroup != null and param.perGroup != ''">
+            AND per_group LIKE concat('%', #{param.perGroup}, '%')
+        </if>
+        <if test="param.perUrl != null and param.perUrl != ''">
+            AND per_url LIKE concat('%', #{param.perUrl}, '%')
+        </if>
+        LIMIT #{pageParam.startIndex}, #{pageParam.pageSize}
+    </select>
+    <!--分页查询权限-查询总数-->
+    <select id="listPageCount" resultType="java.lang.Long">
+        SELECT count(1)
+        FROM sys_permission
+        WHERE isvalid = 1
+        <if test="perName != null and perName != ''">
+            AND per_name LIKE concat('%', #{perName}, '%')
+        </if>
+        <if test="perCode != null and perCode != ''">
+            AND per_code LIKE concat('%', #{perCode}, '%')
+        </if>
+        <if test="perGroup != null and perGroup != ''">
+            AND per_group LIKE concat('%', #{perGroup}, '%')
+        </if>
+        <if test="perUrl != null and perUrl != ''">
+            AND per_url LIKE concat('%', #{perUrl}, '%')
+        </if>
+    </select>
 </mapper>

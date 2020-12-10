@@ -4,6 +4,7 @@ import com.darren1112.dptms.common.spi.common.base.BaseEntity;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.util.Date;
 
@@ -14,6 +15,7 @@ import java.util.Date;
  * @date 20/07/23 02:19
  */
 @Data
+@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public class SysUserEntity extends BaseEntity {
 

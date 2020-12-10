@@ -33,7 +33,7 @@ public class PageBean<T> implements Serializable {
      * 总记录数
      */
     @ApiModelProperty("总记录数")
-    private Integer total;
+    private Long total;
 
     /**
      * 页大小

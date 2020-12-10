@@ -1,18 +1,18 @@
 package com.darren1112.dptms.common.spi.sys.dto;
 
-import com.darren1112.dptms.common.spi.sys.entity.SysUserEntity;
+import com.darren1112.dptms.common.spi.sys.entity.SysPermissionEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
- * 系统用户Dto
+ * 权限Dto
  *
  * @author luyuhao
- * @date 2020/07/23 02:22
+ * @date 2020/12/11 01:34
  */
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class SysUserDto extends SysUserEntity {
+public class SysPermissionDto extends SysPermissionEntity {
 }

@@ -94,6 +94,9 @@ public class RedisAutoConfig extends CachingConfigurerSupport {
             sb.append(".");
             sb.append(method.getName());
             for (Object obj : params) {
+                if (obj == null) {
+                    continue;
+                }
                 sb.append("-");
                 sb.append(obj);
             }

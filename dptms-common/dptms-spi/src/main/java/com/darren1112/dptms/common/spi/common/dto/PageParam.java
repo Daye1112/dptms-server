@@ -18,13 +18,13 @@ public class PageParam implements Serializable {
      * 当前页
      */
     @ApiModelProperty(value = "当前页")
-    private Integer currentPage;
+    private Integer currentPage = 1;
 
     /**
      * 页大小
      */
     @ApiModelProperty(value = "页大小")
-    private Integer pageSize;
+    private Integer pageSize = 10;
 
     /**
      * 查询的起始索引

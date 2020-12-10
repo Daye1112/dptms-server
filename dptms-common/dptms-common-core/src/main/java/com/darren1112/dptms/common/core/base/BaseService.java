@@ -27,7 +27,7 @@ public class BaseService {
      * @param resultList 结果
      * @return 返回分页对象
      */
-    protected <T> PageBean<T> createPageBean(PageParam pageParam, Integer total, List<T> resultList) {
+    protected <T> PageBean<T> createPageBean(PageParam pageParam, Long total, List<T> resultList) {
         PageBean<T> pageBean = new PageBean<>();
         if (pageParam.getPageSize() != null && pageParam.getCurrentPage() != null) {
             pageBean
@@ -40,7 +40,7 @@ public class BaseService {
                     //设置页大小
                     .setPageSize(pageParam.getPageSize())
                     //设置总页数 {(总记录数 + 页大小 - 1) / 页大小}
-                    .setTotalPage((pageBean.getTotal() + pageBean.getPageSize() - 1) / pageBean.getPageSize())
+                    .setTotalPage((int) ((total + pageBean.getPageSize() - 1) / pageBean.getPageSize()))
                     //设置是否有后一页
                     .setHasNext(pageBean.getCurrentPage() < pageBean.getTotalPage())
                     //设置是否有前一页

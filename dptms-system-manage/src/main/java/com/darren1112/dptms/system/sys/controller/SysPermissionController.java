@@ -7,6 +7,9 @@ import com.darren1112.dptms.common.core.validate.ValidatorBuilder;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotEmptyValidatorCallback;
 import com.darren1112.dptms.common.security.starter.util.TokenUtil;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
+import com.darren1112.dptms.common.spi.common.dto.PageBean;
+import com.darren1112.dptms.common.spi.common.dto.PageParam;
+import com.darren1112.dptms.common.spi.sys.dto.SysPermissionDto;
 import com.darren1112.dptms.common.spi.sys.entity.SysPermissionEntity;
 import com.darren1112.dptms.system.common.enums.SystemManageErrorCodeEnum;
 import com.darren1112.dptms.system.sys.service.SysPermissionService;
@@ -59,6 +62,23 @@ public class SysPermissionController extends BaseController {
         entity.setUpdater(activeUser.getId());
         Long id = sysPermissionService.insert(entity);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(id));
+    }
+
+    /**
+     * 分页查询权限
+     *
+     * @param dto       筛选参数
+     * @param pageParam 分页参数
+     * @return {@link JsonResult}
+     * @author luyuhao
+     * @date 20/12/10 01:08
+     */
+    @ApiOperation("分页查询权限")
+    @GetMapping("/listPage")
+    public ResponseEntity<JsonResult<PageBean<SysPermissionDto>>> listPage(PageParam pageParam,
+                                                                           SysPermissionDto dto) {
+        PageBean<SysPermissionDto> pageBean = sysPermissionService.listPage(getPageParam(pageParam), dto);
+        return ResponseEntityUtil.ok(JsonResult.buildSuccessData(pageBean));
     }
 
 }

@@ -19,7 +19,7 @@ public class BaseController {
      * @author luyuhao
      * @date 20/12/10 01:20
      */
-    protected PageParam setPageParam(PageParam pageParam) {
+    protected PageParam getPageParam(PageParam pageParam) {
         if (pageParam.getCurrentPage() != null && pageParam.getPageSize() != null) {
             pageParam.setStartIndex((pageParam.getCurrentPage() - 1) * pageParam.getPageSize());
         }
