@@ -7,7 +7,7 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 import java.nio.charset.Charset;
 
 /**
- * 重写序列化器
+ * 【暂不使用】重写序列化器
  *
  * @author luyuhao
  * @date 19/12/06 20:22

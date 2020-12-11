@@ -23,7 +23,7 @@ import java.util.List;
  * @date 2020/12/09 23:44
  */
 @Service
-@CacheConfig(cacheNames = "sysPermission")
+@CacheConfig(cacheNames = "sysPermission", keyGenerator = "keyGenerator")
 @Transactional(rollbackFor = Throwable.class, readOnly = true)
 public class SysPermissionServiceImpl extends BaseService implements SysPermissionService {
 
@@ -55,7 +55,7 @@ public class SysPermissionServiceImpl extends BaseService implements SysPermissi
      * @date 20/12/10 01:08
      */
     @Override
-    @Cacheable(keyGenerator = "keyGenerator")
+    @Cacheable
     public PageBean<SysPermissionDto> listPage(PageParam pageParam, SysPermissionDto dto) {
         List<SysPermissionDto> list = sysPermissionDao.listPage(pageParam, dto);
         Long count = sysPermissionDao.listPageCount(dto);

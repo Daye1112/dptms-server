@@ -1,26 +1,25 @@
 package com.darren1112.dptms.common.redis.starter.config;
 
 import com.alibaba.fastjson.parser.ParserConfig;
-import com.darren1112.dptms.common.redis.starter.constant.AcceptPackageConstant;
+import com.darren1112.dptms.common.redis.starter.properties.DptmsCacheProperties;
 import com.darren1112.dptms.common.redis.starter.serializer.FastJsonRedisSerializer;
-import com.darren1112.dptms.common.redis.starter.serializer.StringRedisSerializer;
 import com.darren1112.dptms.common.redis.starter.util.RedisUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.cache.CacheProperties;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
+import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import java.time.Duration;
 
@@ -34,44 +33,44 @@ import java.time.Duration;
 @Slf4j
 @EnableCaching
 @ConditionalOnClass(RedisOperations.class)
-@EnableConfigurationProperties({RedisProperties.class, CacheProperties.class})
-public class RedisAutoConfig extends CachingConfigurerSupport {
+@EnableConfigurationProperties({RedisProperties.class, DptmsCacheProperties.class})
+public class RedisAutoConfig {
 
-    @Value("${spring.cache.redis.key-prefix}")
-    private String keyPrefix;
+    @Autowired
+    private DptmsCacheProperties dptmsCacheProperties;
 
-    @Value("${spring.cache.redis.use-key-prefix}")
-    private Boolean useKeyPrefix;
-
-    /**
-     * 设置 redis 数据默认过期时间，默认1天
-     * 设置@cacheable 序列化方式
-     *
-     * @return RedisCacheConfiguration
-     */
     @Bean
-    public RedisCacheConfiguration redisCacheConfiguration() {
-        FastJsonRedisSerializer<Object> fastJsonRedisSerializer = new FastJsonRedisSerializer<>(Object.class);
-        RedisCacheConfiguration configuration = RedisCacheConfiguration.defaultCacheConfig();
-        configuration = configuration.serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(fastJsonRedisSerializer)).entryTtl(Duration.ofHours(2));
-        return configuration;
+    public RedisCacheManager redisCacheManager(RedisConnectionFactory redisConnectionFactory) {
+        RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()
+                .entryTtl(Duration.ofMinutes(dptmsCacheProperties.getCacheTtl()))
+                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new FastJsonRedisSerializer<>(Object.class)));
+        if (dptmsCacheProperties.isUseKeyPrefix()) {
+            config = config.computePrefixWith((cacheName) -> dptmsCacheProperties.getKeyPrefix() + cacheName + ":");
+        }
+        return RedisCacheManager.builder(redisConnectionFactory)
+                .cacheDefaults(config)
+                .transactionAware()
+                .build();
     }
+
 
     @Bean(name = "redisTemplate")
     @ConditionalOnMissingBean(name = "redisTemplate")
-    public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
-        RedisTemplate<Object, Object> redisTemplate = new RedisTemplate<>();
+    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
+        RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
         //使用Jackson2JsonRedisSerializer来序列化和反序列化redis的value值
         FastJsonRedisSerializer fastJsonRedisSerializer = new FastJsonRedisSerializer<>(Object.class);
         redisTemplate.setValueSerializer(fastJsonRedisSerializer);
         redisTemplate.setHashValueSerializer(fastJsonRedisSerializer);
 
-        // TODO 建议使用这种方式，小范围指定白名单
-        for (String acceptItem : AcceptPackageConstant.ACCEPT_ITEMS) {
-            ParserConfig.getGlobalInstance().addAccept(acceptItem);
-        }
+        // 全局开启AutoType，不建议使用
+        ParserConfig.getGlobalInstance().setAutoTypeSupport(true);
+        // 建议使用这种方式，小范围指定白名单
+        // for (String acceptItem : AcceptPackageConstant.ACCEPT_ITEMS) {
+        //     ParserConfig.getGlobalInstance().addAccept(acceptItem);
+        // }
 
-        //使用StringRedisSerializer来序列化和反序列化redis的key
+        // 使用spring自带的StringRedisSerializer来序列化和反序列化redis的key
         redisTemplate.setKeySerializer(new StringRedisSerializer());
         redisTemplate.setHashKeySerializer(new StringRedisSerializer());
 
@@ -89,27 +88,33 @@ public class RedisAutoConfig extends CachingConfigurerSupport {
      * @return KeyGenerator
      */
     @Bean
-    @Override
     public KeyGenerator keyGenerator() {
         return (target, method, params) -> {
             StringBuilder sb = new StringBuilder();
-            sb.append(target.getClass().getName());
-            sb.append(".");
+            sb.append(target.getClass().getSimpleName());
+            sb.append(":");
             sb.append(method.getName());
+            int index = 0;
             for (Object obj : params) {
-                if (obj == null) {
-                    continue;
+                if (index == 0) {
+                    sb.append(":");
+                } else {
+                    sb.append("_");
                 }
-                sb.append("-");
-                sb.append(obj);
+                try {
+                    sb.append(obj.hashCode());
+                } catch (Exception e) {
+                    sb.append(obj);
+                }
+                index++;
             }
             return sb.toString();
         };
     }
 
     @Bean
-    public RedisUtil redisUtil(RedisTemplate<Object, Object> redisTemplate) {
-        return new RedisUtil(redisTemplate, useKeyPrefix ? keyPrefix : "");
+    public RedisUtil redisUtil(RedisTemplate<String, Object> redisTemplate) {
+        return new RedisUtil(redisTemplate, dptmsCacheProperties.isUseKeyPrefix() ? dptmsCacheProperties.getKeyPrefix() : "");
     }
 
 }

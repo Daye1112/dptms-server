@@ -54,6 +54,12 @@
             <optional>true</optional>
         </dependency>
         <!-- [lombok] End -->
+        <!-- [commons-pool2] Start -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+        </dependency>
+        <!-- [commons-pool2] End -->
         <!-- [Plugins] End -->
 
         <!-- [dptms] Start-->

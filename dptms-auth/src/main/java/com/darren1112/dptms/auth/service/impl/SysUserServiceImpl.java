@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @date 2020/07/23 02:43
  */
 @Service
-@CacheConfig(cacheNames = "sysUser")
+@CacheConfig(cacheNames = "sysUser", keyGenerator = "keyGenerator")
 @Transactional(rollbackFor = Throwable.class, readOnly = true)
 public class SysUserServiceImpl implements SysUserService {
 
@@ -33,7 +33,7 @@ public class SysUserServiceImpl implements SysUserService {
      * @date 20/07/23 02:58
      */
     @Override
-    @Cacheable(keyGenerator = "keyGenerator")
+    @Cacheable
     public SysUserDto getByUsername(String username) {
         return sysUserDao.getByUsername(username);
     }

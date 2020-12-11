@@ -18,11 +18,11 @@ public class RedisUtil {
 
     private static final long EXPIRED = -2;
 
-    private RedisTemplate<Object, Object> redisTemplate;
+    private RedisTemplate<String, Object> redisTemplate;
 
     private String keyPrefix;
 
-    public RedisUtil(RedisTemplate<Object, Object> redisTemplate, String keyPrefix) {
+    public RedisUtil(RedisTemplate<String, Object> redisTemplate, String keyPrefix) {
         this.redisTemplate = redisTemplate;
         this.keyPrefix = keyPrefix;
     }
@@ -31,7 +31,7 @@ public class RedisUtil {
      * 清空redis
      */
     public void clear() {
-        Set<Object> keys = redisTemplate.keys(keyPrefix + "*");
+        Set<String> keys = redisTemplate.keys(keyPrefix + "*");
         if (!CollectionUtils.isEmpty(keys)) {
             redisTemplate.delete(keys);
         }
@@ -40,8 +40,8 @@ public class RedisUtil {
     /**
      * 根据前缀匹配所有key
      */
-    public Set<Object> getKeysByPrefix(String prefix) {
-        Set<Object> keys = redisTemplate.keys(keyPrefix + prefix + "*");
+    public Set<String> getKeysByPrefix(String prefix) {
+        Set<String> keys = redisTemplate.keys(keyPrefix + prefix + "*");
         return Optional.ofNullable(keys)
                 .orElse(Collections.emptySet());
     }

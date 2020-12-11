@@ -11,7 +11,7 @@ import java.util.UUID;
 public class RandomTest {
 
     @Test
-    public void test01(){
+    public void test01() {
         UUID uuid = UUID.randomUUID();
         System.out.println(uuid);
         System.out.println(uuid.getLeastSignificantBits());
