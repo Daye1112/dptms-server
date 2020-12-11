@@ -2,12 +2,12 @@ package com.darren1112.dptms.common.redis.starter.config;
 
 import com.alibaba.fastjson.parser.ParserConfig;
 import com.darren1112.dptms.common.redis.starter.constant.AcceptPackageConstant;
-import com.darren1112.dptms.common.redis.starter.properties.DptmsRedisProperties;
 import com.darren1112.dptms.common.redis.starter.serializer.FastJsonRedisSerializer;
 import com.darren1112.dptms.common.redis.starter.serializer.StringRedisSerializer;
 import com.darren1112.dptms.common.redis.starter.util.RedisUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.cache.CacheProperties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
@@ -34,11 +34,14 @@ import java.time.Duration;
 @Slf4j
 @EnableCaching
 @ConditionalOnClass(RedisOperations.class)
-@EnableConfigurationProperties({RedisProperties.class, DptmsRedisProperties.class})
+@EnableConfigurationProperties({RedisProperties.class, CacheProperties.class})
 public class RedisAutoConfig extends CachingConfigurerSupport {
 
-    @Autowired
-    private DptmsRedisProperties dptmsRedisProperties;
+    @Value("${spring.cache.redis.key-prefix}")
+    private String keyPrefix;
+
+    @Value("${spring.cache.redis.use-key-prefix}")
+    private Boolean useKeyPrefix;
 
     /**
      * 设置 redis 数据默认过期时间，默认1天
@@ -106,7 +109,7 @@ public class RedisAutoConfig extends CachingConfigurerSupport {
 
     @Bean
     public RedisUtil redisUtil(RedisTemplate<Object, Object> redisTemplate) {
-        return new RedisUtil(redisTemplate, dptmsRedisProperties.getSystemPrefix());
+        return new RedisUtil(redisTemplate, useKeyPrefix ? keyPrefix : "");
     }
 
 }
