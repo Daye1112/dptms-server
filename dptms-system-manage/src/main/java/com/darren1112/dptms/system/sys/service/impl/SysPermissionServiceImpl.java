@@ -1,10 +1,12 @@
 package com.darren1112.dptms.system.sys.service.impl;
 
 import com.darren1112.dptms.common.core.base.BaseService;
+import com.darren1112.dptms.common.core.exception.BadRequestException;
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
 import com.darren1112.dptms.common.spi.sys.dto.SysPermissionDto;
 import com.darren1112.dptms.common.spi.sys.entity.SysPermissionEntity;
+import com.darren1112.dptms.system.common.enums.SystemManageErrorCodeEnum;
 import com.darren1112.dptms.system.sys.dao.SysPermissionDao;
 import com.darren1112.dptms.system.sys.service.SysPermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +44,7 @@ public class SysPermissionServiceImpl extends BaseService implements SysPermissi
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Throwable.class)
     public Long insert(SysPermissionEntity entity) {
+        validRepeat(entity, false);
         return sysPermissionDao.insert(entity);
     }
 
@@ -60,5 +63,41 @@ public class SysPermissionServiceImpl extends BaseService implements SysPermissi
         List<SysPermissionDto> list = sysPermissionDao.listPage(pageParam, dto);
         Long count = sysPermissionDao.listPageCount(dto);
         return createPageBean(pageParam, count, list);
+    }
+
+    /**
+     * 更新权限信息
+     *
+     * @param entity 权限参数
+     * @return {@link Long}
+     * @author luyuhao
+     * @date 20/12/10 01:08
+     */
+    @Override
+    @CacheEvict(allEntries = true)
+    @Transactional(rollbackFor = Throwable.class)
+    public Long update(SysPermissionEntity entity) {
+        validRepeat(entity, true);
+        return sysPermissionDao.update(entity);
+    }
+
+    /**
+     * 验证code和url是否重复
+     *
+     * @param entity   验证对象
+     * @param isUpdate 是否更新
+     * @author luyuhao
+     * @date 2020/12/12 11:06
+     */
+    private void validRepeat(SysPermissionEntity entity, boolean isUpdate) {
+        SysPermissionDto param = new SysPermissionDto();
+        param.setId(entity.getId());
+        param.setPerCode(entity.getPerCode());
+        param.setPerUrl(entity.getPerUrl());
+        param.setIsUpdate(isUpdate);
+        Long count = sysPermissionDao.countByRepeat(param);
+        if (count != null && count > 0) {
+            throw new BadRequestException(SystemManageErrorCodeEnum.NOT_REPEAT);
+        }
     }
 }

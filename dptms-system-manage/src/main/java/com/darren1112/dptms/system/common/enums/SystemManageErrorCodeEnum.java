@@ -19,6 +19,7 @@ public enum SystemManageErrorCodeEnum implements BaseEnum {
     PER_CODE_NOT_NULL(HttpStatus.BAD_REQUEST, "权限码不能为空"),
     PER_GROUP_NOT_NULL(HttpStatus.BAD_REQUEST, "权限组不能为空"),
     PER_URL_NOT_NULL(HttpStatus.BAD_REQUEST, "权限url不能为空"),
+    NOT_REPEAT(HttpStatus.BAD_REQUEST, "权限码或权限url不能重复"),
     ;
 
     private Integer code;

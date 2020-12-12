@@ -5,6 +5,7 @@ import com.darren1112.dptms.common.core.message.JsonResult;
 import com.darren1112.dptms.common.core.util.ResponseEntityUtil;
 import com.darren1112.dptms.common.core.validate.ValidatorBuilder;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotEmptyValidatorCallback;
+import com.darren1112.dptms.common.core.validate.validator.callback.common.NotNullValidatorCallback;
 import com.darren1112.dptms.common.security.starter.util.TokenUtil;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
@@ -79,6 +80,30 @@ public class SysPermissionController extends BaseController {
                                                                            SysPermissionDto dto) {
         PageBean<SysPermissionDto> pageBean = sysPermissionService.listPage(getPageParam(pageParam), dto);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(pageBean));
+    }
+
+    /**
+     * 更新权限信息
+     *
+     * @param entity 权限参数
+     * @return {@link JsonResult}
+     * @author luyuhao
+     * @date 20/12/10 01:08
+     */
+    @ApiOperation("更新权限")
+    @GetMapping("/update")
+    public ResponseEntity<JsonResult<Long>> update(SysPermissionEntity entity) {
+        ValidatorBuilder.build()
+                .on(entity.getId(), new NotNullValidatorCallback(SystemManageErrorCodeEnum.ID_NOT_NULL))
+                .on(entity.getPerName(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.PER_NAME_NOT_NULL))
+                .on(entity.getPerCode(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.PER_CODE_NOT_NULL))
+                .on(entity.getPerGroup(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.PER_GROUP_NOT_NULL))
+                .on(entity.getPerUrl(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.PER_URL_NOT_NULL))
+                .doValidate().checkResult();
+        ActiveUser activeUser = tokenUtil.getActiveUser();
+        entity.setUpdater(activeUser.getId());
+        Long count = sysPermissionService.update(entity);
+        return ResponseEntityUtil.ok(JsonResult.buildSuccessData(count));
     }
 
 }

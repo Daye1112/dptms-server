@@ -33,4 +33,14 @@ public interface SysPermissionService {
      * @date 20/12/10 01:08
      */
     PageBean<SysPermissionDto> listPage(PageParam pageParam, SysPermissionDto dto);
+
+    /**
+     * 更新权限信息
+     *
+     * @param entity 权限参数
+     * @return {@link Long}
+     * @author luyuhao
+     * @date 20/12/10 01:08
+     */
+    Long update(SysPermissionEntity entity);
 }

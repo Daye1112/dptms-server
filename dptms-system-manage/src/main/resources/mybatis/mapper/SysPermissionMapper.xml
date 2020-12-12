@@ -12,9 +12,9 @@
     <!--分页查询权限-->
     <select id="listPage" resultType="com.darren1112.dptms.common.spi.sys.dto.SysPermissionDto">
         SELECT id,
-               per_name  AS pername,
-               per_code  AS percode,
-               per_group AS pergroup,
+               per_name  AS perName,
+               per_code  AS perCode,
+               per_group AS perGroup,
                per_url   AS perUrl,
                remark,
                isvalid,
@@ -54,6 +54,51 @@
         </if>
         <if test="perUrl != null and perUrl != ''">
             AND per_url LIKE concat('%', #{perUrl}, '%')
+        </if>
+    </select>
+    <!--更新权限信息-->
+    <update id="update">
+        UPDATE sys_permission
+        SET mtime     = now(),
+            per_name  = #{perName},
+            per_code  = #{perCode},
+            per_group = #{perGroup},
+            per_url   = #{perUrl},
+            remark    = #{remark},
+            updater   = #{updater}
+        WHERE isvalid = 1
+          AND id = #{id}
+    </update>
+    <!--根据筛选参数查询list-->
+    <select id="listBy"
+            resultType="com.darren1112.dptms.common.spi.sys.entity.SysPermissionEntity">
+        SELECT id,
+               per_name  AS perName,
+               per_code  AS perCode,
+               per_group AS perGroup,
+               per_url   AS perUrl,
+               remark,
+               isvalid,
+               ctime,
+               creater,
+               mtime,
+               updater
+        FROM sys_permission
+        WHERE isvalid = 1
+        <if test="perCode != null and perCode != ''">
+            AND per_code LIKE concat('%', #{perCode}, '%')
+        </if>
+    </select>
+    <!--查询是否重复-->
+    <select id="countByRepeat" resultType="java.lang.Long"
+            parameterType="com.darren1112.dptms.common.spi.sys.dto.SysPermissionDto">
+        SELECT count(1)
+        FROM sys_permission
+        WHERE isvalid = 1
+            AND per_code = #{perCode}
+            AND per_url = #{perUrl}
+        <if test="isUpdate != null and isUpdate == true">
+            AND id != #{id}
         </if>
     </select>
 </mapper>

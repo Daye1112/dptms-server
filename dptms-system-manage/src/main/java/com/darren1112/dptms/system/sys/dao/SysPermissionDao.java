@@ -49,4 +49,34 @@ public interface SysPermissionDao {
      * @date 20/12/10 01:08
      */
     Long listPageCount(SysPermissionDto dto);
+
+    /**
+     * 更新权限信息
+     *
+     * @param entity 权限参数
+     * @return {@link Long}
+     * @author luyuhao
+     * @date 20/12/10 01:08
+     */
+    Long update(SysPermissionEntity entity);
+
+    /**
+     * 根据筛选参数查询list
+     *
+     * @param entity 筛选参数
+     * @return {@link SysPermissionEntity}
+     * @author luyuhao
+     * @date 2020/12/12 11:11
+     */
+    List<SysPermissionEntity> listBy(SysPermissionEntity entity);
+
+    /**
+     * 查询是否重复
+     *
+     * @param param 查重参数
+     * @return {@link Long 重复数量}
+     * @author luyuhao
+     * @date 2020/12/12 11:14
+     */
+    Long countByRepeat(SysPermissionDto param);
 }
