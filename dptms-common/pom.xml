@@ -15,7 +15,7 @@
     <description>公共模块组</description>
 
     <modules>
-        <module>dptms-spi</module>
+        <module>dptms-common-spi</module>
         <module>dptms-common-core</module>
         <module>dptms-common-web-starter</module>
         <module>dptms-common-security-starter</module>

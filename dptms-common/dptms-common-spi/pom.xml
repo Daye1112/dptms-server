@@ -11,7 +11,7 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>jar</packaging>
 
-    <artifactId>dptms-spi</artifactId>
+    <artifactId>dptms-common-spi</artifactId>
     <description>存放entity、dto、vo等模型模块</description>
 
     <dependencies>

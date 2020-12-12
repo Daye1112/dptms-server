@@ -215,7 +215,7 @@
             </dependency>
             <dependency>
                 <groupId>com.darren1112</groupId>
-                <artifactId>dptms-spi</artifactId>
+                <artifactId>dptms-common-spi</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
