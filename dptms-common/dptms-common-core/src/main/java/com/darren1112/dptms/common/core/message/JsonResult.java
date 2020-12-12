@@ -47,6 +47,10 @@ public class JsonResult<T> implements Serializable {
         return new JsonResult<>(code, message, data);
     }
 
+    public static <C> JsonResult<C> buildSuccess() {
+        return build(SUCCESS_CODE, SUCCESS_MESSAGE, null);
+    }
+
     public static <C> JsonResult<C> buildSuccessData(C data) {
         return build(SUCCESS_CODE, SUCCESS_MESSAGE, data);
     }

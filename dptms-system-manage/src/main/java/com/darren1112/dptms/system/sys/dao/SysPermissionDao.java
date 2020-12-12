@@ -79,4 +79,14 @@ public interface SysPermissionDao {
      * @date 2020/12/12 11:14
      */
     Long countByRepeat(SysPermissionDto param);
+
+    /**
+     * 根据id删除记录
+     *
+     * @param id      id
+     * @param updater 更新者
+     * @author luyuhao
+     * @date 20/12/12 20:44
+     */
+    void deleteById(@Param("id") Long id, @Param("updater") Long updater);
 }

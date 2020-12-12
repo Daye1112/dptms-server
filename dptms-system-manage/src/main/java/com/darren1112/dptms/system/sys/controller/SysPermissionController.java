@@ -19,9 +19,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 权限Controller
@@ -50,8 +48,8 @@ public class SysPermissionController extends BaseController {
      * @date 20/12/10 01:08
      */
     @ApiOperation("插入权限")
-    @GetMapping("/insert")
-    public ResponseEntity<JsonResult> insert(SysPermissionEntity entity) {
+    @PostMapping("/insert")
+    public ResponseEntity<JsonResult<Long>> insert(SysPermissionEntity entity) {
         ValidatorBuilder.build()
                 .on(entity.getPerName(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.PER_NAME_NOT_NULL))
                 .on(entity.getPerCode(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.PER_CODE_NOT_NULL))
@@ -91,7 +89,7 @@ public class SysPermissionController extends BaseController {
      * @date 20/12/10 01:08
      */
     @ApiOperation("更新权限")
-    @GetMapping("/update")
+    @PostMapping("/update")
     public ResponseEntity<JsonResult<Long>> update(SysPermissionEntity entity) {
         ValidatorBuilder.build()
                 .on(entity.getId(), new NotNullValidatorCallback(SystemManageErrorCodeEnum.ID_NOT_NULL))
@@ -104,6 +102,25 @@ public class SysPermissionController extends BaseController {
         entity.setUpdater(activeUser.getId());
         Long count = sysPermissionService.update(entity);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(count));
+    }
+
+    /**
+     * 根据id删除记录
+     *
+     * @param id 记录id
+     * @return {@link JsonResult}
+     * @author luyuhao
+     * @date 20/12/10 01:08
+     */
+    @ApiOperation("根据id删除记录")
+    @GetMapping("/deleteById")
+    public ResponseEntity<JsonResult> deleteById(@RequestParam(value = "id", required = false) Long id) {
+        ValidatorBuilder.build()
+                .on(id, new NotNullValidatorCallback(SystemManageErrorCodeEnum.ID_NOT_NULL))
+                .doValidate().checkResult();
+        ActiveUser activeUser = tokenUtil.getActiveUser();
+        sysPermissionService.deleteById(id, activeUser.getId());
+        return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }
 
 }

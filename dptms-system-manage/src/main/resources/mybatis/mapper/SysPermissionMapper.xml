@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.darren1112.dptms.system.sys.dao.SysPermissionDao">
     <!--插入权限信息-->
-    <insert id="insert" useGeneratedKeys="true" keyColumn="id"
+    <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id"
             parameterType="com.darren1112.dptms.common.spi.sys.entity.SysPermissionEntity">
         INSERT INTO sys_permission(per_name, per_code, per_group, per_url, remark, isvalid,
                                    ctime, creater, mtime, updater)
@@ -95,10 +95,18 @@
         SELECT count(1)
         FROM sys_permission
         WHERE isvalid = 1
-            AND per_code = #{perCode}
-            AND per_url = #{perUrl}
+            AND (per_code = #{perCode} OR per_url = #{perUrl})
         <if test="isUpdate != null and isUpdate == true">
             AND id != #{id}
         </if>
     </select>
+    <!--根据id删除记录-->
+    <update id="deleteById">
+        UPDATE sys_permission
+        SET mtime   = now(),
+            updater = #{updater},
+            isvalid = 0
+        WHERE isvalid = 1
+          AND id = #{id}
+    </update>
 </mapper>

@@ -1,6 +1,7 @@
 package com.darren1112.dptms.auth.test;
 
 import cn.hutool.crypto.digest.MD5;
+import com.darren1112.dptms.common.core.util.Md5Util;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -29,5 +30,12 @@ public class PasswordTest {
     public void test02(){
         String s = new MD5().digestHex("123456");
         System.out.println(s);
+    }
+
+    @Test
+    public void test03(){
+        long l = System.currentTimeMillis();
+        System.out.println(l);
+        System.out.println(Md5Util.encrypt("123456", String.valueOf(l)));
     }
 }

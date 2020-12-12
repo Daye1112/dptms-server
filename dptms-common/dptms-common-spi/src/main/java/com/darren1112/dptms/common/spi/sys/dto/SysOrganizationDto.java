@@ -13,4 +13,9 @@ import lombok.ToString;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public class SysOrganizationDto extends SysOrganizationEntity {
+
+    /**
+     * 是否更新
+     */
+    private Boolean isUpdate;
 }

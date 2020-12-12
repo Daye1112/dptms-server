@@ -45,7 +45,8 @@ public class SysPermissionServiceImpl extends BaseService implements SysPermissi
     @Transactional(rollbackFor = Throwable.class)
     public Long insert(SysPermissionEntity entity) {
         validRepeat(entity, false);
-        return sysPermissionDao.insert(entity);
+        sysPermissionDao.insert(entity);
+        return entity.getId();
     }
 
     /**
@@ -97,7 +98,22 @@ public class SysPermissionServiceImpl extends BaseService implements SysPermissi
         param.setIsUpdate(isUpdate);
         Long count = sysPermissionDao.countByRepeat(param);
         if (count != null && count > 0) {
-            throw new BadRequestException(SystemManageErrorCodeEnum.NOT_REPEAT);
+            throw new BadRequestException(SystemManageErrorCodeEnum.PER_NOT_REPEAT);
         }
+    }
+
+    /**
+     * 根据id删除记录
+     *
+     * @param id      id
+     * @param updater 更新者
+     * @author luyuhao
+     * @date 20/12/12 20:44
+     */
+    @Override
+    @CacheEvict(allEntries = true)
+    @Transactional(rollbackFor = Throwable.class)
+    public void deleteById(Long id, Long updater) {
+        sysPermissionDao.deleteById(id, updater);
     }
 }

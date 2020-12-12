@@ -43,4 +43,14 @@ public interface SysPermissionService {
      * @date 20/12/10 01:08
      */
     Long update(SysPermissionEntity entity);
+
+    /**
+     * 根据id删除记录
+     *
+     * @param id      id
+     * @param updater 更新者
+     * @author luyuhao
+     * @date 20/12/12 20:44
+     */
+    void deleteById(Long id, Long updater);
 }
