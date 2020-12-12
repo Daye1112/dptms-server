@@ -28,4 +28,14 @@ public class SecurityProperties {
      * 多个值时使用逗号分隔
      */
     private String[] anonUris;
+
+    /**
+     * token有效期(s)
+     */
+    private long accessTokenExpired = 60 * 15;
+
+    /**
+     * 刷新token有效期(s)
+     */
+    private long refreshTokenExpired = 60 * 60 * 24 * 7;
 }

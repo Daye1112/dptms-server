@@ -124,7 +124,7 @@ public class TokenValidateFilter extends OncePerRequestFilter {
             return true;
         } else if (StringUtil.isBlank(redisRefreshToken) && Objects.nonNull(activeUser)) {
             // accessToken无效, refreshToken有效 => 刷新accessToken，重置cookie
-            String newAccessToken = authRemoting.refreshAccessToken(refreshToken).getData();
+            String newAccessToken = tokenUtil.refreshAccessToken(refreshToken, securityProperties.getAccessTokenExpired());
             CookieUtil.setCookie(SecurityConstant.ACCESS_TOKEN_KEY, newAccessToken, response);
             return true;
         } else {

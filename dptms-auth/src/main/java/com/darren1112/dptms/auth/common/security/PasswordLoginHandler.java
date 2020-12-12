@@ -10,6 +10,7 @@ import com.darren1112.dptms.common.core.exception.BadRequestException;
 import com.darren1112.dptms.common.core.exception.BaseException;
 import com.darren1112.dptms.common.core.util.CookieUtil;
 import com.darren1112.dptms.common.core.util.Md5Util;
+import com.darren1112.dptms.common.security.starter.properties.SecurityProperties;
 import com.darren1112.dptms.common.security.starter.util.TokenUtil;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 import com.darren1112.dptms.common.spi.common.dto.LoginParam;
@@ -38,7 +39,7 @@ public class PasswordLoginHandler extends BaseUserDetails {
     private SysUserService sysUserService;
 
     @Autowired
-    private AuthProperties authProperties;
+    private SecurityProperties securityProperties;
 
     /**
      * 前置处理
@@ -103,7 +104,7 @@ public class PasswordLoginHandler extends BaseUserDetails {
         String accessToken = UUID.randomUUID().toString().replaceAll("-", "");
         String refreshToken = UUID.randomUUID().toString().replaceAll("-", "");
         // 存放到redis中
-        if (!tokenUtil.saveToken(activeUser, accessToken, refreshToken, authProperties.getAccessTokenExpired(), authProperties.getRefreshTokenExpired())) {
+        if (!tokenUtil.saveToken(activeUser, accessToken, refreshToken, securityProperties.getAccessTokenExpired(), securityProperties.getRefreshTokenExpired())) {
             throw new BadRequestException(AuthErrorCodeEnum.SAVE_TOKEN_ERROR);
         }
         //设置cookie

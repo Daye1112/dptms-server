@@ -10,6 +10,7 @@ import com.darren1112.dptms.common.core.util.ResponseEntityUtil;
 import com.darren1112.dptms.common.core.validate.ValidatorBuilder;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotEmptyValidatorCallback;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotNullValidatorCallback;
+import com.darren1112.dptms.common.security.starter.properties.SecurityProperties;
 import com.darren1112.dptms.common.security.starter.util.TokenUtil;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 import com.darren1112.dptms.common.spi.common.dto.LoginParam;
@@ -44,7 +45,7 @@ public class AuthController {
     private TokenUtil tokenUtil;
 
     @Autowired
-    private AuthProperties authProperties;
+    private SecurityProperties securityProperties;
 
     /**
      * 登录系统
@@ -85,7 +86,7 @@ public class AuthController {
         ValidatorBuilder.build()
                 .on(refreshToken, new NotEmptyValidatorCallback(AuthErrorCodeEnum.REFRESH_TOKEN_NOT_NULL))
                 .doValidate().checkResult();
-        String accessToken = tokenUtil.refreshAccessToken(refreshToken, authProperties.getAccessTokenExpired());
+        String accessToken = tokenUtil.refreshAccessToken(refreshToken, securityProperties.getAccessTokenExpired());
         CookieUtil.setCookie(SecurityConstant.ACCESS_TOKEN_KEY, accessToken, response);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(accessToken));
     }

@@ -17,6 +17,4 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "dptms.auth")
 public class AuthProperties {
 
-    private long accessTokenExpired = 60 * 15;
-    private long refreshTokenExpired = 60 * 60 * 24 * 7;
 }
