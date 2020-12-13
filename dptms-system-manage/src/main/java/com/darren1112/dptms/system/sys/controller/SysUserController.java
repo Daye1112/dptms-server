@@ -4,8 +4,11 @@ import com.darren1112.dptms.common.core.message.JsonResult;
 import com.darren1112.dptms.common.core.util.ResponseEntityUtil;
 import com.darren1112.dptms.common.core.validate.ValidatorBuilder;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotNullValidatorCallback;
+import com.darren1112.dptms.common.security.starter.util.TokenUtil;
+import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 import com.darren1112.dptms.common.spi.sys.dto.SysUserDto;
 import com.darren1112.dptms.system.common.enums.SystemManageErrorCodeEnum;
+import com.darren1112.dptms.system.sys.service.SysUserOrganizationService;
 import com.darren1112.dptms.system.sys.service.SysUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -14,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -31,6 +35,12 @@ public class SysUserController {
     @Autowired
     private SysUserService sysUserService;
 
+    @Autowired
+    private SysUserOrganizationService sysUserOrganizationService;
+
+    @Autowired
+    private TokenUtil tokenUtil;
+
     /**
      * 根据id查询用户
      *
@@ -47,5 +57,26 @@ public class SysUserController {
                 .doValidate().checkResult();
         SysUserDto result = sysUserService.getById(id);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(result));
+    }
+
+    /**
+     * 分配组织
+     *
+     * @param userId 用户id
+     * @param orgIds 组织ids，逗号分隔
+     * @return {@link JsonResult}
+     * @author luyuhao
+     * @date 20/12/13 22:10
+     */
+    @ApiOperation("分配组织")
+    @GetMapping("/assignedOrg")
+    public ResponseEntity<JsonResult> assignedOrg(@RequestParam(value = "userId", required = false) Long userId,
+                                                  @RequestParam(value = "orgIds", required = false) String orgIds) {
+        ValidatorBuilder.build()
+                .on(userId, new NotNullValidatorCallback(SystemManageErrorCodeEnum.USER_ID_NOT_NULL))
+                .doValidate().checkResult();
+        ActiveUser activeUser = tokenUtil.getActiveUser();
+        sysUserOrganizationService.assignedOrg(userId, orgIds, activeUser.getId());
+        return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }
 }

@@ -14,12 +14,15 @@ import com.darren1112.dptms.common.spi.sys.dto.SysOrganizationDto;
 import com.darren1112.dptms.common.spi.sys.entity.SysOrganizationEntity;
 import com.darren1112.dptms.system.common.enums.SystemManageErrorCodeEnum;
 import com.darren1112.dptms.system.sys.service.SysOrganizationService;
+import com.darren1112.dptms.system.sys.service.SysUserOrganizationService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 组织Controller
@@ -34,10 +37,13 @@ import org.springframework.web.bind.annotation.*;
 public class SysOrganizationController extends BaseController {
 
     @Autowired
+    private TokenUtil tokenUtil;
+
+    @Autowired
     private SysOrganizationService sysOrganizationService;
 
     @Autowired
-    private TokenUtil tokenUtil;
+    private SysUserOrganizationService sysUserOrganizationService;
 
     /**
      * 分页查询组织信息
@@ -117,5 +123,23 @@ public class SysOrganizationController extends BaseController {
         ActiveUser activeUser = tokenUtil.getActiveUser();
         sysOrganizationService.deleteById(id, activeUser.getId());
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
+    }
+
+    /**
+     * 查询用户关联的组织list
+     *
+     * @param userId 用户id
+     * @return {@link SysOrganizationDto}
+     * @author luyuhao
+     * @date 20/12/13 21:43
+     */
+    @ApiOperation("查询用户关联的组织list")
+    @GetMapping("/listUserAssigned")
+    public ResponseEntity<JsonResult<List<SysOrganizationDto>>> listUserAssigned(@RequestParam(value = "userId", required = false) Long userId) {
+        ValidatorBuilder.build()
+                .on(userId, new NotNullValidatorCallback(SystemManageErrorCodeEnum.USER_ID_NOT_NULL))
+                .doValidate().checkResult();
+        List<SysOrganizationDto> resultList = sysUserOrganizationService.listUserAssigned(userId);
+        return ResponseEntityUtil.ok(JsonResult.buildSuccessData(resultList));
     }
 }

@@ -1,0 +1,76 @@
+package com.darren1112.dptms.system.sys.service.impl;
+
+import com.darren1112.dptms.common.core.util.StringUtil;
+import com.darren1112.dptms.common.spi.sys.dto.SysOrganizationDto;
+import com.darren1112.dptms.common.spi.sys.entity.SysUserOrganizationEntity;
+import com.darren1112.dptms.system.sys.dao.SysUserOrganizationDao;
+import com.darren1112.dptms.system.sys.service.SysUserOrganizationService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * 用户组织Service
+ *
+ * @author luyuhao
+ * @date 2020/12/13 22:22
+ */
+@Service
+@CacheConfig(cacheNames = "sysUserOrganization", keyGenerator = "keyGenerator")
+@Transactional(rollbackFor = Throwable.class, readOnly = true)
+public class SysUserOrganizationServiceImpl implements SysUserOrganizationService {
+
+    @Autowired
+    private SysUserOrganizationDao sysUserOrganizationDao;
+
+    /**
+     * 查询用户关联的组织list
+     *
+     * @param userId 用户id
+     * @return {@link SysOrganizationDto}
+     * @author luyuhao
+     * @date 20/12/13 21:43
+     */
+    @Override
+    public List<SysOrganizationDto> listUserAssigned(Long userId) {
+        return sysUserOrganizationDao.listUserAssigned(userId);
+    }
+
+    /**
+     * 分配组织
+     *
+     * @param userId  用户id
+     * @param orgIds  组织ids，逗号分隔
+     * @param updater 更新者
+     * @author luyuhao
+     * @date 20/12/13 22:10
+     */
+    @Override
+    @CacheEvict(allEntries = true)
+    @Transactional(rollbackFor = Throwable.class)
+    public void assignedOrg(Long userId, String orgIds, Long updater) {
+        // 清空用户已分配的组织
+        sysUserOrganizationDao.deleteByUserId(userId, updater);
+        if (StringUtil.isBlank(orgIds)) {
+            return;
+        }
+        // 封装list
+        List<SysUserOrganizationEntity> list = new ArrayList<>();
+        String[] orgIdArr = orgIds.split(",");
+        for (String orgId : orgIdArr) {
+            SysUserOrganizationEntity entity = new SysUserOrganizationEntity();
+            entity.setUserId(userId);
+            entity.setOrgId(Long.valueOf(orgId));
+            entity.setCreater(updater);
+            entity.setUpdater(updater);
+            list.add(entity);
+        }
+        // 批量插入
+        sysUserOrganizationDao.batchInsert(list);
+    }
+}

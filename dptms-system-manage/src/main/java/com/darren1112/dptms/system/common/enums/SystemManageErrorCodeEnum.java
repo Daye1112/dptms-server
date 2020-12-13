@@ -23,6 +23,8 @@ public enum SystemManageErrorCodeEnum implements BaseEnum {
     ORG_NAME_NOT_NULL(HttpStatus.BAD_REQUEST, "组织名称不能为空"),
     ORG_CODE_NOT_NULL(HttpStatus.BAD_REQUEST, "组织编号不能为空"),
     ORG_NOT_REPEAT(HttpStatus.BAD_REQUEST, "组织名称或组织编号不能重复"),
+    USER_ID_NOT_NULL(HttpStatus.BAD_REQUEST, "用户id不能为空"),
+    ORG_ID_NOT_NULL(HttpStatus.BAD_REQUEST, "组织id不能为空")
     ;
 
     private Integer code;
