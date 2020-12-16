@@ -24,7 +24,12 @@ public enum SystemManageErrorCodeEnum implements BaseEnum {
     ORG_CODE_NOT_NULL(HttpStatus.BAD_REQUEST, "组织编号不能为空"),
     ORG_NOT_REPEAT(HttpStatus.BAD_REQUEST, "组织名称或组织编号不能重复"),
     USER_ID_NOT_NULL(HttpStatus.BAD_REQUEST, "用户id不能为空"),
-    ORG_ID_NOT_NULL(HttpStatus.BAD_REQUEST, "组织id不能为空")
+    ORG_ID_NOT_NULL(HttpStatus.BAD_REQUEST, "组织id不能为空"),
+    MENU_NAME_NOT_NULL(HttpStatus.BAD_REQUEST, "菜单名不能为空"),
+    MENU_CODE_NOT_NULL(HttpStatus.BAD_REQUEST, "菜单码不能为空"),
+    MENU_TYPE_NOT_NULL(HttpStatus.BAD_REQUEST, "菜单类型不能为空"),
+    MENU_PARENT_ID_NOT_NULL(HttpStatus.BAD_REQUEST, "菜单父节点id不能为空"),
+    MENU_CODE_REPEAT(HttpStatus.BAD_REQUEST, "菜单码不能重复")
     ;
 
     private Integer code;
