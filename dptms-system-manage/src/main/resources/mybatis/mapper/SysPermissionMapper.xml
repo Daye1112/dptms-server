@@ -36,6 +36,7 @@
         <if test="param.perUrl != null and param.perUrl != ''">
             AND per_url LIKE concat('%', #{param.perUrl}, '%')
         </if>
+        ORDER BY per_group, per_name
         LIMIT #{pageParam.startIndex}, #{pageParam.pageSize}
     </select>
     <!--分页查询权限-查询总数-->
