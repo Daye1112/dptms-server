@@ -43,7 +43,7 @@ public class SysMenuController extends BaseController {
      * 插入菜单信息
      *
      * @param entity 菜单参数
-     * @return {@link ResponseEntity< JsonResult< Long>>)
+     * @return {@link JsonResult)
      * @author baojiazhong
      * @date 2020/12/16 14:29
      */
@@ -68,7 +68,7 @@ public class SysMenuController extends BaseController {
      * 根据id删除记录
      *
      * @param id    记录id
-     * @return {@link ResponseEntity<JsonResult>)
+     * @return {@link JsonResult)
      * @author baojiazhong
      * @date 2020/12/16 14:47
      */
@@ -83,6 +83,15 @@ public class SysMenuController extends BaseController {
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }
 
+    /**
+     * 分页查询菜单
+     *
+     * @param pageParam 分页参数
+     * @param dto       查询参数
+     * @author baojiazhong
+     * @return {@link JsonResult)
+     * @date 2020/12/19 0:08
+     */
     @ApiOperation("分页查询菜单")
     @PostMapping("/listPage")
     public ResponseEntity<JsonResult<PageBean<SysMenuDto>>> listPage(PageParam pageParam,
@@ -95,7 +104,7 @@ public class SysMenuController extends BaseController {
      * 更新菜单信息
      *
      * @param entity 菜单参数
-     * @return {@link ResponseEntity<JsonResult<Long>>)
+     * @return {@link JsonResult)
      * @author baojiazhong
      * @date 2020/12/16 15:25
      */
