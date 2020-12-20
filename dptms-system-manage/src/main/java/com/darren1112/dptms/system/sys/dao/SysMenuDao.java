@@ -38,7 +38,7 @@ public interface SysMenuDao {
      * @author baojiazhong
      * @date 2020/12/15 18:11
      */
-    List<SysMenuDto> listPage(@Param("pageParam")PageParam pageParam, @Param("param") SysMenuDto param);
+    List<SysMenuDto> listPage(@Param("pageParam") PageParam pageParam, @Param("param") SysMenuDto param);
 
     /**
      * 分页查询菜单-查询总数
@@ -63,8 +63,8 @@ public interface SysMenuDao {
     /**
      * 根据id删除记录
      *
-     * @param id        id
-     * @param updater   更新着
+     * @param id      id
+     * @param updater 更新着
      * @author baojiazhong
      * @date 2020/12/16 14:33
      */

@@ -14,12 +14,15 @@ import com.darren1112.dptms.common.spi.sys.dto.SysMenuDto;
 import com.darren1112.dptms.common.spi.sys.entity.SysMenuEntity;
 import com.darren1112.dptms.system.common.enums.SystemManageErrorCodeEnum;
 import com.darren1112.dptms.system.sys.service.SysMenuService;
+import com.darren1112.dptms.system.sys.service.SysRoleMenuService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 菜单Controller
@@ -35,6 +38,9 @@ public class SysMenuController extends BaseController {
 
     @Autowired
     private SysMenuService sysMenuService;
+
+    @Autowired
+    private SysRoleMenuService sysRoleMenuService;
 
     @Autowired
     private TokenUtil tokenUtil;
@@ -67,7 +73,7 @@ public class SysMenuController extends BaseController {
     /**
      * 根据id删除记录
      *
-     * @param id    记录id
+     * @param id 记录id
      * @return {@link JsonResult)
      * @author baojiazhong
      * @date 2020/12/16 14:47
@@ -88,8 +94,8 @@ public class SysMenuController extends BaseController {
      *
      * @param pageParam 分页参数
      * @param dto       查询参数
-     * @author baojiazhong
      * @return {@link JsonResult)
+     * @author baojiazhong
      * @date 2020/12/19 0:08
      */
     @ApiOperation("分页查询菜单")
@@ -124,5 +130,21 @@ public class SysMenuController extends BaseController {
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(count));
     }
 
-
+    /**
+     * 查询角色关联的菜单list
+     *
+     * @param roleId 角色id
+     * @return {@link SysMenuDto}
+     * @author luyuhao
+     * @date 20/12/13 21:43
+     */
+    @ApiOperation("查询角色关联的菜单list")
+    @GetMapping("/listRoleAssigned")
+    public ResponseEntity<JsonResult<List<SysMenuDto>>> listRoleAssigned(@RequestParam(value = "roleId", required = false) Long roleId) {
+        ValidatorBuilder.build()
+                .on(roleId, new NotNullValidatorCallback(SystemManageErrorCodeEnum.ROLE_ID_NOT_NULL))
+                .doValidate().checkResult();
+        List<SysMenuDto> resultList = sysRoleMenuService.listRoleAssigned(roleId);
+        return ResponseEntityUtil.ok(JsonResult.buildSuccessData(resultList));
+    }
 }

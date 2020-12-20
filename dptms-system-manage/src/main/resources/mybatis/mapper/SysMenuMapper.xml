@@ -34,7 +34,7 @@
             AND menu_type = #{param.menyType}
         </if>
         <if test="param.menuParentId != null and param.menuParentId != ''">
-            AND menu_type = #{param.menuParentId}
+            AND menu_parent_id = #{param.menuParentId}
         </if>
         LIMIT #{pageParam.startIndex}, #{pageParam.pageSize}
     </select>
@@ -50,10 +50,10 @@
             AND menu_code LIKE concat('%', #{menuCode}, '%')
         </if>
         <if test="menuType != null and menuType != ''">
-            AND menu_type = #{menyType)
+            AND menu_type = #{menyType}
         </if>
         <if test="menuParentId != null and menuParentId != ''">
-            AND menu_type = #{menuParentId}
+            AND menu_parent_id = #{menuParentId}
         </if>
     </select>
     <!--查询是否重复-->
@@ -87,6 +87,6 @@
             remark          = #{remark},
             updater         = #{updater}
         WHERE isvalid = 1
-            AND id =#{id}
+            AND id = #{id}
     </update>
 </mapper>

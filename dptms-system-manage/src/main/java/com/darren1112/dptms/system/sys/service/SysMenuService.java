@@ -17,8 +17,8 @@ public interface SysMenuService {
      * 插入菜单信息
      *
      * @param entity 菜单参数
-     * @author baojiazhong
      * @return {@link Long 菜单id)
+     * @author baojiazhong
      * @date 2020/12/16 11:00
      */
     Long insert(SysMenuEntity entity);
@@ -37,8 +37,8 @@ public interface SysMenuService {
     /**
      * 根据id删除记录
      *
-     * @param id        id
-     * @param updater   更新者
+     * @param id      id
+     * @param updater 更新者
      * @author baojiazhong
      * @date 2020/12/16 14:38
      */

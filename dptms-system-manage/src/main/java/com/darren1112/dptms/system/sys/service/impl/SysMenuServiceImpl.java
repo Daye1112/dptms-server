@@ -36,8 +36,8 @@ public class SysMenuServiceImpl extends BaseService implements SysMenuService {
      * 插入菜单信息
      *
      * @param entity 菜单参数
-     * @author baojiazhong
      * @return {@link Long 菜单id)
+     * @author baojiazhong
      * @date 2020/12/16 11:02
      */
     @Override
@@ -69,8 +69,8 @@ public class SysMenuServiceImpl extends BaseService implements SysMenuService {
     /**
      * 根据id删除记录
      *
-     * @param id        id
-     * @param updater   更新者
+     * @param id      id
+     * @param updater 更新者
      * @author baojiazhong
      * @date 2020/12/16 14:39
      */
@@ -100,8 +100,8 @@ public class SysMenuServiceImpl extends BaseService implements SysMenuService {
     /**
      * 验证code是否重复
      *
-     * @param entity    验证参数
-     * @param isUpdate  是否更新
+     * @param entity   验证参数
+     * @param isUpdate 是否更新
      * @author baojiazhong
      * @date 2020/12/16 11:05
      */
@@ -114,6 +114,5 @@ public class SysMenuServiceImpl extends BaseService implements SysMenuService {
         if (count != null && count > 0) {
             throw new BadRequestException(SystemManageErrorCodeEnum.MENU_CODE_REPEAT);
         }
-
     }
 }

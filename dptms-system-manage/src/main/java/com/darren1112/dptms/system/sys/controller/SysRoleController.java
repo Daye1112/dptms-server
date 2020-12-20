@@ -13,6 +13,7 @@ import com.darren1112.dptms.common.spi.common.dto.PageParam;
 import com.darren1112.dptms.common.spi.sys.dto.SysRoleDto;
 import com.darren1112.dptms.common.spi.sys.entity.SysRoleEntity;
 import com.darren1112.dptms.system.common.enums.SystemManageErrorCodeEnum;
+import com.darren1112.dptms.system.sys.service.SysRoleMenuService;
 import com.darren1112.dptms.system.sys.service.SysRoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -39,6 +40,9 @@ public class SysRoleController extends BaseController {
     @Autowired
     private SysRoleService sysRoleService;
 
+    @Autowired
+    private SysRoleMenuService sysRoleMenuService;
+
     /**
      * 插入角色信息
      *
@@ -54,7 +58,7 @@ public class SysRoleController extends BaseController {
                 .on(entity.getOrgId(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.ORG_ID_NOT_NULL))
                 .on(entity.getRoleName(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.ROLE_NAME_NOT_NULL))
                 .on(entity.getRoleCode(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.ROLE_CODE_NOT_NULL))
-                .on(entity.getIsAdmin(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.ROLE_IS_DADMIN_NOT_NULL))
+                .on(entity.getIsAdmin(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.ROLE_IS_ADMIN_NOT_NULL))
                 .doValidate().checkResult();
         ActiveUser activeUser = tokenUtil.getActiveUser();
         entity.setCreater(activeUser.getId());
@@ -96,7 +100,7 @@ public class SysRoleController extends BaseController {
                 .on(entity.getOrgId(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.ORG_ID_NOT_NULL))
                 .on(entity.getRoleName(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.ROLE_NAME_NOT_NULL))
                 .on(entity.getRoleCode(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.ROLE_CODE_NOT_NULL))
-                .on(entity.getIsAdmin(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.ROLE_IS_DADMIN_NOT_NULL))
+                .on(entity.getIsAdmin(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.ROLE_IS_ADMIN_NOT_NULL))
                 .doValidate().checkResult();
         ActiveUser activeUser = tokenUtil.getActiveUser();
         entity.setUpdater(activeUser.getId());
@@ -120,6 +124,27 @@ public class SysRoleController extends BaseController {
                 .doValidate().checkResult();
         ActiveUser activeUser = tokenUtil.getActiveUser();
         sysRoleService.deleteById(id, activeUser.getId());
+        return ResponseEntityUtil.ok(JsonResult.buildSuccess());
+    }
+
+    /**
+     * 分配菜单
+     *
+     * @param roleId  角色id
+     * @param menuIds 菜单ids，逗号分隔
+     * @return {@link JsonResult}
+     * @author luyuhao
+     * @date 20/12/13 22:10
+     */
+    @ApiOperation("分配菜单")
+    @GetMapping("/assignedMenu")
+    public ResponseEntity<JsonResult> assignedMenu(@RequestParam(value = "roleId", required = false) Long roleId,
+                                                   @RequestParam(value = "menuIds", required = false) String menuIds) {
+        ValidatorBuilder.build()
+                .on(roleId, new NotNullValidatorCallback(SystemManageErrorCodeEnum.USER_ID_NOT_NULL))
+                .doValidate().checkResult();
+        ActiveUser activeUser = tokenUtil.getActiveUser();
+        sysRoleMenuService.assignedMenu(roleId, menuIds, activeUser.getId());
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }
 }

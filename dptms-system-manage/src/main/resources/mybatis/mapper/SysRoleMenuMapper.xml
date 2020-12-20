@@ -1,4 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.darren1112.dptms.system.sys.dao.SysRoleMenuDao">
+    <!--查询角色关联的菜单list-->
+    <select id="listRoleAssigned" parameterType="java.lang.Long"
+            resultType="com.darren1112.dptms.common.spi.sys.dto.SysMenuDto">
+        SELECT t1.id,
+               t1.org_id AS orgId,
+               t1.role_name AS roleName,
+               t1.role_code AS roleCode,
+               t1.is_admin AS isAdmin,
+               t1.remark,
+               t1.isvalid,
+               t1.ctime,
+               t1.creater,
+               t1.mtime,
+               t1.updater,
+               CASE WHEN t2.role_id IS NULL THEN 0
+                    ELSE 1 END AS isAssigned
+        FROM sys_role t1
+                 LEFT JOIN sys_role_menu t2 ON t2.isvalid = 1 AND t1.id = t2.role_id AND t2.role_id = #{roleId}
+        WHERE t1.isvalid = 1
+    </select>
+    <!--清空角色已分配的组织-->
+    <delete id="deleteByRoleId">
+        UPDATE sys_role_menu
+        SET mtime   = now(),
+            isvalid = 0,
+            updater = #{updater}
+        WHERE isvalid = 1
+          AND role_id = #{roleId}
+    </delete>
+    <!--批量插入-->
+    <select id="batchInsert">
+        INSERT INTO sys_role_menu(menu_id, role_id, remark, isvalid, ctime, creater, mtime, updater)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.menuId}, #{item.roleId}, #{item.remark}, 1, now(), #{item.creater}, now(), #{item.updater})
+        </foreach>
+    </select>
 </mapper>
