@@ -12,6 +12,7 @@ import com.darren1112.dptms.system.sys.service.SysMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -53,11 +54,12 @@ public class SysMenuServiceImpl extends BaseService implements SysMenuService {
      *
      * @param dto       筛选参数
      * @param pageParam 分页参数
-     * @return {@link PageBean<SysMenuDto>)
+     * @return {@link SysMenuDto)
      * @author baojiazhong
      * @date 2020/12/16 15:11
      */
     @Override
+    @Cacheable
     public PageBean<SysMenuDto> listPage(PageParam pageParam, SysMenuDto dto) {
         List<SysMenuDto> list = sysMenuDao.listPage(pageParam, dto);
         Long count = sysMenuDao.listPageCount(dto);
