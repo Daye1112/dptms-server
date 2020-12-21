@@ -1,4 +1,4 @@
-package com.darren1112.dptms.auth.common.constants;
+package com.darren1112.dptms.common.core.constants;
 
 /**
  * 账号常量

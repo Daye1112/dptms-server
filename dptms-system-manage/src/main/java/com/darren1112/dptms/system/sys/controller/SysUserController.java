@@ -1,12 +1,19 @@
 package com.darren1112.dptms.system.sys.controller;
 
+import com.darren1112.dptms.common.core.base.BaseController;
+import com.darren1112.dptms.common.core.constants.AccountConstant;
 import com.darren1112.dptms.common.core.message.JsonResult;
+import com.darren1112.dptms.common.core.util.Md5Util;
 import com.darren1112.dptms.common.core.util.ResponseEntityUtil;
 import com.darren1112.dptms.common.core.validate.ValidatorBuilder;
+import com.darren1112.dptms.common.core.validate.validator.callback.common.NotEmptyValidatorCallback;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotNullValidatorCallback;
 import com.darren1112.dptms.common.security.starter.util.TokenUtil;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
+import com.darren1112.dptms.common.spi.common.dto.PageBean;
+import com.darren1112.dptms.common.spi.common.dto.PageParam;
 import com.darren1112.dptms.common.spi.sys.dto.SysUserDto;
+import com.darren1112.dptms.common.spi.sys.entity.SysUserEntity;
 import com.darren1112.dptms.system.common.enums.SystemManageErrorCodeEnum;
 import com.darren1112.dptms.system.sys.service.SysUserOrganizationService;
 import com.darren1112.dptms.system.sys.service.SysUserService;
@@ -15,10 +22,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 系统用户Controller
@@ -30,7 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(tags = "用户管理")
 @RestController
 @RequestMapping(value = "/sys/user")
-public class SysUserController {
+public class SysUserController extends BaseController {
 
     @Autowired
     private SysUserService sysUserService;
@@ -77,6 +81,91 @@ public class SysUserController {
                 .doValidate().checkResult();
         ActiveUser activeUser = tokenUtil.getActiveUser();
         sysUserOrganizationService.assignedOrg(userId, orgIds, activeUser.getId());
+        return ResponseEntityUtil.ok(JsonResult.buildSuccess());
+    }
+
+    /**
+     * 插入用户信息
+     *
+     * @param entity 用户参数
+     * @return {@link JsonResult}
+     * @author luyuhao
+     * @date 20/12/10 01:08
+     */
+    @ApiOperation("插入用户")
+    @PostMapping("/insert")
+    public ResponseEntity<JsonResult<Long>> insert(SysUserEntity entity) {
+        ValidatorBuilder.build()
+                .on(entity.getUsername(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.USER_USERNAME_NOT_NULL))
+                .doValidate().checkResult();
+        // 设置创建者信息
+        ActiveUser activeUser = tokenUtil.getActiveUser();
+        entity.setCreater(activeUser.getId());
+        entity.setUpdater(activeUser.getId());
+        // 初始化entity信息
+        String salt = String.valueOf(System.currentTimeMillis());
+        String password = Md5Util.encrypt("123456", salt);
+        entity.setSalt(salt);
+        entity.setPassword(password);
+        entity.setIsLocked(AccountConstant.IS_LOCKED);
+        Long id = sysUserService.insert(entity);
+        return ResponseEntityUtil.ok(JsonResult.buildSuccessData(id));
+    }
+
+    /**
+     * 分页查询用户
+     *
+     * @param dto       筛选参数
+     * @param pageParam 分页参数
+     * @return {@link JsonResult}
+     * @author luyuhao
+     * @date 20/12/10 01:08
+     */
+    @ApiOperation("分页查询用户")
+    @GetMapping("/listPage")
+    public ResponseEntity<JsonResult<PageBean<SysUserDto>>> listPage(PageParam pageParam,
+                                                                     SysUserDto dto) {
+        PageBean<SysUserDto> pageBean = sysUserService.listPage(getPageParam(pageParam), dto);
+        return ResponseEntityUtil.ok(JsonResult.buildSuccessData(pageBean));
+    }
+
+    /**
+     * 更新用户信息
+     *
+     * @param entity 用户参数
+     * @return {@link JsonResult}
+     * @author luyuhao
+     * @date 20/12/10 01:08
+     */
+    @ApiOperation("更新用户")
+    @PostMapping("/update")
+    public ResponseEntity<JsonResult<Long>> update(SysUserEntity entity) {
+        ValidatorBuilder.build()
+                .on(entity.getId(), new NotNullValidatorCallback(SystemManageErrorCodeEnum.ID_NOT_NULL))
+                .on(entity.getUsername(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.USER_USERNAME_NOT_NULL))
+                .doValidate().checkResult();
+        ActiveUser activeUser = tokenUtil.getActiveUser();
+        entity.setUpdater(activeUser.getId());
+        Long count = sysUserService.update(entity);
+        return ResponseEntityUtil.ok(JsonResult.buildSuccessData(count));
+    }
+
+    /**
+     * 根据id删除记录
+     *
+     * @param id 记录id
+     * @return {@link JsonResult}
+     * @author luyuhao
+     * @date 20/12/10 01:08
+     */
+    @ApiOperation("根据id删除记录")
+    @GetMapping("/deleteById")
+    public ResponseEntity<JsonResult> deleteById(@RequestParam(value = "id", required = false) Long id) {
+        ValidatorBuilder.build()
+                .on(id, new NotNullValidatorCallback(SystemManageErrorCodeEnum.ID_NOT_NULL))
+                .doValidate().checkResult();
+        ActiveUser activeUser = tokenUtil.getActiveUser();
+        sysUserService.deleteById(id, activeUser.getId());
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }
 }

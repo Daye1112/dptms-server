@@ -35,7 +35,8 @@ public enum SystemManageErrorCodeEnum implements BaseEnum {
     ROLE_IS_ADMIN_NOT_NULL(HttpStatus.BAD_REQUEST, "是否管理员不能为空"),
     ROLE_ID_NOT_NULL(HttpStatus.BAD_REQUEST, "角色id不能重复"),
     ROLE_REPEAT(HttpStatus.BAD_REQUEST, "角色编号不能重复"),
-
+    USER_USERNAME_NOT_NULL(HttpStatus.BAD_REQUEST, "用户名不能为空"),
+    USER_NOT_REPEAT(HttpStatus.BAD_REQUEST, "用户名不能重复"),
     ;
 
     private Integer code;

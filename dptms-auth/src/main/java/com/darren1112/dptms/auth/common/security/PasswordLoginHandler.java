@@ -1,8 +1,7 @@
 package com.darren1112.dptms.auth.common.security;
 
-import com.darren1112.dptms.auth.common.constants.AccountConstant;
+import com.darren1112.dptms.common.core.constants.AccountConstant;
 import com.darren1112.dptms.auth.common.enums.AuthErrorCodeEnum;
-import com.darren1112.dptms.auth.common.properties.AuthProperties;
 import com.darren1112.dptms.auth.common.security.base.BaseUserDetails;
 import com.darren1112.dptms.auth.service.SysUserService;
 import com.darren1112.dptms.common.core.constants.SecurityConstant;

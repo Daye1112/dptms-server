@@ -58,10 +58,11 @@ public class SysRoleServiceImpl extends BaseService implements SysRoleService {
      * @date 2020/12/12 11:06
      */
     private void validRepeat(SysRoleEntity entity, boolean isUpdate) {
-        SysRoleEntity param = new SysRoleEntity();
+        SysRoleDto param = new SysRoleDto();
         param.setId(entity.getId());
         param.setRoleCode(entity.getRoleCode());
         param.setOrgId(entity.getOrgId());
+        param.setIsUpdate(isUpdate);
         Long count = sysRoleDao.countByRepeat(param);
         if (count != null && count > 0) {
             throw new BadRequestException(SystemManageErrorCodeEnum.ROLE_REPEAT);

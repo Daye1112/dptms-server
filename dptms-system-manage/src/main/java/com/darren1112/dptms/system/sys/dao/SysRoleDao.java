@@ -27,7 +27,7 @@ public interface SysRoleDao {
      * @author luyuhao
      * @date 2020/12/12 11:14
      */
-    Long countByRepeat(SysRoleEntity param);
+    Long countByRepeat(SysRoleDto param);
 
     /**
      * 插入角色信息
@@ -52,7 +52,7 @@ public interface SysRoleDao {
     /**
      * 分页查询角色-总记录数
      *
-     * @param dto       筛选参数
+     * @param dto 筛选参数
      * @return {@link Long}
      * @author luyuhao
      * @date 20/12/10 01:08

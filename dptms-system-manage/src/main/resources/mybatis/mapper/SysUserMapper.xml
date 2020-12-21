@@ -25,4 +25,91 @@
         WHERE isvalid = 1
           AND id = #{id}
     </select>
+    <!--统计是否重复-->
+    <select id="countByRepeat" parameterType="com.darren1112.dptms.common.spi.sys.dto.SysUserDto"
+            resultType="java.lang.Long">
+        SELECT count(1)
+        FROM sys_user
+        WHERE isvalid = 1
+            AND username = #{username}
+        <if test="isUpdate != null and isUpdate == true">
+            AND id != #{id}
+        </if>
+    </select>
+    <!--新增用户-->
+    <insert id="insert" useGeneratedKeys="true" keyColumn="id"
+            parameterType="com.darren1112.dptms.common.spi.sys.entity.SysUserEntity">
+        INSERT INTO sys_user(username, password, salt, real_name, gender, phone_number, email, last_login_time,
+                             pwd_update_time, file_id, is_locked, remark, isvalid, ctime, creater, mtime, updater)
+        VALUES (#{username}, #{password}, #{salt}, #{realName}, #{gender}, #{phoneNumber},
+                #{email}, null, now(), #{fileId}, #{isLocked}, #{remark}, 1, now(), #{creater}, now(), #{updater})
+    </insert>
+    <!--分页查询用户信息-->
+    <select id="listPage" resultType="com.darren1112.dptms.common.spi.sys.dto.SysUserDto">
+        SELECT id,
+               username,
+               password,
+               salt,
+               real_name       AS realName,
+               gender,
+               phone_number    AS phoneNumber,
+               email,
+               last_login_time AS lastLoginTime,
+               pwd_update_time AS pwdUpdateTime,
+               file_id         AS fileId,
+               is_locked       AS isLocked,
+               remark,
+               isvalid,
+               ctime,
+               creater,
+               mtime,
+               updater
+        FROM sys_user
+        WHERE isvalid = 1
+        <if test="dto.username != null and dto.username != ''">
+            AND username LIKE concat('%', #{dto.username}, '%')
+        </if>
+        <if test="dto.realName != null and dto.realName != ''">
+            AND real_name LIKE concat('%', #{dto.realName}, '%')
+        </if>
+        ORDER BY username
+        LIMIT #{pageParam.startIndex}, #{pageParam.pageSize}
+    </select>
+    <!--分页查询用户信息-记录数-->
+    <select id="listPageCount" parameterType="com.darren1112.dptms.common.spi.sys.dto.SysUserDto"
+            resultType="java.lang.Long">
+        SELECT count(1)
+        FROM sys_user
+        WHERE isvalid = 1
+        <if test="dto.username != null and dto.username != ''">
+            AND username LIKE concat('%', #{dto.username}, '%')
+        </if>
+        <if test="dto.realName != null and dto.realName != ''">
+            AND real_name LIKE concat('%', #{dto.realName}, '%')
+        </if>
+    </select>
+    <!--更新用户信息-->
+    <update id="update"
+            parameterType="com.darren1112.dptms.common.spi.sys.entity.SysUserEntity">
+        UPDATE sys_user
+        SET mtime        = now(),
+            updater      = #{updater},
+            username     = #{username},
+            real_name    = #{realName},
+            gender       = #{gender},
+            phone_number = #{phoneNumber},
+            email        = #{email},
+            is_locked    = #{isLocked}
+        WHERE isvalid = 1
+          AND id = #{id}
+    </update>
+    <!--根据id删除记录-->
+    <delete id="deleteById">
+        UPDATE sys_user
+        SET mtime   = now(),
+            updater = #{updater},
+            isvalid = 0
+        WHERE isvalid = 1
+          AND id = #{id}
+    </delete>
 </mapper>
