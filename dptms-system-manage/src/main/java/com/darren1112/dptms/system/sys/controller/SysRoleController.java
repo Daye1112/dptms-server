@@ -15,12 +15,15 @@ import com.darren1112.dptms.common.spi.sys.entity.SysRoleEntity;
 import com.darren1112.dptms.system.common.enums.SystemManageErrorCodeEnum;
 import com.darren1112.dptms.system.sys.service.SysRoleMenuService;
 import com.darren1112.dptms.system.sys.service.SysRoleService;
+import com.darren1112.dptms.system.sys.service.SysUserRoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 角色Controller
@@ -42,6 +45,9 @@ public class SysRoleController extends BaseController {
 
     @Autowired
     private SysRoleMenuService sysRoleMenuService;
+
+    @Autowired
+    private SysUserRoleService sysUserRoleService;
 
     /**
      * 分配菜单
@@ -145,5 +151,23 @@ public class SysRoleController extends BaseController {
         ActiveUser activeUser = tokenUtil.getActiveUser();
         sysRoleService.deleteById(id, activeUser.getId());
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
+    }
+
+    /**
+     * 查询用户关联的角色list
+     *
+     * @param userId 用户id
+     * @return {@link SysRoleDto}
+     * @author luyuhao
+     * @date 20/12/13 21:43
+     */
+    @ApiOperation("查询用户关联的角色list")
+    @GetMapping("/listUserAssigned")
+    public ResponseEntity<JsonResult<List<SysRoleDto>>> listUserAssigned(@RequestParam(value = "userId", required = false) Long userId) {
+        ValidatorBuilder.build()
+                .on(userId, new NotNullValidatorCallback(SystemManageErrorCodeEnum.USER_ID_NOT_NULL))
+                .doValidate().checkResult();
+        List<SysRoleDto> resultList = sysUserRoleService.listUserAssigned(userId);
+        return ResponseEntityUtil.ok(JsonResult.buildSuccessData(resultList));
     }
 }

@@ -22,4 +22,10 @@ public class SysRoleDto extends SysRoleEntity {
      */
     @ApiModelProperty("是否更新")
     private Boolean isUpdate;
+
+    /**
+     * 是否已分配
+     */
+    @ApiModelProperty("是否已分配")
+    private Boolean isAssigned;
 }

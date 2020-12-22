@@ -16,6 +16,7 @@ import com.darren1112.dptms.common.spi.sys.dto.SysUserDto;
 import com.darren1112.dptms.common.spi.sys.entity.SysUserEntity;
 import com.darren1112.dptms.system.common.enums.SystemManageErrorCodeEnum;
 import com.darren1112.dptms.system.sys.service.SysUserOrganizationService;
+import com.darren1112.dptms.system.sys.service.SysUserRoleService;
 import com.darren1112.dptms.system.sys.service.SysUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -41,6 +42,9 @@ public class SysUserController extends BaseController {
 
     @Autowired
     private SysUserOrganizationService sysUserOrganizationService;
+
+    @Autowired
+    private SysUserRoleService sysUserRoleService;
 
     @Autowired
     private TokenUtil tokenUtil;
@@ -166,6 +170,27 @@ public class SysUserController extends BaseController {
                 .doValidate().checkResult();
         ActiveUser activeUser = tokenUtil.getActiveUser();
         sysUserService.deleteById(id, activeUser.getId());
+        return ResponseEntityUtil.ok(JsonResult.buildSuccess());
+    }
+
+    /**
+     * 分配角色
+     *
+     * @param userId  用户id
+     * @param roleIds 角色ids，逗号分隔
+     * @return {@link JsonResult}
+     * @author luyuhao
+     * @date 20/12/23 01:48
+     */
+    @ApiOperation("分配角色")
+    @GetMapping("/assignedRole")
+    public ResponseEntity<JsonResult> assignedRole(@RequestParam(value = "userId", required = false) Long userId,
+                                                   @RequestParam(value = "roleIds", required = false) String roleIds) {
+        ValidatorBuilder.build()
+                .on(userId, new NotNullValidatorCallback(SystemManageErrorCodeEnum.USER_ID_NOT_NULL))
+                .doValidate().checkResult();
+        ActiveUser activeUser = tokenUtil.getActiveUser();
+        sysUserRoleService.assignedRole(userId, roleIds, activeUser.getId());
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }
 }
