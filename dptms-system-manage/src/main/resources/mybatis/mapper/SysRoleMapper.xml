@@ -68,13 +68,13 @@
     <!--更新角色信息-->
     <update id="update" parameterType="com.darren1112.dptms.common.spi.sys.entity.SysRoleEntity">
         UPDATE sys_role
-        SET mtime = now(),
-            updater = #{updater},
+        SET mtime     = now(),
+            updater   = #{updater},
             role_name = #{roleName},
             role_code = #{roleCode},
-            is_admin = #{isAdmin}
+            is_admin  = #{isAdmin}
         WHERE isvalid = 1
-            AND id = #{id}
+          AND id = #{id}
     </update>
     <!--根据id删除记录-->
     <delete id="deleteById">

@@ -25,6 +25,8 @@ public enum SystemManageErrorCodeEnum implements BaseEnum {
     ORG_NOT_REPEAT(HttpStatus.BAD_REQUEST, "组织名称或组织编号不能重复"),
     USER_ID_NOT_NULL(HttpStatus.BAD_REQUEST, "用户id不能为空"),
     ORG_ID_NOT_NULL(HttpStatus.BAD_REQUEST, "组织id不能为空"),
+    ROLE_ID_NOT_NULL(HttpStatus.BAD_REQUEST, "角色id不能为空"),
+    MENU_ID_NOT_NULL(HttpStatus.BAD_REQUEST, "菜单id不能为空"),
     MENU_NAME_NOT_NULL(HttpStatus.BAD_REQUEST, "菜单名不能为空"),
     MENU_CODE_NOT_NULL(HttpStatus.BAD_REQUEST, "菜单码不能为空"),
     MENU_TYPE_NOT_NULL(HttpStatus.BAD_REQUEST, "菜单类型不能为空"),
@@ -33,11 +35,9 @@ public enum SystemManageErrorCodeEnum implements BaseEnum {
     ROLE_NAME_NOT_NULL(HttpStatus.BAD_REQUEST, "角色名称不能为空"),
     ROLE_CODE_NOT_NULL(HttpStatus.BAD_REQUEST, "角色编号不能为空"),
     ROLE_IS_ADMIN_NOT_NULL(HttpStatus.BAD_REQUEST, "是否管理员不能为空"),
-    ROLE_ID_NOT_NULL(HttpStatus.BAD_REQUEST, "角色id不能重复"),
-    ROLE_REPEAT(HttpStatus.BAD_REQUEST, "角色编号不能重复"),
     USER_USERNAME_NOT_NULL(HttpStatus.BAD_REQUEST, "用户名不能为空"),
     USER_NOT_REPEAT(HttpStatus.BAD_REQUEST, "用户名不能重复"),
-    ;
+    ROLE_NOT_REPEAT(HttpStatus.BAD_REQUEST, "角色码不能重复");
 
     private Integer code;
     private String message;

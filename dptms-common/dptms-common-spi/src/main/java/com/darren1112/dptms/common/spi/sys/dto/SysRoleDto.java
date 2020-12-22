@@ -1,6 +1,7 @@
 package com.darren1112.dptms.common.spi.sys.dto;
 
 import com.darren1112.dptms.common.spi.sys.entity.SysRoleEntity;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -17,7 +18,8 @@ import lombok.ToString;
 public class SysRoleDto extends SysRoleEntity {
 
     /**
-     * 是否更新 true/false
+     * 是否更新
      */
+    @ApiModelProperty("是否更新")
     private Boolean isUpdate;
 }

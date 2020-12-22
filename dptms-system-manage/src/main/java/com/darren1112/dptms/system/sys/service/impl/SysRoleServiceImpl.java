@@ -36,9 +36,9 @@ public class SysRoleServiceImpl extends BaseService implements SysRoleService {
      * 插入角色信息
      *
      * @param entity 角色参数
-     * @return {@link Long}
-     * @author luyuhao
-     * @date 20/12/10 01:08
+     * @return {@link Long 角色id)
+     * @author baojiazhong
+     * @date 2020/12/19 1:08
      */
     @Override
     @CacheEvict(allEntries = true)
@@ -50,49 +50,12 @@ public class SysRoleServiceImpl extends BaseService implements SysRoleService {
     }
 
     /**
-     * 验证roleCode是否重复
-     *
-     * @param entity   验证对象
-     * @param isUpdate 是否更新
-     * @author luyuhao
-     * @date 2020/12/12 11:06
-     */
-    private void validRepeat(SysRoleEntity entity, boolean isUpdate) {
-        SysRoleDto param = new SysRoleDto();
-        param.setId(entity.getId());
-        param.setRoleCode(entity.getRoleCode());
-        param.setOrgId(entity.getOrgId());
-        param.setIsUpdate(isUpdate);
-        Long count = sysRoleDao.countByRepeat(param);
-        if (count != null && count > 0) {
-            throw new BadRequestException(SystemManageErrorCodeEnum.ROLE_REPEAT);
-        }
-    }
-
-    /**
-     * 分页查询角色
-     *
-     * @param dto       筛选参数
-     * @param pageParam 分页参数
-     * @return {@link SysRoleDto}
-     * @author luyuhao
-     * @date 20/12/10 01:08
-     */
-    @Override
-    @Cacheable
-    public PageBean<SysRoleDto> listPage(PageParam pageParam, SysRoleDto dto) {
-        List<SysRoleDto> list = sysRoleDao.listPage(pageParam, dto);
-        Long count = sysRoleDao.listPageCount(dto);
-        return createPageBean(pageParam, count, list);
-    }
-
-    /**
      * 更新角色信息
      *
-     * @param entity 权限参数
-     * @return {@link Long}
-     * @author luyuhao
-     * @date 20/12/10 01:08
+     * @param entity 角色参数
+     * @return {@link Long)
+     * @author baojiazhong
+     * @date 2020/12/19 20:07
      */
     @Override
     @CacheEvict(allEntries = true)
@@ -103,17 +66,54 @@ public class SysRoleServiceImpl extends BaseService implements SysRoleService {
     }
 
     /**
+     * 分页查询角色
+     *
+     * @param pageParam 分页参数
+     * @param dto       筛选参数
+     * @return {@link SysRoleDto)
+     * @author baojiazhong
+     * @date 2020/12/19 21:10
+     */
+    @Override
+    @Cacheable
+    public PageBean<SysRoleDto> listPage(PageParam pageParam, SysRoleDto dto) {
+        List<SysRoleDto> list = sysRoleDao.listPage(pageParam, dto);
+        Long count = sysRoleDao.listPageCount(dto);
+        return createPageBean(pageParam, count, list);
+    }
+
+    /**
      * 根据id删除记录
      *
      * @param id      记录id
      * @param updater 更新者
-     * @author luyuhao
-     * @date 20/12/10 01:08
+     * @author baojiazhong
+     * @date 2020/12/19 21:11
      */
     @Override
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Throwable.class)
     public void deleteById(Long id, Long updater) {
         sysRoleDao.deleteById(id, updater);
+    }
+
+    /**
+     * 验证code是否重复
+     *
+     * @param entity   验证参数
+     * @param isUpdate 是否更新
+     * @author baojiazhong
+     * @date 2020/12/19 1:12
+     */
+    private void validRepeat(SysRoleEntity entity, boolean isUpdate) {
+        SysRoleDto param = new SysRoleDto();
+        param.setId(entity.getId());
+        param.setRoleCode(entity.getRoleCode());
+        param.setOrgId(entity.getOrgId());
+        param.setIsUpdate(isUpdate);
+        Long count = sysRoleDao.countByRepeat(param);
+        if (count != null && count > 0) {
+            throw new BadRequestException(SystemManageErrorCodeEnum.ROLE_NOT_REPEAT);
+        }
     }
 }

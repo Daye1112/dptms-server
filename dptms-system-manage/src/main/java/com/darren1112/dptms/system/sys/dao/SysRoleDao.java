@@ -19,63 +19,65 @@ import java.util.List;
 @Repository
 public interface SysRoleDao {
 
-    /**
-     * 查询是否重复
-     *
-     * @param param 查重参数
-     * @return {@link Long 重复数量}
-     * @author luyuhao
-     * @date 2020/12/12 11:14
-     */
-    Long countByRepeat(SysRoleDto param);
 
     /**
      * 插入角色信息
      *
      * @param entity 角色参数
-     * @author luyuhao
-     * @date 20/12/10 01:08
+     * @return {@link Long 角色id)
+     * @author baojiazhong
+     * @date 2020/12/19 1:19
      */
-    void insert(SysRoleEntity entity);
+    Long insert(SysRoleEntity entity);
 
     /**
-     * 分页查询角色
+     * 查询是否重复
      *
-     * @param dto       筛选参数
-     * @param pageParam 分页参数
-     * @return {@link SysRoleDto}
-     * @author luyuhao
-     * @date 20/12/10 01:08
+     * @param param 查重参数
+     * @return {@link Long 重复数量)
+     * @author baojiazhong
+     * @date 2020/12/19 1:20
      */
-    List<SysRoleDto> listPage(@Param("pageParam") PageParam pageParam, @Param("dto") SysRoleDto dto);
-
-    /**
-     * 分页查询角色-总记录数
-     *
-     * @param dto 筛选参数
-     * @return {@link Long}
-     * @author luyuhao
-     * @date 20/12/10 01:08
-     */
-    Long listPageCount(SysRoleDto dto);
+    Long countByRepeat(SysRoleDto param);
 
     /**
      * 更新角色信息
      *
-     * @param entity 权限参数
-     * @return {@link Long}
-     * @author luyuhao
-     * @date 20/12/10 01:08
+     * @param entity 角色参数
+     * @return {@link Long)
+     * @author baojiazhong
+     * @date 2020/12/19 20:32
      */
     Long update(SysRoleEntity entity);
+
+    /**
+     * 分页查询角色
+     *
+     * @param pageParam 分页参数
+     * @param dto       筛选参数
+     * @return {@link SysRoleDto)
+     * @author baojiazhong
+     * @date 2020/12/19 23:19
+     */
+    List<SysRoleDto> listPage(@Param("pageParam") PageParam pageParam, @Param("param") SysRoleDto dto);
+
+    /**
+     * 分页查询角色-查询总数
+     *
+     * @param dto 筛选参数
+     * @return {@link Long 查询总数)
+     * @author baojiazhong
+     * @date 2020/12/19 23:21
+     */
+    Long listPageCount(SysRoleDto dto);
 
     /**
      * 根据id删除记录
      *
      * @param id      记录id
      * @param updater 更新者
-     * @author luyuhao
-     * @date 20/12/10 01:08
+     * @author baojiazhong
+     * @date 2020/12/19 23:25
      */
     void deleteById(@Param("id") Long id, @Param("updater") Long updater);
 }

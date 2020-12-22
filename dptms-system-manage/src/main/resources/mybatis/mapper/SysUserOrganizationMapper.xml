@@ -29,11 +29,11 @@
           AND user_id = #{userId}
     </update>
     <!--批量插入用户组织信息-->
-    <select id="batchInsert">
+    <insert id="batchInsert">
         INSERT INTO sys_user_organization(org_id, user_id, remark, isvalid, ctime, creater, mtime, updater)
         VALUES
         <foreach collection="list" item="item" separator=",">
             (#{item.orgId}, #{item.userId}, #{item.remark}, 1, now(), #{item.creater}, now(), #{item.updater})
         </foreach>
-    </select>
+    </insert>
 </mapper>

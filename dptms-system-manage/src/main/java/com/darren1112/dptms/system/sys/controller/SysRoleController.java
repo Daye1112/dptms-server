@@ -44,90 +44,6 @@ public class SysRoleController extends BaseController {
     private SysRoleMenuService sysRoleMenuService;
 
     /**
-     * 插入角色信息
-     *
-     * @param entity 角色参数
-     * @return {@link JsonResult}
-     * @author luyuhao
-     * @date 20/12/10 01:08
-     */
-    @ApiOperation("插入角色")
-    @PostMapping("/insert")
-    public ResponseEntity<JsonResult<Long>> insert(SysRoleEntity entity) {
-        ValidatorBuilder.build()
-                .on(entity.getOrgId(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.ORG_ID_NOT_NULL))
-                .on(entity.getRoleName(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.ROLE_NAME_NOT_NULL))
-                .on(entity.getRoleCode(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.ROLE_CODE_NOT_NULL))
-                .on(entity.getIsAdmin(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.ROLE_IS_ADMIN_NOT_NULL))
-                .doValidate().checkResult();
-        ActiveUser activeUser = tokenUtil.getActiveUser();
-        entity.setCreater(activeUser.getId());
-        entity.setUpdater(activeUser.getId());
-        Long id = sysRoleService.insert(entity);
-        return ResponseEntityUtil.ok(JsonResult.buildSuccessData(id));
-    }
-
-    /**
-     * 分页查询角色
-     *
-     * @param dto       筛选参数
-     * @param pageParam 分页参数
-     * @return {@link JsonResult}
-     * @author luyuhao
-     * @date 20/12/10 01:08
-     */
-    @ApiOperation("分页查询角色")
-    @GetMapping("/listPage")
-    public ResponseEntity<JsonResult<PageBean<SysRoleDto>>> listPage(PageParam pageParam,
-                                                                     SysRoleDto dto) {
-        PageBean<SysRoleDto> pageBean = sysRoleService.listPage(getPageParam(pageParam), dto);
-        return ResponseEntityUtil.ok(JsonResult.buildSuccessData(pageBean));
-    }
-
-    /**
-     * 更新角色信息
-     *
-     * @param entity 权限参数
-     * @return {@link JsonResult}
-     * @author luyuhao
-     * @date 20/12/10 01:08
-     */
-    @ApiOperation("更新角色")
-    @PostMapping("/update")
-    public ResponseEntity<JsonResult<Long>> update(SysRoleEntity entity) {
-        ValidatorBuilder.build()
-                .on(entity.getId(), new NotNullValidatorCallback(SystemManageErrorCodeEnum.ID_NOT_NULL))
-                .on(entity.getOrgId(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.ORG_ID_NOT_NULL))
-                .on(entity.getRoleName(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.ROLE_NAME_NOT_NULL))
-                .on(entity.getRoleCode(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.ROLE_CODE_NOT_NULL))
-                .on(entity.getIsAdmin(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.ROLE_IS_ADMIN_NOT_NULL))
-                .doValidate().checkResult();
-        ActiveUser activeUser = tokenUtil.getActiveUser();
-        entity.setUpdater(activeUser.getId());
-        Long count = sysRoleService.update(entity);
-        return ResponseEntityUtil.ok(JsonResult.buildSuccessData(count));
-    }
-
-    /**
-     * 根据id删除记录
-     *
-     * @param id 记录id
-     * @return {@link JsonResult}
-     * @author luyuhao
-     * @date 20/12/10 01:08
-     */
-    @ApiOperation("根据id删除记录")
-    @GetMapping("/deleteById")
-    public ResponseEntity<JsonResult> deleteById(@RequestParam(value = "id", required = false) Long id) {
-        ValidatorBuilder.build()
-                .on(id, new NotNullValidatorCallback(SystemManageErrorCodeEnum.ID_NOT_NULL))
-                .doValidate().checkResult();
-        ActiveUser activeUser = tokenUtil.getActiveUser();
-        sysRoleService.deleteById(id, activeUser.getId());
-        return ResponseEntityUtil.ok(JsonResult.buildSuccess());
-    }
-
-    /**
      * 分配菜单
      *
      * @param roleId  角色id
@@ -145,6 +61,89 @@ public class SysRoleController extends BaseController {
                 .doValidate().checkResult();
         ActiveUser activeUser = tokenUtil.getActiveUser();
         sysRoleMenuService.assignedMenu(roleId, menuIds, activeUser.getId());
+        return ResponseEntityUtil.ok(JsonResult.buildSuccess());
+    }
+
+    /**
+     * 插入角色信息
+     *
+     * @param entity 角色参数
+     * @return {@link JsonResult)
+     * @author baojiazhong
+     * @date 2020/12/19 0:55
+     */
+    @ApiOperation("插入角色")
+    @PostMapping("/insert")
+    public ResponseEntity<JsonResult<Long>> insert(SysRoleEntity entity) {
+        ValidatorBuilder.build()
+                .on(entity.getOrgId(), new NotNullValidatorCallback(SystemManageErrorCodeEnum.ORG_ID_NOT_NULL))
+                .on(entity.getRoleName(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.ROLE_NAME_NOT_NULL))
+                .on(entity.getRoleCode(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.ROLE_CODE_NOT_NULL))
+                .on(entity.getIsAdmin(), new NotNullValidatorCallback(SystemManageErrorCodeEnum.ROLE_IS_ADMIN_NOT_NULL))
+                .doValidate().checkResult();
+        ActiveUser activeUser = tokenUtil.getActiveUser();
+        entity.setCreater(activeUser.getId());
+        entity.setUpdater(activeUser.getId());
+        Long id = sysRoleService.insert(entity);
+        return ResponseEntityUtil.ok(JsonResult.buildSuccessData(id));
+    }
+
+    /**
+     * 分页查询角色
+     *
+     * @param pageParam 分页参数
+     * @param dto       筛选参数
+     * @return {@link JsonResult)
+     * @author baojiazhong
+     * @date 2020/12/19 1:44
+     */
+    @ApiOperation("分页查询")
+    @GetMapping("/listPage")
+    public ResponseEntity<JsonResult<PageBean<SysRoleDto>>> listPage(PageParam pageParam,
+                                                                     SysRoleDto dto) {
+        PageBean<SysRoleDto> pageBean = sysRoleService.listPage(getPageParam(pageParam), dto);
+        return ResponseEntityUtil.ok(JsonResult.buildSuccessData(pageBean));
+    }
+
+    /**
+     * 更新角色信息
+     *
+     * @param entity 角色参数
+     * @return {@link JsonResult)
+     * @author baojiazhong
+     * @date 2020/12/19 1:51
+     */
+    @ApiOperation("更新角色")
+    @PostMapping("/update")
+    public ResponseEntity<JsonResult<Long>> update(SysRoleEntity entity) {
+        ValidatorBuilder.build()
+                .on(entity.getOrgId(), new NotNullValidatorCallback(SystemManageErrorCodeEnum.ORG_ID_NOT_NULL))
+                .on(entity.getRoleName(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.ROLE_NAME_NOT_NULL))
+                .on(entity.getRoleCode(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.ROLE_CODE_NOT_NULL))
+                .on(entity.getIsAdmin(), new NotNullValidatorCallback(SystemManageErrorCodeEnum.ROLE_IS_ADMIN_NOT_NULL))
+                .doValidate().checkResult();
+        ActiveUser activeUser = tokenUtil.getActiveUser();
+        entity.setUpdater(activeUser.getId());
+        Long count = sysRoleService.update(entity);
+        return ResponseEntityUtil.ok(JsonResult.buildSuccessData(count));
+    }
+
+    /**
+     * 根据id删除记录
+     *
+     * @param id 记录id
+     * @return {@link JsonResult)
+     * @author baojiazhong
+     * @date 2020/12/19 1:56
+     */
+    @ApiOperation("删除角色")
+    @PostMapping("/deleteById")
+    public ResponseEntity<JsonResult> deleteById(@RequestParam(value = "id", required = false) Long id) {
+        ValidatorBuilder.build()
+                .on(id, new NotNullValidatorCallback(SystemManageErrorCodeEnum.ID_NOT_NULL))
+                .doValidate().checkResult();
+        ActiveUser activeUser = tokenUtil.getActiveUser();
+        sysRoleService.deleteById(id, activeUser.getId());
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }
 }

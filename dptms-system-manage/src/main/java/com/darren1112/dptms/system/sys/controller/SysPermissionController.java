@@ -13,6 +13,7 @@ import com.darren1112.dptms.common.spi.common.dto.PageParam;
 import com.darren1112.dptms.common.spi.sys.dto.SysPermissionDto;
 import com.darren1112.dptms.common.spi.sys.entity.SysPermissionEntity;
 import com.darren1112.dptms.system.common.enums.SystemManageErrorCodeEnum;
+import com.darren1112.dptms.system.sys.service.SysMenuPermissionService;
 import com.darren1112.dptms.system.sys.service.SysPermissionService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -20,6 +21,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 权限Controller
@@ -35,6 +38,9 @@ public class SysPermissionController extends BaseController {
 
     @Autowired
     private SysPermissionService sysPermissionService;
+
+    @Autowired
+    private SysMenuPermissionService sysMenuPermissionService;
 
     @Autowired
     private TokenUtil tokenUtil;
@@ -123,4 +129,21 @@ public class SysPermissionController extends BaseController {
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }
 
+    /**
+     * 查询与菜单关联的权限list
+     *
+     * @param menuId 菜单id
+     * @return {@link SysPermissionDto)
+     * @author baojiazhong
+     * @date 2020/12/22 23:09
+     */
+    @ApiOperation("查询菜单绑定的权限list")
+    @PostMapping("/listMenuAssigned")
+    public ResponseEntity<JsonResult<List<SysPermissionDto>>> listMenuAssigned(@RequestParam(value = "menuId", required = false) Long menuId) {
+        ValidatorBuilder.build()
+                .on(menuId, new NotNullValidatorCallback(SystemManageErrorCodeEnum.ROLE_ID_NOT_NULL))
+                .doValidate().checkResult();
+        List<SysPermissionDto> list = sysMenuPermissionService.listMenuAssigned(menuId);
+        return ResponseEntityUtil.ok(JsonResult.buildSuccessData(list));
+    }
 }
