@@ -1,4 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.darren1112.dptms.system.sys.dao.SysRoleDao">
+    <!--插入角色信息-->
+    <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id"
+            parameterType="com.darren1112.dptms.common.spi.sys.entity.SysRoleEntity">
+        INSERT INTO sys_role(org_id, role_name, role_code, is_admin, remark, isvalid,
+                             ctime, creater, mtime, updater)
+        VALUES (#{orgId}, #{roleName}, #{roleCode}, #{isAdmin}, #{remark}, 1, now(),
+                #{creater}, now(), #{updater})
+    </insert>
+    <!--查询是否重复-->
+    <select id="countRepeat" resultType="java.lang.Long"
+            parameterType="com.darren1112.dptms.common.spi.sys.dto.SysRoleDto">
+        SELECT COUNT(1)
+        FROM sys_role
+        WHERE isvalid = 1
+            AND role_code = ${roleCode}
+        <if test="isUpdate != null and isUpdate == true">
+            AND id != #{id}
+        </if>
+    </select>
+    <!--分页查询角色-->
+    <select id="listPage" resultType="com.darren1112.dptms.common.spi.sys.dto.SysRoleDto">
+        SELECT id,
+               org_id       AS orgId,
+               role_name    AS roleName,
+               role_code    AS roleCode,
+               is_admin     AS isAdmin,
+               remark,
+               isvalid,
+               ctime,
+               creater,
+               mtime,
+               updater
+        FROM sys_role
+        WHERE isvalid = 1
+        <if test="param.orgId != null and param.orgId != ''">
+            AND org_id = #{param.orgId}
+        </if>
+        <if test="param.roleName != null and param.roleName != ''">
+            AND role_name LIKE concat('%', #{param.roleName}, '%')
+        </if>
+        <if test="param.roleCode != null and param.roleCode != ''">
+            AND role_code LIKE concat('%', #{param.roleCode}, '%')
+        </if>
+        <if test="param.isAdmin != null and param.isAdmin != ''">
+            AND is_admin = #{param.isAdmin}
+        </if>
+        LIMIT #{pageParam.startIndex}, #{pageParam.pageSize}
+    </select>
+    <!--分页查询角色-查询总数-->
+    <select id="listPageCount" resultType="java.lang.Long">
+        SELECT COUNT(1)
+        FROM sys_role
+        WHERE isvalid = 1
+        <if test="orgId != null and orgId != ''">
+            AND org_id = #{orgId}
+        </if>
+        <if test="roleName != null and roleName != ''">
+            AND role_name LIKE concat('%', #{roleName}, '%')
+        </if>
+        <if test="roleCode != null and roleCode != ''">
+            AND role_code LIKE concat('%', #{roleCode}, '%')
+        </if>
+        <if test="isAdmin != null and isAdmin != ''">
+            AND is_admin = #{isAdmin}
+        </if>
+    </select>
+    <!--修改角色信息-->
+    <update id="update">
+        UPDATE sys_role
+        SET mtime       = now(),
+            org_id      = #{orgId},
+            role_name   = #{roleName},
+            role_code   = #{roleCode},
+            is_admin    = #{isAdmin},
+            remark      = #{remark},
+            updater     = #{updater}
+        WHERE isvalid = 1
+            AND id = #{id}
+    </update>
+    <!--根据id删除记录-->
+    <update id="deleteById">
+        UPDATE sys_role
+        SET mtime   = now(),
+            updater = #{updater},
+            isvalid = 0
+        WHERE isvalid = 1
+            AND id = #{id}
+    </update>
+    <!--查询是否重复-->
+    <select id="countByRepeat" resultType="java.lang.Long"
+            parameterType="com.darren1112.dptms.common.spi.sys.dto.SysRoleDto">
+        SELECT COUNT(1)
+        FROM sys_role
+        WHERE isvalid = 1
+            AND (role_code = #{roleCode})
+        <if test="isUpdate != null and isUpdate == true">
+            AND id != #{id}
+        </if>
+    </select>
 </mapper>
