@@ -13,6 +13,7 @@ import com.darren1112.dptms.common.spi.common.dto.PageParam;
 import com.darren1112.dptms.common.spi.sys.dto.SysMenuDto;
 import com.darren1112.dptms.common.spi.sys.entity.SysMenuEntity;
 import com.darren1112.dptms.system.common.enums.SystemManageErrorCodeEnum;
+import com.darren1112.dptms.system.sys.service.SysMenuPermissionService;
 import com.darren1112.dptms.system.sys.service.SysMenuService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -35,6 +36,9 @@ public class SysMenuController extends BaseController {
 
     @Autowired
     private SysMenuService sysMenuService;
+
+    @Autowired
+    private SysMenuPermissionService sysMenuPermissionService;
 
     @Autowired
     private TokenUtil tokenUtil;
@@ -124,5 +128,26 @@ public class SysMenuController extends BaseController {
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(count));
     }
 
+    /**
+     * 分配权限
+     *
+     * @param menuId 菜单id
+     * @param perIds 权限ids，逗号分隔
+     * @return {@link JsonResult)
+     * @author baojiazhong
+     * @date 2020/12/22 23:50
+     */
+    @ApiOperation("分配权限")
+    @PostMapping("/assignedPer")
+    public ResponseEntity<JsonResult> assignedPer(@RequestParam(value = "menuId", required = false) Long menuId,
+                                                  @RequestParam(value = "perIds", required = false) String perIds) {
+
+        ValidatorBuilder.build()
+                .on(menuId, new NotNullValidatorCallback(SystemManageErrorCodeEnum.MENU_ID_NOT_NULL))
+                .doValidate().checkResult();
+        ActiveUser activeUser = tokenUtil.getActiveUser();
+        sysMenuPermissionService.assignedPer(menuId, perIds, activeUser.getId());
+        return ResponseEntityUtil.ok(JsonResult.buildSuccess());
+    }
 
 }
