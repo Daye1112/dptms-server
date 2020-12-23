@@ -39,9 +39,9 @@ public class TokenUtil {
     public boolean saveToken(ActiveUser activeUser, String accessToken, String refreshToken, long accessTokenExpire, long refreshTokenExpire) {
         try {
             // 设置accessToken
-            redisUtil.set(accessToken, refreshToken, accessTokenExpire);
+            redisUtil.set(SecurityConstant.REDIS_ACCESS_TOKEN_PREFIX + accessToken, refreshToken, accessTokenExpire);
             // 设置refreshToken
-            redisUtil.set(refreshToken, JsonUtil.toJsonString(activeUser), refreshTokenExpire);
+            redisUtil.set(SecurityConstant.REDIS_REFRESH_TOKEN_PREFIX + refreshToken, JsonUtil.toJsonString(activeUser), refreshTokenExpire);
             return true;
         } catch (Exception e) {
             return false;
@@ -57,7 +57,8 @@ public class TokenUtil {
      * @date 20/11/27 00:45
      */
     public String getRefreshToken(String accessToken) {
-        return Optional.ofNullable(redisUtil.get(accessToken)).map(Object::toString).orElse(null);
+        return Optional.ofNullable(redisUtil.get(SecurityConstant.REDIS_ACCESS_TOKEN_PREFIX + accessToken))
+                .map(Object::toString).orElse(null);
     }
 
     /**
@@ -69,7 +70,7 @@ public class TokenUtil {
      * @date 20/11/28 01:22
      */
     public ActiveUser getActiveUser(String refreshToken) {
-        return Optional.ofNullable(redisUtil.get(refreshToken))
+        return Optional.ofNullable(redisUtil.get(SecurityConstant.REDIS_REFRESH_TOKEN_PREFIX + refreshToken))
                 .map(Object::toString)
                 .map(item -> JsonUtil.parseObject(item, ActiveUser.class))
                 .orElse(null);
@@ -84,7 +85,7 @@ public class TokenUtil {
      */
     public ActiveUser getActiveUser() {
         String refreshToken = getRefreshAccessTokenFromRequest();
-        return Optional.ofNullable(redisUtil.get(refreshToken))
+        return Optional.ofNullable(redisUtil.get(SecurityConstant.REDIS_REFRESH_TOKEN_PREFIX + refreshToken))
                 .map(Object::toString)
                 .map(item -> JsonUtil.parseObject(item, ActiveUser.class))
                 .orElse(null);
@@ -101,7 +102,7 @@ public class TokenUtil {
      */
     public String refreshAccessToken(String refreshToken, long accessTokenExpire) {
         String newAccessToken = UUID.randomUUID().toString().replaceAll("-", "");
-        redisUtil.set(newAccessToken, refreshToken, accessTokenExpire);
+        redisUtil.set(SecurityConstant.REDIS_ACCESS_TOKEN_PREFIX + newAccessToken, refreshToken, accessTokenExpire);
         return newAccessToken;
     }
 
