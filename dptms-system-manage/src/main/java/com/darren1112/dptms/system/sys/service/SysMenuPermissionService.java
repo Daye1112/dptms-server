@@ -25,9 +25,9 @@ public interface SysMenuPermissionService {
     /**
      * 绑定权限
      *
-     * @param menuId    菜单id
-     * @param perIds    权限ids，逗号分隔
-     * @param updater   更新者
+     * @param menuId  菜单id
+     * @param perIds  权限ids，逗号分隔
+     * @param updater 更新者
      * @author baojiazhong
      * @date 2020/12/22 22:42
      */

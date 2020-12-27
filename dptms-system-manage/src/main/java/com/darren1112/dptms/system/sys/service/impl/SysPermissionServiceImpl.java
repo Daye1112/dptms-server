@@ -116,4 +116,17 @@ public class SysPermissionServiceImpl extends BaseService implements SysPermissi
     public void deleteById(Long id, Long updater) {
         sysPermissionDao.deleteById(id, updater);
     }
+
+    /**
+     * 查询权限组list
+     *
+     * @return {@link SysPermissionDto}
+     * @author luyuhao
+     * @date 2020/12/28 01:10
+     */
+    @Override
+    @Cacheable
+    public List<SysPermissionDto> listGroup() {
+        return sysPermissionDao.listGroup();
+    }
 }

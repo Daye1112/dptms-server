@@ -89,4 +89,13 @@ public interface SysPermissionDao {
      * @date 20/12/12 20:44
      */
     void deleteById(@Param("id") Long id, @Param("updater") Long updater);
+
+    /**
+     * 查询权限组list
+     *
+     * @return {@link SysPermissionDto}
+     * @author luyuhao
+     * @date 2020/12/28 01:10
+     */
+    List<SysPermissionDto> listGroup();
 }

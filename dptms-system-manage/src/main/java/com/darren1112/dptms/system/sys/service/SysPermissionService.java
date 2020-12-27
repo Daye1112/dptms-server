@@ -5,6 +5,8 @@ import com.darren1112.dptms.common.spi.common.dto.PageParam;
 import com.darren1112.dptms.common.spi.sys.dto.SysPermissionDto;
 import com.darren1112.dptms.common.spi.sys.entity.SysPermissionEntity;
 
+import java.util.List;
+
 /**
  * 权限Service
  *
@@ -53,4 +55,13 @@ public interface SysPermissionService {
      * @date 20/12/12 20:44
      */
     void deleteById(Long id, Long updater);
+
+    /**
+     * 查询权限组list
+     *
+     * @return {@link SysPermissionDto}
+     * @author luyuhao
+     * @date 2020/12/28 01:10
+     */
+    List<SysPermissionDto> listGroup();
 }

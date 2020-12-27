@@ -146,4 +146,18 @@ public class SysPermissionController extends BaseController {
         List<SysPermissionDto> list = sysMenuPermissionService.listMenuAssigned(menuId);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(list));
     }
+
+    /**
+     * 查询权限组list
+     *
+     * @return {@link SysPermissionDto}
+     * @author luyuhao
+     * @date 2020/12/28 01:10
+     */
+    @ApiOperation("查询权限组list")
+    @GetMapping("/listGroup")
+    public ResponseEntity<JsonResult<List<SysPermissionDto>>> listGroup() {
+        List<SysPermissionDto> list = sysPermissionService.listGroup();
+        return ResponseEntityUtil.ok(JsonResult.buildSuccessData(list));
+    }
 }

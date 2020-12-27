@@ -110,4 +110,12 @@
         WHERE isvalid = 1
           AND id = #{id}
     </update>
+    <!--查询权限组list-->
+    <select id="listGroup" resultType="com.darren1112.dptms.common.spi.sys.dto.SysPermissionDto">
+        SELECT per_group AS perGroup
+        FROM sys_permission
+        WHERE isvalid = 1
+        GROUP BY per_group
+        ORDER BY per_group
+    </select>
 </mapper>
