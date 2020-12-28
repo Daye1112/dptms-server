@@ -81,11 +81,11 @@
         SELECT count(1)
         FROM sys_user
         WHERE isvalid = 1
-        <if test="dto.username != null and dto.username != ''">
-            AND username LIKE concat('%', #{dto.username}, '%')
+        <if test="username != null and username != ''">
+            AND username LIKE concat('%', #{username}, '%')
         </if>
-        <if test="dto.realName != null and dto.realName != ''">
-            AND real_name LIKE concat('%', #{dto.realName}, '%')
+        <if test="realName != null and realName != ''">
+            AND real_name LIKE concat('%', #{realName}, '%')
         </if>
     </select>
     <!--更新用户信息-->
