@@ -98,8 +98,7 @@
             real_name    = #{realName},
             gender       = #{gender},
             phone_number = #{phoneNumber},
-            email        = #{email},
-            is_locked    = #{isLocked}
+            email        = #{email}
         WHERE isvalid = 1
           AND id = #{id}
     </update>

@@ -111,7 +111,7 @@ public class SysUserController extends BaseController {
         String password = Md5Util.encrypt("123456", salt);
         entity.setSalt(salt);
         entity.setPassword(password);
-        entity.setIsLocked(AccountConstant.IS_LOCKED);
+        entity.setIsLocked(AccountConstant.UN_LOCKED);
         Long id = sysUserService.insert(entity);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(id));
     }
