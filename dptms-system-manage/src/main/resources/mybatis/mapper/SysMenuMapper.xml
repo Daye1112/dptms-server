@@ -9,53 +9,6 @@
         VALUES (#{menuName}, #{menuCode}, #{menuType}, #{menuParentId}, #{remark},
                 1, now(), #{creater}, now(), #{updater})
     </insert>
-    <!--分页查询菜单-->
-    <select id="listPage" resultType="com.darren1112.dptms.common.spi.sys.dto.SysMenuDto">
-        SELECT id,
-               menu_name        AS menuName,
-               menu_code        AS menuCode,
-               menu_type        AS menuType,
-               menu_parent_id   AS menuParentId,
-               remark,
-               isvalid,
-               ctime,
-               creater,
-               mtime,
-               updater
-        FROM sys_menu
-        WHERE isvalid = 1
-        <if test="param.menuName != null and param.menuName != ''">
-            AND menu_name LIKE concat('%', #{param.menuName}, '%')
-        </if>
-        <if test="param.menuCode != null and param.menuCode != ''">
-            AND menu_code LIKE concat('%', #{param.menuCode}, '%')
-        </if>
-        <if test="param.menuType != null and param.menuType != ''">
-            AND menu_type = #{param.menyType}
-        </if>
-        <if test="param.menuParentId != null and param.menuParentId != ''">
-            AND menu_parent_id = #{param.menuParentId}
-        </if>
-        LIMIT #{pageParam.startIndex}, #{pageParam.pageSize}
-    </select>
-    <!--分页查询菜单-查询总数-->
-    <select id="listPageCount" resultType="java.lang.Long">
-        SELECT COUNT(1)
-        FROM sys_menu
-        WHERE isvalid = 1
-        <if test="menuName != null and menuName != ''">
-            AND menu_name LIKE concat('%', #{menuName}, '%')
-        </if>
-        <if test="menuCode != null and menuCode != ''">
-            AND menu_code LIKE concat('%', #{menuCode}, '%')
-        </if>
-        <if test="menuType != null and menuType != ''">
-            AND menu_type = #{menyType}
-        </if>
-        <if test="menuParentId != null and menuParentId != ''">
-            AND menu_parent_id = #{menuParentId}
-        </if>
-    </select>
     <!--查询是否重复-->
     <select id="countByRepeat" resultType="java.lang.Long"
             parameterType="com.darren1112.dptms.common.spi.sys.dto.SysMenuDto">
@@ -89,4 +42,21 @@
         WHERE isvalid = 1
             AND id = #{id}
     </update>
+    <!--查询菜单list-->
+    <select id="list" resultType="com.darren1112.dptms.common.spi.sys.dto.SysMenuDto">
+        SELECT id,
+               menu_name      AS menuName,
+               menu_code      AS menuCode,
+               menu_type      AS menuType,
+               menu_parent_id AS menuParentId,
+               remark,
+               isvalid,
+               ctime,
+               creater,
+               mtime,
+               updater
+        FROM sys_menu
+        WHERE isvalid = 1
+        ORDER BY menu_parent_id, id
+    </select>
 </mapper>

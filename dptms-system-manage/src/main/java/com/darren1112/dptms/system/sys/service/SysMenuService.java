@@ -1,7 +1,5 @@
 package com.darren1112.dptms.system.sys.service;
 
-import com.darren1112.dptms.common.spi.common.dto.PageBean;
-import com.darren1112.dptms.common.spi.common.dto.PageParam;
 import com.darren1112.dptms.common.spi.sys.dto.SysMenuDto;
 import com.darren1112.dptms.common.spi.sys.entity.SysMenuEntity;
 
@@ -24,17 +22,6 @@ public interface SysMenuService {
     Long insert(SysMenuEntity entity);
 
     /**
-     * 分页查询菜单
-     *
-     * @param dto       筛选参数
-     * @param pageParam 分页参数
-     * @return {@link SysMenuDto)
-     * @author baojiazhong
-     * @date 2020/12/16 15:09
-     */
-    PageBean<SysMenuDto> listPage(PageParam pageParam, SysMenuDto dto);
-
-    /**
      * 根据id删除记录
      *
      * @param id      id
@@ -53,4 +40,13 @@ public interface SysMenuService {
      * @date 2020/12/16 15:29
      */
     Long update(SysMenuEntity entity);
+
+    /**
+     * 查询菜单树
+     *
+     * @return {@link SysMenuDto}
+     * @author luyuhao
+     * @date 2021/01/03 23:29
+     */
+    SysMenuDto listTree();
 }

@@ -1,6 +1,5 @@
 package com.darren1112.dptms.system.sys.dao;
 
-import com.darren1112.dptms.common.spi.common.dto.PageParam;
 import com.darren1112.dptms.common.spi.sys.dto.SysMenuDto;
 import com.darren1112.dptms.common.spi.sys.entity.SysMenuEntity;
 import org.apache.ibatis.annotations.Mapper;
@@ -28,27 +27,6 @@ public interface SysMenuDao {
      * @date 2020/12/15 16:53
      */
     Long insert(SysMenuEntity entity);
-
-    /**
-     * 分页查询菜单
-     *
-     * @param param     筛选参数
-     * @param pageParam 分页参数
-     * @return {@link List<SysMenuDto>)
-     * @author baojiazhong
-     * @date 2020/12/15 18:11
-     */
-    List<SysMenuDto> listPage(@Param("pageParam") PageParam pageParam, @Param("param") SysMenuDto param);
-
-    /**
-     * 分页查询菜单-查询总数
-     *
-     * @param dto 筛选参数
-     * @return {@link Long 查询总数)
-     * @author baojiazhong
-     * @date 2020/12/16 15:02
-     */
-    Long listPageCount(SysMenuDto dto);
 
     /**
      * 查询是否重复
@@ -79,4 +57,13 @@ public interface SysMenuDao {
      * @date 2020/12/16 18:35
      */
     Long update(SysMenuEntity entity);
+
+    /**
+     * 查询菜单list
+     *
+     * @return {@link SysMenuDto}
+     * @author luyuhao
+     * @date 2021/01/03 23:44
+     */
+    List<SysMenuDto> list();
 }

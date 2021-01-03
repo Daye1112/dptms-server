@@ -8,8 +8,6 @@ import com.darren1112.dptms.common.core.validate.validator.callback.common.NotEm
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotNullValidatorCallback;
 import com.darren1112.dptms.common.security.starter.util.TokenUtil;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
-import com.darren1112.dptms.common.spi.common.dto.PageBean;
-import com.darren1112.dptms.common.spi.common.dto.PageParam;
 import com.darren1112.dptms.common.spi.sys.dto.SysMenuDto;
 import com.darren1112.dptms.common.spi.sys.entity.SysMenuEntity;
 import com.darren1112.dptms.system.common.enums.SystemManageErrorCodeEnum;
@@ -94,20 +92,17 @@ public class SysMenuController extends BaseController {
     }
 
     /**
-     * 分页查询菜单
+     * 查询菜单树
      *
-     * @param pageParam 分页参数
-     * @param dto       查询参数
      * @return {@link JsonResult)
      * @author baojiazhong
      * @date 2020/12/19 0:08
      */
-    @ApiOperation("分页查询菜单")
-    @PostMapping("/listPage")
-    public ResponseEntity<JsonResult<PageBean<SysMenuDto>>> listPage(PageParam pageParam,
-                                                                     SysMenuDto dto) {
-        PageBean<SysMenuDto> pageBean = sysMenuService.listPage(getPageParam(pageParam), dto);
-        return ResponseEntityUtil.ok(JsonResult.buildSuccessData(pageBean));
+    @ApiOperation("查询菜单树")
+    @GetMapping("/listTree")
+    public ResponseEntity<JsonResult<SysMenuDto>> listTree() {
+        SysMenuDto result = sysMenuService.listTree();
+        return ResponseEntityUtil.ok(JsonResult.buildSuccessData(result));
     }
 
     /**

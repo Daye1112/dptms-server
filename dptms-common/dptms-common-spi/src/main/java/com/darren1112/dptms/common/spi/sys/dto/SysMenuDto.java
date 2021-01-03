@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import java.util.List;
+
 /**
  * 菜单Dto
  *
@@ -28,4 +30,10 @@ public class SysMenuDto extends SysMenuEntity {
      */
     @ApiModelProperty("是否已分配")
     private Boolean isAssigned;
+
+    /**
+     * 子节点
+     */
+    @ApiModelProperty("子节点")
+    private List<SysMenuDto> children;
 }

@@ -2,8 +2,7 @@ package com.darren1112.dptms.system.sys.service.impl;
 
 import com.darren1112.dptms.common.core.base.BaseService;
 import com.darren1112.dptms.common.core.exception.BadRequestException;
-import com.darren1112.dptms.common.spi.common.dto.PageBean;
-import com.darren1112.dptms.common.spi.common.dto.PageParam;
+import com.darren1112.dptms.common.core.util.CollectionUtil;
 import com.darren1112.dptms.common.spi.sys.dto.SysMenuDto;
 import com.darren1112.dptms.common.spi.sys.entity.SysMenuEntity;
 import com.darren1112.dptms.system.common.enums.SystemManageErrorCodeEnum;
@@ -16,6 +15,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -47,23 +47,6 @@ public class SysMenuServiceImpl extends BaseService implements SysMenuService {
         validRepeat(entity, false);
         sysMenuDao.insert(entity);
         return entity.getId();
-    }
-
-    /**
-     * 分页查询菜单
-     *
-     * @param dto       筛选参数
-     * @param pageParam 分页参数
-     * @return {@link SysMenuDto)
-     * @author baojiazhong
-     * @date 2020/12/16 15:11
-     */
-    @Override
-    @Cacheable
-    public PageBean<SysMenuDto> listPage(PageParam pageParam, SysMenuDto dto) {
-        List<SysMenuDto> list = sysMenuDao.listPage(pageParam, dto);
-        Long count = sysMenuDao.listPageCount(dto);
-        return createPageBean(pageParam, count, list);
     }
 
     /**
@@ -114,5 +97,35 @@ public class SysMenuServiceImpl extends BaseService implements SysMenuService {
         if (count != null && count > 0) {
             throw new BadRequestException(SystemManageErrorCodeEnum.MENU_CODE_REPEAT);
         }
+    }
+
+    /**
+     * 查询菜单树
+     *
+     * @return {@link SysMenuDto}
+     * @author luyuhao
+     * @date 2021/01/03 23:29
+     */
+    @Override
+    @Cacheable
+    public SysMenuDto listTree() {
+        List<SysMenuDto> sysMenuList = sysMenuDao.list();
+        if (CollectionUtil.isEmpty(sysMenuList)) {
+            return null;
+        }
+        for (SysMenuDto dto : sysMenuList) {
+            Long menuParentId = dto.getId();
+            if (dto.getChildren() == null) {
+                dto.setChildren(new ArrayList<>());
+            }
+            for (SysMenuDto subDto : sysMenuList) {
+                if (subDto.getMenuParentId().equals(menuParentId)) {
+                    dto.getChildren().add(subDto);
+                }
+            }
+        }
+        return sysMenuList.stream()
+                .filter(item -> item.getMenuParentId().equals(0L))
+                .findFirst().orElse(null);
     }
 }
