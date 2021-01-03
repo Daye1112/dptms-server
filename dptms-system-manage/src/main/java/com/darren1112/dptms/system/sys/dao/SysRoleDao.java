@@ -59,7 +59,7 @@ public interface SysRoleDao {
      * @author baojiazhong
      * @date 2020/12/19 23:19
      */
-    List<SysRoleDto> listPage(@Param("pageParam") PageParam pageParam, @Param("param") SysRoleDto dto);
+    List<SysRoleDto> listPage(@Param("pageParam") PageParam pageParam, @Param("dto") SysRoleDto dto);
 
     /**
      * 分页查询角色-查询总数
@@ -69,7 +69,7 @@ public interface SysRoleDao {
      * @author baojiazhong
      * @date 2020/12/19 23:21
      */
-    Long listPageCount(SysRoleDto dto);
+    Long listPageCount(@Param("dto") SysRoleDto dto);
 
     /**
      * 根据id删除记录

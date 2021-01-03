@@ -143,7 +143,7 @@ public class SysRoleController extends BaseController {
      * @date 2020/12/19 1:56
      */
     @ApiOperation("删除角色")
-    @PostMapping("/deleteById")
+    @GetMapping("/deleteById")
     public ResponseEntity<JsonResult> deleteById(@RequestParam(value = "id", required = false) Long id) {
         ValidatorBuilder.build()
                 .on(id, new NotNullValidatorCallback(SystemManageErrorCodeEnum.ID_NOT_NULL))

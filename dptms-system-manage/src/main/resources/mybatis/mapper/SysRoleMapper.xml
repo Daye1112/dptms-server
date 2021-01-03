@@ -24,7 +24,7 @@
     <!--分页查询角色-->
     <select id="listPage" resultType="com.darren1112.dptms.common.spi.sys.dto.SysRoleDto">
         SELECT id,
-               org_id     AS roleId,
+               org_id     AS orgId,
                role_name  AS roleName,
                role_code  AS roleCode,
                is_admin   AS isAdmin,
