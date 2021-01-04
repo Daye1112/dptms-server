@@ -70,4 +70,17 @@ public class SysMenuPermissionServiceImpl implements SysMenuPermissionService {
         }
         sysMenuPermissionDao.batchInsert(list);
     }
+
+    /**
+     * 根据菜单id查询权限list
+     *
+     * @param menuId 菜单id
+     * @return {@link SysPermissionDto}
+     * @author luyuhao
+     * @date 2021/01/04 23:53
+     */
+    @Override
+    public List<SysPermissionDto> listByMenuId(Long menuId) {
+        return sysMenuPermissionDao.listByMenuId(menuId);
+    }
 }

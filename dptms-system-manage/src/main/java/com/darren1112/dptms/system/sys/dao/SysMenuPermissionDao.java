@@ -31,8 +31,8 @@ public interface SysMenuPermissionDao {
     /**
      * 根据菜单id删除记录
      *
-     * @param menuId    菜单id
-     * @param updater   更新者
+     * @param menuId  菜单id
+     * @param updater 更新者
      * @author baojiazhong
      * @date 2020/12/22 23:27
      */
@@ -41,9 +41,19 @@ public interface SysMenuPermissionDao {
     /**
      * 批量插入菜单权限信息
      *
-     * @param list  菜单权限信息
+     * @param list 菜单权限信息
      * @author baojiazhong
      * @date 2020/12/22 23:27
      */
     void batchInsert(@Param("list") List<SysMenuPermissionEntity> list);
+
+    /**
+     * 根据菜单id查询权限list
+     *
+     * @param menuId 菜单id
+     * @return {@link SysPermissionDto}
+     * @author luyuhao
+     * @date 2021/01/04 23:53
+     */
+    List<SysPermissionDto> listByMenuId(@Param("menuId") Long menuId);
 }

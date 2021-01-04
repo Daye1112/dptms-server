@@ -32,4 +32,14 @@ public interface SysMenuPermissionService {
      * @date 2020/12/22 22:42
      */
     void assignedPer(Long menuId, String perIds, Long updater);
+
+    /**
+     * 根据菜单id查询权限list
+     *
+     * @param menuId 菜单id
+     * @return {@link SysPermissionDto}
+     * @author luyuhao
+     * @date 2021/01/04 23:53
+     */
+    List<SysPermissionDto> listByMenuId(Long menuId);
 }

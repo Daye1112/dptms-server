@@ -141,7 +141,7 @@ public class SysPermissionController extends BaseController {
     @PostMapping("/listMenuAssigned")
     public ResponseEntity<JsonResult<List<SysPermissionDto>>> listMenuAssigned(@RequestParam(value = "menuId", required = false) Long menuId) {
         ValidatorBuilder.build()
-                .on(menuId, new NotNullValidatorCallback(SystemManageErrorCodeEnum.ROLE_ID_NOT_NULL))
+                .on(menuId, new NotNullValidatorCallback(SystemManageErrorCodeEnum.MENU_ID_NOT_NULL))
                 .doValidate().checkResult();
         List<SysPermissionDto> list = sysMenuPermissionService.listMenuAssigned(menuId);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(list));
@@ -158,6 +158,24 @@ public class SysPermissionController extends BaseController {
     @GetMapping("/listGroup")
     public ResponseEntity<JsonResult<List<SysPermissionDto>>> listGroup() {
         List<SysPermissionDto> list = sysPermissionService.listGroup();
+        return ResponseEntityUtil.ok(JsonResult.buildSuccessData(list));
+    }
+
+    /**
+     * 根据菜单id查询权限list
+     *
+     * @param menuId 菜单id
+     * @return {@link SysPermissionDto}
+     * @author luyuhao
+     * @date 2021/01/04 23:52
+     */
+    @ApiOperation("根据菜单id查询权限list")
+    @GetMapping("/listByMenuId")
+    public ResponseEntity<JsonResult<List<SysPermissionDto>>> listByMenuId(@RequestParam(value = "menuId", required = false) Long menuId) {
+        ValidatorBuilder.build()
+                .on(menuId, new NotNullValidatorCallback(SystemManageErrorCodeEnum.MENU_ID_NOT_NULL))
+                .doValidate().checkResult();
+        List<SysPermissionDto> list = sysMenuPermissionService.listByMenuId(menuId);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(list));
     }
 }
