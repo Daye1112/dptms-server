@@ -138,7 +138,7 @@ public class SysPermissionController extends BaseController {
      * @date 2020/12/22 23:09
      */
     @ApiOperation("查询菜单绑定的权限list")
-    @PostMapping("/listMenuAssigned")
+    @GetMapping("/listMenuAssigned")
     public ResponseEntity<JsonResult<List<SysPermissionDto>>> listMenuAssigned(@RequestParam(value = "menuId", required = false) Long menuId) {
         ValidatorBuilder.build()
                 .on(menuId, new NotNullValidatorCallback(SystemManageErrorCodeEnum.MENU_ID_NOT_NULL))
