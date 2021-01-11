@@ -36,7 +36,6 @@
             menu_name       = #{menuName},
             menu_code       = #{menuCode},
             menu_type       = #{menuType},
-            menu_parent_id  = #{menuParentId},
             remark          = #{remark},
             updater         = #{updater}
         WHERE isvalid = 1
