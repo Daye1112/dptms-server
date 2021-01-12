@@ -3,6 +3,7 @@ package com.darren1112.dptms.system.sys.service.impl;
 import com.darren1112.dptms.common.core.util.StringUtil;
 import com.darren1112.dptms.common.spi.sys.dto.SysMenuDto;
 import com.darren1112.dptms.common.spi.sys.entity.SysRoleMenuEntity;
+import com.darren1112.dptms.system.common.util.MenuUtil;
 import com.darren1112.dptms.system.sys.dao.SysRoleMenuDao;
 import com.darren1112.dptms.system.sys.service.SysRoleMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 角色菜单ServiceImpl
@@ -37,8 +39,14 @@ public class SysRoleMenuServiceImpl implements SysRoleMenuService {
      * @date 20/12/13 21:43
      */
     @Override
-    public List<SysMenuDto> listRoleAssigned(Long roleId) {
-        return sysRoleMenuDao.listRoleAssigned(roleId);
+    public SysMenuDto listRoleAssigned(Long roleId) {
+        List<SysMenuDto> sysMenuList = sysRoleMenuDao.listRoleAssigned(roleId);
+        List<Long> assignedIdList = sysMenuList.stream().filter(SysMenuDto::getIsAssigned).map(SysMenuDto::getId).collect(Collectors.toList());
+        SysMenuDto sysMenuDto = MenuUtil.buildTree(sysMenuList);
+        if (sysMenuDto != null) {
+            sysMenuDto.setAssignedIdList(assignedIdList);
+        }
+        return sysMenuDto;
     }
 
     /**

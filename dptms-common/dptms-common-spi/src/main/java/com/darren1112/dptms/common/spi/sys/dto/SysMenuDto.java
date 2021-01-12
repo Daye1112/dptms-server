@@ -36,4 +36,9 @@ public class SysMenuDto extends SysMenuEntity {
      */
     @ApiModelProperty("子节点")
     private List<SysMenuDto> children;
+
+    /**
+     * 已分配的ids
+     */
+    private List<Long> assignedIdList;
 }

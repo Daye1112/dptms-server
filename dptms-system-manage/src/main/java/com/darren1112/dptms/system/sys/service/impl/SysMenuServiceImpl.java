@@ -2,10 +2,10 @@ package com.darren1112.dptms.system.sys.service.impl;
 
 import com.darren1112.dptms.common.core.base.BaseService;
 import com.darren1112.dptms.common.core.exception.BadRequestException;
-import com.darren1112.dptms.common.core.util.CollectionUtil;
 import com.darren1112.dptms.common.spi.sys.dto.SysMenuDto;
 import com.darren1112.dptms.common.spi.sys.entity.SysMenuEntity;
 import com.darren1112.dptms.system.common.enums.SystemManageErrorCodeEnum;
+import com.darren1112.dptms.system.common.util.MenuUtil;
 import com.darren1112.dptms.system.sys.dao.SysMenuDao;
 import com.darren1112.dptms.system.sys.service.SysMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,6 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -110,22 +109,6 @@ public class SysMenuServiceImpl extends BaseService implements SysMenuService {
     @Cacheable
     public SysMenuDto listTree() {
         List<SysMenuDto> sysMenuList = sysMenuDao.list();
-        if (CollectionUtil.isEmpty(sysMenuList)) {
-            return null;
-        }
-        for (SysMenuDto dto : sysMenuList) {
-            Long menuParentId = dto.getId();
-            if (dto.getChildren() == null) {
-                dto.setChildren(new ArrayList<>());
-            }
-            for (SysMenuDto subDto : sysMenuList) {
-                if (subDto.getMenuParentId().equals(menuParentId)) {
-                    dto.getChildren().add(subDto);
-                }
-            }
-        }
-        return sysMenuList.stream()
-                .filter(item -> item.getMenuParentId().equals(0L))
-                .findFirst().orElse(null);
+        return MenuUtil.buildTree(sysMenuList);
     }
 }

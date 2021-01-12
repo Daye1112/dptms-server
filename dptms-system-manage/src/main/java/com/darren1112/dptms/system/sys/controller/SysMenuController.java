@@ -21,8 +21,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 /**
  * 菜单Controller
  *
@@ -137,14 +135,14 @@ public class SysMenuController extends BaseController {
      * @author luyuhao
      * @date 20/12/13 21:43
      */
-    @ApiOperation("查询角色关联的菜单list")
+    @ApiOperation("查询角色关联的菜单Tree")
     @GetMapping("/listRoleAssigned")
-    public ResponseEntity<JsonResult<List<SysMenuDto>>> listRoleAssigned(@RequestParam(value = "roleId", required = false) Long roleId) {
+    public ResponseEntity<JsonResult<SysMenuDto>> listRoleAssigned(@RequestParam(value = "roleId", required = false) Long roleId) {
         ValidatorBuilder.build()
                 .on(roleId, new NotNullValidatorCallback(SystemManageErrorCodeEnum.ROLE_ID_NOT_NULL))
                 .doValidate().checkResult();
-        List<SysMenuDto> resultList = sysRoleMenuService.listRoleAssigned(roleId);
-        return ResponseEntityUtil.ok(JsonResult.buildSuccessData(resultList));
+        SysMenuDto result = sysRoleMenuService.listRoleAssigned(roleId);
+        return ResponseEntityUtil.ok(JsonResult.buildSuccessData(result));
     }
 
     /**

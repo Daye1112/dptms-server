@@ -20,7 +20,7 @@ public interface SysRoleMenuService {
      * @author luyuhao
      * @date 20/12/13 21:43
      */
-    List<SysMenuDto> listRoleAssigned(Long roleId);
+    SysMenuDto listRoleAssigned(Long roleId);
 
     /**
      * 分配菜单

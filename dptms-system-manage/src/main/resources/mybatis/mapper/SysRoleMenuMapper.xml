@@ -5,10 +5,10 @@
     <select id="listRoleAssigned" parameterType="java.lang.Long"
             resultType="com.darren1112.dptms.common.spi.sys.dto.SysMenuDto">
         SELECT t1.id,
-               t1.org_id AS orgId,
-               t1.role_name AS roleName,
-               t1.role_code AS roleCode,
-               t1.is_admin AS isAdmin,
+               t1.menu_name      AS menuName,
+               t1.menu_code      AS menuCode,
+               t1.menu_type      AS menuType,
+               t1.menu_parent_id AS menuParentId,
                t1.remark,
                t1.isvalid,
                t1.ctime,
@@ -16,9 +16,9 @@
                t1.mtime,
                t1.updater,
                CASE WHEN t2.role_id IS NULL THEN 0
-                    ELSE 1 END AS isAssigned
-        FROM sys_role t1
-                 LEFT JOIN sys_role_menu t2 ON t2.isvalid = 1 AND t1.id = t2.role_id AND t2.role_id = #{roleId}
+                    ELSE 1 END   AS isAssigned
+        FROM sys_menu t1
+                 LEFT JOIN sys_role_menu t2 ON t2.isvalid = 1 AND t1.id = t2.menu_id AND t2.role_id = #{roleId}
         WHERE t1.isvalid = 1
     </select>
     <!--清空角色已分配的组织-->
