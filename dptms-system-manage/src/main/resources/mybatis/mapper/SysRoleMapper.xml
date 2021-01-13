@@ -7,7 +7,6 @@
         SELECT count(1)
         FROM sys_role
         WHERE isvalid = 1
-            AND org_id = #{orgId}
             AND role_code = #{roleCode}
         <if test="isUpdate != null and isUpdate == true">
             AND id != #{id}
@@ -16,15 +15,14 @@
     <!--插入角色信息-->
     <insert id="insert" useGeneratedKeys="true" keyColumn="id"
             parameterType="com.darren1112.dptms.common.spi.sys.entity.SysRoleEntity">
-        INSERT INTO sys_role(org_id, role_name, role_code, is_admin, remark,
+        INSERT INTO sys_role(role_name, role_code, is_admin, remark,
                              isvalid, ctime, creater, mtime, updater)
-        VALUES (#{orgId}, #{roleName}, #{roleCode}, #{isAdmin}, #{remark},
+        VALUES (#{roleName}, #{roleCode}, #{isAdmin}, #{remark},
                 1, now(), #{creater}, now(), #{updater})
     </insert>
     <!--分页查询角色-->
     <select id="listPage" resultType="com.darren1112.dptms.common.spi.sys.dto.SysRoleDto">
         SELECT id,
-               org_id     AS orgId,
                role_name  AS roleName,
                role_code  AS roleCode,
                is_admin   AS isAdmin,
@@ -36,7 +34,6 @@
                updater
         FROM sys_role
         WHERE isvalid = 1
-            AND org_id = #{dto.orgId}
         <if test="dto.roleCode != null and dto.roleCode != ''">
             AND role_code LIKE concat('%', #{dto.roleCode}, '%')
         </if>
@@ -54,7 +51,6 @@
         SELECT count(1)
         FROM sys_role
         WHERE isvalid = 1
-            AND org_id = #{dto.orgId}
         <if test="dto.roleCode != null and dto.roleCode != ''">
             AND role_code LIKE concat('%', #{dto.roleCode}, '%')
         </if>

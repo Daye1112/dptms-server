@@ -63,4 +63,13 @@ public interface SysUserService {
      * @date 20/12/10 01:08
      */
     void deleteById(Long id, Long updater);
+
+    /**
+     * 更新用户锁定状态
+     *
+     * @param entity 更新状态
+     * @author luyuhao
+     * @date 2021/01/14 00:19
+     */
+    void updateLock(SysUserEntity entity);
 }

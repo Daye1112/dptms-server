@@ -18,12 +18,6 @@ import lombok.ToString;
 public class SysRoleEntity extends BaseEntity {
 
     /**
-     * 组织id 关联sys_organization.id
-     */
-    @ApiModelProperty(value = "组织id 关联sys_organization.id")
-    private Long orgId;
-
-    /**
      * 角色名称
      */
     @ApiModelProperty(value = "角色名称")

@@ -1,7 +1,6 @@
 CREATE TABLE sys_role
 (
   id        BIGINT NOT NULL AUTO_INCREMENT COMMENT 'id',
-  org_id    BIGINT COMMENT '组织id 关联sys_organization.id',
   role_name VARCHAR(32) COMMENT '角色名称',
   role_code VARCHAR(32) COMMENT '角色编号',
   is_admin  TINYINT COMMENT '是否管理员 0：否 1：是',

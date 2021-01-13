@@ -82,7 +82,6 @@ public class SysRoleController extends BaseController {
     @PostMapping("/insert")
     public ResponseEntity<JsonResult<Long>> insert(SysRoleEntity entity) {
         ValidatorBuilder.build()
-                .on(entity.getOrgId(), new NotNullValidatorCallback(SystemManageErrorCodeEnum.ORG_ID_NOT_NULL))
                 .on(entity.getRoleName(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.ROLE_NAME_NOT_NULL))
                 .on(entity.getRoleCode(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.ROLE_CODE_NOT_NULL))
                 .on(entity.getIsAdmin(), new NotNullValidatorCallback(SystemManageErrorCodeEnum.ROLE_IS_ADMIN_NOT_NULL))
@@ -123,7 +122,6 @@ public class SysRoleController extends BaseController {
     @PostMapping("/update")
     public ResponseEntity<JsonResult<Long>> update(SysRoleEntity entity) {
         ValidatorBuilder.build()
-                .on(entity.getOrgId(), new NotNullValidatorCallback(SystemManageErrorCodeEnum.ORG_ID_NOT_NULL))
                 .on(entity.getRoleName(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.ROLE_NAME_NOT_NULL))
                 .on(entity.getRoleCode(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.ROLE_CODE_NOT_NULL))
                 .on(entity.getIsAdmin(), new NotNullValidatorCallback(SystemManageErrorCodeEnum.ROLE_IS_ADMIN_NOT_NULL))

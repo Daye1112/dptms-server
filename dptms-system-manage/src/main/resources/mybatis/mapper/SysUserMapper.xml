@@ -111,4 +111,13 @@
         WHERE isvalid = 1
           AND id = #{id}
     </delete>
+    <!--更新用户锁定状态-->
+    <update id="updateLock" parameterType="com.darren1112.dptms.common.spi.sys.entity.SysUserEntity">
+        UPDATE sys_user
+        SET mtime     = now(),
+            updater   = #{updater},
+            is_locked = #{isLocked}
+        WHERE isvalid = 1
+          AND id = #{id}
+    </update>
 </mapper>

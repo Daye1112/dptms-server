@@ -129,4 +129,18 @@ public class SysUserServiceImpl extends BaseService implements SysUserService {
     public void deleteById(Long id, Long updater) {
         sysUserDao.deleteById(id, updater);
     }
+
+    /**
+     * 更新用户锁定状态
+     *
+     * @param entity 更新状态
+     * @author luyuhao
+     * @date 2021/01/14 00:19
+     */
+    @Override
+    @CacheEvict(allEntries = true)
+    @Transactional(rollbackFor = Throwable.class)
+    public void updateLock(SysUserEntity entity) {
+        sysUserDao.updateLock(entity);
+    }
 }

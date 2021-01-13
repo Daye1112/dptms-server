@@ -174,6 +174,27 @@ public class SysUserController extends BaseController {
     }
 
     /**
+     * 更新用户锁定状态
+     *
+     * @param entity 更新信息
+     * @return {@link JsonResult}
+     * @author luyuhao
+     * @date 2021/01/14 00:17
+     */
+    @ApiOperation("更新用户锁定状态")
+    @GetMapping("/updateLock")
+    public ResponseEntity<JsonResult> updateLock(SysUserEntity entity) {
+        ValidatorBuilder.build()
+                .on(entity.getId(), new NotNullValidatorCallback(SystemManageErrorCodeEnum.ID_NOT_NULL))
+                .on(entity.getIsLocked(), new NotNullValidatorCallback(SystemManageErrorCodeEnum.USER_IS_LOCKED_NOT_NULL))
+                .doValidate().checkResult();
+        ActiveUser activeUser = tokenUtil.getActiveUser();
+        entity.setUpdater(activeUser.getId());
+        sysUserService.updateLock(entity);
+        return ResponseEntityUtil.ok(JsonResult.buildSuccess());
+    }
+
+    /**
      * 分配角色
      *
      * @param userId  用户id

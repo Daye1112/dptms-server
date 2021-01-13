@@ -109,7 +109,6 @@ public class SysRoleServiceImpl extends BaseService implements SysRoleService {
         SysRoleDto param = new SysRoleDto();
         param.setId(entity.getId());
         param.setRoleCode(entity.getRoleCode());
-        param.setOrgId(entity.getOrgId());
         param.setIsUpdate(isUpdate);
         Long count = sysRoleDao.countByRepeat(param);
         if (count != null && count > 0) {

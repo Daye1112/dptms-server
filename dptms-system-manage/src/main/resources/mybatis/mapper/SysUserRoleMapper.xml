@@ -22,7 +22,6 @@
     <select id="listUserAssigned" parameterType="java.lang.Long"
             resultType="com.darren1112.dptms.common.spi.sys.dto.SysRoleDto">
         SELECT t1.id,
-               t1.org_id       AS roleId,
                t1.role_name    AS roleName,
                t1.role_code    AS roleCode,
                t1.is_admin     AS isAdmin,
