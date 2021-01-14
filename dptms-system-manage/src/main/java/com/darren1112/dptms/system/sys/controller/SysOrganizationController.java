@@ -55,7 +55,7 @@ public class SysOrganizationController extends BaseController {
      * @date 20/12/10 01:08
      */
     @ApiOperation("分页查询组织")
-    @PostMapping("/listPage")
+    @GetMapping("/listPage")
     public ResponseEntity<JsonResult<PageBean<SysOrganizationDto>>> listPage(PageParam pageParam,
                                                                              SysOrganizationDto dto) {
         PageBean<SysOrganizationDto> pageBean = sysOrganizationService.listPage(getPageParam(pageParam), dto);
