@@ -6,7 +6,7 @@ import com.darren1112.dptms.common.core.util.ResponseEntityUtil;
 import com.darren1112.dptms.common.core.validate.ValidatorBuilder;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotEmptyValidatorCallback;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotNullValidatorCallback;
-import com.darren1112.dptms.common.security.starter.util.TokenUtil;
+import com.darren1112.dptms.common.security.starter.util.DptmsSecurityUtil;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
@@ -42,9 +42,6 @@ public class SysPermissionController extends BaseController {
     @Autowired
     private SysMenuPermissionService sysMenuPermissionService;
 
-    @Autowired
-    private TokenUtil tokenUtil;
-
     /**
      * 插入权限信息
      *
@@ -62,7 +59,7 @@ public class SysPermissionController extends BaseController {
                 .on(entity.getPerGroup(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.PER_GROUP_NOT_NULL))
                 .on(entity.getPerUrl(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.PER_URL_NOT_NULL))
                 .doValidate().checkResult();
-        ActiveUser activeUser = tokenUtil.getActiveUser();
+        ActiveUser activeUser = DptmsSecurityUtil.get();
         entity.setCreater(activeUser.getId());
         entity.setUpdater(activeUser.getId());
         Long id = sysPermissionService.insert(entity);
@@ -104,7 +101,7 @@ public class SysPermissionController extends BaseController {
                 .on(entity.getPerGroup(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.PER_GROUP_NOT_NULL))
                 .on(entity.getPerUrl(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.PER_URL_NOT_NULL))
                 .doValidate().checkResult();
-        ActiveUser activeUser = tokenUtil.getActiveUser();
+        ActiveUser activeUser = DptmsSecurityUtil.get();
         entity.setUpdater(activeUser.getId());
         Long count = sysPermissionService.update(entity);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(count));
@@ -124,7 +121,7 @@ public class SysPermissionController extends BaseController {
         ValidatorBuilder.build()
                 .on(id, new NotNullValidatorCallback(SystemManageErrorCodeEnum.ID_NOT_NULL))
                 .doValidate().checkResult();
-        ActiveUser activeUser = tokenUtil.getActiveUser();
+        ActiveUser activeUser = DptmsSecurityUtil.get();
         sysPermissionService.deleteById(id, activeUser.getId());
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }

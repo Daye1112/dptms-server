@@ -1,25 +1,26 @@
-package com.darren1112.dptms.gateway.common.enums;
+package com.darren1112.dptms.common.security.starter.enums;
 
 import com.darren1112.dptms.common.core.exception.enums.BaseEnum;
 import org.springframework.http.HttpStatus;
 
 /**
- * 网关错误码
+ * 安全校验enum
  *
  * @author luyuhao
- * @date 2020/08/02 02:44
+ * @date 2021/01/17 00:50
  */
-public enum GatewayErrorCodeEnum implements BaseEnum {
+public enum SecurityEnum implements BaseEnum {
 
     /**
-     * 网关错误状态码
+     * 安全校验错误状态码
      */
-    ;
+    NOT_LOGIN(HttpStatus.UNAUTHORIZED, "请先登录"),
+    TOKEN_VALID_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "token校验异常，请联系管理员");
 
     private Integer code;
     private String message;
 
-    GatewayErrorCodeEnum(HttpStatus httpStatus, String message) {
+    SecurityEnum(HttpStatus httpStatus, String message) {
         this.code = httpStatus.value();
         this.message = message;
     }

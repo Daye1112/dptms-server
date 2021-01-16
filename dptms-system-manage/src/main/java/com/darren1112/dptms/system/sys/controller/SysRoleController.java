@@ -6,7 +6,7 @@ import com.darren1112.dptms.common.core.util.ResponseEntityUtil;
 import com.darren1112.dptms.common.core.validate.ValidatorBuilder;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotEmptyValidatorCallback;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotNullValidatorCallback;
-import com.darren1112.dptms.common.security.starter.util.TokenUtil;
+import com.darren1112.dptms.common.security.starter.util.DptmsSecurityUtil;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
@@ -38,9 +38,6 @@ import java.util.List;
 public class SysRoleController extends BaseController {
 
     @Autowired
-    private TokenUtil tokenUtil;
-
-    @Autowired
     private SysRoleService sysRoleService;
 
     @Autowired
@@ -65,7 +62,7 @@ public class SysRoleController extends BaseController {
         ValidatorBuilder.build()
                 .on(roleId, new NotNullValidatorCallback(SystemManageErrorCodeEnum.USER_ID_NOT_NULL))
                 .doValidate().checkResult();
-        ActiveUser activeUser = tokenUtil.getActiveUser();
+        ActiveUser activeUser = DptmsSecurityUtil.get();
         sysRoleMenuService.assignedMenu(roleId, menuIds, activeUser.getId());
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }
@@ -86,7 +83,7 @@ public class SysRoleController extends BaseController {
                 .on(entity.getRoleCode(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.ROLE_CODE_NOT_NULL))
                 .on(entity.getIsAdmin(), new NotNullValidatorCallback(SystemManageErrorCodeEnum.ROLE_IS_ADMIN_NOT_NULL))
                 .doValidate().checkResult();
-        ActiveUser activeUser = tokenUtil.getActiveUser();
+        ActiveUser activeUser = DptmsSecurityUtil.get();
         entity.setCreater(activeUser.getId());
         entity.setUpdater(activeUser.getId());
         Long id = sysRoleService.insert(entity);
@@ -126,7 +123,7 @@ public class SysRoleController extends BaseController {
                 .on(entity.getRoleCode(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.ROLE_CODE_NOT_NULL))
                 .on(entity.getIsAdmin(), new NotNullValidatorCallback(SystemManageErrorCodeEnum.ROLE_IS_ADMIN_NOT_NULL))
                 .doValidate().checkResult();
-        ActiveUser activeUser = tokenUtil.getActiveUser();
+        ActiveUser activeUser = DptmsSecurityUtil.get();
         entity.setUpdater(activeUser.getId());
         Long count = sysRoleService.update(entity);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(count));
@@ -146,7 +143,7 @@ public class SysRoleController extends BaseController {
         ValidatorBuilder.build()
                 .on(id, new NotNullValidatorCallback(SystemManageErrorCodeEnum.ID_NOT_NULL))
                 .doValidate().checkResult();
-        ActiveUser activeUser = tokenUtil.getActiveUser();
+        ActiveUser activeUser = DptmsSecurityUtil.get();
         sysRoleService.deleteById(id, activeUser.getId());
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }

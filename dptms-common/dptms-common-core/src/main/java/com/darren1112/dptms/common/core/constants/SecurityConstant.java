@@ -17,14 +17,6 @@ public class SecurityConstant {
      */
     public static final String REFRESH_TOKEN_KEY = "DptmsRefreshToken";
     /**
-     * access token 服务交互的key
-     */
-    public static final String ACCESS_TOKEN_SERVER_KEY = "accessToken";
-    /**
-     * refresh token 服务交互的key
-     */
-    public static final String REFRESH_TOKEN_SERVER_KEY = "refreshToken";
-    /**
      * access token redis key prefix
      */
     public static final String REDIS_ACCESS_TOKEN_PREFIX = "accessToken:";

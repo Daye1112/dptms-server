@@ -1,10 +1,10 @@
 package com.darren1112.dptms.gateway.common.config;
 
+import com.darren1112.dptms.common.core.constants.FilterOrderConstant;
+import com.darren1112.dptms.common.security.starter.core.DptmsTokenValidator;
+import com.darren1112.dptms.common.security.starter.filter.DptmsTokenValidFilter;
 import com.darren1112.dptms.common.security.starter.properties.SecurityProperties;
-import com.darren1112.dptms.common.security.starter.util.TokenUtil;
-import com.darren1112.dptms.gateway.common.filter.PermissionValidateFilter;
-import com.darren1112.dptms.gateway.common.filter.TokenValidateFilter;
-import com.darren1112.dptms.gateway.remoting.AuthRemoting;
+import com.darren1112.dptms.gateway.common.filter.PermissionValidFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -47,25 +47,25 @@ public class ZuulConfig {
     }
 
     @Bean
-    public FilterRegistrationBean tokenValidateFilterBean(TokenUtil tokenUtil, SecurityProperties securityProperties, AuthRemoting authRemoting) {
-        TokenValidateFilter tokenValidateFilter = new TokenValidateFilter(tokenUtil, securityProperties, authRemoting);
-        FilterRegistrationBean<TokenValidateFilter> filterRegistrationBean = new FilterRegistrationBean<>();
-        filterRegistrationBean.setFilter(tokenValidateFilter);
+    public FilterRegistrationBean dptmsTokenFilter(SecurityProperties securityProperties, DptmsTokenValidator dptmsTokenValidator) {
+        DptmsTokenValidFilter dptmsTokenFilter = new DptmsTokenValidFilter(securityProperties, dptmsTokenValidator);
+        FilterRegistrationBean<DptmsTokenValidFilter> filterRegistrationBean = new FilterRegistrationBean<>();
+        filterRegistrationBean.setFilter(dptmsTokenFilter);
         filterRegistrationBean.addUrlPatterns("/*");
         //order的数值越小 则优先级越高
-        filterRegistrationBean.setOrder(0);
-        filterRegistrationBean.setName("tokenValidateFilter");
+        filterRegistrationBean.setOrder(FilterOrderConstant.DPTMS_TOKEN_VALID_FILTER);
+        filterRegistrationBean.setName("dptmsTokenFilter");
         return filterRegistrationBean;
     }
 
     @Bean
-    public FilterRegistrationBean permissionValidateFilterBean(TokenUtil tokenUtil, SecurityProperties securityProperties) {
-        PermissionValidateFilter permissionValidateFilter = new PermissionValidateFilter(securityProperties, tokenUtil);
-        FilterRegistrationBean<PermissionValidateFilter> filterRegistrationBean = new FilterRegistrationBean<>();
+    public FilterRegistrationBean permissionValidateFilterBean(SecurityProperties securityProperties) {
+        PermissionValidFilter permissionValidateFilter = new PermissionValidFilter(securityProperties);
+        FilterRegistrationBean<PermissionValidFilter> filterRegistrationBean = new FilterRegistrationBean<>();
         filterRegistrationBean.setFilter(permissionValidateFilter);
         filterRegistrationBean.addUrlPatterns("/*");
         //order的数值越小 则优先级越高
-        filterRegistrationBean.setOrder(1);
+        filterRegistrationBean.setOrder(FilterOrderConstant.PERMISSION_VALID_FILTER);
         filterRegistrationBean.setName("permissionValidateFilter");
         return filterRegistrationBean;
     }

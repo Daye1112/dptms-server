@@ -8,7 +8,7 @@ import com.darren1112.dptms.common.core.util.ResponseEntityUtil;
 import com.darren1112.dptms.common.core.validate.ValidatorBuilder;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotEmptyValidatorCallback;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotNullValidatorCallback;
-import com.darren1112.dptms.common.security.starter.util.TokenUtil;
+import com.darren1112.dptms.common.security.starter.util.DptmsSecurityUtil;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
@@ -46,9 +46,6 @@ public class SysUserController extends BaseController {
     @Autowired
     private SysUserRoleService sysUserRoleService;
 
-    @Autowired
-    private TokenUtil tokenUtil;
-
     /**
      * 根据id查询用户
      *
@@ -83,7 +80,7 @@ public class SysUserController extends BaseController {
         ValidatorBuilder.build()
                 .on(userId, new NotNullValidatorCallback(SystemManageErrorCodeEnum.USER_ID_NOT_NULL))
                 .doValidate().checkResult();
-        ActiveUser activeUser = tokenUtil.getActiveUser();
+        ActiveUser activeUser = DptmsSecurityUtil.get();
         sysUserOrganizationService.assignedOrg(userId, orgIds, activeUser.getId());
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }
@@ -103,7 +100,7 @@ public class SysUserController extends BaseController {
                 .on(entity.getUsername(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.USER_USERNAME_NOT_NULL))
                 .doValidate().checkResult();
         // 设置创建者信息
-        ActiveUser activeUser = tokenUtil.getActiveUser();
+        ActiveUser activeUser = DptmsSecurityUtil.get();
         entity.setCreater(activeUser.getId());
         entity.setUpdater(activeUser.getId());
         // 初始化entity信息
@@ -148,7 +145,7 @@ public class SysUserController extends BaseController {
                 .on(entity.getId(), new NotNullValidatorCallback(SystemManageErrorCodeEnum.ID_NOT_NULL))
                 .on(entity.getUsername(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.USER_USERNAME_NOT_NULL))
                 .doValidate().checkResult();
-        ActiveUser activeUser = tokenUtil.getActiveUser();
+        ActiveUser activeUser = DptmsSecurityUtil.get();
         entity.setUpdater(activeUser.getId());
         Long count = sysUserService.update(entity);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(count));
@@ -168,7 +165,7 @@ public class SysUserController extends BaseController {
         ValidatorBuilder.build()
                 .on(id, new NotNullValidatorCallback(SystemManageErrorCodeEnum.ID_NOT_NULL))
                 .doValidate().checkResult();
-        ActiveUser activeUser = tokenUtil.getActiveUser();
+        ActiveUser activeUser = DptmsSecurityUtil.get();
         sysUserService.deleteById(id, activeUser.getId());
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }
@@ -188,7 +185,7 @@ public class SysUserController extends BaseController {
                 .on(entity.getId(), new NotNullValidatorCallback(SystemManageErrorCodeEnum.ID_NOT_NULL))
                 .on(entity.getIsLocked(), new NotNullValidatorCallback(SystemManageErrorCodeEnum.USER_IS_LOCKED_NOT_NULL))
                 .doValidate().checkResult();
-        ActiveUser activeUser = tokenUtil.getActiveUser();
+        ActiveUser activeUser = DptmsSecurityUtil.get();
         entity.setUpdater(activeUser.getId());
         sysUserService.updateLock(entity);
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
@@ -210,7 +207,7 @@ public class SysUserController extends BaseController {
         ValidatorBuilder.build()
                 .on(userId, new NotNullValidatorCallback(SystemManageErrorCodeEnum.USER_ID_NOT_NULL))
                 .doValidate().checkResult();
-        ActiveUser activeUser = tokenUtil.getActiveUser();
+        ActiveUser activeUser = DptmsSecurityUtil.get();
         sysUserRoleService.assignedRole(userId, roleIds, activeUser.getId());
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }

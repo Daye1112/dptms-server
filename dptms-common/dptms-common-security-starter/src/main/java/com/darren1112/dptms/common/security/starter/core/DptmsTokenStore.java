@@ -1,0 +1,224 @@
+package com.darren1112.dptms.common.security.starter.core;
+
+import com.darren1112.dptms.common.core.constants.SecurityConstant;
+import com.darren1112.dptms.common.core.util.CookieUtil;
+import com.darren1112.dptms.common.core.util.JsonUtil;
+import com.darren1112.dptms.common.core.util.RequestUtil;
+import com.darren1112.dptms.common.core.util.StringUtil;
+import com.darren1112.dptms.common.redis.starter.util.RedisUtil;
+import com.darren1112.dptms.common.security.starter.properties.SecurityProperties;
+import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Optional;
+
+/**
+ * 系统token存储类
+ *
+ * @author luyuhao
+ * @date 2021/01/16 19:06
+ */
+public class DptmsTokenStore {
+
+    private RedisUtil redisUtil;
+
+    private SecurityProperties securityProperties;
+
+    public DptmsTokenStore(RedisUtil redisUtil, SecurityProperties securityProperties) {
+        this.redisUtil = redisUtil;
+        this.securityProperties = securityProperties;
+    }
+
+    /**
+     * 保存token
+     *
+     * @param activeUser   用户信息
+     * @param accessToken  accessToken
+     * @param refreshToken refreshToken
+     * @author luyuhao
+     * @date 20/11/25 00:25
+     */
+    public void saveToken(ActiveUser activeUser, String accessToken, String refreshToken) {
+        // 设置accessToken
+        saveAccessToken(accessToken, refreshToken);
+        // 设置refreshToken
+        saveRefreshToken(refreshToken, activeUser);
+    }
+
+    /**
+     * 保存access token
+     *
+     * @param accessToken  accessToken
+     * @param refreshToken refreshToken
+     * @author luyuhao
+     * @date 20/11/25 00:25
+     */
+    public void saveAccessToken(String accessToken, String refreshToken) {
+        // 设置accessToken
+        redisUtil.set(SecurityConstant.REDIS_ACCESS_TOKEN_PREFIX + accessToken, refreshToken, securityProperties.getAccessTokenExpired());
+    }
+
+    /**
+     * 保存refresh token
+     *
+     * @param refreshToken refreshToken
+     * @param activeUser   用户信息
+     * @author luyuhao
+     * @date 20/11/25 00:25
+     */
+    public void saveRefreshToken(String refreshToken, ActiveUser activeUser) {
+        // 设置refreshToken
+        redisUtil.set(SecurityConstant.REDIS_REFRESH_TOKEN_PREFIX + refreshToken, JsonUtil.toJsonString(activeUser), securityProperties.getRefreshTokenExpired());
+    }
+
+    /**
+     * 获取用户信息
+     *
+     * @param refreshToken refreshToken
+     * @return {@link ActiveUser 用户信息}
+     * @author luyuhao
+     * @date 20/11/28 01:22
+     */
+    public ActiveUser getActiveUser(String refreshToken) {
+        return Optional.ofNullable(redisUtil.get(SecurityConstant.REDIS_REFRESH_TOKEN_PREFIX + refreshToken))
+                .map(Object::toString)
+                .map(item -> JsonUtil.parseObject(item, ActiveUser.class))
+                .orElse(null);
+    }
+
+    /**
+     * 获取用户信息
+     *
+     * @param request 请求域
+     * @return {@link ActiveUser 用户信息}
+     * @author luyuhao
+     * @date 20/11/28 01:22
+     */
+    public ActiveUser getActiveUser(HttpServletRequest request) {
+        String refreshToken = getRefreshToken(request);
+        return Optional.ofNullable(redisUtil.get(SecurityConstant.REDIS_REFRESH_TOKEN_PREFIX + refreshToken))
+                .map(Object::toString)
+                .map(item -> JsonUtil.parseObject(item, ActiveUser.class))
+                .orElse(null);
+    }
+
+    /**
+     * 保存access token cookie
+     *
+     * @param accessToken accessToken
+     * @param response    响应域
+     * @author luyuhao
+     * @date 20/11/25 00:25
+     */
+    public void saveAccessTokenCookie(String accessToken, HttpServletResponse response) {
+        // 设置accessToken cookie
+        CookieUtil.setCookie(SecurityConstant.ACCESS_TOKEN_KEY, accessToken, response);
+    }
+
+    /**
+     * 保存refresh token cookie
+     *
+     * @param refreshToken refreshToken
+     * @param response     响应域
+     * @author luyuhao
+     * @date 20/11/25 00:25
+     */
+    public void saveRefreshTokenCookie(String refreshToken, HttpServletResponse response) {
+        // 设置refreshToken
+        CookieUtil.setCookie(SecurityConstant.REFRESH_TOKEN_KEY, refreshToken, response);
+    }
+
+    /**
+     * 刷新access token并更新cookie
+     *
+     * @param refreshToken 刷新token
+     * @param response     响应域
+     * @author luyuhao
+     * @date 2021/01/16 19:15
+     */
+    public void refreshAccessTokenAndCookie(String refreshToken, HttpServletResponse response) {
+        String newAccessToken = DptmsTokenGenerator.generateDefaultToken();
+        // 设置access token
+        saveAccessToken(newAccessToken, refreshToken);
+        // 设置access token cookie
+        saveAccessTokenCookie(newAccessToken, response);
+    }
+
+    /**
+     * 从request中获取accessToken
+     *
+     * @param request 请求域
+     * @return {@link String accessToken}
+     * @author luyuhao
+     * @date 20/12/10 02:34
+     */
+    public String getAccessToken(HttpServletRequest request) {
+        String accessToken = CookieUtil.getCookie(SecurityConstant.ACCESS_TOKEN_KEY, request);
+        if (StringUtil.isBlank(accessToken)) {
+            accessToken = RequestUtil.getHeaderByName(SecurityConstant.ACCESS_TOKEN_KEY);
+        }
+        return accessToken;
+    }
+
+    /**
+     * 从request中获取refresh Token
+     *
+     * @param request 请求域
+     * @return {@link String refresh Token}
+     * @author luyuhao
+     * @date 20/12/10 02:34
+     */
+    public String getRefreshToken(HttpServletRequest request) {
+        String refreshToken = CookieUtil.getCookie(SecurityConstant.REFRESH_TOKEN_KEY, request);
+        if (StringUtil.isBlank(refreshToken)) {
+            refreshToken = RequestUtil.getHeaderByName(SecurityConstant.REFRESH_TOKEN_KEY);
+        }
+        return refreshToken;
+    }
+
+    /**
+     * 获取刷新token
+     *
+     * @param accessToken 访问token
+     * @return 刷新token
+     * @author luyuhao
+     * @date 20/11/27 00:45
+     */
+    public String getRefreshToken(String accessToken) {
+        return Optional.ofNullable(redisUtil.get(SecurityConstant.REDIS_ACCESS_TOKEN_PREFIX + accessToken))
+                .map(Object::toString).orElse(null);
+    }
+
+    /**
+     * 生成token
+     *
+     * @param activeUser 用户信息
+     * @param response   响应域
+     * @author luyuhao
+     * @date 2021/01/17 01:11
+     */
+    public void generateToken(ActiveUser activeUser, HttpServletResponse response) {
+        // 生成token
+        String accessToken = DptmsTokenGenerator.generateDefaultToken();
+        String refreshToken = DptmsTokenGenerator.generateDefaultToken();
+        // 保存到redis
+        saveToken(activeUser, accessToken, refreshToken);
+        // 保存到cookie
+        saveTokenCookie(accessToken, refreshToken, response);
+    }
+
+    /**
+     * 保存token cookie
+     *
+     * @param accessToken  access token
+     * @param refreshToken refresh token
+     * @param response     响应域
+     * @author luyuhao
+     * @date 2021/01/17 01:12
+     */
+    private void saveTokenCookie(String accessToken, String refreshToken, HttpServletResponse response) {
+        saveAccessTokenCookie(accessToken, response);
+        saveRefreshTokenCookie(refreshToken, response);
+    }
+}

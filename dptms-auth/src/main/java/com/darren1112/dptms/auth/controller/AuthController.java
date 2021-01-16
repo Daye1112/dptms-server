@@ -1,17 +1,14 @@
 package com.darren1112.dptms.auth.controller;
 
 import com.darren1112.dptms.auth.common.enums.AuthErrorCodeEnum;
-import com.darren1112.dptms.auth.common.properties.AuthProperties;
 import com.darren1112.dptms.auth.common.security.PasswordLoginHandler;
-import com.darren1112.dptms.common.core.constants.SecurityConstant;
 import com.darren1112.dptms.common.core.message.JsonResult;
-import com.darren1112.dptms.common.core.util.CookieUtil;
 import com.darren1112.dptms.common.core.util.ResponseEntityUtil;
 import com.darren1112.dptms.common.core.validate.ValidatorBuilder;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotEmptyValidatorCallback;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotNullValidatorCallback;
+import com.darren1112.dptms.common.security.starter.core.DptmsTokenStore;
 import com.darren1112.dptms.common.security.starter.properties.SecurityProperties;
-import com.darren1112.dptms.common.security.starter.util.TokenUtil;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 import com.darren1112.dptms.common.spi.common.dto.LoginParam;
 import io.swagger.annotations.Api;
@@ -42,10 +39,10 @@ public class AuthController {
     private PasswordLoginHandler passwordLoginHandler;
 
     @Autowired
-    private TokenUtil tokenUtil;
+    private SecurityProperties securityProperties;
 
     @Autowired
-    private SecurityProperties securityProperties;
+    private DptmsTokenStore dptmsTokenStore;
 
     /**
      * 登录系统
@@ -86,8 +83,7 @@ public class AuthController {
         ValidatorBuilder.build()
                 .on(refreshToken, new NotEmptyValidatorCallback(AuthErrorCodeEnum.REFRESH_TOKEN_NOT_NULL))
                 .doValidate().checkResult();
-        String accessToken = tokenUtil.refreshAccessToken(refreshToken, securityProperties.getAccessTokenExpired());
-        CookieUtil.setCookie(SecurityConstant.ACCESS_TOKEN_KEY, accessToken, response);
-        return ResponseEntityUtil.ok(JsonResult.buildSuccessData(accessToken));
+        dptmsTokenStore.refreshAccessTokenAndCookie(refreshToken, response);
+        return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }
 }

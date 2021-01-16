@@ -1,16 +1,14 @@
 package com.darren1112.dptms.auth.common.security;
 
-import com.darren1112.dptms.common.core.constants.AccountConstant;
 import com.darren1112.dptms.auth.common.enums.AuthErrorCodeEnum;
 import com.darren1112.dptms.auth.common.security.base.BaseUserDetails;
 import com.darren1112.dptms.auth.service.SysUserService;
-import com.darren1112.dptms.common.core.constants.SecurityConstant;
+import com.darren1112.dptms.common.core.constants.AccountConstant;
 import com.darren1112.dptms.common.core.exception.BadRequestException;
 import com.darren1112.dptms.common.core.exception.BaseException;
-import com.darren1112.dptms.common.core.util.CookieUtil;
 import com.darren1112.dptms.common.core.util.Md5Util;
+import com.darren1112.dptms.common.security.starter.core.DptmsTokenStore;
 import com.darren1112.dptms.common.security.starter.properties.SecurityProperties;
-import com.darren1112.dptms.common.security.starter.util.TokenUtil;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 import com.darren1112.dptms.common.spi.common.dto.LoginParam;
 import com.darren1112.dptms.common.spi.sys.dto.SysUserDto;
@@ -20,7 +18,6 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Objects;
-import java.util.UUID;
 
 /**
  * 用户信息鉴权
@@ -32,13 +29,13 @@ import java.util.UUID;
 public class PasswordLoginHandler extends BaseUserDetails {
 
     @Autowired
-    private TokenUtil tokenUtil;
-
-    @Autowired
     private SysUserService sysUserService;
 
     @Autowired
     private SecurityProperties securityProperties;
+
+    @Autowired
+    private DptmsTokenStore dptmsTokenStore;
 
     /**
      * 前置处理
@@ -99,16 +96,8 @@ public class PasswordLoginHandler extends BaseUserDetails {
         // 后置处理
         // 更新登录时间
         sysUserService.updateLoginTime(activeUser.getId());
-        // 生成token
-        String accessToken = UUID.randomUUID().toString().replaceAll("-", "");
-        String refreshToken = UUID.randomUUID().toString().replaceAll("-", "");
-        // 存放到redis中
-        if (!tokenUtil.saveToken(activeUser, accessToken, refreshToken, securityProperties.getAccessTokenExpired(), securityProperties.getRefreshTokenExpired())) {
-            throw new BadRequestException(AuthErrorCodeEnum.SAVE_TOKEN_ERROR);
-        }
-        //设置cookie
-        CookieUtil.setCookie(SecurityConstant.ACCESS_TOKEN_KEY, accessToken, response);
-        CookieUtil.setCookie(SecurityConstant.REFRESH_TOKEN_KEY, refreshToken, response);
+        // 生成token并保存到redis和cookie中
+        dptmsTokenStore.generateToken(activeUser, response);
     }
 
     /**

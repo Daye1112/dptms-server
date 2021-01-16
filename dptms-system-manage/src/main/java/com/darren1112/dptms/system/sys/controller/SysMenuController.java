@@ -6,7 +6,7 @@ import com.darren1112.dptms.common.core.util.ResponseEntityUtil;
 import com.darren1112.dptms.common.core.validate.ValidatorBuilder;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotEmptyValidatorCallback;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotNullValidatorCallback;
-import com.darren1112.dptms.common.security.starter.util.TokenUtil;
+import com.darren1112.dptms.common.security.starter.util.DptmsSecurityUtil;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 import com.darren1112.dptms.common.spi.sys.dto.SysMenuDto;
 import com.darren1112.dptms.common.spi.sys.entity.SysMenuEntity;
@@ -42,9 +42,6 @@ public class SysMenuController extends BaseController {
     @Autowired
     private SysMenuPermissionService sysMenuPermissionService;
 
-    @Autowired
-    private TokenUtil tokenUtil;
-
     /**
      * 插入菜单信息
      *
@@ -63,7 +60,7 @@ public class SysMenuController extends BaseController {
                 .on(entity.getMenuType(), new NotNullValidatorCallback(SystemManageErrorCodeEnum.MENU_TYPE_NOT_NULL))
                 .on(entity.getMenuParentId(), new NotNullValidatorCallback(SystemManageErrorCodeEnum.MENU_PARENT_ID_NOT_NULL))
                 .doValidate().checkResult();
-        ActiveUser activeUser = tokenUtil.getActiveUser();
+        ActiveUser activeUser = DptmsSecurityUtil.get();
         entity.setCreater(activeUser.getId());
         entity.setUpdater(activeUser.getId());
         Long id = sysMenuService.insert(entity);
@@ -84,7 +81,7 @@ public class SysMenuController extends BaseController {
         ValidatorBuilder.build()
                 .on(id, new NotNullValidatorCallback(SystemManageErrorCodeEnum.ID_NOT_NULL))
                 .doValidate().checkResult();
-        ActiveUser activeUser = tokenUtil.getActiveUser();
+        ActiveUser activeUser = DptmsSecurityUtil.get();
         sysMenuService.deleteById(id, activeUser.getId());
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }
@@ -121,7 +118,7 @@ public class SysMenuController extends BaseController {
                 .on(entity.getMenuType(), new NotNullValidatorCallback(SystemManageErrorCodeEnum.MENU_TYPE_NOT_NULL))
                 .on(entity.getMenuParentId(), new NotNullValidatorCallback(SystemManageErrorCodeEnum.MENU_PARENT_ID_NOT_NULL))
                 .doValidate().checkResult();
-        ActiveUser activeUser = tokenUtil.getActiveUser();
+        ActiveUser activeUser = DptmsSecurityUtil.get();
         entity.setUpdater(activeUser.getId());
         Long count = sysMenuService.update(entity);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(count));
@@ -161,7 +158,7 @@ public class SysMenuController extends BaseController {
         ValidatorBuilder.build()
                 .on(menuId, new NotNullValidatorCallback(SystemManageErrorCodeEnum.MENU_ID_NOT_NULL))
                 .doValidate().checkResult();
-        ActiveUser activeUser = tokenUtil.getActiveUser();
+        ActiveUser activeUser = DptmsSecurityUtil.get();
         sysMenuPermissionService.assignedPer(menuId, perIds, activeUser.getId());
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }

@@ -1,5 +1,6 @@
 package com.darren1112.dptms.common.security.starter.config;
 
+import com.darren1112.dptms.common.core.constants.FilterOrderConstant;
 import com.darren1112.dptms.common.security.starter.filter.ZuulHeaderValidFilter;
 import com.darren1112.dptms.common.security.starter.properties.SecurityProperties;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class ServerSecurityConfig {
         filterRegistrationBean.setFilter(zuulHeaderValidFilter);
         filterRegistrationBean.addUrlPatterns("/*");
         //order的数值越小 则优先级越高
-        filterRegistrationBean.setOrder(0);
+        filterRegistrationBean.setOrder(FilterOrderConstant.ZUUL_HEADER_VALID_FILTER);
         filterRegistrationBean.setName("zuulHeaderValidFilter");
         return filterRegistrationBean;
     }
