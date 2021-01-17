@@ -125,14 +125,14 @@ public class SysMenuController extends BaseController {
     }
 
     /**
-     * 查询角色关联的菜单list
+     * 查询角色关联的菜单树
      *
      * @param roleId 角色id
      * @return {@link SysMenuDto}
      * @author luyuhao
      * @date 20/12/13 21:43
      */
-    @ApiOperation("查询角色关联的菜单Tree")
+    @ApiOperation("查询角色关联的菜单树")
     @GetMapping("/listRoleAssigned")
     public ResponseEntity<JsonResult<SysMenuDto>> listRoleAssigned(@RequestParam(value = "roleId", required = false) Long roleId) {
         ValidatorBuilder.build()

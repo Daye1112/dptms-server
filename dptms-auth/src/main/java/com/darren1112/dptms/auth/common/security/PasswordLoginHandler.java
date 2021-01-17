@@ -8,7 +8,6 @@ import com.darren1112.dptms.common.core.exception.BadRequestException;
 import com.darren1112.dptms.common.core.exception.BaseException;
 import com.darren1112.dptms.common.core.util.Md5Util;
 import com.darren1112.dptms.common.security.starter.core.DptmsTokenStore;
-import com.darren1112.dptms.common.security.starter.properties.SecurityProperties;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 import com.darren1112.dptms.common.spi.common.dto.LoginParam;
 import com.darren1112.dptms.common.spi.sys.dto.SysUserDto;
@@ -30,9 +29,6 @@ public class PasswordLoginHandler extends BaseUserDetails {
 
     @Autowired
     private SysUserService sysUserService;
-
-    @Autowired
-    private SecurityProperties securityProperties;
 
     @Autowired
     private DptmsTokenStore dptmsTokenStore;

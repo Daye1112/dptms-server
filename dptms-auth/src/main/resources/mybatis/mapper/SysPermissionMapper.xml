@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.darren1112.dptms.auth.dao.SysPermissionDao">
+    <!--根据用户id查询权限list-->
+    <select id="listByUserId" resultType="com.darren1112.dptms.common.spi.sys.dto.SysPermissionDto">
+        SELECT DISTINCT t7.id,
+               t7.per_name  AS perName,
+               t7.per_code  AS perCode,
+               t7.per_group AS perGroup,
+               t7.per_url   AS perUrl,
+               t7.remark,
+               t7.isvalid,
+               t7.ctime,
+               t7.creater,
+               t7.mtime,
+               t7.updater
+        FROM sys_user t1
+                 INNER JOIN sys_user_role t2 ON t2.isvalid = 1 AND t2.user_id = t1.id
+                 INNER JOIN sys_role t3 ON t3.isvalid = 1 AND t3.id = t2.role_id
+                 INNER JOIN sys_role_menu t4 ON t4.isvalid = 1 AND t4.role_id = t3.id
+                 INNER JOIN sys_menu t5 ON t5.isvalid = 1 AND t5.id = t4.menu_id
+                 INNER JOIN sys_menu_permission t6 ON t6.isvalid = 1 AND t6.menu_id = t5.id
+                 INNER JOIN sys_permission t7 ON t7.isvalid = 1 AND t7.id = t6.per_id
+        WHERE t1.isvalid = 1
+          AND t1.id = #{userId}
+    </select>
+</mapper>

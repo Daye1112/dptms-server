@@ -56,6 +56,7 @@
         <if test="param.orgName != null and param.orgName != ''">
             AND org_name LIKE concat('%', #{param.orgName}, '%')
         </if>
+        ORDER BY org_name
         LIMIT #{pageParam.startIndex}, #{pageParam.pageSize}
     </select>
     <!--分页查询组织记录-总记录数-->

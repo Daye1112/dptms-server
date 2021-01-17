@@ -3,8 +3,8 @@ package com.darren1112.dptms.auth.common.security.base;
 import com.darren1112.dptms.auth.common.security.UserDetailsService;
 import com.darren1112.dptms.common.core.exception.BadRequestException;
 import com.darren1112.dptms.common.core.exception.BaseException;
-import com.darren1112.dptms.common.spi.common.dto.LoginParam;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
+import com.darren1112.dptms.common.spi.common.dto.LoginParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 

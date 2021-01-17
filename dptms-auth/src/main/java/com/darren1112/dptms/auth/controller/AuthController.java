@@ -1,30 +1,26 @@
 package com.darren1112.dptms.auth.controller;
 
-import com.darren1112.dptms.auth.common.enums.AuthErrorCodeEnum;
-import com.darren1112.dptms.auth.common.security.PasswordLoginHandler;
+import com.darren1112.dptms.auth.service.SysMenuService;
+import com.darren1112.dptms.auth.service.SysPermissionService;
 import com.darren1112.dptms.common.core.message.JsonResult;
 import com.darren1112.dptms.common.core.util.ResponseEntityUtil;
-import com.darren1112.dptms.common.core.validate.ValidatorBuilder;
-import com.darren1112.dptms.common.core.validate.validator.callback.common.NotEmptyValidatorCallback;
-import com.darren1112.dptms.common.core.validate.validator.callback.common.NotNullValidatorCallback;
-import com.darren1112.dptms.common.security.starter.core.DptmsTokenStore;
-import com.darren1112.dptms.common.security.starter.properties.SecurityProperties;
+import com.darren1112.dptms.common.security.starter.util.DptmsSecurityUtil;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
-import com.darren1112.dptms.common.spi.common.dto.LoginParam;
+import com.darren1112.dptms.common.spi.sys.dto.SysMenuDto;
+import com.darren1112.dptms.common.spi.sys.dto.SysPermissionDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
- * 权限相关Controller
+ * 认证管理Controller
  *
  * @author luyuhao
  * @date 2020/07/20 00:06
@@ -32,58 +28,55 @@ import javax.servlet.http.HttpServletResponse;
 @Slf4j
 @Api(tags = "认证管理", description = "认证管理接口")
 @RestController
-@RequestMapping(value = "/")
+@RequestMapping(value = "/user")
 public class AuthController {
 
     @Autowired
-    private PasswordLoginHandler passwordLoginHandler;
+    private SysPermissionService sysPermissionService;
 
     @Autowired
-    private SecurityProperties securityProperties;
-
-    @Autowired
-    private DptmsTokenStore dptmsTokenStore;
+    private SysMenuService sysMenuService;
 
     /**
-     * 登录系统
+     * 获取用户信息
      *
-     * @param loginParam 登录参数
-     * @param request    请求域
-     * @param response   响应域
      * @return {@link ActiveUser}
      * @author luyuhao
-     * @date 20/11/22 21:55
+     * @date 2021/01/17 19:24
      */
-    @ApiOperation("登录系统")
-    @PostMapping("/login")
-    public ResponseEntity<JsonResult<ActiveUser>> login(LoginParam loginParam,
-                                                        HttpServletRequest request,
-                                                        HttpServletResponse response) {
-        ValidatorBuilder.build()
-                .on(loginParam.getUsername(), new NotEmptyValidatorCallback(AuthErrorCodeEnum.USERNAME_NOT_NULL))
-                .on(loginParam.getPassword(), new NotEmptyValidatorCallback(AuthErrorCodeEnum.PASSWORD_NOT_NULL))
-                .on(loginParam.getLoginType(), new NotNullValidatorCallback(AuthErrorCodeEnum.LOGIN_TYPE_NOT_NULL))
-                .doValidate().checkResult();
-        ActiveUser activeUser = passwordLoginHandler.loginHandler(loginParam, request, response);
-        return ResponseEntityUtil.ok(JsonResult.buildSuccessData(activeUser));
+    @ApiOperation("获取用户信息")
+    @GetMapping("/getInfo")
+    public ResponseEntity<JsonResult<ActiveUser>> getInfo() {
+        return ResponseEntityUtil.ok(JsonResult.buildSuccessData(DptmsSecurityUtil.get()));
     }
 
     /**
-     * 刷新accessToken
+     * 获取用户的权限
      *
-     * @param refreshToken 熟悉token
-     * @return refreshToken
+     * @return {@link SysPermissionDto}
      * @author luyuhao
-     * @date 2020/11/28 11:16
+     * @date 2021/01/17 19:34
      */
-    @ApiOperation("刷新accessToken")
-    @PostMapping("/refreshAccessToken")
-    public ResponseEntity<JsonResult<String>> refreshAccessToken(String refreshToken,
-                                                                 HttpServletResponse response) {
-        ValidatorBuilder.build()
-                .on(refreshToken, new NotEmptyValidatorCallback(AuthErrorCodeEnum.REFRESH_TOKEN_NOT_NULL))
-                .doValidate().checkResult();
-        dptmsTokenStore.refreshAccessTokenAndCookie(refreshToken, response);
-        return ResponseEntityUtil.ok(JsonResult.buildSuccess());
+    @ApiOperation("获取用户的权限")
+    @GetMapping("/listPermission")
+    public ResponseEntity<JsonResult<List<SysPermissionDto>>> listPermission() {
+        ActiveUser activeUser = DptmsSecurityUtil.get();
+        List<SysPermissionDto> resultList = sysPermissionService.listByUserId(activeUser.getId());
+        return ResponseEntityUtil.ok(JsonResult.buildSuccessData(resultList));
+    }
+
+    /**
+     * 获取用户的菜单
+     *
+     * @return {@link SysMenuDto}
+     * @author luyuhao
+     * @date 2021/01/17 19:34
+     */
+    @ApiOperation("获取用户的菜单")
+    @GetMapping("/listMenu")
+    public ResponseEntity<JsonResult<List<SysMenuDto>>> listMenu() {
+        ActiveUser activeUser = DptmsSecurityUtil.get();
+        List<SysMenuDto> resultList = sysMenuService.listMenuByUserId(activeUser.getId());
+        return ResponseEntityUtil.ok(JsonResult.buildSuccessData(resultList));
     }
 }

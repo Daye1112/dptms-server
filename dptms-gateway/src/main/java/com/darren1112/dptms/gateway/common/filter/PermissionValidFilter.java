@@ -1,10 +1,13 @@
 package com.darren1112.dptms.gateway.common.filter;
 
 import com.darren1112.dptms.common.core.constants.FileConstant;
+import com.darren1112.dptms.common.core.util.CollectionUtil;
 import com.darren1112.dptms.common.core.util.UrlUtil;
 import com.darren1112.dptms.common.security.starter.properties.SecurityProperties;
 import com.darren1112.dptms.common.security.starter.util.DptmsSecurityUtil;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
+import com.darren1112.dptms.common.spi.sys.dto.SysPermissionDto;
+import com.darren1112.dptms.gateway.remoting.AuthRemoting;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -13,6 +16,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 权限过滤器
@@ -25,8 +30,11 @@ public class PermissionValidFilter extends OncePerRequestFilter {
 
     private SecurityProperties securityProperties;
 
-    public PermissionValidFilter(SecurityProperties securityProperties) {
+    private AuthRemoting authRemoting;
+
+    public PermissionValidFilter(SecurityProperties securityProperties, AuthRemoting authRemoting) {
         this.securityProperties = securityProperties;
+        this.authRemoting = authRemoting;
     }
 
     /**
@@ -52,9 +60,27 @@ public class PermissionValidFilter extends OncePerRequestFilter {
         }
         // 获取redis中的用户信息
         ActiveUser activeUser = DptmsSecurityUtil.get();
-        // TODO 【用户权限功能完成后开发】查询权限list
-
+        // 查询权限list
+        List<SysPermissionDto> permissionList = authRemoting.listPermission().getData();
         // 判断uri是否在权限list中
+        log.info("访问权限: {}", checkPermission(permissionList, uri));
         chain.doFilter(request, response);
+    }
+
+    /**
+     * 接口访问权限验证
+     *
+     * @param permissionList 权限list
+     * @param uri            访问uri
+     * @return true/false
+     * @author luyuhao
+     * @date 2021/01/17 23:25
+     */
+    private boolean checkPermission(List<SysPermissionDto> permissionList, String uri) {
+        if (CollectionUtil.isEmpty(permissionList)) {
+            return false;
+        }
+        List<String> permissionUrlList = permissionList.stream().map(SysPermissionDto::getPerUrl).collect(Collectors.toList());
+        return UrlUtil.matchUri(uri, permissionUrlList);
     }
 }

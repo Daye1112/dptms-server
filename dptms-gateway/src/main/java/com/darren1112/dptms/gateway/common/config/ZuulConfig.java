@@ -5,6 +5,7 @@ import com.darren1112.dptms.common.security.starter.core.DptmsTokenValidator;
 import com.darren1112.dptms.common.security.starter.filter.DptmsTokenValidFilter;
 import com.darren1112.dptms.common.security.starter.properties.SecurityProperties;
 import com.darren1112.dptms.gateway.common.filter.PermissionValidFilter;
+import com.darren1112.dptms.gateway.remoting.AuthRemoting;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -59,8 +60,8 @@ public class ZuulConfig {
     }
 
     @Bean
-    public FilterRegistrationBean permissionValidateFilterBean(SecurityProperties securityProperties) {
-        PermissionValidFilter permissionValidateFilter = new PermissionValidFilter(securityProperties);
+    public FilterRegistrationBean permissionValidateFilterBean(SecurityProperties securityProperties, AuthRemoting authRemoting) {
+        PermissionValidFilter permissionValidateFilter = new PermissionValidFilter(securityProperties, authRemoting);
         FilterRegistrationBean<PermissionValidFilter> filterRegistrationBean = new FilterRegistrationBean<>();
         filterRegistrationBean.setFilter(permissionValidateFilter);
         filterRegistrationBean.addUrlPatterns("/*");

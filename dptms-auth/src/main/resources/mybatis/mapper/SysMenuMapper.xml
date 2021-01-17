@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.darren1112.dptms.auth.dao.SysMenuDao">
+    <!--获取用户的菜单-->
+    <select id="listMenuByUserId" resultType="com.darren1112.dptms.common.spi.sys.dto.SysMenuDto">
+        SELECT DISTINCT t5.id,
+                        t5.menu_name      AS menuName,
+                        t5.menu_code      AS menuCode,
+                        t5.menu_type      AS menuType,
+                        t5.menu_parent_id AS menuParentId,
+                        t5.remark,
+                        t5.isvalid,
+                        t5.ctime,
+                        t5.creater,
+                        t5.mtime,
+                        t5.updater
+        FROM sys_user t1
+                 INNER JOIN sys_user_role t2 ON t2.isvalid = 1 AND t2.user_id = t1.id
+                 INNER JOIN sys_role t3 ON t3.isvalid = 1 AND t3.id = t2.role_id
+                 INNER JOIN sys_role_menu t4 ON t4.isvalid = 1 AND t4.role_id = t3.id
+                 INNER JOIN sys_menu t5 ON t5.isvalid = 1 AND t5.id = t4.menu_id
+        WHERE t1.isvalid = 1
+          AND t1.id = #{userId}
+    </select>
+</mapper>

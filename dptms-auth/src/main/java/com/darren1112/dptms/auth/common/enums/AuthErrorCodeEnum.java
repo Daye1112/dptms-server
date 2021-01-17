@@ -20,8 +20,7 @@ public enum AuthErrorCodeEnum implements BaseEnum {
     USERNAME_NOT_NULL(HttpStatus.BAD_REQUEST, "账号不能为空"),
     PASSWORD_NOT_NULL(HttpStatus.BAD_REQUEST, "密码不能为空"),
     LOGIN_TYPE_NOT_NULL(HttpStatus.BAD_REQUEST, "登录类型不能为空"),
-    REFRESH_TOKEN_NOT_NULL(HttpStatus.BAD_REQUEST, "refreshToken不能为空")
-    ;
+    REFRESH_TOKEN_NOT_NULL(HttpStatus.BAD_REQUEST, "refreshToken不能为空");
 
     private Integer code;
     private String message;

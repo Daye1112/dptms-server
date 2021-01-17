@@ -148,6 +148,18 @@ public class DptmsTokenStore {
     /**
      * 从request中获取accessToken
      *
+     * @return {@link String accessToken}
+     * @author luyuhao
+     * @date 20/12/10 02:34
+     */
+    public String getAccessToken() {
+        HttpServletRequest request = RequestUtil.getHttpServletRequest();
+        return getAccessToken(request);
+    }
+
+    /**
+     * 从request中获取accessToken
+     *
      * @param request 请求域
      * @return {@link String accessToken}
      * @author luyuhao
@@ -159,6 +171,18 @@ public class DptmsTokenStore {
             accessToken = RequestUtil.getHeaderByName(SecurityConstant.ACCESS_TOKEN_KEY);
         }
         return accessToken;
+    }
+
+    /**
+     * 从request中获取refresh Token
+     *
+     * @return {@link String refresh Token}
+     * @author luyuhao
+     * @date 20/12/10 02:34
+     */
+    public String getRefreshToken() {
+        HttpServletRequest request = RequestUtil.getHttpServletRequest();
+        return getRefreshToken(request);
     }
 
     /**

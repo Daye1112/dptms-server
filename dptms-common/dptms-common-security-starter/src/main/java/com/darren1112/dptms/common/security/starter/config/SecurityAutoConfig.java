@@ -1,6 +1,7 @@
 package com.darren1112.dptms.common.security.starter.config;
 
 import com.darren1112.dptms.common.core.constants.FilterOrderConstant;
+import com.darren1112.dptms.common.core.constants.SecurityConstant;
 import com.darren1112.dptms.common.redis.starter.util.RedisUtil;
 import com.darren1112.dptms.common.security.starter.core.DptmsTokenStore;
 import com.darren1112.dptms.common.security.starter.core.DptmsTokenValidator;
@@ -26,10 +27,12 @@ public class SecurityAutoConfig {
     private SecurityProperties securityProperties;
 
     @Bean
-    public RequestInterceptor feignRequestInterceptor() {
+    public RequestInterceptor feignRequestInterceptor(DptmsTokenStore dptmsTokenStore) {
         return requestTemplate -> {
             String gatewayToken = new String(Base64Utils.encode(securityProperties.getHeaderValue().getBytes()));
             requestTemplate.header(securityProperties.getHeaderKey(), gatewayToken);
+            requestTemplate.header(SecurityConstant.REFRESH_TOKEN_KEY, dptmsTokenStore.getRefreshToken());
+            requestTemplate.header(SecurityConstant.ACCESS_TOKEN_KEY, dptmsTokenStore.getAccessToken());
         };
     }
 
@@ -51,7 +54,7 @@ public class SecurityAutoConfig {
         filterRegistrationBean.addUrlPatterns("/*");
         //order的数值越小 则优先级越高
         filterRegistrationBean.setOrder(FilterOrderConstant.ADD_USER_FILTER);
-        filterRegistrationBean.setName("zuulHeaderValidFilter");
+        filterRegistrationBean.setName("addUserFilter");
         return filterRegistrationBean;
     }
 }
