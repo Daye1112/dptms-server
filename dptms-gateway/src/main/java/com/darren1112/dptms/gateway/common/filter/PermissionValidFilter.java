@@ -1,12 +1,15 @@
 package com.darren1112.dptms.gateway.common.filter;
 
 import com.darren1112.dptms.common.core.constants.FileConstant;
+import com.darren1112.dptms.common.core.message.JsonResult;
 import com.darren1112.dptms.common.core.util.CollectionUtil;
+import com.darren1112.dptms.common.core.util.ResponseUtil;
 import com.darren1112.dptms.common.core.util.UrlUtil;
 import com.darren1112.dptms.common.security.starter.properties.SecurityProperties;
 import com.darren1112.dptms.common.security.starter.util.DptmsSecurityUtil;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 import com.darren1112.dptms.common.spi.sys.dto.SysPermissionDto;
+import com.darren1112.dptms.gateway.common.enums.GatewayErrorCodeEnum;
 import com.darren1112.dptms.gateway.remoting.AuthRemoting;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -63,7 +66,11 @@ public class PermissionValidFilter extends OncePerRequestFilter {
         // 查询权限list
         List<SysPermissionDto> permissionList = authRemoting.listPermission().getData();
         // 判断uri是否在权限list中
-        log.info("访问权限: {}", checkPermission(permissionList, uri));
+        if (!checkPermission(permissionList, uri)) {
+            log.info("用户: {} 访问无权限接口 {}", activeUser.getUsername(), uri);
+            ResponseUtil.setJsonResult(response, JsonResult.buildErrorEnum(GatewayErrorCodeEnum.FORBIDDEN));
+            return;
+        }
         chain.doFilter(request, response);
     }
 

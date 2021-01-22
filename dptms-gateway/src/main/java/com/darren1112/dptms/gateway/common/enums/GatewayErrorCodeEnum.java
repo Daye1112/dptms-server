@@ -14,6 +14,7 @@ public enum GatewayErrorCodeEnum implements BaseEnum {
     /**
      * 网关错误状态码
      */
+    FORBIDDEN(HttpStatus.FORBIDDEN, "无访问权限"),
     ;
 
     private Integer code;
