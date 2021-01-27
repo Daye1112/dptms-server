@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.darren1112.dptms.auth.dao.SysMenuPermissionDao">
+    <!--查询菜单关联的权限list-->
+    <select id="listMenuAssigned" parameterType="java.lang.Long"
+            resultType="com.darren1112.dptms.common.spi.sys.dto.SysPermissionDto">
+        SELECT t1.id,
+               t1.per_name  AS perName,
+               t1.per_code  AS perCode,
+               t1.per_group AS perGroup,
+               t1.per_url   AS perUrl,
+               t1.remark,
+               t1.isvalid,
+               t1.ctime,
+               t1.creater,
+               t1.mtime,
+               t1.updater,
+               CASE WHEN t2.menu_id IS NULL THEN 0
+                    ELSE 1 END AS isAssigned
+        FROM sys_permission t1
+                 LEFT JOIN sys_menu_permission t2 ON t2.isvalid = 1 AND t2.per_id = t1.id AND t2.menu_id = #{menuId}
+        WHERE t1.isvalid = 1
+    </select>
+    <!--根据菜单id删除记录-->
+    <update id="deleteByMenuId">
+        UPDATE sys_menu_permission
+        SET mtime   = now(),
+            isvalid = 0,
+            updater = #{updater}
+        WHERE isvalid = 1
+            AND menu_id = #{menuId}
+    </update>
+    <!--批量插入菜单权限信息-->
+    <insert id="batchInsert">
+        INSERT INTO sys_menu_permission(per_id, menu_id, remark, isvalid, ctime, creater, mtime, updater)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.perId}, #{item.menuId}, #{item.remark}, 1, now(), #{item.creater}, now(), #{item.updater})
+        </foreach>
+    </insert>
+    <!--根据菜单id查询权限list-->
+    <select id="listByMenuId" resultType="com.darren1112.dptms.common.spi.sys.dto.SysPermissionDto">
+        SELECT t1.id,
+               t1.per_name  AS perName,
+               t1.per_code  AS perCode,
+               t1.per_group AS perGroup,
+               t1.per_url   AS perUrl,
+               t1.remark,
+               t1.isvalid,
+               t1.ctime,
+               t1.creater,
+               t1.mtime,
+               t1.updater
+        FROM sys_permission t1
+                 LEFT JOIN sys_menu_permission t2 ON t1.id = t2.per_id AND t2.isvalid = 1
+        WHERE t1.isvalid = 1
+          AND t2.menu_id = #{menuId}
+        ORDER BY id
+    </select>
+</mapper>

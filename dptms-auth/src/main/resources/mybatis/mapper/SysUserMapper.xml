@@ -1,64 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.darren1112.dptms.auth.dao.SysUserDao">
+    <!--新增用户-->
     <insert id="insert" keyColumn="id" keyProperty="id"
             parameterType="com.darren1112.dptms.common.spi.sys.entity.SysUserEntity" useGeneratedKeys="true">
-        INSERT INTO sys_user (username, `password`, salt, real_name,
-                              gender, phone_number, email, pwd_update_time, file_id,
-                              remark, isvalid, ctime, creater, mtime, updater)
-        VALUES (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR},
-                #{realName,jdbcType=VARCHAR},
-                #{gender,jdbcType=TINYINT}, #{phoneNumber,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},
-                now(), #{fileId,jdbcType=BIGINT}, #{remark,jdbcType=VARCHAR}, 1,
-                now(), #{creater,jdbcType=BIGINT}, now(), #{updater,jdbcType=BIGINT})
+        INSERT INTO sys_user(username, password, salt, real_name, gender, phone_number, email, last_login_time,
+                             pwd_update_time, file_id, is_locked, remark, isvalid, ctime, creater, mtime, updater)
+        VALUES (#{username}, #{password}, #{salt}, #{realName}, #{gender}, #{phoneNumber},
+                #{email}, null, now(), #{fileId}, #{isLocked}, #{remark}, 1, now(), #{creater}, now(), #{updater})
     </insert>
-    <update id="update" parameterType="com.darren1112.dptms.common.spi.sys.dto.SysUserDto">
-        UPDATE sys_user
-        SET
-        mtime = now()
-        <if test="username != null and username != ''">
-            ,username = #{username,jdbcType=VARCHAR}
-        </if>
-        <if test="password != null and password != ''">
-            ,`password` = #{password,jdbcType=VARCHAR}
-        </if>
-        <if test="salt != null and salt != ''">
-            ,salt = #{salt,jdbcType=VARCHAR}
-        </if>
-        <if test="realName != null and realName != ''">
-            ,real_name = #{realName,jdbcType=VARCHAR}
-        </if>
-        <if test="gender != null">
-            ,gender = #{gender,jdbcType=TINYINT}
-        </if>
-        <if test="phoneNumber != null and phoneNumber != ''">
-            ,phone_number = #{phoneNumer,jdbcType=VARCHAR}
-        </if>
-        <if test="email != null and email != ''">
-            ,email = #{email,jdbcType=VARCHAR}
-        </if>
-        <if test="lastLoginTime != null">
-            ,last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP}
-        </if>
-        <if test="pwdUpdateTime != null">
-            ,pwd_update_time = #{pwdUpdateTime,jdbcType=TIMESTAMP}
-        </if>
-        <if test="fileId != null">
-            ,file_id = #{fileId,jdbcType=BIGINT}
-        </if>
-        <if test="isLocked != null">
-            ,is_locked = #{isLocked,jdbcType=TINYINT}
-        </if>
-        <if test="remark != null and remark != ''">
-            ,remark = #{remark,jdbcType=VARCHAR}
-        </if>
-        <if test="updateBy != null">
-            ,updater = #{updater,jdbcType=BIGINT}
-        </if>
-        WHERE id = #{id,jdbcType=BIGINT}
-        AND isvalid = 1
-    </update>
-
     <select id="getByUsername" resultType="com.darren1112.dptms.common.spi.sys.dto.SysUserDto">
         SELECT id,
                username,
@@ -87,6 +37,116 @@
         UPDATE sys_user
         SET mtime           = now(),
             last_login_time = now()
+        WHERE isvalid = 1
+          AND id = #{id}
+    </update>
+    <select id="getById" resultType="com.darren1112.dptms.common.spi.sys.dto.SysUserDto">
+        SELECT id,
+               username,
+               password,
+               salt,
+               real_name       AS realname,
+               gender,
+               phone_number    AS phonenumber,
+               email,
+               last_login_time AS lastlogintime,
+               pwd_update_time AS pwdupdatetime,
+               file_id         AS fileid,
+               is_locked       AS islocked,
+               remark,
+               isvalid,
+               ctime,
+               creater,
+               mtime,
+               updater
+        FROM sys_user
+        WHERE isvalid = 1
+          AND id = #{id}
+    </select>
+    <!--统计是否重复-->
+    <select id="countByRepeat" parameterType="com.darren1112.dptms.common.spi.sys.dto.SysUserDto"
+            resultType="java.lang.Long">
+        SELECT count(1)
+        FROM sys_user
+        WHERE isvalid = 1
+        AND username = #{username}
+        <if test="isUpdate != null and isUpdate == true">
+            AND id != #{id}
+        </if>
+    </select>
+    <!--分页查询用户信息-->
+    <select id="listPage" resultType="com.darren1112.dptms.common.spi.sys.dto.SysUserDto">
+        SELECT id,
+        username,
+        password,
+        salt,
+        real_name       AS realName,
+        gender,
+        phone_number    AS phoneNumber,
+        email,
+        last_login_time AS lastLoginTime,
+        pwd_update_time AS pwdUpdateTime,
+        file_id         AS fileId,
+        is_locked       AS isLocked,
+        remark,
+        isvalid,
+        ctime,
+        creater,
+        mtime,
+        updater
+        FROM sys_user
+        WHERE isvalid = 1
+        <if test="dto.username != null and dto.username != ''">
+            AND username LIKE concat('%', #{dto.username}, '%')
+        </if>
+        <if test="dto.realName != null and dto.realName != ''">
+            AND real_name LIKE concat('%', #{dto.realName}, '%')
+        </if>
+        ORDER BY username
+        LIMIT #{pageParam.startIndex}, #{pageParam.pageSize}
+    </select>
+    <!--分页查询用户信息-记录数-->
+    <select id="listPageCount" parameterType="com.darren1112.dptms.common.spi.sys.dto.SysUserDto"
+            resultType="java.lang.Long">
+        SELECT count(1)
+        FROM sys_user
+        WHERE isvalid = 1
+        <if test="username != null and username != ''">
+            AND username LIKE concat('%', #{username}, '%')
+        </if>
+        <if test="realName != null and realName != ''">
+            AND real_name LIKE concat('%', #{realName}, '%')
+        </if>
+    </select>
+    <!--更新用户信息-->
+    <update id="update"
+            parameterType="com.darren1112.dptms.common.spi.sys.entity.SysUserEntity">
+        UPDATE sys_user
+        SET mtime        = now(),
+            updater      = #{updater},
+            username     = #{username},
+            real_name    = #{realName},
+            gender       = #{gender},
+            phone_number = #{phoneNumber},
+            email        = #{email}
+        WHERE isvalid = 1
+          AND id = #{id}
+    </update>
+    <!--根据id删除记录-->
+    <delete id="deleteById">
+        UPDATE sys_user
+        SET mtime   = now(),
+            updater = #{updater},
+            isvalid = 0
+        WHERE isvalid = 1
+          AND id = #{id}
+    </delete>
+    <!--更新用户锁定状态-->
+    <update id="updateLock" parameterType="com.darren1112.dptms.common.spi.sys.entity.SysUserEntity">
+        UPDATE sys_user
+        SET mtime     = now(),
+            updater   = #{updater},
+            is_locked = #{isLocked}
         WHERE isvalid = 1
           AND id = #{id}
     </update>

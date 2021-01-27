@@ -26,6 +26,6 @@ public interface AuthRemoting {
      * @author luyuhao
      * @date 2021/01/17 19:34
      */
-    @GetMapping("/user/listPermission")
+    @GetMapping("/activeUser/listPermission")
     JsonResult<List<SysPermissionDto>> listPermission();
 }
