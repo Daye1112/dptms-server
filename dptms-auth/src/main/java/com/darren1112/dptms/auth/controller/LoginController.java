@@ -15,6 +15,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -65,21 +66,20 @@ public class LoginController {
     }
 
     /**
-     * 刷新accessToken
+     * 登出系统
      *
-     * @param refreshToken 熟悉token
-     * @return refreshToken
+     * @param request  请求域
+     * @param response 响应域
+     * @return {@link ActiveUser}
      * @author luyuhao
-     * @date 2020/11/28 11:16
+     * @date 20/11/22 21:55
      */
-    @ApiOperation("刷新accessToken")
-    @PostMapping("/refreshAccessToken")
-    public ResponseEntity<JsonResult<String>> refreshAccessToken(String refreshToken,
-                                                                 HttpServletResponse response) {
-        ValidatorBuilder.build()
-                .on(refreshToken, new NotEmptyValidatorCallback(AuthErrorCodeEnum.REFRESH_TOKEN_NOT_NULL))
-                .doValidate().checkResult();
-        dptmsTokenStore.refreshAccessTokenAndCookie(refreshToken, response);
+    @ApiOperation("登出系统")
+    @GetMapping("/logout")
+    public ResponseEntity<JsonResult<ActiveUser>> logout(HttpServletRequest request,
+                                                         HttpServletResponse response) {
+        dptmsTokenStore.removeTokenAndCookie(request, response);
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }
+
 }

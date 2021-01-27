@@ -50,6 +50,7 @@ public class PermissionValidFilter extends OncePerRequestFilter {
     private boolean shouldNotFilter(String uri) {
         //白名单校验
         return UrlUtil.matchUri(uri, securityProperties.getAnonUris())
+                || UrlUtil.matchUri(uri, securityProperties.getAnonPermissionUris())
                 || UrlUtil.matchUri(uri, FileConstant.STATIC_PATTERNS);
     }
 
@@ -66,11 +67,11 @@ public class PermissionValidFilter extends OncePerRequestFilter {
         // 查询权限list
         List<SysPermissionDto> permissionList = authRemoting.listPermission().getData();
         // 判断uri是否在权限list中
-        // if (!checkPermission(permissionList, uri)) {
-        //     log.info("用户: {} 访问无权限接口 {}", activeUser.getUsername(), uri);
-        //     ResponseUtil.setJsonResult(response, JsonResult.buildErrorEnum(GatewayErrorCodeEnum.FORBIDDEN));
-        //     return;
-        // }
+        if (!checkPermission(permissionList, uri)) {
+            log.info("用户: {} 访问无权限接口 {}", activeUser.getUsername(), uri);
+            ResponseUtil.setJsonResult(response, JsonResult.buildErrorEnum(GatewayErrorCodeEnum.FORBIDDEN));
+            return;
+        }
         chain.doFilter(request, response);
     }
 

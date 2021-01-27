@@ -30,6 +30,12 @@ public class SecurityProperties {
     private String[] anonUris;
 
     /**
+     * 免权限认证资源路径，支持通配符
+     * 多个值时使用逗号分隔
+     */
+    private String[] anonPermissionUris;
+
+    /**
      * token有效期(s)
      */
     private long accessTokenExpired = 60 * 15;

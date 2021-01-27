@@ -245,4 +245,88 @@ public class DptmsTokenStore {
         saveAccessTokenCookie(accessToken, response);
         saveRefreshTokenCookie(refreshToken, response);
     }
+
+    /**
+     * 删除token
+     *
+     * @param request  请求域
+     * @param response 响应域
+     * @author luyuhao
+     * @date 2021/01/28 01:03
+     */
+    public void removeTokenAndCookie(HttpServletRequest request, HttpServletResponse response) {
+        String accessToken = getAccessToken(request);
+        String refreshToken = getRefreshToken(request);
+        removeToken(accessToken, refreshToken);
+        removeTokenCookie(response);
+    }
+
+    /**
+     * 删除cookie中的token
+     *
+     * @param response 响应域
+     * @author luyuhao
+     * @date 2021/01/28 01:07
+     */
+    private void removeTokenCookie(HttpServletResponse response) {
+        removeAccessTokenCookie(response);
+        removeRefreshTokenCookie(response);
+    }
+
+    /**
+     * 删除cookie中的refreshToken
+     *
+     * @param response 响应域
+     * @author luyuhao
+     * @date 2021/01/28 01:08
+     */
+    private void removeRefreshTokenCookie(HttpServletResponse response) {
+        CookieUtil.deleteCookie(SecurityConstant.REFRESH_TOKEN_KEY, response);
+    }
+
+    /**
+     * 删除cookie中的accessToken
+     *
+     * @param response 响应域
+     * @author luyuhao
+     * @date 2021/01/28 01:08
+     */
+    private void removeAccessTokenCookie(HttpServletResponse response) {
+        CookieUtil.deleteCookie(SecurityConstant.ACCESS_TOKEN_KEY, response);
+    }
+
+    /**
+     * 删除token
+     *
+     * @param accessToken  accessToken
+     * @param refreshToken refreshToken
+     * @author luyuhao
+     * @date 2021/01/28 01:05
+     */
+    private void removeToken(String accessToken, String refreshToken) {
+        removeAccessToken(accessToken);
+        removeRefreshToken(refreshToken);
+    }
+
+    /**
+     * 删除refreshToken
+     *
+     * @param refreshToken refreshToken
+     * @author luyuhao
+     * @date 2021/01/28 01:06
+     */
+    private void removeRefreshToken(String refreshToken) {
+        redisUtil.delete(refreshToken);
+    }
+
+    /**
+     * 删除accessToken
+     *
+     * @param accessToken accessToken
+     * @author luyuhao
+     * @date 2021/01/28 01:06
+     */
+    private void removeAccessToken(String accessToken) {
+        redisUtil.delete(accessToken);
+    }
 }

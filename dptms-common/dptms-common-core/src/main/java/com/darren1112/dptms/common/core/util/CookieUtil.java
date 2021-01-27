@@ -70,4 +70,19 @@ public class CookieUtil {
         }
         return null;
     }
+
+    /**
+     * 删除cookie
+     *
+     * @param cookieName cookie名
+     * @param response   响应域
+     * @author luyuhao
+     * @date 2021/01/28 01:10
+     */
+    public static void deleteCookie(String cookieName, HttpServletResponse response) {
+        Cookie cookie = new Cookie(cookieName, null);
+        cookie.setMaxAge(0);
+        cookie.setPath("/");
+        response.addCookie(cookie);
+    }
 }
