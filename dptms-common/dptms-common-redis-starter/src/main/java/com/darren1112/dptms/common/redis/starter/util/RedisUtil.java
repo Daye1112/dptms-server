@@ -40,7 +40,14 @@ public class RedisUtil {
     /**
      * 根据前缀匹配所有key
      */
-    public Set<String> getKeysByPrefix(String prefix) {
+    public Set<String> getKeys(String prefix) {
+        return getKeysWithKeyPrefix(keyPrefix, prefix);
+    }
+
+    /**
+     * 根据前缀匹配所有key
+     */
+    public Set<String> getKeysWithKeyPrefix(String keyPrefix, String prefix) {
         Set<String> keys = redisTemplate.keys(keyPrefix + prefix + "*");
         return Optional.ofNullable(keys)
                 .orElse(Collections.emptySet());
@@ -50,7 +57,7 @@ public class RedisUtil {
      * 批量删除缓存
      */
     public void batchDeleteByPrefix(String prefix) {
-        redisTemplate.delete(getKeysByPrefix(keyPrefix + prefix));
+        redisTemplate.delete(getKeys(keyPrefix + prefix));
     }
 
     /**
@@ -77,6 +84,17 @@ public class RedisUtil {
      * @return 时间(秒) 返回0代表为永久有效
      */
     public long getExpire(String key) {
+        return getExpireWithKeyPrefix(keyPrefix, key);
+    }
+
+    /**
+     * 根据key 获取过期时间
+     *
+     * @param key       键 不能为null
+     * @param keyPrefix key前缀
+     * @return 时间(秒) 返回0代表为永久有效
+     */
+    public long getExpireWithKeyPrefix(String keyPrefix, String key) {
         Long res = redisTemplate.getExpire(keyPrefix + key, TimeUnit.SECONDS);
         return Optional.ofNullable(res)
                 .orElse(EXPIRED);
@@ -103,14 +121,25 @@ public class RedisUtil {
      *
      * @param key 可以传一个值 或多个
      */
+    public void delete(Object... key) {
+        deleteWithKeyPrefix(keyPrefix, key);
+    }
+
+    /**
+     * 删除缓存
+     *
+     * @param keyPrefix key前缀
+     * @param key       可以传一个值 或多个
+     */
     @SuppressWarnings("unchecked")
-    public void delete(String... key) {
+    public void deleteWithKeyPrefix(String keyPrefix, Object... key) {
         if (key != null && key.length > 0) {
             if (key.length == 1) {
                 redisTemplate.delete(keyPrefix + key[0]);
             } else {
                 List<String> keyList = new ArrayList<>();
-                for (String s : key) {
+                for (Object obj : key) {
+                    String s = obj.toString();
                     keyList.add(keyPrefix + s);
                 }
                 redisTemplate.delete(CollectionUtils.arrayToList(keyList));
@@ -125,6 +154,17 @@ public class RedisUtil {
      * @return 值
      */
     public Object get(String key) {
+        return getWithKeyPrefix(keyPrefix, key);
+    }
+
+    /**
+     * 普通缓存获取
+     *
+     * @param key       键
+     * @param keyPrefix key前缀
+     * @return 值
+     */
+    public Object getWithKeyPrefix(String keyPrefix, String key) {
         return redisTemplate.opsForValue().get(keyPrefix + key);
     }
 
@@ -133,7 +173,6 @@ public class RedisUtil {
      *
      * @param key   键
      * @param value 值
-     * @return true成功 false失败
      */
     public void set(String key, Object value) {
         try {
@@ -150,9 +189,20 @@ public class RedisUtil {
      * @param key   键
      * @param value 值
      * @param time  时间(秒) time要大于0 如果time小于等于0 将设置无限期
-     * @return true成功 false 失败
      */
     public void set(String key, Object value, long time) {
+        setWithKeyPrefix(keyPrefix, key, value, time);
+    }
+
+    /**
+     * 普通缓存放入并设置时间
+     *
+     * @param keyPrefix 键前缀
+     * @param key       键
+     * @param value     值
+     * @param time      时间(秒) time要大于0 如果time小于等于0 将设置无限期
+     */
+    public void setWithKeyPrefix(String keyPrefix, String key, Object value, long time) {
         try {
             if (time > 0) {
                 redisTemplate.opsForValue().set(keyPrefix + key, value, time, TimeUnit.SECONDS);

@@ -15,6 +15,10 @@ public enum SystemManageErrorCodeEnum implements BaseEnum {
      * 系统管理错误状态码
      */
     ID_NOT_NULL(HttpStatus.BAD_REQUEST, "id不能为空"),
+    REDIS_KEY_NOT_NULL(HttpStatus.BAD_REQUEST, "缓存键值不能为空"),
+    REDIS_KEY_PREFIX_NOT_NULL(HttpStatus.BAD_REQUEST, "缓存前缀不能为空"),
+    REDIS_VALUE_NOT_NULL(HttpStatus.BAD_REQUEST, "缓存值不能为空"),
+    REDIS_KEY_EXPIRED_NOT_NULL(HttpStatus.BAD_REQUEST, "缓存有效期不能为空"),
     ;
 
     private Integer code;

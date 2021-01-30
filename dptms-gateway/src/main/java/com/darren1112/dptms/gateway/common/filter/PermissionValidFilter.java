@@ -5,6 +5,7 @@ import com.darren1112.dptms.common.core.message.JsonResult;
 import com.darren1112.dptms.common.core.util.CollectionUtil;
 import com.darren1112.dptms.common.core.util.ResponseUtil;
 import com.darren1112.dptms.common.core.util.UrlUtil;
+import com.darren1112.dptms.common.security.starter.enums.SecurityEnum;
 import com.darren1112.dptms.common.security.starter.properties.SecurityProperties;
 import com.darren1112.dptms.common.security.starter.util.DptmsSecurityUtil;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
@@ -62,17 +63,22 @@ public class PermissionValidFilter extends OncePerRequestFilter {
             chain.doFilter(request, response);
             return;
         }
-        // 获取redis中的用户信息
-        ActiveUser activeUser = DptmsSecurityUtil.get();
-        // 查询权限list
-        List<SysPermissionDto> permissionList = authRemoting.listPermission().getData();
-        // 判断uri是否在权限list中
-        if (!checkPermission(permissionList, uri)) {
-            log.info("用户: {} 访问无权限接口 {}", activeUser.getUsername(), uri);
-            ResponseUtil.setJsonResult(response, JsonResult.buildErrorEnum(GatewayErrorCodeEnum.FORBIDDEN));
-            return;
+        try {
+            // 获取redis中的用户信息
+            ActiveUser activeUser = DptmsSecurityUtil.get();
+            // 查询权限list
+            List<SysPermissionDto> permissionList = authRemoting.listPermission().getData();
+            // 判断uri是否在权限list中
+            if (!checkPermission(permissionList, uri)) {
+                log.info("用户: {} 访问无权限接口 {}", activeUser.getUsername(), uri);
+                ResponseUtil.setJsonResult(response, JsonResult.buildErrorEnum(GatewayErrorCodeEnum.FORBIDDEN));
+                return;
+            }
+            chain.doFilter(request, response);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            ResponseUtil.setJsonResult(response, JsonResult.buildErrorEnum(SecurityEnum.PERMISSION_VALID_ERROR));
         }
-        chain.doFilter(request, response);
     }
 
     /**

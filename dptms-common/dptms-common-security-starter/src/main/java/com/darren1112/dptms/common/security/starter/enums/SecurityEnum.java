@@ -15,7 +15,9 @@ public enum SecurityEnum implements BaseEnum {
      * 安全校验错误状态码
      */
     NOT_LOGIN(HttpStatus.UNAUTHORIZED, "请先登录"),
-    TOKEN_VALID_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "token校验异常，请联系管理员");
+    TOKEN_VALID_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "token校验异常，请联系管理员"),
+    PERMISSION_VALID_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "权限校验异常，请联系管理员")
+    ;
 
     private Integer code;
     private String message;

@@ -24,5 +24,9 @@ public class SecurityConstant {
      * refresh token redis key prefix
      */
     public static final String REDIS_REFRESH_TOKEN_PREFIX = "refreshToken:";
+    /**
+     * user refresh token redis key prefix
+     */
+    public static final String REDIS_USER_REFRESH_TOKEN_PREFIX = "activeUser:";
 
 }
