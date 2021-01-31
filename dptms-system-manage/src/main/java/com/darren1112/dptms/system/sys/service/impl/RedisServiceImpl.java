@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
@@ -37,9 +36,18 @@ public class RedisServiceImpl extends BaseService implements RedisService {
      */
     @Override
     public PageBean<SysRedisDto> listPage(String keyPrefix, PageParam pageParam) {
+        // 查询keys，并进行排序分页
         Set<String> keySet = redisUtil.getKeysWithKeyPrefix("", keyPrefix);
+        List<String> keyList = new ArrayList<>(keySet);
+        Long count = (long) keyList.size();
+        keyList.sort(String::compareTo);
+        int endIndex = pageParam.getStartIndex() + pageParam.getPageSize();
+        endIndex = endIndex > keyList.size() ? keyList.size() : endIndex;
+        keyList = keyList.subList(pageParam.getStartIndex(), endIndex);
+
+        // 查询value和有效期
         List<SysRedisDto> list = new ArrayList<>();
-        for (String key : keySet) {
+        for (String key : keyList) {
             Object value = redisUtil.getWithKeyPrefix("", key);
             long expire = redisUtil.getExpireWithKeyPrefix("", key);
             SysRedisDto subSysRedisDto = new SysRedisDto();
@@ -48,11 +56,6 @@ public class RedisServiceImpl extends BaseService implements RedisService {
             subSysRedisDto.setExpired(expire);
             list.add(subSysRedisDto);
         }
-        Long count = (long) list.size();
-        list.sort(Comparator.comparing(SysRedisDto::getKey));
-        int endIndex = pageParam.getStartIndex() + pageParam.getPageSize();
-        endIndex = endIndex > list.size() ? list.size() : endIndex;
-        list = list.subList(pageParam.getStartIndex(), endIndex);
         return createPageBean(pageParam, count, list);
     }
 
