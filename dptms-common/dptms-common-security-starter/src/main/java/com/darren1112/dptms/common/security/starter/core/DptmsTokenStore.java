@@ -88,6 +88,18 @@ public class DptmsTokenStore {
     }
 
     /**
+     * 获取当前用户的最新refreshToken
+     *
+     * @param activeUser 用户信息
+     * @author luyuhao
+     * @date 2021/01/30 23:36
+     */
+    public String getUserRefreshToken(ActiveUser activeUser) {
+        // 设置当前用户的最新refreshToken
+        return Optional.ofNullable(redisUtil.get(SecurityConstant.REDIS_USER_REFRESH_TOKEN_PREFIX + ":" + activeUser.getId())).map(Object::toString).orElse(null);
+    }
+
+    /**
      * 获取用户信息
      *
      * @param refreshToken refreshToken
@@ -331,7 +343,9 @@ public class DptmsTokenStore {
      * @date 2021/01/28 01:06
      */
     private void removeRefreshToken(String refreshToken) {
-        redisUtil.delete(refreshToken);
+        if (StringUtil.isNotBlank(refreshToken)) {
+            redisUtil.delete(refreshToken);
+        }
     }
 
     /**
@@ -342,6 +356,8 @@ public class DptmsTokenStore {
      * @date 2021/01/28 01:06
      */
     private void removeAccessToken(String accessToken) {
-        redisUtil.delete(accessToken);
+        if (StringUtil.isNotBlank(accessToken)) {
+            redisUtil.delete(accessToken);
+        }
     }
 }

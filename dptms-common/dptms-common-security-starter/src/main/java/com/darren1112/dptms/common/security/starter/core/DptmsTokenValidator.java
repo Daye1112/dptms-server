@@ -54,6 +54,7 @@ public class DptmsTokenValidator {
         } else {
             // accessToken和refreshToken均无效 => 打回
             // accessToken有效, refreshToken无效 => 打回
+            dptmsTokenStore.removeTokenAndCookie(request, response);
             flag = false;
         }
         if (flag) {
@@ -62,5 +63,30 @@ public class DptmsTokenValidator {
             request.setAttribute(SecurityConstant.REFRESH_TOKEN_KEY, refreshToken);
         }
         return flag;
+    }
+
+    /**
+     * 重复登录校验
+     *
+     * @param request  请求域
+     * @param response 响应域
+     * @return true/false
+     * @author luyuhao
+     * @date 2021/01/31 19:08
+     */
+    public boolean repeatLoginValidHandle(HttpServletRequest request, HttpServletResponse response) {
+        String refreshToken = dptmsTokenStore.getRefreshToken(request);
+        if (StringUtil.isBlank(refreshToken)) {
+            return false;
+        }
+        ActiveUser activeUser = dptmsTokenStore.getActiveUser(refreshToken);
+        String userRefreshToken = dptmsTokenStore.getUserRefreshToken(activeUser);
+        if (!userRefreshToken.equals(refreshToken)) {
+            // 当前用户被挤下线，删除当前的token
+            dptmsTokenStore.removeTokenAndCookie(request, response);
+            return false;
+        } else {
+            return true;
+        }
     }
 }

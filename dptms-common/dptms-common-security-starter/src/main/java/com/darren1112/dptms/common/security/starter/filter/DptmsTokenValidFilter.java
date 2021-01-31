@@ -75,11 +75,17 @@ public class DptmsTokenValidFilter extends OncePerRequestFilter {
                 ResponseUtil.setJsonResult(response, JsonResult.buildErrorEnum(SecurityEnum.NOT_LOGIN));
                 return;
             }
+            // 重复登录校验
+            if (!dptmsTokenValidator.repeatLoginValidHandle(request, response)) {
+                ResponseUtil.setJsonResult(response, JsonResult.buildErrorEnum(SecurityEnum.REPEAT_LOGIN));
+                return;
+            }
             chain.doFilter(request, response);
-            DptmsSecurityUtil.remove();
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             ResponseUtil.setJsonResult(response, JsonResult.buildErrorEnum(SecurityEnum.TOKEN_VALID_ERROR));
+        } finally {
+            DptmsSecurityUtil.remove();
         }
     }
 }

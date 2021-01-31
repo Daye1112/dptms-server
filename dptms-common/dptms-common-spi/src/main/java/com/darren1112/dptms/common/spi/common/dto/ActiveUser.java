@@ -57,9 +57,39 @@ public class ActiveUser {
     private Date lastLoginTime;
 
     /**
+     * 密码更新时间
+     */
+    @ApiModelProperty("密码更新时间")
+    private Date pwdUpdateTime;
+
+    /**
      * 头像文件id
      */
     @ApiModelProperty("头像文件id")
     private Long fileId;
+
+    /**
+     * 浏览器
+     */
+    @ApiModelProperty("浏览器")
+    private String browser;
+
+    /**
+     * 操作系统
+     */
+    @ApiModelProperty("操作系统")
+    private String os;
+
+    /**
+     * ip
+     */
+    @ApiModelProperty("ip")
+    private String ip;
+
+    /**
+     * ip地址
+     */
+    @ApiModelProperty("ip地址")
+    private String ipAddress;
 
 }

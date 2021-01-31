@@ -6,7 +6,9 @@ import com.darren1112.dptms.auth.service.SysUserService;
 import com.darren1112.dptms.common.core.constants.AccountConstant;
 import com.darren1112.dptms.common.core.exception.BadRequestException;
 import com.darren1112.dptms.common.core.exception.BaseException;
+import com.darren1112.dptms.common.core.util.IpUtil;
 import com.darren1112.dptms.common.core.util.Md5Util;
+import com.darren1112.dptms.common.core.util.WebUtil;
 import com.darren1112.dptms.common.security.starter.core.DptmsTokenStore;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 import com.darren1112.dptms.common.spi.common.dto.LoginParam;
@@ -90,6 +92,10 @@ public class PasswordLoginHandler extends BaseUserDetails {
     @Override
     public void afterHandler(ActiveUser activeUser, HttpServletRequest request, HttpServletResponse response) throws BaseException {
         // 后置处理
+        activeUser.setIp(IpUtil.getIp(request));
+        activeUser.setIpAddress(IpUtil.getCityInfo(activeUser.getIp()));
+        activeUser.setBrowser(WebUtil.getBrowser());
+        activeUser.setOs(WebUtil.getOs());
         // 更新登录时间
         sysUserService.updateLoginTime(activeUser.getId());
         // 生成token并保存到redis和cookie中
@@ -115,6 +121,7 @@ public class PasswordLoginHandler extends BaseUserDetails {
         activeUser.setEmail(sysUserDto.getEmail());
         activeUser.setLastLoginTime(sysUserDto.getLastLoginTime());
         activeUser.setFileId(sysUserDto.getFileId());
+        activeUser.setPwdUpdateTime(sysUserDto.getPwdUpdateTime());
         return activeUser;
     }
 }

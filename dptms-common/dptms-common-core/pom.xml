@@ -71,6 +71,12 @@
             <artifactId>ip2region</artifactId>
         </dependency>
         <!-- [ip2region] End -->
+        <!-- [UserAgentUtils] Start -->
+        <dependency>
+            <groupId>eu.bitwalker</groupId>
+            <artifactId>UserAgentUtils</artifactId>
+        </dependency>
+        <!-- [UserAgentUtils] End -->
         <!-- [Plugins] End -->
 
         <!-- [dptms] Start-->

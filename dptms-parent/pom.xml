@@ -38,6 +38,8 @@
         <spring-boot-admin.version>2.1.6</spring-boot-admin.version>
         <ip2region.version>1.7.2</ip2region.version>
         <tomcat.version>8.5.47</tomcat.version>
+        <UserAgentUtils.version>1.20</UserAgentUtils.version>
+
         <target.dir>D:\dptms\shell</target.dir>
     </properties>
 
@@ -165,6 +167,13 @@
                 <version>${ip2region.version}</version>
             </dependency>
             <!-- [ip2region] End -->
+            <!-- [UserAgentUtils] Start -->
+            <dependency>
+                <groupId>eu.bitwalker</groupId>
+                <artifactId>UserAgentUtils</artifactId>
+                <version>${UserAgentUtils.version}</version>
+            </dependency>
+            <!-- [UserAgentUtils] End -->
             <!-- [Plugins] End -->
 
             <!-- [dptms] Start-->
