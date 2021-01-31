@@ -11,7 +11,10 @@ import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * 系统token存储类
@@ -84,7 +87,7 @@ public class DptmsTokenStore {
      */
     private void saveUserRefreshToken(ActiveUser activeUser, String refreshToken) {
         // 设置当前用户的最新refreshToken
-        redisUtil.set(SecurityConstant.REDIS_USER_REFRESH_TOKEN_PREFIX + ":" + activeUser.getId(), refreshToken, securityProperties.getRefreshTokenExpired());
+        redisUtil.set(SecurityConstant.REDIS_USER_REFRESH_TOKEN_PREFIX + activeUser.getId(), refreshToken, securityProperties.getRefreshTokenExpired());
     }
 
     /**
@@ -96,7 +99,7 @@ public class DptmsTokenStore {
      */
     public String getUserRefreshToken(ActiveUser activeUser) {
         // 设置当前用户的最新refreshToken
-        return Optional.ofNullable(redisUtil.get(SecurityConstant.REDIS_USER_REFRESH_TOKEN_PREFIX + ":" + activeUser.getId())).map(Object::toString).orElse(null);
+        return Optional.ofNullable(redisUtil.get(SecurityConstant.REDIS_USER_REFRESH_TOKEN_PREFIX + activeUser.getId())).map(Object::toString).orElse(null);
     }
 
     /**
@@ -342,9 +345,9 @@ public class DptmsTokenStore {
      * @author luyuhao
      * @date 2021/01/28 01:06
      */
-    private void removeRefreshToken(String refreshToken) {
+    public void removeRefreshToken(String refreshToken) {
         if (StringUtil.isNotBlank(refreshToken)) {
-            redisUtil.delete(refreshToken);
+            redisUtil.delete(SecurityConstant.REDIS_REFRESH_TOKEN_PREFIX + refreshToken);
         }
     }
 
@@ -357,7 +360,7 @@ public class DptmsTokenStore {
      */
     private void removeAccessToken(String accessToken) {
         if (StringUtil.isNotBlank(accessToken)) {
-            redisUtil.delete(accessToken);
+            redisUtil.delete(SecurityConstant.REDIS_ACCESS_TOKEN_PREFIX + accessToken);
         }
     }
 
@@ -375,5 +378,28 @@ public class DptmsTokenStore {
             // 设置refreshToken
             redisUtil.set(SecurityConstant.REDIS_REFRESH_TOKEN_PREFIX + refreshToken, JsonUtil.toJsonString(activeUser), expired);
         }
+    }
+
+    /**
+     * 查询所有用户refreshToken的keys
+     *
+     * @return {@link String}
+     * @author luyuhao
+     * @date 2021/01/31 22:47
+     */
+    public List<String> listAllUserRefreshKeys() {
+        Set<String> keys = redisUtil.getKeys(SecurityConstant.REDIS_USER_REFRESH_TOKEN_PREFIX);
+        return new ArrayList<>(keys);
+    }
+
+    /**
+     * 移除userRefreshToken
+     *
+     * @param activeUser 用户信息
+     * @author luyuhao
+     * @date 2021/01/31 23:22
+     */
+    public void removeUserRefreshToken(ActiveUser activeUser) {
+        redisUtil.delete(SecurityConstant.REDIS_USER_REFRESH_TOKEN_PREFIX + activeUser.getId());
     }
 }

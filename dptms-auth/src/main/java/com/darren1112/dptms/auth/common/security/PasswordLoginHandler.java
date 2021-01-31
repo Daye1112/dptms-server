@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -96,6 +97,7 @@ public class PasswordLoginHandler extends BaseUserDetails {
         activeUser.setIpAddress(IpUtil.getCityInfo(activeUser.getIp()));
         activeUser.setBrowser(WebUtil.getBrowser());
         activeUser.setOs(WebUtil.getOs());
+        activeUser.setLoginTime(new Date());
         // 更新登录时间
         sysUserService.updateLoginTime(activeUser.getId());
         // 生成token并保存到redis和cookie中

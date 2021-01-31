@@ -70,6 +70,12 @@ public class ActiveUser {
     private Long fileId;
 
     /**
+     * 登录时间
+     */
+    @ApiModelProperty("登录时间")
+    private Date loginTime;
+
+    /**
      * 浏览器
      */
     @ApiModelProperty("浏览器")

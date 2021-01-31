@@ -1,7 +1,6 @@
 package com.darren1112.dptms.auth.controller;
 
 import com.darren1112.dptms.auth.service.SysMenuService;
-import com.darren1112.dptms.auth.service.SysPermissionService;
 import com.darren1112.dptms.auth.service.SysUserService;
 import com.darren1112.dptms.common.core.message.JsonResult;
 import com.darren1112.dptms.common.core.util.ResponseEntityUtil;
@@ -32,9 +31,6 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/activeUser")
 public class ActiveUserController {
-
-    @Autowired
-    private SysPermissionService sysPermissionService;
 
     @Autowired
     private SysMenuService sysMenuService;

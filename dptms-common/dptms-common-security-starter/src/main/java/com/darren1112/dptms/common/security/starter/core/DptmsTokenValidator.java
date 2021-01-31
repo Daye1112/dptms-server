@@ -81,7 +81,7 @@ public class DptmsTokenValidator {
         }
         ActiveUser activeUser = dptmsTokenStore.getActiveUser(refreshToken);
         String userRefreshToken = dptmsTokenStore.getUserRefreshToken(activeUser);
-        if (!userRefreshToken.equals(refreshToken)) {
+        if (StringUtil.isBlank(userRefreshToken) || !userRefreshToken.equals(refreshToken)) {
             // 当前用户被挤下线，删除当前的token
             dptmsTokenStore.removeTokenAndCookie(request, response);
             return false;

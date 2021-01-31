@@ -53,7 +53,6 @@ public class SysMenuController extends BaseController {
     @ApiOperation("插入菜单")
     @PostMapping("/insert")
     public ResponseEntity<JsonResult<Long>> insert(SysMenuEntity entity) {
-
         ValidatorBuilder.build()
                 .on(entity.getMenuCode(), new NotEmptyValidatorCallback(AuthErrorCodeEnum.MENU_CODE_NOT_NULL))
                 .on(entity.getMenuName(), new NotEmptyValidatorCallback(AuthErrorCodeEnum.MENU_NAME_NOT_NULL))
