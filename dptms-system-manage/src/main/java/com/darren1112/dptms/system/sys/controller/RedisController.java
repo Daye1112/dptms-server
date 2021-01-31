@@ -3,9 +3,11 @@ package com.darren1112.dptms.system.sys.controller;
 import com.darren1112.dptms.common.core.base.BaseController;
 import com.darren1112.dptms.common.core.message.JsonResult;
 import com.darren1112.dptms.common.core.util.ResponseEntityUtil;
+import com.darren1112.dptms.common.core.util.StringUtil;
 import com.darren1112.dptms.common.core.validate.ValidatorBuilder;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotEmptyValidatorCallback;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotNullValidatorCallback;
+import com.darren1112.dptms.common.redis.starter.properties.DptmsCacheProperties;
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
 import com.darren1112.dptms.common.spi.sys.dto.SysRedisDto;
@@ -32,6 +34,9 @@ public class RedisController extends BaseController {
     @Autowired
     private RedisService redisService;
 
+    @Autowired
+    private DptmsCacheProperties dptmsCacheProperties;
+
     /**
      * 根据key的前缀分页查缓存数据
      *
@@ -43,9 +48,7 @@ public class RedisController extends BaseController {
      */
     @GetMapping("/listPage")
     public ResponseEntity<JsonResult<PageBean<SysRedisDto>>> listPage(@RequestParam(value = "keyPrefix", required = false) String keyPrefix, PageParam pageParam) {
-        ValidatorBuilder.build()
-                .on(keyPrefix, new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.REDIS_KEY_PREFIX_NOT_NULL))
-                .doValidate().checkResult();
+        keyPrefix = StringUtil.isBlank(keyPrefix) ? dptmsCacheProperties.getKeyPrefix() : keyPrefix;
         PageBean<SysRedisDto> result = redisService.listPage(keyPrefix, getPageParam(pageParam));
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(result));
     }
