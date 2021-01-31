@@ -2,12 +2,10 @@ package com.darren1112.dptms.gateway.remoting;
 
 import com.darren1112.dptms.common.core.message.JsonResult;
 import com.darren1112.dptms.common.spi.sys.dto.SysPermissionDto;
+import com.darren1112.dptms.common.spi.sys.dto.SysUserDto;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.List;
 
 /**
  * auth服务rpc调用
@@ -26,6 +24,6 @@ public interface AuthRemoting {
      * @author luyuhao
      * @date 2021/01/17 19:34
      */
-    @GetMapping("/activeUser/listPermission")
-    JsonResult<List<SysPermissionDto>> listPermission();
+    @GetMapping("/activeUser/getNewInfo")
+    JsonResult<SysUserDto> getNewInfo();
 }

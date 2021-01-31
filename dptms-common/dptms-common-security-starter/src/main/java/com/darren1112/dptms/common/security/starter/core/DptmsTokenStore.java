@@ -360,4 +360,20 @@ public class DptmsTokenStore {
             redisUtil.delete(accessToken);
         }
     }
+
+    /**
+     * 更新用户信息
+     *
+     * @param activeUser 用户信息
+     * @author luyuhao
+     * @date 2021/01/31 20:00
+     */
+    public void updateActiveUser(ActiveUser activeUser) {
+        String refreshToken = getRefreshToken();
+        long expired = redisUtil.getExpire(SecurityConstant.REDIS_REFRESH_TOKEN_PREFIX + refreshToken);
+        if (expired > 0) {
+            // 设置refreshToken
+            redisUtil.set(SecurityConstant.REDIS_REFRESH_TOKEN_PREFIX + refreshToken, JsonUtil.toJsonString(activeUser), expired);
+        }
+    }
 }

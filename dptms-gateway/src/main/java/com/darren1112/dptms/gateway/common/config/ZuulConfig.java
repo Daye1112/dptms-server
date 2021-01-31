@@ -1,6 +1,7 @@
 package com.darren1112.dptms.gateway.common.config;
 
 import com.darren1112.dptms.common.core.constants.FilterOrderConstant;
+import com.darren1112.dptms.common.security.starter.core.DptmsTokenStore;
 import com.darren1112.dptms.common.security.starter.core.DptmsTokenValidator;
 import com.darren1112.dptms.common.security.starter.filter.DptmsTokenValidFilter;
 import com.darren1112.dptms.common.security.starter.properties.SecurityProperties;
@@ -60,8 +61,8 @@ public class ZuulConfig {
     }
 
     @Bean
-    public FilterRegistrationBean permissionValidateFilterBean(SecurityProperties securityProperties, AuthRemoting authRemoting) {
-        PermissionValidFilter permissionValidateFilter = new PermissionValidFilter(securityProperties, authRemoting);
+    public FilterRegistrationBean permissionValidateFilterBean(SecurityProperties securityProperties, AuthRemoting authRemoting, DptmsTokenStore dptmsTokenStore) {
+        PermissionValidFilter permissionValidateFilter = new PermissionValidFilter(securityProperties, authRemoting, dptmsTokenStore);
         FilterRegistrationBean<PermissionValidFilter> filterRegistrationBean = new FilterRegistrationBean<>();
         filterRegistrationBean.setFilter(permissionValidateFilter);
         filterRegistrationBean.addUrlPatterns("/*");

@@ -91,4 +91,14 @@ public interface SysUserService {
      * @date 2021/01/14 00:19
      */
     void updateLock(SysUserEntity entity);
+
+    /**
+     * 根据用户id查询用户信息和权限list
+     *
+     * @param id 用户id
+     * @return {@link SysUserDto}
+     * @author luyuhao
+     * @date 2021/01/31 19:39
+     */
+    SysUserDto getUserInfoAndPermissionByUserId(Long id);
 }

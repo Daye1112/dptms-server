@@ -16,16 +16,6 @@ import java.util.List;
 public interface SysPermissionService {
 
     /**
-     * 根据用户id查询权限list
-     *
-     * @param userId 用户id
-     * @return {@link SysPermissionDto}
-     * @author luyuhao
-     * @date 2021/01/17 21:30
-     */
-    List<SysPermissionDto> listByUserId(Long userId);
-
-    /**
      * 插入权限信息
      *
      * @param entity 权限参数

@@ -76,7 +76,7 @@ public class PasswordLoginHandler extends BaseUserDetails {
         if (sysUserDto.getIsLocked().equals(AccountConstant.IS_LOCKED)) {
             throw new BadRequestException(AuthErrorCodeEnum.LOCKED);
         }
-        return convert(sysUserDto);
+        return ActiveUser.convert(sysUserDto);
     }
 
     /**
@@ -102,26 +102,4 @@ public class PasswordLoginHandler extends BaseUserDetails {
         dptmsTokenStore.generateToken(activeUser, response);
     }
 
-    /**
-     * 对象转换
-     * 返回基本信息
-     *
-     * @param sysUserDto 用户信息
-     * @return {@link ActiveUser}
-     * @author luyuhao
-     * @date 20/11/22 22:24
-     */
-    private ActiveUser convert(SysUserDto sysUserDto) {
-        ActiveUser activeUser = new ActiveUser();
-        activeUser.setId(sysUserDto.getId());
-        activeUser.setUsername(sysUserDto.getUsername());
-        activeUser.setRealName(sysUserDto.getRealName());
-        activeUser.setGender(sysUserDto.getGender());
-        activeUser.setPhoneNumber(sysUserDto.getPhoneNumber());
-        activeUser.setEmail(sysUserDto.getEmail());
-        activeUser.setLastLoginTime(sysUserDto.getLastLoginTime());
-        activeUser.setFileId(sysUserDto.getFileId());
-        activeUser.setPwdUpdateTime(sysUserDto.getPwdUpdateTime());
-        return activeUser;
-    }
 }

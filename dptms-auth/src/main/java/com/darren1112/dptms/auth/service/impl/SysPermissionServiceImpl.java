@@ -33,19 +33,6 @@ public class SysPermissionServiceImpl extends BaseService implements SysPermissi
     private SysPermissionDao sysPermissionDao;
 
     /**
-     * 根据用户id查询权限list
-     *
-     * @param userId 用户id
-     * @return {@link SysPermissionDto}
-     * @author luyuhao
-     * @date 2021/01/17 21:30
-     */
-    @Override
-    public List<SysPermissionDto> listByUserId(Long userId) {
-        return sysPermissionDao.listByUserId(userId);
-    }
-
-    /**
      * 插入权限信息
      *
      * @param entity 权限参数

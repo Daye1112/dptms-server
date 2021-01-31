@@ -2,12 +2,14 @@ package com.darren1112.dptms.auth.controller;
 
 import com.darren1112.dptms.auth.service.SysMenuService;
 import com.darren1112.dptms.auth.service.SysPermissionService;
+import com.darren1112.dptms.auth.service.SysUserService;
 import com.darren1112.dptms.common.core.message.JsonResult;
 import com.darren1112.dptms.common.core.util.ResponseEntityUtil;
 import com.darren1112.dptms.common.security.starter.util.DptmsSecurityUtil;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 import com.darren1112.dptms.common.spi.sys.dto.SysMenuDto;
 import com.darren1112.dptms.common.spi.sys.dto.SysPermissionDto;
+import com.darren1112.dptms.common.spi.sys.dto.SysUserDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -37,6 +39,9 @@ public class ActiveUserController {
     @Autowired
     private SysMenuService sysMenuService;
 
+    @Autowired
+    private SysUserService sysUserService;
+
     /**
      * 获取用户信息
      *
@@ -51,18 +56,18 @@ public class ActiveUserController {
     }
 
     /**
-     * 获取用户的权限
+     * 获取用户最新信息
      *
      * @return {@link SysPermissionDto}
      * @author luyuhao
      * @date 2021/01/17 19:34
      */
-    @ApiOperation("获取用户的权限")
-    @GetMapping("/listPermission")
-    public ResponseEntity<JsonResult<List<SysPermissionDto>>> listPermission() {
+    @ApiOperation("获取用户最新信息")
+    @GetMapping("/getNewInfo")
+    public ResponseEntity<JsonResult<SysUserDto>> getNewInfo() {
         ActiveUser activeUser = DptmsSecurityUtil.get();
-        List<SysPermissionDto> resultList = sysPermissionService.listByUserId(activeUser.getId());
-        return ResponseEntityUtil.ok(JsonResult.buildSuccessData(resultList));
+        SysUserDto result = sysUserService.getUserInfoAndPermissionByUserId(activeUser.getId());
+        return ResponseEntityUtil.ok(JsonResult.buildSuccessData(result));
     }
 
     /**

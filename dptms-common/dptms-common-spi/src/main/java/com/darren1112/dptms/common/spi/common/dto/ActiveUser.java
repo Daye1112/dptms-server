@@ -1,5 +1,6 @@
 package com.darren1112.dptms.common.spi.common.dto;
 
+import com.darren1112.dptms.common.spi.sys.dto.SysUserDto;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -92,4 +93,37 @@ public class ActiveUser {
     @ApiModelProperty("ip地址")
     private String ipAddress;
 
+    /**
+     * 对象属性复制
+     *
+     * @param sysUserDto 用户信息
+     * @return {@link ActiveUser}
+     * @author luyuhao
+     * @date 2021/01/31 19:50
+     */
+    public static ActiveUser convert(SysUserDto sysUserDto) {
+        ActiveUser activeUser = new ActiveUser();
+        convert(activeUser, sysUserDto);
+        return activeUser;
+    }
+
+    /**
+     * 对象属性复制
+     *
+     * @param activeUser 用户信息
+     * @param sysUserDto 新用户信息
+     * @author luyuhao
+     * @date 2021/01/31 19:50
+     */
+    public static void convert(ActiveUser activeUser, SysUserDto sysUserDto) {
+        activeUser.setId(sysUserDto.getId());
+        activeUser.setUsername(sysUserDto.getUsername());
+        activeUser.setRealName(sysUserDto.getRealName());
+        activeUser.setGender(sysUserDto.getGender());
+        activeUser.setPhoneNumber(sysUserDto.getPhoneNumber());
+        activeUser.setEmail(sysUserDto.getEmail());
+        activeUser.setLastLoginTime(sysUserDto.getLastLoginTime());
+        activeUser.setFileId(sysUserDto.getFileId());
+        activeUser.setPwdUpdateTime(sysUserDto.getPwdUpdateTime());
+    }
 }

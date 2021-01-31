@@ -1,12 +1,14 @@
 package com.darren1112.dptms.auth.service.impl;
 
 import com.darren1112.dptms.auth.common.enums.AuthErrorCodeEnum;
+import com.darren1112.dptms.auth.dao.SysPermissionDao;
 import com.darren1112.dptms.auth.dao.SysUserDao;
 import com.darren1112.dptms.auth.service.SysUserService;
 import com.darren1112.dptms.common.core.base.BaseService;
 import com.darren1112.dptms.common.core.exception.BadRequestException;
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
+import com.darren1112.dptms.common.spi.sys.dto.SysPermissionDto;
 import com.darren1112.dptms.common.spi.sys.dto.SysUserDto;
 import com.darren1112.dptms.common.spi.sys.entity.SysUserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,9 @@ public class SysUserServiceImpl extends BaseService implements SysUserService {
 
     @Autowired
     private SysUserDao sysUserDao;
+
+    @Autowired
+    private SysPermissionDao sysPermissionDao;
 
     /**
      * 根据用户名查询用户信息
@@ -170,5 +175,23 @@ public class SysUserServiceImpl extends BaseService implements SysUserService {
     @Transactional(rollbackFor = Throwable.class)
     public void updateLock(SysUserEntity entity) {
         sysUserDao.updateLock(entity);
+    }
+
+    /**
+     * 根据用户id查询用户信息和权限list
+     *
+     * @param id 用户id
+     * @return {@link SysUserDto}
+     * @author luyuhao
+     * @date 2021/01/31 19:39
+     */
+    @Override
+    public SysUserDto getUserInfoAndPermissionByUserId(Long id) {
+        SysUserDto userInfo = this.getById(id);
+        if (userInfo != null) {
+            List<SysPermissionDto> permissionList = sysPermissionDao.listByUserId(id);
+            userInfo.setPermissionList(permissionList);
+        }
+        return userInfo;
     }
 }

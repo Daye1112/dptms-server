@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import java.util.List;
+
 /**
  * 系统用户Dto
  *
@@ -20,4 +22,9 @@ public class SysUserDto extends SysUserEntity {
      * 是否更新 true/false
      */
     private Boolean isUpdate;
+
+    /**
+     * 权限list
+     */
+    private List<SysPermissionDto> permissionList;
 }
