@@ -6,7 +6,7 @@ package com.darren1112.dptms.common.core.exception.enums;
  * @author luyuhao
  * @date 19/12/06 03:18
  */
-public interface BaseEnum {
+public interface BaseErrorEnum {
     /**
      * 异常code
      *

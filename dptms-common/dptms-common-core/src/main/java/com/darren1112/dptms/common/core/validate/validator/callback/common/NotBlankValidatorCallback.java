@@ -1,7 +1,7 @@
 package com.darren1112.dptms.common.core.validate.validator.callback.common;
 
 import com.darren1112.dptms.common.core.enums.CommonErrorCodeEnum;
-import com.darren1112.dptms.common.core.exception.enums.BaseEnum;
+import com.darren1112.dptms.common.core.exception.enums.BaseErrorEnum;
 import com.darren1112.dptms.common.core.util.StringUtil;
 import com.darren1112.dptms.common.core.validate.validator.ValidatorContext;
 import com.darren1112.dptms.common.core.validate.validator.callback.BaseValidatorCallback;
@@ -18,8 +18,8 @@ public class NotBlankValidatorCallback extends BaseValidatorCallback<String> {
         super(CommonErrorCodeEnum.STRING_NOT_EMPTY);
     }
 
-    public NotBlankValidatorCallback(BaseEnum baseEnum) {
-        super(baseEnum);
+    public NotBlankValidatorCallback(BaseErrorEnum baseErrorEnum) {
+        super(baseErrorEnum);
     }
 
     @Override

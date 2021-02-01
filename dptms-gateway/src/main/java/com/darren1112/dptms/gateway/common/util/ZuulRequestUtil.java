@@ -1,6 +1,6 @@
 package com.darren1112.dptms.gateway.common.util;
 
-import com.darren1112.dptms.common.core.exception.enums.BaseEnum;
+import com.darren1112.dptms.common.core.exception.enums.BaseErrorEnum;
 import com.darren1112.dptms.common.core.message.JsonResult;
 import com.darren1112.dptms.common.core.util.ResponseUtil;
 import com.netflix.zuul.context.RequestContext;
@@ -52,14 +52,14 @@ public class ZuulRequestUtil {
     /**
      * 返回错误信息
      *
-     * @param baseEnum 错误信息
+     * @param baseErrorEnum 错误信息
      * @author luyuhao
      * @date 20/11/26 23:54
      */
-    public static void returnError(BaseEnum baseEnum) {
+    public static void returnError(BaseErrorEnum baseErrorEnum) {
         RequestContext ctx = getRequestContext();
         // 直接打回
         ctx.setSendZuulResponse(false);
-        ResponseUtil.setJsonResult(ctx.getResponse(), JsonResult.buildErrorEnum(baseEnum));
+        ResponseUtil.setJsonResult(ctx.getResponse(), JsonResult.buildErrorEnum(baseErrorEnum));
     }
 }

@@ -1,6 +1,6 @@
 package com.darren1112.dptms.common.core.message;
 
-import com.darren1112.dptms.common.core.exception.enums.BaseEnum;
+import com.darren1112.dptms.common.core.exception.enums.BaseErrorEnum;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -67,7 +67,7 @@ public class JsonResult<T> implements Serializable {
         return build(code, message, null);
     }
 
-    public static <C> JsonResult<C> buildErrorEnum(BaseEnum baseEnum) {
-        return build(baseEnum.getCode(), baseEnum.getMessage(), null);
+    public static <C> JsonResult<C> buildErrorEnum(BaseErrorEnum baseErrorEnum) {
+        return build(baseErrorEnum.getCode(), baseErrorEnum.getMessage(), null);
     }
 }

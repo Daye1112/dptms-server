@@ -2,7 +2,7 @@ package com.darren1112.dptms.common.core.validate.handler;
 
 
 import com.darren1112.dptms.common.core.exception.BadRequestException;
-import com.darren1112.dptms.common.core.exception.enums.BaseEnum;
+import com.darren1112.dptms.common.core.exception.enums.BaseErrorEnum;
 import com.darren1112.dptms.common.core.validate.result.ValidatorResult;
 
 import java.util.Objects;
@@ -23,7 +23,7 @@ public class ValidateHandler {
      */
     public static void checkValidator(ValidatorResult result) {
         if (!result.isCheckResult()) {
-            throw new BadRequestException(result.getBaseEnum());
+            throw new BadRequestException(result.getBaseErrorEnum());
         }
     }
 
@@ -31,11 +31,11 @@ public class ValidateHandler {
      * 针对单参数校验
      *
      * @param checkResult true:参数错误; false:参数正确
-     * @param baseEnum    错误码
+     * @param baseErrorEnum    错误码
      */
-    public static void checkParameter(Boolean checkResult, BaseEnum baseEnum) {
+    public static void checkParameter(Boolean checkResult, BaseErrorEnum baseErrorEnum) {
         if (checkResult) {
-            throw new BadRequestException(baseEnum);
+            throw new BadRequestException(baseErrorEnum);
         }
     }
 
@@ -43,11 +43,11 @@ public class ValidateHandler {
      * 针对单参数校验 - 空值校验
      *
      * @param checkObj 待校验的参数
-     * @param baseEnum 错误码
+     * @param baseErrorEnum 错误码
      */
-    public static void checkNull(Object checkObj, BaseEnum baseEnum) {
+    public static void checkNull(Object checkObj, BaseErrorEnum baseErrorEnum) {
         if (Objects.isNull(checkObj)) {
-            throw new BadRequestException(baseEnum);
+            throw new BadRequestException(baseErrorEnum);
         }
     }
 }

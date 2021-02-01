@@ -1,6 +1,6 @@
 package com.darren1112.dptms.common.security.starter.enums;
 
-import com.darren1112.dptms.common.core.exception.enums.BaseEnum;
+import com.darren1112.dptms.common.core.exception.enums.BaseErrorEnum;
 import org.springframework.http.HttpStatus;
 
 /**
@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
  * @author luyuhao
  * @date 2021/01/17 00:50
  */
-public enum SecurityEnum implements BaseEnum {
+public enum SecurityEnum implements BaseErrorEnum {
 
     /**
      * 安全校验错误状态码

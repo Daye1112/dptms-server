@@ -1,6 +1,6 @@
 package com.darren1112.dptms.common.core.enums;
 
-import com.darren1112.dptms.common.core.exception.enums.BaseEnum;
+import com.darren1112.dptms.common.core.exception.enums.BaseErrorEnum;
 import org.springframework.http.HttpStatus;
 
 /**
@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
  * @author luyuhao
  * @date 2020/08/02 02:44
  */
-public enum CommonErrorCodeEnum implements BaseEnum {
+public enum CommonErrorCodeEnum implements BaseErrorEnum {
 
     /**
      * 服务统一错误状态码

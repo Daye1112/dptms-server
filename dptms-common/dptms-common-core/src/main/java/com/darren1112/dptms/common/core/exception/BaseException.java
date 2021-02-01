@@ -1,6 +1,6 @@
 package com.darren1112.dptms.common.core.exception;
 
-import com.darren1112.dptms.common.core.exception.enums.BaseEnum;
+import com.darren1112.dptms.common.core.exception.enums.BaseErrorEnum;
 import org.springframework.http.HttpStatus;
 
 /**
@@ -12,9 +12,9 @@ import org.springframework.http.HttpStatus;
 public class BaseException extends RuntimeException {
     private Integer status = HttpStatus.BAD_REQUEST.value();
 
-    public BaseException(BaseEnum baseEnum) {
-        super(baseEnum.getMessage());
-        this.status = baseEnum.getCode();
+    public BaseException(BaseErrorEnum baseErrorEnum) {
+        super(baseErrorEnum.getMessage());
+        this.status = baseErrorEnum.getCode();
     }
 
     public BaseException(Integer status) {

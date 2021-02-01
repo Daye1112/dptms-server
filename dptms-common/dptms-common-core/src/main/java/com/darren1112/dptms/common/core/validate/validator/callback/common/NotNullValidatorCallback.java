@@ -1,7 +1,7 @@
 package com.darren1112.dptms.common.core.validate.validator.callback.common;
 
 import com.darren1112.dptms.common.core.enums.CommonErrorCodeEnum;
-import com.darren1112.dptms.common.core.exception.enums.BaseEnum;
+import com.darren1112.dptms.common.core.exception.enums.BaseErrorEnum;
 import com.darren1112.dptms.common.core.validate.validator.ValidatorContext;
 import com.darren1112.dptms.common.core.validate.validator.callback.BaseValidatorCallback;
 
@@ -15,8 +15,8 @@ public class NotNullValidatorCallback extends BaseValidatorCallback<Object> {
         super(CommonErrorCodeEnum.OBJECT_NOT_NULL);
     }
 
-    public NotNullValidatorCallback(BaseEnum baseEnum) {
-        super(baseEnum);
+    public NotNullValidatorCallback(BaseErrorEnum baseErrorEnum) {
+        super(baseErrorEnum);
     }
 
     @Override

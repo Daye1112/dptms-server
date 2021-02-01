@@ -1,6 +1,6 @@
 package com.darren1112.dptms.common.core.validate.validator.callback;
 
-import com.darren1112.dptms.common.core.exception.enums.BaseEnum;
+import com.darren1112.dptms.common.core.exception.enums.BaseErrorEnum;
 import com.darren1112.dptms.common.core.validate.validator.ValidatorContext;
 
 /**
@@ -9,10 +9,10 @@ import com.darren1112.dptms.common.core.validate.validator.ValidatorContext;
  */
 public abstract class BaseValidatorCallback<T> implements ValidatorCallback<T> {
 
-    private BaseEnum baseEnum;
+    private BaseErrorEnum baseErrorEnum;
 
-    public BaseValidatorCallback(BaseEnum baseEnum) {
-        this.baseEnum = baseEnum;
+    public BaseValidatorCallback(BaseErrorEnum baseErrorEnum) {
+        this.baseErrorEnum = baseErrorEnum;
     }
 
     @Override
@@ -27,7 +27,7 @@ public abstract class BaseValidatorCallback<T> implements ValidatorCallback<T> {
     }
 
     private void errorHandle(ValidatorContext context) {
-        context.getValidatorResult().setBaseEnum(this.baseEnum);
+        context.getValidatorResult().setBaseErrorEnum(this.baseErrorEnum);
     }
 
     private void successHandle(ValidatorContext context) {

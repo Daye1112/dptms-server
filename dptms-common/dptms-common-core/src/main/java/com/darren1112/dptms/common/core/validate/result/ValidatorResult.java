@@ -1,6 +1,6 @@
 package com.darren1112.dptms.common.core.validate.result;
 
-import com.darren1112.dptms.common.core.exception.enums.BaseEnum;
+import com.darren1112.dptms.common.core.exception.enums.BaseErrorEnum;
 
 /**
  * @author luyuhao
@@ -16,7 +16,7 @@ public class ValidatorResult {
     /**
      * 错误信息枚举
      */
-    private BaseEnum baseEnum;
+    private BaseErrorEnum baseErrorEnum;
 
     public ValidatorResult(boolean checkResult) {
         this.checkResult = checkResult;
@@ -30,11 +30,11 @@ public class ValidatorResult {
         this.checkResult = checkResult;
     }
 
-    public BaseEnum getBaseEnum() {
-        return baseEnum;
+    public BaseErrorEnum getBaseErrorEnum() {
+        return baseErrorEnum;
     }
 
-    public void setBaseEnum(BaseEnum baseEnum) {
-        this.baseEnum = baseEnum;
+    public void setBaseErrorEnum(BaseErrorEnum baseErrorEnum) {
+        this.baseErrorEnum = baseErrorEnum;
     }
 }

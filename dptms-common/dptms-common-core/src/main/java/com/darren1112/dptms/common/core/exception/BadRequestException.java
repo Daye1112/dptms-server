@@ -1,6 +1,6 @@
 package com.darren1112.dptms.common.core.exception;
 
-import com.darren1112.dptms.common.core.exception.enums.BaseEnum;
+import com.darren1112.dptms.common.core.exception.enums.BaseErrorEnum;
 import lombok.Getter;
 
 /**
@@ -20,7 +20,7 @@ public class BadRequestException extends BaseException {
         super(status, message);
     }
 
-    public BadRequestException(BaseEnum baseEnum) {
-        super(baseEnum);
+    public BadRequestException(BaseErrorEnum baseErrorEnum) {
+        super(baseErrorEnum);
     }
 }

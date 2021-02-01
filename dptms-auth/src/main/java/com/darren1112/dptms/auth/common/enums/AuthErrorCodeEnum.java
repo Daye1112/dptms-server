@@ -1,6 +1,6 @@
 package com.darren1112.dptms.auth.common.enums;
 
-import com.darren1112.dptms.common.core.exception.enums.BaseEnum;
+import com.darren1112.dptms.common.core.exception.enums.BaseErrorEnum;
 import org.springframework.http.HttpStatus;
 
 /**
@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
  * @author luyuhao
  * @date 2020/07/26 21:22
  */
-public enum AuthErrorCodeEnum implements BaseEnum {
+public enum AuthErrorCodeEnum implements BaseErrorEnum {
 
     /**
      * 认证服务错误状态码
