@@ -22,6 +22,7 @@
         <module>dptms-common-redis-starter</module>
         <module>dptms-common-doc-starter</module>
         <module>dptms-common-doc-gateway-starter</module>
+        <module>dptms-common-log-starter</module>
     </modules>
 
 </project>
