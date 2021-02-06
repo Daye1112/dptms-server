@@ -17,8 +17,7 @@ public enum LogLevel implements BaseCommonEnum {
     DEBUG(1, "DEBUG"),
     INFO(2, "INFO"),
     WARN(3, "WARN"),
-    ERROR(4, "ERROR")
-    ;
+    ERROR(4, "ERROR");
 
     private Integer code;
     private String name;
@@ -36,5 +35,21 @@ public enum LogLevel implements BaseCommonEnum {
     @Override
     public String getName() {
         return name;
+    }
+
+    /**
+     * 根据name匹配枚举对象
+     *
+     * @param name name
+     * @return {@link LogLevel}
+     * @author luyuhao
+     * @date 2021/02/07 01:46
+     */
+    public static LogLevel matchByName(String name) {
+        try {
+            return LogLevel.valueOf(name);
+        } catch (Exception e) {
+            return INFO;
+        }
     }
 }

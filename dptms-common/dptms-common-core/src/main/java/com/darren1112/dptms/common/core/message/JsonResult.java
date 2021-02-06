@@ -18,8 +18,8 @@ import java.io.Serializable;
 @Accessors(chain = true)
 public class JsonResult<T> implements Serializable {
 
-    private static final Integer SUCCESS_CODE = HttpStatus.OK.value();
-    private static final String SUCCESS_MESSAGE = "请求成功";
+    public static final Integer SUCCESS_CODE = HttpStatus.OK.value();
+    public static final String SUCCESS_MESSAGE = "请求成功";
 
     /**
      * http状态码

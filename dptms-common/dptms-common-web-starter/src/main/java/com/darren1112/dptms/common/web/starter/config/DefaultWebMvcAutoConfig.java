@@ -1,8 +1,8 @@
 package com.darren1112.dptms.common.web.starter.config;
 
+import com.darren1112.dptms.common.web.starter.convert.String2DateConverter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.FormatterRegistry;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 

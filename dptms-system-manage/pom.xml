@@ -123,7 +123,6 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <mainClass>com.darren1112.dptms.system.SystemManageApplication</mainClass>
-                    <!--<skip>true</skip>-->
                 </configuration>
             </plugin>
 

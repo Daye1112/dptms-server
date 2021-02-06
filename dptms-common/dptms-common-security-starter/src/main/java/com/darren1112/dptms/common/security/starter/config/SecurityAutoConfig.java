@@ -11,6 +11,7 @@ import feign.RequestInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.util.Base64Utils;
 
@@ -20,6 +21,7 @@ import org.springframework.util.Base64Utils;
  * @author luyuhao
  * @date 2020/12/07 00:54
  */
+@EnableFeignClients(basePackages = {"com.darren1112.dptms"})
 @EnableConfigurationProperties(SecurityProperties.class)
 public class SecurityAutoConfig {
 

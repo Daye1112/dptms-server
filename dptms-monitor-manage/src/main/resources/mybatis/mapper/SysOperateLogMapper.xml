@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.darren1112.dptms.monitor.dao.SysOperateLogDao">
+    <!--插入操作日志信息-->
+    <insert id="insert" parameterType="com.darren1112.dptms.common.spi.sys.dto.SysOperateLogDto">
+        INSERT sys_operate_log(username, content, url, browser, ip, ip_address, log_level, business_type, exception_content, request_param, time_consuming, remark, isvalid, ctime, creater, mtime, updater)
+        VALUES (#{username}, #{content}, #{url}, #{browser}, #{ip}, #{ipAddress}, #{logLevel}, #{businessType}, #{exceptionContent}, #{requestParam}, #{timeConsuming}, #{remark}, 1, #{ctime}, #{creater}, #{mtime}, #{updater})
+    </insert>
+</mapper>

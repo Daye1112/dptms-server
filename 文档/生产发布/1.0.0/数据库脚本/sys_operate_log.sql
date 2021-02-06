@@ -10,7 +10,7 @@ CREATE TABLE sys_operate_log
   log_level         TINYINT COMMENT '日志级别',
   business_type     TINYINT COMMENT '业务类型',
   exception_content varchar(512) COMMENT '异常内容',
-  request_param     varchar(512) COMMENT '请求参数',
+  request_param     text COMMENT '请求参数',
   time_consuming    int COMMENT '接口耗时',
   remark            VARCHAR(256) COMMENT '备注',
   isvalid           TINYINT COMMENT '是否有效',

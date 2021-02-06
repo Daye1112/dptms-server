@@ -28,14 +28,17 @@ public class AddUserFilter extends OncePerRequestFilter {
     @Override
     @SuppressWarnings("NullableProblems")
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
-        // 获取用户信息
-        ActiveUser activeUser = dptmsTokenStore.getActiveUser(request);
-        // 设置用户信息
-        DptmsSecurityUtil.set(activeUser);
-        // 设置用户信息到请求域
-        setAttribute(activeUser, request);
-        chain.doFilter(request, response);
-        DptmsSecurityUtil.remove();
+        try {
+            // 获取用户信息
+            ActiveUser activeUser = dptmsTokenStore.getActiveUser(request);
+            // 设置用户信息
+            DptmsSecurityUtil.set(activeUser);
+            // 设置用户信息到请求域
+            setAttribute(activeUser, request);
+            chain.doFilter(request, response);
+        } finally {
+            DptmsSecurityUtil.remove();
+        }
     }
 
     /**
