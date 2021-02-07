@@ -9,6 +9,9 @@ import com.darren1112.dptms.common.core.util.ResponseEntityUtil;
 import com.darren1112.dptms.common.core.validate.ValidatorBuilder;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotEmptyValidatorCallback;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotNullValidatorCallback;
+import com.darren1112.dptms.common.log.starter.annotation.Log;
+import com.darren1112.dptms.common.log.starter.enums.BusinessType;
+import com.darren1112.dptms.common.log.starter.enums.LogLevel;
 import com.darren1112.dptms.common.security.starter.util.DptmsSecurityUtil;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
@@ -50,6 +53,7 @@ public class SysPermissionController extends BaseController {
      * @author luyuhao
      * @date 20/12/10 01:08
      */
+    @Log(value = "插入权限", businessType = BusinessType.INSERT)
     @ApiOperation("插入权限")
     @PostMapping("/insert")
     public ResponseEntity<JsonResult<Long>> insert(SysPermissionEntity entity) {
@@ -75,6 +79,7 @@ public class SysPermissionController extends BaseController {
      * @author luyuhao
      * @date 20/12/10 01:08
      */
+    @Log(value = "分页查询权限", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     @ApiOperation("分页查询权限")
     @GetMapping("/listPage")
     public ResponseEntity<JsonResult<PageBean<SysPermissionDto>>> listPage(PageParam pageParam,
@@ -91,6 +96,7 @@ public class SysPermissionController extends BaseController {
      * @author luyuhao
      * @date 20/12/10 01:08
      */
+    @Log(value = "更新权限", businessType = BusinessType.UPDATE)
     @ApiOperation("更新权限")
     @PostMapping("/update")
     public ResponseEntity<JsonResult<Long>> update(SysPermissionEntity entity) {
@@ -115,6 +121,7 @@ public class SysPermissionController extends BaseController {
      * @author luyuhao
      * @date 20/12/10 01:08
      */
+    @Log(value = "根据id删除记录", businessType = BusinessType.DELETE)
     @ApiOperation("根据id删除记录")
     @GetMapping("/deleteById")
     public ResponseEntity<JsonResult> deleteById(@RequestParam(value = "id", required = false) Long id) {
@@ -134,6 +141,7 @@ public class SysPermissionController extends BaseController {
      * @author baojiazhong
      * @date 2020/12/22 23:09
      */
+    @Log(value = "查询菜单绑定的权限list", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     @ApiOperation("查询菜单绑定的权限list")
     @GetMapping("/listMenuAssigned")
     public ResponseEntity<JsonResult<List<SysPermissionDto>>> listMenuAssigned(@RequestParam(value = "menuId", required = false) Long menuId) {
@@ -151,6 +159,7 @@ public class SysPermissionController extends BaseController {
      * @author luyuhao
      * @date 2020/12/28 01:10
      */
+    @Log(value = "查询权限组list", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     @ApiOperation("查询权限组list")
     @GetMapping("/listGroup")
     public ResponseEntity<JsonResult<List<SysPermissionDto>>> listGroup() {
@@ -166,6 +175,7 @@ public class SysPermissionController extends BaseController {
      * @author luyuhao
      * @date 2021/01/04 23:52
      */
+    @Log(value = "根据菜单id查询权限list", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     @ApiOperation("根据菜单id查询权限list")
     @GetMapping("/listByMenuId")
     public ResponseEntity<JsonResult<List<SysPermissionDto>>> listByMenuId(@RequestParam(value = "menuId", required = false) Long menuId) {

@@ -15,6 +15,7 @@ import com.darren1112.dptms.common.spi.sys.dto.SysPermissionDto;
 import com.darren1112.dptms.common.spi.sys.dto.SysUserDto;
 import com.darren1112.dptms.gateway.common.enums.GatewayErrorCodeEnum;
 import com.darren1112.dptms.gateway.remoting.AuthRemoting;
+import com.netflix.client.ClientException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.filter.OncePerRequestFilter;
 

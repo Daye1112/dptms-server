@@ -12,6 +12,9 @@ import com.darren1112.dptms.common.core.util.ResponseEntityUtil;
 import com.darren1112.dptms.common.core.validate.ValidatorBuilder;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotEmptyValidatorCallback;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotNullValidatorCallback;
+import com.darren1112.dptms.common.log.starter.annotation.Log;
+import com.darren1112.dptms.common.log.starter.enums.BusinessType;
+import com.darren1112.dptms.common.log.starter.enums.LogLevel;
 import com.darren1112.dptms.common.security.starter.util.DptmsSecurityUtil;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
@@ -54,6 +57,7 @@ public class SysUserController extends BaseController {
      * @author luyuhao
      * @date 20/11/30 23:12
      */
+    @Log(value = "根据id查询用户", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     @ApiOperation("根据id查询用户")
     @GetMapping("/getById")
     public ResponseEntity<JsonResult<SysUserDto>> getById(Long id) {
@@ -73,6 +77,7 @@ public class SysUserController extends BaseController {
      * @author luyuhao
      * @date 20/12/13 22:10
      */
+    @Log(value = "分配用户组织", businessType = BusinessType.UPDATE)
     @ApiOperation("分配组织")
     @GetMapping("/assignedOrg")
     public ResponseEntity<JsonResult> assignedOrg(@RequestParam(value = "userId", required = false) Long userId,
@@ -93,6 +98,7 @@ public class SysUserController extends BaseController {
      * @author luyuhao
      * @date 20/12/10 01:08
      */
+    @Log(value = "插入用户", businessType = BusinessType.INSERT)
     @ApiOperation("插入用户")
     @PostMapping("/insert")
     public ResponseEntity<JsonResult<Long>> insert(SysUserEntity entity) {
@@ -122,6 +128,7 @@ public class SysUserController extends BaseController {
      * @author luyuhao
      * @date 20/12/10 01:08
      */
+    @Log(value = "分页查询用户", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     @ApiOperation("分页查询用户")
     @GetMapping("/listPage")
     public ResponseEntity<JsonResult<PageBean<SysUserDto>>> listPage(PageParam pageParam,
@@ -138,6 +145,7 @@ public class SysUserController extends BaseController {
      * @author luyuhao
      * @date 20/12/10 01:08
      */
+    @Log(value = "更新用户", businessType = BusinessType.UPDATE)
     @ApiOperation("更新用户")
     @PostMapping("/update")
     public ResponseEntity<JsonResult<Long>> update(SysUserEntity entity) {
@@ -159,6 +167,7 @@ public class SysUserController extends BaseController {
      * @author luyuhao
      * @date 20/12/10 01:08
      */
+    @Log(value = "根据id删除用户", logLevel = LogLevel.WARN, businessType = BusinessType.DELETE)
     @ApiOperation("根据id删除记录")
     @GetMapping("/deleteById")
     public ResponseEntity<JsonResult> deleteById(@RequestParam(value = "id", required = false) Long id) {
@@ -178,6 +187,7 @@ public class SysUserController extends BaseController {
      * @author luyuhao
      * @date 2021/01/14 00:17
      */
+    @Log(value = "更新用户锁定状态", logLevel = LogLevel.WARN, businessType = BusinessType.UPDATE)
     @ApiOperation("更新用户锁定状态")
     @GetMapping("/updateLock")
     public ResponseEntity<JsonResult> updateLock(SysUserEntity entity) {
@@ -200,6 +210,7 @@ public class SysUserController extends BaseController {
      * @author luyuhao
      * @date 20/12/23 01:48
      */
+    @Log(value = "分配用户角色", businessType = BusinessType.UPDATE)
     @ApiOperation("分配角色")
     @GetMapping("/assignedRole")
     public ResponseEntity<JsonResult> assignedRole(@RequestParam(value = "userId", required = false) Long userId,

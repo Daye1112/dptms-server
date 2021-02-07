@@ -1,6 +1,5 @@
 package com.darren1112.dptms.common.log.starter.collect.impl;
 
-import com.darren1112.dptms.common.core.message.JsonResult;
 import com.darren1112.dptms.common.log.starter.collect.LogCollectService;
 import com.darren1112.dptms.common.log.starter.remoting.MonitorManageRemoting;
 import com.darren1112.dptms.common.spi.sys.dto.SysOperateLogDto;
@@ -29,12 +28,8 @@ public class FeignLogCollectServiceImpl implements LogCollectService {
     @Override
     public void operateLogCollect(SysOperateLogDto dto) {
         try {
-            JsonResult jsonResult = monitorManageRemoting.insert(dto);
-            if (!jsonResult.getCode().equals(JsonResult.SUCCESS_CODE)) {
-                log.warn("操作日志收集失败，失败原因: {}，日志信息: {}", jsonResult.getMessage(), dto);
-            } else {
-                log.info("日志采集成功, 用户: {}, 操作内容: {}", dto.getUsername(), dto.getContent());
-            }
+            monitorManageRemoting.insert(dto);
+            log.info("日志采集成功, 用户: {}, 操作内容: {}", dto.getUsername(), dto.getContent());
         } catch (Exception e) {
             log.error("监控系统未启动");
         }

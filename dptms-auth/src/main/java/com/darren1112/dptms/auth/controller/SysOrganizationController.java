@@ -9,6 +9,9 @@ import com.darren1112.dptms.common.core.util.ResponseEntityUtil;
 import com.darren1112.dptms.common.core.validate.ValidatorBuilder;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotEmptyValidatorCallback;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotNullValidatorCallback;
+import com.darren1112.dptms.common.log.starter.annotation.Log;
+import com.darren1112.dptms.common.log.starter.enums.BusinessType;
+import com.darren1112.dptms.common.log.starter.enums.LogLevel;
 import com.darren1112.dptms.common.security.starter.util.DptmsSecurityUtil;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
@@ -51,6 +54,7 @@ public class SysOrganizationController extends BaseController {
      * @author luyuhao
      * @date 20/12/10 01:08
      */
+    @Log(value = "分页查询组织", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     @ApiOperation("分页查询组织")
     @GetMapping("/listPage")
     public ResponseEntity<JsonResult<PageBean<SysOrganizationDto>>> listPage(PageParam pageParam,
@@ -67,6 +71,7 @@ public class SysOrganizationController extends BaseController {
      * @author luyuhao
      * @date 20/12/10 01:08
      */
+    @Log(value = "插入组织", businessType = BusinessType.INSERT)
     @ApiOperation("插入组织")
     @PostMapping("/insert")
     public ResponseEntity<JsonResult<Long>> insert(SysOrganizationEntity entity) {
@@ -89,6 +94,7 @@ public class SysOrganizationController extends BaseController {
      * @author luyuhao
      * @date 20/12/10 01:08
      */
+    @Log(value = "更新组织", businessType = BusinessType.UPDATE)
     @ApiOperation("更新组织")
     @PostMapping("/update")
     public ResponseEntity<JsonResult<Long>> update(SysOrganizationEntity entity) {
@@ -111,6 +117,7 @@ public class SysOrganizationController extends BaseController {
      * @author luyuhao
      * @date 20/12/10 01:08
      */
+    @Log(value = "根据id删除记录", businessType = BusinessType.DELETE)
     @ApiOperation("根据id删除记录")
     @GetMapping("/deleteById")
     public ResponseEntity<JsonResult> deleteById(@RequestParam(value = "id", required = false) Long id) {
@@ -130,6 +137,7 @@ public class SysOrganizationController extends BaseController {
      * @author luyuhao
      * @date 20/12/13 21:43
      */
+    @Log(value = "查询用户关联的组织list", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     @ApiOperation("查询用户关联的组织list")
     @GetMapping("/listUserAssigned")
     public ResponseEntity<JsonResult<List<SysOrganizationDto>>> listUserAssigned(@RequestParam(value = "userId", required = false) Long userId) {

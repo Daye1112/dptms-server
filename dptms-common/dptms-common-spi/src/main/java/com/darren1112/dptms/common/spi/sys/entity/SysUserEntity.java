@@ -1,6 +1,7 @@
 package com.darren1112.dptms.common.spi.sys.entity;
 
 import com.darren1112.dptms.common.spi.common.base.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -65,12 +66,14 @@ public class SysUserEntity extends BaseEntity {
      * 上次登录时间
      */
     @ApiModelProperty("上次登录时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date lastLoginTime;
 
     /**
      * 密码更新时间
      */
     @ApiModelProperty("密码更新时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date pwdUpdateTime;
 
     /**

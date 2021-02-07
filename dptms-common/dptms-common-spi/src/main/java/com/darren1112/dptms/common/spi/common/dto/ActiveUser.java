@@ -1,6 +1,7 @@
 package com.darren1112.dptms.common.spi.common.dto;
 
 import com.darren1112.dptms.common.spi.sys.dto.SysUserDto;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -55,12 +56,14 @@ public class ActiveUser {
      * 上次登录时间
      */
     @ApiModelProperty("上次登录时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date lastLoginTime;
 
     /**
      * 密码更新时间
      */
     @ApiModelProperty("密码更新时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date pwdUpdateTime;
 
     /**
@@ -73,6 +76,7 @@ public class ActiveUser {
      * 登录时间
      */
     @ApiModelProperty("登录时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date loginTime;
 
     /**

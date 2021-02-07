@@ -10,6 +10,9 @@ import com.darren1112.dptms.common.core.util.ResponseEntityUtil;
 import com.darren1112.dptms.common.core.validate.ValidatorBuilder;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotEmptyValidatorCallback;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotNullValidatorCallback;
+import com.darren1112.dptms.common.log.starter.annotation.Log;
+import com.darren1112.dptms.common.log.starter.enums.BusinessType;
+import com.darren1112.dptms.common.log.starter.enums.LogLevel;
 import com.darren1112.dptms.common.security.starter.util.DptmsSecurityUtil;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
@@ -55,6 +58,7 @@ public class SysRoleController extends BaseController {
      * @author luyuhao
      * @date 20/12/13 22:10
      */
+    @Log(value = "分配角色菜单", businessType = BusinessType.UPDATE)
     @ApiOperation("分配菜单")
     @GetMapping("/assignedMenu")
     public ResponseEntity<JsonResult> assignedMenu(@RequestParam(value = "roleId", required = false) Long roleId,
@@ -75,6 +79,7 @@ public class SysRoleController extends BaseController {
      * @author baojiazhong
      * @date 2020/12/19 0:55
      */
+    @Log(value = "插入角色", businessType = BusinessType.INSERT)
     @ApiOperation("插入角色")
     @PostMapping("/insert")
     public ResponseEntity<JsonResult<Long>> insert(SysRoleEntity entity) {
@@ -99,6 +104,7 @@ public class SysRoleController extends BaseController {
      * @author baojiazhong
      * @date 2020/12/19 1:44
      */
+    @Log(value = "分页查询角色", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     @ApiOperation("分页查询")
     @GetMapping("/listPage")
     public ResponseEntity<JsonResult<PageBean<SysRoleDto>>> listPage(PageParam pageParam,
@@ -115,6 +121,7 @@ public class SysRoleController extends BaseController {
      * @author baojiazhong
      * @date 2020/12/19 1:51
      */
+    @Log(value = "更新角色", businessType = BusinessType.UPDATE)
     @ApiOperation("更新角色")
     @PostMapping("/update")
     public ResponseEntity<JsonResult<Long>> update(SysRoleEntity entity) {
@@ -137,6 +144,7 @@ public class SysRoleController extends BaseController {
      * @author baojiazhong
      * @date 2020/12/19 1:56
      */
+    @Log(value = "删除角色", businessType = BusinessType.DELETE)
     @ApiOperation("删除角色")
     @GetMapping("/deleteById")
     public ResponseEntity<JsonResult> deleteById(@RequestParam(value = "id", required = false) Long id) {
@@ -156,6 +164,7 @@ public class SysRoleController extends BaseController {
      * @author luyuhao
      * @date 20/12/13 21:43
      */
+    @Log(value = "查询用户关联的角色list", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     @ApiOperation("查询用户关联的角色list")
     @GetMapping("/listUserAssigned")
     public ResponseEntity<JsonResult<List<SysRoleDto>>> listUserAssigned(@RequestParam(value = "userId", required = false) Long userId) {

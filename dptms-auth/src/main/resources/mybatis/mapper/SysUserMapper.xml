@@ -78,8 +78,6 @@
     <select id="listPage" resultType="com.darren1112.dptms.common.spi.sys.dto.SysUserDto">
         SELECT id,
         username,
-        password,
-        salt,
         real_name       AS realName,
         gender,
         phone_number    AS phoneNumber,

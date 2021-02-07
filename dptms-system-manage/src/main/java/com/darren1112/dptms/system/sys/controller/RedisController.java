@@ -7,6 +7,9 @@ import com.darren1112.dptms.common.core.util.StringUtil;
 import com.darren1112.dptms.common.core.validate.ValidatorBuilder;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotEmptyValidatorCallback;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotNullValidatorCallback;
+import com.darren1112.dptms.common.log.starter.annotation.Log;
+import com.darren1112.dptms.common.log.starter.enums.BusinessType;
+import com.darren1112.dptms.common.log.starter.enums.LogLevel;
 import com.darren1112.dptms.common.redis.starter.properties.DptmsCacheProperties;
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
@@ -14,6 +17,7 @@ import com.darren1112.dptms.common.spi.sys.dto.SysRedisDto;
 import com.darren1112.dptms.system.common.enums.SystemManageErrorCodeEnum;
 import com.darren1112.dptms.system.sys.service.RedisService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -46,6 +50,8 @@ public class RedisController extends BaseController {
      * @author luyuhao
      * @date 2021/01/31 00:04
      */
+    @Log(value = "分页查询缓存", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
+    @ApiOperation("分页查询缓存")
     @GetMapping("/listPage")
     public ResponseEntity<JsonResult<PageBean<SysRedisDto>>> listPage(@RequestParam(value = "keyPrefix", required = false) String keyPrefix, PageParam pageParam) {
         keyPrefix = StringUtil.isBlank(keyPrefix) ? dptmsCacheProperties.getKeyPrefix() : keyPrefix;
@@ -61,6 +67,8 @@ public class RedisController extends BaseController {
      * @author luyuhao
      * @date 2021/01/31 00:04
      */
+    @Log(value = "新增缓存", logLevel = LogLevel.WARN, businessType = BusinessType.INSERT)
+    @ApiOperation("新增缓存")
     @PostMapping("/insert")
     public ResponseEntity<JsonResult> insert(SysRedisDto sysRedisDto) {
         ValidatorBuilder.build()
@@ -80,6 +88,8 @@ public class RedisController extends BaseController {
      * @author luyuhao
      * @date 2021/01/31 00:04
      */
+    @Log(value = "删除缓存", logLevel = LogLevel.WARN, businessType = BusinessType.DELETE)
+    @ApiOperation("删除缓存")
     @GetMapping("/deleteByKey")
     public ResponseEntity<JsonResult> deleteByKey(SysRedisDto sysRedisDto) {
         ValidatorBuilder.build()

@@ -9,6 +9,7 @@ import com.darren1112.dptms.common.log.starter.remoting.MonitorManageRemoting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 /**
@@ -17,6 +18,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
  * @author luyuhao
  * @date 2021/02/07 01:59
  */
+@EnableAsync
 @EnableConfigurationProperties(LogProperties.class)
 public class LogAutoConfig {
 
@@ -30,12 +32,12 @@ public class LogAutoConfig {
      * @author luyuhao
      * @date 2021/02/07 02:09
      */
-    @Bean("logCollectThreadPool")
+    @Bean
     public ThreadPoolTaskExecutor logCollectThreadPool() {
         ThreadPoolTaskExecutor logCollectThreadPool = new ThreadPoolTaskExecutor();
         logCollectThreadPool.setMaxPoolSize(logProperties.getLogMaxPoolSize());
         logCollectThreadPool.setCorePoolSize(logCollectThreadPool.getCorePoolSize());
-        logCollectThreadPool.setThreadNamePrefix("dptms-log-collect-thread-");
+        logCollectThreadPool.setThreadNamePrefix("logCollectExecutor-");
         logCollectThreadPool.initialize();
         return logCollectThreadPool;
     }
