@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,7 +40,7 @@ public class SysOperateLogController extends BaseController {
      */
     @ApiOperation(value = "插入操作日志", hidden = true)
     @PostMapping("/insert")
-    public ResponseEntity<JsonResult> insert(SysOperateLogDto dto) {
+    public ResponseEntity<JsonResult> insert(@RequestBody SysOperateLogDto dto) {
         sysOperateLogService.insert(dto);
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }

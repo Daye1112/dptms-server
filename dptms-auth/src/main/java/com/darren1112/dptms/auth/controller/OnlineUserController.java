@@ -7,6 +7,9 @@ import com.darren1112.dptms.common.core.message.JsonResult;
 import com.darren1112.dptms.common.core.util.ResponseEntityUtil;
 import com.darren1112.dptms.common.core.validate.ValidatorBuilder;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotNullValidatorCallback;
+import com.darren1112.dptms.common.log.starter.annotation.Log;
+import com.darren1112.dptms.common.log.starter.enums.BusinessType;
+import com.darren1112.dptms.common.log.starter.enums.LogLevel;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
@@ -44,6 +47,7 @@ public class OnlineUserController extends BaseController {
      * @author luyuhao
      * @date 2021/01/31 21:52
      */
+    @Log(value = "分页查询在线用户", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     @ApiOperation("分页查询在线用户")
     @GetMapping("/listPage")
     public ResponseEntity<JsonResult<PageBean<ActiveUser>>> listPage(ActiveUser activeUser, PageParam pageParam) {
@@ -59,6 +63,7 @@ public class OnlineUserController extends BaseController {
      * @author luyuhao
      * @date 2021/01/31 22:57
      */
+    @Log(value = "强制下线用户", logLevel = LogLevel.WARN, businessType = BusinessType.FORCE)
     @ApiOperation("强制下线用户")
     @GetMapping("/forcedOffline")
     public ResponseEntity<JsonResult> forcedOffline(@RequestParam(value = "userId", required = false) Long userId) {

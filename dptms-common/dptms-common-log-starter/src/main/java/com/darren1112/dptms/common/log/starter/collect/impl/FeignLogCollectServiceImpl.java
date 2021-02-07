@@ -28,9 +28,15 @@ public class FeignLogCollectServiceImpl implements LogCollectService {
      */
     @Override
     public void operateLogCollect(SysOperateLogDto dto) {
-        JsonResult jsonResult = monitorManageRemoting.insert(dto);
-        if (!jsonResult.getCode().equals(JsonResult.SUCCESS_CODE)) {
-            log.warn("操作日志收集失败，失败原因: {}，日志信息: {}", jsonResult.getMessage(), dto);
+        try {
+            JsonResult jsonResult = monitorManageRemoting.insert(dto);
+            if (!jsonResult.getCode().equals(JsonResult.SUCCESS_CODE)) {
+                log.warn("操作日志收集失败，失败原因: {}，日志信息: {}", jsonResult.getMessage(), dto);
+            } else {
+                log.info("日志采集成功, 用户: {}, 操作内容: {}", dto.getUsername(), dto.getContent());
+            }
+        } catch (Exception e) {
+            log.error("监控系统未启动");
         }
     }
 }

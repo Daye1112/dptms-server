@@ -1,5 +1,6 @@
 package com.darren1112.dptms.common.log.starter.properties;
 
+import com.darren1112.dptms.common.log.starter.enums.LogCollectType;
 import com.darren1112.dptms.common.log.starter.enums.LogLevel;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -28,4 +29,9 @@ public class LogProperties {
      * 日志采集线程池最大维护数
      */
     private int logCorePoolSize = 20;
+
+    /**
+     * 日志采集器类型
+     */
+    private LogCollectType logCollectType = LogCollectType.FEIGN;
 }

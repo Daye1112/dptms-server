@@ -5,6 +5,7 @@ import com.darren1112.dptms.common.spi.sys.dto.SysLoginLogDto;
 import com.darren1112.dptms.common.spi.sys.dto.SysOperateLogDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -26,7 +27,7 @@ public interface MonitorManageRemoting {
      * @date 2021/02/06 20:50
      */
     @PostMapping("/loginLog/insert")
-    JsonResult insert(SysLoginLogDto dto);
+    JsonResult insert(@RequestBody SysLoginLogDto dto);
 
     /**
      * 插入操作日志信息
@@ -37,5 +38,5 @@ public interface MonitorManageRemoting {
      * @date 2021/02/06 20:50
      */
     @PostMapping("/operateLog/insert")
-    JsonResult insert(SysOperateLogDto dto);
+    JsonResult insert(@RequestBody SysOperateLogDto dto);
 }

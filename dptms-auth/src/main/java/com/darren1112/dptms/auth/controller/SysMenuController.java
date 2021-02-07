@@ -10,6 +10,9 @@ import com.darren1112.dptms.common.core.util.ResponseEntityUtil;
 import com.darren1112.dptms.common.core.validate.ValidatorBuilder;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotEmptyValidatorCallback;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotNullValidatorCallback;
+import com.darren1112.dptms.common.log.starter.annotation.Log;
+import com.darren1112.dptms.common.log.starter.enums.BusinessType;
+import com.darren1112.dptms.common.log.starter.enums.LogLevel;
 import com.darren1112.dptms.common.security.starter.util.DptmsSecurityUtil;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 import com.darren1112.dptms.common.spi.sys.dto.SysMenuDto;
@@ -50,6 +53,7 @@ public class SysMenuController extends BaseController {
      * @author baojiazhong
      * @date 2020/12/16 14:29
      */
+    @Log(value = "插入菜单", businessType = BusinessType.INSERT)
     @ApiOperation("插入菜单")
     @PostMapping("/insert")
     public ResponseEntity<JsonResult<Long>> insert(SysMenuEntity entity) {
@@ -74,6 +78,7 @@ public class SysMenuController extends BaseController {
      * @author baojiazhong
      * @date 2020/12/16 14:47
      */
+    @Log(value = "根据id删除记录", businessType = BusinessType.DELETE)
     @ApiOperation("根据id删除记录")
     @GetMapping("/deleteById")
     public ResponseEntity<JsonResult> deleteById(@RequestParam(value = "id", required = false) Long id) {
@@ -92,6 +97,7 @@ public class SysMenuController extends BaseController {
      * @author baojiazhong
      * @date 2020/12/19 0:08
      */
+    @Log(value = "查询菜单树", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     @ApiOperation("查询菜单树")
     @GetMapping("/listTree")
     public ResponseEntity<JsonResult<SysMenuDto>> listTree() {
@@ -107,6 +113,7 @@ public class SysMenuController extends BaseController {
      * @author baojiazhong
      * @date 2020/12/16 15:25
      */
+    @Log(value = "更新菜单", businessType = BusinessType.UPDATE)
     @ApiOperation("更新菜单")
     @PostMapping("/update")
     public ResponseEntity<JsonResult<Long>> update(SysMenuEntity entity) {
@@ -131,6 +138,7 @@ public class SysMenuController extends BaseController {
      * @author luyuhao
      * @date 20/12/13 21:43
      */
+    @Log(value = "查询角色关联的菜单树", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     @ApiOperation("查询角色关联的菜单树")
     @GetMapping("/listRoleAssigned")
     public ResponseEntity<JsonResult<SysMenuDto>> listRoleAssigned(@RequestParam(value = "roleId", required = false) Long roleId) {
@@ -150,6 +158,7 @@ public class SysMenuController extends BaseController {
      * @author baojiazhong
      * @date 2020/12/22 23:50
      */
+    @Log(value = "分配权限", businessType = BusinessType.UPDATE)
     @ApiOperation("分配权限")
     @PostMapping("/assignedPer")
     public ResponseEntity<JsonResult> assignedPer(@RequestParam(value = "menuId", required = false) Long menuId,
