@@ -1,5 +1,6 @@
 package com.darren1112.dptms.common.log.starter.config;
 
+import com.darren1112.dptms.common.core.thread.decorator.ThreadPoolDecorator;
 import com.darren1112.dptms.common.log.starter.aspect.LogAspect;
 import com.darren1112.dptms.common.log.starter.collect.LogCollectService;
 import com.darren1112.dptms.common.log.starter.collect.impl.FeignLogCollectServiceImpl;
@@ -11,6 +12,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+
+import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * 日志自动配置类
@@ -38,12 +41,16 @@ public class LogAutoConfig {
         logCollectThreadPool.setMaxPoolSize(logProperties.getLogMaxPoolSize());
         logCollectThreadPool.setCorePoolSize(logCollectThreadPool.getCorePoolSize());
         logCollectThreadPool.setThreadNamePrefix("logCollectExecutor-");
+        // 传递上下文
+        logCollectThreadPool.setTaskDecorator(new ThreadPoolDecorator());
+        // 当线程池已满,且等待队列也满了的时候,转为主线程执行
+        logCollectThreadPool.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
         logCollectThreadPool.initialize();
         return logCollectThreadPool;
     }
 
     @Bean
-    public LogCollectService feignLogCollectService(MonitorManageRemoting monitorManageRemoting) {
+    public LogCollectService logCollectService(MonitorManageRemoting monitorManageRemoting) {
         LogCollectType logCollectType = logProperties.getLogCollectType();
         switch (logCollectType) {
             case FEIGN:
