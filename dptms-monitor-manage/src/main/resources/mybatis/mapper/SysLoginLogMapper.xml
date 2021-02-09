@@ -6,4 +6,59 @@
         INSERT INTO sys_login_log(username, os, browser, ip, ip_address, remark, isvalid, ctime, creater, mtime, updater)
         VALUES (#{username}, #{os}, #{browser}, #{ip}, #{ipAddress}, #{remark}, 1, #{ctime}, #{creater}, #{mtime}, #{updater})
     </insert>
+    <!--分页查询登录日志-->
+    <select id="listPage" resultType="com.darren1112.dptms.common.spi.sys.dto.SysLoginLogDto">
+        SELECT id,
+               username,
+               os,
+               browser,
+               ip,
+               ip_address AS ipAddress,
+               remark,
+               isvalid,
+               ctime,
+               creater,
+               mtime,
+               updater
+        FROM sys_login_log
+        WHERE isvalid = 1
+         <if test="dto.username != null and dto.username != ''">
+             AND username LIKE concat('%', #{dto.username}, '%')
+         </if>
+        <if test="dto.ip != null and dto.ip != ''">
+            AND ip LIKE concat('%', #{dto.ip}, '%')
+        </if>
+        <if test="dto.ipAddress != null and dto.ipAddress != ''">
+            AND ip_address LIKE concat('%', #{dto.ipAddress}, '%')
+        </if>
+        <if test="dto.browser != null and dto.browser != ''">
+            AND browser LIKE concat('%', #{dto.browser}, '%')
+        </if>
+        <if test="dto.os != null and dto.os != ''">
+            AND os LIKE concat('%', #{dto.os}, '%')
+        </if>
+        ORDER BY ctime DESC
+        LIMIT #{pageParam.startIndex}, #{pageParam.pageSize}
+    </select>
+    <!--分页查询登录日志记录数-->
+    <select id="listPageCount" resultType="java.lang.Long">
+        SELECT count(1)
+        FROM sys_login_log
+        WHERE isvalid = 1
+        <if test="dto.username != null and dto.username != ''">
+            AND username LIKE concat('%', #{dto.username}, '%')
+        </if>
+        <if test="dto.ip != null and dto.ip != ''">
+            AND ip LIKE concat('%', #{dto.ip}, '%')
+        </if>
+        <if test="dto.ipAddress != null and dto.ipAddress != ''">
+            AND ip_address LIKE concat('%', #{dto.ipAddress}, '%')
+        </if>
+        <if test="dto.browser != null and dto.browser != ''">
+            AND browser LIKE concat('%', #{dto.browser}, '%')
+        </if>
+        <if test="dto.os != null and dto.os != ''">
+            AND os LIKE concat('%', #{dto.os}, '%')
+        </if>
+    </select>
 </mapper>
