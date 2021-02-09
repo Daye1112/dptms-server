@@ -9,6 +9,7 @@ import com.darren1112.dptms.common.spi.common.dto.PageBean;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,7 @@ import java.util.Optional;
  * @date 2021/01/31 22:05
  */
 @Service
+@Transactional(rollbackFor = Throwable.class, readOnly = true)
 public class OnlineUserServiceImpl extends BaseService implements OnlineUserService {
 
     @Autowired

@@ -3,13 +3,17 @@ package com.darren1112.dptms.auth.common.security.base;
 import com.darren1112.dptms.auth.common.security.UserDetailsService;
 import com.darren1112.dptms.common.core.exception.BadRequestException;
 import com.darren1112.dptms.common.core.exception.BaseException;
+import com.darren1112.dptms.common.log.starter.collect.LogCollectService;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 import com.darren1112.dptms.common.spi.common.dto.LoginParam;
+import com.darren1112.dptms.common.spi.sys.dto.SysLoginLogDto;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 
 /**
  * 用户信息Base
@@ -19,6 +23,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Slf4j
 public abstract class BaseUserDetails implements UserDetailsService {
+
+    @Autowired
+    private LogCollectService logCollectService;
 
     /**
      * 登录鉴权
@@ -102,5 +109,26 @@ public abstract class BaseUserDetails implements UserDetailsService {
     @Override
     public BaseException exceptionHandler(Exception e) {
         return new BadRequestException(HttpStatus.BAD_REQUEST.value(), "错误信息: " + e.getMessage());
+    }
+
+    /**
+     * 登录日志采集
+     *
+     * @param activeUser 登录用户信息
+     * @author luyuhao
+     * @date 2021/2/9 14:09
+     */
+    protected void loginLogCollect(ActiveUser activeUser) {
+        SysLoginLogDto loginLogDto = new SysLoginLogDto();
+        loginLogDto.setUsername(activeUser.getUsername());
+        loginLogDto.setOs(activeUser.getOs());
+        loginLogDto.setBrowser(activeUser.getBrowser());
+        loginLogDto.setIp(activeUser.getIp());
+        loginLogDto.setIpAddress(activeUser.getIpAddress());
+        loginLogDto.setCtime(new Date());
+        loginLogDto.setMtime(new Date());
+        loginLogDto.setCreater(activeUser.getId());
+        loginLogDto.setUpdater(activeUser.getId());
+        logCollectService.loginLogCollect(loginLogDto);
     }
 }

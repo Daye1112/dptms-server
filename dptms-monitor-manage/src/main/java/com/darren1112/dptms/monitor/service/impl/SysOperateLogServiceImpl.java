@@ -6,6 +6,7 @@ import com.darren1112.dptms.monitor.dao.SysOperateLogDao;
 import com.darren1112.dptms.monitor.service.SysOperateLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 操作日志ServiceImpl
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
  * @date 2021/02/06 20:44
  */
 @Service
+@Transactional(rollbackFor = Throwable.class, readOnly = true)
 public class SysOperateLogServiceImpl extends BaseService implements SysOperateLogService {
 
     @Autowired
@@ -27,6 +29,7 @@ public class SysOperateLogServiceImpl extends BaseService implements SysOperateL
      * @date 2021/02/06 21:08
      */
     @Override
+    @Transactional(rollbackFor = Throwable.class)
     public void insert(SysOperateLogDto dto) {
         sysOperateLogDao.insert(dto);
     }

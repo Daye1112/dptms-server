@@ -102,6 +102,8 @@ public class PasswordLoginHandler extends BaseUserDetails {
         sysUserService.updateLoginTime(activeUser.getId());
         // 生成token并保存到redis和cookie中
         dptmsTokenStore.generateToken(activeUser, response);
+        // 登录日志收集
+        loginLogCollect(activeUser);
     }
 
 }

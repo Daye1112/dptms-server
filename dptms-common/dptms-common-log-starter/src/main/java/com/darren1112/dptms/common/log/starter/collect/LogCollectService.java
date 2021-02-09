@@ -1,5 +1,6 @@
 package com.darren1112.dptms.common.log.starter.collect;
 
+import com.darren1112.dptms.common.spi.sys.dto.SysLoginLogDto;
 import com.darren1112.dptms.common.spi.sys.dto.SysOperateLogDto;
 import org.springframework.scheduling.annotation.Async;
 
@@ -20,4 +21,14 @@ public interface LogCollectService {
      */
     @Async("logCollectThreadPool")
     void operateLogCollect(SysOperateLogDto dto);
+
+    /**
+     * 插入登录日志信息
+     *
+     * @param dto 日志参数
+     * @author luyuhao
+     * @date 2021/02/06 20:50
+     */
+    @Async("logCollectThreadPool")
+    void loginLogCollect(SysLoginLogDto dto);
 }
