@@ -3,7 +3,68 @@
 <mapper namespace="com.darren1112.dptms.monitor.dao.SysOperateLogDao">
     <!--插入操作日志信息-->
     <insert id="insert" parameterType="com.darren1112.dptms.common.spi.sys.dto.SysOperateLogDto">
-        INSERT sys_operate_log(username, content, url, browser, ip, ip_address, log_level, business_type, exception_content, request_param, time_consuming, remark, isvalid, ctime, creater, mtime, updater)
+        INSERT INTO sys_operate_log(username, content, url, browser, ip, ip_address, log_level, business_type, exception_content, request_param, time_consuming, remark, isvalid, ctime, creater, mtime, updater)
         VALUES (#{username}, #{content}, #{url}, #{browser}, #{ip}, #{ipAddress}, #{logLevel}, #{businessType}, #{exceptionContent}, #{requestParam}, #{timeConsuming}, #{remark}, 1, #{ctime}, #{creater}, #{mtime}, #{updater})
     </insert>
+    <!--分页查询操作日志-->
+    <select id="listPage" resultType="com.darren1112.dptms.common.spi.sys.dto.SysOperateLogDto">
+        SELECT id,
+               username,
+               content,
+               url,
+               browser,
+               ip,
+               ip_address        AS ipAddress,
+               log_level         AS logLevel,
+               business_type     AS businessType,
+               exception_content AS exceptionContent,
+               request_param     AS requestParam,
+               time_consuming    AS timeConsuming,
+               remark,
+               isvalid,
+               ctime,
+               creater,
+               mtime,
+               updater
+        FROM sys_operate_log
+        WHERE isvalid = 1
+        <if test="dto.username != null and dto.username != ''">
+            AND username LIKE concat('%', #{dto.username}, '%')
+        </if>
+        <if test="dto.logLevel != null">
+            AND log_level = #{dto.logLevel}
+        </if>
+        <if test="dto.businessType != null">
+            AND business_type = #{dto.businessType}
+        </if>
+        <if test="dto.url != null and dto.url != ''">
+            AND url LIKE concat('%', #{dto.url}, '%')
+        </if>
+        <if test="dto.ipAddress != null and dto.ipAddress != ''">
+            AND ip_address LIKE concat('%', #{dto.ipAddress}, '%')
+        </if>
+        ORDER BY ctime DESC
+        LIMIT #{pageParam.startIndex}, #{pageParam.pageSize}
+    </select>
+    <!--分页查询操作日志-记录数-->
+    <select id="listPageCount" resultType="java.lang.Long">
+        SELECT count(1)
+        FROM sys_operate_log
+        WHERE isvalid = 1
+        <if test="dto.username != null and dto.username != ''">
+            AND username LIKE concat('%', #{dto.username}, '%')
+        </if>
+        <if test="dto.logLevel != null">
+            AND log_level = #{dto.logLevel}
+        </if>
+        <if test="dto.businessType != null">
+            AND business_type = #{dto.businessType}
+        </if>
+        <if test="dto.url != null and dto.url != ''">
+            AND url LIKE concat('%', #{dto.url}, '%')
+        </if>
+        <if test="dto.ipAddress != null and dto.ipAddress != ''">
+            AND ip_address LIKE concat('%', #{dto.ipAddress}, '%')
+        </if>
+    </select>
 </mapper>

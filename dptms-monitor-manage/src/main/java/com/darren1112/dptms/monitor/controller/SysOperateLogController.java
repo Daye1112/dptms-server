@@ -3,6 +3,11 @@ package com.darren1112.dptms.monitor.controller;
 import com.darren1112.dptms.common.core.base.BaseController;
 import com.darren1112.dptms.common.core.message.JsonResult;
 import com.darren1112.dptms.common.core.util.ResponseEntityUtil;
+import com.darren1112.dptms.common.log.starter.annotation.Log;
+import com.darren1112.dptms.common.log.starter.enums.BusinessType;
+import com.darren1112.dptms.common.log.starter.enums.LogLevel;
+import com.darren1112.dptms.common.spi.common.dto.PageBean;
+import com.darren1112.dptms.common.spi.common.dto.PageParam;
 import com.darren1112.dptms.common.spi.sys.dto.SysOperateLogDto;
 import com.darren1112.dptms.monitor.service.SysOperateLogService;
 import io.swagger.annotations.Api;
@@ -10,10 +15,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 操作日志Controller
@@ -43,5 +45,23 @@ public class SysOperateLogController extends BaseController {
     public ResponseEntity<JsonResult> insert(@RequestBody SysOperateLogDto dto) {
         sysOperateLogService.insert(dto);
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
+    }
+
+    /**
+     * 分页查询操作日志
+     *
+     * @param dto       筛选参数
+     * @param pageParam 分页参数
+     * @return {@link JsonResult}
+     * @author luyuhao
+     * @date 20/12/10 01:08
+     */
+    @Log(value = "分页查询操作日志", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
+    @ApiOperation("分页查询操作日志")
+    @GetMapping("/listPage")
+    public ResponseEntity<JsonResult<PageBean<SysOperateLogDto>>> listPage(PageParam pageParam,
+                                                                           SysOperateLogDto dto) {
+        PageBean<SysOperateLogDto> pageBean = sysOperateLogService.listPage(getPageParam(pageParam), dto);
+        return ResponseEntityUtil.ok(JsonResult.buildSuccessData(pageBean));
     }
 }
