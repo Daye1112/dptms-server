@@ -16,4 +16,12 @@ public class JasyptTest {
 
         System.out.println(str1 + ": " + JasyptUtil.defaultEncrypt(str1, secret));
     }
+
+    @Test
+    public void test02() {
+        String secret = "xxx";
+        String str1 = "yyy";
+
+        System.out.println(str1 + ": " + JasyptUtil.defaultDecrypt(str1, secret));
+    }
 }
