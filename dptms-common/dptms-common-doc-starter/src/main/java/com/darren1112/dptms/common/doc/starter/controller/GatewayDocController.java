@@ -1,8 +1,8 @@
-package com.darren1112.dptms.common.doc.gateway.starter.controller;
+package com.darren1112.dptms.common.doc.starter.controller;
 
 import com.darren1112.dptms.common.core.util.CollectionUtil;
 import com.darren1112.dptms.common.core.util.ResponseEntityUtil;
-import com.darren1112.dptms.common.doc.gateway.starter.properties.DocGatewayProperties;
+import com.darren1112.dptms.common.doc.starter.properties.GatewayDocProperties;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,12 +22,12 @@ import java.util.Optional;
  */
 @RestController
 @AllArgsConstructor
-public class DocGatewayController {
+public class GatewayDocController {
 
     private SecurityConfiguration securityConfiguration;
     private UiConfiguration uiConfiguration;
     private SwaggerResourcesProvider swaggerResources;
-    private DocGatewayProperties docGatewayProperties;
+    private GatewayDocProperties gatewayDocProperties;
 
     @GetMapping("/swagger-resources/configuration/security")
     public Mono<ResponseEntity<SecurityConfiguration>> securityConfiguration() {
@@ -45,7 +45,7 @@ public class DocGatewayController {
     public Mono<ResponseEntity<List<SwaggerResource>>> swaggerResources() {
         List<SwaggerResource> swaggerResources = this.swaggerResources.get();
         List<SwaggerResource> filterList = new ArrayList<>();
-        String[] unResources = docGatewayProperties.getUnResources();
+        String[] unResources = gatewayDocProperties.getUnResources();
         if (CollectionUtil.isNotEmpty(unResources)) {
             List<String> resourceList = CollectionUtil.arrayToList(unResources);
             swaggerResources.stream()

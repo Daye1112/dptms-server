@@ -1,11 +1,9 @@
 package com.darren1112.dptms.common.doc.starter.config;
 
-import com.darren1112.dptms.common.doc.starter.properties.DocProperties;
+import com.darren1112.dptms.common.doc.starter.properties.ServerDocProperties;
 import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
-import com.google.common.collect.Lists;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,13 +13,11 @@ import springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.service.*;
+import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
-
-import java.util.List;
 
 /**
  * 文档自动配置类
@@ -33,12 +29,11 @@ import java.util.List;
 @EnableSwagger2
 @EnableKnife4j
 @Import(BeanValidatorPluginsConfiguration.class)
-@EnableConfigurationProperties(DocProperties.class)
-@ConditionalOnProperty(value = "dptms.doc.enable", havingValue = "true", matchIfMissing = true)
-public class DocAutoConfig {
+@EnableConfigurationProperties(ServerDocProperties.class)
+public class ServerDocConfig {
 
     @Autowired
-    private DocProperties docProperties;
+    private ServerDocProperties serverDocProperties;
 
     @Bean
     @Order(-1)
@@ -49,21 +44,21 @@ public class DocAutoConfig {
                 .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
                 .paths(PathSelectors.any())
                 .build();
-                // .securityContexts(Lists.newArrayList(securityContext()))
-                // .securitySchemes(Lists.<SecurityScheme>newArrayList(apiKey()));
+        // .securityContexts(Lists.newArrayList(securityContext()))
+        // .securitySchemes(Lists.<SecurityScheme>newArrayList(apiKey()));
     }
 
 
     private ApiInfo groupApiInfo() {
-        Contact contact = new Contact(docProperties.getName(), "", docProperties.getEmail());
+        Contact contact = new Contact(serverDocProperties.getName(), "", serverDocProperties.getEmail());
 
         return new ApiInfoBuilder()
-                .title(docProperties.getTitle())
-                .description(docProperties.getDescription())
+                .title(serverDocProperties.getTitle())
+                .description(serverDocProperties.getDescription())
                 .contact(contact)
                 .license("Apache 2.0")
                 .licenseUrl("https://www.apache.org/licenses/LICENSE-2.0.html")
-                .version(docProperties.getVersion())
+                .version(serverDocProperties.getVersion())
                 .build();
     }
 

@@ -1,7 +1,7 @@
-package com.darren1112.dptms.common.doc.gateway.starter.config;
+package com.darren1112.dptms.common.doc.starter.config;
 
 import com.darren1112.dptms.common.core.util.CollectionUtil;
-import com.darren1112.dptms.common.doc.gateway.starter.properties.DocGatewayProperties;
+import com.darren1112.dptms.common.doc.starter.properties.GatewayDocProperties;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.netflix.zuul.filters.Route;
@@ -22,11 +22,11 @@ import java.util.List;
 @Slf4j
 @Primary
 @AllArgsConstructor
-public class DocGatewayResourceConfig implements SwaggerResourcesProvider {
+public class GatewayDocResourceConfig implements SwaggerResourcesProvider {
 
     private RouteLocator routeLocator;
 
-    private DocGatewayProperties docGatewayProperties;
+    private GatewayDocProperties gatewayDocProperties;
 
     private final static String SUFFIX = "v2/api-docs";
 
@@ -35,7 +35,7 @@ public class DocGatewayResourceConfig implements SwaggerResourcesProvider {
         //获取所有router
         List<SwaggerResource> resources = new ArrayList<>();
         List<Route> routes = routeLocator.getRoutes();
-        String[] unAccessResource = docGatewayProperties.getUnResources();
+        String[] unAccessResource = gatewayDocProperties.getUnResources();
         List<String> unAccessResourceList = CollectionUtil.arrayToList(unAccessResource);
         if (CollectionUtil.isNotEmpty(routes)) {
             routes.stream().filter(item -> !unAccessResourceList.contains(item.getId()))

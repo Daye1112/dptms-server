@@ -1,4 +1,4 @@
-package com.darren1112.dptms.common.doc.gateway.starter.properties;
+package com.darren1112.dptms.common.doc.starter.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -11,12 +11,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @Data
 @ConfigurationProperties(prefix = "dptms.doc.gateway")
-public class DocGatewayProperties {
-
-    /**
-     * 是否开启网关文档聚合功能
-     */
-    private Boolean enable;
+public class GatewayDocProperties {
 
     /**
      * 不需要暴露doc的服务列表，多个值时用逗号分隔

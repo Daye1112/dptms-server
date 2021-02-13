@@ -249,11 +249,6 @@
             </dependency>
             <dependency>
                 <groupId>com.darren1112</groupId>
-                <artifactId>dptms-common-doc-gateway-starter</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.darren1112</groupId>
                 <artifactId>dptms-common-log-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>

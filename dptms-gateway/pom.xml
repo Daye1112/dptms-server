@@ -123,7 +123,7 @@
         </dependency>
         <dependency>
             <groupId>com.darren1112</groupId>
-            <artifactId>dptms-common-doc-gateway-starter</artifactId>
+            <artifactId>dptms-common-doc-starter</artifactId>
         </dependency>
         <dependency>
             <groupId>com.darren1112</groupId>

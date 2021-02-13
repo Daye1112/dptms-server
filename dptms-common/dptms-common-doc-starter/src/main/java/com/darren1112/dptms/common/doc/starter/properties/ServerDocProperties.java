@@ -11,12 +11,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @Data
 @ConfigurationProperties(prefix = "dptms.doc")
-public class DocProperties {
-
-    /**
-     * 是否开启doc功能
-     */
-    private Boolean enable;
+public class ServerDocProperties {
     /**
      * 文档标题
      */

@@ -1,19 +1,19 @@
 package com.darren1112.dptms.auth;
 
 import com.darren1112.dptms.common.core.util.EnvironmentAwareUtil;
+import com.darren1112.dptms.common.doc.starter.annotation.EnableServerDoc;
 import com.darren1112.dptms.common.security.starter.annotation.EnableServerSecurity;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 /**
  * @author luyuhao
  * @date 2020/07/18 22:19
  */
-@EnableCaching
-@EnableServerSecurity
+@EnableServerDoc
 @EnableEurekaClient
+@EnableServerSecurity
 @SpringBootApplication
 public class AuthApplication {
 

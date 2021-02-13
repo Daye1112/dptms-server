@@ -1,3 +1,0 @@
-# Auto Configure
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.darren1112.dptms.common.doc.starter.config.DocAutoConfig
