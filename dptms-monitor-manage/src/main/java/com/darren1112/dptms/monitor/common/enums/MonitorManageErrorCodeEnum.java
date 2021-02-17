@@ -15,6 +15,7 @@ public enum MonitorManageErrorCodeEnum implements BaseErrorEnum {
      * 监控管理错误状态码
      */
     ID_NOT_NULL(HttpStatus.BAD_REQUEST, "id不能为空"),
+    MODULE_NOT_NULL(HttpStatus.BAD_REQUEST, "模块不能为空")
     ;
 
     private Integer code;

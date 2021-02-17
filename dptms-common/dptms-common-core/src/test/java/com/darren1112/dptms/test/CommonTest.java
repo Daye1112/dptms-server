@@ -1,6 +1,7 @@
 package com.darren1112.dptms.test;
 
 import com.darren1112.dptms.common.core.enums.MicroErrorCodeEnum;
+import com.darren1112.dptms.common.core.enums.ServerEnum;
 import org.junit.Test;
 
 import java.io.UnsupportedEncodingException;
@@ -33,5 +34,10 @@ public class CommonTest {
     @Test
     public void test04(){
         System.out.println(MicroErrorCodeEnum.valueOf("asd"));
+    }
+
+    @Test
+    public void test05(){
+        System.out.println(ServerEnum.matchByCode(1));
     }
 }

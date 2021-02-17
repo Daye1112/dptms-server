@@ -108,6 +108,14 @@
             <groupId>com.darren1112</groupId>
             <artifactId>dptms-common-log-starter</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.darren1112</groupId>
+            <artifactId>dptms-common-component</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.darren1112</groupId>
+            <artifactId>dptms-common-security-starter</artifactId>
+        </dependency>
         <!-- [dptms] End-->
     </dependencies>
 

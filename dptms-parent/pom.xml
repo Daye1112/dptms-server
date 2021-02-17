@@ -252,6 +252,11 @@
                 <artifactId>dptms-common-log-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.darren1112</groupId>
+                <artifactId>dptms-common-component</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <!-- [dptms] End-->
         </dependencies>
     </dependencyManagement>
