@@ -6,7 +6,7 @@ import com.darren1112.dptms.common.log.starter.collect.LogCollectService;
 import com.darren1112.dptms.common.log.starter.collect.impl.FeignLogCollectServiceImpl;
 import com.darren1112.dptms.common.log.starter.enums.LogCollectType;
 import com.darren1112.dptms.common.log.starter.properties.LogProperties;
-import com.darren1112.dptms.common.log.starter.remoting.MonitorManageRemoting;
+import com.darren1112.dptms.component.remoting.MonitorManageRemoting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;

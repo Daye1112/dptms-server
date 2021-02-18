@@ -26,6 +26,13 @@
         </dependency>
         <!-- Spring Boot End -->
 
+        <!-- [Spring Cloud] Start -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <!-- [Spring Cloud] End -->
+
         <!-- [Plugins] Start -->
         <!-- [druid] Start -->
         <dependency>

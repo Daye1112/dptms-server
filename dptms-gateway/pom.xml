@@ -129,6 +129,10 @@
             <groupId>com.darren1112</groupId>
             <artifactId>dptms-common-security-starter</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.darren1112</groupId>
+            <artifactId>dptms-common-component</artifactId>
+        </dependency>
         <!-- [dptms] End-->
     </dependencies>
 

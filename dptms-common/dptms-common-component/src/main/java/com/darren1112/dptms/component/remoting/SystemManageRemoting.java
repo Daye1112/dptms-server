@@ -1,4 +1,4 @@
-package com.darren1112.dptms.monitor.remoting;
+package com.darren1112.dptms.component.remoting;
 
 import com.darren1112.dptms.common.core.message.JsonResult;
 import com.darren1112.dptms.common.spi.monitor.dto.DruidStatDto;
@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 /**
- * auth模块rpc调用
+ * system manage 模块rpc调用
  *
  * @author luyuhao
- * @date 2021/02/15 23:39
+ * @date 2021/02/15 23:40
  */
-@FeignClient("dptms-auth")
-@RequestMapping(value = "/auth")
-public interface AuthRemoting {
+@FeignClient("dptms-system-manage")
+@RequestMapping(value = "/system-manage")
+public interface SystemManageRemoting {
 
     /**
      * 接口访问统计

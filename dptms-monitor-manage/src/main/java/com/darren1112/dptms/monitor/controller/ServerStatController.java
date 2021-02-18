@@ -12,8 +12,8 @@ import com.darren1112.dptms.common.spi.common.dto.KeyValueDto;
 import com.darren1112.dptms.common.spi.monitor.dto.DruidStatDto;
 import com.darren1112.dptms.component.service.DruidService;
 import com.darren1112.dptms.monitor.common.enums.MonitorManageErrorCodeEnum;
-import com.darren1112.dptms.monitor.remoting.AuthRemoting;
-import com.darren1112.dptms.monitor.remoting.SystemManageRemoting;
+import com.darren1112.dptms.component.remoting.AuthRemoting;
+import com.darren1112.dptms.component.remoting.SystemManageRemoting;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.ArrayList;
 import java.util.Collections;

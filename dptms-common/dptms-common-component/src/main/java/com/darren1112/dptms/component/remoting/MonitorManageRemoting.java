@@ -1,4 +1,4 @@
-package com.darren1112.dptms.common.log.starter.remoting;
+package com.darren1112.dptms.component.remoting;
 
 import com.darren1112.dptms.common.core.message.JsonResult;
 import com.darren1112.dptms.common.spi.sys.dto.SysLoginLogDto;

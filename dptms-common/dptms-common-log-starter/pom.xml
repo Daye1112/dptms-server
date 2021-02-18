@@ -32,13 +32,6 @@
         </dependency>
         <!-- Spring Boot End -->
 
-        <!-- [Spring Cloud] Start -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
-        </dependency>
-        <!-- [Spring Cloud] End -->
-
         <!-- [Plugins] Start -->
         <!-- [lombok] Start -->
         <dependency>
@@ -57,6 +50,10 @@
         <dependency>
             <groupId>com.darren1112</groupId>
             <artifactId>dptms-common-security-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.darren1112</groupId>
+            <artifactId>dptms-common-component</artifactId>
         </dependency>
         <!-- [dptms] End-->
     </dependencies>
