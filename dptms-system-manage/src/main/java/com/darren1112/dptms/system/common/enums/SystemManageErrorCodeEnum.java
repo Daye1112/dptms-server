@@ -19,7 +19,11 @@ public enum SystemManageErrorCodeEnum implements BaseErrorEnum {
     REDIS_KEY_PREFIX_NOT_NULL(HttpStatus.BAD_REQUEST, "缓存前缀不能为空"),
     REDIS_VALUE_NOT_NULL(HttpStatus.BAD_REQUEST, "缓存值不能为空"),
     REDIS_KEY_EXPIRED_NOT_NULL(HttpStatus.BAD_REQUEST, "缓存有效期不能为空"),
-    ;
+    ORG_ID_NOT_NULL(HttpStatus.BAD_REQUEST, "组织id不能为空"),
+    APP_CODE_NOT_NULL(HttpStatus.BAD_REQUEST, "应用编号不能为空"),
+    APP_NAME_NOT_NULL(HttpStatus.BAD_REQUEST, "应用名称不能为空"),
+    APP_TYPE_NOT_NULL(HttpStatus.BAD_REQUEST, "应用类型不能为空"),
+    APP_NOT_REPEAT(HttpStatus.BAD_REQUEST, "应用信息重复");
 
     private Integer code;
     private String message;

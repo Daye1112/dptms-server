@@ -34,6 +34,62 @@
     </select>
     <!--分页查询服务应用-记录数-->
     <select id="listPageCount" resultType="java.lang.Long">
-
+        SELECT count(1)
+        FROM service_application
+        WHERE isvalid = 1
+        <if test="dto.orgId != null">
+            AND org_id = #{dto.orgId}
+        </if>
+        <if test="dto.appCode != null and dto.appCode != ''">
+            AND app_code LIKE concat('%', #{dto.appCode}, '%')
+        </if>
+        <if test="dto.appName != null and dto.appName != ''">
+            AND app_name LIKE concat('%', #{dto.appName}, '%')
+        </if>
+        <if test="dto.appType != null">
+            AND app_type = #{dto.appType}
+        </if>
     </select>
+    <!--统计重复的服务应用-->
+    <select id="countByRepeat" parameterType="com.darren1112.dptms.common.spi.service.dto.ServiceApplicationDto"
+            resultType="java.lang.Long">
+        SELECT count(1)
+        FROM service_application
+        WHERE isvalid = 1
+          AND app_code = #{appCode}
+          AND app_name = #{appName}
+        <if test="isUpdate != null and isUpdate == true">
+            AND id != #{id}
+        </if>
+    </select>
+    <!--新增服务应用-->
+    <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id"
+            parameterType="com.darren1112.dptms.common.spi.service.dto.ServiceApplicationDto">
+        INSERT INTO service_application(org_id, app_code, app_name, app_type,
+                                        remark, isvalid, ctime, creater, mtime, updater)
+        VALUES (#{orgId}, #{appCode}, #{appName}, #{appType},
+                #{remark}, 1, now(), #{creater}, now(), #{updater})
+    </insert>
+    <!--更新服务应用-->
+    <update id="update"
+            parameterType="com.darren1112.dptms.common.spi.service.dto.ServiceApplicationDto">
+        UPDATE service_application
+        SET mtime    = now(),
+            updater  = #{updater},
+            org_id   = #{orgId},
+            app_code = #{appCode},
+            app_name = #{appName},
+            app_type = #{appType}
+        WHERE isvalid = 1
+          AND id = #{id}
+    </update>
+    <!--根据id删除服务-->
+    <delete id="deleteById">
+        UPDATE service_application
+        SET mtime   = now(),
+            updater = #{updater},
+            isvalid = 0
+        WHERE isvalid = 1
+          AND id = #{id}
+    </delete>
 </mapper>

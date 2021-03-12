@@ -38,4 +38,42 @@ public interface ServiceApplicationDao {
      * @date 2021/03/12 17:33
      */
     Long listPageCount(@Param("dto") ServiceApplicationDto dto);
+
+    /**
+     * 统计重复的服务应用
+     *
+     * @param param 查询条件
+     * @return {@link Long 重复数量}
+     * @author luyuhao
+     * @date 2021/03/12 23:32
+     */
+    Long countByRepeat(ServiceApplicationDto param);
+
+    /**
+     * 新增服务应用
+     *
+     * @param dto 服务信息
+     * @author luyuhao
+     * @date 2021/03/12 23:35
+     */
+    void insert(ServiceApplicationDto dto);
+
+    /**
+     * 更新服务应用
+     *
+     * @param dto 服务信息
+     * @author luyuhao
+     * @date 2021/03/12 23:43
+     */
+    void update(ServiceApplicationDto dto);
+
+    /**
+     * 根据id删除服务
+     *
+     * @param id      服务id
+     * @param updater 更新者
+     * @author luyuhao
+     * @date 2021/03/13 00:49
+     */
+    void deleteById(@Param("id") Long id, @Param("updater") Long updater);
 }

@@ -22,4 +22,33 @@ public interface ServiceApplicationService {
      * @date 2021/03/12 17:33
      */
     PageBean<ServiceApplicationDto> listPage(PageParam pageParam, ServiceApplicationDto dto);
+
+    /**
+     * 插入服务应用
+     *
+     * @param dto 服务信息
+     * @return {@link Long}
+     * @author luyuhao
+     * @date 2021/03/12 23:28
+     */
+    Long insert(ServiceApplicationDto dto);
+
+    /**
+     * 更新服务应用
+     *
+     * @param dto 服务信息
+     * @author luyuhao
+     * @date 2021/03/12 23:42
+     */
+    void update(ServiceApplicationDto dto);
+
+    /**
+     * 根据id删除服务
+     *
+     * @param id      服务id
+     * @param updater 更新者
+     * @author luyuhao
+     * @date 2021/03/13 00:49
+     */
+    void deleteById(Long id, Long updater);
 }
