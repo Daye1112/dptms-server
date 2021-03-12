@@ -1,4 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.darren1112.dptms.system.service.dao.ServiceApplicationDao">
+    <!--分页查询服务应用-->
+    <select id="listPage"
+            resultType="com.darren1112.dptms.common.spi.service.dto.ServiceApplicationDto">
+        SELECT id,
+               org_id   AS orgId,
+               app_code AS appCode,
+               app_name AS appName,
+               app_type AS appType,
+               remark,
+               isvalid,
+               ctime,
+               creater,
+               mtime,
+               updater
+        FROM service_application
+        WHERE isvalid = 1
+        <if test="dto.orgId != null">
+            AND org_id = #{dto.orgId}
+        </if>
+        <if test="dto.appCode != null and dto.appCode != ''">
+            AND app_code LIKE concat('%', #{dto.appCode}, '%')
+        </if>
+        <if test="dto.appName != null and dto.appName != ''">
+            AND app_name LIKE concat('%', #{dto.appName}, '%')
+        </if>
+        <if test="dto.appType != null">
+            AND app_type = #{dto.appType}
+        </if>
+        ORDER BY app_code
+             LIMIT #{pageParam.startIndex}, #{pageParam.pageSize}
+    </select>
+    <!--分页查询服务应用-记录数-->
+    <select id="listPageCount" resultType="java.lang.Long">
+
+    </select>
 </mapper>
