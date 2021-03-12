@@ -47,8 +47,8 @@ public class ServiceApplicationController extends BaseController {
      * @author luyuhao
      * @date 2021/03/12 17:33
      */
-    @Log(value = "分页查询用户", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
-    @ApiOperation("分页查询用户")
+    @Log(value = "分页查询服务应用", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
+    @ApiOperation("分页查询服务应用")
     @GetMapping("/listPage")
     public ResponseEntity<JsonResult<PageBean<ServiceApplicationDto>>> listPage(PageParam pageParam,
                                                                                 ServiceApplicationDto dto) {
