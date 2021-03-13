@@ -1,4 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.darren1112.dptms.system.service.dao.ServiceConfigProfileDao">
+    <!--查询服务应用list-->
+    <select id="list" parameterType="com.darren1112.dptms.common.spi.service.dto.ServiceConfigProfileDto"
+            resultType="com.darren1112.dptms.common.spi.service.dto.ServiceConfigProfileDto">
+        SELECT id,
+               application_id AS applicationId,
+               profile_code   AS profileCode,
+               profile_name   AS profileName,
+               remark,
+               isvalid,
+               ctime,
+               creater,
+               mtime,
+               updater
+        FROM service_config_profile
+        WHERE isvalid = 1
+          AND application_id = #{applicationId}
+        <if test="profileCode != null and profileCode != ''">
+            AND profile_code LIKE concat('%', #{profileCode}, '%')
+        </if>
+        <if test="profileName != null and profileName != ''">
+            AND profile_name LIKE concat('%', #{profileName}, '%')
+        </if>
+        ORDER BY profile_code
+    </select>
+    <!--验证配置环境是否重复-->
+    <select id="countByRepeat"
+            parameterType="com.darren1112.dptms.common.spi.service.dto.ServiceConfigProfileDto"
+            resultType="java.lang.Long">
+        SELECT count(1)
+        FROM service_config_profile
+        WHERE isvalid = 1
+        AND profile_code = #{profileCode}
+        AND application_id = #{applicationId}
+        <if test="isUpdate != null and isUpdate == true">
+            AND id != #{id}
+        </if>
+    </select>
+    <!--插入配置环境-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id"
+            parameterType="com.darren1112.dptms.common.spi.service.dto.ServiceConfigProfileDto">
+        INSERT INTO service_config_profile(application_id, profile_code, profile_name,
+                                           remark, isvalid, ctime, creater, mtime, updater)
+        VALUES (#{applicationId}, #{profileCode}, #{profileName},
+                #{remark}, 1, now(), #{creater}, now(), #{updater})
+    </insert>
+    <!--更新配置环境-->
+    <update id="update"
+            parameterType="com.darren1112.dptms.common.spi.service.dto.ServiceConfigProfileDto">
+        UPDATE service_config_profile
+        SET mtime          = now(),
+            updater        = #{updater},
+            application_id = #{applicationId},
+            profile_code   = #{profileCode},
+            profile_name   = #{profileName}
+        WHERE isvalid = 1
+          AND id = #{id}
+    </update>
+    <!--根据id删除配置环境-->
+    <delete id="deleteById">
+        UPDATE service_config_profile
+        SET mtime   = now(),
+            isvalid = 0
+        WHERE isvalid = 1
+          AND id = #{id}
+    </delete>
 </mapper>

@@ -24,7 +24,10 @@ public enum SystemManageErrorCodeEnum implements BaseErrorEnum {
     APP_NAME_NOT_NULL(HttpStatus.BAD_REQUEST, "应用名称不能为空"),
     APP_TYPE_NOT_NULL(HttpStatus.BAD_REQUEST, "应用类型不能为空"),
     APP_NOT_REPEAT(HttpStatus.BAD_REQUEST, "应用信息重复"),
-    APP_ID_NOT_NULL(HttpStatus.BAD_REQUEST, "应用id不能为空")
+    APP_ID_NOT_NULL(HttpStatus.BAD_REQUEST, "应用id不能为空"),
+    PROFILE_CODE_NOT_NULL(HttpStatus.BAD_REQUEST, "环境编号不能为空"),
+    PROFILE_NAME_NOT_NULL(HttpStatus.BAD_REQUEST, "环境名称不能为空"),
+    PROFILE_NOT_REPEAT(HttpStatus.BAD_REQUEST, "配置环境重复")
     ;
 
     private Integer code;

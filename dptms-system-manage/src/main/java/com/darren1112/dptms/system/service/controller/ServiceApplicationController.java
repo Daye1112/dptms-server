@@ -90,11 +90,12 @@ public class ServiceApplicationController extends BaseController {
      * @author luyuhao
      * @date 2021/03/12 23:33
      */
-    @Log(value = "插入服务应用", businessType = BusinessType.INSERT)
-    @ApiOperation("插入服务应用")
+    @Log(value = "更新服务应用", businessType = BusinessType.UPDATE)
+    @ApiOperation("更新服务应用")
     @PostMapping("/update")
     public ResponseEntity<JsonResult> update(ServiceApplicationDto dto) {
         ValidatorBuilder.build()
+                .on(dto.getId(), new NotNullValidatorCallback(SystemManageErrorCodeEnum.ID_NOT_NULL))
                 .on(dto.getOrgId(), new NotNullValidatorCallback(SystemManageErrorCodeEnum.ORG_ID_NOT_NULL))
                 .on(dto.getAppCode(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.APP_CODE_NOT_NULL))
                 .on(dto.getAppName(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.APP_NAME_NOT_NULL))
