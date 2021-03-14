@@ -27,7 +27,11 @@ public enum SystemManageErrorCodeEnum implements BaseErrorEnum {
     APP_ID_NOT_NULL(HttpStatus.BAD_REQUEST, "应用id不能为空"),
     PROFILE_CODE_NOT_NULL(HttpStatus.BAD_REQUEST, "环境编号不能为空"),
     PROFILE_NAME_NOT_NULL(HttpStatus.BAD_REQUEST, "环境名称不能为空"),
-    PROFILE_NOT_REPEAT(HttpStatus.BAD_REQUEST, "配置环境重复")
+    PROFILE_NOT_REPEAT(HttpStatus.BAD_REQUEST, "环境信息重复"),
+    PROFILE_ID_NOT_NULL(HttpStatus.BAD_REQUEST, "环境id不能为空"),
+    PROP_KEY_NOT_NULL(HttpStatus.BAD_REQUEST, "属性key不能为空"),
+    PROP_VALUE_NOT_NULL(HttpStatus.BAD_REQUEST, "属性value不能为空"),
+    PROP_NOT_REPEAT(HttpStatus.BAD_REQUEST, "属性信息重复"),
     ;
 
     private Integer code;
