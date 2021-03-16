@@ -13,7 +13,7 @@ import java.util.List;
  * 系统用户Dao
  *
  * @author luyuhao
- * @date 20/07/23 02:22
+ * @since 20/07/23 02:22
  */
 @Mapper
 @Repository
@@ -24,7 +24,7 @@ public interface SysUserDao {
      *
      * @param sysUserEntity 用户实体类
      * @author luyuhao
-     * @date 20/07/23 02:26
+     * @since 20/07/23 02:26
      */
     void insert(SysUserEntity sysUserEntity);
 
@@ -34,7 +34,7 @@ public interface SysUserDao {
      * @param username 用户名
      * @return 用户信息
      * @author luyuhao
-     * @date 20/07/23 02:49
+     * @since 20/07/23 02:49
      */
     SysUserDto getByUsername(@Param("username") String username);
 
@@ -43,7 +43,7 @@ public interface SysUserDao {
      *
      * @param id 用户id
      * @author luyuhao
-     * @date 20/12/09 01:02
+     * @since 20/12/09 01:02
      */
     void updateLastLoginTime(@Param("id") Long id);
 
@@ -53,7 +53,7 @@ public interface SysUserDao {
      * @param id id
      * @return {@link SysUserDto}
      * @author luyuhao
-     * @date 20/11/30 23:12
+     * @since 20/11/30 23:12
      */
     SysUserDto getById(@Param("id") Long id);
 
@@ -63,7 +63,7 @@ public interface SysUserDao {
      * @param param 查询参数
      * @return {@link Long}
      * @author luyuhao
-     * @date 20/12/22 01:06
+     * @since 20/12/22 01:06
      */
     Long countByRepeat(SysUserDto param);
 
@@ -74,7 +74,7 @@ public interface SysUserDao {
      * @param dto       查询条件
      * @return {@link SysUserDto}
      * @author luyuhao
-     * @date 20/12/22 01:12
+     * @since 20/12/22 01:12
      */
     List<SysUserDto> listPage(@Param("pageParam") PageParam pageParam, @Param("dto") SysUserDto dto);
 
@@ -84,7 +84,7 @@ public interface SysUserDao {
      * @param dto 查询条件
      * @return {@link Long}
      * @author luyuhao
-     * @date 20/12/22 01:12
+     * @since 20/12/22 01:12
      */
     Long listPageCount(SysUserDto dto);
 
@@ -94,7 +94,7 @@ public interface SysUserDao {
      * @param entity 用户参数
      * @return {@link Long}
      * @author luyuhao
-     * @date 20/12/10 01:08
+     * @since 20/12/10 01:08
      */
     Long update(SysUserEntity entity);
 
@@ -104,7 +104,7 @@ public interface SysUserDao {
      * @param id      记录id
      * @param updater 更新者
      * @author luyuhao
-     * @date 20/12/10 01:08
+     * @since 20/12/10 01:08
      */
     void deleteById(@Param("id") Long id, @Param("updater") Long updater);
 
@@ -113,7 +113,7 @@ public interface SysUserDao {
      *
      * @param entity 更新状态
      * @author luyuhao
-     * @date 2021/01/14 00:19
+     * @since 2021/01/14 00:19
      */
     void updateLock(SysUserEntity entity);
 }

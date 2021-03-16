@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
  * 认证服务错误状态码
  *
  * @author luyuhao
- * @date 2020/07/26 21:22
+ * @since 2020/07/26 21:22
  */
 public enum AuthErrorCodeEnum implements BaseErrorEnum {
 

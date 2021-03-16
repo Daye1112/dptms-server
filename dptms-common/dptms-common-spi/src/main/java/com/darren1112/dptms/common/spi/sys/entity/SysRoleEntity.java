@@ -10,7 +10,7 @@ import lombok.ToString;
  * 角色Entity
  *
  * @author luyuhao
- * @date 20/12/13 23:05
+ * @since 20/12/13 23:05
  */
 @Data
 @ToString(callSuper = true)

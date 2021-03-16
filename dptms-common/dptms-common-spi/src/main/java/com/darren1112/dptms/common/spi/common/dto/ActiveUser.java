@@ -11,7 +11,7 @@ import java.util.Date;
  * 活跃(在线)用户信息
  *
  * @author luyuhao
- * @date 2020/11/22 16:59
+ * @since 2020/11/22 16:59
  */
 @Data
 public class ActiveUser {
@@ -109,7 +109,7 @@ public class ActiveUser {
      * @param sysUserDto 用户信息
      * @return {@link ActiveUser}
      * @author luyuhao
-     * @date 2021/01/31 19:50
+     * @since 2021/01/31 19:50
      */
     public static ActiveUser convert(SysUserDto sysUserDto) {
         ActiveUser activeUser = new ActiveUser();
@@ -123,7 +123,7 @@ public class ActiveUser {
      * @param activeUser 用户信息
      * @param sysUserDto 新用户信息
      * @author luyuhao
-     * @date 2021/01/31 19:50
+     * @since 2021/01/31 19:50
      */
     public static void convert(ActiveUser activeUser, SysUserDto sysUserDto) {
         activeUser.setId(sysUserDto.getId());

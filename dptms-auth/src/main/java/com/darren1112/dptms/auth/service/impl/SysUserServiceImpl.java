@@ -24,7 +24,7 @@ import java.util.List;
  * 系统用户Service
  *
  * @author luyuhao
- * @date 2020/07/23 02:43
+ * @since 2020/07/23 02:43
  */
 @Service
 @CacheConfig(cacheNames = "sysUser", keyGenerator = "keyGenerator")
@@ -43,7 +43,7 @@ public class SysUserServiceImpl extends BaseService implements SysUserService {
      * @param username 用户名
      * @return 用户信息
      * @author luyuhao
-     * @date 20/07/23 02:58
+     * @since 20/07/23 02:58
      */
     @Override
     @Cacheable
@@ -56,7 +56,7 @@ public class SysUserServiceImpl extends BaseService implements SysUserService {
      *
      * @param id 用户id
      * @author luyuhao
-     * @date 20/12/09 01:02
+     * @since 20/12/09 01:02
      */
     @Override
     @CacheEvict(allEntries = true)
@@ -71,7 +71,7 @@ public class SysUserServiceImpl extends BaseService implements SysUserService {
      * @param id id
      * @return {@link SysUserDto}
      * @author luyuhao
-     * @date 20/11/30 23:12
+     * @since 20/11/30 23:12
      */
     @Override
     @Cacheable

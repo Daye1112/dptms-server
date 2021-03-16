@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.*;
  * 系统用户Controller
  *
  * @author luyuhao
- * @date 2020/07/25 02:14
+ * @since 2020/07/25 02:14
  */
 @Slf4j
 @Api(tags = "用户管理")
@@ -55,7 +55,7 @@ public class SysUserController extends BaseController {
      * @param id id
      * @return {@link SysUserDto}
      * @author luyuhao
-     * @date 20/11/30 23:12
+     * @since 20/11/30 23:12
      */
     @Log(value = "根据id查询用户", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     @ApiOperation("根据id查询用户")
@@ -75,7 +75,7 @@ public class SysUserController extends BaseController {
      * @param orgIds 组织ids，逗号分隔
      * @return {@link JsonResult}
      * @author luyuhao
-     * @date 20/12/13 22:10
+     * @since 20/12/13 22:10
      */
     @Log(value = "分配用户组织", businessType = BusinessType.UPDATE)
     @ApiOperation("分配组织")
@@ -96,7 +96,7 @@ public class SysUserController extends BaseController {
      * @param entity 用户参数
      * @return {@link JsonResult}
      * @author luyuhao
-     * @date 20/12/10 01:08
+     * @since 20/12/10 01:08
      */
     @Log(value = "插入用户", businessType = BusinessType.INSERT)
     @ApiOperation("插入用户")
@@ -126,7 +126,7 @@ public class SysUserController extends BaseController {
      * @param pageParam 分页参数
      * @return {@link JsonResult}
      * @author luyuhao
-     * @date 20/12/10 01:08
+     * @since 20/12/10 01:08
      */
     @Log(value = "分页查询用户", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     @ApiOperation("分页查询用户")
@@ -143,7 +143,7 @@ public class SysUserController extends BaseController {
      * @param entity 用户参数
      * @return {@link JsonResult}
      * @author luyuhao
-     * @date 20/12/10 01:08
+     * @since 20/12/10 01:08
      */
     @Log(value = "更新用户", businessType = BusinessType.UPDATE)
     @ApiOperation("更新用户")
@@ -165,7 +165,7 @@ public class SysUserController extends BaseController {
      * @param id 记录id
      * @return {@link JsonResult}
      * @author luyuhao
-     * @date 20/12/10 01:08
+     * @since 20/12/10 01:08
      */
     @Log(value = "根据id删除用户", logLevel = LogLevel.WARN, businessType = BusinessType.DELETE)
     @ApiOperation("根据id删除记录")
@@ -185,7 +185,7 @@ public class SysUserController extends BaseController {
      * @param entity 更新信息
      * @return {@link JsonResult}
      * @author luyuhao
-     * @date 2021/01/14 00:17
+     * @since 2021/01/14 00:17
      */
     @Log(value = "更新用户锁定状态", logLevel = LogLevel.WARN, businessType = BusinessType.UPDATE)
     @ApiOperation("更新用户锁定状态")
@@ -208,7 +208,7 @@ public class SysUserController extends BaseController {
      * @param roleIds 角色ids，逗号分隔
      * @return {@link JsonResult}
      * @author luyuhao
-     * @date 20/12/23 01:48
+     * @since 20/12/23 01:48
      */
     @Log(value = "分配用户角色", businessType = BusinessType.UPDATE)
     @ApiOperation("分配角色")

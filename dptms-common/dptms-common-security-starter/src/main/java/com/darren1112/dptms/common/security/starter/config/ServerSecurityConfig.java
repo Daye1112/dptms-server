@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Bean;
  * 服务权限自动配置
  *
  * @author luyuhao
- * @date 2020/08/04 01:35
+ * @since 2020/08/04 01:35
  */
 public class ServerSecurityConfig {
 

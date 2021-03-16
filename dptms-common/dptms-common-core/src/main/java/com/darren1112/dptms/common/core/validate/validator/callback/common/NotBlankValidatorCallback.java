@@ -10,7 +10,7 @@ import com.darren1112.dptms.common.core.validate.validator.callback.BaseValidato
  * string非空校验
  *
  * @author luyuhao
- * @date 2020/12/13 22:26
+ * @since 2020/12/13 22:26
  */
 public class NotBlankValidatorCallback extends BaseValidatorCallback<String> {
 

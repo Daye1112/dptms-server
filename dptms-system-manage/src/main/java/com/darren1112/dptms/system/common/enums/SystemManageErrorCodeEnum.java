@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
  * 系统管理错误状态码enum
  *
  * @author luyuhao
- * @date 2020/11/30 23:13
+ * @since 2020/11/30 23:13
  */
 public enum SystemManageErrorCodeEnum implements BaseErrorEnum {
 

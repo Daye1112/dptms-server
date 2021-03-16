@@ -10,7 +10,7 @@ import lombok.ToString;
  * 权限Dto
  *
  * @author luyuhao
- * @date 2020/12/11 01:34
+ * @since 2020/12/11 01:34
  */
 @Data
 @ToString(callSuper = true)

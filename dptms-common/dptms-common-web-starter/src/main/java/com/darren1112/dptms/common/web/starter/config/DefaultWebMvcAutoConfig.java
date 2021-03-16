@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * WebMvc配置类
  *
  * @author luyuhao
- * @date 2019/12/6 9:32
+ * @since 2019/12/6 9:32
  */
 @Slf4j
 public class DefaultWebMvcAutoConfig implements WebMvcConfigurer {

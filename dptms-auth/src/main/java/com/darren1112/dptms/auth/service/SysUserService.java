@@ -9,7 +9,7 @@ import com.darren1112.dptms.common.spi.sys.entity.SysUserEntity;
  * 系统用户Service
  *
  * @author luyuhao
- * @date 2020/07/23 02:42
+ * @since 2020/07/23 02:42
  */
 public interface SysUserService {
 
@@ -19,7 +19,7 @@ public interface SysUserService {
      * @param username 用户名
      * @return 用户信息
      * @author luyuhao
-     * @date 20/07/23 02:58
+     * @since 20/07/23 02:58
      */
     SysUserDto getByUsername(String username);
 
@@ -28,7 +28,7 @@ public interface SysUserService {
      *
      * @param id 用户id
      * @author luyuhao
-     * @date 20/12/09 01:02
+     * @since 20/12/09 01:02
      */
     void updateLoginTime(Long id);
 
@@ -38,7 +38,7 @@ public interface SysUserService {
      * @param id id
      * @return {@link SysUserDto}
      * @author luyuhao
-     * @date 20/11/30 23:12
+     * @since 20/11/30 23:12
      */
     SysUserDto getById(Long id);
 
@@ -48,7 +48,7 @@ public interface SysUserService {
      * @param entity 用户参数
      * @return {@link Long}
      * @author luyuhao
-     * @date 20/12/10 01:08
+     * @since 20/12/10 01:08
      */
     Long insert(SysUserEntity entity);
 
@@ -59,7 +59,7 @@ public interface SysUserService {
      * @param pageParam 分页参数
      * @return {@link SysUserDto}
      * @author luyuhao
-     * @date 20/12/10 01:08
+     * @since 20/12/10 01:08
      */
     PageBean<SysUserDto> listPage(PageParam pageParam, SysUserDto dto);
 
@@ -69,7 +69,7 @@ public interface SysUserService {
      * @param entity 用户参数
      * @return {@link Long}
      * @author luyuhao
-     * @date 20/12/10 01:08
+     * @since 20/12/10 01:08
      */
     Long update(SysUserEntity entity);
 
@@ -79,7 +79,7 @@ public interface SysUserService {
      * @param id      记录id
      * @param updater 更新者
      * @author luyuhao
-     * @date 20/12/10 01:08
+     * @since 20/12/10 01:08
      */
     void deleteById(Long id, Long updater);
 
@@ -88,7 +88,7 @@ public interface SysUserService {
      *
      * @param entity 更新状态
      * @author luyuhao
-     * @date 2021/01/14 00:19
+     * @since 2021/01/14 00:19
      */
     void updateLock(SysUserEntity entity);
 
@@ -98,7 +98,7 @@ public interface SysUserService {
      * @param id 用户id
      * @return {@link SysUserDto}
      * @author luyuhao
-     * @date 2021/01/31 19:39
+     * @since 2021/01/31 19:39
      */
     SysUserDto getUserInfoAndPermissionByUserId(Long id);
 }

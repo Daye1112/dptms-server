@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  * 认证服务配置类型
  *
  * @author luyuhao
- * @date 2020/08/01 03:36
+ * @since 2020/08/01 03:36
  */
 @Data
 @Component

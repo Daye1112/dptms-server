@@ -4,7 +4,7 @@ package com.darren1112.dptms.common.core.constants;
  * 文件常量
  *
  * @author luyuhao
- * @date 2020/11/29 01:50
+ * @since 2020/11/29 01:50
  */
 public class FileConstant {
 

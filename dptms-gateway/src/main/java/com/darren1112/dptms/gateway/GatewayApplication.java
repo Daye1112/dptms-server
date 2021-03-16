@@ -11,7 +11,7 @@ import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
  * 启动类
  *
  * @author luyuhao
- * @date 2020/07/31 02:12
+ * @since 2020/07/31 02:12
  */
 @EnableZuulProxy
 @EnableGatewayDoc

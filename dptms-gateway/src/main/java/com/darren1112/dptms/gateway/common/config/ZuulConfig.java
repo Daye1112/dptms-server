@@ -18,7 +18,7 @@ import org.springframework.web.filter.CorsFilter;
  * zuul配置类
  *
  * @author luyuhao
- * @date 2020/08/02 21:59
+ * @since 2020/08/02 21:59
  */
 @Configuration
 public class ZuulConfig {
@@ -28,7 +28,7 @@ public class ZuulConfig {
      *
      * @return CorsFilter
      * @author luyuhao
-     * @date 20/08/02 22:02
+     * @since 20/08/02 22:02
      */
     @Bean
     public CorsFilter corsFilter() {

@@ -6,7 +6,7 @@ import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
  * zuul 相关常量
  *
  * @author luyuhao
- * @date 2020/11/26 23:31
+ * @since 2020/11/26 23:31
  */
 public class ZuulConstant {
 

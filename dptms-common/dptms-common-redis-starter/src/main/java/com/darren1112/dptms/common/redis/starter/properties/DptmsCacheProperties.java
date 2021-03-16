@@ -7,7 +7,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * 缓存配置
  *
  * @author luyuhao
- * @date 2020/12/11 22:44
+ * @since 2020/12/11 22:44
  */
 @Data
 @ConfigurationProperties(prefix = "dptms.cache")

@@ -4,7 +4,7 @@ package com.darren1112.dptms.common.core.constants;
  * 账号常量
  *
  * @author luyuhao
- * @date 2020/11/22 23:45
+ * @since 2020/11/22 23:45
  */
 public class AccountConstant {
 

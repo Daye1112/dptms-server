@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
  * 网关错误码
  *
  * @author luyuhao
- * @date 2020/08/02 02:44
+ * @since 2020/08/02 02:44
  */
 public enum GatewayErrorCodeEnum implements BaseErrorEnum {
 
