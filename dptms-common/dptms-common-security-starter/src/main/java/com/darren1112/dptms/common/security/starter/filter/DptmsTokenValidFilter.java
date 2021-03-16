@@ -22,7 +22,7 @@ import java.io.IOException;
  * token过滤器
  *
  * @author luyuhao
- * @date 2021/01/16 18:59
+ * @since 2021/01/16 18:59
  */
 @Slf4j
 public class DptmsTokenValidFilter extends OncePerRequestFilter {
@@ -41,7 +41,7 @@ public class DptmsTokenValidFilter extends OncePerRequestFilter {
      *
      * @return true/false
      * @author luyuhao
-     * @date 20/08/02 14:45
+     * @since 20/08/02 14:45
      */
     private boolean shouldNotFilter(String uri) {
         //白名单校验
@@ -58,7 +58,7 @@ public class DptmsTokenValidFilter extends OncePerRequestFilter {
      * 5. 适当延长refreshToken有效期
      *
      * @author luyuhao
-     * @date 20/08/02 14:46
+     * @since 20/08/02 14:46
      */
     @Override
     @SuppressWarnings("NullableProblems")

@@ -17,7 +17,7 @@ import java.util.List;
  * 网关资源配置
  *
  * @author luyuhao
- * @date 2020/08/07 02:00
+ * @since 2020/08/07 02:00
  */
 @Slf4j
 @Primary

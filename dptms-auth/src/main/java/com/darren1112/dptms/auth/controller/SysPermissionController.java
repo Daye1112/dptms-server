@@ -31,7 +31,7 @@ import java.util.List;
  * 权限Controller
  *
  * @author luyuhao
- * @date 2020/12/10 00:58
+ * @since 2020/12/10 00:58
  */
 @Slf4j
 @Api(tags = "权限管理")
@@ -51,7 +51,7 @@ public class SysPermissionController extends BaseController {
      * @param entity 权限参数
      * @return {@link JsonResult}
      * @author luyuhao
-     * @date 20/12/10 01:08
+     * @since 20/12/10 01:08
      */
     @Log(value = "插入权限", businessType = BusinessType.INSERT)
     @ApiOperation("插入权限")
@@ -77,7 +77,7 @@ public class SysPermissionController extends BaseController {
      * @param pageParam 分页参数
      * @return {@link JsonResult}
      * @author luyuhao
-     * @date 20/12/10 01:08
+     * @since 20/12/10 01:08
      */
     @Log(value = "分页查询权限", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     @ApiOperation("分页查询权限")
@@ -94,7 +94,7 @@ public class SysPermissionController extends BaseController {
      * @param entity 权限参数
      * @return {@link JsonResult}
      * @author luyuhao
-     * @date 20/12/10 01:08
+     * @since 20/12/10 01:08
      */
     @Log(value = "更新权限", businessType = BusinessType.UPDATE)
     @ApiOperation("更新权限")
@@ -119,7 +119,7 @@ public class SysPermissionController extends BaseController {
      * @param id 记录id
      * @return {@link JsonResult}
      * @author luyuhao
-     * @date 20/12/10 01:08
+     * @since 20/12/10 01:08
      */
     @Log(value = "根据id删除记录", businessType = BusinessType.DELETE)
     @ApiOperation("根据id删除记录")
@@ -139,7 +139,7 @@ public class SysPermissionController extends BaseController {
      * @param menuId 菜单id
      * @return {@link SysPermissionDto)
      * @author baojiazhong
-     * @date 2020/12/22 23:09
+     * @since 2020/12/22 23:09
      */
     @Log(value = "查询菜单绑定的权限list", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     @ApiOperation("查询菜单绑定的权限list")
@@ -157,7 +157,7 @@ public class SysPermissionController extends BaseController {
      *
      * @return {@link SysPermissionDto}
      * @author luyuhao
-     * @date 2020/12/28 01:10
+     * @since 2020/12/28 01:10
      */
     @Log(value = "查询权限组list", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     @ApiOperation("查询权限组list")
@@ -173,7 +173,7 @@ public class SysPermissionController extends BaseController {
      * @param menuId 菜单id
      * @return {@link SysPermissionDto}
      * @author luyuhao
-     * @date 2021/01/04 23:52
+     * @since 2021/01/04 23:52
      */
     @Log(value = "根据菜单id查询权限list", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     @ApiOperation("根据菜单id查询权限list")

@@ -15,7 +15,7 @@ import java.io.IOException;
  * 添加用户信息
  *
  * @author luyuhao
- * @date 2021/01/17 01:25
+ * @since 2021/01/17 01:25
  */
 public class AddUserFilter extends OncePerRequestFilter {
 
@@ -47,7 +47,7 @@ public class AddUserFilter extends OncePerRequestFilter {
      * @param activeUser 用户信息
      * @param request    请求域
      * @author luyuhao
-     * @date 2021/01/17 01:34
+     * @since 2021/01/17 01:34
      */
     private void setAttribute(ActiveUser activeUser, HttpServletRequest request) {
         if (null != activeUser) {

@@ -11,7 +11,7 @@ import java.util.Objects;
  * 响应工具类
  *
  * @author luyuhao
- * @date 2020/08/02 02:47
+ * @since 2020/08/02 02:47
  */
 @Slf4j
 public class ResponseUtil {
@@ -22,7 +22,7 @@ public class ResponseUtil {
      * @param response   响应域
      * @param jsonResult 响应结果
      * @author luyuhao
-     * @date 20/08/02 02:50
+     * @since 20/08/02 02:50
      */
     public static void setJsonResult(HttpServletResponse response, JsonResult jsonResult) {
         PrintWriter out = null;

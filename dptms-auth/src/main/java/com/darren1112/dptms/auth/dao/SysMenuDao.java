@@ -12,7 +12,7 @@ import java.util.List;
  * 菜单Dao
  *
  * @author luyuhao
- * @date 2020/12/12 17:23
+ * @since 2020/12/12 17:23
  */
 @Mapper
 @Repository
@@ -24,7 +24,7 @@ public interface SysMenuDao {
      * @param userId 用户id
      * @return {@link SysMenuDto}
      * @author luyuhao
-     * @date 2021/01/17 19:34
+     * @since 2021/01/17 19:34
      */
     List<SysMenuDto> listMenuByUserId(Long userId);
 
@@ -34,7 +34,7 @@ public interface SysMenuDao {
      * @param entity 菜单参数
      * @return {@link Long)
      * @author baojiazhong
-     * @date 2020/12/15 16:53
+     * @since 2020/12/15 16:53
      */
     Long insert(SysMenuEntity entity);
 
@@ -44,7 +44,7 @@ public interface SysMenuDao {
      * @param param 查重参数
      * @return {@link Long 重复数量)
      * @author baojiazhong
-     * @date 2020/12/16 11:08
+     * @since 2020/12/16 11:08
      */
     Long countByRepeat(SysMenuDto param);
 
@@ -54,7 +54,7 @@ public interface SysMenuDao {
      * @param id      id
      * @param updater 更新着
      * @author baojiazhong
-     * @date 2020/12/16 14:33
+     * @since 2020/12/16 14:33
      */
     void deleteById(@Param("id") Long id, @Param("updater") Long updater);
 
@@ -64,7 +64,7 @@ public interface SysMenuDao {
      * @param entity 菜单参数
      * @return {@link Long)
      * @author baojiazhong
-     * @date 2020/12/16 18:35
+     * @since 2020/12/16 18:35
      */
     Long update(SysMenuEntity entity);
 
@@ -73,7 +73,7 @@ public interface SysMenuDao {
      *
      * @return {@link SysMenuDto}
      * @author luyuhao
-     * @date 2021/01/03 23:44
+     * @since 2021/01/03 23:44
      */
     List<SysMenuDto> list();
 }

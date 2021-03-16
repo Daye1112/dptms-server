@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
  * feign全局异常处理
  *
  * @author luyuhao
- * @date 19/12/18 22:09
+ * @since 19/12/18 22:09
  */
 @Slf4j
 public class GlobalFeignErrorHandler implements ErrorDecoder {

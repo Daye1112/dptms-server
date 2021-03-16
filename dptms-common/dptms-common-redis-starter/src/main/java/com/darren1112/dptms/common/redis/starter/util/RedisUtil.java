@@ -637,7 +637,7 @@ public class RedisUtil {
      * @param second 过期时间
      * @return true/false
      * @author luyuhao
-     * @date 20/12/04 21:51
+     * @since 20/12/04 21:51
      */
     public boolean tryLock(String key, Object value, long second) {
         return Optional.ofNullable(redisTemplate.opsForValue().setIfAbsent(keyPrefix + key, value, second, TimeUnit.SECONDS)).orElse(false);
@@ -649,7 +649,7 @@ public class RedisUtil {
      * @param key   key
      * @param value value
      * @author luyuhao
-     * @date 20/12/04 21:59
+     * @since 20/12/04 21:59
      */
     public void releaseLock(String key, Object value) {
         Object object = get(key);

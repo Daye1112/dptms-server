@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Bean;
  * mvc的bean管理配置类
  *
  * @author luyuhao
- * @date 2020/1/6 18:41
+ * @since 2020/1/6 18:41
  */
 public class WebMvcBeanAutoConfig {
 
@@ -23,7 +23,7 @@ public class WebMvcBeanAutoConfig {
      *
      * @return 异常信息
      * @author luyuhao
-     * @date 20/08/02 21:57
+     * @since 20/08/02 21:57
      */
     @Bean
     public ErrorDecoder errorDecoder() {

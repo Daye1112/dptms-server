@@ -27,7 +27,7 @@ import javax.servlet.http.HttpServletResponse;
  * 登录管理Controller
  *
  * @author luyuhao
- * @date 2021/01/17 19:26
+ * @since 2021/01/17 19:26
  */
 @Slf4j
 @Api(tags = "登录管理", description = "登录管理接口")
@@ -49,7 +49,7 @@ public class LoginController {
      * @param response   响应域
      * @return {@link ActiveUser}
      * @author luyuhao
-     * @date 20/11/22 21:55
+     * @since 20/11/22 21:55
      */
     @ApiOperation("登录系统")
     @PostMapping("/login")
@@ -72,7 +72,7 @@ public class LoginController {
      * @param response 响应域
      * @return {@link ActiveUser}
      * @author luyuhao
-     * @date 20/11/22 21:55
+     * @since 20/11/22 21:55
      */
     @ApiOperation("登出系统")
     @GetMapping("/logout")

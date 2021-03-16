@@ -9,7 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  * @author luyuhao
- * @date 2020/07/26 19:39
+ * @since 2020/07/26 19:39
  */
 public class PasswordTest {
 

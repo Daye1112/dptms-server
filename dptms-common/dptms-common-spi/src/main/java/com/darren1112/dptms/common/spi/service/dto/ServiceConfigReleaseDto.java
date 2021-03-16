@@ -9,7 +9,7 @@ import lombok.ToString;
  * 配置发布表Dto
  *
  * @author luyuhao
- * @date 2021/03/12 01:40
+ * @since 2021/03/12 01:40
  */
 @Data
 @ToString(callSuper = true)

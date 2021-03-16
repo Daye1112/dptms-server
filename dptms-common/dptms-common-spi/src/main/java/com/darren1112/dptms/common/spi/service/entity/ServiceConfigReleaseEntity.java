@@ -13,7 +13,7 @@ import java.util.Date;
  * 配置发布表Entity
  *
  * @author luyuhao
- * @date 2021/03/12 01:40
+ * @since 2021/03/12 01:40
  */
 @Data
 @ToString(callSuper = true)

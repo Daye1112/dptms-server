@@ -11,7 +11,7 @@ import java.util.List;
  * 系统用户Dto
  *
  * @author luyuhao
- * @date 2020/07/23 02:22
+ * @since 2020/07/23 02:22
  */
 @Data
 @ToString(callSuper = true)

@@ -28,7 +28,7 @@ import java.time.Duration;
  * ConditionalOnClass 自动配置
  *
  * @author luyuhao
- * @date 2020/08/05 01:16
+ * @since 2020/08/05 01:16
  */
 @Slf4j
 @EnableCaching

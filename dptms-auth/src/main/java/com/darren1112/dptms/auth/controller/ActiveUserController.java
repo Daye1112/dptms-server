@@ -27,7 +27,7 @@ import java.util.List;
  * 认证管理Controller
  *
  * @author luyuhao
- * @date 2020/07/20 00:06
+ * @since 2020/07/20 00:06
  */
 @Slf4j
 @Api(tags = "认证管理", description = "认证管理接口")
@@ -46,7 +46,7 @@ public class ActiveUserController {
      *
      * @return {@link ActiveUser}
      * @author luyuhao
-     * @date 2021/01/17 19:24
+     * @since 2021/01/17 19:24
      */
     @Log(value = "获取用户信息", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     @ApiOperation("获取用户信息")
@@ -60,7 +60,7 @@ public class ActiveUserController {
      *
      * @return {@link SysPermissionDto}
      * @author luyuhao
-     * @date 2021/01/17 19:34
+     * @since 2021/01/17 19:34
      */
     @Log(value = "获取用户最新信息", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     @ApiOperation("获取用户最新信息")
@@ -76,7 +76,7 @@ public class ActiveUserController {
      *
      * @return {@link SysMenuDto}
      * @author luyuhao
-     * @date 2021/01/17 19:34
+     * @since 2021/01/17 19:34
      */
     @Log(value = "获取用户的菜单", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     @ApiOperation("获取用户的菜单")

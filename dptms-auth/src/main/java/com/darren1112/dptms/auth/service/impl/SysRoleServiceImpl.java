@@ -22,7 +22,7 @@ import java.util.List;
  * 角色ServiceImpl
  *
  * @author luyuhao
- * @date 2020/12/13 23:09
+ * @since 2020/12/13 23:09
  */
 @Service
 @CacheConfig(cacheNames = "sysRole", keyGenerator = "keyGenerator")
@@ -38,7 +38,7 @@ public class SysRoleServiceImpl extends BaseService implements SysRoleService {
      * @param entity 角色参数
      * @return {@link Long 角色id)
      * @author baojiazhong
-     * @date 2020/12/19 1:08
+     * @since 2020/12/19 1:08
      */
     @Override
     @CacheEvict(allEntries = true)
@@ -55,7 +55,7 @@ public class SysRoleServiceImpl extends BaseService implements SysRoleService {
      * @param entity 角色参数
      * @return {@link Long)
      * @author baojiazhong
-     * @date 2020/12/19 20:07
+     * @since 2020/12/19 20:07
      */
     @Override
     @CacheEvict(allEntries = true)
@@ -72,7 +72,7 @@ public class SysRoleServiceImpl extends BaseService implements SysRoleService {
      * @param dto       筛选参数
      * @return {@link SysRoleDto)
      * @author baojiazhong
-     * @date 2020/12/19 21:10
+     * @since 2020/12/19 21:10
      */
     @Override
     @Cacheable
@@ -88,7 +88,7 @@ public class SysRoleServiceImpl extends BaseService implements SysRoleService {
      * @param id      记录id
      * @param updater 更新者
      * @author baojiazhong
-     * @date 2020/12/19 21:11
+     * @since 2020/12/19 21:11
      */
     @Override
     @CacheEvict(allEntries = true)
@@ -103,7 +103,7 @@ public class SysRoleServiceImpl extends BaseService implements SysRoleService {
      * @param entity   验证参数
      * @param isUpdate 是否更新
      * @author baojiazhong
-     * @date 2020/12/19 1:12
+     * @since 2020/12/19 1:12
      */
     private void validRepeat(SysRoleEntity entity, boolean isUpdate) {
         SysRoleDto param = new SysRoleDto();

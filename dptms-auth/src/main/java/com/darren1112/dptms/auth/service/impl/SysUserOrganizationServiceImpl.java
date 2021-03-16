@@ -18,7 +18,7 @@ import java.util.List;
  * 用户组织Service
  *
  * @author luyuhao
- * @date 2020/12/13 22:22
+ * @since 2020/12/13 22:22
  */
 @Service
 @CacheConfig(cacheNames = "sysUserOrganization", keyGenerator = "keyGenerator")
@@ -34,7 +34,7 @@ public class SysUserOrganizationServiceImpl implements SysUserOrganizationServic
      * @param userId 用户id
      * @return {@link SysOrganizationDto}
      * @author luyuhao
-     * @date 20/12/13 21:43
+     * @since 20/12/13 21:43
      */
     @Override
     public List<SysOrganizationDto> listUserAssigned(Long userId) {
@@ -48,7 +48,7 @@ public class SysUserOrganizationServiceImpl implements SysUserOrganizationServic
      * @param orgIds  组织ids，逗号分隔
      * @param updater 更新者
      * @author luyuhao
-     * @date 20/12/13 22:10
+     * @since 20/12/13 22:10
      */
     @Override
     @CacheEvict(allEntries = true)

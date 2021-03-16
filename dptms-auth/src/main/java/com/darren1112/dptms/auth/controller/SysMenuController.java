@@ -51,7 +51,7 @@ public class SysMenuController extends BaseController {
      * @param entity 菜单参数
      * @return {@link JsonResult)
      * @author baojiazhong
-     * @date 2020/12/16 14:29
+     * @since 2020/12/16 14:29
      */
     @Log(value = "插入菜单", businessType = BusinessType.INSERT)
     @ApiOperation("插入菜单")
@@ -76,7 +76,7 @@ public class SysMenuController extends BaseController {
      * @param id 记录id
      * @return {@link JsonResult)
      * @author baojiazhong
-     * @date 2020/12/16 14:47
+     * @since 2020/12/16 14:47
      */
     @Log(value = "根据id删除记录", businessType = BusinessType.DELETE)
     @ApiOperation("根据id删除记录")
@@ -95,7 +95,7 @@ public class SysMenuController extends BaseController {
      *
      * @return {@link JsonResult)
      * @author baojiazhong
-     * @date 2020/12/19 0:08
+     * @since 2020/12/19 0:08
      */
     @Log(value = "查询菜单树", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     @ApiOperation("查询菜单树")
@@ -111,7 +111,7 @@ public class SysMenuController extends BaseController {
      * @param entity 菜单参数
      * @return {@link JsonResult)
      * @author baojiazhong
-     * @date 2020/12/16 15:25
+     * @since 2020/12/16 15:25
      */
     @Log(value = "更新菜单", businessType = BusinessType.UPDATE)
     @ApiOperation("更新菜单")
@@ -136,7 +136,7 @@ public class SysMenuController extends BaseController {
      * @param roleId 角色id
      * @return {@link SysMenuDto}
      * @author luyuhao
-     * @date 20/12/13 21:43
+     * @since 20/12/13 21:43
      */
     @Log(value = "查询角色关联的菜单树", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     @ApiOperation("查询角色关联的菜单树")
@@ -156,7 +156,7 @@ public class SysMenuController extends BaseController {
      * @param perIds 权限ids，逗号分隔
      * @return {@link JsonResult)
      * @author baojiazhong
-     * @date 2020/12/22 23:50
+     * @since 2020/12/22 23:50
      */
     @Log(value = "分配权限", businessType = BusinessType.UPDATE)
     @ApiOperation("分配权限")

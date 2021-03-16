@@ -12,7 +12,7 @@ import java.util.List;
  * 用户组织Dao
  *
  * @author luyuhao
- * @date 20/12/13 18:04
+ * @since 20/12/13 18:04
  */
 @Mapper
 @Repository
@@ -24,7 +24,7 @@ public interface SysUserOrganizationDao {
      * @param userId 用户id
      * @return {@link SysOrganizationDto}
      * @author luyuhao
-     * @date 20/12/13 21:43
+     * @since 20/12/13 21:43
      */
     List<SysOrganizationDto> listUserAssigned(@Param("userId") Long userId);
 
@@ -34,7 +34,7 @@ public interface SysUserOrganizationDao {
      * @param userId  用户id
      * @param updater 更新者
      * @author luyuhao
-     * @date 20/12/13 22:35
+     * @since 20/12/13 22:35
      */
     void deleteByUserId(@Param("userId") Long userId, @Param("updater") Long updater);
 
@@ -43,7 +43,7 @@ public interface SysUserOrganizationDao {
      *
      * @param list 用户组织信息
      * @author luyuhao
-     * @date 20/12/13 22:42
+     * @since 20/12/13 22:42
      */
     void batchInsert(@Param("list") List<SysUserOrganizationEntity> list);
 }

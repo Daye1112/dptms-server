@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
  * 配置发布属性表ServiceImpl
  *
  * @author luyuhao
- * @date 2021/03/12 01:47
+ * @since 2021/03/12 01:47
  */
 @Service
 @CacheConfig(cacheNames = "serviceConfigReleaseProp", keyGenerator = "keyGenerator")

@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author luyuhao
- * @date 2021/02/07 00:32
+ * @since 2021/02/07 00:32
  */
 @Slf4j
 public class FeignLogCollectServiceImpl implements LogCollectService {
@@ -24,7 +24,7 @@ public class FeignLogCollectServiceImpl implements LogCollectService {
      *
      * @param dto 日志信息
      * @author luyuhao
-     * @date 2021/02/07 00:32
+     * @since 2021/02/07 00:32
      */
     @Override
     public void operateLogCollect(SysOperateLogDto dto) {
@@ -41,7 +41,7 @@ public class FeignLogCollectServiceImpl implements LogCollectService {
      *
      * @param dto 日志参数
      * @author luyuhao
-     * @date 2021/02/06 20:50
+     * @since 2021/02/06 20:50
      */
     @Override
     public void loginLogCollect(SysLoginLogDto dto) {

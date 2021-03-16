@@ -6,7 +6,7 @@ import java.util.UUID;
 
 /**
  * @author luyuhao
- * @date 2020/11/23 00:04
+ * @since 2020/11/23 00:04
  */
 public class RandomTest {
 

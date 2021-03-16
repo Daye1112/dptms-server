@@ -31,7 +31,7 @@ import java.util.List;
  * 组织Controller
  *
  * @author luyuhao
- * @date 2020/08/16 01:43
+ * @since 2020/08/16 01:43
  */
 @Slf4j
 @Api(tags = "组织管理")
@@ -52,7 +52,7 @@ public class SysOrganizationController extends BaseController {
      * @param dto       筛选参数
      * @return {@link JsonResult}
      * @author luyuhao
-     * @date 20/12/10 01:08
+     * @since 20/12/10 01:08
      */
     @Log(value = "分页查询组织", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     @ApiOperation("分页查询组织")
@@ -69,7 +69,7 @@ public class SysOrganizationController extends BaseController {
      * @param entity 组织参数
      * @return {@link JsonResult}
      * @author luyuhao
-     * @date 20/12/10 01:08
+     * @since 20/12/10 01:08
      */
     @Log(value = "插入组织", businessType = BusinessType.INSERT)
     @ApiOperation("插入组织")
@@ -92,7 +92,7 @@ public class SysOrganizationController extends BaseController {
      * @param entity 组织参数
      * @return {@link JsonResult}
      * @author luyuhao
-     * @date 20/12/10 01:08
+     * @since 20/12/10 01:08
      */
     @Log(value = "更新组织", businessType = BusinessType.UPDATE)
     @ApiOperation("更新组织")
@@ -115,7 +115,7 @@ public class SysOrganizationController extends BaseController {
      * @param id 记录id
      * @return {@link JsonResult}
      * @author luyuhao
-     * @date 20/12/10 01:08
+     * @since 20/12/10 01:08
      */
     @Log(value = "根据id删除记录", businessType = BusinessType.DELETE)
     @ApiOperation("根据id删除记录")
@@ -135,7 +135,7 @@ public class SysOrganizationController extends BaseController {
      * @param userId 用户id
      * @return {@link SysOrganizationDto}
      * @author luyuhao
-     * @date 20/12/13 21:43
+     * @since 20/12/13 21:43
      */
     @Log(value = "查询用户关联的组织list", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     @ApiOperation("查询用户关联的组织list")

@@ -12,7 +12,7 @@ import java.util.Locale;
 
 /**
  * @author luyuhao
- * @date 19/12/15 21:32
+ * @since 19/12/15 21:32
  */
 @Slf4j
 public class DateUtil extends cn.hutool.core.date.DateUtil {

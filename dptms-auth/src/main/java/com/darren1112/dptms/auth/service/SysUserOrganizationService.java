@@ -8,7 +8,7 @@ import java.util.List;
  * 用户组织Service
  *
  * @author luyuhao
- * @date 2020/12/13 22:19
+ * @since 2020/12/13 22:19
  */
 public interface SysUserOrganizationService {
 
@@ -18,7 +18,7 @@ public interface SysUserOrganizationService {
      * @param userId 用户id
      * @return {@link SysOrganizationDto}
      * @author luyuhao
-     * @date 20/12/13 21:43
+     * @since 20/12/13 21:43
      */
     List<SysOrganizationDto> listUserAssigned(Long userId);
 
@@ -29,7 +29,7 @@ public interface SysUserOrganizationService {
      * @param orgIds  组织ids，逗号分隔
      * @param updater 更新者
      * @author luyuhao
-     * @date 20/12/13 22:10
+     * @since 20/12/13 22:10
      */
     void assignedOrg(Long userId, String orgIds, Long updater);
 }

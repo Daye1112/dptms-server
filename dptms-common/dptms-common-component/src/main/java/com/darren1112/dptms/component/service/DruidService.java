@@ -8,7 +8,7 @@ import java.util.List;
  * druid service
  *
  * @author luyuhao
- * @date 2021/02/15 23:30
+ * @since 2021/02/15 23:30
  */
 public interface DruidService {
 
@@ -17,7 +17,7 @@ public interface DruidService {
      *
      * @return {@link DruidStatDto}
      * @author luyuhao
-     * @date 2021/02/15 23:32
+     * @since 2021/02/15 23:32
      */
     List<DruidStatDto> apiStatList();
 }

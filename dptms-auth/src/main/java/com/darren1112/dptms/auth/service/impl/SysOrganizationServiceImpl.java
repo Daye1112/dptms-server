@@ -22,7 +22,7 @@ import java.util.List;
  * 组织ServiceImpl
  *
  * @author luyuhao
- * @date 2020/08/16 01:43
+ * @since 2020/08/16 01:43
  */
 @Service
 @CacheConfig(cacheNames = "sysOrganization", keyGenerator = "keyGenerator")
@@ -39,7 +39,7 @@ public class SysOrganizationServiceImpl extends BaseService implements SysOrgani
      * @param param     筛选参数
      * @return {@link SysOrganizationDto}
      * @author luyuhao
-     * @date 20/12/10 01:08
+     * @since 20/12/10 01:08
      */
     @Override
     @Cacheable
@@ -55,7 +55,7 @@ public class SysOrganizationServiceImpl extends BaseService implements SysOrgani
      * @param entity 组织参数
      * @return {@link Long}
      * @author luyuhao
-     * @date 20/12/10 01:08
+     * @since 20/12/10 01:08
      */
     @Override
     @CacheEvict(allEntries = true)
@@ -72,7 +72,7 @@ public class SysOrganizationServiceImpl extends BaseService implements SysOrgani
      * @param entity   参数
      * @param isUpdate 是否更新
      * @author luyuhao
-     * @date 20/12/12 22:04
+     * @since 20/12/12 22:04
      */
     private void validRepeat(SysOrganizationEntity entity, boolean isUpdate) {
         SysOrganizationDto param = new SysOrganizationDto();
@@ -92,7 +92,7 @@ public class SysOrganizationServiceImpl extends BaseService implements SysOrgani
      * @param entity 组织参数
      * @return {@link Long}
      * @author luyuhao
-     * @date 20/12/10 01:08
+     * @since 20/12/10 01:08
      */
     @Override
     @CacheEvict(allEntries = true)
@@ -108,7 +108,7 @@ public class SysOrganizationServiceImpl extends BaseService implements SysOrgani
      * @param id      记录id
      * @param updater 更新者
      * @author luyuhao
-     * @date 20/12/10 01:08
+     * @since 20/12/10 01:08
      */
     @Override
     @CacheEvict(allEntries = true)

@@ -21,7 +21,7 @@ import java.util.List;
  * 配置发布表ServiceImpl
  *
  * @author luyuhao
- * @date 2021/03/12 01:47
+ * @since 2021/03/12 01:47
  */
 @Service
 @CacheConfig(cacheNames = "serviceConfigRelease", keyGenerator = "keyGenerator")

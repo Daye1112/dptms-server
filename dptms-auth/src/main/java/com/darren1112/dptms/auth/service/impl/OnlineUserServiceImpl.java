@@ -19,7 +19,7 @@ import java.util.Optional;
  * 在线用户管理ServiceImpl
  *
  * @author luyuhao
- * @date 2021/01/31 22:05
+ * @since 2021/01/31 22:05
  */
 @Service
 @Transactional(rollbackFor = Throwable.class, readOnly = true)
@@ -38,7 +38,7 @@ public class OnlineUserServiceImpl extends BaseService implements OnlineUserServ
      * @param pageParam  分页参数
      * @return {@link ActiveUser}
      * @author luyuhao
-     * @date 2021/01/31 21:52
+     * @since 2021/01/31 21:52
      */
     @Override
     public PageBean<ActiveUser> listPage(ActiveUser activeUser, PageParam pageParam) {
@@ -67,7 +67,7 @@ public class OnlineUserServiceImpl extends BaseService implements OnlineUserServ
      *
      * @param userId 用户id
      * @author luyuhao
-     * @date 2021/01/31 22:57
+     * @since 2021/01/31 22:57
      */
     @Override
     public void forcedOffline(Long userId) {

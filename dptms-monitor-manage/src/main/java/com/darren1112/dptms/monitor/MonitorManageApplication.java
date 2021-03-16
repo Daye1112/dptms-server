@@ -10,7 +10,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
  * 监控服务启动类
  *
  * @author luyuhao
- * @date 2020/08/09 21:05
+ * @since 2020/08/09 21:05
  */
 @EnableServerDoc
 @EnableEurekaClient

@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.*;
  * 配置发布表Controller
  *
  * @author luyuhao
- * @date 2021/03/12 01:51
+ * @since 2021/03/12 01:51
  */
 @Slf4j
 @Api(tags = "配置发布管理", description = "配置发布管理接口")
@@ -45,7 +45,7 @@ public class ServiceConfigReleaseController extends BaseController {
      * @param pageParam 分页参数
      * @return {@link ServiceConfigReleaseDto}
      * @author luyuhao
-     * @date 2021/03/16 08:33
+     * @since 2021/03/16 08:33
      */
     @Log(value = "分页查询发布列表", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     @ApiOperation("分页查询发布列表")
@@ -66,7 +66,7 @@ public class ServiceConfigReleaseController extends BaseController {
      * @param dto 服务信息
      * @return {@link JsonResult}
      * @author luyuhao
-     * @date 2021/03/16 08:33
+     * @since 2021/03/16 08:33
      */
     @Log(value = "插入发布信息", businessType = BusinessType.INSERT)
     @ApiOperation("插入发布信息")
@@ -93,7 +93,7 @@ public class ServiceConfigReleaseController extends BaseController {
      * @param id 发布id
      * @return {@link JsonResult}
      * @author luyuhao
-     * @date 2021/03/16 08:33
+     * @since 2021/03/16 08:33
      */
     @Log(value = "删除发布信息", businessType = BusinessType.DELETE)
     @ApiOperation("删除发布信息")

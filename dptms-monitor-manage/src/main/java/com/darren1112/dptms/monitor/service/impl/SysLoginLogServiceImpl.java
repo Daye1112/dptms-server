@@ -16,7 +16,7 @@ import java.util.List;
  * 登录日志ServiceImpl
  *
  * @author luyuhao
- * @date 2021/02/06 20:44
+ * @since 2021/02/06 20:44
  */
 @Service
 @Transactional(rollbackFor = Throwable.class, readOnly = true)
@@ -30,7 +30,7 @@ public class SysLoginLogServiceImpl extends BaseService implements SysLoginLogSe
      *
      * @param dto 日志信息
      * @author luyuhao
-     * @date 2021/02/06 20:53
+     * @since 2021/02/06 20:53
      */
     @Override
     @Transactional(rollbackFor = Throwable.class)
@@ -45,7 +45,7 @@ public class SysLoginLogServiceImpl extends BaseService implements SysLoginLogSe
      * @param dto       查询条件
      * @return {@link SysLoginLogDto}
      * @author luyuhao
-     * @date 2021/02/10 00:13
+     * @since 2021/02/10 00:13
      */
     @Override
     public PageBean<SysLoginLogDto> listPage(PageParam pageParam, SysLoginLogDto dto) {

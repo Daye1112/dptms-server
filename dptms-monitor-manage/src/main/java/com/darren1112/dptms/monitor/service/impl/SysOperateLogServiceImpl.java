@@ -16,7 +16,7 @@ import java.util.List;
  * 操作日志ServiceImpl
  *
  * @author luyuhao
- * @date 2021/02/06 20:44
+ * @since 2021/02/06 20:44
  */
 @Service
 @Transactional(rollbackFor = Throwable.class, readOnly = true)
@@ -30,7 +30,7 @@ public class SysOperateLogServiceImpl extends BaseService implements SysOperateL
      *
      * @param dto 日志信息
      * @author luyuhao
-     * @date 2021/02/06 21:08
+     * @since 2021/02/06 21:08
      */
     @Override
     @Transactional(rollbackFor = Throwable.class)
@@ -45,7 +45,7 @@ public class SysOperateLogServiceImpl extends BaseService implements SysOperateL
      * @param pageParam 分页参数
      * @return {@link SysOperateLogDto}
      * @author luyuhao
-     * @date 20/12/10 01:08
+     * @since 20/12/10 01:08
      */
     @Override
     public PageBean<SysOperateLogDto> listPage(PageParam pageParam, SysOperateLogDto dto) {

@@ -7,7 +7,7 @@ import lombok.Data;
  * 登录参数
  *
  * @author luyuhao
- * @date 2020/11/22 17:18
+ * @since 2020/11/22 17:18
  */
 @Data
 public class LoginParam {

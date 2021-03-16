@@ -8,7 +8,7 @@ import com.darren1112.dptms.common.spi.common.dto.PageParam;
  * 在线用户管理Service
  *
  * @author luyuhao
- * @date 2021/01/31 22:05
+ * @since 2021/01/31 22:05
  */
 public interface OnlineUserService {
 
@@ -19,7 +19,7 @@ public interface OnlineUserService {
      * @param pageParam  分页参数
      * @return {@link ActiveUser}
      * @author luyuhao
-     * @date 2021/01/31 21:52
+     * @since 2021/01/31 21:52
      */
     PageBean<ActiveUser> listPage(ActiveUser activeUser, PageParam pageParam);
 
@@ -28,7 +28,7 @@ public interface OnlineUserService {
      *
      * @param userId 用户id
      * @author luyuhao
-     * @date 2021/01/31 22:57
+     * @since 2021/01/31 22:57
      */
     void forcedOffline(Long userId);
 }

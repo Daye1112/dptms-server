@@ -13,7 +13,7 @@ import java.util.List;
  * 角色Dao
  *
  * @author luyuhao
- * @date 20/12/13 23:07
+ * @since 20/12/13 23:07
  */
 @Mapper
 @Repository
@@ -26,7 +26,7 @@ public interface SysRoleDao {
      * @param entity 角色参数
      * @return {@link Long 角色id)
      * @author baojiazhong
-     * @date 2020/12/19 1:19
+     * @since 2020/12/19 1:19
      */
     Long insert(SysRoleEntity entity);
 
@@ -36,7 +36,7 @@ public interface SysRoleDao {
      * @param param 查重参数
      * @return {@link Long 重复数量)
      * @author baojiazhong
-     * @date 2020/12/19 1:20
+     * @since 2020/12/19 1:20
      */
     Long countByRepeat(SysRoleDto param);
 
@@ -46,7 +46,7 @@ public interface SysRoleDao {
      * @param entity 角色参数
      * @return {@link Long)
      * @author baojiazhong
-     * @date 2020/12/19 20:32
+     * @since 2020/12/19 20:32
      */
     Long update(SysRoleEntity entity);
 
@@ -57,7 +57,7 @@ public interface SysRoleDao {
      * @param dto       筛选参数
      * @return {@link SysRoleDto)
      * @author baojiazhong
-     * @date 2020/12/19 23:19
+     * @since 2020/12/19 23:19
      */
     List<SysRoleDto> listPage(@Param("pageParam") PageParam pageParam, @Param("dto") SysRoleDto dto);
 
@@ -67,7 +67,7 @@ public interface SysRoleDao {
      * @param dto 筛选参数
      * @return {@link Long 查询总数)
      * @author baojiazhong
-     * @date 2020/12/19 23:21
+     * @since 2020/12/19 23:21
      */
     Long listPageCount(@Param("dto") SysRoleDto dto);
 
@@ -77,7 +77,7 @@ public interface SysRoleDao {
      * @param id      记录id
      * @param updater 更新者
      * @author baojiazhong
-     * @date 2020/12/19 23:25
+     * @since 2020/12/19 23:25
      */
     void deleteById(@Param("id") Long id, @Param("updater") Long updater);
 }

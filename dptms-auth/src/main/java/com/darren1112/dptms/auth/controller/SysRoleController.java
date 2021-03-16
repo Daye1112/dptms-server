@@ -32,7 +32,7 @@ import java.util.List;
  * 角色Controller
  *
  * @author luyuhao
- * @date 2020/12/13 23:11
+ * @since 2020/12/13 23:11
  */
 @Slf4j
 @Api(tags = "角色管理")
@@ -56,7 +56,7 @@ public class SysRoleController extends BaseController {
      * @param menuIds 菜单ids，逗号分隔
      * @return {@link JsonResult}
      * @author luyuhao
-     * @date 20/12/13 22:10
+     * @since 20/12/13 22:10
      */
     @Log(value = "分配角色菜单", businessType = BusinessType.UPDATE)
     @ApiOperation("分配菜单")
@@ -77,7 +77,7 @@ public class SysRoleController extends BaseController {
      * @param entity 角色参数
      * @return {@link JsonResult)
      * @author baojiazhong
-     * @date 2020/12/19 0:55
+     * @since 2020/12/19 0:55
      */
     @Log(value = "插入角色", businessType = BusinessType.INSERT)
     @ApiOperation("插入角色")
@@ -102,7 +102,7 @@ public class SysRoleController extends BaseController {
      * @param dto       筛选参数
      * @return {@link JsonResult)
      * @author baojiazhong
-     * @date 2020/12/19 1:44
+     * @since 2020/12/19 1:44
      */
     @Log(value = "分页查询角色", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     @ApiOperation("分页查询")
@@ -119,7 +119,7 @@ public class SysRoleController extends BaseController {
      * @param entity 角色参数
      * @return {@link JsonResult)
      * @author baojiazhong
-     * @date 2020/12/19 1:51
+     * @since 2020/12/19 1:51
      */
     @Log(value = "更新角色", businessType = BusinessType.UPDATE)
     @ApiOperation("更新角色")
@@ -142,7 +142,7 @@ public class SysRoleController extends BaseController {
      * @param id 记录id
      * @return {@link JsonResult)
      * @author baojiazhong
-     * @date 2020/12/19 1:56
+     * @since 2020/12/19 1:56
      */
     @Log(value = "删除角色", businessType = BusinessType.DELETE)
     @ApiOperation("删除角色")
@@ -162,7 +162,7 @@ public class SysRoleController extends BaseController {
      * @param userId 用户id
      * @return {@link SysRoleDto}
      * @author luyuhao
-     * @date 20/12/13 21:43
+     * @since 20/12/13 21:43
      */
     @Log(value = "查询用户关联的角色list", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     @ApiOperation("查询用户关联的角色list")

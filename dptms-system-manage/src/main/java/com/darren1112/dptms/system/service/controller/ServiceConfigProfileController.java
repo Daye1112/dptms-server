@@ -26,7 +26,7 @@ import java.util.List;
  * 配置环境表Controller
  *
  * @author luyuhao
- * @date 2021/03/12 01:51
+ * @since 2021/03/12 01:51
  */
 @Slf4j
 @Api(tags = "配置环境管理", description = "配置环境管理接口")
@@ -43,7 +43,7 @@ public class ServiceConfigProfileController {
      * @param dto 筛选参数
      * @return {@link ServiceConfigProfileDto}
      * @author luyuhao
-     * @date 2021/03/13 01:33
+     * @since 2021/03/13 01:33
      */
     @Log(value = "查询配置环境list", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     @ApiOperation("查询配置环境list")
@@ -62,7 +62,7 @@ public class ServiceConfigProfileController {
      * @param dto 配置环境信息
      * @return {@link Long}
      * @author luyuhao
-     * @date 2021/03/14 02:03
+     * @since 2021/03/14 02:03
      */
     @Log(value = "插入配置环境", businessType = BusinessType.INSERT)
     @ApiOperation("插入配置环境")
@@ -87,7 +87,7 @@ public class ServiceConfigProfileController {
      * @param dto 配置环境信息
      * @return {@link JsonResult}
      * @author luyuhao
-     * @date 2021/03/14 02:03
+     * @since 2021/03/14 02:03
      */
     @Log(value = "更新配置环境", businessType = BusinessType.UPDATE)
     @ApiOperation("更新配置环境")
@@ -113,7 +113,7 @@ public class ServiceConfigProfileController {
      * @param id 配置环境id
      * @return {@link JsonResult}
      * @author luyuhao
-     * @date 2021/03/14 02:03
+     * @since 2021/03/14 02:03
      */
     @Log(value = "删除配置环境", businessType = BusinessType.DELETE)
     @ApiOperation("删除配置环境")

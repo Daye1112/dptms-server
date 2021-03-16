@@ -14,7 +14,7 @@ import springfox.documentation.swagger.web.UiConfiguration;
  * 网关文档配置类
  *
  * @author luyuhao
- * @date 2020/08/07 01:56
+ * @since 2020/08/07 01:56
  */
 @EnableConfigurationProperties(GatewayDocProperties.class)
 public class GatewayDocConfig {

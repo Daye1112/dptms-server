@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
  * 用户信息Service
  *
  * @author luyuhao
- * @date 2020/11/22 17:07
+ * @since 2020/11/22 17:07
  */
 public interface UserDetailsService {
 
@@ -23,7 +23,7 @@ public interface UserDetailsService {
      * @param response   响应域
      * @return {@link ActiveUser 用户信息}
      * @author luyuhao
-     * @date 20/11/22 17:25
+     * @since 20/11/22 17:25
      */
     ActiveUser loginHandler(LoginParam loginParam, HttpServletRequest request, HttpServletResponse response);
 
@@ -35,7 +35,7 @@ public interface UserDetailsService {
      * @param response   响应域
      * @throws BaseException 异常
      * @author luyuhao
-     * @date 20/11/22 17:26
+     * @since 20/11/22 17:26
      */
     void preHandler(LoginParam loginParam, HttpServletRequest request, HttpServletResponse response) throws BaseException;
 
@@ -48,7 +48,7 @@ public interface UserDetailsService {
      * @return {@link ActiveUser}
      * @throws BaseException 异常
      * @author luyuhao
-     * @date 20/11/22 21:07
+     * @since 20/11/22 21:07
      */
     ActiveUser handler(LoginParam loginParam, HttpServletRequest request, HttpServletResponse response) throws BaseException;
 
@@ -60,7 +60,7 @@ public interface UserDetailsService {
      * @param response   响应域
      * @throws BaseException 异常
      * @author luyuhao
-     * @date 20/11/22 17:42
+     * @since 20/11/22 17:42
      */
     void afterHandler(ActiveUser activeUser, HttpServletRequest request, HttpServletResponse response) throws BaseException;
 
@@ -70,7 +70,7 @@ public interface UserDetailsService {
      * @param e 异常
      * @return {@link BaseException 处理后的异常}
      * @author luyuhao
-     * @date 20/11/22 21:11
+     * @since 20/11/22 21:11
      */
     BaseException exceptionHandler(Exception e);
 }

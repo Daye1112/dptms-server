@@ -8,7 +8,7 @@ import java.util.List;
  * 用户角色Service
  *
  * @author luyuhao
- * @date 2020/12/23 01:51
+ * @since 2020/12/23 01:51
  */
 public interface SysUserRoleService {
 
@@ -19,7 +19,7 @@ public interface SysUserRoleService {
      * @param roleIds 角色ids，逗号分隔
      * @param updater 更新者
      * @author luyuhao
-     * @date 20/12/23 01:48
+     * @since 20/12/23 01:48
      */
     void assignedRole(Long userId, String roleIds, Long updater);
 
@@ -29,7 +29,7 @@ public interface SysUserRoleService {
      * @param userId 用户id
      * @return {@link SysRoleDto}
      * @author luyuhao
-     * @date 20/12/13 21:43
+     * @since 20/12/13 21:43
      */
     List<SysRoleDto> listUserAssigned(Long userId);
 }

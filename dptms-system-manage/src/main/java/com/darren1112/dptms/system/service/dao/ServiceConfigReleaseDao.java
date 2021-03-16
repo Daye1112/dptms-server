@@ -12,7 +12,7 @@ import java.util.List;
  * 配置发布表Dao
  *
  * @author luyuhao
- * @date 2021/03/12 01:43
+ * @since 2021/03/12 01:43
  */
 @Mapper
 @Repository

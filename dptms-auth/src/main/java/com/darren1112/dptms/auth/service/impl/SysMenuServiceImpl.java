@@ -37,7 +37,7 @@ public class SysMenuServiceImpl extends BaseService implements SysMenuService {
      * @param userId 用户id
      * @return {@link SysMenuDto}
      * @author luyuhao
-     * @date 2021/01/17 19:34
+     * @since 2021/01/17 19:34
      */
     @Override
     public List<SysMenuDto> listMenuByUserId(Long userId) {
@@ -50,7 +50,7 @@ public class SysMenuServiceImpl extends BaseService implements SysMenuService {
      * @param entity 菜单参数
      * @return {@link Long 菜单id)
      * @author baojiazhong
-     * @date 2020/12/16 11:02
+     * @since 2020/12/16 11:02
      */
     @Override
     @CacheEvict(allEntries = true)
@@ -67,7 +67,7 @@ public class SysMenuServiceImpl extends BaseService implements SysMenuService {
      * @param id      id
      * @param updater 更新者
      * @author baojiazhong
-     * @date 2020/12/16 14:39
+     * @since 2020/12/16 14:39
      */
     @Override
     @CacheEvict(allEntries = true)
@@ -82,7 +82,7 @@ public class SysMenuServiceImpl extends BaseService implements SysMenuService {
      * @param entity 菜单参数
      * @return {@link Long)
      * @author baojiazhong
-     * @date 2020/12/16 15:49
+     * @since 2020/12/16 15:49
      */
     @Override
     @CacheEvict(allEntries = true)
@@ -98,7 +98,7 @@ public class SysMenuServiceImpl extends BaseService implements SysMenuService {
      * @param entity   验证参数
      * @param isUpdate 是否更新
      * @author baojiazhong
-     * @date 2020/12/16 11:05
+     * @since 2020/12/16 11:05
      */
     private void validRepeat(SysMenuEntity entity, boolean isUpdate) {
         SysMenuDto param = new SysMenuDto();
@@ -116,7 +116,7 @@ public class SysMenuServiceImpl extends BaseService implements SysMenuService {
      *
      * @return {@link SysMenuDto}
      * @author luyuhao
-     * @date 2021/01/03 23:29
+     * @since 2021/01/03 23:29
      */
     @Override
     @Cacheable

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * 监控管理服务rpc调用
  *
  * @author luyuhao
- * @date 2021/02/06 22:23
+ * @since 2021/02/06 22:23
  */
 @FeignClient("dptms-monitor-manage")
 @RequestMapping(value = "/monitor-manage")
@@ -24,7 +24,7 @@ public interface MonitorManageRemoting {
      * @param dto 日志参数
      * @return {@link JsonResult)
      * @author luyuhao
-     * @date 2021/02/06 20:50
+     * @since 2021/02/06 20:50
      */
     @PostMapping("/loginLog/insert")
     JsonResult insert(@RequestBody SysLoginLogDto dto);
@@ -35,7 +35,7 @@ public interface MonitorManageRemoting {
      * @param dto 日志参数
      * @return {@link JsonResult)
      * @author luyuhao
-     * @date 2021/02/06 20:50
+     * @since 2021/02/06 20:50
      */
     @PostMapping("/operateLog/insert")
     JsonResult insert(@RequestBody SysOperateLogDto dto);

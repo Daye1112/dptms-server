@@ -6,7 +6,7 @@ import java.util.UUID;
  * token生成类
  *
  * @author luyuhao
- * @date 2021/01/16 17:10
+ * @since 2021/01/16 17:10
  */
 public class DptmsTokenGenerator {
 
@@ -15,7 +15,7 @@ public class DptmsTokenGenerator {
      *
      * @return {@link String token}
      * @author luyuhao
-     * @date 2021/01/16 17:11
+     * @since 2021/01/16 17:11
      */
     public static String generateDefaultToken() {
         return UUID.randomUUID().toString().replaceAll("-", "");

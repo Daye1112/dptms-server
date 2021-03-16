@@ -13,7 +13,7 @@ import java.util.List;
  * auth模块rpc调用
  *
  * @author luyuhao
- * @date 2021/02/15 23:39
+ * @since 2021/02/15 23:39
  */
 @FeignClient("dptms-auth")
 @RequestMapping(value = "/auth")
@@ -24,7 +24,7 @@ public interface AuthRemoting {
      *
      * @return {@link DruidStatDto}
      * @author luyuhao
-     * @date 2021/02/17 20:45
+     * @since 2021/02/17 20:45
      */
     @GetMapping("/druidStat/apiStat")
     JsonResult<List<DruidStatDto>> getApiStat();
@@ -34,7 +34,7 @@ public interface AuthRemoting {
      *
      * @return {@link SysUserDto}
      * @author luyuhao
-     * @date 2021/01/17 19:34
+     * @since 2021/01/17 19:34
      */
     @GetMapping("/activeUser/getNewInfo")
     JsonResult<SysUserDto> getNewInfo();

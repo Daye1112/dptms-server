@@ -18,7 +18,7 @@ import java.util.List;
  * 配置环境属性表ServiceImpl
  *
  * @author luyuhao
- * @date 2021/03/12 01:47
+ * @since 2021/03/12 01:47
  */
 @Service
 @CacheConfig(cacheNames = "serviceConfigProfileProp", keyGenerator = "keyGenerator")
@@ -34,7 +34,7 @@ public class ServiceConfigProfilePropServiceImpl implements ServiceConfigProfile
      * @param dto 配置环境属性
      * @return {@link ServiceConfigProfilePropDto}
      * @author luyuhao
-     * @date 2021/03/14 22:57
+     * @since 2021/03/14 22:57
      */
     @Override
     @Cacheable
@@ -48,7 +48,7 @@ public class ServiceConfigProfilePropServiceImpl implements ServiceConfigProfile
      * @param dto 配置环境属性信息
      * @return {@link Long}
      * @author luyuhao
-     * @date 2021/03/14 23:01
+     * @since 2021/03/14 23:01
      */
     @Override
     @CacheEvict(allEntries = true)
@@ -65,7 +65,7 @@ public class ServiceConfigProfilePropServiceImpl implements ServiceConfigProfile
      * @param dto      验证对象
      * @param isUpdate 是否更新
      * @author luyuhao
-     * @date 2021/03/14 02:04
+     * @since 2021/03/14 02:04
      */
     private void validRepeat(ServiceConfigProfilePropDto dto, boolean isUpdate) {
         ServiceConfigProfilePropDto param = new ServiceConfigProfilePropDto();
@@ -84,7 +84,7 @@ public class ServiceConfigProfilePropServiceImpl implements ServiceConfigProfile
      *
      * @param dto 配置环境属性信息
      * @author luyuhao
-     * @date 2021/03/14 23:08
+     * @since 2021/03/14 23:08
      */
     @Override
     @CacheEvict(allEntries = true)
@@ -100,7 +100,7 @@ public class ServiceConfigProfilePropServiceImpl implements ServiceConfigProfile
      * @param id      id
      * @param updater 更新者
      * @author luyuhao
-     * @date 2021/03/14 23:11
+     * @since 2021/03/14 23:11
      */
     @Override
     @CacheEvict(allEntries = true)

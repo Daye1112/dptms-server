@@ -6,7 +6,7 @@ import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
  * 系统权限工具类
  *
  * @author luyuhao
- * @date 2021/01/16 17:00
+ * @since 2021/01/16 17:00
  */
 public class DptmsSecurityUtil {
 

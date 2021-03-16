@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
  * 操作日志Controller
  *
  * @author luyuhao
- * @date 2021/02/06 20:45
+ * @since 2021/02/06 20:45
  */
 @Slf4j
 @Api(tags = "操作日志管理")
@@ -38,7 +38,7 @@ public class SysOperateLogController extends BaseController {
      * @param dto 日志参数
      * @return {@link JsonResult)
      * @author luyuhao
-     * @date 2021/02/06 20:50
+     * @since 2021/02/06 20:50
      */
     @ApiOperation(value = "插入操作日志", hidden = true)
     @PostMapping("/insert")
@@ -54,7 +54,7 @@ public class SysOperateLogController extends BaseController {
      * @param pageParam 分页参数
      * @return {@link JsonResult}
      * @author luyuhao
-     * @date 20/12/10 01:08
+     * @since 20/12/10 01:08
      */
     @Log(value = "分页查询操作日志", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     @ApiOperation("分页查询操作日志")

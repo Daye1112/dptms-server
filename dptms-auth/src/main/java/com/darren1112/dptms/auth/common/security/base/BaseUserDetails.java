@@ -19,7 +19,7 @@ import java.util.Date;
  * 用户信息Base
  *
  * @author luyuhao
- * @date 2020/11/22 17:11
+ * @since 2020/11/22 17:11
  */
 @Slf4j
 public abstract class BaseUserDetails implements UserDetailsService {
@@ -35,7 +35,7 @@ public abstract class BaseUserDetails implements UserDetailsService {
      * @param response   响应域
      * @return {@link ActiveUser 用户信息}
      * @author luyuhao
-     * @date 20/11/22 17:25
+     * @since 20/11/22 17:25
      */
     @Override
     public ActiveUser loginHandler(LoginParam loginParam, HttpServletRequest request, HttpServletResponse response) {
@@ -66,7 +66,7 @@ public abstract class BaseUserDetails implements UserDetailsService {
      * @param response   响应域
      * @throws BaseException 异常
      * @author luyuhao
-     * @date 20/11/22 17:26
+     * @since 20/11/22 17:26
      */
     @Override
     public abstract void preHandler(LoginParam loginParam, HttpServletRequest request, HttpServletResponse response) throws BaseException;
@@ -80,7 +80,7 @@ public abstract class BaseUserDetails implements UserDetailsService {
      * @return {@link ActiveUser}
      * @throws BaseException 异常
      * @author luyuhao
-     * @date 20/11/22 21:07
+     * @since 20/11/22 21:07
      */
     @Override
     public abstract ActiveUser handler(LoginParam loginParam, HttpServletRequest request, HttpServletResponse response) throws BaseException;
@@ -93,7 +93,7 @@ public abstract class BaseUserDetails implements UserDetailsService {
      * @param response   响应域
      * @throws BaseException 异常
      * @author luyuhao
-     * @date 20/11/22 17:42
+     * @since 20/11/22 17:42
      */
     @Override
     public abstract void afterHandler(ActiveUser activeUser, HttpServletRequest request, HttpServletResponse response) throws BaseException;
@@ -104,7 +104,7 @@ public abstract class BaseUserDetails implements UserDetailsService {
      * @param e 异常
      * @return {@link BaseException 处理后的异常}
      * @author luyuhao
-     * @date 20/11/22 21:11
+     * @since 20/11/22 21:11
      */
     @Override
     public BaseException exceptionHandler(Exception e) {
@@ -116,7 +116,7 @@ public abstract class BaseUserDetails implements UserDetailsService {
      *
      * @param activeUser 登录用户信息
      * @author luyuhao
-     * @date 2021/2/9 14:09
+     * @since 2021/2/9 14:09
      */
     protected void loginLogCollect(ActiveUser activeUser) {
         SysLoginLogDto loginLogDto = new SysLoginLogDto();

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 配置发布属性表Controller
  *
  * @author luyuhao
- * @date 2021/03/12 01:51
+ * @since 2021/03/12 01:51
  */
 @Slf4j
 @Api(tags = "配置发布属性管理", description = "配置发布属性管理接口")

@@ -12,7 +12,7 @@ import java.util.List;
  * 集合工具类
  *
  * @author luyuhao
- * @date 2020/08/01 03:52
+ * @since 2020/08/01 03:52
  */
 public class CollectionUtil extends CollectionUtils {
 
@@ -22,7 +22,7 @@ public class CollectionUtil extends CollectionUtils {
      * @param collection 集合
      * @return true/false
      * @author luyuhao
-     * @date 20/08/01 03:53
+     * @since 20/08/01 03:53
      */
     public static boolean isNotEmpty(@Nullable Collection<?> collection) {
         return !isEmpty(collection);
@@ -34,7 +34,7 @@ public class CollectionUtil extends CollectionUtils {
      * @param array 数组
      * @return true/false
      * @author luyuhao
-     * @date 20/08/01 03:53
+     * @since 20/08/01 03:53
      */
     public static <T> boolean isEmpty(T[] array) {
         return array == null || array.length == 0;
@@ -46,7 +46,7 @@ public class CollectionUtil extends CollectionUtils {
      * @param arr 数组
      * @return true/false
      * @author luyuhao
-     * @date 20/08/01 03:53
+     * @since 20/08/01 03:53
      */
     public static <T> boolean isNotEmpty(T[] arr) {
         return !isEmpty(arr);
@@ -58,7 +58,7 @@ public class CollectionUtil extends CollectionUtils {
      * @param array 数组
      * @return list
      * @author luyuhao
-     * @date 2020/8/11 14:24
+     * @since 2020/8/11 14:24
      */
     public static <T> List<T> arrayToList(T[] array) {
         if (isEmpty(array)) {

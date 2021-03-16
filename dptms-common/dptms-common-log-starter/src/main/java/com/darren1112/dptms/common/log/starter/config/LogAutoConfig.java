@@ -19,7 +19,7 @@ import java.util.concurrent.ThreadPoolExecutor;
  * 日志自动配置类
  *
  * @author luyuhao
- * @date 2021/02/07 01:59
+ * @since 2021/02/07 01:59
  */
 @EnableAsync
 @EnableConfigurationProperties(LogProperties.class)
@@ -33,7 +33,7 @@ public class LogAutoConfig {
      *
      * @return {@link ThreadPoolTaskExecutor}
      * @author luyuhao
-     * @date 2021/02/07 02:09
+     * @since 2021/02/07 02:09
      */
     @Bean
     public ThreadPoolTaskExecutor logCollectThreadPool() {

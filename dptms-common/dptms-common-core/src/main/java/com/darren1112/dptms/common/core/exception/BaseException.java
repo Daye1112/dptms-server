@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
  * 基础异常类
  *
  * @author luyuhao
- * @date 2020/01/07 23:50
+ * @since 2020/01/07 23:50
  */
 public class BaseException extends RuntimeException {
     private Integer status = HttpStatus.BAD_REQUEST.value();

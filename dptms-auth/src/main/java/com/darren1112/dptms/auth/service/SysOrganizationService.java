@@ -9,7 +9,7 @@ import com.darren1112.dptms.common.spi.sys.entity.SysOrganizationEntity;
  * 组织Service
  *
  * @author luyuhao
- * @date 2020/08/16 01:42
+ * @since 2020/08/16 01:42
  */
 public interface SysOrganizationService {
 
@@ -19,7 +19,7 @@ public interface SysOrganizationService {
      * @param entity 组织参数
      * @return {@link Long}
      * @author luyuhao
-     * @date 20/12/10 01:08
+     * @since 20/12/10 01:08
      */
     Long insert(SysOrganizationEntity entity);
 
@@ -29,7 +29,7 @@ public interface SysOrganizationService {
      * @param entity 组织参数
      * @return {@link Long}
      * @author luyuhao
-     * @date 20/12/10 01:08
+     * @since 20/12/10 01:08
      */
     Long update(SysOrganizationEntity entity);
 
@@ -39,7 +39,7 @@ public interface SysOrganizationService {
      * @param id      记录id
      * @param updater 更新者
      * @author luyuhao
-     * @date 20/12/10 01:08
+     * @since 20/12/10 01:08
      */
     void deleteById(Long id, Long updater);
 
@@ -50,7 +50,7 @@ public interface SysOrganizationService {
      * @param param     筛选参数
      * @return {@link SysOrganizationDto}
      * @author luyuhao
-     * @date 20/12/10 01:08
+     * @since 20/12/10 01:08
      */
     PageBean<SysOrganizationDto> listPage(PageParam pageParam, SysOrganizationDto param);
 }

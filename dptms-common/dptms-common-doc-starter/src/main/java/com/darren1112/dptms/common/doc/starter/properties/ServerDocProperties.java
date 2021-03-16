@@ -7,7 +7,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * 文档信息配置
  *
  * @author luyuhao
- * @date 2020/08/06 02:37
+ * @since 2020/08/06 02:37
  */
 @Data
 @ConfigurationProperties(prefix = "dptms.doc")

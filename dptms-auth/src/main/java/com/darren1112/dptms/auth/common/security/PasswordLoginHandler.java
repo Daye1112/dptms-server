@@ -25,7 +25,7 @@ import java.util.Objects;
  * 用户信息鉴权
  *
  * @author luyuhao
- * @date 2020/11/22 17:13
+ * @since 2020/11/22 17:13
  */
 @Component
 public class PasswordLoginHandler extends BaseUserDetails {
@@ -44,7 +44,7 @@ public class PasswordLoginHandler extends BaseUserDetails {
      * @param response   响应域
      * @throws BaseException 异常
      * @author luyuhao
-     * @date 20/11/22 17:26
+     * @since 20/11/22 17:26
      */
     @Override
     public void preHandler(LoginParam loginParam, HttpServletRequest request, HttpServletResponse response) throws BaseException {
@@ -60,7 +60,7 @@ public class PasswordLoginHandler extends BaseUserDetails {
      * @return {@link ActiveUser}
      * @throws BaseException 异常
      * @author luyuhao
-     * @date 20/11/22 21:07
+     * @since 20/11/22 21:07
      */
     @Override
     public ActiveUser handler(LoginParam loginParam, HttpServletRequest request, HttpServletResponse response) throws BaseException {
@@ -88,7 +88,7 @@ public class PasswordLoginHandler extends BaseUserDetails {
      * @param response   响应域
      * @throws BaseException 异常
      * @author luyuhao
-     * @date 20/11/22 17:42
+     * @since 20/11/22 17:42
      */
     @Override
     public void afterHandler(ActiveUser activeUser, HttpServletRequest request, HttpServletResponse response) throws BaseException {

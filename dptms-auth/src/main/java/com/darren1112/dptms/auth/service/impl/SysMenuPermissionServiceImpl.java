@@ -34,7 +34,7 @@ public class SysMenuPermissionServiceImpl implements SysMenuPermissionService {
      * @param menuId 菜单id
      * @return {@link SysPermissionDto)
      * @author baojiazhong
-     * @date 2020/12/22 22:47
+     * @since 2020/12/22 22:47
      */
     @Override
     public List<SysPermissionDto> listMenuAssigned(Long menuId) {
@@ -48,7 +48,7 @@ public class SysMenuPermissionServiceImpl implements SysMenuPermissionService {
      * @param perIds  权限ids，逗号分隔
      * @param updater 更新者
      * @author baojiazhong
-     * @date 2020/12/22 23:10
+     * @since 2020/12/22 23:10
      */
     @Override
     @CacheEvict(allEntries = true)
@@ -77,7 +77,7 @@ public class SysMenuPermissionServiceImpl implements SysMenuPermissionService {
      * @param menuId 菜单id
      * @return {@link SysPermissionDto}
      * @author luyuhao
-     * @date 2021/01/04 23:53
+     * @since 2021/01/04 23:53
      */
     @Override
     public List<SysPermissionDto> listByMenuId(Long menuId) {

@@ -13,7 +13,7 @@ import java.util.Date;
  * 系统用户Entity
  *
  * @author luyuhao
- * @date 20/07/23 02:19
+ * @since 20/07/23 02:19
  */
 @Data
 @ToString(callSuper = true)

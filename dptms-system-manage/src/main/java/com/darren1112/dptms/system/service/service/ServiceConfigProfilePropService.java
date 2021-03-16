@@ -8,7 +8,7 @@ import java.util.List;
  * 配置环境属性表Service
  *
  * @author luyuhao
- * @date 2021/03/12 01:45
+ * @since 2021/03/12 01:45
  */
 public interface ServiceConfigProfilePropService {
 
@@ -18,7 +18,7 @@ public interface ServiceConfigProfilePropService {
      * @param dto 配置环境属性
      * @return {@link ServiceConfigProfilePropDto}
      * @author luyuhao
-     * @date 2021/03/14 22:57
+     * @since 2021/03/14 22:57
      */
     List<ServiceConfigProfilePropDto> list(ServiceConfigProfilePropDto dto);
 
@@ -28,7 +28,7 @@ public interface ServiceConfigProfilePropService {
      * @param dto 配置环境属性信息
      * @return {@link Long}
      * @author luyuhao
-     * @date 2021/03/14 23:01
+     * @since 2021/03/14 23:01
      */
     Long insert(ServiceConfigProfilePropDto dto);
 
@@ -37,7 +37,7 @@ public interface ServiceConfigProfilePropService {
      *
      * @param dto 配置环境属性信息
      * @author luyuhao
-     * @date 2021/03/14 23:08
+     * @since 2021/03/14 23:08
      */
     void update(ServiceConfigProfilePropDto dto);
 
@@ -47,7 +47,7 @@ public interface ServiceConfigProfilePropService {
      * @param id      id
      * @param updater 更新者
      * @author luyuhao
-     * @date 2021/03/14 23:11
+     * @since 2021/03/14 23:11
      */
     void deleteById(Long id, Long updater);
 }

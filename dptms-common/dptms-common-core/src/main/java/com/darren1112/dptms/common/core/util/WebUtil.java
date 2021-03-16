@@ -8,7 +8,7 @@ import eu.bitwalker.useragentutils.UserAgent;
  * web相关工具类
  *
  * @author luyuhao
- * @date 2021/01/31 18:51
+ * @since 2021/01/31 18:51
  */
 public class WebUtil {
 
@@ -17,7 +17,7 @@ public class WebUtil {
      *
      * @return 操作信息
      * @author luyuhao
-     * @date 2021/01/31 19:02
+     * @since 2021/01/31 19:02
      */
     public static String getOs() {
         String userAgentStr = RequestUtil.getHeaderByName("User-Agent");
@@ -32,7 +32,7 @@ public class WebUtil {
      *
      * @return 浏览器+版本
      * @author luyuhao
-     * @date 2021/01/31 19:01
+     * @since 2021/01/31 19:01
      */
     public static String getBrowser() {
         String userAgentStr = RequestUtil.getHeaderByName("User-Agent");

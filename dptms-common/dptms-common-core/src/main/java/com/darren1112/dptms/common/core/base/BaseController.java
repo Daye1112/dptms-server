@@ -17,7 +17,7 @@ public class BaseController {
      * @param pageParam 分页参数
      * @return {@link PageParam 分页参数}
      * @author luyuhao
-     * @date 20/12/10 01:20
+     * @since 20/12/10 01:20
      */
     protected PageParam getPageParam(PageParam pageParam) {
         if (pageParam.getCurrentPage() != null && pageParam.getPageSize() != null) {

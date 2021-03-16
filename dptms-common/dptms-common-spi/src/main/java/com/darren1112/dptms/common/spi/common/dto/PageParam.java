@@ -9,7 +9,7 @@ import java.io.Serializable;
  * 分页参数传递工具
  *
  * @author luyuhao
- * @date 2019/12/17 18:41
+ * @since 2019/12/17 18:41
  */
 @Data
 public class PageParam implements Serializable {

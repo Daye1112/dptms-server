@@ -8,7 +8,7 @@ import lombok.Data;
  * key-value对象
  *
  * @author luyuhao
- * @date 2021/02/17 22:40
+ * @since 2021/02/17 22:40
  */
 @Data
 @ApiModel("key-value对象")

@@ -8,7 +8,7 @@ import com.darren1112.dptms.common.spi.service.dto.ServiceConfigReleaseDto;
  * 配置发布表Service
  *
  * @author luyuhao
- * @date 2021/03/12 01:45
+ * @since 2021/03/12 01:45
  */
 public interface ServiceConfigReleaseService {
 

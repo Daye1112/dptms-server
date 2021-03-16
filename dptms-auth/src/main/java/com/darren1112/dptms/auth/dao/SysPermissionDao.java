@@ -13,7 +13,7 @@ import java.util.List;
  * 权限Dao
  *
  * @author luyuhao
- * @date 20/12/09 23:43
+ * @since 20/12/09 23:43
  */
 @Mapper
 @Repository
@@ -25,7 +25,7 @@ public interface SysPermissionDao {
      * @param userId 用户id
      * @return {@link SysPermissionDto}
      * @author luyuhao
-     * @date 2021/01/17 21:30
+     * @since 2021/01/17 21:30
      */
     List<SysPermissionDto> listByUserId(Long userId);
 
@@ -35,7 +35,7 @@ public interface SysPermissionDao {
      * @param entity 权限参数
      * @return {@link Long 权限id}
      * @author luyuhao
-     * @date 20/12/10 01:08
+     * @since 20/12/10 01:08
      */
     Long insert(SysPermissionEntity entity);
 
@@ -46,7 +46,7 @@ public interface SysPermissionDao {
      * @param pageParam 分页参数
      * @return {@link SysPermissionDto}
      * @author luyuhao
-     * @date 20/12/10 01:08
+     * @since 20/12/10 01:08
      */
     List<SysPermissionDto> listPage(@Param("pageParam") PageParam pageParam, @Param("param") SysPermissionDto param);
 
@@ -56,7 +56,7 @@ public interface SysPermissionDao {
      * @param dto 筛选参数
      * @return {@link SysPermissionDto}
      * @author luyuhao
-     * @date 20/12/10 01:08
+     * @since 20/12/10 01:08
      */
     Long listPageCount(SysPermissionDto dto);
 
@@ -66,7 +66,7 @@ public interface SysPermissionDao {
      * @param entity 权限参数
      * @return {@link Long}
      * @author luyuhao
-     * @date 20/12/10 01:08
+     * @since 20/12/10 01:08
      */
     Long update(SysPermissionEntity entity);
 
@@ -76,7 +76,7 @@ public interface SysPermissionDao {
      * @param entity 筛选参数
      * @return {@link SysPermissionEntity}
      * @author luyuhao
-     * @date 2020/12/12 11:11
+     * @since 2020/12/12 11:11
      */
     List<SysPermissionEntity> listBy(SysPermissionEntity entity);
 
@@ -86,7 +86,7 @@ public interface SysPermissionDao {
      * @param param 查重参数
      * @return {@link Long 重复数量}
      * @author luyuhao
-     * @date 2020/12/12 11:14
+     * @since 2020/12/12 11:14
      */
     Long countByRepeat(SysPermissionDto param);
 
@@ -96,7 +96,7 @@ public interface SysPermissionDao {
      * @param id      id
      * @param updater 更新者
      * @author luyuhao
-     * @date 20/12/12 20:44
+     * @since 20/12/12 20:44
      */
     void deleteById(@Param("id") Long id, @Param("updater") Long updater);
 
@@ -105,7 +105,7 @@ public interface SysPermissionDao {
      *
      * @return {@link SysPermissionDto}
      * @author luyuhao
-     * @date 2020/12/28 01:10
+     * @since 2020/12/28 01:10
      */
     List<SysPermissionDto> listGroup();
 }

@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
  * 角色菜单ServiceImpl
  *
  * @author luyuhao
- * @date 2020/12/13 23:09
+ * @since 2020/12/13 23:09
  */
 @Service
 @CacheConfig(cacheNames = "sysRoleMenu", keyGenerator = "keyGenerator")
@@ -36,7 +36,7 @@ public class SysRoleMenuServiceImpl implements SysRoleMenuService {
      * @param roleId 角色id
      * @return {@link SysMenuDto}
      * @author luyuhao
-     * @date 20/12/13 21:43
+     * @since 20/12/13 21:43
      */
     @Override
     public SysMenuDto listRoleAssigned(Long roleId) {
@@ -56,7 +56,7 @@ public class SysRoleMenuServiceImpl implements SysRoleMenuService {
      * @param menuIds 菜单ids，逗号分隔
      * @param updater 更新者
      * @author luyuhao
-     * @date 20/12/13 22:10
+     * @since 20/12/13 22:10
      */
     @Override
     @CacheEvict(allEntries = true)

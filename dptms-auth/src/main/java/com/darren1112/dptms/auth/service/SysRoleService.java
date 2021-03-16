@@ -9,7 +9,7 @@ import com.darren1112.dptms.common.spi.sys.entity.SysRoleEntity;
  * 角色Service
  *
  * @author luyuhao
- * @date 2020/12/13 23:09
+ * @since 2020/12/13 23:09
  */
 public interface SysRoleService {
 
@@ -19,7 +19,7 @@ public interface SysRoleService {
      * @param entity 角色参数
      * @return {@link Long 角色id)
      * @author baojiazhong
-     * @date 2020/12/19 1:07
+     * @since 2020/12/19 1:07
      */
     Long insert(SysRoleEntity entity);
 
@@ -29,7 +29,7 @@ public interface SysRoleService {
      * @param entity 角色参数
      * @return {@link Long)
      * @author baojiazhong
-     * @date 2020/12/19 20:05
+     * @since 2020/12/19 20:05
      */
     Long update(SysRoleEntity entity);
 
@@ -40,7 +40,7 @@ public interface SysRoleService {
      * @param dto       筛选参数
      * @return {@link SysRoleDto)
      * @author baojiazhong
-     * @date 2020/12/19 20:33
+     * @since 2020/12/19 20:33
      */
     PageBean<SysRoleDto> listPage(PageParam pageParam, SysRoleDto dto);
 
@@ -50,7 +50,7 @@ public interface SysRoleService {
      * @param id      记录id
      * @param updater 更新者
      * @author baojiazhong
-     * @date 2020/12/19 20:35
+     * @since 2020/12/19 20:35
      */
     void deleteById(Long id, Long updater);
 }

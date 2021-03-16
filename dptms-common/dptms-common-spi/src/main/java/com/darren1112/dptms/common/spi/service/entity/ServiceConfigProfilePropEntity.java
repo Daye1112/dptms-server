@@ -10,7 +10,7 @@ import lombok.ToString;
  * 配置环境属性表Entity
  *
  * @author luyuhao
- * @date 2021/03/12 01:39
+ * @since 2021/03/12 01:39
  */
 @Data
 @ToString(callSuper = true)

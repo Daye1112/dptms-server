@@ -20,7 +20,7 @@ import java.util.Set;
  * 系统token存储类
  *
  * @author luyuhao
- * @date 2021/01/16 19:06
+ * @since 2021/01/16 19:06
  */
 public class DptmsTokenStore {
 
@@ -40,7 +40,7 @@ public class DptmsTokenStore {
      * @param accessToken  accessToken
      * @param refreshToken refreshToken
      * @author luyuhao
-     * @date 20/11/25 00:25
+     * @since 20/11/25 00:25
      */
     public void saveToken(ActiveUser activeUser, String accessToken, String refreshToken) {
         // 设置accessToken
@@ -57,7 +57,7 @@ public class DptmsTokenStore {
      * @param accessToken  accessToken
      * @param refreshToken refreshToken
      * @author luyuhao
-     * @date 20/11/25 00:25
+     * @since 20/11/25 00:25
      */
     public void saveAccessToken(String accessToken, String refreshToken) {
         // 设置accessToken
@@ -70,7 +70,7 @@ public class DptmsTokenStore {
      * @param refreshToken refreshToken
      * @param activeUser   用户信息
      * @author luyuhao
-     * @date 20/11/25 00:25
+     * @since 20/11/25 00:25
      */
     public void saveRefreshToken(String refreshToken, ActiveUser activeUser) {
         // 设置refreshToken
@@ -83,7 +83,7 @@ public class DptmsTokenStore {
      * @param activeUser   用户信息
      * @param refreshToken refreshToken
      * @author luyuhao
-     * @date 2021/01/30 23:36
+     * @since 2021/01/30 23:36
      */
     private void saveUserRefreshToken(ActiveUser activeUser, String refreshToken) {
         // 设置当前用户的最新refreshToken
@@ -95,7 +95,7 @@ public class DptmsTokenStore {
      *
      * @param activeUser 用户信息
      * @author luyuhao
-     * @date 2021/01/30 23:36
+     * @since 2021/01/30 23:36
      */
     public String getUserRefreshToken(ActiveUser activeUser) {
         // 设置当前用户的最新refreshToken
@@ -108,7 +108,7 @@ public class DptmsTokenStore {
      * @param refreshToken refreshToken
      * @return {@link ActiveUser 用户信息}
      * @author luyuhao
-     * @date 20/11/28 01:22
+     * @since 20/11/28 01:22
      */
     public ActiveUser getActiveUser(String refreshToken) {
         return Optional.ofNullable(redisUtil.get(SecurityConstant.REDIS_REFRESH_TOKEN_PREFIX + refreshToken))
@@ -123,7 +123,7 @@ public class DptmsTokenStore {
      * @param request 请求域
      * @return {@link ActiveUser 用户信息}
      * @author luyuhao
-     * @date 20/11/28 01:22
+     * @since 20/11/28 01:22
      */
     public ActiveUser getActiveUser(HttpServletRequest request) {
         String refreshToken = getRefreshToken(request);
@@ -139,7 +139,7 @@ public class DptmsTokenStore {
      * @param accessToken accessToken
      * @param response    响应域
      * @author luyuhao
-     * @date 20/11/25 00:25
+     * @since 20/11/25 00:25
      */
     public void saveAccessTokenCookie(String accessToken, HttpServletResponse response) {
         // 设置accessToken cookie
@@ -152,7 +152,7 @@ public class DptmsTokenStore {
      * @param refreshToken refreshToken
      * @param response     响应域
      * @author luyuhao
-     * @date 20/11/25 00:25
+     * @since 20/11/25 00:25
      */
     public void saveRefreshTokenCookie(String refreshToken, HttpServletResponse response) {
         // 设置refreshToken
@@ -165,7 +165,7 @@ public class DptmsTokenStore {
      * @param refreshToken 刷新token
      * @param response     响应域
      * @author luyuhao
-     * @date 2021/01/16 19:15
+     * @since 2021/01/16 19:15
      */
     public void refreshAccessTokenAndCookie(String refreshToken, HttpServletResponse response) {
         String newAccessToken = DptmsTokenGenerator.generateDefaultToken();
@@ -180,7 +180,7 @@ public class DptmsTokenStore {
      *
      * @return {@link String accessToken}
      * @author luyuhao
-     * @date 20/12/10 02:34
+     * @since 20/12/10 02:34
      */
     public String getAccessToken() {
         HttpServletRequest request = RequestUtil.getHttpServletRequest();
@@ -193,7 +193,7 @@ public class DptmsTokenStore {
      * @param request 请求域
      * @return {@link String accessToken}
      * @author luyuhao
-     * @date 20/12/10 02:34
+     * @since 20/12/10 02:34
      */
     public String getAccessToken(HttpServletRequest request) {
         String accessToken = CookieUtil.getCookie(SecurityConstant.ACCESS_TOKEN_KEY, request);
@@ -208,7 +208,7 @@ public class DptmsTokenStore {
      *
      * @return {@link String refresh Token}
      * @author luyuhao
-     * @date 20/12/10 02:34
+     * @since 20/12/10 02:34
      */
     public String getRefreshToken() {
         HttpServletRequest request = RequestUtil.getHttpServletRequest();
@@ -221,7 +221,7 @@ public class DptmsTokenStore {
      * @param request 请求域
      * @return {@link String refresh Token}
      * @author luyuhao
-     * @date 20/12/10 02:34
+     * @since 20/12/10 02:34
      */
     public String getRefreshToken(HttpServletRequest request) {
         String refreshToken = CookieUtil.getCookie(SecurityConstant.REFRESH_TOKEN_KEY, request);
@@ -237,7 +237,7 @@ public class DptmsTokenStore {
      * @param accessToken 访问token
      * @return 刷新token
      * @author luyuhao
-     * @date 20/11/27 00:45
+     * @since 20/11/27 00:45
      */
     public String getRefreshToken(String accessToken) {
         return Optional.ofNullable(redisUtil.get(SecurityConstant.REDIS_ACCESS_TOKEN_PREFIX + accessToken))
@@ -250,7 +250,7 @@ public class DptmsTokenStore {
      * @param activeUser 用户信息
      * @param response   响应域
      * @author luyuhao
-     * @date 2021/01/17 01:11
+     * @since 2021/01/17 01:11
      */
     public void generateToken(ActiveUser activeUser, HttpServletResponse response) {
         // 生成token
@@ -269,7 +269,7 @@ public class DptmsTokenStore {
      * @param refreshToken refresh token
      * @param response     响应域
      * @author luyuhao
-     * @date 2021/01/17 01:12
+     * @since 2021/01/17 01:12
      */
     private void saveTokenCookie(String accessToken, String refreshToken, HttpServletResponse response) {
         saveAccessTokenCookie(accessToken, response);
@@ -282,7 +282,7 @@ public class DptmsTokenStore {
      * @param request  请求域
      * @param response 响应域
      * @author luyuhao
-     * @date 2021/01/28 01:03
+     * @since 2021/01/28 01:03
      */
     public void removeTokenAndCookie(HttpServletRequest request, HttpServletResponse response) {
         String accessToken = getAccessToken(request);
@@ -296,7 +296,7 @@ public class DptmsTokenStore {
      *
      * @param response 响应域
      * @author luyuhao
-     * @date 2021/01/28 01:07
+     * @since 2021/01/28 01:07
      */
     private void removeTokenCookie(HttpServletResponse response) {
         removeAccessTokenCookie(response);
@@ -308,7 +308,7 @@ public class DptmsTokenStore {
      *
      * @param response 响应域
      * @author luyuhao
-     * @date 2021/01/28 01:08
+     * @since 2021/01/28 01:08
      */
     private void removeRefreshTokenCookie(HttpServletResponse response) {
         CookieUtil.deleteCookie(SecurityConstant.REFRESH_TOKEN_KEY, response);
@@ -319,7 +319,7 @@ public class DptmsTokenStore {
      *
      * @param response 响应域
      * @author luyuhao
-     * @date 2021/01/28 01:08
+     * @since 2021/01/28 01:08
      */
     private void removeAccessTokenCookie(HttpServletResponse response) {
         CookieUtil.deleteCookie(SecurityConstant.ACCESS_TOKEN_KEY, response);
@@ -331,7 +331,7 @@ public class DptmsTokenStore {
      * @param accessToken  accessToken
      * @param refreshToken refreshToken
      * @author luyuhao
-     * @date 2021/01/28 01:05
+     * @since 2021/01/28 01:05
      */
     private void removeToken(String accessToken, String refreshToken) {
         removeAccessToken(accessToken);
@@ -343,7 +343,7 @@ public class DptmsTokenStore {
      *
      * @param refreshToken refreshToken
      * @author luyuhao
-     * @date 2021/01/28 01:06
+     * @since 2021/01/28 01:06
      */
     public void removeRefreshToken(String refreshToken) {
         if (StringUtil.isNotBlank(refreshToken)) {
@@ -356,7 +356,7 @@ public class DptmsTokenStore {
      *
      * @param accessToken accessToken
      * @author luyuhao
-     * @date 2021/01/28 01:06
+     * @since 2021/01/28 01:06
      */
     private void removeAccessToken(String accessToken) {
         if (StringUtil.isNotBlank(accessToken)) {
@@ -369,7 +369,7 @@ public class DptmsTokenStore {
      *
      * @param activeUser 用户信息
      * @author luyuhao
-     * @date 2021/01/31 20:00
+     * @since 2021/01/31 20:00
      */
     public void updateActiveUser(ActiveUser activeUser) {
         String refreshToken = getRefreshToken();
@@ -385,7 +385,7 @@ public class DptmsTokenStore {
      *
      * @return {@link String}
      * @author luyuhao
-     * @date 2021/01/31 22:47
+     * @since 2021/01/31 22:47
      */
     public List<String> listAllUserRefreshKeys() {
         Set<String> keys = redisUtil.getKeys(SecurityConstant.REDIS_USER_REFRESH_TOKEN_PREFIX);
@@ -397,7 +397,7 @@ public class DptmsTokenStore {
      *
      * @param activeUser 用户信息
      * @author luyuhao
-     * @date 2021/01/31 23:22
+     * @since 2021/01/31 23:22
      */
     public void removeUserRefreshToken(ActiveUser activeUser) {
         redisUtil.delete(SecurityConstant.REDIS_USER_REFRESH_TOKEN_PREFIX + activeUser.getId());

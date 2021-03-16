@@ -17,7 +17,7 @@ import java.util.Set;
  * redis service impl
  *
  * @author luyuhao
- * @date 2021/01/31 00:05
+ * @since 2021/01/31 00:05
  */
 @Service
 public class RedisServiceImpl extends BaseService implements RedisService {
@@ -32,7 +32,7 @@ public class RedisServiceImpl extends BaseService implements RedisService {
      * @param pageParam 分页参数
      * @return {@link SysRedisDto}
      * @author luyuhao
-     * @date 2021/01/31 00:07
+     * @since 2021/01/31 00:07
      */
     @Override
     public PageBean<SysRedisDto> listPage(String keyPrefix, PageParam pageParam) {
@@ -64,7 +64,7 @@ public class RedisServiceImpl extends BaseService implements RedisService {
      *
      * @param sysRedisDto 缓存信息
      * @author luyuhao
-     * @date 2021/01/31 01:01
+     * @since 2021/01/31 01:01
      */
     @Override
     public void insert(SysRedisDto sysRedisDto) {
@@ -76,7 +76,7 @@ public class RedisServiceImpl extends BaseService implements RedisService {
      *
      * @param sysRedisDto 缓存信息
      * @author luyuhao
-     * @date 2021/01/31 00:04
+     * @since 2021/01/31 00:04
      */
     @Override
     public void deleteByKey(SysRedisDto sysRedisDto) {

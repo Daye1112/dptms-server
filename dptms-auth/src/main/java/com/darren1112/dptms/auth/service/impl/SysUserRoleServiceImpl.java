@@ -18,7 +18,7 @@ import java.util.List;
  * 用户角色ServiceImpl
  *
  * @author luyuhao
- * @date 2020/12/23 01:51
+ * @since 2020/12/23 01:51
  */
 @Service
 @CacheConfig(cacheNames = "sysUserRole", keyGenerator = "keyGenerator")
@@ -35,7 +35,7 @@ public class SysUserRoleServiceImpl implements SysUserRoleService {
      * @param roleIds 角色ids，逗号分隔
      * @param updater 更新者
      * @author luyuhao
-     * @date 20/12/23 01:48
+     * @since 20/12/23 01:48
      */
     @Override
     @CacheEvict(allEntries = true)
@@ -67,7 +67,7 @@ public class SysUserRoleServiceImpl implements SysUserRoleService {
      * @param userId 用户id
      * @return {@link SysRoleDto}
      * @author luyuhao
-     * @date 20/12/13 21:43
+     * @since 20/12/13 21:43
      */
     @Override
     public List<SysRoleDto> listUserAssigned(Long userId) {

@@ -85,7 +85,7 @@ public class SysUserServiceImpl extends BaseService implements SysUserService {
      * @param entity 用户参数
      * @return {@link Long}
      * @author luyuhao
-     * @date 20/12/10 01:08
+     * @since 20/12/10 01:08
      */
     @Override
     @CacheEvict(allEntries = true)
@@ -102,7 +102,7 @@ public class SysUserServiceImpl extends BaseService implements SysUserService {
      * @param entity   验证对象
      * @param isUpdate 是否更新
      * @author luyuhao
-     * @date 2020/12/12 11:06
+     * @since 2020/12/12 11:06
      */
     private void validRepeat(SysUserEntity entity, boolean isUpdate) {
         SysUserDto param = new SysUserDto();
@@ -122,7 +122,7 @@ public class SysUserServiceImpl extends BaseService implements SysUserService {
      * @param pageParam 分页参数
      * @return {@link SysUserDto}
      * @author luyuhao
-     * @date 20/12/10 01:08
+     * @since 20/12/10 01:08
      */
     @Override
     @Cacheable
@@ -138,7 +138,7 @@ public class SysUserServiceImpl extends BaseService implements SysUserService {
      * @param entity 用户参数
      * @return {@link Long}
      * @author luyuhao
-     * @date 20/12/10 01:08
+     * @since 20/12/10 01:08
      */
     @Override
     @CacheEvict(allEntries = true)
@@ -154,7 +154,7 @@ public class SysUserServiceImpl extends BaseService implements SysUserService {
      * @param id      记录id
      * @param updater 更新者
      * @author luyuhao
-     * @date 20/12/10 01:08
+     * @since 20/12/10 01:08
      */
     @Override
     @CacheEvict(allEntries = true)
@@ -168,7 +168,7 @@ public class SysUserServiceImpl extends BaseService implements SysUserService {
      *
      * @param entity 更新状态
      * @author luyuhao
-     * @date 2021/01/14 00:19
+     * @since 2021/01/14 00:19
      */
     @Override
     @CacheEvict(allEntries = true)
@@ -183,7 +183,7 @@ public class SysUserServiceImpl extends BaseService implements SysUserService {
      * @param id 用户id
      * @return {@link SysUserDto}
      * @author luyuhao
-     * @date 2021/01/31 19:39
+     * @since 2021/01/31 19:39
      */
     @Override
     public SysUserDto getUserInfoAndPermissionByUserId(Long id) {

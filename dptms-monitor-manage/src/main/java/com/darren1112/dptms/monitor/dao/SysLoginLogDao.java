@@ -12,7 +12,7 @@ import java.util.List;
  * 登录日志Dao
  *
  * @author luyuhao
- * @date 2021/02/06 20:40
+ * @since 2021/02/06 20:40
  */
 @Mapper
 @Repository
@@ -23,7 +23,7 @@ public interface SysLoginLogDao {
      *
      * @param dto 日志信息
      * @author luyuhao
-     * @date 2021/02/06 21:04
+     * @since 2021/02/06 21:04
      */
     void insert(SysLoginLogDto dto);
 
@@ -34,7 +34,7 @@ public interface SysLoginLogDao {
      * @param dto       筛选条件
      * @return {@link SysLoginLogDto}
      * @author luyuhao
-     * @date 2021/02/10 00:15
+     * @since 2021/02/10 00:15
      */
     List<SysLoginLogDto> listPage(@Param("pageParam") PageParam pageParam, @Param("dto") SysLoginLogDto dto);
 
@@ -44,7 +44,7 @@ public interface SysLoginLogDao {
      * @param dto 筛选条件
      * @return {@link Long}
      * @author luyuhao
-     * @date 2021/02/10 00:19
+     * @since 2021/02/10 00:19
      */
     Long listPageCount(@Param("dto") SysLoginLogDto dto);
 }

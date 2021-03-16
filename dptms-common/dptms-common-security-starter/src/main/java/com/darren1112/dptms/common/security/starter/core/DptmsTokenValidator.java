@@ -13,7 +13,7 @@ import java.util.Objects;
  * 系统token校验器
  *
  * @author luyuhao
- * @date 2021/01/16 19:01
+ * @since 2021/01/16 19:01
  */
 public class DptmsTokenValidator {
 
@@ -30,7 +30,7 @@ public class DptmsTokenValidator {
      * @param response 响应域
      * @return true/false
      * @author luyuhao
-     * @date 2020/11/28 10:47
+     * @since 2020/11/28 10:47
      */
     public boolean tokenValidHandle(HttpServletRequest request, HttpServletResponse response) {
         String accessToken = dptmsTokenStore.getAccessToken(request);
@@ -72,7 +72,7 @@ public class DptmsTokenValidator {
      * @param response 响应域
      * @return true/false
      * @author luyuhao
-     * @date 2021/01/31 19:08
+     * @since 2021/01/31 19:08
      */
     public boolean repeatLoginValidHandle(HttpServletRequest request, HttpServletResponse response) {
         String refreshToken = dptmsTokenStore.getRefreshToken(request);

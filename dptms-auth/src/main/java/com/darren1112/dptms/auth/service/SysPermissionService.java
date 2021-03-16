@@ -11,7 +11,7 @@ import java.util.List;
  * 权限Service
  *
  * @author luyuhao
- * @date 2020/12/09 23:43
+ * @since 2020/12/09 23:43
  */
 public interface SysPermissionService {
 
@@ -21,7 +21,7 @@ public interface SysPermissionService {
      * @param entity 权限参数
      * @return {@link Long 权限id}
      * @author luyuhao
-     * @date 20/12/10 01:08
+     * @since 20/12/10 01:08
      */
     Long insert(SysPermissionEntity entity);
 
@@ -32,7 +32,7 @@ public interface SysPermissionService {
      * @param pageParam 分页参数
      * @return {@link SysPermissionDto}
      * @author luyuhao
-     * @date 20/12/10 01:08
+     * @since 20/12/10 01:08
      */
     PageBean<SysPermissionDto> listPage(PageParam pageParam, SysPermissionDto dto);
 
@@ -42,7 +42,7 @@ public interface SysPermissionService {
      * @param entity 权限参数
      * @return {@link Long}
      * @author luyuhao
-     * @date 20/12/10 01:08
+     * @since 20/12/10 01:08
      */
     Long update(SysPermissionEntity entity);
 
@@ -52,7 +52,7 @@ public interface SysPermissionService {
      * @param id      id
      * @param updater 更新者
      * @author luyuhao
-     * @date 20/12/12 20:44
+     * @since 20/12/12 20:44
      */
     void deleteById(Long id, Long updater);
 
@@ -61,7 +61,7 @@ public interface SysPermissionService {
      *
      * @return {@link SysPermissionDto}
      * @author luyuhao
-     * @date 2020/12/28 01:10
+     * @since 2020/12/28 01:10
      */
     List<SysPermissionDto> listGroup();
 }

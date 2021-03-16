@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
  * 上下文过滤器
  *
  * @author luyuhao
- * @date 2020/08/02 14:44
+ * @since 2020/08/02 14:44
  */
 @Slf4j
 @Component
@@ -33,7 +33,7 @@ public class ZuulRequestFilter extends ZuulFilter {
      *
      * @return 过滤器类型
      * @author luyuhao
-     * @date 20/08/02 14:45
+     * @since 20/08/02 14:45
      */
     @Override
     public String filterType() {
@@ -45,7 +45,7 @@ public class ZuulRequestFilter extends ZuulFilter {
      *
      * @return 顺序号
      * @author luyuhao
-     * @date 20/08/02 14:45
+     * @since 20/08/02 14:45
      */
     @Override
     public int filterOrder() {
@@ -57,7 +57,7 @@ public class ZuulRequestFilter extends ZuulFilter {
      *
      * @return true/false
      * @author luyuhao
-     * @date 20/08/02 14:45
+     * @since 20/08/02 14:45
      */
     @Override
     public boolean shouldFilter() {
@@ -69,7 +69,7 @@ public class ZuulRequestFilter extends ZuulFilter {
      *
      * @return Object
      * @author luyuhao
-     * @date 20/08/02 14:46
+     * @since 20/08/02 14:46
      */
     @Override
     public Object run() throws ZuulException {

@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
  * 安全校验enum
  *
  * @author luyuhao
- * @date 2021/01/17 00:50
+ * @since 2021/01/17 00:50
  */
 public enum SecurityEnum implements BaseErrorEnum {
 

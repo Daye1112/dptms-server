@@ -19,7 +19,7 @@ public interface SysMenuService {
      * @param userId 用户id
      * @return {@link SysMenuDto}
      * @author luyuhao
-     * @date 2021/01/17 19:34
+     * @since 2021/01/17 19:34
      */
     List<SysMenuDto> listMenuByUserId(Long userId);
 
@@ -29,7 +29,7 @@ public interface SysMenuService {
      * @param entity 菜单参数
      * @return {@link Long 菜单id)
      * @author baojiazhong
-     * @date 2020/12/16 11:00
+     * @since 2020/12/16 11:00
      */
     Long insert(SysMenuEntity entity);
 
@@ -39,7 +39,7 @@ public interface SysMenuService {
      * @param id      id
      * @param updater 更新者
      * @author baojiazhong
-     * @date 2020/12/16 14:38
+     * @since 2020/12/16 14:38
      */
     void deleteById(Long id, Long updater);
 
@@ -49,7 +49,7 @@ public interface SysMenuService {
      * @param entity 菜单参数
      * @return {@link Long)
      * @author baojiazhong
-     * @date 2020/12/16 15:29
+     * @since 2020/12/16 15:29
      */
     Long update(SysMenuEntity entity);
 
@@ -58,7 +58,7 @@ public interface SysMenuService {
      *
      * @return {@link SysMenuDto}
      * @author luyuhao
-     * @date 2021/01/03 23:29
+     * @since 2021/01/03 23:29
      */
     SysMenuDto listTree();
 }

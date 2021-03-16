@@ -7,7 +7,7 @@ import lombok.Data;
  * redis dto
  *
  * @author luyuhao
- * @date 2021/01/31 00:02
+ * @since 2021/01/31 00:02
  */
 @Data
 public class SysRedisDto {

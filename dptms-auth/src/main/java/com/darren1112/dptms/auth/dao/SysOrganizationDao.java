@@ -13,7 +13,7 @@ import java.util.List;
  * 组织Dao
  *
  * @author luyuhao
- * @date 20/08/16 01:35
+ * @since 20/08/16 01:35
  */
 @Mapper
 @Repository
@@ -25,7 +25,7 @@ public interface SysOrganizationDao {
      * @param param 查询参数
      * @return 记录数
      * @author luyuhao
-     * @date 20/12/12 22:08
+     * @since 20/12/12 22:08
      */
     Long countByRepeat(SysOrganizationDto param);
 
@@ -35,7 +35,7 @@ public interface SysOrganizationDao {
      * @param entity 组织参数
      * @return {@link Long}
      * @author luyuhao
-     * @date 20/12/10 01:08
+     * @since 20/12/10 01:08
      */
     Long insert(SysOrganizationEntity entity);
 
@@ -45,7 +45,7 @@ public interface SysOrganizationDao {
      * @param entity 组织参数
      * @return {@link Long}
      * @author luyuhao
-     * @date 20/12/10 01:08
+     * @since 20/12/10 01:08
      */
     Long update(SysOrganizationEntity entity);
 
@@ -55,7 +55,7 @@ public interface SysOrganizationDao {
      * @param id      记录id
      * @param updater 更新者
      * @author luyuhao
-     * @date 20/12/10 01:08
+     * @since 20/12/10 01:08
      */
     void deleteById(@Param("id") Long id, @Param("updater") Long updater);
 
@@ -66,7 +66,7 @@ public interface SysOrganizationDao {
      * @param param     筛选条件
      * @return {@link SysOrganizationDto}
      * @author luyuhao
-     * @date 20/12/12 22:47
+     * @since 20/12/12 22:47
      */
     List<SysOrganizationDto> listPage(@Param("pageParam") PageParam pageParam, @Param("param") SysOrganizationDto param);
 
@@ -76,7 +76,7 @@ public interface SysOrganizationDao {
      * @param param 筛选条件
      * @return {@link Long}
      * @author luyuhao
-     * @date 20/12/12 22:47
+     * @since 20/12/12 22:47
      */
     Long listPageCount(SysOrganizationDto param);
 }

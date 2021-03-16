@@ -18,7 +18,7 @@ public interface SysMenuPermissionService {
      * @param menuId 菜单id
      * @return {@link SysPermissionDto)
      * @author baojiazhong
-     * @date 2020/12/22 22:41
+     * @since 2020/12/22 22:41
      */
     List<SysPermissionDto> listMenuAssigned(Long menuId);
 
@@ -29,7 +29,7 @@ public interface SysMenuPermissionService {
      * @param perIds  权限ids，逗号分隔
      * @param updater 更新者
      * @author baojiazhong
-     * @date 2020/12/22 22:42
+     * @since 2020/12/22 22:42
      */
     void assignedPer(Long menuId, String perIds, Long updater);
 
@@ -39,7 +39,7 @@ public interface SysMenuPermissionService {
      * @param menuId 菜单id
      * @return {@link SysPermissionDto}
      * @author luyuhao
-     * @date 2021/01/04 23:53
+     * @since 2021/01/04 23:53
      */
     List<SysPermissionDto> listByMenuId(Long menuId);
 }

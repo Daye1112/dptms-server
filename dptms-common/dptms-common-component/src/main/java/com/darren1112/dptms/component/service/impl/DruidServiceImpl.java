@@ -12,7 +12,7 @@ import java.util.Map;
  * druid service impl
  *
  * @author luyuhao
- * @date 2021/02/15 23:31
+ * @since 2021/02/15 23:31
  */
 public class DruidServiceImpl implements DruidService {
 
@@ -23,7 +23,7 @@ public class DruidServiceImpl implements DruidService {
      *
      * @return {@link DruidStatDto}
      * @author luyuhao
-     * @date 2021/02/15 23:32
+     * @since 2021/02/15 23:32
      */
     @Override
     public List<DruidStatDto> apiStatList() {

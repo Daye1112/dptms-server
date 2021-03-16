@@ -10,7 +10,7 @@ import java.nio.charset.Charset;
  * 【暂不使用】重写序列化器
  *
  * @author luyuhao
- * @date 19/12/06 20:22
+ * @since 19/12/06 20:22
  */
 public class StringRedisSerializer implements RedisSerializer<Object> {
 

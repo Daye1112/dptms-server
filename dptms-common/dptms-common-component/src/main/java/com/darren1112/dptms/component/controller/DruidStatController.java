@@ -36,7 +36,7 @@ public class DruidStatController {
      *
      * @return {@link DruidStatDto}
      * @author luyuhao
-     * @date 2021/02/17 20:45
+     * @since 2021/02/17 20:45
      */
     @GetMapping("/apiStat")
     public ResponseEntity<JsonResult<List<DruidStatDto>>> getApiStat() {

@@ -22,7 +22,7 @@ import java.util.List;
  * 权限ServiceImpl
  *
  * @author luyuhao
- * @date 2020/12/09 23:44
+ * @since 2020/12/09 23:44
  */
 @Service
 @CacheConfig(cacheNames = "sysPermission", keyGenerator = "keyGenerator")
@@ -38,7 +38,7 @@ public class SysPermissionServiceImpl extends BaseService implements SysPermissi
      * @param entity 权限参数
      * @return {@link Long 权限id}
      * @author luyuhao
-     * @date 20/12/10 01:08
+     * @since 20/12/10 01:08
      */
     @Override
     @CacheEvict(allEntries = true)
@@ -56,7 +56,7 @@ public class SysPermissionServiceImpl extends BaseService implements SysPermissi
      * @param pageParam 分页参数
      * @return {@link SysPermissionDto}
      * @author luyuhao
-     * @date 20/12/10 01:08
+     * @since 20/12/10 01:08
      */
     @Override
     @Cacheable
@@ -72,7 +72,7 @@ public class SysPermissionServiceImpl extends BaseService implements SysPermissi
      * @param entity 权限参数
      * @return {@link Long}
      * @author luyuhao
-     * @date 20/12/10 01:08
+     * @since 20/12/10 01:08
      */
     @Override
     @CacheEvict(allEntries = true)
@@ -88,7 +88,7 @@ public class SysPermissionServiceImpl extends BaseService implements SysPermissi
      * @param entity   验证对象
      * @param isUpdate 是否更新
      * @author luyuhao
-     * @date 2020/12/12 11:06
+     * @since 2020/12/12 11:06
      */
     private void validRepeat(SysPermissionEntity entity, boolean isUpdate) {
         SysPermissionDto param = new SysPermissionDto();
@@ -108,7 +108,7 @@ public class SysPermissionServiceImpl extends BaseService implements SysPermissi
      * @param id      id
      * @param updater 更新者
      * @author luyuhao
-     * @date 20/12/12 20:44
+     * @since 20/12/12 20:44
      */
     @Override
     @CacheEvict(allEntries = true)
@@ -122,7 +122,7 @@ public class SysPermissionServiceImpl extends BaseService implements SysPermissi
      *
      * @return {@link SysPermissionDto}
      * @author luyuhao
-     * @date 2020/12/28 01:10
+     * @since 2020/12/28 01:10
      */
     @Override
     @Cacheable

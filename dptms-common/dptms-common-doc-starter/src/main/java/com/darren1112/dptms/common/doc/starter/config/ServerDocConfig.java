@@ -23,7 +23,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * 文档自动配置类
  *
  * @author luyuhao
- * @date 2020/08/06 02:36
+ * @since 2020/08/06 02:36
  */
 @Configuration
 @EnableSwagger2

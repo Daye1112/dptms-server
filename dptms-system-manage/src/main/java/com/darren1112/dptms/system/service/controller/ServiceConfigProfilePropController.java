@@ -27,7 +27,7 @@ import java.util.List;
  * 配置环境属性表Controller
  *
  * @author luyuhao
- * @date 2021/03/12 01:51
+ * @since 2021/03/12 01:51
  */
 @Slf4j
 @Api(tags = "配置环境属性管理", description = "配置环境属性管理接口")
@@ -44,7 +44,7 @@ public class ServiceConfigProfilePropController {
      * @param dto 筛选参数
      * @return {@link ServiceConfigProfileDto}
      * @author luyuhao
-     * @date 2021/03/13 01:33
+     * @since 2021/03/13 01:33
      */
     @Log(value = "查询配置环境属性list", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     @ApiOperation("查询配置环境属性list")
@@ -63,7 +63,7 @@ public class ServiceConfigProfilePropController {
      * @param dto 配置环境属性信息
      * @return {@link Long}
      * @author luyuhao
-     * @date 2021/03/14 02:03
+     * @since 2021/03/14 02:03
      */
     @Log(value = "插入配置环境属性", businessType = BusinessType.INSERT)
     @ApiOperation("插入配置环境属性")
@@ -88,7 +88,7 @@ public class ServiceConfigProfilePropController {
      * @param dto 配置环境信息
      * @return {@link JsonResult}
      * @author luyuhao
-     * @date 2021/03/14 02:03
+     * @since 2021/03/14 02:03
      */
     @Log(value = "更新配置环境属性", businessType = BusinessType.UPDATE)
     @ApiOperation("更新配置环境属性")
@@ -114,7 +114,7 @@ public class ServiceConfigProfilePropController {
      * @param id 配置环境id
      * @return {@link JsonResult}
      * @author luyuhao
-     * @date 2021/03/14 02:03
+     * @since 2021/03/14 02:03
      */
     @Log(value = "删除配置环境属性", businessType = BusinessType.DELETE)
     @ApiOperation("删除配置环境属性")

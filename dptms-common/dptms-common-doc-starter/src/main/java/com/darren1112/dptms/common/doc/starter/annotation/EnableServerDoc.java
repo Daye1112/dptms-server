@@ -9,7 +9,7 @@ import java.lang.annotation.*;
  * 开启服务接口文档注解
  *
  * @author luyuhao
- * @date 2021/02/13 22:20
+ * @since 2021/02/13 22:20
  */
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)

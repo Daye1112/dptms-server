@@ -27,7 +27,7 @@ import java.util.Optional;
  * 操作日志aop
  *
  * @author luyuhao
- * @date 2021/02/06 22:31
+ * @since 2021/02/06 22:31
  */
 @Aspect
 @Slf4j
@@ -51,7 +51,7 @@ public class LogAspect extends BaseAop {
      * 配置切入点
      *
      * @author luyuhao
-     * @date 2021/02/06 22:32
+     * @since 2021/02/06 22:32
      */
     @Pointcut("@annotation(com.darren1112.dptms.common.log.starter.annotation.Log)")
     public void pointcut() {
@@ -64,7 +64,7 @@ public class LogAspect extends BaseAop {
      * @param joinPoint 切入点
      * @return {@link Object}
      * @author luyuhao
-     * @date 2021/02/06 22:33
+     * @since 2021/02/06 22:33
      */
     @Around("pointcut()")
     public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
@@ -89,7 +89,7 @@ public class LogAspect extends BaseAop {
      * @param joinPoint 切点
      * @param e         异常
      * @author luyuhao
-     * @date 2021/02/06 22:41
+     * @since 2021/02/06 22:41
      */
     @AfterThrowing(pointcut = "pointcut()", throwing = "e")
     public void logAfterThrowing(JoinPoint joinPoint, Throwable e) {
@@ -105,7 +105,7 @@ public class LogAspect extends BaseAop {
      * @param logAnnotation 日志注解
      * @return {@link SysOperateLogDto}
      * @author luyuhao
-     * @date 2021/02/07 00:41
+     * @since 2021/02/07 00:41
      */
     private SysOperateLogDto buildDto(JoinPoint joinPoint, Log logAnnotation, Throwable e) {
         // 获取请求域、用户信息等

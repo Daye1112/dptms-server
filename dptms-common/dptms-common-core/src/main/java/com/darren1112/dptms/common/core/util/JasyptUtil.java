@@ -7,7 +7,7 @@ import org.jasypt.encryption.pbe.config.SimpleStringPBEConfig;
  * Jasypt加密工具类
  *
  * @author luyuhao
- * @date 2020/08/11 00:33
+ * @since 2020/08/11 00:33
  */
 public class JasyptUtil {
 
@@ -22,7 +22,7 @@ public class JasyptUtil {
      * @param secret 密钥
      * @return 加密串
      * @author luyuhao
-     * @date 20/08/11 00:33
+     * @since 20/08/11 00:33
      */
     public static String defaultEncrypt(String str, String secret) {
         PooledPBEStringEncryptor encryptor = new PooledPBEStringEncryptor();
@@ -37,7 +37,7 @@ public class JasyptUtil {
      * @param secret 密钥
      * @return 解密串
      * @author luyuhao
-     * @date 20/08/11 00:33
+     * @since 20/08/11 00:33
      */
     public static String defaultDecrypt(String str, String secret) {
         PooledPBEStringEncryptor encryptor = new PooledPBEStringEncryptor();
@@ -51,7 +51,7 @@ public class JasyptUtil {
      * @param secret 密钥
      * @return 默认config
      * @author luyuhao
-     * @date 20/08/11 01:14
+     * @since 20/08/11 01:14
      */
     private static SimpleStringPBEConfig createDefaultConfig(String secret) {
         SimpleStringPBEConfig config = new SimpleStringPBEConfig();

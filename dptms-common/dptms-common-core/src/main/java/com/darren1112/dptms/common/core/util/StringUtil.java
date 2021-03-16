@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
  * 字符串操作
  *
  * @author luyuhao
- * @date 19/12/15 14:40
+ * @since 19/12/15 14:40
  */
 public class StringUtil extends StringUtils {
 
@@ -85,7 +85,7 @@ public class StringUtil extends StringUtils {
      * @param subStr 子串
      * @return true/false
      * @author luyuhao
-     * @date 20/08/02 01:43
+     * @since 20/08/02 01:43
      */
     public static boolean containsIgnoreCase(String str, String subStr) {
         if (str == null || subStr == null) {
@@ -108,7 +108,7 @@ public class StringUtil extends StringUtils {
      * @param str2 字符串2
      * @return true/false
      * @author luyuhao
-     * @date 20/08/02 19:52
+     * @since 20/08/02 19:52
      */
     public static boolean equal(String str1, String str2) {
         return Objects.equals(str1, str2);
@@ -121,7 +121,7 @@ public class StringUtil extends StringUtils {
      * @param str2 字符串2
      * @return true/false
      * @author luyuhao
-     * @date 2020/8/7 14:43
+     * @since 2020/8/7 14:43
      */
     public static boolean equalsIgnoreCase(String str1, String str2) {
         return str1 == null ? str2 == null : str1.equalsIgnoreCase(str2);

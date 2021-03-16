@@ -10,7 +10,7 @@ import java.util.List;
  * 菜单工具类
  *
  * @author luyuhao
- * @date 2021/01/13 00:56
+ * @since 2021/01/13 00:56
  */
 public class MenuUtil {
 
@@ -20,7 +20,7 @@ public class MenuUtil {
      * @param sysMenuList 菜单list
      * @return {@link SysMenuDto}
      * @author luyuhao
-     * @date 2021/01/13 00:57
+     * @since 2021/01/13 00:57
      */
     public static SysMenuDto buildTree(List<SysMenuDto> sysMenuList) {
         if (CollectionUtil.isEmpty(sysMenuList)) {

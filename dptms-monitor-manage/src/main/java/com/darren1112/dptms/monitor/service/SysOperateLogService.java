@@ -8,7 +8,7 @@ import com.darren1112.dptms.common.spi.sys.dto.SysOperateLogDto;
  * 操作日志Service
  *
  * @author luyuhao
- * @date 2021/02/06 20:43
+ * @since 2021/02/06 20:43
  */
 public interface SysOperateLogService {
 
@@ -17,7 +17,7 @@ public interface SysOperateLogService {
      *
      * @param dto 日志信息
      * @author luyuhao
-     * @date 2021/02/06 21:08
+     * @since 2021/02/06 21:08
      */
     void insert(SysOperateLogDto dto);
 
@@ -28,7 +28,7 @@ public interface SysOperateLogService {
      * @param pageParam 分页参数
      * @return {@link SysOperateLogDto}
      * @author luyuhao
-     * @date 20/12/10 01:08
+     * @since 20/12/10 01:08
      */
     PageBean<SysOperateLogDto> listPage(PageParam pageParam, SysOperateLogDto dto);
 }
