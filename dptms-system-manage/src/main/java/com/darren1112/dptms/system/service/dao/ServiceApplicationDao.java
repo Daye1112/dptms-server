@@ -12,7 +12,7 @@ import java.util.List;
  * 应用表Dao
  *
  * @author luyuhao
- * @date 2020/12/12 17:23
+ * @since 2020/12/12 17:23
  */
 @Mapper
 @Repository
@@ -25,7 +25,7 @@ public interface ServiceApplicationDao {
      * @param pageParam 分页参数
      * @return {@link ServiceApplicationDto}
      * @author luyuhao
-     * @date 2021/03/12 17:33
+     * @since 2021/03/12 17:33
      */
     List<ServiceApplicationDto> listPage(@Param("pageParam") PageParam pageParam, @Param("dto") ServiceApplicationDto dto);
 
@@ -35,7 +35,7 @@ public interface ServiceApplicationDao {
      * @param dto 筛选参数
      * @return {@link ServiceApplicationDto}
      * @author luyuhao
-     * @date 2021/03/12 17:33
+     * @since 2021/03/12 17:33
      */
     Long listPageCount(@Param("dto") ServiceApplicationDto dto);
 
@@ -45,7 +45,7 @@ public interface ServiceApplicationDao {
      * @param param 查询条件
      * @return {@link Long 重复数量}
      * @author luyuhao
-     * @date 2021/03/12 23:32
+     * @since 2021/03/12 23:32
      */
     Long countByRepeat(ServiceApplicationDto param);
 
@@ -54,7 +54,7 @@ public interface ServiceApplicationDao {
      *
      * @param dto 服务信息
      * @author luyuhao
-     * @date 2021/03/12 23:35
+     * @since 2021/03/12 23:35
      */
     void insert(ServiceApplicationDto dto);
 
@@ -63,7 +63,7 @@ public interface ServiceApplicationDao {
      *
      * @param dto 服务信息
      * @author luyuhao
-     * @date 2021/03/12 23:43
+     * @since 2021/03/12 23:43
      */
     void update(ServiceApplicationDto dto);
 
@@ -73,7 +73,7 @@ public interface ServiceApplicationDao {
      * @param id      服务id
      * @param updater 更新者
      * @author luyuhao
-     * @date 2021/03/13 00:49
+     * @since 2021/03/13 00:49
      */
     void deleteById(@Param("id") Long id, @Param("updater") Long updater);
 }

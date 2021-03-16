@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
  * 配置发布属性表Dao
  *
  * @author luyuhao
- * @date 2021/03/12 01:44
+ * @since 2021/03/12 01:44
  */
 @Mapper
 @Repository

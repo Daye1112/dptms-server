@@ -15,4 +15,9 @@ import lombok.ToString;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public class ServiceConfigReleaseDto extends ServiceConfigReleaseEntity {
+
+    /**
+     * 是否更新 true/false
+     */
+    private Boolean isUpdate;
 }

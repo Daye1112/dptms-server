@@ -11,7 +11,7 @@ import java.util.List;
  * 配置环境属性表Dao
  *
  * @author luyuhao
- * @date 2021/03/12 01:43
+ * @since 2021/03/12 01:43
  */
 @Mapper
 @Repository
@@ -23,7 +23,7 @@ public interface ServiceConfigProfilePropDao {
      * @param dto 配置环境属性
      * @return {@link ServiceConfigProfilePropDto}
      * @author luyuhao
-     * @date 2021/03/14 22:57
+     * @since 2021/03/14 22:57
      */
     List<ServiceConfigProfilePropDto> list(ServiceConfigProfilePropDto dto);
 
@@ -33,7 +33,7 @@ public interface ServiceConfigProfilePropDao {
      * @param param 查询信息
      * @return {@link Long}
      * @author luyuhao
-     * @date 2021/03/14 23:04
+     * @since 2021/03/14 23:04
      */
     Long countByRepeat(ServiceConfigProfilePropDto param);
 
@@ -43,7 +43,7 @@ public interface ServiceConfigProfilePropDao {
      *
      * @param dto 配置环境属性信息
      * @author luyuhao
-     * @date 2021/03/14 23:01
+     * @since 2021/03/14 23:01
      */
     void insert(ServiceConfigProfilePropDto dto);
 
@@ -52,7 +52,7 @@ public interface ServiceConfigProfilePropDao {
      *
      * @param dto 配置环境属性信息
      * @author luyuhao
-     * @date 2021/03/14 23:08
+     * @since 2021/03/14 23:08
      */
     void update(ServiceConfigProfilePropDto dto);
 
@@ -62,7 +62,7 @@ public interface ServiceConfigProfilePropDao {
      * @param id      id
      * @param updater 更新者
      * @author luyuhao
-     * @date 2021/03/14 23:11
+     * @since 2021/03/14 23:11
      */
     void deleteById(@Param("id") Long id, @Param("updater") Long updater);
 }

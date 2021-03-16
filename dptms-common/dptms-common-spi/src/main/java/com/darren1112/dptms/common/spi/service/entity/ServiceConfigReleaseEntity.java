@@ -1,6 +1,7 @@
 package com.darren1112.dptms.common.spi.service.entity;
 
 import com.darren1112.dptms.common.spi.common.base.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -41,17 +42,18 @@ public class ServiceConfigReleaseEntity extends BaseEntity {
      * 发布类型 0：普通发布 1：回滚发布
      */
     @ApiModelProperty(value = "发布类型 0：普通发布 1：回滚发布")
-    private Byte releaseType;
+    private Integer releaseType;
 
     /**
      * 发布状态 0：失效 1：激活
      */
     @ApiModelProperty(value = "发布状态 0：失效 1：激活")
-    private Byte releaseStatus;
+    private Integer releaseStatus;
 
     /**
      * 发布时间
      */
     @ApiModelProperty(value = "发布时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date releaseTime;
 }
