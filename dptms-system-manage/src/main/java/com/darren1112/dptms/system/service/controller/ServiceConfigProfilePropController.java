@@ -10,7 +10,6 @@ import com.darren1112.dptms.common.log.starter.enums.BusinessType;
 import com.darren1112.dptms.common.log.starter.enums.LogLevel;
 import com.darren1112.dptms.common.security.starter.util.DptmsSecurityUtil;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
-import com.darren1112.dptms.common.spi.service.dto.ServiceConfigProfileDto;
 import com.darren1112.dptms.common.spi.service.dto.ServiceConfigProfilePropDto;
 import com.darren1112.dptms.system.common.enums.SystemManageErrorCodeEnum;
 import com.darren1112.dptms.system.service.service.ServiceConfigProfilePropService;
@@ -42,7 +41,7 @@ public class ServiceConfigProfilePropController {
      * 查询配置环境属性list
      *
      * @param dto 筛选参数
-     * @return {@link ServiceConfigProfileDto}
+     * @return {@link ServiceConfigProfilePropDto}
      * @author luyuhao
      * @since 2021/03/13 01:33
      */
