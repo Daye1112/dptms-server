@@ -2,6 +2,7 @@ package com.darren1112.dptms.monitor;
 
 import com.darren1112.dptms.common.core.util.EnvironmentAwareUtil;
 import com.darren1112.dptms.common.doc.starter.annotation.EnableServerDoc;
+import com.darren1112.dptms.common.security.starter.annotation.EnableServerSecurity;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
@@ -14,6 +15,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
  */
 @EnableServerDoc
 @EnableEurekaClient
+@EnableServerSecurity
 @SpringBootApplication
 public class MonitorManageApplication {
 
