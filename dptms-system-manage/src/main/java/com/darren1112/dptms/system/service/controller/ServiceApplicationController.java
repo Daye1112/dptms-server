@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.*;
  * @since 2021/03/12 01:33
  */
 @Slf4j
-@Api(tags = "服务管理", description = "服务管理接口")
+@Api(tags = "应用管理", description = "应用管理接口")
 @RestController
 @RequestMapping(value = "/service/application")
 public class ServiceApplicationController extends BaseController {
@@ -72,7 +72,7 @@ public class ServiceApplicationController extends BaseController {
                 .on(dto.getOrgId(), new NotNullValidatorCallback(SystemManageErrorCodeEnum.ORG_ID_NOT_NULL))
                 .on(dto.getAppCode(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.APP_CODE_NOT_NULL))
                 .on(dto.getAppName(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.APP_NAME_NOT_NULL))
-                .on(dto.getAppType(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.APP_TYPE_NOT_NULL))
+                .on(dto.getAppType(), new NotNullValidatorCallback(SystemManageErrorCodeEnum.APP_TYPE_NOT_NULL))
                 .doValidate().checkResult();
         // 设置创建者信息
         ActiveUser activeUser = DptmsSecurityUtil.get();
@@ -99,7 +99,7 @@ public class ServiceApplicationController extends BaseController {
                 .on(dto.getOrgId(), new NotNullValidatorCallback(SystemManageErrorCodeEnum.ORG_ID_NOT_NULL))
                 .on(dto.getAppCode(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.APP_CODE_NOT_NULL))
                 .on(dto.getAppName(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.APP_NAME_NOT_NULL))
-                .on(dto.getAppType(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.APP_TYPE_NOT_NULL))
+                .on(dto.getAppType(), new NotNullValidatorCallback(SystemManageErrorCodeEnum.APP_TYPE_NOT_NULL))
                 .doValidate().checkResult();
         // 设置创建者信息
         ActiveUser activeUser = DptmsSecurityUtil.get();
@@ -119,7 +119,7 @@ public class ServiceApplicationController extends BaseController {
      */
     @Log(value = "删除服务应用", businessType = BusinessType.DELETE)
     @ApiOperation("删除服务应用")
-    @PostMapping("/deleteById")
+    @GetMapping("/deleteById")
     public ResponseEntity<JsonResult> deleteById(@RequestParam(value = "id", required = false) Long id) {
         ValidatorBuilder.build()
                 .on(id, new NotNullValidatorCallback(SystemManageErrorCodeEnum.ID_NOT_NULL))
