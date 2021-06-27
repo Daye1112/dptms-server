@@ -90,7 +90,7 @@ public class ServiceConfigProfileServiceImpl implements ServiceConfigProfileServ
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Throwable.class)
     public void update(ServiceConfigProfileDto dto) {
-        validRepeat(dto, false);
+        validRepeat(dto, true);
         serviceConfigProfileDao.update(dto);
     }
 

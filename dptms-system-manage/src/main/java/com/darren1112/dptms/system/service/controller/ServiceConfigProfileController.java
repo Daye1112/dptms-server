@@ -117,7 +117,7 @@ public class ServiceConfigProfileController {
      */
     @Log(value = "删除配置环境", businessType = BusinessType.DELETE)
     @ApiOperation("删除配置环境")
-    @PostMapping("/deleteById")
+    @GetMapping("/deleteById")
     public ResponseEntity<JsonResult> deleteById(@RequestParam(value = "id", required = false) Long id) {
         ValidatorBuilder.build()
                 .on(id, new NotNullValidatorCallback(SystemManageErrorCodeEnum.ID_NOT_NULL))
