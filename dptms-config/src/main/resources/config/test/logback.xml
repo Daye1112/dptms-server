@@ -42,7 +42,6 @@
     <root level="INFO">
         <!--appender将会添加到这个loger-->
         <appender-ref ref="fileLog"/>
-        <appender-ref ref="consoleLog"/>
     </root>
 
 </configuration>
