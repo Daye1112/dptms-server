@@ -97,7 +97,7 @@ public class ServiceConfigReleaseController extends BaseController {
      */
     @Log(value = "删除发布信息", businessType = BusinessType.DELETE)
     @ApiOperation("删除发布信息")
-    @PostMapping("/deleteById")
+    @GetMapping("/deleteById")
     public ResponseEntity<JsonResult> deleteById(@RequestParam(value = "id", required = false) Long id) {
         ValidatorBuilder.build()
                 .on(id, new NotNullValidatorCallback(SystemManageErrorCodeEnum.ID_NOT_NULL))
