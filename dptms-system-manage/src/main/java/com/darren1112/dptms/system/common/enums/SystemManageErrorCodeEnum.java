@@ -32,6 +32,7 @@ public enum SystemManageErrorCodeEnum implements BaseErrorEnum {
     PROP_KEY_NOT_NULL(HttpStatus.BAD_REQUEST, "属性key不能为空"),
     PROP_VALUE_NOT_NULL(HttpStatus.BAD_REQUEST, "属性value不能为空"),
     PROP_NOT_REPEAT(HttpStatus.BAD_REQUEST, "属性信息重复"),
+    PROP_NOT_EXIST(HttpStatus.BAD_REQUEST, "无属性信息"),
     RELEASE_VERSION_NOT_NULL(HttpStatus.BAD_REQUEST, "发布版本不能为空"),
     RELEASE_TYPE_NOT_NULL(HttpStatus.BAD_REQUEST, "发布类型不能为空"),
     RELEASE_NOT_REPEAT(HttpStatus.BAD_REQUEST, "发布版本重复"),

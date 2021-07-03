@@ -75,7 +75,6 @@ public class ServiceConfigReleaseController extends BaseController {
         ValidatorBuilder.build()
                 .on(dto.getApplicationId(), new NotNullValidatorCallback(SystemManageErrorCodeEnum.APP_ID_NOT_NULL))
                 .on(dto.getProfileId(), new NotNullValidatorCallback(SystemManageErrorCodeEnum.PROFILE_ID_NOT_NULL))
-                .on(dto.getReleaseVersion(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.RELEASE_VERSION_NOT_NULL))
                 .on(dto.getReleaseType(), new NotNullValidatorCallback(SystemManageErrorCodeEnum.RELEASE_TYPE_NOT_NULL))
                 .doValidate().checkResult();
         // 设置创建者信息

@@ -50,4 +50,14 @@ public interface ServiceConfigProfilePropService {
      * @since 2021/03/14 23:11
      */
     void deleteById(Long id, Long updater);
+
+    /**
+     * 根据环境id查询属性集合
+     *
+     * @param profileId 环境id
+     * @return {@link ServiceConfigProfilePropDto}
+     * @author luyuhao
+     * @since 2021/7/3 10:40
+     */
+    List<ServiceConfigProfilePropDto> listByProfileId(Long profileId);
 }

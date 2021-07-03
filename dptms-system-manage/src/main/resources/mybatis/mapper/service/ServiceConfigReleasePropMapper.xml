@@ -28,4 +28,14 @@
             AND prop_desc LIKE concat('%', #{propDesc}, '%')
         </if>
     </select>
+    <!--批量新增发布属性-->
+    <select id="batchInsert" parameterType="java.util.List">
+        INSERT INTO service_config_release_prop(release_id, prop_key, prop_value, prop_desc,
+                                                remark, isvalid, ctime, creater, mtime, updater)
+        VALUES
+            <foreach collection="list" item="item" separator=",">
+               (#{item.releaseId}, #{item.propKey}, #{item.propValue}, #{item.propDesc},
+                   #{item.remark}, 1, now(), #{item.creater}, now(), #{item.updater})
+            </foreach>
+    </select>
 </mapper>

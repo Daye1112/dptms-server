@@ -108,4 +108,20 @@ public class ServiceConfigProfilePropServiceImpl implements ServiceConfigProfile
     public void deleteById(Long id, Long updater) {
         serviceConfigProfilePropDao.deleteById(id, updater);
     }
+
+    /**
+     * 根据环境id查询属性集合
+     *
+     * @param profileId 环境id
+     * @return {@link ServiceConfigProfilePropDto}
+     * @author luyuhao
+     * @since 2021/7/3 10:40
+     */
+    @Override
+    @Cacheable
+    public List<ServiceConfigProfilePropDto> listByProfileId(Long profileId) {
+        ServiceConfigProfilePropDto dto = new ServiceConfigProfilePropDto();
+        dto.setProfileId(profileId);
+        return serviceConfigProfilePropDao.list(dto);
+    }
 }
