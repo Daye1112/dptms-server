@@ -41,7 +41,7 @@ public class ServiceConfigReleaseEntity extends BaseEntity {
     /**
      * 发布类型 0：普通发布 1：回滚发布
      */
-    @ApiModelProperty(value = "发布类型 0：普通发布 1：回滚发布")
+    @ApiModelProperty(value = "发布类型 1：普通发布 2：回滚发布")
     private Integer releaseType;
 
     /**

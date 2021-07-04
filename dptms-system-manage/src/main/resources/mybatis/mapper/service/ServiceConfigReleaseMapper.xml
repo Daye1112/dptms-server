@@ -56,13 +56,13 @@
         </if>
     </select>
     <!--插入发布信息-->
-    <insert id="insert"
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id"
             parameterType="com.darren1112.dptms.common.spi.service.dto.ServiceConfigReleaseDto">
         INSERT INTO service_config_release(application_id, profile_id, release_version,
                                            release_type, release_status, release_time,
                                            remark, isvalid, ctime, creater, mtime, updater)
         VALUES (#{applicationId}, #{profileId}, #{releaseVersion}, #{releaseType},
-                #{releaseStatus}, now(), #{remark},
+                1, now(), #{remark},
                 1, now(), #{creater}, now(), #{updater})
     </insert>
     <!--删除发布信息-->

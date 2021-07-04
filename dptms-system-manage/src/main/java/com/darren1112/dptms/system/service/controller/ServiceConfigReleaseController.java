@@ -61,7 +61,7 @@ public class ServiceConfigReleaseController extends BaseController {
     }
 
     /**
-     * 插入服务应用
+     * 插入发布信息
      *
      * @param dto 服务信息
      * @return {@link JsonResult}
