@@ -60,4 +60,14 @@ public interface ServiceConfigProfilePropService {
      * @since 2021/7/3 10:40
      */
     List<ServiceConfigProfilePropDto> listByProfileId(Long profileId);
+
+    /**
+     * 批量导入配置环境属性
+     *
+     * @param dto content   文本内容
+     *            profileId 环境id
+     * @author luyuhao
+     * @since 2021/7/21
+     */
+    void batchInsert(ServiceConfigProfilePropDto dto);
 }

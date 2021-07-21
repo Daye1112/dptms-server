@@ -1,8 +1,10 @@
 package com.darren1112.dptms.system.service.controller;
 
 import com.darren1112.dptms.common.core.message.JsonResult;
+import com.darren1112.dptms.common.core.util.EncodeUtil;
 import com.darren1112.dptms.common.core.util.ResponseEntityUtil;
 import com.darren1112.dptms.common.core.validate.ValidatorBuilder;
+import com.darren1112.dptms.common.core.validate.validator.callback.common.LengthValidatorCallback;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotEmptyValidatorCallback;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotNullValidatorCallback;
 import com.darren1112.dptms.common.log.starter.annotation.Log;
@@ -71,6 +73,7 @@ public class ServiceConfigProfilePropController {
         ValidatorBuilder.build()
                 .on(dto.getProfileId(), new NotNullValidatorCallback(SystemManageErrorCodeEnum.PROFILE_ID_NOT_NULL))
                 .on(dto.getPropKey(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.PROP_KEY_NOT_NULL))
+                .on(dto.getPropKey(), new LengthValidatorCallback(SystemManageErrorCodeEnum.PROP_KEY_TOO_LONG, 128))
                 .on(dto.getPropValue(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.PROP_VALUE_NOT_NULL))
                 .doValidate().checkResult();
         // 设置创建者信息
@@ -95,8 +98,8 @@ public class ServiceConfigProfilePropController {
     public ResponseEntity<JsonResult> update(ServiceConfigProfilePropDto dto) {
         ValidatorBuilder.build()
                 .on(dto.getId(), new NotNullValidatorCallback(SystemManageErrorCodeEnum.ID_NOT_NULL))
-                .on(dto.getProfileId(), new NotNullValidatorCallback(SystemManageErrorCodeEnum.PROFILE_ID_NOT_NULL))
                 .on(dto.getPropKey(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.PROP_KEY_NOT_NULL))
+                .on(dto.getPropKey(), new LengthValidatorCallback(SystemManageErrorCodeEnum.PROP_KEY_TOO_LONG, 128))
                 .on(dto.getPropValue(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.PROP_VALUE_NOT_NULL))
                 .doValidate().checkResult();
         // 设置创建者信息
@@ -125,6 +128,32 @@ public class ServiceConfigProfilePropController {
         // 设置创建者信息
         ActiveUser activeUser = DptmsSecurityUtil.get();
         serviceConfigProfilePropService.deleteById(id, activeUser.getId());
+        return ResponseEntityUtil.ok(JsonResult.buildSuccess());
+    }
+
+    /**
+     * 批量导入配置环境属性
+     *
+     * @param dto content   文本内容
+     *            profileId 环境id
+     * @return {@link Long}
+     * @author luyuhao
+     * @since 2021/07/20
+     */
+    @Log(value = "批量导入配置环境属性", businessType = BusinessType.INSERT)
+    @ApiOperation("批量导入配置环境属性")
+    @PostMapping("/batchInsert")
+    public ResponseEntity<JsonResult> batchInsert(ServiceConfigProfilePropDto dto) {
+        ValidatorBuilder.build()
+                .on(dto.getProfileId(), new NotNullValidatorCallback(SystemManageErrorCodeEnum.PROFILE_ID_NOT_NULL))
+                .on(dto.getContent(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.PROP_NOT_NULL))
+                .doValidate().checkResult();
+        dto.setContent(EncodeUtil.decodeUrl(dto.getContent()));
+        // 设置创建者信息
+        ActiveUser activeUser = DptmsSecurityUtil.get();
+        dto.setCreater(activeUser.getId());
+        dto.setUpdater(activeUser.getId());
+        serviceConfigProfilePropService.batchInsert(dto);
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }
 }

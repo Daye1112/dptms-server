@@ -1,6 +1,9 @@
 package com.darren1112.dptms.system.service.service.impl;
 
 import com.darren1112.dptms.common.core.exception.BadRequestException;
+import com.darren1112.dptms.common.core.util.CollectionUtil;
+import com.darren1112.dptms.common.core.util.PropertiesUtil;
+import com.darren1112.dptms.common.core.util.StringUtil;
 import com.darren1112.dptms.common.spi.service.dto.ServiceConfigProfilePropDto;
 import com.darren1112.dptms.system.common.enums.SystemManageErrorCodeEnum;
 import com.darren1112.dptms.system.service.dao.ServiceConfigProfilePropDao;
@@ -12,7 +15,8 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 配置环境属性表ServiceImpl
@@ -123,5 +127,73 @@ public class ServiceConfigProfilePropServiceImpl implements ServiceConfigProfile
         ServiceConfigProfilePropDto dto = new ServiceConfigProfilePropDto();
         dto.setProfileId(profileId);
         return serviceConfigProfilePropDao.list(dto);
+    }
+
+    /**
+     * 批量导入配置环境属性
+     *
+     * @param dto content   文本内容
+     *            profileId 环境id
+     * @author luyuhao
+     * @since 2021/7/21
+     */
+    @Override
+    @CacheEvict(allEntries = true)
+    @Transactional(rollbackFor = Throwable.class)
+    public void batchInsert(ServiceConfigProfilePropDto dto) {
+        Properties properties = PropertiesUtil.buildPropertiesByStr(dto.getContent());
+
+        // 提取新增的keys
+        Set<String> keySet = properties.stringPropertyNames();
+        // 查询已有的配置
+        List<ServiceConfigProfilePropDto> propList = this.listByProfileId(dto.getProfileId());
+        Set<String> propKeySet = propList.stream().map(ServiceConfigProfilePropDto::getPropKey).collect(Collectors.toSet());
+
+        // 新增的key
+        Set<String> newKeySet = new HashSet<>(keySet);
+        newKeySet.removeAll(propKeySet);
+
+        // 已有的key
+        Set<String> overrideKey = new HashSet<>(keySet);
+        overrideKey.retainAll(propKeySet);
+
+        // 新增属性
+        if (CollectionUtil.isNotEmpty(newKeySet)) {
+            List<ServiceConfigProfilePropDto> newPropList = new ArrayList<>();
+            for (String newKey : newKeySet) {
+                // 去除空格
+                String key = StringUtil.trim(newKey);
+                String value = StringUtil.trim(properties.getProperty(newKey));
+
+                if (key.length() > 128) {
+                    throw new BadRequestException(SystemManageErrorCodeEnum.PROP_KEY_TOO_LONG);
+                }
+                ServiceConfigProfilePropDto subDto = new ServiceConfigProfilePropDto();
+                subDto.setProfileId(dto.getProfileId());
+                subDto.setPropKey(key);
+                subDto.setPropValue(value);
+                subDto.setCreater(dto.getCreater());
+                subDto.setUpdater(dto.getUpdater());
+
+                newPropList.add(subDto);
+            }
+
+            // 批量新增
+            serviceConfigProfilePropDao.batchInsert(newPropList);
+        }
+
+        // 更新属性
+        if (CollectionUtil.isNotEmpty(overrideKey)) {
+            propList.stream()
+                    .filter(item -> overrideKey.contains(item.getPropKey()))
+                    .forEach(item -> {
+                        item.setPropKey(StringUtil.trim(item.getPropKey()));
+                        item.setPropValue(StringUtil.trim(properties.getProperty(item.getPropKey())));
+                        item.setUpdater(dto.getUpdater());
+
+                        // 更新属性
+                        serviceConfigProfilePropDao.update(item);
+                    });
+        }
     }
 }

@@ -65,4 +65,13 @@ public interface ServiceConfigProfilePropDao {
      * @since 2021/03/14 23:11
      */
     void deleteById(@Param("id") Long id, @Param("updater") Long updater);
+
+    /**
+     * 批量新增环境属性
+     *
+     * @param propList 环境属性集合
+     * @author luyuhao
+     * @since 2021/7/21
+     */
+    void batchInsert(List<ServiceConfigProfilePropDto> propList);
 }

@@ -20,4 +20,9 @@ public class ServiceConfigProfilePropDto extends ServiceConfigProfilePropEntity 
      * 是否更新 true/false
      */
     private Boolean isUpdate;
+
+    /**
+     * 配置信息文本格式
+     */
+    private String content;
 }
