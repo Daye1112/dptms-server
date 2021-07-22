@@ -7,6 +7,7 @@ import org.lionsoul.ip2region.DbConfig;
 import org.lionsoul.ip2region.DbSearcher;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.lang.reflect.Method;
 
 /**
@@ -66,9 +67,11 @@ public class IpUtil {
                 return "";
             }
             String path = "ip2region/ip2region.db";
+            String name = "ip2region.db";
+            File file = FileUtil.createSystemFile(new ClassPathResource(path).getStream(), name);
             int algorithm = DbSearcher.BTREE_ALGORITHM;
             DbConfig config = new DbConfig();
-            DbSearcher searcher = new DbSearcher(config, new ClassPathResource(path).getAbsolutePath());
+            DbSearcher searcher = new DbSearcher(config, file.getPath());
             Method method;
             switch (algorithm) {
                 case DbSearcher.BTREE_ALGORITHM:
