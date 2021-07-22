@@ -29,7 +29,11 @@ public class FileUtil {
         OutputStream os = null;
         ByteArrayOutputStream output = null;
         try {
-            File file = new File(FileConstant.SYSTEM_FILE_PATH + name);
+            File dir = new File(FileConstant.SYSTEM_FILE_PATH);
+            if (!dir.exists()) {
+                boolean mkdirsResult = dir.mkdirs();
+            }
+            File file = new File(FileConstant.SYSTEM_FILE_PATH, name);
             if (file.exists()) {
                 return file;
             }
