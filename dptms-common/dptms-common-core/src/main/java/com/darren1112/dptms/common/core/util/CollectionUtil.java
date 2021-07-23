@@ -3,10 +3,8 @@ package com.darren1112.dptms.common.core.util;
 import org.springframework.lang.Nullable;
 import org.springframework.util.CollectionUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 集合工具类
@@ -64,6 +62,21 @@ public class CollectionUtil extends CollectionUtils {
         if (isEmpty(array)) {
             return new ArrayList<>();
         }
-        return Arrays.asList(array);
+        return Arrays.stream(array).collect(Collectors.toList());
+    }
+
+    /**
+     * 数组转set
+     *
+     * @param array 数组
+     * @return {@link Set}
+     * @author luyuhao
+     * @since 2021/7/22
+     */
+    public static <T> Set<T> arrayToSet(T[] array) {
+        if (isEmpty(array)) {
+            return new HashSet<>();
+        }
+        return Arrays.stream(array).collect(Collectors.toSet());
     }
 }

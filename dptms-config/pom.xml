@@ -36,6 +36,22 @@
         </dependency>
         <!-- [Spring Boot] End -->
 
+        <!-- [数据源依赖] Start -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+        </dependency>
+        <!-- [数据源依赖] End -->
+
         <!-- [Spring Cloud] Start -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>

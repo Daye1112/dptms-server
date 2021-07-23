@@ -5,6 +5,7 @@ import org.apache.commons.lang.StringUtils;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * 字符串操作
@@ -15,6 +16,11 @@ import java.util.regex.Pattern;
 public class StringUtil extends StringUtils {
 
     private static final Pattern CHINESE_PATTERN = Pattern.compile("[\u4e00-\u9fa5]");
+
+    /**
+     * 默认分隔符
+     */
+    private static final String DEFUALT_DELIMITER = ",";
 
     /**
      * 判断字符串是否含有中文
@@ -125,5 +131,33 @@ public class StringUtil extends StringUtils {
      */
     public static boolean equalsIgnoreCase(String str1, String str2) {
         return str1 == null ? str2 == null : str1.equalsIgnoreCase(str2);
+    }
+
+    /**
+     * 字符串分隔为set集合，逗号分隔
+     *
+     * @param str 字符串
+     * @return {@link String}
+     * @author luyuhao
+     * @since 2021/7/22
+     */
+    public static Set<String> splitToSet(String str) {
+        return splitToSet(str, DEFUALT_DELIMITER);
+    }
+
+    /**
+     * 根据分隔符，将字符串转为set集合
+     *
+     * @param str       字符串
+     * @param delimiter 分隔符
+     * @return {@link String}
+     * @author luyuhao
+     * @since 2021/7/22
+     */
+    private static Set<String> splitToSet(String str, String delimiter) {
+        if (isBlank(str)) {
+            return new HashSet<>();
+        }
+        return Arrays.stream(split(str, delimiter)).collect(Collectors.toSet());
     }
 }
