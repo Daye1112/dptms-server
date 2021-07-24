@@ -4,6 +4,8 @@ import com.darren1112.dptms.common.core.util.CollectionUtil;
 import com.darren1112.dptms.common.core.util.StringUtil;
 import com.darren1112.dptms.common.spi.service.dto.ServiceConfigReleasePropDto;
 import com.darren1112.dptms.config.dao.ServiceConfigReleasePropDao;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.config.environment.Environment;
 import org.springframework.cloud.config.environment.PropertySource;
@@ -23,6 +25,8 @@ import java.util.stream.Collectors;
  */
 @Component
 public class DptmsJdbcEnvironmentRepository implements EnvironmentRepository {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(DptmsJdbcEnvironmentRepository.class);
 
     private static final String LABEL_LATEST = "latest";
 
@@ -46,9 +50,12 @@ public class DptmsJdbcEnvironmentRepository implements EnvironmentRepository {
         // 初始化环境信息
         Environment environment = new Environment(application, profileArray, label, null, null);
         // 逗号分隔，转为应用/环境集合
-        Set<String> applicationSet = StringUtil.splitToSet(application);
+        Set<String> applicationSet = StringUtil.splitToSet(application)
+                .stream()
+                .filter(item -> !"app".equals(item))
+                .collect(Collectors.toSet());
         Set<String> profileSet = CollectionUtil.arrayToSet(profileArray);
-
+        // 遍历获取
         for (String app : applicationSet) {
             for (String pro : profileSet) {
                 // 读取每个应用的每个环境
@@ -59,6 +66,7 @@ public class DptmsJdbcEnvironmentRepository implements EnvironmentRepository {
                 } else {
                     releasePropList = serviceConfigReleasePropDao.listBy(app, pro, label);
                 }
+                LOGGER.info("environment: name={}, profile={}, label={}, propSize={}", app, pro, label, CollectionUtil.isEmpty(releasePropList) ? 0 : releasePropList.size());
                 // 查询结果集组装
                 if (CollectionUtil.isNotEmpty(releasePropList)) {
                     Map<String, String> properties = releasePropList.stream()
