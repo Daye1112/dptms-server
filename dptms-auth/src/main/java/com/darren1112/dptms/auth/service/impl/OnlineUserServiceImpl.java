@@ -57,7 +57,9 @@ public class OnlineUserServiceImpl extends BaseService implements OnlineUserServ
             String refreshToken = Optional.ofNullable(redisUtil.getWithKeyPrefix("", key))
                     .map(Object::toString).orElse("");
             ActiveUser subActiveUser = dptmsTokenStore.getActiveUser(refreshToken);
-            activeUserList.add(subActiveUser);
+            if (subActiveUser != null) {
+                activeUserList.add(subActiveUser);
+            }
         }
         return createPageBean(pageParam, count, activeUserList);
     }
