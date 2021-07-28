@@ -70,14 +70,14 @@ public class LoginController {
      *
      * @param request  请求域
      * @param response 响应域
-     * @return {@link ActiveUser}
+     * @return {@link JsonResult}
      * @author luyuhao
      * @since 20/11/22 21:55
      */
     @ApiOperation("登出系统")
     @GetMapping("/logout")
-    public ResponseEntity<JsonResult<ActiveUser>> logout(HttpServletRequest request,
-                                                         HttpServletResponse response) {
+    public ResponseEntity<JsonResult> logout(HttpServletRequest request,
+                                             HttpServletResponse response) {
         dptmsTokenStore.removeTokenAndCookie(request, response);
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }

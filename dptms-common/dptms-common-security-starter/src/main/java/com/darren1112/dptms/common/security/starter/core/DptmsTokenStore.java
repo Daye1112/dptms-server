@@ -47,6 +47,8 @@ public class DptmsTokenStore {
         saveAccessToken(accessToken, refreshToken);
         // 设置refreshToken
         saveRefreshToken(refreshToken, activeUser);
+        // 移除旧的refreshToken
+        removeUserRefreshToken(activeUser);
         // 保存当前用户的最新refreshToken
         saveUserRefreshToken(activeUser, refreshToken);
     }
@@ -287,6 +289,7 @@ public class DptmsTokenStore {
     public void removeTokenAndCookie(HttpServletRequest request, HttpServletResponse response) {
         String accessToken = getAccessToken(request);
         String refreshToken = getRefreshToken(request);
+        removeUserRefreshToken(refreshToken);
         removeToken(accessToken, refreshToken);
         removeTokenCookie(response);
     }
@@ -401,5 +404,21 @@ public class DptmsTokenStore {
      */
     public void removeUserRefreshToken(ActiveUser activeUser) {
         redisUtil.delete(SecurityConstant.REDIS_USER_REFRESH_TOKEN_PREFIX + activeUser.getId());
+    }
+
+    /**
+     * 根据refreshToken移除ActiveUser
+     *
+     * @param refreshToken 刷新token
+     * @author luyuhao
+     * @since 2021/07/28
+     */
+    private void removeUserRefreshToken(String refreshToken) {
+        if (StringUtil.isNotBlank(refreshToken)) {
+            ActiveUser activeUser = getActiveUser(refreshToken);
+            if (activeUser != null) {
+                removeUserRefreshToken(activeUser);
+            }
+        }
     }
 }
