@@ -48,7 +48,7 @@ public class DptmsTokenStore {
         // 设置refreshToken
         saveRefreshToken(refreshToken, activeUser);
         // 移除旧的refreshToken
-        removeUserRefreshToken(activeUser);
+        removeRefreshToken(getUserRefreshToken(activeUser));
         // 保存当前用户的最新refreshToken
         saveUserRefreshToken(activeUser, refreshToken);
     }
