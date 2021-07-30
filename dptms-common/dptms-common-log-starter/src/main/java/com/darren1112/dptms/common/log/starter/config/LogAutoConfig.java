@@ -2,9 +2,8 @@ package com.darren1112.dptms.common.log.starter.config;
 
 import com.darren1112.dptms.common.core.thread.decorator.ThreadPoolDecorator;
 import com.darren1112.dptms.common.log.starter.aspect.LogAspect;
+import com.darren1112.dptms.common.log.starter.collect.LogCollectFactory;
 import com.darren1112.dptms.common.log.starter.collect.LogCollectService;
-import com.darren1112.dptms.common.log.starter.collect.impl.FeignLogCollectServiceImpl;
-import com.darren1112.dptms.common.log.starter.enums.LogCollectType;
 import com.darren1112.dptms.common.log.starter.properties.LogProperties;
 import com.darren1112.dptms.component.remoting.MonitorManageRemoting;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,13 +50,9 @@ public class LogAutoConfig {
 
     @Bean
     public LogCollectService logCollectService(MonitorManageRemoting monitorManageRemoting) {
-        LogCollectType logCollectType = logProperties.getLogCollectType();
-        switch (logCollectType) {
-            case FEIGN:
-                return new FeignLogCollectServiceImpl(monitorManageRemoting);
-            default:
-                return new FeignLogCollectServiceImpl(monitorManageRemoting);
-        }
+        return new LogCollectFactory()
+                .setMonitorManageRemoting(monitorManageRemoting)
+                .create(logProperties.getLogCollectType());
     }
 
     @Bean

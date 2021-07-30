@@ -7,6 +7,8 @@ import com.darren1112.dptms.common.spi.sys.dto.SysOperateLogDto;
 import lombok.extern.slf4j.Slf4j;
 
 /**
+ * feign-日志收集
+ *
  * @author luyuhao
  * @since 2021/02/07 00:32
  */
