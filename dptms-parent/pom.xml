@@ -39,6 +39,8 @@
         <ip2region.version>1.7.2</ip2region.version>
         <tomcat.version>8.5.47</tomcat.version>
         <UserAgentUtils.version>1.20</UserAgentUtils.version>
+        <jedis.version>2.9.3</jedis.version>
+        <commons-collections.version>3.2.2</commons-collections.version>
 
         <target.dir>D:\dptms\shell</target.dir>
     </properties>
@@ -174,6 +176,20 @@
                 <version>${UserAgentUtils.version}</version>
             </dependency>
             <!-- [UserAgentUtils] End -->
+            <!-- [jedis] Start -->
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>${jedis.version}</version>
+            </dependency>
+            <!-- [jedis] End -->
+            <!-- [collections] Start -->
+            <dependency>
+                <groupId>commons-collections</groupId>
+                <artifactId>commons-collections</artifactId>
+                <version>${commons-collections.version}</version>
+            </dependency>
+            <!-- [collections] End -->
             <!-- [Plugins] End -->
 
             <!-- [dptms] Start-->

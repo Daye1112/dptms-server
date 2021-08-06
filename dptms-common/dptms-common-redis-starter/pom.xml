@@ -60,6 +60,12 @@
             <artifactId>commons-pool2</artifactId>
         </dependency>
         <!-- [commons-pool2] End -->
+        <!-- [jedis] Start -->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+        </dependency>
+        <!-- [jedis] End -->
         <!-- [Plugins] End -->
 
         <!-- [dptms] Start-->

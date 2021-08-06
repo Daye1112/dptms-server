@@ -81,6 +81,12 @@
             <artifactId>UserAgentUtils</artifactId>
         </dependency>
         <!-- [UserAgentUtils] End -->
+        <!-- [collections] Start -->
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+        </dependency>
+        <!-- [collections] End -->
         <!-- [Plugins] End -->
 
         <!-- [dptms] Start-->

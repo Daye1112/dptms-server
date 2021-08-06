@@ -1,7 +1,6 @@
 package com.darren1112.dptms.common.core.util;
 
-import org.springframework.lang.Nullable;
-import org.springframework.util.CollectionUtils;
+import org.apache.commons.collections.CollectionUtils;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -13,18 +12,6 @@ import java.util.stream.Collectors;
  * @since 2020/08/01 03:52
  */
 public class CollectionUtil extends CollectionUtils {
-
-    /**
-     * 判断集合不为空
-     *
-     * @param collection 集合
-     * @return true/false
-     * @author luyuhao
-     * @since 20/08/01 03:53
-     */
-    public static boolean isNotEmpty(@Nullable Collection<?> collection) {
-        return !isEmpty(collection);
-    }
 
     /**
      * 判断数组为空
@@ -78,5 +65,29 @@ public class CollectionUtil extends CollectionUtils {
             return new HashSet<>();
         }
         return Arrays.stream(array).collect(Collectors.toSet());
+    }
+
+    /**
+     * 判断map不为空
+     *
+     * @param map map
+     * @return true/false
+     * @author luyuhao
+     * @since 2021/8/6
+     */
+    public static boolean isNotEmpty(Map<?, ?> map) {
+        return !isEmpty(map);
+    }
+
+    /**
+     * 判断map为空
+     *
+     * @param map map
+     * @return true/false
+     * @author luyuhao
+     * @since 2021/8/6
+     */
+    private static boolean isEmpty(Map<?, ?> map) {
+        return map == null || map.isEmpty();
     }
 }
