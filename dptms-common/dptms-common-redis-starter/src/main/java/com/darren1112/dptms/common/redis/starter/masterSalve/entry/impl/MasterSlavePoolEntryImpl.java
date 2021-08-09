@@ -6,6 +6,7 @@ import com.darren1112.dptms.common.redis.starter.masterSalve.health.impl.MasterS
 import com.darren1112.dptms.common.redis.starter.masterSalve.state.MasterSlaveState;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisPoolConfig;
 
 /**
  * @author luyuhao
@@ -40,36 +41,51 @@ public class MasterSlavePoolEntryImpl implements MasterSlavePoolEntry {
     }
 
     private void initPool() {
-
+        JedisPoolConfig config = new JedisPoolConfig();
+        config.setMaxTotal(maxTotal);
+        config.setMaxIdle(maxIdle);
+        config.setMaxWaitMillis(maxWaitMillis);
+        config.setTestOnBorrow(false);
+        if (password != null) {
+            pool = new JedisPool(config, host, port, DEFAULT_TIMEOUT, password);
+        } else {
+            pool = new JedisPool(config, host, port, DEFAULT_TIMEOUT);
+        }
     }
 
     @Override
     public String getName() {
-        return null;
+        return this.host + ":" + this.port;
     }
 
     @Override
     public MasterSlaveState getState() {
-        return null;
+        return state;
     }
 
     @Override
     public void setState(MasterSlaveState state) {
-
+        this.state = state;
     }
 
     @Override
     public Jedis getResource() {
-        return null;
+        return pool.getResource();
     }
 
     @Override
     public MasterSlavePoolHealth getHealth() {
-        return null;
+        return health;
+    }
+
+    public void setHealth(MasterSlavePoolHealth health) {
+        this.health = health;
     }
 
     @Override
     public void close() {
-
+        if(pool != null){
+            pool.close();
+        }
     }
 }

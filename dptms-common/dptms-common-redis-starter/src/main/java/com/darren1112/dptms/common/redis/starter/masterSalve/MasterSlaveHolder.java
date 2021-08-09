@@ -7,11 +7,13 @@ import com.darren1112.dptms.common.redis.starter.hint.RedisHintRouteManager;
 import com.darren1112.dptms.common.redis.starter.masterSalve.entry.MasterSlavePoolEntry;
 import com.darren1112.dptms.common.redis.starter.masterSalve.entry.impl.MasterSlavePoolEntryImpl;
 import com.darren1112.dptms.common.redis.starter.masterSalve.state.MasterSlaveStateContext;
+import com.darren1112.dptms.common.redis.starter.masterSalve.state.MasterSlaveStateEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.*;
@@ -165,25 +167,170 @@ public class MasterSlaveHolder implements MasterSlaveOperationCallback {
 
     @Override
     public void delistMaster(String name) {
+        if (null == master || null == name) {
+            return;
+        }
+        ReentrantReadWriteLock.WriteLock lock = masterLock.writeLock();
+        try {
+            if (lock.tryLock(DEFAULT_LOCK_WAIT_SECOND, TimeUnit.SECONDS)) {
+                try {
+                    if (master.getName().equals(name)) {
+                        loggerSwap(master.getName(), master.getState().getState(), MasterSlaveStateContext.STATE_INVALID.getState());
+                        master.setState(MasterSlaveStateContext.STATE_INVALID);
+                        master = null;
+                    }
+                } finally {
+                    lock.unlock();
+                }
+            }
+        } catch (InterruptedException e) {
+            LOGGER.error(e.getMessage(), e);
+        }
+    }
 
+    private void loggerSwap(String name, MasterSlaveStateEnum before, MasterSlaveStateEnum after) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(name);
+        sb.append(":");
+        sb.append(before.getStateName());
+        sb.append("===>");
+        sb.append(after.getStateName());
+        LOGGER.info(sb.toString());
     }
 
     @Override
     public void enlistMaster(String name) {
+        if (null == name) {
+            return;
+        }
+        ReentrantReadWriteLock.WriteLock lock = masterLock.writeLock();
+        try {
+            if (lock.tryLock(DEFAULT_LOCK_WAIT_SECOND, TimeUnit.SECONDS)) {
+                try {
+                    if (null != master && !master.getName().equals(name)) {
+                        loggerSwap(master.getName(), master.getState().getState(), MasterSlaveStateContext.STATE_INVALID.getState());
+                        master.setState(MasterSlaveStateContext.STATE_INVALID);
+                    }
 
+                    master = allMasterSlavePoolEntryMap.get(name);
+                    loggerSwap(master.getName(), master.getState().getState(), MasterSlaveStateContext.STATE_MASTER.getState());
+
+                    master.setState(MasterSlaveStateContext.STATE_MASTER);
+                } finally {
+                    lock.unlock();
+                }
+            }
+        } catch (InterruptedException e) {
+            LOGGER.error(e.getMessage(), e);
+        }
     }
 
     @Override
     public void delistSalve(String name) {
-
+        if (null == name) {
+            return;
+        }
+        ReentrantReadWriteLock.WriteLock lock = slaveLock.writeLock();
+        try {
+            if (lock.tryLock(DEFAULT_LOCK_WAIT_SECOND, TimeUnit.SECONDS)) {
+                try {
+                    Iterator<MasterSlavePoolEntry> iterator = listSlavePoolEntry.iterator();
+                    while (iterator.hasNext()) {
+                        MasterSlavePoolEntry slave = iterator.next();
+                        if (slave.getName().equals(name)) {
+                            loggerSwap(slave.getName(), slave.getState().getState(), MasterSlaveStateContext.STATE_INVALID.getState());
+                            slave.setState(MasterSlaveStateContext.STATE_INVALID);
+                            iterator.remove();
+                        }
+                    }
+                } finally {
+                    lock.unlock();
+                }
+            }
+        } catch (InterruptedException e) {
+            LOGGER.error(e.getMessage(), e);
+        }
     }
 
     @Override
     public void enlistSalve(String name) {
-
+        if (null == name) {
+            return;
+        }
+        ReentrantReadWriteLock.WriteLock lock = slaveLock.writeLock();
+        try {
+            if (lock.tryLock(DEFAULT_LOCK_WAIT_SECOND, TimeUnit.SECONDS)) {
+                try {
+                    MasterSlavePoolEntry slave = allMasterSlavePoolEntryMap.get(name);
+                    loggerSwap(slave.getName(), slave.getState().getState(), MasterSlaveStateContext.STATE_SLAVE.getState());
+                    slave.setState(MasterSlaveStateContext.STATE_SLAVE);
+                    listSlavePoolEntry.add(slave);
+                } finally {
+                    lock.unlock();
+                }
+            }
+        } catch (InterruptedException e) {
+            LOGGER.error(e.getMessage(), e);
+        }
     }
 
     public Map<String, MasterSlavePoolEntry> getListSlavePoolEntry() {
         return this.allMasterSlavePoolEntryMap;
+    }
+
+    public String getPrefix() {
+        return prefix;
+    }
+
+    public void setPrefix(String prefix) {
+        this.prefix = prefix;
+    }
+
+    public int getMaxTotal() {
+        return maxTotal;
+    }
+
+    public void setMaxTotal(int maxTotal) {
+        this.maxTotal = maxTotal;
+    }
+
+    public int getMaxIdle() {
+        return maxIdle;
+    }
+
+    public void setMaxIdle(int maxIdle) {
+        this.maxIdle = maxIdle;
+    }
+
+    public long getMaxWaitMillis() {
+        return maxWaitMillis;
+    }
+
+    public void setMaxWaitMillis(long maxWaitMillis) {
+        this.maxWaitMillis = maxWaitMillis;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public boolean isEnableHeartbeat() {
+        return enableHeartbeat;
+    }
+
+    public void setEnableHeartbeat(boolean enableHeartbeat) {
+        this.enableHeartbeat = enableHeartbeat;
     }
 }
