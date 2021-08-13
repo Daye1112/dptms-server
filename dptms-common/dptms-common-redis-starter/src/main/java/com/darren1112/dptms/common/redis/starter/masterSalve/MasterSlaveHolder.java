@@ -226,7 +226,7 @@ public class MasterSlaveHolder implements MasterSlaveOperationCallback {
     }
 
     @Override
-    public void delistSalve(String name) {
+    public void delistSlave(String name) {
         if (null == name) {
             return;
         }
@@ -253,7 +253,7 @@ public class MasterSlaveHolder implements MasterSlaveOperationCallback {
     }
 
     @Override
-    public void enlistSalve(String name) {
+    public void enlistSlave(String name) {
         if (null == name) {
             return;
         }

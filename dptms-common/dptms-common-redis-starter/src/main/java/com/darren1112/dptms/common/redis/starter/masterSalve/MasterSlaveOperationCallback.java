@@ -33,7 +33,7 @@ public interface MasterSlaveOperationCallback {
      * @author luyuhao
      * @since 2021/8/4
      */
-    void delistSalve(String name);
+    void delistSlave(String name);
 
     /**
      * 加入到salve中，状态变更为master
@@ -42,5 +42,5 @@ public interface MasterSlaveOperationCallback {
      * @author luyuhao
      * @since 2021/8/4
      */
-    void enlistSalve(String name);
+    void enlistSlave(String name);
 }

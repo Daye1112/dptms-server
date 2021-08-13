@@ -4,6 +4,8 @@ import com.darren1112.dptms.common.redis.starter.masterSalve.MasterSlaveOperatio
 import com.darren1112.dptms.common.redis.starter.masterSalve.entry.MasterSlavePoolEntry;
 import com.darren1112.dptms.common.redis.starter.masterSalve.state.MasterSlaveState;
 import com.darren1112.dptms.common.redis.starter.masterSalve.state.MasterSlaveStateEnum;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author luyuhao
@@ -11,19 +13,21 @@ import com.darren1112.dptms.common.redis.starter.masterSalve.state.MasterSlaveSt
  */
 public class InvalidStateImpl implements MasterSlaveState {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(InvalidStateImpl.class);
+
     @Override
     public MasterSlaveStateEnum getState() {
-        return null;
+        return MasterSlaveStateEnum.INVALID;
     }
 
     @Override
     public void doMaster(MasterSlavePoolEntry current, MasterSlaveOperationCallback callback) {
-
+        callback.enlistMaster(current.getName());
     }
 
     @Override
     public void doSlave(MasterSlavePoolEntry current, MasterSlaveOperationCallback callback) {
-
+        callback.enlistSlave(current.getName());
     }
 
     @Override
