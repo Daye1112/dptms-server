@@ -2,7 +2,7 @@ package com.darren1112.dptms.common.security.starter.config;
 
 import com.darren1112.dptms.common.core.constants.FilterOrderConstant;
 import com.darren1112.dptms.common.core.constants.SecurityConstant;
-import com.darren1112.dptms.common.redis.starter.util.RedisUtil;
+import com.darren1112.dptms.common.redis.starter.core.RedisUtil;
 import com.darren1112.dptms.common.security.starter.core.DptmsTokenStore;
 import com.darren1112.dptms.common.security.starter.core.DptmsTokenValidator;
 import com.darren1112.dptms.common.security.starter.filter.AddUserFilter;

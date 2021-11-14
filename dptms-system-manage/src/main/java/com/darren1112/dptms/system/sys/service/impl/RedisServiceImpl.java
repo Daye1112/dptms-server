@@ -1,7 +1,7 @@
 package com.darren1112.dptms.system.sys.service.impl;
 
 import com.darren1112.dptms.common.core.base.BaseService;
-import com.darren1112.dptms.common.redis.starter.util.RedisUtil;
+import com.darren1112.dptms.common.redis.starter.core.RedisUtil;
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
 import com.darren1112.dptms.common.spi.sys.dto.SysRedisDto;
@@ -48,12 +48,12 @@ public class RedisServiceImpl extends BaseService implements RedisService {
         // 查询value和有效期
         List<SysRedisDto> list = new ArrayList<>();
         for (String key : keyList) {
-            Object value = redisUtil.getWithKeyPrefix("", key);
-            long expire = redisUtil.getExpireWithKeyPrefix("", key);
+            String value = redisUtil.getWithPrefix("", key);
+            long expire = redisUtil.ttlWithPrefix("", key);
             SysRedisDto subSysRedisDto = new SysRedisDto();
             subSysRedisDto.setKey(key);
             subSysRedisDto.setValue(value);
-            subSysRedisDto.setExpired(expire);
+            subSysRedisDto.setExpired((int) expire);
             list.add(subSysRedisDto);
         }
         return createPageBean(pageParam, count, list);
@@ -68,7 +68,7 @@ public class RedisServiceImpl extends BaseService implements RedisService {
      */
     @Override
     public void insert(SysRedisDto sysRedisDto) {
-        redisUtil.setWithKeyPrefix("", sysRedisDto.getKey(), sysRedisDto.getValue(), sysRedisDto.getExpired());
+        redisUtil.setWithPrefix("", sysRedisDto.getKey(), sysRedisDto.getValue(), sysRedisDto.getExpired());
     }
 
     /**
@@ -80,6 +80,6 @@ public class RedisServiceImpl extends BaseService implements RedisService {
      */
     @Override
     public void deleteByKey(SysRedisDto sysRedisDto) {
-        redisUtil.deleteWithKeyPrefix("", sysRedisDto.getKey());
+        redisUtil.removeKeyWithPrefix("", sysRedisDto.getKey());
     }
 }

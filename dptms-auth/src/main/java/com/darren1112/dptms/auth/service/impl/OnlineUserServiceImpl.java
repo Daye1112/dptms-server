@@ -2,7 +2,7 @@ package com.darren1112.dptms.auth.service.impl;
 
 import com.darren1112.dptms.auth.service.OnlineUserService;
 import com.darren1112.dptms.common.core.base.BaseService;
-import com.darren1112.dptms.common.redis.starter.util.RedisUtil;
+import com.darren1112.dptms.common.redis.starter.core.RedisUtil;
 import com.darren1112.dptms.common.security.starter.core.DptmsTokenStore;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
@@ -54,7 +54,7 @@ public class OnlineUserServiceImpl extends BaseService implements OnlineUserServ
         // 获取用户信息
         List<ActiveUser> activeUserList = new ArrayList<>();
         for (String key : keyList) {
-            String refreshToken = Optional.ofNullable(redisUtil.getWithKeyPrefix("", key))
+            String refreshToken = Optional.ofNullable(redisUtil.getWithPrefix("", key))
                     .map(Object::toString).orElse("");
             ActiveUser subActiveUser = dptmsTokenStore.getActiveUser(refreshToken);
             if (subActiveUser != null) {

@@ -22,11 +22,11 @@ public class SysRedisDto {
      * value
      */
     @ApiModelProperty(value = "value")
-    private Object value;
+    private String value;
 
     /**
      * 有效期
      */
     @ApiModelProperty(value = "有效期")
-    private Long expired;
+    private Integer expired;
 }

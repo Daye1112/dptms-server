@@ -142,7 +142,7 @@ public class MasterSlaveHolder implements MasterSlaveOperationCallback {
         return null;
     }
 
-    public Jedis getReadResorce() {
+    public Jedis getReadResource() {
         ReentrantReadWriteLock.ReadLock lock = slaveLock.readLock();
         if (lock.tryLock()) {
             try {

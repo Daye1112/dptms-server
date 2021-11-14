@@ -2,7 +2,7 @@ package com.darren1112.dptms.common.security.starter.core;
 
 import com.darren1112.dptms.common.core.util.RequestUtil;
 import com.darren1112.dptms.common.core.util.StringUtil;
-import com.darren1112.dptms.common.redis.starter.util.RedisUtil;
+import com.darren1112.dptms.common.redis.starter.core.RedisUtil;
 import com.darren1112.dptms.common.security.starter.properties.SecurityProperties;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 

@@ -13,4 +13,8 @@ public class RedisConstants {
     public static final String INFO_ROLE_MASTER = "master";
 
     public static final String INFO_ROLE_SLAVE = "slave";
+
+    public static final String MODEL_MASTER_SLAVE = "masterSlave";
+
+    public static final String MODEL_CLUSTER = "cluster";
 }

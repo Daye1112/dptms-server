@@ -38,10 +38,10 @@ public class SecurityProperties {
     /**
      * token有效期(s)
      */
-    private long accessTokenExpired = 60 * 15;
+    private int accessTokenExpired = 60 * 15;
 
     /**
      * 刷新token有效期(s)
      */
-    private long refreshTokenExpired = 60 * 60 * 24 * 7;
+    private int refreshTokenExpired = 60 * 60 * 24 * 7;
 }

@@ -1,9 +1,12 @@
 package com.darren1112.dptms.common.redis.starter.config;
 
 import com.alibaba.fastjson.parser.ParserConfig;
-import com.darren1112.dptms.common.redis.starter.properties.DptmsCacheProperties;
+import com.darren1112.dptms.common.redis.starter.core.MasterSlaveRedisUtil;
+import com.darren1112.dptms.common.redis.starter.core.RedisClusterUtil;
+import com.darren1112.dptms.common.redis.starter.core.RedisConstants;
+import com.darren1112.dptms.common.redis.starter.core.RedisUtil;
+import com.darren1112.dptms.common.redis.starter.properties.DptmsRedisProperties;
 import com.darren1112.dptms.common.redis.starter.serializer.FastJsonRedisSerializer;
-import com.darren1112.dptms.common.redis.starter.util.RedisUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -33,26 +36,58 @@ import java.time.Duration;
 @Slf4j
 @EnableCaching
 @ConditionalOnClass(RedisOperations.class)
-@EnableConfigurationProperties({RedisProperties.class, DptmsCacheProperties.class})
+@EnableConfigurationProperties({RedisProperties.class,
+        // DptmsCacheProperties.class,
+        DptmsRedisProperties.class})
 public class RedisAutoConfig {
 
+    // @Autowired
+    // private DptmsCacheProperties dptmsCacheProperties;
+
     @Autowired
-    private DptmsCacheProperties dptmsCacheProperties;
+    private DptmsRedisProperties dptmsRedisProperties;
 
     @Bean
     public RedisCacheManager redisCacheManager(RedisConnectionFactory redisConnectionFactory) {
         RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()
-                .entryTtl(Duration.ofMinutes(dptmsCacheProperties.getCacheTtl()))
-                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new FastJsonRedisSerializer<>(Object.class)));
-        if (dptmsCacheProperties.isUseKeyPrefix()) {
-            config = config.computePrefixWith((cacheName) -> dptmsCacheProperties.getKeyPrefix() + cacheName + ":");
-        }
+                .entryTtl(Duration.ofMinutes(dptmsRedisProperties.getCacheTtl()))
+                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new FastJsonRedisSerializer<>(Object.class)))
+                .computePrefixWith((cacheName) -> dptmsRedisProperties.getPrefix() + cacheName + ":");
         return RedisCacheManager.builder(redisConnectionFactory)
                 .cacheDefaults(config)
                 .transactionAware()
                 .build();
     }
 
+    @Bean
+    @ConditionalOnMissingBean
+    public RedisUtil redisUtil() {
+        String model = this.dptmsRedisProperties.getModel();
+        if (RedisConstants.MODEL_MASTER_SLAVE.equals(model)) {
+            MasterSlaveRedisUtil redisUtil = new MasterSlaveRedisUtil();
+            redisUtil.setPrefix(this.dptmsRedisProperties.getPrefix());
+            redisUtil.setMaxTotal(this.dptmsRedisProperties.getMaxTotal());
+            redisUtil.setMaxIdle(this.dptmsRedisProperties.getMaxIdle());
+            redisUtil.setMaxWaitMills((long) this.dptmsRedisProperties.getMaxWaitMillis());
+            redisUtil.setIp(this.dptmsRedisProperties.getIp());
+            redisUtil.setPassword(this.dptmsRedisProperties.getPassword());
+            redisUtil.setEnableHeartbeat(this.dptmsRedisProperties.isEnableHeartbeat());
+            redisUtil.init();
+            return redisUtil;
+        } else if (RedisConstants.MODEL_CLUSTER.equals(model)) {
+            RedisClusterUtil redisClusterUtil = new RedisClusterUtil();
+            redisClusterUtil.setPrefix(this.dptmsRedisProperties.getPrefix());
+            redisClusterUtil.setMaxTotal(this.dptmsRedisProperties.getMaxTotal());
+            redisClusterUtil.setMaxIdle(this.dptmsRedisProperties.getMaxIdle());
+            redisClusterUtil.setMaxWaitMills((long) this.dptmsRedisProperties.getMaxWaitMillis());
+            redisClusterUtil.setIp(this.dptmsRedisProperties.getIp());
+            redisClusterUtil.setPassword(this.dptmsRedisProperties.getPassword());
+            redisClusterUtil.init();
+            return redisClusterUtil;
+        } else {
+            return null;
+        }
+    }
 
     @Bean(name = "redisTemplate")
     @ConditionalOnMissingBean(name = "redisTemplate")
@@ -112,9 +147,9 @@ public class RedisAutoConfig {
         };
     }
 
-    @Bean
-    public RedisUtil redisUtil(RedisTemplate<String, Object> redisTemplate) {
-        return new RedisUtil(redisTemplate, dptmsCacheProperties.isUseKeyPrefix() ? dptmsCacheProperties.getKeyPrefix() : "");
-    }
+    // @Bean
+    // public RedisUtil redisUtil(RedisTemplate<String, Object> redisTemplate) {
+    //     return new RedisUtil(redisTemplate, dptmsCacheProperties.isUseKeyPrefix() ? dptmsCacheProperties.getKeyPrefix() : "");
+    // }
 
 }

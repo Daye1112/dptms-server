@@ -64,7 +64,8 @@ public class SerializeUtil {
      * @author luyuhao
      * @since 2021/8/13
      */
-    public static Object deserialize(byte[] bytes) {
+    @SuppressWarnings("unchecked")
+    public static <T> T deserialize(byte[] bytes) {
         if (bytes == null) {
             return null;
         }
@@ -75,7 +76,7 @@ public class SerializeUtil {
         try {
             bais = new ByteArrayInputStream(bytes);
             ois = new ObjectInputStream(bais);
-            return ois.readObject();
+            return (T) ois.readObject();
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
             return null;

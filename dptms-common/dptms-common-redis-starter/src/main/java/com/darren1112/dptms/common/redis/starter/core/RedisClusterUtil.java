@@ -1,16 +1,14 @@
 package com.darren1112.dptms.common.redis.starter.core;
 
 import com.darren1112.dptms.common.core.util.CollectionUtil;
+import com.darren1112.dptms.common.core.util.SerializeUtil;
+import com.darren1112.dptms.common.core.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import redis.clients.jedis.HostAndPort;
-import redis.clients.jedis.JedisCluster;
-import redis.clients.jedis.JedisPubSub;
+import redis.clients.jedis.*;
 
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.io.IOException;
+import java.util.*;
 
 /**
  * redis集群模式实现
@@ -57,7 +55,7 @@ public class RedisClusterUtil implements RedisUtil {
     /**
      * 存放集群的ip及端口
      */
-    Set<HostAndPort> nodes = new LinkedHashSet<>();
+    private Set<HostAndPort> nodes = new LinkedHashSet<>();
 
     /**
      * 资源初始化
@@ -67,6 +65,29 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public void init() {
+        if (StringUtil.isEmpty(this.ip)) {
+            return;
+        }
+        String[] ips = this.ip.split(",");
+
+        for (String subIp : ips) {
+            String[] ipAndPort = subIp.split(":");
+            this.nodes.add(new HostAndPort(ipAndPort[0], Integer.valueOf(ipAndPort[1])));
+        }
+
+        this.initCluster();
+    }
+
+    private void initCluster() {
+        JedisPoolConfig poolConfig = new JedisPoolConfig();
+        poolConfig.setMaxTotal(this.maxTotal);
+        poolConfig.setMaxIdle(this.maxIdle);
+        poolConfig.setMaxWaitMillis(this.maxWaitMillis);
+        if (StringUtil.isEmpty(this.password)) {
+            this.jedisCluster = new JedisCluster(this.nodes, 2000, 2000, 5, this.password, poolConfig);
+        } else {
+            this.jedisCluster = new JedisCluster(this.nodes, poolConfig);
+        }
 
     }
 
@@ -78,7 +99,14 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public void close() {
-
+        if (this.jedisCluster != null) {
+            try {
+                this.jedisCluster.close();
+            } catch (IOException e) {
+                LOGGER.warn(e.getMessage(), e);
+            }
+            this.jedisCluster = null;
+        }
     }
 
     /**
@@ -105,10 +133,10 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public String getWithPrefix(String prefix, String key) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        return this.jedisCluster.get(key);
     }
 
     /**
@@ -135,10 +163,10 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public <T> T getObjectWithPrefix(String prefix, String key) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        return this.deserialize(this.getBytesWithPrefix(prefix, key));
     }
 
     /**
@@ -167,10 +195,83 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public String setWithPrefix(String prefix, String key, String value) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        return this.jedisCluster.set(key, value);
+    }
+
+    /**
+     * 设置key value
+     *
+     * @param key     键
+     * @param value   值
+     * @param seconds 有效时间（秒）
+     * @return {@link String}
+     * @author luyuhao
+     * @since 2021/8/11
+     */
+    @Override
+    public String set(String key, String value, int seconds) {
+        return setWithPrefix(this.prefix, key, value, seconds);
+    }
+
+    /**
+     * 含前缀-设置key value
+     *
+     * @param prefix  前缀
+     * @param key     键
+     * @param value   值
+     * @param seconds 有效时间（秒）
+     * @return {@link String}
+     * @author luyuhao
+     * @since 2021/8/11
+     */
+    @Override
+    public String setWithPrefix(String prefix, String key, String value, int seconds) {
+        if (prefix != null) {
+            key = prefix + key;
+        }
+        return this.jedisCluster.setex(key, seconds, value);
+    }
+
+    /**
+     * 根据前缀匹配所有key
+     *
+     * @param keyPrefix 前缀
+     * @return {@link String}
+     * @author luyuhao
+     * @since 2021/11/14
+     */
+    @Override
+    public Set<String> getKeys(String keyPrefix) {
+        return getKeysWithKeyPrefix(this.prefix, keyPrefix);
+    }
+
+    /**
+     * 根据前缀匹配所有key
+     *
+     * @param prefix    前缀
+     * @param keyPrefix 查询前缀
+     * @return {@link String}
+     * @author luyuhao
+     * @since 2021/11/14
+     */
+    @Override
+    public Set<String> getKeysWithKeyPrefix(String prefix, String keyPrefix) {
+        if (prefix != null) {
+            keyPrefix = prefix + keyPrefix;
+        }
+        Set<String> keys = new HashSet<>();
+        Map<String, JedisPool> clusterNodes = this.jedisCluster.getClusterNodes();
+
+        for (String key : clusterNodes.keySet()) {
+            JedisPool jedisPool = clusterNodes.get(key);
+            Jedis resource = jedisPool.getResource();
+            keys.addAll(resource.keys(keyPrefix));
+        }
+
+        return keys;
     }
 
     /**
@@ -209,10 +310,10 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public String setWithPrefix(String prefix, String key, String value, String nxxx, String expx, long seconds) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        return this.jedisCluster.set(key, value, nxxx, expx, seconds);
     }
 
     /**
@@ -241,10 +342,7 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public <T> String setObjectWithPrefix(String prefix, String key, T value) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
-        }
-        return null;
+        return this.setBytesWithPrefix(prefix, key, SerializeUtil.serialize(value));
     }
 
     /**
@@ -275,10 +373,10 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public String setExWithPrefix(String prefix, String key, String value, Integer seconds) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        return this.jedisCluster.setex(key, seconds, value);
     }
 
     /**
@@ -309,10 +407,7 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public <T> String setExObjectWithPrefix(String prefix, String key, T value, Integer seconds) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
-        }
-        return null;
+        return this.setExBytesWithPrefix(prefix, key, SerializeUtil.serialize(value), seconds);
     }
 
     /**
@@ -343,10 +438,10 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public String setExBytesWithPrefix(String prefix, String key, byte[] value, Integer seconds) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        return this.jedisCluster.setex(key.getBytes(), seconds, value);
     }
 
     /**
@@ -373,10 +468,10 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public byte[] getBytesWithPrefix(String prefix, String key) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return new byte[0];
+        return this.jedisCluster.get(key.getBytes());
     }
 
     /**
@@ -405,10 +500,10 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public String setBytesWithPrefix(String prefix, String key, byte[] value) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        return this.jedisCluster.set(key.getBytes(), value);
     }
 
     /**
@@ -439,10 +534,10 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public Long setMapWithPrefix(String prefix, String key, String field, String value) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        return this.jedisCluster.hset(key, field, value);
     }
 
     /**
@@ -473,10 +568,7 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public <T> Long setMapObjectWithPrefix(String prefix, String key, String field, T value) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
-        }
-        return null;
+        return this.setMapBytesWithPrefix(prefix, key, field, SerializeUtil.serialize(value));
     }
 
     /**
@@ -507,10 +599,7 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public Long hsetWithPrefix(String prefix, String key, String field, String value) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
-        }
-        return null;
+        return this.setMapWithPrefix(prefix, key, field, value);
     }
 
     /**
@@ -539,10 +628,11 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public String getMapWithPrefix(String prefix, String key, String field) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+
+        return this.jedisCluster.hget(key, field);
     }
 
     /**
@@ -571,10 +661,7 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public <T> T getMapObjectWithPrefix(String prefix, String key, String field) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
-        }
-        return null;
+        return this.deserialize(this.getMapBytesWithPrefix(prefix, key, field));
     }
 
     /**
@@ -603,10 +690,11 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public byte[] getMapBytesWithPrefix(String prefix, String key, String field) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return new byte[0];
+
+        return this.jedisCluster.hget(key.getBytes(), field.getBytes());
     }
 
     /**
@@ -637,10 +725,10 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public Long setMapBytesWithPrefix(String prefix, String key, String field, byte[] value) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        return this.jedisCluster.hset(key.getBytes(), field.getBytes(), value);
     }
 
     /**
@@ -669,10 +757,10 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public Long removeMapFieldWithPrefix(String prefix, String key, String... fields) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        return this.jedisCluster.hdel(key, fields);
     }
 
     /**
@@ -701,10 +789,10 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public Long expireWithPrefix(String prefix, String key, Integer seconds) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        return this.jedisCluster.expire(key, seconds);
     }
 
     /**
@@ -731,10 +819,10 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public Long ttlWithPrefix(String prefix, String key) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        return this.jedisCluster.ttl(key);
     }
 
     /**
@@ -761,10 +849,10 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public Long removeKeyWithPrefix(String prefix, String key) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        return this.jedisCluster.del(key);
     }
 
     /**
@@ -791,10 +879,10 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public boolean existsWithPrefix(String prefix, String key) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return false;
+        return this.jedisCluster.exists(key);
     }
 
     /**
@@ -823,10 +911,10 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public Long setNxWithPrefix(String prefix, String key, String value) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        return this.jedisCluster.setnx(key, value);
     }
 
     /**
@@ -855,10 +943,7 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public <T> Long setNxObjectWithPrefix(String prefix, String key, T value) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
-        }
-        return null;
+        return this.setNxBytesWithPrefix(prefix, key, SerializeUtil.serialize(value));
     }
 
     /**
@@ -887,10 +972,10 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public Long setNxBytesWithPrefix(String prefix, String key, byte[] value) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        return this.jedisCluster.setnx(key.getBytes(), value);
     }
 
     /**
@@ -920,7 +1005,7 @@ public class RedisClusterUtil implements RedisUtil {
         if (this.prefix != null) {
             pattern = this.prefix + pattern;
         }
-        return null;
+        return this.jedisCluster.hkeys(pattern);
     }
 
     /**
@@ -949,10 +1034,10 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public List<String> getMapValuesWithPrefix(String prefix, String key, String... fields) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        return this.jedisCluster.hmget(key, fields);
     }
 
     /**
@@ -981,10 +1066,10 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public String setMapWithPrefix(String prefix, String key, Map<String, String> hash) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        return this.jedisCluster.hmset(key, hash);
     }
 
     /**
@@ -1011,10 +1096,10 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public Long incrWithPrefix(String prefix, String key) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        return this.jedisCluster.incr(key);
     }
 
     /**
@@ -1043,10 +1128,10 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public Long incrByWithPrefix(String prefix, String key, Long increment) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        return this.jedisCluster.incrBy(key, increment);
     }
 
     /**
@@ -1075,10 +1160,10 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public Long hincrWithPrefix(String prefix, String key, String field) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        return this.jedisCluster.hincrBy(key, field, 1);
     }
 
     /**
@@ -1090,7 +1175,7 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public void psubscribe(JedisPubSub jedisPubSub) {
-
+        this.psubscribe(jedisPubSub, "*");
     }
 
     /**
@@ -1103,7 +1188,7 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public void psubscribe(JedisPubSub jedisPubSub, String... patterns) {
-
+        this.jedisCluster.psubscribe(jedisPubSub, patterns);
     }
 
     /**
@@ -1116,7 +1201,7 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public void subscribe(JedisPubSub listener, String... channels) {
-
+        this.jedisCluster.subscribe(listener, channels);
     }
 
     /**
@@ -1143,10 +1228,10 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public String lpopWithPrefix(String prefix, String key) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        return this.jedisCluster.lpop(key);
     }
 
     /**
@@ -1175,10 +1260,10 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public Long lpushWithPrefix(String prefix, String key, String... strings) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        return this.jedisCluster.lpush(key, strings);
     }
 
     /**
@@ -1205,10 +1290,10 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public String rpopWithPrefix(String prefix, String key) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        return this.jedisCluster.rpop(key);
     }
 
     /**
@@ -1237,10 +1322,10 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public Long rpushWithPrefix(String prefix, String key, String... strings) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        return this.jedisCluster.rpush(key, strings);
     }
 
     /**
@@ -1267,10 +1352,10 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public Long llenWithPrefix(String prefix, String key) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        return this.jedisCluster.llen(key);
     }
 
     /**
@@ -1299,10 +1384,10 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public String lIndexWithPrefix(String prefix, String key, long index) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        return this.jedisCluster.lindex(key, index);
     }
 
     /**
@@ -1333,10 +1418,10 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public List<String> lrangeWithPrefix(String prefix, String key, long start, long end) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        return this.jedisCluster.lrange(key, start, end);
     }
 
     /**
@@ -1365,10 +1450,10 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public Long saddWithPrefix(String prefix, String key, String... members) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        return this.jedisCluster.sadd(key, members);
     }
 
     /**
@@ -1397,10 +1482,10 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public Long saddWithPrefix(String prefix, String key, byte[]... members) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        return this.jedisCluster.sadd(key.getBytes(), members);
     }
 
     /**
@@ -1429,10 +1514,10 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public Long sremWithPrefix(String prefix, String key, String... members) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        return this.jedisCluster.srem(key, members);
     }
 
     /**
@@ -1459,10 +1544,10 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public Long scardWithPrefix(String prefix, String key) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        return this.jedisCluster.scard(key);
     }
 
     /**
@@ -1489,10 +1574,10 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public Set<String> smembersWithPrefix(String prefix, String key) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        return this.jedisCluster.smembers(key);
     }
 
     /**
@@ -1521,10 +1606,10 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public List<String> srandmemberWithPrefix(String prefix, String key, int count) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        return this.jedisCluster.srandmember(key, count);
     }
 
     /**
@@ -1557,10 +1642,10 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public Long zaddWithPrefix(String prefix, String key, double score, String member) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        return this.jedisCluster.zadd(key, score, member);
     }
 
     /**
@@ -1589,10 +1674,10 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public Long zremWithPrefix(String prefix, String key, String... members) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        return this.jedisCluster.zrem(key, members);
     }
 
     /**
@@ -1623,10 +1708,10 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public Long zremrangeByRankWithPrefix(String prefix, String key, long start, long stop) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        return this.jedisCluster.zremrangeByRank(key, start, stop);
     }
 
     /**
@@ -1657,10 +1742,10 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public Long zremrangeByScoreWithPrefix(String prefix, String key, double min, double max) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        return this.jedisCluster.zremrangeByScore(key, min, max);
     }
 
     /**
@@ -1691,10 +1776,10 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public Set<String> zrangeWithPrefix(String prefix, String key, long start, long end) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        return this.jedisCluster.zrange(key, start, end);
     }
 
     /**
@@ -1725,10 +1810,10 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public Set<String> zrangeByScoreWithPrefix(String prefix, String key, double min, double max) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        return this.jedisCluster.zrangeByScore(key, min, max);
     }
 
     /**
@@ -1759,10 +1844,10 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public Set<String> zrevrangeWithPrefix(String prefix, String key, long start, long end) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        return this.jedisCluster.zrevrange(key, start, end);
     }
 
     /**
@@ -1791,10 +1876,10 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public Double zscoreWithPrefix(String prefix, String key, String member) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        return this.jedisCluster.zscore(key, member);
     }
 
     /**
@@ -1827,10 +1912,10 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public Double zincrbyWithPrefix(String prefix, String key, double increment, String member) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        return this.zincrby(key, increment, member);
     }
 
     /**
@@ -1861,10 +1946,10 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public Long zcountWithPrefix(String prefix, String key, double min, double max) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        return this.jedisCluster.zcount(key, min, max);
     }
 
     /**
@@ -1925,10 +2010,10 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public boolean getBitWithPrefix(String prefix, String key, long offset) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return false;
+        return this.getBit(key, offset);
     }
 
     /**
@@ -1959,10 +2044,10 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public boolean setBitWithPrefix(String prefix, String key, long offset, boolean value) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return false;
+        return this.jedisCluster.setbit(key, offset, value);
     }
 
     /**
@@ -1989,10 +2074,10 @@ public class RedisClusterUtil implements RedisUtil {
      */
     @Override
     public long bitCountWithPrefix(String prefix, String key) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return 0;
+        return this.jedisCluster.bitcount(key);
     }
 
     /**
@@ -2102,4 +2187,11 @@ public class RedisClusterUtil implements RedisUtil {
     public void setEnableHeartbeat(boolean enableHeartbeat) {
     }
 
+    private <T> T deserialize(byte[] value) {
+        try {
+            return SerializeUtil.deserialize(value);
+        } catch (ClassCastException var3) {
+            return null;
+        }
+    }
 }

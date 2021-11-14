@@ -96,6 +96,52 @@ public interface RedisUtil {
     String setWithPrefix(String prefix, String key, String value);
 
     /**
+     * 设置key value
+     *
+     * @param key     键
+     * @param value   值
+     * @param seconds 有效时间（秒）
+     * @return {@link String}
+     * @author luyuhao
+     * @since 2021/8/11
+     */
+    String set(String key, String value, int seconds);
+
+    /**
+     * 含前缀-设置key value
+     *
+     * @param prefix  前缀
+     * @param key     键
+     * @param value   值
+     * @param seconds 有效时间（秒）
+     * @return {@link String}
+     * @author luyuhao
+     * @since 2021/8/11
+     */
+    String setWithPrefix(String prefix, String key, String value, int seconds);
+
+    /**
+     * 根据前缀匹配所有key
+     *
+     * @param keyPrefix 前缀
+     * @return {@link String}
+     * @author luyuhao
+     * @since 2021/11/14
+     */
+    Set<String> getKeys(String keyPrefix);
+
+    /**
+     * 根据前缀匹配所有key
+     *
+     * @param prefix    前缀
+     * @param keyPrefix 查询前缀
+     * @return {@link String}
+     * @author luyuhao
+     * @since 2021/11/14
+     */
+    Set<String> getKeysWithKeyPrefix(String prefix, String keyPrefix);
+
+    /**
      * 根据策略设置key value
      *
      * @param key     键
@@ -1064,7 +1110,7 @@ public interface RedisUtil {
      *
      * @param prefix 前缀
      * @param key    键
-     * @param count 返回的元素数量
+     * @param count  返回的元素数量
      * @return {@link String}
      * @author luyuhao
      * @since 2021/8/11

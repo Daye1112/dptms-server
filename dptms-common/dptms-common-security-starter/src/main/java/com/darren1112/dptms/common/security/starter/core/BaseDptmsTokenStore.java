@@ -5,7 +5,7 @@ import com.darren1112.dptms.common.core.util.CookieUtil;
 import com.darren1112.dptms.common.core.util.JsonUtil;
 import com.darren1112.dptms.common.core.util.RequestUtil;
 import com.darren1112.dptms.common.core.util.StringUtil;
-import com.darren1112.dptms.common.redis.starter.util.RedisUtil;
+import com.darren1112.dptms.common.redis.starter.core.RedisUtil;
 import com.darren1112.dptms.common.security.starter.properties.SecurityProperties;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 
@@ -24,9 +24,9 @@ import java.util.Set;
  */
 public abstract class BaseDptmsTokenStore {
 
-    RedisUtil redisUtil;
+    private RedisUtil redisUtil;
 
-    SecurityProperties securityProperties;
+    private SecurityProperties securityProperties;
 
     public BaseDptmsTokenStore(RedisUtil redisUtil, SecurityProperties securityProperties) {
         this.redisUtil = redisUtil;
@@ -217,7 +217,7 @@ public abstract class BaseDptmsTokenStore {
      */
     public void removeRefreshToken(String refreshToken) {
         if (StringUtil.isNotBlank(refreshToken)) {
-            redisUtil.delete(SecurityConstant.REDIS_REFRESH_TOKEN_PREFIX + refreshToken);
+            redisUtil.removeKey(SecurityConstant.REDIS_REFRESH_TOKEN_PREFIX + refreshToken);
         }
     }
 
@@ -230,7 +230,7 @@ public abstract class BaseDptmsTokenStore {
      */
     public void removeAccessToken(String accessToken) {
         if (StringUtil.isNotBlank(accessToken)) {
-            redisUtil.delete(SecurityConstant.REDIS_ACCESS_TOKEN_PREFIX + accessToken);
+            redisUtil.removeKey(SecurityConstant.REDIS_ACCESS_TOKEN_PREFIX + accessToken);
         }
     }
 
@@ -243,10 +243,10 @@ public abstract class BaseDptmsTokenStore {
      * @since 2021/01/31 20:00
      */
     public void updateActiveUser(ActiveUser activeUser, String refreshToken) {
-        long expired = redisUtil.getExpire(SecurityConstant.REDIS_REFRESH_TOKEN_PREFIX + refreshToken);
+        long expired = redisUtil.ttl(SecurityConstant.REDIS_REFRESH_TOKEN_PREFIX + refreshToken);
         if (expired > 0) {
             // 设置refreshToken
-            redisUtil.set(SecurityConstant.REDIS_REFRESH_TOKEN_PREFIX + refreshToken, JsonUtil.toJsonString(activeUser), expired);
+            redisUtil.set(SecurityConstant.REDIS_REFRESH_TOKEN_PREFIX + refreshToken, JsonUtil.toJsonString(activeUser), (int) expired);
         }
     }
 
@@ -270,7 +270,7 @@ public abstract class BaseDptmsTokenStore {
      * @since 2021/01/31 23:22
      */
     public void removeUserRefreshToken(ActiveUser activeUser) {
-        redisUtil.delete(SecurityConstant.REDIS_USER_REFRESH_TOKEN_PREFIX + activeUser.getId());
+        redisUtil.removeKey(SecurityConstant.REDIS_USER_REFRESH_TOKEN_PREFIX + activeUser.getId());
     }
 
 }

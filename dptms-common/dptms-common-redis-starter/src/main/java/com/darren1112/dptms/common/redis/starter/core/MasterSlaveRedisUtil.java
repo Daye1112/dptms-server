@@ -127,10 +127,10 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public String getWithPrefix(String prefix, String key) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        try (Jedis jedis = holder.getReadResorce()) {
+        try (Jedis jedis = holder.getReadResource()) {
             return jedis.get(key);
         }
     }
@@ -159,10 +159,10 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public <T> T getObjectWithPrefix(String prefix, String key) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        try (Jedis jedis = holder.getReadResorce()) {
+        try (Jedis jedis = holder.getReadResource()) {
             byte[] bytes = jedis.get(key.getBytes());
             return deserialize(bytes);
         }
@@ -194,11 +194,79 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public String setWithPrefix(String prefix, String key, String value) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
         try (Jedis jedis = holder.getWriteResource()) {
             return jedis.set(key, value);
+        }
+    }
+
+    /**
+     * 设置key value
+     *
+     * @param key     键
+     * @param value   值
+     * @param seconds 有效时间（秒）
+     * @return {@link String}
+     * @author luyuhao
+     * @since 2021/8/11
+     */
+    @Override
+    public String set(String key, String value, int seconds) {
+        return setWithPrefix(this.prefix, key, value, seconds);
+    }
+
+    /**
+     * 含前缀-设置key value
+     *
+     * @param prefix  前缀
+     * @param key     键
+     * @param value   值
+     * @param seconds 有效时间（秒）
+     * @return {@link String}
+     * @author luyuhao
+     * @since 2021/8/11
+     */
+    @Override
+    public String setWithPrefix(String prefix, String key, String value, int seconds) {
+        if (prefix != null) {
+            key = prefix + key;
+        }
+        try (Jedis jedis = holder.getWriteResource()) {
+            return jedis.setex(key, seconds, value);
+        }
+    }
+
+    /**
+     * 根据前缀匹配所有key
+     *
+     * @param keyPrefix 前缀
+     * @return {@link String}
+     * @author luyuhao
+     * @since 2021/11/14
+     */
+    @Override
+    public Set<String> getKeys(String keyPrefix) {
+        return this.getKeysWithKeyPrefix(this.prefix, keyPrefix);
+    }
+
+    /**
+     * 根据前缀匹配所有key
+     *
+     * @param prefix    前缀
+     * @param keyPrefix 查询前缀
+     * @return {@link String}
+     * @author luyuhao
+     * @since 2021/11/14
+     */
+    @Override
+    public Set<String> getKeysWithKeyPrefix(String prefix, String keyPrefix) {
+        if (prefix != null) {
+            keyPrefix = prefix + keyPrefix;
+        }
+        try (Jedis jedis = holder.getWriteResource()) {
+            return jedis.keys(keyPrefix);
         }
     }
 
@@ -238,8 +306,8 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public String setWithPrefix(String prefix, String key, String value, String nxxx, String expx, long seconds) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
         try (Jedis jedis = holder.getWriteResource()) {
             return jedis.set(key, value, nxxx, expx, seconds);
@@ -272,8 +340,8 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public <T> String setObjectWithPrefix(String prefix, String key, T value) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
         try (Jedis jedis = holder.getWriteResource()) {
             return jedis.set(key.getBytes(), SerializeUtil.serialize(value));
@@ -308,8 +376,8 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public String setExWithPrefix(String prefix, String key, String value, Integer seconds) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
         try (Jedis jedis = holder.getWriteResource()) {
             return jedis.setex(key, seconds, value);
@@ -344,8 +412,8 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public <T> String setExObjectWithPrefix(String prefix, String key, T value, Integer seconds) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
         try (Jedis jedis = holder.getWriteResource()) {
             return jedis.setex(key.getBytes(), seconds, SerializeUtil.serialize(value));
@@ -380,8 +448,8 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public String setExBytesWithPrefix(String prefix, String key, byte[] value, Integer seconds) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
         try (Jedis jedis = holder.getWriteResource()) {
             return jedis.setex(key.getBytes(), seconds, value);
@@ -412,10 +480,10 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public byte[] getBytesWithPrefix(String prefix, String key) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        try (Jedis jedis = holder.getReadResorce()) {
+        try (Jedis jedis = holder.getReadResource()) {
             return jedis.get(key.getBytes());
         }
     }
@@ -446,8 +514,8 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public String setBytesWithPrefix(String prefix, String key, byte[] value) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
         try (Jedis jedis = holder.getWriteResource()) {
             return jedis.set(key.getBytes(), value);
@@ -482,8 +550,8 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public Long setMapWithPrefix(String prefix, String key, String field, String value) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
         try (Jedis jedis = holder.getWriteResource()) {
             return jedis.hset(key, field, value);
@@ -518,8 +586,8 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public <T> Long setMapObjectWithPrefix(String prefix, String key, String field, T value) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
         try (Jedis jedis = holder.getWriteResource()) {
             return jedis.hset(key.getBytes(), field.getBytes(), SerializeUtil.serialize(value));
@@ -554,8 +622,8 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public Long hsetWithPrefix(String prefix, String key, String field, String value) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
         try (Jedis jedis = holder.getWriteResource()) {
             return jedis.hset(key, field, value);
@@ -588,10 +656,10 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public String getMapWithPrefix(String prefix, String key, String field) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        try (Jedis jedis = holder.getReadResorce()) {
+        try (Jedis jedis = holder.getReadResource()) {
             return jedis.hget(key, field);
         }
     }
@@ -622,10 +690,10 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public <T> T getMapObjectWithPrefix(String prefix, String key, String field) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        try (Jedis jedis = holder.getReadResorce()) {
+        try (Jedis jedis = holder.getReadResource()) {
             byte[] bytes = jedis.hget(key.getBytes(), field.getBytes());
             return deserialize(bytes);
         }
@@ -657,10 +725,10 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public byte[] getMapBytesWithPrefix(String prefix, String key, String field) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        try (Jedis jedis = holder.getReadResorce()) {
+        try (Jedis jedis = holder.getReadResource()) {
             return jedis.hget(key.getBytes(), field.getBytes());
         }
     }
@@ -693,10 +761,12 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public Long setMapBytesWithPrefix(String prefix, String key, String field, byte[] value) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        try (Jedis jedis = holder.getWriteResource()) {
+            return jedis.hset(key.getBytes(), field.getBytes(), value);
+        }
     }
 
     /**
@@ -725,10 +795,12 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public Long removeMapFieldWithPrefix(String prefix, String key, String... fields) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        try (Jedis jedis = holder.getWriteResource()) {
+            return jedis.hdel(key, fields);
+        }
     }
 
     /**
@@ -757,10 +829,12 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public Long expireWithPrefix(String prefix, String key, Integer seconds) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        try (Jedis jedis = holder.getWriteResource()) {
+            return jedis.expire(key, seconds);
+        }
     }
 
     /**
@@ -787,10 +861,12 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public Long ttlWithPrefix(String prefix, String key) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        try (Jedis jedis = holder.getReadResource()) {
+            return jedis.ttl(key);
+        }
     }
 
     /**
@@ -817,10 +893,12 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public Long removeKeyWithPrefix(String prefix, String key) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        try (Jedis jedis = holder.getWriteResource()) {
+            return jedis.del(key);
+        }
     }
 
     /**
@@ -847,10 +925,12 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public boolean existsWithPrefix(String prefix, String key) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return false;
+        try (Jedis jedis = holder.getReadResource()) {
+            return jedis.exists(key);
+        }
     }
 
     /**
@@ -879,10 +959,12 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public Long setNxWithPrefix(String prefix, String key, String value) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        try (Jedis jedis = holder.getWriteResource()) {
+            return jedis.setnx(key, value);
+        }
     }
 
     /**
@@ -911,10 +993,12 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public <T> Long setNxObjectWithPrefix(String prefix, String key, T value) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        try (Jedis jedis = holder.getWriteResource()) {
+            return jedis.setnx(key.getBytes(), SerializeUtil.serialize(value));
+        }
     }
 
     /**
@@ -943,10 +1027,12 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public Long setNxBytesWithPrefix(String prefix, String key, byte[] value) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        try (Jedis jedis = holder.getWriteResource()) {
+            return jedis.setnx(key.getBytes(), value);
+        }
     }
 
     /**
@@ -976,7 +1062,9 @@ public class MasterSlaveRedisUtil implements RedisUtil {
         if (this.prefix != null) {
             pattern = this.prefix + pattern;
         }
-        return null;
+        try (Jedis jedis = holder.getReadResource()) {
+            return jedis.hkeys(pattern);
+        }
     }
 
     /**
@@ -1005,10 +1093,12 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public List<String> getMapValuesWithPrefix(String prefix, String key, String... fields) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        try (Jedis jedis = holder.getReadResource()) {
+            return jedis.hmget(key, fields);
+        }
     }
 
     /**
@@ -1037,10 +1127,12 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public String setMapWithPrefix(String prefix, String key, Map<String, String> hash) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        try (Jedis jedis = holder.getWriteResource()) {
+            return jedis.hmset(key, hash);
+        }
     }
 
     /**
@@ -1067,10 +1159,12 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public Long incrWithPrefix(String prefix, String key) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        try (Jedis jedis = holder.getWriteResource()) {
+            return jedis.incr(key);
+        }
     }
 
     /**
@@ -1099,10 +1193,12 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public Long incrByWithPrefix(String prefix, String key, Long increment) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        try (Jedis jedis = holder.getWriteResource()) {
+            return jedis.incrBy(key, increment);
+        }
     }
 
     /**
@@ -1131,10 +1227,12 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public Long hincrWithPrefix(String prefix, String key, String field) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        try (Jedis jedis = holder.getWriteResource()) {
+            return jedis.hincrBy(key, field, 1);
+        }
     }
 
     /**
@@ -1146,7 +1244,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public void psubscribe(JedisPubSub jedisPubSub) {
-
+        this.psubscribe(jedisPubSub, "*");
     }
 
     /**
@@ -1159,7 +1257,9 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public void psubscribe(JedisPubSub jedisPubSub, String... patterns) {
-
+        try (Jedis jedis = holder.getWriteResource()) {
+            jedis.psubscribe(jedisPubSub, patterns);
+        }
     }
 
     /**
@@ -1172,7 +1272,9 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public void subscribe(JedisPubSub listener, String... channels) {
-
+        try (Jedis jedis = holder.getWriteResource()) {
+            jedis.subscribe(listener, channels);
+        }
     }
 
     /**
@@ -1199,10 +1301,12 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public String lpopWithPrefix(String prefix, String key) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        try (Jedis jedis = holder.getWriteResource()) {
+            return jedis.lpop(key);
+        }
     }
 
     /**
@@ -1231,10 +1335,12 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public Long lpushWithPrefix(String prefix, String key, String... strings) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        try (Jedis jedis = holder.getWriteResource()) {
+            return jedis.lpush(key, strings);
+        }
     }
 
     /**
@@ -1261,10 +1367,12 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public String rpopWithPrefix(String prefix, String key) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        try (Jedis jedis = holder.getWriteResource()) {
+            return jedis.rpop(key);
+        }
     }
 
     /**
@@ -1293,10 +1401,12 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public Long rpushWithPrefix(String prefix, String key, String... strings) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        try (Jedis jedis = holder.getWriteResource()) {
+            return jedis.rpush(key, strings);
+        }
     }
 
     /**
@@ -1323,10 +1433,12 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public Long llenWithPrefix(String prefix, String key) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        try (Jedis jedis = holder.getReadResource()) {
+            return jedis.llen(key);
+        }
     }
 
     /**
@@ -1355,10 +1467,12 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public String lIndexWithPrefix(String prefix, String key, long index) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        try (Jedis jedis = holder.getReadResource()) {
+            return jedis.lindex(key, index);
+        }
     }
 
     /**
@@ -1389,10 +1503,12 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public List<String> lrangeWithPrefix(String prefix, String key, long start, long end) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        try (Jedis jedis = holder.getReadResource()) {
+            return jedis.lrange(key, start, end);
+        }
     }
 
     /**
@@ -1421,10 +1537,12 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public Long saddWithPrefix(String prefix, String key, String... members) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        try (Jedis jedis = holder.getWriteResource()) {
+            return jedis.sadd(key, members);
+        }
     }
 
     /**
@@ -1453,10 +1571,12 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public Long saddWithPrefix(String prefix, String key, byte[]... members) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        try (Jedis jedis = holder.getWriteResource()) {
+            return jedis.sadd(key.getBytes(), members);
+        }
     }
 
     /**
@@ -1485,10 +1605,12 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public Long sremWithPrefix(String prefix, String key, String... members) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        try (Jedis jedis = holder.getWriteResource()) {
+            return jedis.srem(key, members);
+        }
     }
 
     /**
@@ -1515,10 +1637,12 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public Long scardWithPrefix(String prefix, String key) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        try (Jedis jedis = holder.getWriteResource()) {
+            return jedis.scard(key);
+        }
     }
 
     /**
@@ -1545,10 +1669,12 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public Set<String> smembersWithPrefix(String prefix, String key) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        try (Jedis jedis = holder.getWriteResource()) {
+            return jedis.smembers(key);
+        }
     }
 
     /**
@@ -1577,10 +1703,12 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public List<String> srandmemberWithPrefix(String prefix, String key, int count) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        try (Jedis jedis = holder.getWriteResource()) {
+            return jedis.srandmember(key, count);
+        }
     }
 
     /**
@@ -1613,10 +1741,12 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public Long zaddWithPrefix(String prefix, String key, double score, String member) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        try (Jedis jedis = holder.getWriteResource()) {
+            return jedis.zadd(key, score, member);
+        }
     }
 
     /**
@@ -1645,10 +1775,12 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public Long zremWithPrefix(String prefix, String key, String... members) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        try (Jedis jedis = holder.getWriteResource()) {
+            return jedis.zrem(key, members);
+        }
     }
 
     /**
@@ -1679,10 +1811,12 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public Long zremrangeByRankWithPrefix(String prefix, String key, long start, long stop) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        try (Jedis jedis = holder.getWriteResource()) {
+            return jedis.zremrangeByRank(key, start, stop);
+        }
     }
 
     /**
@@ -1713,10 +1847,12 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public Long zremrangeByScoreWithPrefix(String prefix, String key, double min, double max) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        try (Jedis jedis = holder.getWriteResource()) {
+            return jedis.zremrangeByScore(key, min, max);
+        }
     }
 
     /**
@@ -1747,10 +1883,12 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public Set<String> zrangeWithPrefix(String prefix, String key, long start, long end) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        try (Jedis jedis = holder.getReadResource()) {
+            return jedis.zrange(key, start, end);
+        }
     }
 
     /**
@@ -1781,10 +1919,12 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public Set<String> zrangeByScoreWithPrefix(String prefix, String key, double min, double max) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        try (Jedis jedis = holder.getReadResource()) {
+            return jedis.zrangeByScore(key, min, max);
+        }
     }
 
     /**
@@ -1815,10 +1955,12 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public Set<String> zrevrangeWithPrefix(String prefix, String key, long start, long end) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        try (Jedis jedis = holder.getReadResource()) {
+            return jedis.zrevrange(key, start, end);
+        }
     }
 
     /**
@@ -1847,10 +1989,12 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public Double zscoreWithPrefix(String prefix, String key, String member) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        try (Jedis jedis = holder.getReadResource()) {
+            return jedis.zscore(key, member);
+        }
     }
 
     /**
@@ -1883,10 +2027,12 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public Double zincrbyWithPrefix(String prefix, String key, double increment, String member) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        try (Jedis jedis = holder.getWriteResource()) {
+            return jedis.zincrby(key, increment, member);
+        }
     }
 
     /**
@@ -1917,10 +2063,12 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public Long zcountWithPrefix(String prefix, String key, double min, double max) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return null;
+        try (Jedis jedis = holder.getReadResource()) {
+            return jedis.zcount(key, min, max);
+        }
     }
 
     /**
@@ -1932,7 +2080,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public String info() {
-        try (Jedis jedis = holder.getReadResorce()) {
+        try (Jedis jedis = holder.getReadResource()) {
             return jedis.info();
         }
     }
@@ -1954,7 +2102,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
                 keys.set(i, prefix + keys.get(i));
             }
         }
-        try (Jedis jedis = holder.getReadResorce()) {
+        try (Jedis jedis = holder.getWriteResource()) {
             return jedis.eval(script, keys, args);
         }
     }
@@ -1985,10 +2133,12 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public boolean getBitWithPrefix(String prefix, String key, long offset) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return false;
+        try (Jedis jedis = holder.getReadResource()) {
+            return jedis.getbit(key, offset);
+        }
     }
 
     /**
@@ -2019,10 +2169,12 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public boolean setBitWithPrefix(String prefix, String key, long offset, boolean value) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return false;
+        try (Jedis jedis = holder.getWriteResource()) {
+            return jedis.setbit(key, offset, value);
+        }
     }
 
     /**
@@ -2049,15 +2201,17 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      */
     @Override
     public long bitCountWithPrefix(String prefix, String key) {
-        if (this.prefix != null) {
-            key = this.prefix + key;
+        if (prefix != null) {
+            key = prefix + key;
         }
-        return 0;
+        try (Jedis jedis = holder.getReadResource()) {
+            return jedis.bitcount(key);
+        }
     }
 
     private <T> T deserialize(byte[] value) {
         try {
-            return (T) SerializeUtil.deserialize(value);
+            return SerializeUtil.deserialize(value);
         } catch (ClassCastException e) {
             return null;
         }
