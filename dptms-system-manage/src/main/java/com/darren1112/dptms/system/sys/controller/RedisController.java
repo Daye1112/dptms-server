@@ -10,7 +10,7 @@ import com.darren1112.dptms.common.core.validate.validator.callback.common.NotNu
 import com.darren1112.dptms.common.log.starter.annotation.Log;
 import com.darren1112.dptms.common.log.starter.enums.BusinessType;
 import com.darren1112.dptms.common.log.starter.enums.LogLevel;
-import com.darren1112.dptms.common.redis.starter.properties.DptmsCacheProperties;
+import com.darren1112.dptms.common.redis.starter.properties.DptmsRedisProperties;
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
 import com.darren1112.dptms.common.spi.sys.dto.SysRedisDto;
@@ -39,7 +39,7 @@ public class RedisController extends BaseController {
     private RedisService redisService;
 
     @Autowired
-    private DptmsCacheProperties dptmsCacheProperties;
+    private DptmsRedisProperties dptmsRedisProperties;
 
     /**
      * 根据key的前缀分页查缓存数据
@@ -54,7 +54,7 @@ public class RedisController extends BaseController {
     @ApiOperation("分页查询缓存")
     @GetMapping("/listPage")
     public ResponseEntity<JsonResult<PageBean<SysRedisDto>>> listPage(@RequestParam(value = "keyPrefix", required = false) String keyPrefix, PageParam pageParam) {
-        keyPrefix = StringUtil.isBlank(keyPrefix) ? dptmsCacheProperties.getKeyPrefix() : keyPrefix;
+        keyPrefix = StringUtil.isBlank(keyPrefix) ? dptmsRedisProperties.getPrefix() : keyPrefix;
         PageBean<SysRedisDto> result = redisService.listPage(keyPrefix, getPageParam(pageParam));
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(result));
     }
