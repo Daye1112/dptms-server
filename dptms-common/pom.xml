@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>dptms-parent</artifactId>
+        <groupId>com.darren1112</groupId>
+        <version>1.0.0</version>
+        <relativePath>../dptms-parent/pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>pom</packaging>
+
+    <artifactId>dptms-common</artifactId>
+    <description>公共模块组</description>
+
+    <modules>
+        <module>dptms-common-spi</module>
+        <module>dptms-common-core</module>
+        <module>dptms-common-web-starter</module>
+        <module>dptms-common-security-starter</module>
+        <module>dptms-common-redis-starter</module>
+        <module>dptms-common-doc-starter</module>
+        <module>dptms-common-log-starter</module>
+        <module>dptms-common-component</module>
+    </modules>
+
+</project>

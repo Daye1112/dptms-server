@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>dptms-parent</artifactId>
+        <groupId>com.darren1112</groupId>
+        <version>1.0.0</version>
+        <relativePath>../dptms-parent/pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>jar</packaging>
+
+    <name>dptms-auth</name>
+    <artifactId>dptms-auth</artifactId>
+    <description>认证服务模块</description>
+
+    <dependencies>
+        <!-- [Spring Boot] Start -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis-reactive</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>de.codecentric</groupId>
+            <artifactId>spring-boot-admin-starter-client</artifactId>
+        </dependency>
+        <!-- [Spring Boot] End -->
+
+        <!-- [Spring Cloud] Start -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>
+        <!-- [Spring Cloud] End -->
+
+        <!-- [数据源依赖] Start -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+        </dependency>
+        <!-- [数据源依赖] End -->
+
+        <!-- [Plugins] Start -->
+        <!-- [lombok] Start -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- [lombok] End -->
+        <!-- [fastjson] Start -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+        </dependency>
+        <!-- [fastjson] End -->
+        <!-- [Plugins] End -->
+
+        <!-- [dptms] Start-->
+        <dependency>
+            <groupId>com.darren1112</groupId>
+            <artifactId>dptms-common-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.darren1112</groupId>
+            <artifactId>dptms-common-web-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.darren1112</groupId>
+            <artifactId>dptms-common-redis-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.darren1112</groupId>
+            <artifactId>dptms-common-doc-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.darren1112</groupId>
+            <artifactId>dptms-common-security-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.darren1112</groupId>
+            <artifactId>dptms-common-log-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.darren1112</groupId>
+            <artifactId>dptms-common-component</artifactId>
+        </dependency>
+        <!-- [dptms] End-->
+    </dependencies>
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.darren1112.dptms.auth.AuthApplication</mainClass>
+                    <!--<skip>true</skip>-->
+                </configuration>
+            </plugin>
+
+            <!--指定打包路径-->
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <mkdir dir="${target.dir}/"/>
+                                <copy file="${project.build.directory}/${project.build.finalName}.jar"
+                                      tofile="${target.dir}/${project.build.finalName}.jar" overwrite="true"/>
+                            </tasks>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

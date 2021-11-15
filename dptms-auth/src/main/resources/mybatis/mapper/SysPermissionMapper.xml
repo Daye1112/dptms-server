@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.darren1112.dptms.auth.dao.SysPermissionDao">
+    <!--根据用户id查询权限list-->
+    <select id="listByUserId" resultType="com.darren1112.dptms.common.spi.sys.dto.SysPermissionDto">
+        SELECT DISTINCT t7.id,
+               t7.per_name  AS perName,
+               t7.per_code  AS perCode,
+               t7.per_group AS perGroup,
+               t7.per_url   AS perUrl,
+               t7.remark,
+               t7.isvalid,
+               t7.ctime,
+               t7.creater,
+               t7.mtime,
+               t7.updater
+        FROM sys_user t1
+                 INNER JOIN sys_user_role t2 ON t2.isvalid = 1 AND t2.user_id = t1.id
+                 INNER JOIN sys_role t3 ON t3.isvalid = 1 AND t3.id = t2.role_id
+                 INNER JOIN sys_role_menu t4 ON t4.isvalid = 1 AND t4.role_id = t3.id
+                 INNER JOIN sys_menu t5 ON t5.isvalid = 1 AND t5.id = t4.menu_id
+                 INNER JOIN sys_menu_permission t6 ON t6.isvalid = 1 AND t6.menu_id = t5.id
+                 INNER JOIN sys_permission t7 ON t7.isvalid = 1 AND t7.id = t6.per_id
+        WHERE t1.isvalid = 1
+          AND t1.id = #{userId}
+    </select>
+    <!--插入权限信息-->
+    <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id"
+            parameterType="com.darren1112.dptms.common.spi.sys.entity.SysPermissionEntity">
+        INSERT INTO sys_permission(per_name, per_code, per_group, per_url, remark, isvalid,
+                                   ctime, creater, mtime, updater)
+        VALUES (#{perName}, #{perCode}, #{perGroup}, #{perUrl}, #{remark}, 1, now(),
+                #{creater}, now(), #{updater})
+    </insert>
+    <!--分页查询权限-->
+    <select id="listPage" resultType="com.darren1112.dptms.common.spi.sys.dto.SysPermissionDto">
+        SELECT id,
+        per_name  AS perName,
+        per_code  AS perCode,
+        per_group AS perGroup,
+        per_url   AS perUrl,
+        remark,
+        isvalid,
+        ctime,
+        creater,
+        mtime,
+        updater
+        FROM sys_permission
+        WHERE isvalid = 1
+        <if test="param.perName != null and param.perName != ''">
+            AND per_name LIKE concat('%', #{param.perName}, '%')
+        </if>
+        <if test="param.perCode != null and param.perCode != ''">
+            AND per_code LIKE concat('%', #{param.perCode}, '%')
+        </if>
+        <if test="param.perGroup != null and param.perGroup != ''">
+            AND per_group LIKE concat('%', #{param.perGroup}, '%')
+        </if>
+        <if test="param.perUrl != null and param.perUrl != ''">
+            AND per_url LIKE concat('%', #{param.perUrl}, '%')
+        </if>
+        ORDER BY per_group, per_name
+        LIMIT #{pageParam.startIndex}, #{pageParam.pageSize}
+    </select>
+    <!--分页查询权限-查询总数-->
+    <select id="listPageCount" resultType="java.lang.Long">
+        SELECT count(1)
+        FROM sys_permission
+        WHERE isvalid = 1
+        <if test="perName != null and perName != ''">
+            AND per_name LIKE concat('%', #{perName}, '%')
+        </if>
+        <if test="perCode != null and perCode != ''">
+            AND per_code LIKE concat('%', #{perCode}, '%')
+        </if>
+        <if test="perGroup != null and perGroup != ''">
+            AND per_group LIKE concat('%', #{perGroup}, '%')
+        </if>
+        <if test="perUrl != null and perUrl != ''">
+            AND per_url LIKE concat('%', #{perUrl}, '%')
+        </if>
+    </select>
+    <!--更新权限信息-->
+    <update id="update">
+        UPDATE sys_permission
+        SET mtime     = now(),
+            per_name  = #{perName},
+            per_code  = #{perCode},
+            per_group = #{perGroup},
+            per_url   = #{perUrl},
+            remark    = #{remark},
+            updater   = #{updater}
+        WHERE isvalid = 1
+          AND id = #{id}
+    </update>
+    <!--根据筛选参数查询list-->
+    <select id="listBy"
+            resultType="com.darren1112.dptms.common.spi.sys.entity.SysPermissionEntity">
+        SELECT id,
+        per_name  AS perName,
+        per_code  AS perCode,
+        per_group AS perGroup,
+        per_url   AS perUrl,
+        remark,
+        isvalid,
+        ctime,
+        creater,
+        mtime,
+        updater
+        FROM sys_permission
+        WHERE isvalid = 1
+        <if test="perCode != null and perCode != ''">
+            AND per_code LIKE concat('%', #{perCode}, '%')
+        </if>
+    </select>
+    <!--查询是否重复-->
+    <select id="countByRepeat" resultType="java.lang.Long"
+            parameterType="com.darren1112.dptms.common.spi.sys.dto.SysPermissionDto">
+        SELECT count(1)
+        FROM sys_permission
+        WHERE isvalid = 1
+        AND (per_code = #{perCode} OR per_url = #{perUrl})
+        <if test="isUpdate != null and isUpdate == true">
+            AND id != #{id}
+        </if>
+    </select>
+    <!--根据id删除记录-->
+    <update id="deleteById">
+        UPDATE sys_permission
+        SET mtime   = now(),
+            updater = #{updater},
+            isvalid = 0
+        WHERE isvalid = 1
+          AND id = #{id}
+    </update>
+    <!--查询权限组list-->
+    <select id="listGroup" resultType="com.darren1112.dptms.common.spi.sys.dto.SysPermissionDto">
+        SELECT per_group AS perGroup
+        FROM sys_permission
+        WHERE isvalid = 1
+        GROUP BY per_group
+        ORDER BY per_group
+    </select>
+</mapper>

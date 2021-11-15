@@ -1,0 +1,4 @@
+# Auto Configure
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.darren1112.dptms.component.config.DruidAutoConfig,\
+  com.darren1112.dptms.component.config.CommonAutoConfig

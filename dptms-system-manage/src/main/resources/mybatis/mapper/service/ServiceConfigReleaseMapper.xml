@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.darren1112.dptms.system.service.dao.ServiceConfigReleaseDao">
+    <!--分页查询发布列表-->
+    <select id="listPage" resultType="com.darren1112.dptms.common.spi.service.dto.ServiceConfigReleaseDto">
+        SELECT id,
+               application_id  AS applicationId,
+               profile_id      AS profileId,
+               release_version AS releaseVersion,
+               release_type    AS releaseType,
+               release_status  AS releaseStatus,
+               release_time    AS releaseTime,
+               remark,
+               isvalid,
+               ctime,
+               creater,
+               mtime,
+               updater
+        FROM service_config_release
+        WHERE isvalid = 1
+            AND application_id = #{dto.applicationId}
+            AND profile_id = #{dto.profileId}
+        <if test="dto.releaseVersion != null and dto.releaseVersion != ''">
+            AND release_version = #{dto.releaseVersion}
+        </if>
+        <if test="dto.releaseType != null">
+            AND release_type = #{dto.releaseType}
+        </if>
+        ORDER BY id DESC
+        LIMIT #{pageParam.startIndex}, #{pageParam.pageSize}
+    </select>
+    <!--分页查询发布列表 - 总记录数-->
+    <select id="listPageCount" resultType="java.lang.Long">
+        SELECT count(1)
+        FROM service_config_release
+        WHERE isvalid = 1
+            AND application_id = #{dto.applicationId}
+            AND profile_id = #{dto.profileId}
+        <if test="dto.releaseVersion != null and dto.releaseVersion != ''">
+            AND release_version = #{dto.releaseVersion}
+        </if>
+        <if test="dto.releaseType != null">
+            AND release_type = #{dto.releaseType}
+        </if>
+    </select>
+    <!--统计重复版本记录数-->
+    <select id="countByRepeat" parameterType="com.darren1112.dptms.common.spi.service.dto.ServiceConfigReleaseDto"
+            resultType="java.lang.Long">
+        SELECT count(1)
+        FROM service_config_release
+        WHERE application_id = #{applicationId}
+          AND profile_id = #{profileId}
+          AND release_version = #{releaseVersion}
+        <if test="isUpdate != null and isUpdate == true">
+            AND id != #{id}
+        </if>
+    </select>
+    <!--插入发布信息-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id"
+            parameterType="com.darren1112.dptms.common.spi.service.dto.ServiceConfigReleaseDto">
+        INSERT INTO service_config_release(application_id, profile_id, release_version,
+                                           release_type, release_status, release_time,
+                                           remark, isvalid, ctime, creater, mtime, updater)
+        VALUES (#{applicationId}, #{profileId}, #{releaseVersion}, #{releaseType},
+                1, now(), #{remark},
+                1, now(), #{creater}, now(), #{updater})
+    </insert>
+    <!--删除发布信息-->
+    <delete id="deleteById">
+        UPDATE service_config_release
+        SET mtime   = now(),
+            isvalid = 0,
+            updater = #{updater}
+        WHERE isvalid = 1
+          AND id = #{id}
+    </delete>
+</mapper>

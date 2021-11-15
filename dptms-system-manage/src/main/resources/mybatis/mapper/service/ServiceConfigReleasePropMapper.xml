@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.darren1112.dptms.system.service.dao.ServiceConfigReleasePropDao">
+    <!--查询配置发布属性list-->
+    <select id="list" parameterType="com.darren1112.dptms.common.spi.service.dto.ServiceConfigReleasePropDto"
+            resultType="com.darren1112.dptms.common.spi.service.dto.ServiceConfigReleasePropDto">
+        SELECT id,
+               release_id AS releaseId,
+               prop_key AS propKey,
+               prop_value AS propValue,
+               prop_desc AS propDesc,
+               remark,
+               isvalid,
+               ctime,
+               creater,
+               mtime,
+               updater
+        FROM service_config_release_prop
+        WHERE isvalid = 1
+          AND release_id = #{releaseId}
+        <if test="propKey != null and propKey != ''">
+            AND prop_key LIKE concat('%', #{propKey}, '%')
+        </if>
+        <if test="propValue != null and propValue != ''">
+            AND prop_value LIKE concat('%', #{propValue}, '%')
+        </if>
+        <if test="propDesc != null and propDesc != ''">
+            AND prop_desc LIKE concat('%', #{propDesc}, '%')
+        </if>
+    </select>
+    <!--批量新增发布属性-->
+    <select id="batchInsert" parameterType="java.util.List">
+        INSERT INTO service_config_release_prop(release_id, prop_key, prop_value, prop_desc,
+                                                remark, isvalid, ctime, creater, mtime, updater)
+        VALUES
+            <foreach collection="list" item="item" separator=",">
+               (#{item.releaseId}, #{item.propKey}, #{item.propValue}, #{item.propDesc},
+                   #{item.remark}, 1, now(), #{item.creater}, now(), #{item.updater})
+            </foreach>
+    </select>
+</mapper>

@@ -1,0 +1,167 @@
+{
+  "code": 1,
+  "data": {
+    "userMenus": [
+      {
+        "dropRoot": false,
+        "dropInner": false,
+        "isAdmin": null,
+        "sort": 1,
+        "title": "项目组管理系统",
+        "parentId": 0,
+        "url": "/",
+        "expand": false,
+        "children": [
+          {
+            "dropRoot": false,
+            "dropInner": false,
+            "isAdmin": null,
+            "sort": 1,
+            "title": "系统管理",
+            "parentId": 1,
+            "url": "",
+            "expand": false,
+            "children": [
+              {
+                "dropRoot": false,
+                "dropInner": false,
+                "isAdmin": null,
+                "sort": 7,
+                "title": "客户管理",
+                "parentId": 2,
+                "url": "",
+                "expand": false,
+                "children": [
+                  {
+                    "dropRoot": false,
+                    "dropInner": false,
+                    "isAdmin": null,
+                    "sort": 1,
+                    "title": "新增客户",
+                    "parentId": 246,
+                    "url": "",
+                    "expand": false,
+                    "children": [],
+                    "menuCode": "SYS_CUSTOMER_ADD",
+                    "name": "新增客户",
+                    "checked": false,
+                    "childOuter": false,
+                    "menuType": "1",
+                    "id": 252
+                  },
+                  {
+                    "dropRoot": false,
+                    "dropInner": false,
+                    "isAdmin": null,
+                    "sort": 2,
+                    "title": "修改客户",
+                    "parentId": 246,
+                    "url": "",
+                    "expand": false,
+                    "children": [],
+                    "menuCode": "SYS_CUSTOMER_UPDATE",
+                    "name": "修改客户",
+                    "checked": false,
+                    "childOuter": false,
+                    "menuType": "1",
+                    "id": 253
+                  }
+                ],
+                "menuCode": "SYS_CUSTOMER_MANAGE",
+                "name": "客户管理",
+                "checked": false,
+                "childOuter": false,
+                "menuType": "1",
+                "id": 246
+              },
+              {
+                "dropRoot": false,
+                "dropInner": false,
+                "isAdmin": null,
+                "sort": 8,
+                "title": "母账号管理",
+                "parentId": 2,
+                "url": "",
+                "expand": false,
+                "children": [
+                  {
+                    "dropRoot": false,
+                    "dropInner": false,
+                    "isAdmin": null,
+                    "sort": 1,
+                    "title": "母账号新增",
+                    "parentId": 256,
+                    "url": "",
+                    "expand": false,
+                    "children": [],
+                    "menuCode": "SYS_PARENTACCOUNT_PARENTACCOUNTADD",
+                    "name": "母账号新增",
+                    "checked": false,
+                    "childOuter": false,
+                    "menuType": "1",
+                    "id": 257
+                  },
+                  {
+                    "dropRoot": false,
+                    "dropInner": false,
+                    "isAdmin": null,
+                    "sort": 2,
+                    "title": "证书新增",
+                    "parentId": 256,
+                    "url": "",
+                    "expand": false,
+                    "children": [],
+                    "menuCode": "SYS_PARENTACCOUNT_CERTIFICATEADD",
+                    "name": "证书新增",
+                    "checked": false,
+                    "childOuter": false,
+                    "menuType": "1",
+                    "id": 258
+                  }
+                ],
+                "menuCode": "SYS_PARENTACCOUNT_MANAGE",
+                "name": "母账号管理",
+                "checked": false,
+                "childOuter": false,
+                "menuType": "1",
+                "id": 256
+              }
+            ],
+            "menuCode": "SYSTEM_MANAGE",
+            "name": "系统管理",
+            "checked": false,
+            "childOuter": false,
+            "menuType": "1",
+            "id": 2
+          },
+          {
+            "dropRoot": false,
+            "dropInner": false,
+            "isAdmin": null,
+            "sort": 5,
+            "title": "服务管理",
+            "parentId": 1,
+            "url": "/dptms/service-manage/index",
+            "expand": false,
+            "children": [],
+            "menuCode": "SERVICE_MANAGE",
+            "name": "服务管理",
+            "checked": false,
+            "childOuter": false,
+            "menuType": "3",
+            "id": 223
+          }
+        ],
+        "menuCode": "",
+        "name": "项目组管理系统",
+        "checked": false,
+        "childOuter": false,
+        "menuType": "1",
+        "id": 1
+      }
+    ]
+  },
+  "msg": "success",
+  "subCode": "",
+  "subMsg": ""
+}

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.darren1112.dptms.config.dao.ServiceConfigReleasePropDao">
+    <!--根据应用和环境查询最新的发布配置-->
+    <select id="listLatest"
+            resultType="com.darren1112.dptms.common.spi.service.dto.ServiceConfigReleasePropDto">
+        SELECT t2.id,
+               t1.app_code     AS appCode,
+               t1.profile_code AS profileCode,
+               t2.prop_key     AS propKey,
+               t2.prop_value   AS propValue
+        FROM (SELECT t1.id,
+                     t1.application_id,
+                     t1.profile_id,
+                     t2.app_code,
+                     t3.profile_code
+              FROM service_config_release t1
+                       INNER JOIN service_application t2
+                                  ON t2.isvalid = 1
+                                       AND t2.id = t1.application_id
+                                       AND t2.app_code = #{application,jdbcType=VARCHAR}
+                       INNER JOIN service_config_profile t3
+                                  ON t3.isvalid = 1
+                                       AND t3.id = t1.profile_id
+                                       AND t3.profile_code = #{profile,jdbcType=VARCHAR}
+              WHERE t1.isvalid = 1
+              ORDER BY t1.release_time DESC
+              LIMIT 1) t1
+                 LEFT JOIN service_config_release_prop t2 ON t2.isvalid = 1
+                                                               AND t1.id = t2.release_id
+    </select>
+    <!--根据应用、环境和版本信息查询发布配置-->
+    <select id="listBy"
+            resultType="com.darren1112.dptms.common.spi.service.dto.ServiceConfigReleasePropDto">
+        SELECT t2.id,
+               t1.app_code     AS appCode,
+               t1.profile_code AS profileCode,
+               t2.prop_key     AS propKey,
+               t2.prop_value   AS propValue
+        FROM (SELECT t1.id,
+                     t1.application_id,
+                     t1.profile_id,
+                     t2.app_code,
+                     t3.profile_code
+              FROM service_config_release t1
+                       INNER JOIN service_application t2
+                                  ON t2.isvalid = 1
+                                       AND t2.id = t1.application_id
+                                       AND t2.app_code = #{application,jdbcType=VARCHAR}
+                       INNER JOIN service_config_profile t3
+                                  ON t3.isvalid = 1
+                                       AND t3.id = t1.profile_id
+                                       AND t3.profile_code = #{profile,jdbcType=VARCHAR}
+              WHERE t1.isvalid = 1
+                AND t1.release_version = #{releaseVersion,jdbcType=VARCHAR}
+              ORDER BY t1.release_time DESC
+              LIMIT 1) t1
+                 LEFT JOIN service_config_release_prop t2 ON t2.isvalid = 1
+                                                               AND t1.id = t2.release_id
+    </select>
+</mapper>
