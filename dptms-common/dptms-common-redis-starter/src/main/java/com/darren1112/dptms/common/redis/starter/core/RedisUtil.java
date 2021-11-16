@@ -1512,6 +1512,15 @@ public interface RedisUtil {
     void setPassword(String password);
 
     /**
+     * 设置库号
+     *
+     * @param database 库号
+     * @author luyuhao
+     * @since 2021/8/11
+     */
+    void setDatabase(int database);
+
+    /**
      * 设置是否启用心跳检测
      *
      * @param enableHeartbeat 是否启用心跳检测

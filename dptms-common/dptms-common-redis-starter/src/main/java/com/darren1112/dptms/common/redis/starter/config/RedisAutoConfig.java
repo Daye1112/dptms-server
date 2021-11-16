@@ -71,6 +71,7 @@ public class RedisAutoConfig {
             redisUtil.setMaxWaitMills((long) this.dptmsRedisProperties.getMaxWaitMillis());
             redisUtil.setIp(this.dptmsRedisProperties.getIp());
             redisUtil.setPassword(this.dptmsRedisProperties.getPassword());
+            redisUtil.setDatabase(this.dptmsRedisProperties.getDatabase());
             redisUtil.setEnableHeartbeat(this.dptmsRedisProperties.isEnableHeartbeat());
             redisUtil.init();
             return redisUtil;

@@ -22,12 +22,13 @@ public class MasterSlavePoolEntryImpl implements MasterSlavePoolEntry {
     private int maxTotal;
     private int maxIdle;
     private long maxWaitMillis;
+    private int database;
     private JedisPool pool;
 
     private MasterSlaveState state;
     private MasterSlavePoolHealth health;
 
-    public MasterSlavePoolEntryImpl(MasterSlaveState state, String host, int port, String password, int maxTotal, int maxIdle, long maxWaitMillis) {
+    public MasterSlavePoolEntryImpl(MasterSlaveState state, String host, int port, String password, int maxTotal, int maxIdle, long maxWaitMillis, int database) {
         this.state = state;
         this.host = host;
         this.port = port;
@@ -35,6 +36,7 @@ public class MasterSlavePoolEntryImpl implements MasterSlavePoolEntry {
         this.maxTotal = maxTotal;
         this.maxIdle = maxIdle;
         this.maxWaitMillis = maxWaitMillis;
+        this.database = database;
         health = new MasterSlavePoolHealthImpl(this);
 
         initPool();
@@ -47,9 +49,9 @@ public class MasterSlavePoolEntryImpl implements MasterSlavePoolEntry {
         config.setMaxWaitMillis(maxWaitMillis);
         config.setTestOnBorrow(false);
         if (password != null) {
-            pool = new JedisPool(config, host, port, DEFAULT_TIMEOUT, password);
+            pool = new JedisPool(config, host, port, DEFAULT_TIMEOUT, password, database);
         } else {
-            pool = new JedisPool(config, host, port, DEFAULT_TIMEOUT);
+            pool = new JedisPool(config, host, port, DEFAULT_TIMEOUT, null, database);
         }
     }
 
@@ -84,7 +86,7 @@ public class MasterSlavePoolEntryImpl implements MasterSlavePoolEntry {
 
     @Override
     public void close() {
-        if(pool != null){
+        if (pool != null) {
             pool.close();
         }
     }

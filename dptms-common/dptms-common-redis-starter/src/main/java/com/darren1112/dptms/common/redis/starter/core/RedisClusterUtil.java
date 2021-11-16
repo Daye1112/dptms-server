@@ -2177,6 +2177,18 @@ public class RedisClusterUtil implements RedisUtil {
     }
 
     /**
+     * 设置库号
+     *
+     * @param database 库号
+     * @author luyuhao
+     * @since 2021/8/11
+     */
+    @Override
+    public void setDatabase(int database) {
+        throw new UnsupportedOperationException("集群环境不支持多库");
+    }
+
+    /**
      * 设置是否启用心跳检测
      *
      * @param enableHeartbeat 是否启用心跳检测

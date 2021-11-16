@@ -30,6 +30,11 @@ public class DptmsRedisProperties {
     private String password;
 
     /**
+     * 库号
+     */
+    private int database;
+
+    /**
      * 设置最大连接数
      */
     private int maxIdle;

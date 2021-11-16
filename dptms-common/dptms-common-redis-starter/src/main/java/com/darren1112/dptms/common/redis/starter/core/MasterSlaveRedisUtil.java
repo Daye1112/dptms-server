@@ -59,6 +59,11 @@ public class MasterSlaveRedisUtil implements RedisUtil {
     private String password;
 
     /**
+     * 库号
+     */
+    private int database;
+
+    /**
      * 是否启用心跳检测
      */
     private boolean enableHeartbeat = true;
@@ -84,6 +89,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
         holder.setMaxWaitMillis(this.maxWaitMillis);
         holder.setIp(this.ip);
         holder.setPassword(this.password);
+        holder.setDatabase(this.database);
         holder.setEnableHeartbeat(this.enableHeartbeat);
         holder.init();
     }
@@ -2311,6 +2317,18 @@ public class MasterSlaveRedisUtil implements RedisUtil {
 
     public String getPassword() {
         return password;
+    }
+
+    /**
+     * 设置库号
+     *
+     * @param database 库号
+     * @author luyuhao
+     * @since 2021/8/11
+     */
+    @Override
+    public void setDatabase(int database) {
+        this.database = database;
     }
 
     /**

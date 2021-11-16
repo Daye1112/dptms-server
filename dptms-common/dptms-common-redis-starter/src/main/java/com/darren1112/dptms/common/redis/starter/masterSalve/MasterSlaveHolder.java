@@ -41,6 +41,7 @@ public class MasterSlaveHolder implements MasterSlaveOperationCallback {
     private long maxWaitMillis;
     private String ip;
     private String password;
+    private int database;
     private boolean enableHeartbeat = true;
 
     private MasterSlavePoolEntry master;
@@ -65,14 +66,14 @@ public class MasterSlaveHolder implements MasterSlaveOperationCallback {
         scheduler.scheduleAtFixedRate(new MasterSlaveHolderRefreshTask(executor, this), MasterSlaveHolderRefreshTask.DELAY_SECONDS, MasterSlaveHolderRefreshTask.PERIOD_SECONDS, TimeUnit.SECONDS);
     }
 
-    private void setMaster(String host, int port, String password, int maxTotal, int maxIdle, long maxWaitMillis) {
-        MasterSlavePoolEntry newObject = new MasterSlavePoolEntryImpl(MasterSlaveStateContext.STATE_MASTER, host, port, password, maxTotal, maxIdle, maxWaitMillis);
+    private void setMaster(String host, int port, String password, int maxTotal, int maxIdle, long maxWaitMillis, int database) {
+        MasterSlavePoolEntry newObject = new MasterSlavePoolEntryImpl(MasterSlaveStateContext.STATE_MASTER, host, port, password, maxTotal, maxIdle, maxWaitMillis, database);
         this.master = newObject;
         allMasterSlavePoolEntryMap.put(newObject.getName(), newObject);
     }
 
-    private void addSlave(String host, int port, String password, int maxTotal, int maxIdle, long maxWaitMillis) {
-        MasterSlavePoolEntry newObject = new MasterSlavePoolEntryImpl(MasterSlaveStateContext.STATE_SLAVE, host, port, password, maxTotal, maxIdle, maxWaitMillis);
+    private void addSlave(String host, int port, String password, int maxTotal, int maxIdle, long maxWaitMillis, int database) {
+        MasterSlavePoolEntry newObject = new MasterSlavePoolEntryImpl(MasterSlaveStateContext.STATE_SLAVE, host, port, password, maxTotal, maxIdle, maxWaitMillis, database);
         this.listSlavePoolEntry.add(newObject);
         allMasterSlavePoolEntryMap.put(newObject.getName(), newObject);
     }
@@ -85,11 +86,11 @@ public class MasterSlaveHolder implements MasterSlaveOperationCallback {
         try {
             String[] ips = ip.split(",");
 
-            this.setMaster(resolveHost(ips[0]), resolvePort(ips[0]), password, maxTotal, maxIdle, maxWaitMillis);
+            this.setMaster(resolveHost(ips[0]), resolvePort(ips[0]), password, maxTotal, maxIdle, maxWaitMillis, database);
 
             if (ips.length > 1) {
                 for (int i = 1; i < ips.length; i++) {
-                    this.addSlave(resolveHost(ips[i]), resolvePort(ips[i]), password, maxTotal, maxIdle, maxWaitMillis);
+                    this.addSlave(resolveHost(ips[i]), resolvePort(ips[i]), password, maxTotal, maxIdle, maxWaitMillis, database);
                 }
             }
 
@@ -324,6 +325,14 @@ public class MasterSlaveHolder implements MasterSlaveOperationCallback {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getDatabase() {
+        return database;
+    }
+
+    public void setDatabase(int database) {
+        this.database = database;
     }
 
     public boolean isEnableHeartbeat() {
