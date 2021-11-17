@@ -4,11 +4,15 @@ import com.darren1112.dptms.auth.common.enums.AuthErrorCodeEnum;
 import com.darren1112.dptms.auth.common.security.base.BaseUserDetails;
 import com.darren1112.dptms.auth.service.SysUserService;
 import com.darren1112.dptms.common.core.constants.AccountConstant;
+import com.darren1112.dptms.common.core.constants.RedisConstant;
 import com.darren1112.dptms.common.core.exception.BadRequestException;
 import com.darren1112.dptms.common.core.exception.BaseException;
 import com.darren1112.dptms.common.core.util.IpUtil;
 import com.darren1112.dptms.common.core.util.Md5Util;
+import com.darren1112.dptms.common.core.util.StringUtil;
 import com.darren1112.dptms.common.core.util.WebUtil;
+import com.darren1112.dptms.common.core.validate.handler.ValidateHandler;
+import com.darren1112.dptms.common.redis.starter.core.RedisUtil;
 import com.darren1112.dptms.common.security.starter.core.DptmsTokenStore;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 import com.darren1112.dptms.common.spi.common.dto.LoginParam;
@@ -31,6 +35,9 @@ import java.util.Objects;
 public class PasswordLoginHandler extends BaseUserDetails {
 
     @Autowired
+    private RedisUtil redisUtil;
+
+    @Autowired
     private SysUserService sysUserService;
 
     @Autowired
@@ -48,7 +55,12 @@ public class PasswordLoginHandler extends BaseUserDetails {
      */
     @Override
     public void preHandler(LoginParam loginParam, HttpServletRequest request, HttpServletResponse response) throws BaseException {
-        // TODO 邮箱验证、验证码登录等
+        // 验证码验证
+        String realCode = redisUtil.get(RedisConstant.CAPTCHA_PREFIX + loginParam.getCaptchaKey());
+        // 为空判断
+        ValidateHandler.checkParameter(StringUtil.isBlank(realCode), AuthErrorCodeEnum.CAPTCHA_INVALID);
+        // 是否相同验证
+        ValidateHandler.checkParameter(!realCode.equalsIgnoreCase(loginParam.getCaptchaCode()), AuthErrorCodeEnum.CAPTCHA_CODE_ERROR);
     }
 
     /**

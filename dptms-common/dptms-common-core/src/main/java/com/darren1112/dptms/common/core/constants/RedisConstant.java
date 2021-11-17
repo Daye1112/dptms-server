@@ -8,4 +8,8 @@ package com.darren1112.dptms.common.core.constants;
  */
 public class RedisConstant {
 
+    /**
+     * 验证码存储前缀-{@value}
+     */
+    public static final String CAPTCHA_PREFIX = "captcha:";
 }

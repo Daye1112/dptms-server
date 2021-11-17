@@ -29,4 +29,16 @@ public class LoginParam {
      */
     @ApiModelProperty("登录类型 1：账号密码登录")
     private Integer loginType;
+
+    /**
+     * captchaKey
+     */
+    @ApiModelProperty("验证码key")
+    private String captchaKey;
+
+    /**
+     * captchaCode
+     */
+    @ApiModelProperty("验证码code")
+    private String captchaCode;
 }

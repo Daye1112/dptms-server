@@ -1,6 +1,7 @@
 package com.darren1112.dptms.common.core.captcha.context;
 
 import com.darren1112.dptms.common.core.util.UuidUtil;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * 验证码生成结果
@@ -13,12 +14,13 @@ public class CaptchaResult {
     /**
      * 验证码code
      */
+    @JsonIgnore
     private String code;
 
     /**
-     * uuid
+     * captchaKey
      */
-    private String uuid;
+    private String captchaKey;
 
     /**
      * 验证码base64格式
@@ -26,7 +28,7 @@ public class CaptchaResult {
     private String base64;
 
     public CaptchaResult() {
-        this.uuid = UuidUtil.generateDefault();
+        this.captchaKey = UuidUtil.generateDefault();
     }
 
     public String getCode() {
@@ -37,12 +39,12 @@ public class CaptchaResult {
         this.code = code;
     }
 
-    public String getUuid() {
-        return uuid;
+    public String getCaptchaKey() {
+        return captchaKey;
     }
 
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
+    public void setCaptchaKey(String captchaKey) {
+        this.captchaKey = captchaKey;
     }
 
     public String getBase64() {
