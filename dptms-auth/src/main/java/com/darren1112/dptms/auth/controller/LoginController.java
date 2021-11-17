@@ -58,7 +58,7 @@ public class LoginController {
      * @since 2021/11/17
      */
     @ApiOperation("生成验证码")
-    @PostMapping("/captcha")
+    @GetMapping("/captcha")
     public ResponseEntity<JsonResult<CaptchaResult>> captcha() {
         try {
             // 生成验证码
