@@ -41,6 +41,7 @@
         <UserAgentUtils.version>1.20</UserAgentUtils.version>
         <jedis.version>2.9.3</jedis.version>
         <commons-collections.version>3.2.2</commons-collections.version>
+        <easy-captcha.version>1.6.2</easy-captcha.version>
 
         <target.dir>D:\dptms\shell</target.dir>
     </properties>
@@ -190,6 +191,13 @@
                 <version>${commons-collections.version}</version>
             </dependency>
             <!-- [collections] End -->
+            <!-- [easy-captcha] Start -->
+            <dependency>
+                <groupId>com.github.whvcse</groupId>
+                <artifactId>easy-captcha</artifactId>
+                <version>${easy-captcha.version}</version>
+            </dependency>
+            <!-- [easy-captcha] End -->
             <!-- [Plugins] End -->
 
             <!-- [dptms] Start-->

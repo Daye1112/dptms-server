@@ -1,6 +1,6 @@
 package com.darren1112.dptms.common.security.starter.core;
 
-import java.util.UUID;
+import com.darren1112.dptms.common.core.util.UuidUtil;
 
 /**
  * token生成类
@@ -18,6 +18,6 @@ public class DptmsTokenGenerator {
      * @since 2021/01/16 17:11
      */
     public static String generateDefaultToken() {
-        return UUID.randomUUID().toString().replaceAll("-", "");
+        return UuidUtil.generateDefault();
     }
 }

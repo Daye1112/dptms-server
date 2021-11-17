@@ -87,6 +87,12 @@
             <artifactId>commons-collections</artifactId>
         </dependency>
         <!-- [collections] End -->
+        <!-- [easy-captcha] Start -->
+        <dependency>
+            <groupId>com.github.whvcse</groupId>
+            <artifactId>easy-captcha</artifactId>
+        </dependency>
+        <!-- [easy-captcha] End -->
         <!-- [Plugins] End -->
 
         <!-- [dptms] Start-->
