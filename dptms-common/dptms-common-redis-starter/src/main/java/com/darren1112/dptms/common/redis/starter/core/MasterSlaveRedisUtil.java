@@ -271,8 +271,8 @@ public class MasterSlaveRedisUtil implements RedisUtil {
         if (prefix != null) {
             keyPrefix = prefix + keyPrefix;
         }
-        try (Jedis jedis = holder.getWriteResource()) {
-            return jedis.keys(keyPrefix);
+        try (Jedis jedis = holder.getReadResource()) {
+            return jedis.keys(keyPrefix + "*");
         }
     }
 

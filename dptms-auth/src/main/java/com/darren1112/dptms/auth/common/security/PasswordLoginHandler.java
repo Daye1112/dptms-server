@@ -57,6 +57,8 @@ public class PasswordLoginHandler extends BaseUserDetails {
     public void preHandler(LoginParam loginParam, HttpServletRequest request, HttpServletResponse response) throws BaseException {
         // 验证码验证
         String realCode = redisUtil.get(RedisConstant.CAPTCHA_PREFIX + loginParam.getCaptchaKey());
+        // 移除验证码
+        redisUtil.removeKey(RedisConstant.CAPTCHA_PREFIX + loginParam.getCaptchaKey());
         // 为空判断
         ValidateHandler.checkParameter(StringUtil.isBlank(realCode), AuthErrorCodeEnum.CAPTCHA_INVALID);
         // 是否相同验证
