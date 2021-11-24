@@ -6,6 +6,8 @@ import com.darren1112.dptms.auth.dao.SysUserDao;
 import com.darren1112.dptms.auth.service.SysUserService;
 import com.darren1112.dptms.common.core.base.BaseService;
 import com.darren1112.dptms.common.core.exception.BadRequestException;
+import com.darren1112.dptms.common.core.util.Md5Util;
+import com.darren1112.dptms.common.core.validate.handler.ValidateHandler;
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
 import com.darren1112.dptms.common.spi.sys.dto.SysPermissionDto;
@@ -193,5 +195,34 @@ public class SysUserServiceImpl extends BaseService implements SysUserService {
             userInfo.setPermissionList(permissionList);
         }
         return userInfo;
+    }
+
+    /**
+     * 更新密码
+     *
+     * @param dto 用户信息
+     * @return {@link SysUserDto}
+     * @author luyuhao
+     * @since 2021/11/24
+     */
+    @Override
+    @CacheEvict(allEntries = true)
+    @Transactional(rollbackFor = Throwable.class)
+    public SysUserDto updatePassword(SysUserDto dto) {
+        // 查询旧用户信息
+        SysUserDto userDto = sysUserDao.getById(dto.getId());
+        // 判断用户是否存在
+        ValidateHandler.checkNull(userDto, AuthErrorCodeEnum.USER_NOT_EXIST);
+        // 加密输入的旧密码
+        String oldEncPassword = Md5Util.encrypt(dto.getOldPassword(), userDto.getSalt());
+        // 验证输入的旧密码与当前密码是否相同
+        ValidateHandler.checkParameter(!oldEncPassword.equals(userDto.getPassword()), AuthErrorCodeEnum.USER_PASSWORD_ERROR);
+        // 新密码加密
+        String newEncPassword = Md5Util.encrypt(dto.getNewPassword(), userDto.getSalt());
+        dto.setNewPassword(newEncPassword);
+        sysUserDao.updatePassword(dto);
+
+        // 返回新的用户信息
+        return sysUserDao.getById(dto.getId());
     }
 }

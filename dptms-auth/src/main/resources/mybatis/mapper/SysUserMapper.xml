@@ -148,4 +148,15 @@
         WHERE isvalid = 1
           AND id = #{id}
     </update>
+
+    <!--更新用户密码-->
+    <update id="updatePassword">
+        UPDATE sys_user
+        SET mtime           = now(),
+            updater         = #{updater},
+            password        = #{newPassword},
+            pwd_update_time = now()
+        WHERE isvalid = 1
+          AND id = #{id}
+    </update>
 </mapper>

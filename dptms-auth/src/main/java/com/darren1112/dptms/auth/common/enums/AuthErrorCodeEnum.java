@@ -44,6 +44,11 @@ public enum AuthErrorCodeEnum implements BaseErrorEnum {
     USER_USERNAME_NOT_NULL(HttpStatus.BAD_REQUEST, "用户名不能为空"),
     USER_IS_LOCKED_NOT_NULL(HttpStatus.BAD_REQUEST, "用户锁定状态不能为空"),
     USER_NOT_REPEAT(HttpStatus.BAD_REQUEST, "用户名不能重复"),
+    USER_NEW_PASSWORD_NOT_NULL(HttpStatus.BAD_REQUEST, "新密码不能为空"),
+    USER_OLD_PASSWORD_NOT_NULL(HttpStatus.BAD_REQUEST, "旧密码不能为空"),
+    USER_NOT_EXIST(HttpStatus.BAD_REQUEST, "用户不存在"),
+    USER_PASSWORD_ERROR(HttpStatus.BAD_REQUEST, "用户密码错误"),
+
     ROLE_NOT_REPEAT(HttpStatus.BAD_REQUEST, "角色码不能重复"),
     CAPTCHA_GENERATE_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "验证码生成异常"),
     CAPTCHA_KEY_NOT_NULL(HttpStatus.BAD_REQUEST, "验证码key不能为空"),

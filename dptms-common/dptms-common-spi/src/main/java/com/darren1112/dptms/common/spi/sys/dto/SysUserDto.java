@@ -1,6 +1,7 @@
 package com.darren1112.dptms.common.spi.sys.dto;
 
 import com.darren1112.dptms.common.spi.sys.entity.SysUserEntity;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -27,4 +28,16 @@ public class SysUserDto extends SysUserEntity {
      * 权限list
      */
     private List<SysPermissionDto> permissionList;
+
+    /**
+     * 旧密码
+     */
+    @ApiModelProperty("旧密码")
+    private String oldPassword;
+
+    /**
+     * 新密码
+     */
+    @ApiModelProperty("新密码")
+    private String newPassword;
 }

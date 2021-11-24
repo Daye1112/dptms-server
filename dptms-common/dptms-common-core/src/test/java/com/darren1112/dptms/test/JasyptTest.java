@@ -14,7 +14,7 @@ public class JasyptTest {
         String secret = "xxx";
         String str1 = "yyy";
 
-        System.out.println(str1 + ": " + JasyptUtil.defaultEncrypt(str1, secret));
+        System.out.println(str1 + ": ENC(" + JasyptUtil.defaultEncrypt(str1, secret) + ")");
     }
 
     @Test

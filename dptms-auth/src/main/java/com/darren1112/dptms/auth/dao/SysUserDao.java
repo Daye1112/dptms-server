@@ -116,4 +116,13 @@ public interface SysUserDao {
      * @since 2021/01/14 00:19
      */
     void updateLock(SysUserEntity entity);
+
+    /**
+     * 更新用户密码
+     *
+     * @param dto 用户信息
+     * @author luyuhao
+     * @since 2021/11/24
+     */
+    void updatePassword(SysUserDto dto);
 }

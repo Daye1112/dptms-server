@@ -101,4 +101,14 @@ public interface SysUserService {
      * @since 2021/01/31 19:39
      */
     SysUserDto getUserInfoAndPermissionByUserId(Long id);
+
+    /**
+     * 更新密码
+     *
+     * @param dto 用户信息
+     * @return {@link SysUserDto}
+     * @author luyuhao
+     * @since 2021/11/24
+     */
+    SysUserDto updatePassword(SysUserDto dto);
 }
