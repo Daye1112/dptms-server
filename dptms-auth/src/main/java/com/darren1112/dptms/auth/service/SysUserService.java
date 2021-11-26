@@ -106,9 +106,8 @@ public interface SysUserService {
      * 更新密码
      *
      * @param dto 用户信息
-     * @return {@link SysUserDto}
      * @author luyuhao
      * @since 2021/11/24
      */
-    SysUserDto updatePassword(SysUserDto dto);
+    void updatePassword(SysUserDto dto);
 }

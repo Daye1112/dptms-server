@@ -147,12 +147,8 @@ public class ActiveUserController {
         ActiveUser activeUser = DptmsSecurityUtil.get();
         dto.setId(activeUser.getId());
         dto.setUpdater(activeUser.getId());
-        // 更新密码并获取新的用户信息
-        SysUserDto newDto = sysUserService.updatePassword(dto);
-        // 更新到现有用户中
-        ActiveUser.convert(activeUser, newDto);
-        // 更新redis中的用户信息
-        dptmsTokenStore.updateActiveUser(activeUser);
+        // 更新密码
+        sysUserService.updatePassword(dto);
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }
 }

@@ -201,14 +201,13 @@ public class SysUserServiceImpl extends BaseService implements SysUserService {
      * 更新密码
      *
      * @param dto 用户信息
-     * @return {@link SysUserDto}
      * @author luyuhao
      * @since 2021/11/24
      */
     @Override
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Throwable.class)
-    public SysUserDto updatePassword(SysUserDto dto) {
+    public void updatePassword(SysUserDto dto) {
         // 查询旧用户信息
         SysUserDto userDto = sysUserDao.getById(dto.getId());
         // 判断用户是否存在
@@ -221,8 +220,5 @@ public class SysUserServiceImpl extends BaseService implements SysUserService {
         String newEncPassword = Md5Util.encrypt(dto.getNewPassword(), userDto.getSalt());
         dto.setNewPassword(newEncPassword);
         sysUserDao.updatePassword(dto);
-
-        // 返回新的用户信息
-        return sysUserDao.getById(dto.getId());
     }
 }

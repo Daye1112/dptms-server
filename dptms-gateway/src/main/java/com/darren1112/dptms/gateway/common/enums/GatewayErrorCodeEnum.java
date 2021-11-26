@@ -17,7 +17,7 @@ public enum GatewayErrorCodeEnum implements BaseErrorEnum {
     FORBIDDEN(HttpStatus.FORBIDDEN, "无访问权限，请联系管理员申请权限"),
     USER_ALREADY_DELETE(HttpStatus.UNAUTHORIZED, "账号已被删除，请联系管理员"),
     USER_IS_LOCKED(HttpStatus.UNAUTHORIZED, "账号已被锁定，请联系管理员"),
-    PASSWORD_UPDATE(HttpStatus.FORBIDDEN, "密码已修改，请重新登录"),
+    PASSWORD_UPDATE(HttpStatus.UNAUTHORIZED, "密码已修改，请重新登录"),
     ;
 
     private Integer code;
