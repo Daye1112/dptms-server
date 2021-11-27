@@ -47,4 +47,15 @@ public interface SysLoginLogDao {
      * @since 2021/02/10 00:19
      */
     Long listPageCount(@Param("dto") SysLoginLogDto dto);
+
+    /**
+     * 查询用户id和数量的登录信息
+     *
+     * @param userId 用户id
+     * @param number 查询条数
+     * @return {@link SysLoginLogDto}
+     * @author luyuhao
+     * @since 2021/11/27
+     */
+    List<SysLoginLogDto> listByUserIdAndNumber(@Param("userId") Long userId, @Param("number") Integer number);
 }

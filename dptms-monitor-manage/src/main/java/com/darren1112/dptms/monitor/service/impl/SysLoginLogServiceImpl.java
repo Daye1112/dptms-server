@@ -53,4 +53,17 @@ public class SysLoginLogServiceImpl extends BaseService implements SysLoginLogSe
         Long count = sysLoginLogDao.listPageCount(dto);
         return createPageBean(pageParam, count, list);
     }
+
+    /**
+     * 查询最后7条登录记录
+     *
+     * @param userId 用户id
+     * @return {@link SysLoginLogDto}
+     * @author luyuhao
+     * @since 2021/11/27
+     */
+    @Override
+    public List<SysLoginLogDto> listLastSevenByUserId(Long userId) {
+        return sysLoginLogDao.listByUserIdAndNumber(userId, 7);
+    }
 }

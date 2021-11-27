@@ -61,4 +61,21 @@
             AND os LIKE concat('%', #{dto.os}, '%')
         </if>
     </select>
+
+    <!--查询用户id和数量的登录信息-->
+    <select id="listByUserIdAndNumber"
+            resultType="com.darren1112.dptms.common.spi.sys.dto.SysLoginLogDto">
+        SELECT t1.id,
+               t1.username,
+               t1.os,
+               t1.browser,
+               t1.ip,
+               t1.ip_address AS ipAddress,
+               t1.ctime
+        FROM sys_login_log t1
+        WHERE t1.isvalid = 1
+          AND t1.creater = #{userId}
+        ORDER BY t1.ctime DESC
+        LIMIT #{number}
+    </select>
 </mapper>
