@@ -10,8 +10,8 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>jar</packaging>
 
-    <artifactId>dptms-common-log-starter</artifactId>
-    <description>日志配置starter</description>
+    <artifactId>dptms-common-fastdfs-starter</artifactId>
+    <description>fastdfs-starter</description>
 
     <dependencies>
         <!-- Spring Boot Begin -->
@@ -31,7 +31,12 @@
         </dependency>
         <!-- Spring Boot End -->
 
-        <!-- [Plugins] Start -->
+        <!-- FastDFS-Client Start -->
+        <dependency>
+            <groupId>com.github.tobato</groupId>
+            <artifactId>fastdfs-client</artifactId>
+        </dependency>
+        <!-- FastDFS-Client End -->
         <!-- [lombok] Start -->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -45,15 +50,9 @@
         <dependency>
             <groupId>com.darren1112</groupId>
             <artifactId>dptms-common-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.darren1112</groupId>
-            <artifactId>dptms-common-security-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.darren1112</groupId>
-            <artifactId>dptms-common-component</artifactId>
+            <optional>true</optional>
         </dependency>
         <!-- [dptms] End-->
     </dependencies>
+
 </project>

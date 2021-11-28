@@ -23,6 +23,7 @@
         <module>dptms-common-doc-starter</module>
         <module>dptms-common-log-starter</module>
         <module>dptms-common-component</module>
+        <module>dptms-common-fastdfs-starter</module>
     </modules>
 
 </project>

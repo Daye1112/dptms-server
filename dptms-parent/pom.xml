@@ -42,6 +42,7 @@
         <jedis.version>2.9.3</jedis.version>
         <commons-collections.version>3.2.2</commons-collections.version>
         <easy-captcha.version>1.6.2</easy-captcha.version>
+        <fastdfs-client.version>1.27.2</fastdfs-client.version>
 
         <target.dir>D:\dptms\shell</target.dir>
     </properties>
@@ -198,6 +199,13 @@
                 <version>${easy-captcha.version}</version>
             </dependency>
             <!-- [easy-captcha] End -->
+            <!-- FastDFS-Client Start -->
+            <dependency>
+                <groupId>com.github.tobato</groupId>
+                <artifactId>fastdfs-client</artifactId>
+                <version>${fastdfs-client.version}</version>
+            </dependency>
+            <!-- FastDFS-Client End -->
             <!-- [Plugins] End -->
 
             <!-- [dptms] Start-->
