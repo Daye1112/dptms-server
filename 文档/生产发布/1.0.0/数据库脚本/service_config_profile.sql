@@ -11,5 +11,5 @@ CREATE TABLE service_config_profile
   mtime          DATETIME COMMENT '更新时间',
   updater        BIGINT COMMENT '更新者',
   PRIMARY KEY (id)
-) COMMENT ='配置环境表';
+) COMMENT ='配置环境表' ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci;
 

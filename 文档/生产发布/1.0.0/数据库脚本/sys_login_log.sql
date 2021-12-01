@@ -13,7 +13,7 @@ CREATE TABLE sys_login_log
   mtime      DATETIME COMMENT '更新时间',
   updater    BIGINT COMMENT '更新者',
   PRIMARY KEY (id)
-);
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci;
 
 ALTER TABLE sys_login_log
   COMMENT '登录日志表';

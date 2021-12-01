@@ -19,7 +19,7 @@ CREATE TABLE sys_operate_log
   mtime             DATETIME COMMENT '更新时间',
   updater           BIGINT COMMENT '更新者',
   PRIMARY KEY (id)
-);
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci;
 
 ALTER TABLE sys_operate_log
   COMMENT '操作日志表';

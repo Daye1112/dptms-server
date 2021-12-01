@@ -12,5 +12,5 @@ CREATE TABLE service_application
   mtime    DATETIME COMMENT '更新时间',
   updater  BIGINT COMMENT '更新者',
   PRIMARY KEY (id)
-) COMMENT ='应用表';
+) COMMENT ='应用表' ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci;
 
