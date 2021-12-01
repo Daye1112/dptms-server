@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import java.util.List;
+
 /**
  * 文件信息Dto
  *
@@ -17,4 +19,9 @@ import lombok.ToString;
 public class FileInfoDto extends FileInfoEntity {
 
     private static final long serialVersionUID = 1L;
+
+    /**
+     * 文件存储集合
+     */
+    private List<FileDfsInfoDto> fileDfsInfoList;
 }

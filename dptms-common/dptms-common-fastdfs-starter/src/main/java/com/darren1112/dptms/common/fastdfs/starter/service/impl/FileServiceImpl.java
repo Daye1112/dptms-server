@@ -4,7 +4,9 @@ import com.darren1112.dptms.common.core.util.CollectionUtil;
 import com.darren1112.dptms.common.core.util.StringUtil;
 import com.darren1112.dptms.common.fastdfs.starter.properties.FastDfsProperties;
 import com.darren1112.dptms.common.fastdfs.starter.service.FileService;
+import com.darren1112.dptms.common.spi.file.dto.FileInfoDto;
 import com.github.tobato.fastdfs.domain.fdfs.FileInfo;
+import com.github.tobato.fastdfs.domain.fdfs.MetaData;
 import com.github.tobato.fastdfs.domain.fdfs.StorePath;
 import com.github.tobato.fastdfs.domain.proto.storage.DownloadByteArray;
 import com.github.tobato.fastdfs.service.FastFileStorageClient;
@@ -13,10 +15,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * 文件ServiceImpl
@@ -217,5 +221,20 @@ public class FileServiceImpl implements FileService {
      */
     private String getResAccessUrl(StorePath storePath) {
         return fastDfsProperties.getRequestUrl() + storePath.getFullPath();
+    }
+
+    /**
+     * 文件上传
+     *
+     * @param fileStream  文件流
+     * @param fileName    文件名
+     * @param metaDataSet 元数据信息
+     * @return {@link FileInfoDto}
+     * @author luyuhao
+     * @since 2021/12/1
+     */
+    @Override
+    public FileInfoDto uploadFile(InputStream fileStream, String fileName, Set<MetaData> metaDataSet) {
+        return null;
     }
 }
