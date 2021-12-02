@@ -17,4 +17,9 @@ public class FastDfsProperties {
      * 请求url
      */
     private String requestUrl;
+
+    /**
+     * 大文件切割大小，默认20MB
+     */
+    private int splitSize = 20 * 1024 * 1024;
 }
