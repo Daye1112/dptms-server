@@ -22,4 +22,9 @@ public class FastDfsProperties {
      * 大文件切割大小，默认20MB
      */
     private int splitSize = 20 * 1024 * 1024;
+
+    /**
+     * 重试次数
+     */
+    private int retryTimes = 3;
 }

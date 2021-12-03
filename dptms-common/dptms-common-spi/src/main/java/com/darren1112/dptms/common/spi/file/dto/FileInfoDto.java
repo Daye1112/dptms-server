@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,4 +25,18 @@ public class FileInfoDto extends FileInfoEntity {
      * 文件存储集合
      */
     private List<FileDfsInfoDto> fileDfsInfoList;
+
+    /**
+     * 添加单个文件存储信息
+     *
+     * @param fileDfsInfoDto 文件存储信息
+     * @author luyuhao
+     * @since 2021/12/3
+     */
+    public void addFileDfsInfoDto(FileDfsInfoDto fileDfsInfoDto) {
+        if (this.fileDfsInfoList == null) {
+            this.fileDfsInfoList = new ArrayList<>();
+        }
+        this.fileDfsInfoList.add(fileDfsInfoDto);
+    }
 }

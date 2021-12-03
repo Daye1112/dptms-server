@@ -21,8 +21,9 @@ public interface FileHandler {
      * @param fileName    文件名
      * @param metaDataSet 元数据信息
      * @return {@link FileInfoDto}
+     * @throws Exception 异常
      * @author luyuhao
      * @since 2021/12/1
      */
-    FileInfoDto uploadFile(InputStream fileStream, String fileName, Set<MetaData> metaDataSet);
+    FileInfoDto uploadFile(InputStream fileStream, String fileName, Set<MetaData> metaDataSet) throws Exception;
 }

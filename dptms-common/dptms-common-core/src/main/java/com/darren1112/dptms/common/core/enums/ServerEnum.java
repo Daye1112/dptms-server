@@ -12,7 +12,7 @@ import java.util.Arrays;
  */
 public enum ServerEnum implements BaseCommonEnum {
     /**
-     * 日志采集器类型
+     * 服务类型
      */
     DPTMS_AUTH(1, "dptms-auth"),
     DPTMS_SYSTEM_MANAGE(2, "dptms-system-manage"),
