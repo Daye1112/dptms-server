@@ -2,9 +2,10 @@ package com.darren1112.dptms.common.fastdfs.starter.service.impl;
 
 import com.darren1112.dptms.common.core.util.CollectionUtil;
 import com.darren1112.dptms.common.core.util.StringUtil;
+import com.darren1112.dptms.common.fastdfs.starter.core.factory.FileHandlerFactory;
 import com.darren1112.dptms.common.fastdfs.starter.properties.FastDfsProperties;
 import com.darren1112.dptms.common.fastdfs.starter.service.FileService;
-import com.darren1112.dptms.common.spi.file.dto.FileInfoDto;
+import com.darren1112.dptms.common.spi.file.dto.FileDfsInfoDto;
 import com.github.tobato.fastdfs.domain.fdfs.FileInfo;
 import com.github.tobato.fastdfs.domain.fdfs.MetaData;
 import com.github.tobato.fastdfs.domain.fdfs.StorePath;
@@ -34,41 +35,14 @@ public class FileServiceImpl implements FileService {
 
     private FastDfsProperties fastDfsProperties;
 
+    private FileHandlerFactory fileHandlerFactory;
+
     public FileServiceImpl(FastFileStorageClient fastFileStorageClient,
-                           FastDfsProperties fastDfsProperties) {
+                           FastDfsProperties fastDfsProperties,
+                           FileHandlerFactory fileHandlerFactory) {
         this.fastFileStorageClient = fastFileStorageClient;
         this.fastDfsProperties = fastDfsProperties;
-    }
-
-    /**
-     * 上传文件
-     *
-     * @param file 文件对象
-     * @return {@link String 文件访问地址}
-     * @author luyuhao
-     * @since 2021/11/28
-     */
-    @Override
-    public String uploadFile(MultipartFile file) throws IOException {
-        StorePath storePath = fastFileStorageClient.uploadFile(file.getInputStream(), file.getSize(), FilenameUtils.getExtension(file.getOriginalFilename()), null);
-        return getResAccessUrl(storePath);
-    }
-
-    /**
-     * 将一段字符串生成一个文件上传
-     *
-     * @param content       文件内容
-     * @param fileExtension 文件后缀名
-     * @return {@link String}
-     * @author luyuhao
-     * @since 2021/11/28
-     */
-    @Override
-    public String uploadFile(String content, String fileExtension) {
-        byte[] buff = content.getBytes(Charset.forName("UTF-8"));
-        ByteArrayInputStream stream = new ByteArrayInputStream(buff);
-        StorePath storePath = fastFileStorageClient.uploadFile(stream, buff.length, fileExtension, null);
-        return getResAccessUrl(storePath);
+        this.fileHandlerFactory = fileHandlerFactory;
     }
 
     /**
@@ -229,12 +203,14 @@ public class FileServiceImpl implements FileService {
      * @param fileStream  文件流
      * @param fileName    文件名
      * @param metaDataSet 元数据信息
-     * @return {@link FileInfoDto}
+     * @return {@link FileDfsInfoDto}
+     * @throws Exception 异常
      * @author luyuhao
      * @since 2021/12/1
      */
     @Override
-    public FileInfoDto uploadFile(InputStream fileStream, String fileName, Set<MetaData> metaDataSet) {
-        return null;
+    public List<FileDfsInfoDto> uploadFile(InputStream fileStream, String fileName, Set<MetaData> metaDataSet) throws Exception {
+        return fileHandlerFactory.create(fileStream.available())
+                .uploadFile(fileStream, fileName, metaDataSet);
     }
 }

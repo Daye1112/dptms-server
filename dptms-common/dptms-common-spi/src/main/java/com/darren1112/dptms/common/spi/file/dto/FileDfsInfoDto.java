@@ -17,4 +17,37 @@ import lombok.ToString;
 public class FileDfsInfoDto extends FileDfsInfoEntity {
 
     private static final long serialVersionUID = 1L;
+
+    /**
+     * 创建对象
+     *
+     * @param fileGroup 存储组
+     * @param filePath  存储路径
+     * @param fileSize  存储大小
+     * @return {@link FileDfsInfoDto}
+     * @author luyuhao
+     * @since 2021/12/4
+     */
+    public static FileDfsInfoDto create(String fileGroup, String filePath, Long fileSize) {
+        return create(fileGroup, filePath, fileSize, 1);
+    }
+
+    /**
+     * 创建对象
+     *
+     * @param fileGroup 存储组
+     * @param filePath  存储路径
+     * @param fileSize  存储大小
+     * @return {@link FileDfsInfoDto}
+     * @author luyuhao
+     * @since 2021/12/4
+     */
+    public static FileDfsInfoDto create(String fileGroup, String filePath, Long fileSize, Integer fileOrder) {
+        FileDfsInfoDto result = new FileDfsInfoDto();
+        result.setFileGroup(fileGroup);
+        result.setFilePath(filePath);
+        result.setFileSize(fileSize);
+        result.setFileOrder(fileOrder);
+        return result;
+    }
 }

@@ -15,7 +15,7 @@ import java.util.List;
  * @author luyuhao
  * @since 2020/11/23 00:18
  */
-public class FileUtil {
+public class FileUtil extends cn.hutool.core.io.FileUtil {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FileUtil.class);
 

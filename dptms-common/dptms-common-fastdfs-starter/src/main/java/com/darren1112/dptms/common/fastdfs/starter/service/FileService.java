@@ -1,11 +1,9 @@
 package com.darren1112.dptms.common.fastdfs.starter.service;
 
-import com.darren1112.dptms.common.spi.file.dto.FileInfoDto;
+import com.darren1112.dptms.common.spi.file.dto.FileDfsInfoDto;
 import com.github.tobato.fastdfs.domain.fdfs.FileInfo;
 import com.github.tobato.fastdfs.domain.fdfs.MetaData;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Set;
@@ -24,33 +22,12 @@ public interface FileService {
      * @param fileStream  文件流
      * @param fileName    文件名
      * @param metaDataSet 元数据信息
-     * @return {@link FileInfoDto}
+     * @return {@link FileDfsInfoDto}
+     * @throws Exception 异常
      * @author luyuhao
      * @since 2021/12/1
      */
-    FileInfoDto uploadFile(InputStream fileStream, String fileName, Set<MetaData> metaDataSet);
-
-    /**
-     * 上传文件
-     *
-     * @param file 文件对象
-     * @return {@link String 文件访问地址}
-     * @throws IOException io异常
-     * @author luyuhao
-     * @since 2021/11/28
-     */
-    String uploadFile(MultipartFile file) throws IOException;
-
-    /**
-     * 将一段字符串生成一个文件上传
-     *
-     * @param content       文件内容
-     * @param fileExtension 文件后缀名
-     * @return {@link String}
-     * @author luyuhao
-     * @since 2021/11/28
-     */
-    String uploadFile(String content, String fileExtension);
+    List<FileDfsInfoDto> uploadFile(InputStream fileStream, String fileName, Set<MetaData> metaDataSet) throws Exception;
 
     /**
      * 下载文件

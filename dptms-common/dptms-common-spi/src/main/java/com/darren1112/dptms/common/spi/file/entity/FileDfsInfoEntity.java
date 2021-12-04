@@ -47,5 +47,5 @@ public class FileDfsInfoEntity extends BaseEntity {
      * 文件排序
      */
     @ApiModelProperty(value = "文件排序")
-    private Integer fileOrder;
+    private Integer fileOrder = 1;
 }

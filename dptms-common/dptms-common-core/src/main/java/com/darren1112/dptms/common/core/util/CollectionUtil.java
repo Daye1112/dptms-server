@@ -90,4 +90,18 @@ public class CollectionUtil extends CollectionUtils {
     private static boolean isEmpty(Map<?, ?> map) {
         return map == null || map.isEmpty();
     }
+
+    /**
+     * 将单个对象封装为集合
+     *
+     * @param obj 单个对象
+     * @return {@link List}
+     * @author luyuhao
+     * @since 2021/12/4
+     */
+    public static <T> List<T> packToList(T obj) {
+        List<T> result = new ArrayList<>();
+        result.add(obj);
+        return result;
+    }
 }

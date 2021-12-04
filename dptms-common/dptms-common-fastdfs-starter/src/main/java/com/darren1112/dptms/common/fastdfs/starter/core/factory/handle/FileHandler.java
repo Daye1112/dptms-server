@@ -1,9 +1,10 @@
 package com.darren1112.dptms.common.fastdfs.starter.core.factory.handle;
 
-import com.darren1112.dptms.common.spi.file.dto.FileInfoDto;
+import com.darren1112.dptms.common.spi.file.dto.FileDfsInfoDto;
 import com.github.tobato.fastdfs.domain.fdfs.MetaData;
 
 import java.io.InputStream;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -20,10 +21,10 @@ public interface FileHandler {
      * @param fileStream  文件流
      * @param fileName    文件名
      * @param metaDataSet 元数据信息
-     * @return {@link FileInfoDto}
+     * @return {@link FileDfsInfoDto}
      * @throws Exception 异常
      * @author luyuhao
      * @since 2021/12/1
      */
-    FileInfoDto uploadFile(InputStream fileStream, String fileName, Set<MetaData> metaDataSet) throws Exception;
+    List<FileDfsInfoDto> uploadFile(InputStream fileStream, String fileName, Set<MetaData> metaDataSet) throws Exception;
 }
