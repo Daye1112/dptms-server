@@ -1,7 +1,7 @@
 package com.darren1112.dptms.file.test.service;
 
 import com.darren1112.dptms.common.core.util.EnvironmentAwareUtil;
-import com.darren1112.dptms.common.fastdfs.starter.service.FileService;
+import com.darren1112.dptms.common.fastdfs.starter.core.client.FileClient;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,7 +20,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class FastDfsServiceTest {
 
     @Autowired
-    private FileService fileService;
+    private FileClient fileClient;
 
     @BeforeClass
     public static void init() {
@@ -29,7 +29,5 @@ public class FastDfsServiceTest {
 
     @Test
     public void test01() {
-        String url = fileService.uploadFile("test", "txt");
-        System.out.println(url);
     }
 }

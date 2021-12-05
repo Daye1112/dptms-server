@@ -10,14 +10,18 @@ public interface BaseErrorEnum {
     /**
      * 异常code
      *
-     * @return int
+     * @return {@link Integer)
+     * @author luyuhao
+     * @since 2021/12/5
      */
     Integer getCode();
 
     /**
      * 异常信息
      *
-     * @return string
+     * @return {@link String)
+     * @author luyuhao
+     * @since 2021/12/5
      */
     String getMessage();
 }

@@ -5,8 +5,8 @@ import com.darren1112.dptms.common.fastdfs.starter.core.factory.handle.FileHandl
 import com.darren1112.dptms.common.fastdfs.starter.core.factory.handle.LargeFileHandler;
 import com.darren1112.dptms.common.fastdfs.starter.core.factory.handle.SmallFileHandler;
 import com.darren1112.dptms.common.fastdfs.starter.properties.FastDfsProperties;
-import com.darren1112.dptms.common.fastdfs.starter.service.FileService;
-import com.darren1112.dptms.common.fastdfs.starter.service.impl.FileServiceImpl;
+import com.darren1112.dptms.common.fastdfs.starter.core.client.FileClient;
+import com.darren1112.dptms.common.fastdfs.starter.core.client.impl.FastDfsFileClient;
 import com.github.tobato.fastdfs.service.FastFileStorageClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -25,8 +25,8 @@ public class FastDfsAutoConfig {
     private FastDfsProperties fastDfsProperties;
 
     @Bean
-    public FileService fileService(FastFileStorageClient fastFileStorageClient, FileHandlerFactory fileHandlerFactory) {
-        return new FileServiceImpl(fastFileStorageClient, fastDfsProperties, fileHandlerFactory);
+    public FileClient fileClient(FastFileStorageClient fastFileStorageClient, FileHandlerFactory fileHandlerFactory) {
+        return new FastDfsFileClient(fastFileStorageClient, fastDfsProperties, fileHandlerFactory);
     }
 
     @Bean("smallFileHandler")
