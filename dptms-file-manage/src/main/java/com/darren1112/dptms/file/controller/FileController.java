@@ -6,6 +6,9 @@ import com.darren1112.dptms.common.core.validate.handler.ValidateHandler;
 import com.darren1112.dptms.common.log.starter.annotation.Log;
 import com.darren1112.dptms.common.log.starter.enums.BusinessType;
 import com.darren1112.dptms.common.log.starter.enums.LogLevel;
+import com.darren1112.dptms.common.security.starter.util.DptmsSecurityUtil;
+import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
+import com.darren1112.dptms.common.spi.file.dto.FileInfoDto;
 import com.darren1112.dptms.file.common.enums.FileManageErrorCodeEnum;
 import com.darren1112.dptms.file.service.FileInfoService;
 import io.swagger.annotations.Api;
@@ -46,7 +49,8 @@ public class FileController {
     @Log(value = "文件上传", logLevel = LogLevel.INFO, businessType = BusinessType.INSERT)
     public ResponseEntity<JsonResult> uploadFile(MultipartFile file) {
         ValidateHandler.checkNull(file, FileManageErrorCodeEnum.FILE_NOT_NULL);
-        fileInfoService.uploadFile(file);
+        ActiveUser activeUser = DptmsSecurityUtil.get();
+        fileInfoService.uploadFile(file, activeUser.getId());
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }
 }

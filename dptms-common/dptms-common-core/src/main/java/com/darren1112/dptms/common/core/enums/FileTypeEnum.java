@@ -45,7 +45,7 @@ public enum FileTypeEnum {
      * @author luyuhao
      * @since 2021/12/4
      */
-    public static int matchByExtName(String extName) {
+    public static int matchTypeByExtName(String extName) {
         if (StringUtil.isEmpty(extName)) {
             return OTHER.getType();
         }

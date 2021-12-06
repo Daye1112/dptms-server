@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.darren1112.dptms.file.dao.FileInfoDao">
+    <!--新增文件信息-->
+    <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id"
+            parameterType="com.darren1112.dptms.common.spi.file.dto.FileInfoDto">
+        INSERT INTO file_info(org_id, file_type, file_name, file_size, file_ext,
+                              remark, isvalid, ctime, creater, mtime, updater)
+        VALUES (#{orgId}, #{fileType}, #{fileName}, #{fileSize}, #{fileExt},
+                #{remark}, 1, now(), #{creater}, now(), #{updater})
+    </insert>
 </mapper>

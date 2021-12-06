@@ -13,9 +13,10 @@ public interface FileInfoService {
     /**
      * 文件上传
      *
-     * @param file 文件信息
+     * @param file   文件信息
+     * @param userId 用户id
      * @author luyuhao
      * @since 2021/12/05
      */
-    void uploadFile(MultipartFile file);
+    void uploadFile(MultipartFile file, Long userId);
 }
