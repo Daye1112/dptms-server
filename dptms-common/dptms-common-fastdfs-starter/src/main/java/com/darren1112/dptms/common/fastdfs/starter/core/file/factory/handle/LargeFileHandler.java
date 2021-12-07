@@ -1,4 +1,4 @@
-package com.darren1112.dptms.common.fastdfs.starter.core.factory.handle;
+package com.darren1112.dptms.common.fastdfs.starter.core.file.factory.handle;
 
 import com.darren1112.dptms.common.core.util.FileUtil;
 import com.darren1112.dptms.common.fastdfs.starter.properties.FastDfsProperties;
@@ -6,6 +6,7 @@ import com.darren1112.dptms.common.spi.file.dto.FileDfsInfoDto;
 import com.github.tobato.fastdfs.domain.fdfs.MetaData;
 import com.github.tobato.fastdfs.domain.fdfs.StorePath;
 import com.github.tobato.fastdfs.service.FastFileStorageClient;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -26,9 +27,12 @@ public class LargeFileHandler implements FileHandler {
 
     private FastDfsProperties fastDfsProperties;
 
-    public LargeFileHandler(FastFileStorageClient fastFileStorageClient, FastDfsProperties fastDfsProperties) {
+    private ThreadPoolTaskExecutor fileHandleThreadPool;
+
+    public LargeFileHandler(FastFileStorageClient fastFileStorageClient, FastDfsProperties fastDfsProperties, ThreadPoolTaskExecutor fileHandleThreadPool) {
         this.fastFileStorageClient = fastFileStorageClient;
         this.fastDfsProperties = fastDfsProperties;
+        this.fileHandleThreadPool = fileHandleThreadPool;
     }
 
     /**
@@ -92,4 +96,5 @@ public class LargeFileHandler implements FileHandler {
         }
         return resultList;
     }
+
 }

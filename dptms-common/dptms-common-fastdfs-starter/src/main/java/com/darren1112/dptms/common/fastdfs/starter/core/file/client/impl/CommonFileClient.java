@@ -1,16 +1,12 @@
-package com.darren1112.dptms.common.fastdfs.starter.core.client.impl;
+package com.darren1112.dptms.common.fastdfs.starter.core.file.client.impl;
 
-import com.darren1112.dptms.common.core.util.CollectionUtil;
 import com.darren1112.dptms.common.core.util.FileUtil;
-import com.darren1112.dptms.common.core.util.StringUtil;
-import com.darren1112.dptms.common.fastdfs.starter.core.factory.FileHandlerFactory;
+import com.darren1112.dptms.common.fastdfs.starter.core.file.factory.FileHandlerFactory;
 import com.darren1112.dptms.common.fastdfs.starter.properties.FastDfsProperties;
-import com.darren1112.dptms.common.fastdfs.starter.core.client.FileClient;
+import com.darren1112.dptms.common.fastdfs.starter.core.file.client.FileClient;
 import com.darren1112.dptms.common.spi.file.dto.FileDfsInfoDto;
 import com.darren1112.dptms.common.spi.file.entity.FileDfsInfoEntity;
-import com.github.tobato.fastdfs.domain.fdfs.FileInfo;
 import com.github.tobato.fastdfs.domain.fdfs.MetaData;
-import com.github.tobato.fastdfs.domain.fdfs.StorePath;
 import com.github.tobato.fastdfs.domain.proto.storage.DownloadByteArray;
 import com.github.tobato.fastdfs.service.FastFileStorageClient;
 
@@ -23,7 +19,7 @@ import java.util.*;
  * @author luyuhao
  * @since 2021/11/28
  */
-public class FastDfsFileClient implements FileClient {
+public class CommonFileClient implements FileClient {
 
     private FastFileStorageClient fastFileStorageClient;
 
@@ -31,9 +27,9 @@ public class FastDfsFileClient implements FileClient {
 
     private FileHandlerFactory fileHandlerFactory;
 
-    public FastDfsFileClient(FastFileStorageClient fastFileStorageClient,
-                             FastDfsProperties fastDfsProperties,
-                             FileHandlerFactory fileHandlerFactory) {
+    public CommonFileClient(FastFileStorageClient fastFileStorageClient,
+                            FastDfsProperties fastDfsProperties,
+                            FileHandlerFactory fileHandlerFactory) {
         this.fastFileStorageClient = fastFileStorageClient;
         this.fastDfsProperties = fastDfsProperties;
         this.fileHandlerFactory = fileHandlerFactory;

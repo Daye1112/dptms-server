@@ -1,4 +1,4 @@
-package com.darren1112.dptms.common.fastdfs.starter.core.factory.handle;
+package com.darren1112.dptms.common.fastdfs.starter.core.file.factory.handle;
 
 import cn.hutool.core.io.FileUtil;
 import com.darren1112.dptms.common.core.util.CollectionUtil;

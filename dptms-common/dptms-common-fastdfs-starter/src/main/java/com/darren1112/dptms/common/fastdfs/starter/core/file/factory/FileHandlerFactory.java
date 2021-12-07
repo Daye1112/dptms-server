@@ -1,6 +1,6 @@
-package com.darren1112.dptms.common.fastdfs.starter.core.factory;
+package com.darren1112.dptms.common.fastdfs.starter.core.file.factory;
 
-import com.darren1112.dptms.common.fastdfs.starter.core.factory.handle.FileHandler;
+import com.darren1112.dptms.common.fastdfs.starter.core.file.factory.handle.FileHandler;
 import com.darren1112.dptms.common.fastdfs.starter.properties.FastDfsProperties;
 
 /**

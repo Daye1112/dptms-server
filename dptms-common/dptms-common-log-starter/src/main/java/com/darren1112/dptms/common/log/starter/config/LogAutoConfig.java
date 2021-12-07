@@ -38,7 +38,7 @@ public class LogAutoConfig {
     public ThreadPoolTaskExecutor logCollectThreadPool() {
         ThreadPoolTaskExecutor logCollectThreadPool = new ThreadPoolTaskExecutor();
         logCollectThreadPool.setMaxPoolSize(logProperties.getLogMaxPoolSize());
-        logCollectThreadPool.setCorePoolSize(logCollectThreadPool.getCorePoolSize());
+        logCollectThreadPool.setCorePoolSize(logProperties.getLogCorePoolSize());
         logCollectThreadPool.setThreadNamePrefix("logCollectExecutor-");
         // 传递上下文
         logCollectThreadPool.setTaskDecorator(new ThreadPoolDecorator());

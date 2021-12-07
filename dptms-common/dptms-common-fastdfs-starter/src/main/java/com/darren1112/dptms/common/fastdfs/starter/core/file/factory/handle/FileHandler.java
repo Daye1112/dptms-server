@@ -1,4 +1,4 @@
-package com.darren1112.dptms.common.fastdfs.starter.core.client;
+package com.darren1112.dptms.common.fastdfs.starter.core.file.factory.handle;
 
 import com.darren1112.dptms.common.spi.file.dto.FileDfsInfoDto;
 import com.github.tobato.fastdfs.domain.fdfs.MetaData;
@@ -8,12 +8,12 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * 文件Service
+ * 文件处理器-接口类
  *
  * @author luyuhao
- * @date 2021/11/28 21:43
+ * @since 2021/12/2
  */
-public interface FileClient {
+public interface FileHandler {
 
     /**
      * 文件上传
@@ -27,15 +27,4 @@ public interface FileClient {
      * @since 2021/12/1
      */
     List<FileDfsInfoDto> uploadFile(InputStream fileStream, String fileName, Set<MetaData> metaDataSet) throws Exception;
-
-    /**
-     * 文件下载
-     *
-     * @param fileDfsInfoList 文件存储信息集合
-     * @return {@link FileDfsInfoDto}
-     * @throws Exception 异常
-     * @author luyuhao
-     * @since 2021/12/1
-     */
-    byte[] download(List<FileDfsInfoDto> fileDfsInfoList) throws Exception;
 }

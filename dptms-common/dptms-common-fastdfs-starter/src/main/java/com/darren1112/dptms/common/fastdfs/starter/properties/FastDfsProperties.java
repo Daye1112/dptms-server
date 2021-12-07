@@ -19,12 +19,22 @@ public class FastDfsProperties {
     private String requestUrl;
 
     /**
-     * 大文件切割大小，默认20MB
+     * 大文件切割大小，默认50MB
      */
-    private int splitSize = 20 * 1024 * 1024;
+    private int splitSize = 50 * 1024 * 1024;
 
     /**
-     * 重试次数
+     * 重试次数，<2表示不启用重试机制
      */
     private int retryTimes = 3;
+
+    /**
+     * 文件处理线程池池最大线程数
+     */
+    private int fileMaxPoolSize = 200;
+
+    /**
+     * 文件处理线程池最大维护数
+     */
+    private int fileCorePoolSize = 20;
 }

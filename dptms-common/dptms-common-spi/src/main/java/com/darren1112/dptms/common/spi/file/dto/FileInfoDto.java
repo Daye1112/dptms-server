@@ -25,5 +25,4 @@ public class FileInfoDto extends FileInfoEntity {
      */
     private List<FileDfsInfoDto> fileDfsInfoList;
 
-
 }
