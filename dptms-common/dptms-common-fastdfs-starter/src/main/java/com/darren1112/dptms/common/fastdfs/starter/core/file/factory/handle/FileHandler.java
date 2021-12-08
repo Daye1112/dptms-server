@@ -27,4 +27,15 @@ public interface FileHandler {
      * @since 2021/12/1
      */
     List<FileDfsInfoDto> uploadFile(InputStream fileStream, String fileName, Set<MetaData> metaDataSet) throws Exception;
+
+    /**
+     * 文件下载
+     *
+     * @param fileDfsInfoList 文件存储信息集合
+     * @return {@link FileDfsInfoDto}
+     * @throws Exception 异常
+     * @author luyuhao
+     * @since 2021/12/1
+     */
+    byte[] download(List<FileDfsInfoDto> fileDfsInfoList) throws Exception;
 }

@@ -41,4 +41,15 @@ public class FileHandlerFactory {
             return largeFileHandler;
         }
     }
+
+    /**
+     * 创建默认处理器，主要用于通用方法
+     *
+     * @return {@link FileHandler}
+     * @author luyuhao
+     * @since 2021/12/4
+     */
+    public FileHandler createDefault() {
+        return largeFileHandler;
+    }
 }

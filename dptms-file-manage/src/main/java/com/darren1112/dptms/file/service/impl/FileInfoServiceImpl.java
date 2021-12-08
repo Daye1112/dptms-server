@@ -42,12 +42,13 @@ public class FileInfoServiceImpl implements FileInfoService {
      *
      * @param file   文件信息
      * @param userId 用户id
+     * @return {@link FileInfoDto}
      * @author luyuhao
      * @since 2021/12/05
      */
     @Override
     @Transactional(rollbackFor = Throwable.class)
-    public void uploadFile(MultipartFile file, Long userId) {
+    public FileInfoDto uploadFile(MultipartFile file, Long userId) {
         try {
             // 初始化上传信息
             FileInfoDto fileInfoDto = FileInfoUtil.create(file, userId);
@@ -63,6 +64,7 @@ public class FileInfoServiceImpl implements FileInfoService {
             });
             // 批量新增存储信息
             fileDfsInfoDao.batchInsert(fileDfsInfoList);
+            return fileInfoDto;
         } catch (Exception e) {
             log.error("文件上传失败, 失败原因：" + e.getMessage(), e);
             throw new ServiceHandleException(FileManageErrorCodeEnum.FILE_UPLOAD_ERROR);

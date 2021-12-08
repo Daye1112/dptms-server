@@ -1,11 +1,11 @@
 package com.darren1112.dptms.common.fastdfs.starter.core.file.factory.handle;
 
-import com.darren1112.dptms.common.core.util.FileUtil;
+import com.darren1112.dptms.common.fastdfs.starter.core.fastdfs.factory.FastDfsHandlerFactory;
 import com.darren1112.dptms.common.fastdfs.starter.properties.FastDfsProperties;
 import com.darren1112.dptms.common.spi.file.dto.FileDfsInfoDto;
 import com.github.tobato.fastdfs.domain.fdfs.MetaData;
-import com.github.tobato.fastdfs.domain.fdfs.StorePath;
-import com.github.tobato.fastdfs.service.FastFileStorageClient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import java.io.ByteArrayInputStream;
@@ -14,6 +14,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.Future;
 
 /**
  * 大文件处理器
@@ -21,16 +22,16 @@ import java.util.Set;
  * @author luyuhao
  * @since 2021/12/2
  */
-public class LargeFileHandler implements FileHandler {
+public class LargeFileHandler extends AbstractFileHandler {
 
-    private FastFileStorageClient fastFileStorageClient;
+    private static final Logger log = LoggerFactory.getLogger(LargeFileHandler.class);
 
     private FastDfsProperties fastDfsProperties;
 
     private ThreadPoolTaskExecutor fileHandleThreadPool;
 
-    public LargeFileHandler(FastFileStorageClient fastFileStorageClient, FastDfsProperties fastDfsProperties, ThreadPoolTaskExecutor fileHandleThreadPool) {
-        this.fastFileStorageClient = fastFileStorageClient;
+    public LargeFileHandler(FastDfsHandlerFactory fastDfsHandlerFactory, FastDfsProperties fastDfsProperties, ThreadPoolTaskExecutor fileHandleThreadPool) {
+        super(fastDfsHandlerFactory);
         this.fastDfsProperties = fastDfsProperties;
         this.fileHandleThreadPool = fileHandleThreadPool;
     }
@@ -48,17 +49,15 @@ public class LargeFileHandler implements FileHandler {
      */
     @Override
     public List<FileDfsInfoDto> uploadFile(InputStream fileStream, String fileName, Set<MetaData> metaDataSet) throws Exception {
-        List<FileDfsInfoDto> resultList = new ArrayList<>();
         // 获取文件大小
         int fileSize = fileStream.available();
         int splitSize = this.fastDfsProperties.getSplitSize();
-        String extName = FileUtil.extName(fileName);
 
         // 计算参数
         int count = (fileSize + splitSize - 1) / splitSize;
         int byteSize = splitSize > 1024 ? 1024 : splitSize;
         Exception exception = null;
-
+        List<Future<FileDfsInfoDto>> futureList = new ArrayList<>();
         // 循环遍历
         for (int i = 0; i < count; i++) {
             try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
@@ -73,24 +72,38 @@ public class LargeFileHandler implements FileHandler {
                 }
                 // 封装切割结果
                 InputStream subFileStream = new ByteArrayInputStream(baos.toByteArray());
-                // TODO 异步上传
-                // 文件上传
-                StorePath storePath = fastFileStorageClient.uploadFile(subFileStream, fileSize, extName, metaDataSet);
-                // 添加到结果集
-                resultList.add(FileDfsInfoDto.create(storePath.getGroup(), storePath.getPath(), (long) fileSize, (i + 1)));
+                // 异步上传
+                int order = i + 1;
+                Future<FileDfsInfoDto> future = fileHandleThreadPool.submit(() -> super.simpleUpload(subFileStream, fileName, metaDataSet, order));
+                futureList.add(future);
             } catch (Exception e) {
+                // 上传异常，直接结束
+                log.error("文件上传失败, 失败原因: " + e.getMessage(), e);
                 exception = e;
-            }
-            // 如果一个上传失败，直接结束
-            if (exception != null) {
                 break;
             }
         }
-
+        List<FileDfsInfoDto> resultList = new ArrayList<>();
+        for (Future<FileDfsInfoDto> subFuture : futureList) {
+            try {
+                resultList.add(subFuture.get());
+            } catch (Exception e) {
+                log.error("文件上传失败, 失败原因: " + e.getMessage(), e);
+                exception = e;
+            }
+        }
         // 如果存在失败，则删除已上传子文件
         if (exception != null) {
             for (FileDfsInfoDto fileDfsInfoDto : resultList) {
-                fastFileStorageClient.deleteFile(fileDfsInfoDto.getFileGroup(), fileDfsInfoDto.getFilePath());
+                fileHandleThreadPool.execute(() -> {
+                    try {
+                        fastDfsHandlerFactory.create()
+                                .deleteFile(fileDfsInfoDto.getFileGroup(), fileDfsInfoDto.getFilePath());
+                    } catch (Exception e) {
+                        log.error("文件删除失败, groupName: {}, path: {}", fileDfsInfoDto.getFileGroup(), fileDfsInfoDto.getFilePath());
+                        log.error(e.getMessage(), e);
+                    }
+                });
             }
             throw exception;
         }

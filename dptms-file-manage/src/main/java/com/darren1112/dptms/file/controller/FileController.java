@@ -50,7 +50,7 @@ public class FileController {
     public ResponseEntity<JsonResult> uploadFile(MultipartFile file) {
         ValidateHandler.checkNull(file, FileManageErrorCodeEnum.FILE_NOT_NULL);
         ActiveUser activeUser = DptmsSecurityUtil.get();
-        fileInfoService.uploadFile(file, activeUser.getId());
-        return ResponseEntityUtil.ok(JsonResult.buildSuccess());
+        FileInfoDto fileInfoDto = fileInfoService.uploadFile(file, activeUser.getId());
+        return ResponseEntityUtil.ok(JsonResult.buildSuccessData(fileInfoDto));
     }
 }

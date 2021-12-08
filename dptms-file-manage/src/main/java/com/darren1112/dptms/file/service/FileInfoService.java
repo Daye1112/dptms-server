@@ -1,5 +1,6 @@
 package com.darren1112.dptms.file.service;
 
+import com.darren1112.dptms.common.spi.file.dto.FileInfoDto;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -15,8 +16,9 @@ public interface FileInfoService {
      *
      * @param file   文件信息
      * @param userId 用户id
+     * @return {@link FileInfoDto}
      * @author luyuhao
      * @since 2021/12/05
      */
-    void uploadFile(MultipartFile file, Long userId);
+    FileInfoDto uploadFile(MultipartFile file, Long userId);
 }
