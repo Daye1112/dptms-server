@@ -40,7 +40,8 @@ public class GlobalExceptionHandler {
      * 文件上传异常处理
      */
     @ExceptionHandler(MultipartException.class)
-    public ResponseEntity handleMultipartException(Throwable t) {
+    public ResponseEntity handleMultipartException(MultipartException me) {
+        log.error("系统捕捉MultipartException异常并处理 ==> " + MicroErrorCodeEnum.FILE_UPLOAD_ERROR.getMessage(), me);
         return ResponseEntityUtil.badRequest(JsonResult.buildErrorEnum(MicroErrorCodeEnum.FILE_UPLOAD_ERROR));
     }
 

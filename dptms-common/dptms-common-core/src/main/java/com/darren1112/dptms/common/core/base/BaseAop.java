@@ -3,6 +3,7 @@ package com.darren1112.dptms.common.core.base;
 import com.darren1112.dptms.common.core.util.JsonUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,7 +33,8 @@ public class BaseAop {
         if (argValues != null) {
             for (int i = 0; i < argValues.length; i++) {
                 if (argNames[i].contains("request")
-                        || argNames[i].contains("response")) {
+                        || argNames[i].contains("response")
+                        || argValues[i] instanceof MultipartFile) {
                     continue;
                 }
                 paramMap.put(argNames[i], argValues[i]);

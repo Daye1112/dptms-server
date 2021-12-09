@@ -1,7 +1,6 @@
 package com.darren1112.dptms.common.log.starter.aspect;
 
 import com.darren1112.dptms.common.core.base.BaseAop;
-import com.darren1112.dptms.common.core.util.IpUtil;
 import com.darren1112.dptms.common.core.util.RequestUtil;
 import com.darren1112.dptms.common.log.starter.annotation.Log;
 import com.darren1112.dptms.common.log.starter.collect.LogCollectService;
@@ -75,10 +74,14 @@ public class LogAspect extends BaseAop {
         Object result = joinPoint.proceed();
         // 是否需要采集
         if (logAnnotation.logLevel().getCode() >= logProperties.getLogLevel().getCode()) {
-            // 创建日志对象
-            SysOperateLogDto dto = buildDto(joinPoint, logAnnotation, null);
-            // 日志收集
-            logCollectService.operateLogCollect(dto);
+            try {
+                // 创建日志对象
+                SysOperateLogDto dto = buildDto(joinPoint, logAnnotation, null);
+                // 日志收集
+                logCollectService.operateLogCollect(dto);
+            } catch (Exception e) {
+                log.error("日志采集失败, 失败原因: " + e.getMessage(), e);
+            }
         }
         return result;
     }

@@ -3,6 +3,7 @@ package com.darren1112.dptms.common.core.enums;
 import com.darren1112.dptms.common.core.util.StringUtil;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -16,7 +17,7 @@ public enum FileTypeEnum {
     /**
      * 文件类型
      */
-    OTHER(1, null),
+    OTHER(1, Collections.emptyList()),
     IMAGE(2, Arrays.asList("bmp", "jpg", "jpeg", "png", "gif")),
     OFFICE(3, Arrays.asList("doc", "docx", "xls", "xlsx", "ppt", "pptx")),
     ;

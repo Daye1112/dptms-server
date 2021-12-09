@@ -62,11 +62,12 @@ public abstract class AbstractFileHandler implements FileHandler {
      */
     protected FileDfsInfoDto simpleUpload(InputStream fileStream, String fileName, Set<MetaData> metaDataSet, Integer fileOrder) {
         try {
+            long fileSize = fileStream.available();
             // 文件上传
             StorePath storePath = fastDfsHandlerFactory.create()
-                    .uploadFile(fileStream, fileStream.available(), FileUtil.extName(fileName), metaDataSet);
+                    .uploadFile(fileStream, fileSize, FileUtil.extName(fileName), metaDataSet);
             // 设置属性
-            return FileDfsInfoDto.create(storePath.getGroup(), storePath.getPath(), (long) fileStream.available(), fileOrder);
+            return FileDfsInfoDto.create(storePath.getGroup(), storePath.getPath(), fileSize, fileOrder);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
