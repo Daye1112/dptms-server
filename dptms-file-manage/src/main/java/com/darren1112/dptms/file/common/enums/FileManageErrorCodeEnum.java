@@ -14,8 +14,8 @@ public enum FileManageErrorCodeEnum implements BaseErrorEnum {
      * 文件管理错误信息
      */
     FILE_NOT_NULL(HttpStatus.BAD_REQUEST, "文件不能为空"),
-    FILE_UPLOAD_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "文件上传失败")
-    ;
+    FILE_UPLOAD_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "文件上传失败"),
+    FILE_ID_NOT_NULL(HttpStatus.BAD_REQUEST, "文件id不能为空");
 
     private Integer code;
     private String message;

@@ -53,4 +53,20 @@ public class FileController {
         FileInfoDto fileInfoDto = fileInfoService.uploadFile(file, activeUser.getId());
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(fileInfoDto));
     }
+
+    // /**
+    //  * 文件下载
+    //  *
+    //  * @param fileId 文件id
+    //  * @return {@link ResponseEntity)
+    //  * @author luyuhao
+    //  * @since 2021/12/10
+    //  */
+    // @PostMapping("/download")
+    // @ApiOperation(value = "文件上传")
+    // @Log(value = "文件上传", logLevel = LogLevel.INFO, businessType = BusinessType.INSERT)
+    // public ResponseEntity download(@RequestParam(value = "fileId", required = false) Long fileId){
+    //     ValidateHandler.checkNull(fileId, FileManageErrorCodeEnum.FILE_ID_NOT_NULL);
+    //     byte[] bytes = fileInfoService.download(fileId);
+    // }
 }
