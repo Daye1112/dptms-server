@@ -22,4 +22,18 @@
             )
         </foreach>
     </insert>
+
+    <!--根据文件信息id查询文件存储信息-->
+    <select id="listByFileInfoId"
+            resultType="com.darren1112.dptms.common.spi.file.dto.FileDfsInfoDto">
+        SELECT id,
+               file_info_id AS fileInfoId,
+               file_group   AS fileGroup,
+               file_path    AS filePath,
+               file_size    AS fileSize,
+               file_order   AS fileOrder
+        FROM file_dfs_info
+        WHERE isvalid = 1
+          AND file_info_id = #{fileId}
+    </select>
 </mapper>

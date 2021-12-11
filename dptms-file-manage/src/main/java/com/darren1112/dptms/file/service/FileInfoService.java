@@ -21,4 +21,24 @@ public interface FileInfoService {
      * @since 2021/12/05
      */
     FileInfoDto uploadFile(MultipartFile file, Long userId);
+
+    /**
+     * 文件下载
+     *
+     * @param fileId 文件id
+     * @return {@link FileInfoDto}
+     * @author luyuhao
+     * @since 2021/12/10
+     */
+    FileInfoDto download(Long fileId);
+
+    /**
+     * 根据文件id查询文件完整信息
+     *
+     * @param fileId 文件id
+     * @return {@link FileInfoDto}
+     * @author luyuhao
+     * @since 2021/12/10
+     */
+    FileInfoDto getFullInfoById(Long fileId);
 }

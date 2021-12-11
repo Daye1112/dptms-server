@@ -2,6 +2,7 @@ package com.darren1112.dptms.file.dao;
 
 import com.darren1112.dptms.common.spi.file.dto.FileDfsInfoDto;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -24,4 +25,14 @@ public interface FileDfsInfoDao {
      * @since 2021/12/7
      */
     void batchInsert(List<FileDfsInfoDto> list);
+
+    /**
+     * 根据文件信息id查询文件存储信息
+     *
+     * @param fileId 文件id
+     * @return {@link FileDfsInfoDto}
+     * @author luyuhao
+     * @since 2021/12/11
+     */
+    List<FileDfsInfoDto> listByFileInfoId(@Param("fileId") Long fileId);
 }

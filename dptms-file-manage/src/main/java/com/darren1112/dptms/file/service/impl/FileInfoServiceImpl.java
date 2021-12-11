@@ -1,5 +1,6 @@
 package com.darren1112.dptms.file.service.impl;
 
+import com.darren1112.dptms.common.core.exception.BadRequestException;
 import com.darren1112.dptms.common.core.exception.ServiceHandleException;
 import com.darren1112.dptms.common.fastdfs.starter.core.file.client.FileClient;
 import com.darren1112.dptms.common.spi.file.dto.FileDfsInfoDto;
@@ -69,5 +70,45 @@ public class FileInfoServiceImpl implements FileInfoService {
             log.error("文件上传失败, 失败原因：" + e.getMessage(), e);
             throw new ServiceHandleException(FileManageErrorCodeEnum.FILE_UPLOAD_ERROR);
         }
+    }
+
+    /**
+     * 文件下载
+     *
+     * @param fileId 文件id
+     * @return {@link FileInfoDto}
+     * @author luyuhao
+     * @since 2021/12/10
+     */
+    @Override
+    public FileInfoDto download(Long fileId) {
+        try {
+            FileInfoDto fileInfo = getFullInfoById(fileId);
+            byte[] fileBytes = fileClient.download(fileInfo.getFileDfsInfoList());
+            fileInfo.setFileBytes(fileBytes);
+            return fileInfo;
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            throw new BadRequestException(FileManageErrorCodeEnum.FILE_DOWNLOAD_ERROR);
+        }
+    }
+
+    /**
+     * 根据文件id查询文件完整信息
+     *
+     * @param fileId 文件id
+     * @return {@link FileInfoDto}
+     * @author luyuhao
+     * @since 2021/12/10
+     */
+    @Override
+    public FileInfoDto getFullInfoById(Long fileId) {
+        FileInfoDto fileInfo = fileInfoDao.getById(fileId);
+        if (null == fileInfo) {
+            throw new BadRequestException(FileManageErrorCodeEnum.FILE_NOT_EXIST);
+        }
+        List<FileDfsInfoDto> fileDfsInfoList = fileDfsInfoDao.listByFileInfoId(fileId);
+        fileInfo.setFileDfsInfoList(fileDfsInfoList);
+        return fileInfo;
     }
 }

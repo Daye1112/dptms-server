@@ -19,6 +19,11 @@ public class FileDfsInfoDto extends FileDfsInfoEntity {
     private static final long serialVersionUID = 1L;
 
     /**
+     * 文件字节流
+     */
+    private byte[] fileBytes;
+
+    /**
      * 创建对象
      *
      * @param fileGroup 存储组

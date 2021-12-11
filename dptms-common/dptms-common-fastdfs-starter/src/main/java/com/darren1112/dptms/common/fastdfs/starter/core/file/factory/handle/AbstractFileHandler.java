@@ -3,14 +3,11 @@ package com.darren1112.dptms.common.fastdfs.starter.core.file.factory.handle;
 import com.darren1112.dptms.common.core.util.FileUtil;
 import com.darren1112.dptms.common.fastdfs.starter.core.fastdfs.factory.FastDfsHandlerFactory;
 import com.darren1112.dptms.common.spi.file.dto.FileDfsInfoDto;
-import com.darren1112.dptms.common.spi.file.entity.FileDfsInfoEntity;
 import com.github.tobato.fastdfs.domain.fdfs.MetaData;
 import com.github.tobato.fastdfs.domain.fdfs.StorePath;
 import com.github.tobato.fastdfs.domain.proto.storage.DownloadByteArray;
 
 import java.io.InputStream;
-import java.util.Comparator;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -21,32 +18,29 @@ import java.util.Set;
  */
 public abstract class AbstractFileHandler implements FileHandler {
 
-    protected FastDfsHandlerFactory fastDfsHandlerFactory;
+    FastDfsHandlerFactory fastDfsHandlerFactory;
 
-    public AbstractFileHandler(FastDfsHandlerFactory fastDfsHandlerFactory) {
+    AbstractFileHandler(FastDfsHandlerFactory fastDfsHandlerFactory) {
         this.fastDfsHandlerFactory = fastDfsHandlerFactory;
     }
 
     /**
-     * 文件下载
+     * 简单文件下载封装方法
      *
-     * @param fileDfsInfoList 文件存储信息集合
+     * @param fileDfsInfo 文件存储信息
      * @return {@link FileDfsInfoDto}
-     * @throws Exception 异常
      * @author luyuhao
-     * @since 2021/12/1
+     * @since 2021/12/11
      */
-    @Override
-    public byte[] download(List<FileDfsInfoDto> fileDfsInfoList) throws Exception {
-        byte[] result = null;
-        // 根据order排序
-        fileDfsInfoList.sort(Comparator.comparing(FileDfsInfoEntity::getFileOrder));
-        for (FileDfsInfoDto subFileInfo : fileDfsInfoList) {
-            byte[] subFileBytes = fastDfsHandlerFactory.create()
-                    .downloadFile(subFileInfo.getFileGroup(), subFileInfo.getFilePath(), new DownloadByteArray());
-            result = FileUtil.mergeBytes(result, subFileBytes);
+    FileDfsInfoDto simpleDownload(FileDfsInfoDto fileDfsInfo) {
+        try {
+            byte[] fileBytes = fastDfsHandlerFactory.create()
+                    .downloadFile(fileDfsInfo.getFileGroup(), fileDfsInfo.getFilePath(), new DownloadByteArray());
+            fileDfsInfo.setFileBytes(fileBytes);
+            return fileDfsInfo;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-        return result;
     }
 
     /**
@@ -60,7 +54,7 @@ public abstract class AbstractFileHandler implements FileHandler {
      * @author luyuhao
      * @since 2021/12/8
      */
-    protected FileDfsInfoDto simpleUpload(InputStream fileStream, String fileName, Set<MetaData> metaDataSet, Integer fileOrder) {
+    FileDfsInfoDto simpleUpload(InputStream fileStream, String fileName, Set<MetaData> metaDataSet, Integer fileOrder) {
         try {
             long fileSize = fileStream.available();
             // 文件上传

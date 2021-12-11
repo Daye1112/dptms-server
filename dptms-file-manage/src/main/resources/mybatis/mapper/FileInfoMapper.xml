@@ -9,4 +9,16 @@
         VALUES (#{orgId}, #{fileType}, #{fileName}, #{fileSize}, #{fileExt},
                 #{remark}, 1, now(), #{creater}, now(), #{updater})
     </insert>
+
+    <!--根据文件id查询文件信息-->
+    <select id="getById" resultType="com.darren1112.dptms.common.spi.file.dto.FileInfoDto">
+        SELECT id,
+               file_type AS fileType,
+               file_name AS fileName,
+               file_size AS fileSize,
+               file_ext  AS fileExt
+        FROM file_info
+        WHERE isvalid = 1
+          AND id = #{fileId}
+    </select>
 </mapper>

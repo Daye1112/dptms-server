@@ -36,7 +36,7 @@ public class CommonFileClient implements FileClient {
      */
     @Override
     public List<FileDfsInfoDto> uploadFile(InputStream fileStream, String fileName, Set<MetaData> metaDataSet) throws Exception {
-        return fileHandlerFactory.create(fileStream.available())
+        return fileHandlerFactory.uploadCreate(fileStream.available())
                 .uploadFile(fileStream, fileName, metaDataSet);
     }
 
@@ -51,7 +51,7 @@ public class CommonFileClient implements FileClient {
      */
     @Override
     public byte[] download(List<FileDfsInfoDto> fileDfsInfoList) throws Exception {
-        return fileHandlerFactory.createDefault()
+        return fileHandlerFactory.downloadCreate(fileDfsInfoList.size())
                 .download(fileDfsInfoList);
     }
 }

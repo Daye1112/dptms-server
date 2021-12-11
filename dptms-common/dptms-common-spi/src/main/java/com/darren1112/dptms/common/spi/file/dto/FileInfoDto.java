@@ -25,4 +25,8 @@ public class FileInfoDto extends FileInfoEntity {
      */
     private List<FileDfsInfoDto> fileDfsInfoList;
 
+    /**
+     * 文件数组集合
+     */
+    private byte[] fileBytes;
 }

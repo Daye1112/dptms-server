@@ -1,8 +1,10 @@
 package com.darren1112.dptms.common.fastdfs.starter.core.file.factory.handle;
 
+import com.darren1112.dptms.common.core.util.FileUtil;
 import com.darren1112.dptms.common.fastdfs.starter.core.fastdfs.factory.FastDfsHandlerFactory;
 import com.darren1112.dptms.common.fastdfs.starter.properties.FastDfsProperties;
 import com.darren1112.dptms.common.spi.file.dto.FileDfsInfoDto;
+import com.darren1112.dptms.common.spi.file.entity.FileDfsInfoEntity;
 import com.github.tobato.fastdfs.domain.fdfs.MetaData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +14,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Future;
@@ -30,7 +33,9 @@ public class LargeFileHandler extends AbstractFileHandler {
 
     private ThreadPoolTaskExecutor fileHandleThreadPool;
 
-    public LargeFileHandler(FastDfsHandlerFactory fastDfsHandlerFactory, FastDfsProperties fastDfsProperties, ThreadPoolTaskExecutor fileHandleThreadPool) {
+    public LargeFileHandler(FastDfsHandlerFactory fastDfsHandlerFactory,
+                            FastDfsProperties fastDfsProperties,
+                            ThreadPoolTaskExecutor fileHandleThreadPool) {
         super(fastDfsHandlerFactory);
         this.fastDfsProperties = fastDfsProperties;
         this.fileHandleThreadPool = fileHandleThreadPool;
@@ -110,4 +115,34 @@ public class LargeFileHandler extends AbstractFileHandler {
         return resultList;
     }
 
+    /**
+     * 文件下载
+     *
+     * @param fileDfsInfoList 文件存储信息集合
+     * @return {@link FileDfsInfoDto}
+     * @throws Exception 异常
+     * @author luyuhao
+     * @since 2021/12/1
+     */
+    @Override
+    public byte[] download(List<FileDfsInfoDto> fileDfsInfoList) throws Exception {
+        // 文件异步下载
+        List<Future<FileDfsInfoDto>> futureList = new ArrayList<>();
+        for (FileDfsInfoDto subFileDfsInfo : fileDfsInfoList) {
+            Future<FileDfsInfoDto> subFileDfsInfoFuture = fileHandleThreadPool.submit(() -> super.simpleDownload(subFileDfsInfo));
+            futureList.add(subFileDfsInfoFuture);
+        }
+        // 获取文件下载结果
+        List<FileDfsInfoDto> downLoadList = new ArrayList<>();
+        for (Future<FileDfsInfoDto> subFileDfsInfoFuture : futureList) {
+            downLoadList.add(subFileDfsInfoFuture.get());
+        }
+        // 文件下载结果组装
+        byte[] result = null;
+        downLoadList.sort(Comparator.comparing(FileDfsInfoEntity::getFileOrder));
+        for (FileDfsInfoDto subFileDfsInfo : downLoadList) {
+            result = FileUtil.mergeBytes(result, subFileDfsInfo.getFileBytes());
+        }
+        return result;
+    }
 }

@@ -2,6 +2,7 @@ package com.darren1112.dptms.file.controller;
 
 import com.darren1112.dptms.common.core.message.JsonResult;
 import com.darren1112.dptms.common.core.util.ResponseEntityUtil;
+import com.darren1112.dptms.common.core.util.WebUtil;
 import com.darren1112.dptms.common.core.validate.handler.ValidateHandler;
 import com.darren1112.dptms.common.log.starter.annotation.Log;
 import com.darren1112.dptms.common.log.starter.enums.BusinessType;
@@ -16,10 +17,10 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 文件Controller
@@ -54,19 +55,47 @@ public class FileController {
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(fileInfoDto));
     }
 
-    // /**
-    //  * 文件下载
-    //  *
-    //  * @param fileId 文件id
-    //  * @return {@link ResponseEntity)
-    //  * @author luyuhao
-    //  * @since 2021/12/10
-    //  */
-    // @PostMapping("/download")
-    // @ApiOperation(value = "文件上传")
-    // @Log(value = "文件上传", logLevel = LogLevel.INFO, businessType = BusinessType.INSERT)
-    // public ResponseEntity download(@RequestParam(value = "fileId", required = false) Long fileId){
-    //     ValidateHandler.checkNull(fileId, FileManageErrorCodeEnum.FILE_ID_NOT_NULL);
-    //     byte[] bytes = fileInfoService.download(fileId);
-    // }
+    /**
+     * 文件下载
+     *
+     * @param fileId 文件id
+     * @return {@link ResponseEntity)
+     * @author luyuhao
+     * @since 2021/12/10
+     */
+    @GetMapping("/download")
+    @ApiOperation(value = "文件下载")
+    public ResponseEntity download(HttpServletRequest request,
+                                   @RequestParam(value = "fileId", required = false) Long fileId) {
+        // 文件id校验
+        ValidateHandler.checkNull(fileId, FileManageErrorCodeEnum.FILE_ID_NOT_NULL);
+        // 文件下载
+        FileInfoDto fileInfo = fileInfoService.download(fileId);
+        try {
+            // 文件下载
+            return WebUtil.download(fileInfo.getFileName(), fileInfo.getFileBytes(), request);
+        } catch (Exception e) {
+            // 返回文件下载失败
+            return ResponseEntityUtil.internalServerError(JsonResult.buildErrorEnum(FileManageErrorCodeEnum.FILE_DOWNLOAD_ERROR));
+        }
+    }
+
+    /**
+     * 文件预览
+     *
+     * @param fileId 文件id
+     * @return {@link ResponseEntity)
+     * @author luyuhao
+     * @since 2021/12/10
+     */
+    @GetMapping("/view")
+    @ApiOperation(value = "文件预览")
+    public ResponseEntity view(@RequestParam(value = "fileId", required = false) Long fileId) {
+        // 文件id校验
+        ValidateHandler.checkNull(fileId, FileManageErrorCodeEnum.FILE_ID_NOT_NULL);
+        // 文件下载
+        FileInfoDto fileInfo = fileInfoService.download(fileId);
+        // 文件预览
+        return WebUtil.view(fileInfo.getFileName(), fileInfo.getFileBytes());
+    }
 }
