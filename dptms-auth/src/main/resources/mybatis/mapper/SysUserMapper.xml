@@ -126,7 +126,8 @@
             real_name    = #{realName},
             gender       = #{gender},
             phone_number = #{phoneNumber},
-            email        = #{email}
+            email        = #{email},
+            file_id      = #{fileId}
         WHERE isvalid = 1
           AND id = #{id}
     </update>
