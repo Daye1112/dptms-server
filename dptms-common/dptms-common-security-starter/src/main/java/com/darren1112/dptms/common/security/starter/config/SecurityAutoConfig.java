@@ -5,7 +5,7 @@ import com.darren1112.dptms.common.core.constants.SecurityConstant;
 import com.darren1112.dptms.common.redis.starter.core.RedisUtil;
 import com.darren1112.dptms.common.security.starter.core.DptmsTokenStore;
 import com.darren1112.dptms.common.security.starter.core.DptmsTokenValidator;
-import com.darren1112.dptms.common.security.starter.filter.AddUserFilter;
+import com.darren1112.dptms.common.security.starter.filter.AddCommonInfoFilter;
 import com.darren1112.dptms.common.security.starter.properties.SecurityProperties;
 import feign.RequestInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,14 +47,14 @@ public class SecurityAutoConfig {
     }
 
     @Bean
-    public FilterRegistrationBean addUserFilter(DptmsTokenStore dptmsTokenStore) {
-        AddUserFilter addUserFilter = new AddUserFilter(dptmsTokenStore);
-        FilterRegistrationBean<AddUserFilter> filterRegistrationBean = new FilterRegistrationBean<>();
-        filterRegistrationBean.setFilter(addUserFilter);
+    public FilterRegistrationBean addCommonInfoFilter(DptmsTokenStore dptmsTokenStore) {
+        AddCommonInfoFilter addCommonInfoFilter = new AddCommonInfoFilter(dptmsTokenStore);
+        FilterRegistrationBean<AddCommonInfoFilter> filterRegistrationBean = new FilterRegistrationBean<>();
+        filterRegistrationBean.setFilter(addCommonInfoFilter);
         filterRegistrationBean.addUrlPatterns("/*");
         //order的数值越小 则优先级越高
         filterRegistrationBean.setOrder(FilterOrderConstant.ADD_USER_FILTER);
-        filterRegistrationBean.setName("addUserFilter");
+        filterRegistrationBean.setName("addCommonInfoFilter");
         return filterRegistrationBean;
     }
 }

@@ -1,41 +1,30 @@
-package com.darren1112.dptms.common.spi.file.entity;
+package com.darren1112.dptms.common.spi.file.dto;
 
-import com.darren1112.dptms.common.spi.common.base.BaseEntity;
+import com.darren1112.dptms.common.spi.file.entity.FileCenterEntity;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
- * 文件信息Entity
+ * 文件中心Dto
  *
  * @author luyuhao
- * @since 2021/12/1
+ * @since 2021/12/18
  */
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class FileInfoEntity extends BaseEntity {
+public class FileCenterDto extends FileCenterEntity {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * 组织id
-     */
-    @ApiModelProperty(value = "组织id")
-    private Long orgId;
 
     /**
      * 文件类型
      */
     @ApiModelProperty(value = "文件类型")
     private Integer fileType;
-
-    /**
-     * 文件名称
-     */
-    @ApiModelProperty(value = "文件名称")
-    private String fileName;
 
     /**
      * 文件总大小
@@ -48,10 +37,4 @@ public class FileInfoEntity extends BaseEntity {
      */
     @ApiModelProperty(value = "文件类型名")
     private String fileExt;
-
-    /**
-     * 文件夹总大小
-     */
-    @ApiModelProperty(value = "文件夹总大小")
-    private Long fileSizeCount;
 }
