@@ -10,7 +10,7 @@ import com.darren1112.dptms.common.spi.monitor.dto.MonitorOperateLogDto;
  * @author luyuhao
  * @since 2021/02/06 20:43
  */
-public interface SysOperateLogService {
+public interface MonitorOperateLogService {
 
     /**
      * 插入操作日志信息

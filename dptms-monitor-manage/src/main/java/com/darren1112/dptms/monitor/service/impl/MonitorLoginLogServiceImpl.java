@@ -4,8 +4,8 @@ import com.darren1112.dptms.common.core.base.BaseService;
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
 import com.darren1112.dptms.common.spi.monitor.dto.MonitorLoginLogDto;
-import com.darren1112.dptms.monitor.dao.SysLoginLogDao;
-import com.darren1112.dptms.monitor.service.SysLoginLogService;
+import com.darren1112.dptms.monitor.dao.MonitorLoginLogDao;
+import com.darren1112.dptms.monitor.service.MonitorLoginLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,10 +20,10 @@ import java.util.List;
  */
 @Service
 @Transactional(rollbackFor = Throwable.class, readOnly = true)
-public class SysLoginLogServiceImpl extends BaseService implements SysLoginLogService {
+public class MonitorLoginLogServiceImpl extends BaseService implements MonitorLoginLogService {
 
     @Autowired
-    private SysLoginLogDao sysLoginLogDao;
+    private MonitorLoginLogDao monitorLoginLogDao;
 
     /**
      * 插入登录日志信息
@@ -35,7 +35,7 @@ public class SysLoginLogServiceImpl extends BaseService implements SysLoginLogSe
     @Override
     @Transactional(rollbackFor = Throwable.class)
     public void insert(MonitorLoginLogDto dto) {
-        sysLoginLogDao.insert(dto);
+        monitorLoginLogDao.insert(dto);
     }
 
     /**
@@ -49,8 +49,8 @@ public class SysLoginLogServiceImpl extends BaseService implements SysLoginLogSe
      */
     @Override
     public PageBean<MonitorLoginLogDto> listPage(PageParam pageParam, MonitorLoginLogDto dto) {
-        List<MonitorLoginLogDto> list = sysLoginLogDao.listPage(pageParam, dto);
-        Long count = sysLoginLogDao.listPageCount(dto);
+        List<MonitorLoginLogDto> list = monitorLoginLogDao.listPage(pageParam, dto);
+        Long count = monitorLoginLogDao.listPageCount(dto);
         return createPageBean(pageParam, count, list);
     }
 
@@ -64,6 +64,6 @@ public class SysLoginLogServiceImpl extends BaseService implements SysLoginLogSe
      */
     @Override
     public List<MonitorLoginLogDto> listLastSevenByUserId(Long userId) {
-        return sysLoginLogDao.listByUserIdAndNumber(userId, 7);
+        return monitorLoginLogDao.listByUserIdAndNumber(userId, 7);
     }
 }

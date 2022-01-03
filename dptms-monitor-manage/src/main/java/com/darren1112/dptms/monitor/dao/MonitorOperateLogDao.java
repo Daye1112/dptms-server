@@ -16,7 +16,7 @@ import java.util.List;
  */
 @Mapper
 @Repository
-public interface SysOperateLogDao {
+public interface MonitorOperateLogDao {
 
     /**
      * 插入操作日志信息

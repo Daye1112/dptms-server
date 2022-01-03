@@ -11,7 +11,7 @@ import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
 import com.darren1112.dptms.common.spi.monitor.dto.MonitorLoginLogDto;
-import com.darren1112.dptms.monitor.service.SysLoginLogService;
+import com.darren1112.dptms.monitor.service.MonitorLoginLogService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -31,10 +31,10 @@ import java.util.List;
 @Api(tags = "登录日志管理")
 @RestController
 @RequestMapping(value = "/loginLog")
-public class SysLoginLogController extends BaseController {
+public class MonitorLoginLogController extends BaseController {
 
     @Autowired
-    private SysLoginLogService sysLoginLogService;
+    private MonitorLoginLogService monitorLoginLogService;
 
     /**
      * 插入登录日志信息
@@ -47,7 +47,7 @@ public class SysLoginLogController extends BaseController {
     @PostMapping("/insert")
     @ApiOperation(value = "插入登录日志", hidden = true)
     public ResponseEntity<JsonResult> insert(@RequestBody MonitorLoginLogDto dto) {
-        sysLoginLogService.insert(dto);
+        monitorLoginLogService.insert(dto);
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }
 
@@ -65,7 +65,7 @@ public class SysLoginLogController extends BaseController {
     @Log(value = "分页查询登录日志", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     public ResponseEntity<JsonResult<PageBean<MonitorLoginLogDto>>> listPage(PageParam pageParam,
                                                                              MonitorLoginLogDto dto) {
-        PageBean<MonitorLoginLogDto> pageBean = sysLoginLogService.listPage(getPageParam(pageParam), dto);
+        PageBean<MonitorLoginLogDto> pageBean = monitorLoginLogService.listPage(getPageParam(pageParam), dto);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(pageBean));
     }
 
@@ -81,7 +81,7 @@ public class SysLoginLogController extends BaseController {
     @Log(value = "查询当前用户的登录日志", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     public ResponseEntity<JsonResult<List<MonitorLoginLogDto>>> listCurrentUser() {
         ActiveUser activeUser = DptmsSecurityUtil.get();
-        List<MonitorLoginLogDto> list = sysLoginLogService.listLastSevenByUserId(activeUser.getId());
+        List<MonitorLoginLogDto> list = monitorLoginLogService.listLastSevenByUserId(activeUser.getId());
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(list));
     }
 }

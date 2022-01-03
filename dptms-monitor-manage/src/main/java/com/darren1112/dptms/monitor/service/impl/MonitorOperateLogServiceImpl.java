@@ -4,8 +4,8 @@ import com.darren1112.dptms.common.core.base.BaseService;
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
 import com.darren1112.dptms.common.spi.monitor.dto.MonitorOperateLogDto;
-import com.darren1112.dptms.monitor.dao.SysOperateLogDao;
-import com.darren1112.dptms.monitor.service.SysOperateLogService;
+import com.darren1112.dptms.monitor.dao.MonitorOperateLogDao;
+import com.darren1112.dptms.monitor.service.MonitorOperateLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,10 +20,10 @@ import java.util.List;
  */
 @Service
 @Transactional(rollbackFor = Throwable.class, readOnly = true)
-public class SysOperateLogServiceImpl extends BaseService implements SysOperateLogService {
+public class MonitorOperateLogServiceImpl extends BaseService implements MonitorOperateLogService {
 
     @Autowired
-    private SysOperateLogDao sysOperateLogDao;
+    private MonitorOperateLogDao monitorOperateLogDao;
 
     /**
      * 插入操作日志信息
@@ -35,7 +35,7 @@ public class SysOperateLogServiceImpl extends BaseService implements SysOperateL
     @Override
     @Transactional(rollbackFor = Throwable.class)
     public void insert(MonitorOperateLogDto dto) {
-        sysOperateLogDao.insert(dto);
+        monitorOperateLogDao.insert(dto);
     }
 
     /**
@@ -49,8 +49,8 @@ public class SysOperateLogServiceImpl extends BaseService implements SysOperateL
      */
     @Override
     public PageBean<MonitorOperateLogDto> listPage(PageParam pageParam, MonitorOperateLogDto dto) {
-        List<MonitorOperateLogDto> list = sysOperateLogDao.listPage(pageParam, dto);
-        Long count = sysOperateLogDao.listPageCount(dto);
+        List<MonitorOperateLogDto> list = monitorOperateLogDao.listPage(pageParam, dto);
+        Long count = monitorOperateLogDao.listPageCount(dto);
         return createPageBean(pageParam, count, list);
     }
 }

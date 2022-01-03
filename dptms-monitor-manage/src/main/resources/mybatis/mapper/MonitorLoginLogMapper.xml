@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.darren1112.dptms.monitor.dao.SysLoginLogDao">
+<mapper namespace="com.darren1112.dptms.monitor.dao.MonitorLoginLogDao">
     <!--插入登录日志信息-->
     <insert id="insert" parameterType="com.darren1112.dptms.common.spi.monitor.dto.MonitorLoginLogDto">
-        INSERT INTO sys_login_log(username, os, browser, ip, ip_address, remark, isvalid, ctime, creater, mtime, updater)
+        INSERT INTO monitor_login_log(username, os, browser, ip, ip_address, remark, isvalid, ctime, creater, mtime, updater)
         VALUES (#{username}, #{os}, #{browser}, #{ip}, #{ipAddress}, #{remark}, 1, #{ctime}, #{creater}, #{mtime}, #{updater})
     </insert>
     <!--分页查询登录日志-->
@@ -20,7 +20,7 @@
                creater,
                mtime,
                updater
-        FROM sys_login_log
+        FROM monitor_login_log
         WHERE isvalid = 1
          <if test="dto.username != null and dto.username != ''">
              AND username LIKE concat('%', #{dto.username}, '%')
@@ -43,7 +43,7 @@
     <!--分页查询登录日志记录数-->
     <select id="listPageCount" resultType="java.lang.Long">
         SELECT count(1)
-        FROM sys_login_log
+        FROM monitor_login_log
         WHERE isvalid = 1
         <if test="dto.username != null and dto.username != ''">
             AND username LIKE concat('%', #{dto.username}, '%')
@@ -72,7 +72,7 @@
                t1.ip,
                t1.ip_address AS ipAddress,
                t1.ctime
-        FROM sys_login_log t1
+        FROM monitor_login_log t1
         WHERE t1.isvalid = 1
           AND t1.creater = #{userId}
         ORDER BY t1.ctime DESC

@@ -16,7 +16,7 @@ import java.util.List;
  */
 @Mapper
 @Repository
-public interface SysLoginLogDao {
+public interface MonitorLoginLogDao {
 
     /**
      * 插入登录日志信息

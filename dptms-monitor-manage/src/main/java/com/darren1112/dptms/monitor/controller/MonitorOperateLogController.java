@@ -9,7 +9,7 @@ import com.darren1112.dptms.common.log.starter.enums.LogLevel;
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
 import com.darren1112.dptms.common.spi.monitor.dto.MonitorOperateLogDto;
-import com.darren1112.dptms.monitor.service.SysOperateLogService;
+import com.darren1112.dptms.monitor.service.MonitorOperateLogService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -27,10 +27,10 @@ import org.springframework.web.bind.annotation.*;
 @Api(tags = "操作日志管理")
 @RestController
 @RequestMapping(value = "/operateLog")
-public class SysOperateLogController extends BaseController {
+public class MonitorOperateLogController extends BaseController {
 
     @Autowired
-    private SysOperateLogService sysOperateLogService;
+    private MonitorOperateLogService monitorOperateLogService;
 
     /**
      * 插入操作日志信息
@@ -43,7 +43,7 @@ public class SysOperateLogController extends BaseController {
     @ApiOperation(value = "插入操作日志", hidden = true)
     @PostMapping("/insert")
     public ResponseEntity<JsonResult> insert(@RequestBody MonitorOperateLogDto dto) {
-        sysOperateLogService.insert(dto);
+        monitorOperateLogService.insert(dto);
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }
 
@@ -61,7 +61,7 @@ public class SysOperateLogController extends BaseController {
     @GetMapping("/listPage")
     public ResponseEntity<JsonResult<PageBean<MonitorOperateLogDto>>> listPage(PageParam pageParam,
                                                                                MonitorOperateLogDto dto) {
-        PageBean<MonitorOperateLogDto> pageBean = sysOperateLogService.listPage(getPageParam(pageParam), dto);
+        PageBean<MonitorOperateLogDto> pageBean = monitorOperateLogService.listPage(getPageParam(pageParam), dto);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(pageBean));
     }
 }

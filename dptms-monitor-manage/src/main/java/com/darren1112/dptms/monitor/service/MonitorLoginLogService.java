@@ -12,7 +12,7 @@ import java.util.List;
  * @author luyuhao
  * @since 2021/02/06 20:43
  */
-public interface SysLoginLogService {
+public interface MonitorLoginLogService {
 
     /**
      * 插入登录日志信息
