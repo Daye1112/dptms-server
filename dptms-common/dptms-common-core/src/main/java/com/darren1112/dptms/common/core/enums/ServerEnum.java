@@ -17,6 +17,7 @@ public enum ServerEnum implements BaseCommonEnum {
     DPTMS_AUTH(1, "dptms-auth"),
     DPTMS_SYSTEM_MANAGE(2, "dptms-system-manage"),
     DPTMS_MONITOR_MANAGE(3, "dptms-monitor-manage"),
+    DPTMS_FILE_MANAGE(4, "dptms-file-manage")
     ;
 
     private Integer code;

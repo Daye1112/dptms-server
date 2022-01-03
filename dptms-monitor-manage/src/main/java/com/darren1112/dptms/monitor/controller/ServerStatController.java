@@ -10,6 +10,7 @@ import com.darren1112.dptms.common.log.starter.enums.BusinessType;
 import com.darren1112.dptms.common.log.starter.enums.LogLevel;
 import com.darren1112.dptms.common.spi.common.dto.KeyValueDto;
 import com.darren1112.dptms.common.spi.monitor.dto.DruidStatDto;
+import com.darren1112.dptms.component.remoting.FileManageRemoting;
 import com.darren1112.dptms.component.service.DruidService;
 import com.darren1112.dptms.monitor.common.enums.MonitorManageErrorCodeEnum;
 import com.darren1112.dptms.component.remoting.AuthRemoting;
@@ -49,6 +50,9 @@ public class ServerStatController {
 
     @Autowired
     private SystemManageRemoting systemManageRemoting;
+
+    @Autowired
+    private FileManageRemoting fileManageRemoting;
 
     /**
      * 查询服务list
@@ -99,6 +103,12 @@ public class ServerStatController {
             // dptms-system-manage
             case DPTMS_SYSTEM_MANAGE:
                 druidStatDtoList = Optional.ofNullable(systemManageRemoting.getApiStat())
+                        .map(JsonResult::getData)
+                        .orElse(Collections.emptyList());
+                break;
+            // dptms-file-manage
+            case DPTMS_FILE_MANAGE:
+                druidStatDtoList = Optional.ofNullable(fileManageRemoting.getApiStat())
                         .map(JsonResult::getData)
                         .orElse(Collections.emptyList());
                 break;
