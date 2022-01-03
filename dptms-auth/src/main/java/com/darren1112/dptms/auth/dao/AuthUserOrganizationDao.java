@@ -16,7 +16,7 @@ import java.util.List;
  */
 @Mapper
 @Repository
-public interface SysUserOrganizationDao {
+public interface AuthUserOrganizationDao {
 
     /**
      * 查询用户关联的组织list

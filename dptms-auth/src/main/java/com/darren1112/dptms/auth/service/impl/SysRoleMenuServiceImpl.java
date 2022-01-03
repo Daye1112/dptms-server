@@ -1,7 +1,7 @@
 package com.darren1112.dptms.auth.service.impl;
 
 import com.darren1112.dptms.auth.common.util.MenuUtil;
-import com.darren1112.dptms.auth.dao.SysRoleMenuDao;
+import com.darren1112.dptms.auth.dao.AuthRoleMenuDao;
 import com.darren1112.dptms.auth.service.SysRoleMenuService;
 import com.darren1112.dptms.common.core.util.StringUtil;
 import com.darren1112.dptms.common.spi.auth.dto.AuthMenuDto;
@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 public class SysRoleMenuServiceImpl implements SysRoleMenuService {
 
     @Autowired
-    private SysRoleMenuDao sysRoleMenuDao;
+    private AuthRoleMenuDao authRoleMenuDao;
 
     /**
      * 查询角色关联的菜单list
@@ -40,7 +40,7 @@ public class SysRoleMenuServiceImpl implements SysRoleMenuService {
      */
     @Override
     public AuthMenuDto listRoleAssigned(Long roleId) {
-        List<AuthMenuDto> sysMenuList = sysRoleMenuDao.listRoleAssigned(roleId);
+        List<AuthMenuDto> sysMenuList = authRoleMenuDao.listRoleAssigned(roleId);
         List<Long> assignedIdList = sysMenuList.stream().filter(AuthMenuDto::getIsAssigned).map(AuthMenuDto::getId).collect(Collectors.toList());
         AuthMenuDto sysMenuDto = MenuUtil.buildTree(sysMenuList);
         if (sysMenuDto != null) {
@@ -63,7 +63,7 @@ public class SysRoleMenuServiceImpl implements SysRoleMenuService {
     @Transactional(rollbackFor = Throwable.class)
     public void assignedMenu(Long roleId, String menuIds, Long updater) {
         // 清空角色已分配的组织
-        sysRoleMenuDao.deleteByRoleId(roleId, updater);
+        authRoleMenuDao.deleteByRoleId(roleId, updater);
         if (StringUtil.isBlank(menuIds)) {
             return;
         }
@@ -79,6 +79,6 @@ public class SysRoleMenuServiceImpl implements SysRoleMenuService {
             list.add(entity);
         }
         // 批量插入
-        sysRoleMenuDao.batchInsert(list);
+        authRoleMenuDao.batchInsert(list);
     }
 }

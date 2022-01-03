@@ -1,8 +1,8 @@
 package com.darren1112.dptms.auth.service.impl;
 
 import com.darren1112.dptms.auth.common.enums.AuthErrorCodeEnum;
-import com.darren1112.dptms.auth.dao.SysPermissionDao;
-import com.darren1112.dptms.auth.dao.SysUserDao;
+import com.darren1112.dptms.auth.dao.AuthPermissionDao;
+import com.darren1112.dptms.auth.dao.AuthUserDao;
 import com.darren1112.dptms.auth.service.SysUserService;
 import com.darren1112.dptms.common.core.base.BaseService;
 import com.darren1112.dptms.common.core.exception.BadRequestException;
@@ -34,10 +34,10 @@ import java.util.List;
 public class SysUserServiceImpl extends BaseService implements SysUserService {
 
     @Autowired
-    private SysUserDao sysUserDao;
+    private AuthUserDao authUserDao;
 
     @Autowired
-    private SysPermissionDao sysPermissionDao;
+    private AuthPermissionDao authPermissionDao;
 
     /**
      * 根据用户名查询用户信息
@@ -50,7 +50,7 @@ public class SysUserServiceImpl extends BaseService implements SysUserService {
     @Override
     @Cacheable
     public AuthUserDto getByUsername(String username) {
-        return sysUserDao.getByUsername(username);
+        return authUserDao.getByUsername(username);
     }
 
     /**
@@ -64,7 +64,7 @@ public class SysUserServiceImpl extends BaseService implements SysUserService {
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Throwable.class)
     public void updateLoginTime(Long id) {
-        sysUserDao.updateLastLoginTime(id);
+        authUserDao.updateLastLoginTime(id);
     }
 
     /**
@@ -78,7 +78,7 @@ public class SysUserServiceImpl extends BaseService implements SysUserService {
     @Override
     @Cacheable
     public AuthUserDto getById(Long id) {
-        return sysUserDao.getById(id);
+        return authUserDao.getById(id);
     }
 
     /**
@@ -94,7 +94,7 @@ public class SysUserServiceImpl extends BaseService implements SysUserService {
     @Transactional(rollbackFor = Throwable.class)
     public Long insert(AuthUserEntity entity) {
         validRepeat(entity, false);
-        sysUserDao.insert(entity);
+        authUserDao.insert(entity);
         return entity.getId();
     }
 
@@ -111,7 +111,7 @@ public class SysUserServiceImpl extends BaseService implements SysUserService {
         param.setId(entity.getId());
         param.setUsername(entity.getUsername());
         param.setIsUpdate(isUpdate);
-        Long count = sysUserDao.countByRepeat(param);
+        Long count = authUserDao.countByRepeat(param);
         if (count != null && count > 0) {
             throw new BadRequestException(AuthErrorCodeEnum.USER_NOT_REPEAT);
         }
@@ -129,8 +129,8 @@ public class SysUserServiceImpl extends BaseService implements SysUserService {
     @Override
     @Cacheable
     public PageBean<AuthUserDto> listPage(PageParam pageParam, AuthUserDto dto) {
-        List<AuthUserDto> list = sysUserDao.listPage(pageParam, dto);
-        Long count = sysUserDao.listPageCount(dto);
+        List<AuthUserDto> list = authUserDao.listPage(pageParam, dto);
+        Long count = authUserDao.listPageCount(dto);
         return createPageBean(pageParam, count, list);
     }
 
@@ -147,7 +147,7 @@ public class SysUserServiceImpl extends BaseService implements SysUserService {
     @Transactional(rollbackFor = Throwable.class)
     public Long update(AuthUserEntity entity) {
         validRepeat(entity, true);
-        return sysUserDao.update(entity);
+        return authUserDao.update(entity);
     }
 
     /**
@@ -162,7 +162,7 @@ public class SysUserServiceImpl extends BaseService implements SysUserService {
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Throwable.class)
     public void deleteById(Long id, Long updater) {
-        sysUserDao.deleteById(id, updater);
+        authUserDao.deleteById(id, updater);
     }
 
     /**
@@ -176,7 +176,7 @@ public class SysUserServiceImpl extends BaseService implements SysUserService {
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Throwable.class)
     public void updateLock(AuthUserEntity entity) {
-        sysUserDao.updateLock(entity);
+        authUserDao.updateLock(entity);
     }
 
     /**
@@ -191,7 +191,7 @@ public class SysUserServiceImpl extends BaseService implements SysUserService {
     public AuthUserDto getUserInfoAndPermissionByUserId(Long id) {
         AuthUserDto userInfo = this.getById(id);
         if (userInfo != null) {
-            List<AuthPermissionDto> permissionList = sysPermissionDao.listByUserId(id);
+            List<AuthPermissionDto> permissionList = authPermissionDao.listByUserId(id);
             userInfo.setPermissionList(permissionList);
         }
         return userInfo;
@@ -209,7 +209,7 @@ public class SysUserServiceImpl extends BaseService implements SysUserService {
     @Transactional(rollbackFor = Throwable.class)
     public void updatePassword(AuthUserDto dto) {
         // 查询旧用户信息
-        AuthUserDto userDto = sysUserDao.getById(dto.getId());
+        AuthUserDto userDto = authUserDao.getById(dto.getId());
         // 判断用户是否存在
         ValidateHandler.checkNull(userDto, AuthErrorCodeEnum.USER_NOT_EXIST);
         // 加密输入的旧密码
@@ -219,6 +219,6 @@ public class SysUserServiceImpl extends BaseService implements SysUserService {
         // 新密码加密
         String newEncPassword = Md5Util.encrypt(dto.getNewPassword(), userDto.getSalt());
         dto.setNewPassword(newEncPassword);
-        sysUserDao.updatePassword(dto);
+        authUserDao.updatePassword(dto);
     }
 }

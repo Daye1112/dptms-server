@@ -1,6 +1,6 @@
 package com.darren1112.dptms.auth.service.impl;
 
-import com.darren1112.dptms.auth.dao.SysUserOrganizationDao;
+import com.darren1112.dptms.auth.dao.AuthUserOrganizationDao;
 import com.darren1112.dptms.auth.service.SysUserOrganizationService;
 import com.darren1112.dptms.common.core.util.StringUtil;
 import com.darren1112.dptms.common.spi.auth.dto.AuthOrganizationDto;
@@ -26,7 +26,7 @@ import java.util.List;
 public class SysUserOrganizationServiceImpl implements SysUserOrganizationService {
 
     @Autowired
-    private SysUserOrganizationDao sysUserOrganizationDao;
+    private AuthUserOrganizationDao authUserOrganizationDao;
 
     /**
      * 查询用户关联的组织list
@@ -38,7 +38,7 @@ public class SysUserOrganizationServiceImpl implements SysUserOrganizationServic
      */
     @Override
     public List<AuthOrganizationDto> listUserAssigned(Long userId) {
-        return sysUserOrganizationDao.listUserAssigned(userId);
+        return authUserOrganizationDao.listUserAssigned(userId);
     }
 
     /**
@@ -55,7 +55,7 @@ public class SysUserOrganizationServiceImpl implements SysUserOrganizationServic
     @Transactional(rollbackFor = Throwable.class)
     public void assignedOrg(Long userId, String orgIds, Long updater) {
         // 清空用户已分配的组织
-        sysUserOrganizationDao.deleteByUserId(userId, updater);
+        authUserOrganizationDao.deleteByUserId(userId, updater);
         if (StringUtil.isBlank(orgIds)) {
             return;
         }
@@ -71,6 +71,6 @@ public class SysUserOrganizationServiceImpl implements SysUserOrganizationServic
             list.add(entity);
         }
         // 批量插入
-        sysUserOrganizationDao.batchInsert(list);
+        authUserOrganizationDao.batchInsert(list);
     }
 }

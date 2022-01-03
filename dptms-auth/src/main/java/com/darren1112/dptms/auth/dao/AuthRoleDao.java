@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Mapper
 @Repository
-public interface SysRoleDao {
+public interface AuthRoleDao {
 
 
     /**

@@ -1,7 +1,7 @@
 package com.darren1112.dptms.auth.service.impl;
 
 import com.darren1112.dptms.auth.common.enums.AuthErrorCodeEnum;
-import com.darren1112.dptms.auth.dao.SysOrganizationDao;
+import com.darren1112.dptms.auth.dao.AuthOrganizationDao;
 import com.darren1112.dptms.auth.service.SysOrganizationService;
 import com.darren1112.dptms.common.core.base.BaseService;
 import com.darren1112.dptms.common.core.exception.BadRequestException;
@@ -30,7 +30,7 @@ import java.util.List;
 public class SysOrganizationServiceImpl extends BaseService implements SysOrganizationService {
 
     @Autowired
-    private SysOrganizationDao sysOrganizationDao;
+    private AuthOrganizationDao authOrganizationDao;
 
     /**
      * 分页查询组织信息
@@ -44,8 +44,8 @@ public class SysOrganizationServiceImpl extends BaseService implements SysOrgani
     @Override
     @Cacheable
     public PageBean<AuthOrganizationDto> listPage(PageParam pageParam, AuthOrganizationDto param) {
-        List<AuthOrganizationDto> list = sysOrganizationDao.listPage(pageParam, param);
-        Long count = sysOrganizationDao.listPageCount(param);
+        List<AuthOrganizationDto> list = authOrganizationDao.listPage(pageParam, param);
+        Long count = authOrganizationDao.listPageCount(param);
         return createPageBean(pageParam, count, list);
     }
 
@@ -62,7 +62,7 @@ public class SysOrganizationServiceImpl extends BaseService implements SysOrgani
     @Transactional(rollbackFor = Throwable.class)
     public Long insert(AuthOrganizationEntity entity) {
         validRepeat(entity, false);
-        sysOrganizationDao.insert(entity);
+        authOrganizationDao.insert(entity);
         return entity.getId();
     }
 
@@ -80,7 +80,7 @@ public class SysOrganizationServiceImpl extends BaseService implements SysOrgani
         param.setOrgCode(entity.getOrgCode());
         param.setOrgName(entity.getOrgName());
         param.setId(entity.getId());
-        Long count = sysOrganizationDao.countByRepeat(param);
+        Long count = authOrganizationDao.countByRepeat(param);
         if (count != null && count > 0) {
             throw new BadRequestException(AuthErrorCodeEnum.ORG_NOT_REPEAT);
         }
@@ -99,7 +99,7 @@ public class SysOrganizationServiceImpl extends BaseService implements SysOrgani
     @Transactional(rollbackFor = Throwable.class)
     public Long update(AuthOrganizationEntity entity) {
         validRepeat(entity, true);
-        return sysOrganizationDao.update(entity);
+        return authOrganizationDao.update(entity);
     }
 
     /**
@@ -114,6 +114,6 @@ public class SysOrganizationServiceImpl extends BaseService implements SysOrgani
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Throwable.class)
     public void deleteById(Long id, Long updater) {
-        sysOrganizationDao.deleteById(id, updater);
+        authOrganizationDao.deleteById(id, updater);
     }
 }

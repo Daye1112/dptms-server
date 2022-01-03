@@ -1,7 +1,7 @@
 package com.darren1112.dptms.auth.service.impl;
 
 import com.darren1112.dptms.auth.common.enums.AuthErrorCodeEnum;
-import com.darren1112.dptms.auth.dao.SysPermissionDao;
+import com.darren1112.dptms.auth.dao.AuthPermissionDao;
 import com.darren1112.dptms.auth.service.SysPermissionService;
 import com.darren1112.dptms.common.core.base.BaseService;
 import com.darren1112.dptms.common.core.exception.BadRequestException;
@@ -30,7 +30,7 @@ import java.util.List;
 public class SysPermissionServiceImpl extends BaseService implements SysPermissionService {
 
     @Autowired
-    private SysPermissionDao sysPermissionDao;
+    private AuthPermissionDao authPermissionDao;
 
     /**
      * 插入权限信息
@@ -45,7 +45,7 @@ public class SysPermissionServiceImpl extends BaseService implements SysPermissi
     @Transactional(rollbackFor = Throwable.class)
     public Long insert(AuthPermissionEntity entity) {
         validRepeat(entity, false);
-        sysPermissionDao.insert(entity);
+        authPermissionDao.insert(entity);
         return entity.getId();
     }
 
@@ -61,8 +61,8 @@ public class SysPermissionServiceImpl extends BaseService implements SysPermissi
     @Override
     @Cacheable
     public PageBean<AuthPermissionDto> listPage(PageParam pageParam, AuthPermissionDto dto) {
-        List<AuthPermissionDto> list = sysPermissionDao.listPage(pageParam, dto);
-        Long count = sysPermissionDao.listPageCount(dto);
+        List<AuthPermissionDto> list = authPermissionDao.listPage(pageParam, dto);
+        Long count = authPermissionDao.listPageCount(dto);
         return createPageBean(pageParam, count, list);
     }
 
@@ -79,7 +79,7 @@ public class SysPermissionServiceImpl extends BaseService implements SysPermissi
     @Transactional(rollbackFor = Throwable.class)
     public Long update(AuthPermissionEntity entity) {
         validRepeat(entity, true);
-        return sysPermissionDao.update(entity);
+        return authPermissionDao.update(entity);
     }
 
     /**
@@ -96,7 +96,7 @@ public class SysPermissionServiceImpl extends BaseService implements SysPermissi
         param.setPerCode(entity.getPerCode());
         param.setPerUrl(entity.getPerUrl());
         param.setIsUpdate(isUpdate);
-        Long count = sysPermissionDao.countByRepeat(param);
+        Long count = authPermissionDao.countByRepeat(param);
         if (count != null && count > 0) {
             throw new BadRequestException(AuthErrorCodeEnum.PER_NOT_REPEAT);
         }
@@ -114,7 +114,7 @@ public class SysPermissionServiceImpl extends BaseService implements SysPermissi
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Throwable.class)
     public void deleteById(Long id, Long updater) {
-        sysPermissionDao.deleteById(id, updater);
+        authPermissionDao.deleteById(id, updater);
     }
 
     /**
@@ -127,6 +127,6 @@ public class SysPermissionServiceImpl extends BaseService implements SysPermissi
     @Override
     @Cacheable
     public List<AuthPermissionDto> listGroup() {
-        return sysPermissionDao.listGroup();
+        return authPermissionDao.listGroup();
     }
 }

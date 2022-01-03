@@ -1,7 +1,7 @@
 package com.darren1112.dptms.auth.service.impl;
 
 import com.darren1112.dptms.auth.common.enums.AuthErrorCodeEnum;
-import com.darren1112.dptms.auth.dao.SysRoleDao;
+import com.darren1112.dptms.auth.dao.AuthRoleDao;
 import com.darren1112.dptms.auth.service.SysRoleService;
 import com.darren1112.dptms.common.core.base.BaseService;
 import com.darren1112.dptms.common.core.exception.BadRequestException;
@@ -30,7 +30,7 @@ import java.util.List;
 public class SysRoleServiceImpl extends BaseService implements SysRoleService {
 
     @Autowired
-    private SysRoleDao sysRoleDao;
+    private AuthRoleDao authRoleDao;
 
     /**
      * 插入角色信息
@@ -45,7 +45,7 @@ public class SysRoleServiceImpl extends BaseService implements SysRoleService {
     @Transactional(rollbackFor = Throwable.class)
     public Long insert(AuthRoleEntity entity) {
         validRepeat(entity, false);
-        sysRoleDao.insert(entity);
+        authRoleDao.insert(entity);
         return entity.getId();
     }
 
@@ -62,7 +62,7 @@ public class SysRoleServiceImpl extends BaseService implements SysRoleService {
     @Transactional(rollbackFor = Throwable.class)
     public Long update(AuthRoleEntity entity) {
         validRepeat(entity, true);
-        return sysRoleDao.update(entity);
+        return authRoleDao.update(entity);
     }
 
     /**
@@ -77,8 +77,8 @@ public class SysRoleServiceImpl extends BaseService implements SysRoleService {
     @Override
     @Cacheable
     public PageBean<AuthRoleDto> listPage(PageParam pageParam, AuthRoleDto dto) {
-        List<AuthRoleDto> list = sysRoleDao.listPage(pageParam, dto);
-        Long count = sysRoleDao.listPageCount(dto);
+        List<AuthRoleDto> list = authRoleDao.listPage(pageParam, dto);
+        Long count = authRoleDao.listPageCount(dto);
         return createPageBean(pageParam, count, list);
     }
 
@@ -94,7 +94,7 @@ public class SysRoleServiceImpl extends BaseService implements SysRoleService {
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Throwable.class)
     public void deleteById(Long id, Long updater) {
-        sysRoleDao.deleteById(id, updater);
+        authRoleDao.deleteById(id, updater);
     }
 
     /**
@@ -110,7 +110,7 @@ public class SysRoleServiceImpl extends BaseService implements SysRoleService {
         param.setId(entity.getId());
         param.setRoleCode(entity.getRoleCode());
         param.setIsUpdate(isUpdate);
-        Long count = sysRoleDao.countByRepeat(param);
+        Long count = authRoleDao.countByRepeat(param);
         if (count != null && count > 0) {
             throw new BadRequestException(AuthErrorCodeEnum.ROLE_NOT_REPEAT);
         }

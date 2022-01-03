@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.darren1112.dptms.auth.dao.SysOrganizationDao">
+<mapper namespace="com.darren1112.dptms.auth.dao.AuthOrganizationDao">
     <!--查询重复记录数-->
     <select id="countByRepeat" parameterType="com.darren1112.dptms.common.spi.auth.entity.AuthOrganizationEntity"
             resultType="java.lang.Long">

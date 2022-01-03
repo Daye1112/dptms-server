@@ -2,7 +2,7 @@ package com.darren1112.dptms.auth.service.impl;
 
 import com.darren1112.dptms.auth.common.enums.AuthErrorCodeEnum;
 import com.darren1112.dptms.auth.common.util.MenuUtil;
-import com.darren1112.dptms.auth.dao.SysMenuDao;
+import com.darren1112.dptms.auth.dao.AuthMenuDao;
 import com.darren1112.dptms.auth.service.SysMenuService;
 import com.darren1112.dptms.common.core.base.BaseService;
 import com.darren1112.dptms.common.core.exception.BadRequestException;
@@ -29,7 +29,7 @@ import java.util.List;
 public class SysMenuServiceImpl extends BaseService implements SysMenuService {
 
     @Autowired
-    private SysMenuDao sysMenuDao;
+    private AuthMenuDao authMenuDao;
 
     /**
      * 获取用户的菜单
@@ -41,7 +41,7 @@ public class SysMenuServiceImpl extends BaseService implements SysMenuService {
      */
     @Override
     public List<AuthMenuDto> listMenuByUserId(Long userId) {
-        return sysMenuDao.listMenuByUserId(userId);
+        return authMenuDao.listMenuByUserId(userId);
     }
 
     /**
@@ -57,7 +57,7 @@ public class SysMenuServiceImpl extends BaseService implements SysMenuService {
     @Transactional(rollbackFor = Throwable.class)
     public Long insert(AuthMenuEntity entity) {
         validRepeat(entity, false);
-        sysMenuDao.insert(entity);
+        authMenuDao.insert(entity);
         return entity.getId();
     }
 
@@ -73,7 +73,7 @@ public class SysMenuServiceImpl extends BaseService implements SysMenuService {
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Throwable.class)
     public void deleteById(Long id, Long updater) {
-        sysMenuDao.deleteById(id, updater);
+        authMenuDao.deleteById(id, updater);
     }
 
     /**
@@ -89,7 +89,7 @@ public class SysMenuServiceImpl extends BaseService implements SysMenuService {
     @Transactional(rollbackFor = Throwable.class)
     public Long update(AuthMenuEntity entity) {
         validRepeat(entity, true);
-        return sysMenuDao.update(entity);
+        return authMenuDao.update(entity);
     }
 
     /**
@@ -105,7 +105,7 @@ public class SysMenuServiceImpl extends BaseService implements SysMenuService {
         param.setId(entity.getId());
         param.setMenuCode(entity.getMenuCode());
         param.setIsUpdate(isUpdate);
-        Long count = sysMenuDao.countByRepeat(param);
+        Long count = authMenuDao.countByRepeat(param);
         if (count != null && count > 0) {
             throw new BadRequestException(AuthErrorCodeEnum.MENU_CODE_REPEAT);
         }
@@ -121,7 +121,7 @@ public class SysMenuServiceImpl extends BaseService implements SysMenuService {
     @Override
     @Cacheable
     public AuthMenuDto listTree() {
-        List<AuthMenuDto> sysMenuList = sysMenuDao.list();
+        List<AuthMenuDto> sysMenuList = authMenuDao.list();
         return MenuUtil.buildTree(sysMenuList);
     }
 }

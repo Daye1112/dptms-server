@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.darren1112.dptms.auth.dao.SysRoleMenuDao">
+<mapper namespace="com.darren1112.dptms.auth.dao.AuthRoleMenuDao">
     <!--查询角色关联的菜单list-->
     <select id="listRoleAssigned" parameterType="java.lang.Long"
             resultType="com.darren1112.dptms.common.spi.auth.dto.AuthMenuDto">

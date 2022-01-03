@@ -1,6 +1,6 @@
 package com.darren1112.dptms.auth.service.impl;
 
-import com.darren1112.dptms.auth.dao.SysMenuPermissionDao;
+import com.darren1112.dptms.auth.dao.AuthMenuPermissionDao;
 import com.darren1112.dptms.auth.service.SysMenuPermissionService;
 import com.darren1112.dptms.common.core.util.StringUtil;
 import com.darren1112.dptms.common.spi.auth.dto.AuthPermissionDto;
@@ -26,7 +26,7 @@ import java.util.List;
 public class SysMenuPermissionServiceImpl implements SysMenuPermissionService {
 
     @Autowired
-    private SysMenuPermissionDao sysMenuPermissionDao;
+    private AuthMenuPermissionDao authMenuPermissionDao;
 
     /**
      * 查询菜单关联的权限list
@@ -38,7 +38,7 @@ public class SysMenuPermissionServiceImpl implements SysMenuPermissionService {
      */
     @Override
     public List<AuthPermissionDto> listMenuAssigned(Long menuId) {
-        return sysMenuPermissionDao.listMenuAssigned(menuId);
+        return authMenuPermissionDao.listMenuAssigned(menuId);
     }
 
     /**
@@ -54,7 +54,7 @@ public class SysMenuPermissionServiceImpl implements SysMenuPermissionService {
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Throwable.class)
     public void assignedPer(Long menuId, String perIds, Long updater) {
-        sysMenuPermissionDao.deleteByMenuId(menuId, updater);
+        authMenuPermissionDao.deleteByMenuId(menuId, updater);
         if (StringUtil.isBlank(perIds)) {
             return;
         }
@@ -68,7 +68,7 @@ public class SysMenuPermissionServiceImpl implements SysMenuPermissionService {
             entity.setUpdater(updater);
             list.add(entity);
         }
-        sysMenuPermissionDao.batchInsert(list);
+        authMenuPermissionDao.batchInsert(list);
     }
 
     /**
@@ -81,6 +81,6 @@ public class SysMenuPermissionServiceImpl implements SysMenuPermissionService {
      */
     @Override
     public List<AuthPermissionDto> listByMenuId(Long menuId) {
-        return sysMenuPermissionDao.listByMenuId(menuId);
+        return authMenuPermissionDao.listByMenuId(menuId);
     }
 }

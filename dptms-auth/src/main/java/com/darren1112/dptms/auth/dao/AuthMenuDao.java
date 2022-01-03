@@ -16,7 +16,7 @@ import java.util.List;
  */
 @Mapper
 @Repository
-public interface SysMenuDao {
+public interface AuthMenuDao {
 
     /**
      * 获取用户的菜单

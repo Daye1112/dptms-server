@@ -16,7 +16,7 @@ import java.util.List;
  */
 @Mapper
 @Repository
-public interface SysMenuPermissionDao {
+public interface AuthMenuPermissionDao {
 
     /**
      * 查询菜单关联的权限list

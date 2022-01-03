@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Mapper
 @Repository
-public interface SysPermissionDao {
+public interface AuthPermissionDao {
 
     /**
      * 根据用户id查询权限list

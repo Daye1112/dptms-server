@@ -16,7 +16,7 @@ import java.util.List;
  */
 @Mapper
 @Repository
-public interface SysRoleMenuDao {
+public interface AuthRoleMenuDao {
 
     /**
      * 查询角色关联的菜单list

@@ -16,7 +16,7 @@ import java.util.List;
  */
 @Mapper
 @Repository
-public interface SysUserRoleDao {
+public interface AuthUserRoleDao {
 
     /**
      * 清空用户已分配的角色

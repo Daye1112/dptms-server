@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Mapper
 @Repository
-public interface SysOrganizationDao {
+public interface AuthOrganizationDao {
 
     /**
      * 查询重复记录数

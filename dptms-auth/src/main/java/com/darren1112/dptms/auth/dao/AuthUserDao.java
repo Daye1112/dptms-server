@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Mapper
 @Repository
-public interface SysUserDao {
+public interface AuthUserDao {
 
     /**
      * 插入数据

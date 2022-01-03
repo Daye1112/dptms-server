@@ -1,6 +1,6 @@
 package com.darren1112.dptms.auth.service.impl;
 
-import com.darren1112.dptms.auth.dao.SysUserRoleDao;
+import com.darren1112.dptms.auth.dao.AuthUserRoleDao;
 import com.darren1112.dptms.auth.service.SysUserRoleService;
 import com.darren1112.dptms.common.core.util.StringUtil;
 import com.darren1112.dptms.common.spi.auth.dto.AuthRoleDto;
@@ -26,7 +26,7 @@ import java.util.List;
 public class SysUserRoleServiceImpl implements SysUserRoleService {
 
     @Autowired
-    private SysUserRoleDao sysUserRoleDao;
+    private AuthUserRoleDao authUserRoleDao;
 
     /**
      * 分配角色
@@ -42,7 +42,7 @@ public class SysUserRoleServiceImpl implements SysUserRoleService {
     @Transactional(rollbackFor = Throwable.class)
     public void assignedRole(Long userId, String roleIds, Long updater) {
         // 清空用户已分配的角色
-        sysUserRoleDao.deleteByUserId(userId, updater);
+        authUserRoleDao.deleteByUserId(userId, updater);
         if (StringUtil.isBlank(roleIds)) {
             return;
         }
@@ -58,7 +58,7 @@ public class SysUserRoleServiceImpl implements SysUserRoleService {
             list.add(entity);
         }
         // 批量插入
-        sysUserRoleDao.batchInsert(list);
+        authUserRoleDao.batchInsert(list);
     }
 
     /**
@@ -71,6 +71,6 @@ public class SysUserRoleServiceImpl implements SysUserRoleService {
      */
     @Override
     public List<AuthRoleDto> listUserAssigned(Long userId) {
-        return sysUserRoleDao.listUserAssigned(userId);
+        return authUserRoleDao.listUserAssigned(userId);
     }
 }
