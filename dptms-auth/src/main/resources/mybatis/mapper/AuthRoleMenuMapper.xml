@@ -17,13 +17,13 @@
                t1.updater,
                CASE WHEN t2.role_id IS NULL THEN 0
                     ELSE 1 END   AS isAssigned
-        FROM sys_menu t1
-                 LEFT JOIN sys_role_menu t2 ON t2.isvalid = 1 AND t1.id = t2.menu_id AND t2.role_id = #{roleId}
+        FROM auth_menu t1
+                 LEFT JOIN auth_role_menu t2 ON t2.isvalid = 1 AND t1.id = t2.menu_id AND t2.role_id = #{roleId}
         WHERE t1.isvalid = 1
     </select>
     <!--清空角色已分配的组织-->
     <delete id="deleteByRoleId">
-        UPDATE sys_role_menu
+        UPDATE auth_role_menu
         SET mtime   = now(),
             isvalid = 0,
             updater = #{updater}
@@ -32,7 +32,7 @@
     </delete>
     <!--批量插入-->
     <select id="batchInsert">
-        INSERT INTO sys_role_menu(menu_id, role_id, remark, isvalid, ctime, creater, mtime, updater)
+        INSERT INTO auth_role_menu(menu_id, role_id, remark, isvalid, ctime, creater, mtime, updater)
         VALUES
         <foreach collection="list" item="item" separator=",">
             (#{item.menuId}, #{item.roleId}, #{item.remark}, 1, now(), #{item.creater}, now(), #{item.updater})

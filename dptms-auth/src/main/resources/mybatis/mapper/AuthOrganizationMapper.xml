@@ -5,7 +5,7 @@
     <select id="countByRepeat" parameterType="com.darren1112.dptms.common.spi.auth.entity.AuthOrganizationEntity"
             resultType="java.lang.Long">
         SELECT count(1)
-        FROM sys_organization
+        FROM auth_organization
         WHERE isvalid = 1
             AND (org_code = #{orgCode} OR org_name = #{orgName})
         <if test="isUpdate != null and isUpdate == true">
@@ -15,12 +15,12 @@
     <!--插入组织信息-->
     <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id"
             parameterType="com.darren1112.dptms.common.spi.auth.entity.AuthOrganizationEntity">
-        INSERT INTO sys_organization(org_name, org_code, remark, isvalid, ctime, creater, mtime, updater)
+        INSERT INTO auth_organization(org_name, org_code, remark, isvalid, ctime, creater, mtime, updater)
         VALUES (#{orgName}, #{orgCode}, #{remark}, 1, now(), #{creater}, now(), #{updater})
     </insert>
     <!--更新组织信息-->
     <update id="update" parameterType="com.darren1112.dptms.common.spi.auth.entity.AuthOrganizationEntity">
-        UPDATE sys_organization
+        UPDATE auth_organization
         SET mtime    = now(),
             org_name = #{orgName},
             org_code = #{orgCode},
@@ -30,7 +30,7 @@
     </update>
     <!--根据id删除记录-->
     <update id="deleteById">
-        UPDATE sys_organization
+        UPDATE auth_organization
         SET mtime   = now(),
             updater = #{updater},
             isvalid = 0
@@ -48,7 +48,7 @@
                creater,
                mtime,
                updater
-        FROM sys_organization
+        FROM auth_organization
         WHERE isvalid = 1
         <if test="param.orgCode != null and param.orgCode != ''">
             AND org_code LIKE concat('%', #{param.orgCode}, '%')
@@ -63,7 +63,7 @@
     <select id="listPageCount" parameterType="com.darren1112.dptms.common.spi.auth.dto.AuthOrganizationDto"
             resultType="java.lang.Long">
         SELECT count(1)
-        FROM sys_organization
+        FROM auth_organization
         WHERE isvalid = 1
         <if test="orgCode != null and orgCode != ''">
             AND org_code LIKE concat('%', #{orgCode}, '%')

@@ -17,13 +17,13 @@
                t1.updater,
                CASE WHEN t2.menu_id IS NULL THEN 0
                     ELSE 1 END AS isAssigned
-        FROM sys_permission t1
-                 LEFT JOIN sys_menu_permission t2 ON t2.isvalid = 1 AND t2.per_id = t1.id AND t2.menu_id = #{menuId}
+        FROM auth_permission t1
+                 LEFT JOIN auth_menu_permission t2 ON t2.isvalid = 1 AND t2.per_id = t1.id AND t2.menu_id = #{menuId}
         WHERE t1.isvalid = 1
     </select>
     <!--根据菜单id删除记录-->
     <update id="deleteByMenuId">
-        UPDATE sys_menu_permission
+        UPDATE auth_menu_permission
         SET mtime   = now(),
             isvalid = 0,
             updater = #{updater}
@@ -32,7 +32,7 @@
     </update>
     <!--批量插入菜单权限信息-->
     <insert id="batchInsert">
-        INSERT INTO sys_menu_permission(per_id, menu_id, remark, isvalid, ctime, creater, mtime, updater)
+        INSERT INTO auth_menu_permission(per_id, menu_id, remark, isvalid, ctime, creater, mtime, updater)
         VALUES
         <foreach collection="list" item="item" separator=",">
             (#{item.perId}, #{item.menuId}, #{item.remark}, 1, now(), #{item.creater}, now(), #{item.updater})
@@ -51,8 +51,8 @@
                t1.creater,
                t1.mtime,
                t1.updater
-        FROM sys_permission t1
-                 LEFT JOIN sys_menu_permission t2 ON t1.id = t2.per_id AND t2.isvalid = 1
+        FROM auth_permission t1
+                 LEFT JOIN auth_menu_permission t2 ON t1.id = t2.per_id AND t2.isvalid = 1
         WHERE t1.isvalid = 1
           AND t2.menu_id = #{menuId}
         ORDER BY id

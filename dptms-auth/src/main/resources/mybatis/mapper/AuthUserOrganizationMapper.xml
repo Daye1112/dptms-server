@@ -15,13 +15,13 @@
                t1.updater,
                CASE WHEN t2.user_id IS NULL THEN 0
                     ELSE 1 END AS isAssigned
-        FROM sys_organization t1
-                 LEFT JOIN sys_user_organization t2 ON t2.isvalid = 1 AND t2.org_id = t1.id AND t2.user_id = #{userId}
+        FROM auth_organization t1
+                 LEFT JOIN auth_user_organization t2 ON t2.isvalid = 1 AND t2.org_id = t1.id AND t2.user_id = #{userId}
         WHERE t1.isvalid = 1
     </select>
     <!--根据用户id删除记录-->
     <update id="deleteByUserId">
-        UPDATE sys_user_organization
+        UPDATE auth_user_organization
         SET mtime   = now(),
             isvalid = 0,
             updater = #{updater}
@@ -30,7 +30,7 @@
     </update>
     <!--批量插入用户组织信息-->
     <insert id="batchInsert">
-        INSERT INTO sys_user_organization(org_id, user_id, remark, isvalid, ctime, creater, mtime, updater)
+        INSERT INTO auth_user_organization(org_id, user_id, remark, isvalid, ctime, creater, mtime, updater)
         VALUES
         <foreach collection="list" item="item" separator=",">
             (#{item.orgId}, #{item.userId}, #{item.remark}, 1, now(), #{item.creater}, now(), #{item.updater})

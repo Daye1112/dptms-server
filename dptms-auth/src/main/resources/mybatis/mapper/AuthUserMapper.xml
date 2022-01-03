@@ -4,7 +4,7 @@
     <!--新增用户-->
     <insert id="insert" keyColumn="id" keyProperty="id"
             parameterType="com.darren1112.dptms.common.spi.auth.entity.AuthUserEntity" useGeneratedKeys="true">
-        INSERT INTO sys_user(username, password, salt, real_name, gender, phone_number, email, last_login_time,
+        INSERT INTO auth_user(username, password, salt, real_name, gender, phone_number, email, last_login_time,
                              pwd_update_time, file_id, is_locked, remark, isvalid, ctime, creater, mtime, updater)
         VALUES (#{username}, #{password}, #{salt}, #{realName}, #{gender}, #{phoneNumber},
                 #{email}, null, now(), #{fileId}, #{isLocked}, #{remark}, 1, now(), #{creater}, now(), #{updater})
@@ -28,13 +28,13 @@
                creater,
                mtime,
                updater
-        FROM sys_user
+        FROM auth_user
         WHERE username = #{username}
           AND isvalid = 1
     </select>
     <!--更新登录时间-->
     <update id="updateLastLoginTime">
-        UPDATE sys_user
+        UPDATE auth_user
         SET mtime           = now(),
             last_login_time = now()
         WHERE isvalid = 1
@@ -59,7 +59,7 @@
                creater,
                mtime,
                updater
-        FROM sys_user
+        FROM auth_user
         WHERE isvalid = 1
           AND id = #{id}
     </select>
@@ -67,7 +67,7 @@
     <select id="countByRepeat" parameterType="com.darren1112.dptms.common.spi.auth.dto.AuthUserDto"
             resultType="java.lang.Long">
         SELECT count(1)
-        FROM sys_user
+        FROM auth_user
         WHERE isvalid = 1
         AND username = #{username}
         <if test="isUpdate != null and isUpdate == true">
@@ -92,7 +92,7 @@
         creater,
         mtime,
         updater
-        FROM sys_user
+        FROM auth_user
         WHERE isvalid = 1
         <if test="dto.username != null and dto.username != ''">
             AND username LIKE concat('%', #{dto.username}, '%')
@@ -107,7 +107,7 @@
     <select id="listPageCount" parameterType="com.darren1112.dptms.common.spi.auth.dto.AuthUserDto"
             resultType="java.lang.Long">
         SELECT count(1)
-        FROM sys_user
+        FROM auth_user
         WHERE isvalid = 1
         <if test="username != null and username != ''">
             AND username LIKE concat('%', #{username}, '%')
@@ -119,7 +119,7 @@
     <!--更新用户信息-->
     <update id="update"
             parameterType="com.darren1112.dptms.common.spi.auth.entity.AuthUserEntity">
-        UPDATE sys_user
+        UPDATE auth_user
         SET mtime        = now(),
             updater      = #{updater},
             username     = #{username},
@@ -133,7 +133,7 @@
     </update>
     <!--根据id删除记录-->
     <delete id="deleteById">
-        UPDATE sys_user
+        UPDATE auth_user
         SET mtime   = now(),
             updater = #{updater},
             isvalid = 0
@@ -142,7 +142,7 @@
     </delete>
     <!--更新用户锁定状态-->
     <update id="updateLock" parameterType="com.darren1112.dptms.common.spi.auth.entity.AuthUserEntity">
-        UPDATE sys_user
+        UPDATE auth_user
         SET mtime     = now(),
             updater   = #{updater},
             is_locked = #{isLocked}
@@ -152,7 +152,7 @@
 
     <!--更新用户密码-->
     <update id="updatePassword">
-        UPDATE sys_user
+        UPDATE auth_user
         SET mtime           = now(),
             updater         = #{updater},
             password        = #{newPassword},

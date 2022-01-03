@@ -14,18 +14,18 @@
                         t5.creater,
                         t5.mtime,
                         t5.updater
-        FROM sys_user t1
-                 INNER JOIN sys_user_role t2 ON t2.isvalid = 1 AND t2.user_id = t1.id
-                 INNER JOIN sys_role t3 ON t3.isvalid = 1 AND t3.id = t2.role_id
-                 INNER JOIN sys_role_menu t4 ON t4.isvalid = 1 AND t4.role_id = t3.id
-                 INNER JOIN sys_menu t5 ON t5.isvalid = 1 AND t5.id = t4.menu_id
+        FROM auth_user t1
+                 INNER JOIN auth_user_role t2 ON t2.isvalid = 1 AND t2.user_id = t1.id
+                 INNER JOIN auth_role t3 ON t3.isvalid = 1 AND t3.id = t2.role_id
+                 INNER JOIN auth_role_menu t4 ON t4.isvalid = 1 AND t4.role_id = t3.id
+                 INNER JOIN auth_menu t5 ON t5.isvalid = 1 AND t5.id = t4.menu_id
         WHERE t1.isvalid = 1
           AND t1.id = #{userId}
     </select>
     <!--插入菜单信息-->
     <insert id="insert" useGeneratedKeys="true" keyColumn="id"
             parameterType="com.darren1112.dptms.common.spi.auth.entity.AuthMenuEntity">
-        INSERT INTO sys_menu(menu_name, menu_code, menu_type, menu_parent_id, remark,
+        INSERT INTO auth_menu(menu_name, menu_code, menu_type, menu_parent_id, remark,
                              isvalid, ctime, creater, mtime, updater)
         VALUES (#{menuName}, #{menuCode}, #{menuType}, #{menuParentId}, #{remark},
                 1, now(), #{creater}, now(), #{updater})
@@ -34,7 +34,7 @@
     <select id="countByRepeat" resultType="java.lang.Long"
             parameterType="com.darren1112.dptms.common.spi.auth.dto.AuthMenuDto">
         SELECT COUNT(1)
-        FROM sys_menu
+        FROM auth_menu
         WHERE isvalid = 1
         AND (menu_code = #{menuCode})
         <if test="isUpdate != null and isUpdate == true">
@@ -43,7 +43,7 @@
     </select>
     <!--根据id删除记录-->
     <update id="deleteById">
-        UPDATE sys_menu
+        UPDATE auth_menu
         SET mtime   = now(),
             updater = #{updater},
             isvalid = 0
@@ -52,7 +52,7 @@
     </update>
     <!--更新菜单信息-->
     <update id="update">
-        UPDATE sys_menu
+        UPDATE auth_menu
         SET mtime           = now(),
             menu_name       = #{menuName},
             menu_code       = #{menuCode},
@@ -75,7 +75,7 @@
                creater,
                mtime,
                updater
-        FROM sys_menu
+        FROM auth_menu
         WHERE isvalid = 1
         ORDER BY menu_parent_id, id
     </select>

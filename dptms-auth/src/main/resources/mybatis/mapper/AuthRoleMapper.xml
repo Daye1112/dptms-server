@@ -5,7 +5,7 @@
     <select id="countByRepeat" parameterType="com.darren1112.dptms.common.spi.auth.dto.AuthRoleDto"
             resultType="java.lang.Long">
         SELECT count(1)
-        FROM sys_role
+        FROM auth_role
         WHERE isvalid = 1
             AND role_code = #{roleCode}
         <if test="isUpdate != null and isUpdate == true">
@@ -15,7 +15,7 @@
     <!--插入角色信息-->
     <insert id="insert" useGeneratedKeys="true" keyColumn="id"
             parameterType="com.darren1112.dptms.common.spi.auth.entity.AuthRoleEntity">
-        INSERT INTO sys_role(role_name, role_code, is_admin, remark,
+        INSERT INTO auth_role(role_name, role_code, is_admin, remark,
                              isvalid, ctime, creater, mtime, updater)
         VALUES (#{roleName}, #{roleCode}, #{isAdmin}, #{remark},
                 1, now(), #{creater}, now(), #{updater})
@@ -32,7 +32,7 @@
                creater,
                mtime,
                updater
-        FROM sys_role
+        FROM auth_role
         WHERE isvalid = 1
         <if test="dto.roleCode != null and dto.roleCode != ''">
             AND role_code LIKE concat('%', #{dto.roleCode}, '%')
@@ -49,7 +49,7 @@
     <!--分页查询角色-总记录数-->
     <select id="listPageCount" resultType="java.lang.Long">
         SELECT count(1)
-        FROM sys_role
+        FROM auth_role
         WHERE isvalid = 1
         <if test="dto.roleCode != null and dto.roleCode != ''">
             AND role_code LIKE concat('%', #{dto.roleCode}, '%')
@@ -63,7 +63,7 @@
     </select>
     <!--更新角色信息-->
     <update id="update" parameterType="com.darren1112.dptms.common.spi.auth.entity.AuthRoleEntity">
-        UPDATE sys_role
+        UPDATE auth_role
         SET mtime     = now(),
             updater   = #{updater},
             role_name = #{roleName},
@@ -74,7 +74,7 @@
     </update>
     <!--根据id删除记录-->
     <delete id="deleteById">
-        UPDATE sys_role
+        UPDATE auth_role
         SET mtime = now(),
             updater = #{updater},
             isvalid = 0

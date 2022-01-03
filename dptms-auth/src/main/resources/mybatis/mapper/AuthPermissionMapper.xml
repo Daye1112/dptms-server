@@ -14,20 +14,20 @@
                t7.creater,
                t7.mtime,
                t7.updater
-        FROM sys_user t1
-                 INNER JOIN sys_user_role t2 ON t2.isvalid = 1 AND t2.user_id = t1.id
-                 INNER JOIN sys_role t3 ON t3.isvalid = 1 AND t3.id = t2.role_id
-                 INNER JOIN sys_role_menu t4 ON t4.isvalid = 1 AND t4.role_id = t3.id
-                 INNER JOIN sys_menu t5 ON t5.isvalid = 1 AND t5.id = t4.menu_id
-                 INNER JOIN sys_menu_permission t6 ON t6.isvalid = 1 AND t6.menu_id = t5.id
-                 INNER JOIN sys_permission t7 ON t7.isvalid = 1 AND t7.id = t6.per_id
+        FROM auth_user t1
+                 INNER JOIN auth_user_role t2 ON t2.isvalid = 1 AND t2.user_id = t1.id
+                 INNER JOIN auth_role t3 ON t3.isvalid = 1 AND t3.id = t2.role_id
+                 INNER JOIN auth_role_menu t4 ON t4.isvalid = 1 AND t4.role_id = t3.id
+                 INNER JOIN auth_menu t5 ON t5.isvalid = 1 AND t5.id = t4.menu_id
+                 INNER JOIN auth_menu_permission t6 ON t6.isvalid = 1 AND t6.menu_id = t5.id
+                 INNER JOIN auth_permission t7 ON t7.isvalid = 1 AND t7.id = t6.per_id
         WHERE t1.isvalid = 1
           AND t1.id = #{userId}
     </select>
     <!--插入权限信息-->
     <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id"
             parameterType="com.darren1112.dptms.common.spi.auth.entity.AuthPermissionEntity">
-        INSERT INTO sys_permission(per_name, per_code, per_group, per_url, remark, isvalid,
+        INSERT INTO auth_permission(per_name, per_code, per_group, per_url, remark, isvalid,
                                    ctime, creater, mtime, updater)
         VALUES (#{perName}, #{perCode}, #{perGroup}, #{perUrl}, #{remark}, 1, now(),
                 #{creater}, now(), #{updater})
@@ -45,7 +45,7 @@
         creater,
         mtime,
         updater
-        FROM sys_permission
+        FROM auth_permission
         WHERE isvalid = 1
         <if test="param.perName != null and param.perName != ''">
             AND per_name LIKE concat('%', #{param.perName}, '%')
@@ -65,7 +65,7 @@
     <!--分页查询权限-查询总数-->
     <select id="listPageCount" resultType="java.lang.Long">
         SELECT count(1)
-        FROM sys_permission
+        FROM auth_permission
         WHERE isvalid = 1
         <if test="perName != null and perName != ''">
             AND per_name LIKE concat('%', #{perName}, '%')
@@ -82,7 +82,7 @@
     </select>
     <!--更新权限信息-->
     <update id="update">
-        UPDATE sys_permission
+        UPDATE auth_permission
         SET mtime     = now(),
             per_name  = #{perName},
             per_code  = #{perCode},
@@ -107,7 +107,7 @@
         creater,
         mtime,
         updater
-        FROM sys_permission
+        FROM auth_permission
         WHERE isvalid = 1
         <if test="perCode != null and perCode != ''">
             AND per_code LIKE concat('%', #{perCode}, '%')
@@ -117,7 +117,7 @@
     <select id="countByRepeat" resultType="java.lang.Long"
             parameterType="com.darren1112.dptms.common.spi.auth.dto.AuthPermissionDto">
         SELECT count(1)
-        FROM sys_permission
+        FROM auth_permission
         WHERE isvalid = 1
         AND (per_code = #{perCode} OR per_url = #{perUrl})
         <if test="isUpdate != null and isUpdate == true">
@@ -126,7 +126,7 @@
     </select>
     <!--根据id删除记录-->
     <update id="deleteById">
-        UPDATE sys_permission
+        UPDATE auth_permission
         SET mtime   = now(),
             updater = #{updater},
             isvalid = 0
@@ -136,7 +136,7 @@
     <!--查询权限组list-->
     <select id="listGroup" resultType="com.darren1112.dptms.common.spi.auth.dto.AuthPermissionDto">
         SELECT per_group AS perGroup
-        FROM sys_permission
+        FROM auth_permission
         WHERE isvalid = 1
         GROUP BY per_group
         ORDER BY per_group
