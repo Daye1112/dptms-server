@@ -1,4 +1,4 @@
-CREATE TABLE sys_operate_log
+CREATE TABLE monitor_operate_log
 (
   id                BIGINT NOT NULL AUTO_INCREMENT COMMENT 'id',
   username          varchar(64) COMMENT '用户名',
@@ -21,6 +21,6 @@ CREATE TABLE sys_operate_log
   PRIMARY KEY (id)
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci;
 
-ALTER TABLE sys_operate_log
+ALTER TABLE monitor_operate_log
   COMMENT '操作日志表';
 

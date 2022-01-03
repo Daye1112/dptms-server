@@ -1,4 +1,4 @@
-CREATE TABLE sys_login_log
+CREATE TABLE monitor_login_log
 (
   id         BIGINT NOT NULL AUTO_INCREMENT COMMENT 'id',
   username   varchar(64) COMMENT '用户名',
@@ -15,6 +15,6 @@ CREATE TABLE sys_login_log
   PRIMARY KEY (id)
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci;
 
-ALTER TABLE sys_login_log
+ALTER TABLE monitor_login_log
   COMMENT '登录日志表';
 
