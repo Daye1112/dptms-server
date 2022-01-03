@@ -11,7 +11,7 @@
                t1.file_parent_path    AS fileParentPath,
                t1.file_order          AS fileOrder,
                t1.file_id             AS fileId,
-               t2.file_type           AS fileType,
+               t2.file_type           AS fileInfoType,
                t2.file_size           AS fileSize,
                t2.file_ext            AS fileExt,
                (SELECT COALESCE(SUM(t4.file_size), 0)

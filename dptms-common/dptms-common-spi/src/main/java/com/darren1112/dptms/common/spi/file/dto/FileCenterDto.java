@@ -24,7 +24,7 @@ public class FileCenterDto extends FileCenterEntity {
      * 文件类型
      */
     @ApiModelProperty(value = "文件类型")
-    private Integer fileType;
+    private Integer fileInfoType;
 
     /**
      * 文件总大小
