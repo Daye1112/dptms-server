@@ -37,7 +37,7 @@ import java.util.List;
 @Api(tags = "组织管理")
 @RestController
 @RequestMapping(value = "/organization")
-public class SysOrganizationController extends BaseController {
+public class AuthOrganizationController extends BaseController {
 
     @Autowired
     private AuthOrganizationService authOrganizationService;

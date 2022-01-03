@@ -38,7 +38,7 @@ import org.springframework.web.bind.annotation.*;
 @Api(tags = "用户管理")
 @RestController
 @RequestMapping(value = "/user")
-public class SysUserController extends BaseController {
+public class AuthUserController extends BaseController {
 
     @Autowired
     private AuthUserService authUserService;

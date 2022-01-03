@@ -34,7 +34,7 @@ import org.springframework.web.bind.annotation.*;
 @Api(tags = "菜单管理")
 @RestController
 @RequestMapping(value = "/menu")
-public class SysMenuController extends BaseController {
+public class AuthMenuController extends BaseController {
 
     @Autowired
     private AuthMenuService authMenuService;

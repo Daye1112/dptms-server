@@ -38,7 +38,7 @@ import java.util.List;
 @Api(tags = "角色管理")
 @RestController
 @RequestMapping(value = "/role")
-public class SysRoleController extends BaseController {
+public class AuthRoleController extends BaseController {
 
     @Autowired
     private AuthRoleService authRoleService;

@@ -37,7 +37,7 @@ import java.util.List;
 @Api(tags = "权限管理")
 @RestController
 @RequestMapping(value = "/permission")
-public class SysPermissionController extends BaseController {
+public class AuthPermissionController extends BaseController {
 
     @Autowired
     private AuthPermissionService authPermissionService;
