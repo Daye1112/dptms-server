@@ -1,19 +1,21 @@
-package com.darren1112.dptms.common.spi.sys.dto;
+package com.darren1112.dptms.common.spi.auth.dto;
 
-import com.darren1112.dptms.common.spi.sys.entity.SysOrganizationEntity;
+import com.darren1112.dptms.common.spi.auth.entity.SysRoleEntity;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
+ * 角色Dto
+ *
  * @author luyuhao
- * @since 2020/08/16 01:35
+ * @since 2020/12/13 23:05
  */
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class SysOrganizationDto extends SysOrganizationEntity {
+public class SysRoleDto extends SysRoleEntity {
 
     /**
      * 是否更新

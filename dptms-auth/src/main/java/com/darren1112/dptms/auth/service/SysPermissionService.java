@@ -2,8 +2,8 @@ package com.darren1112.dptms.auth.service;
 
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
-import com.darren1112.dptms.common.spi.sys.dto.SysPermissionDto;
-import com.darren1112.dptms.common.spi.sys.entity.SysPermissionEntity;
+import com.darren1112.dptms.common.spi.auth.dto.SysPermissionDto;
+import com.darren1112.dptms.common.spi.auth.entity.SysPermissionEntity;
 
 import java.util.List;
 

@@ -2,7 +2,7 @@ package com.darren1112.dptms.component.remoting;
 
 import com.darren1112.dptms.common.core.message.JsonResult;
 import com.darren1112.dptms.common.spi.monitor.dto.DruidStatDto;
-import com.darren1112.dptms.common.spi.sys.dto.SysUserDto;
+import com.darren1112.dptms.common.spi.auth.dto.SysUserDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,4 +1,4 @@
-CREATE TABLE sys_role_menu
+CREATE TABLE auth_role_menu
 (
   id      BIGINT NOT NULL AUTO_INCREMENT COMMENT 'id',
   menu_id BIGINT COMMENT '菜单id',
@@ -12,6 +12,6 @@ CREATE TABLE sys_role_menu
   PRIMARY KEY (id)
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci;
 
-ALTER TABLE sys_role_menu
+ALTER TABLE auth_role_menu
   COMMENT '角色菜单表';
 

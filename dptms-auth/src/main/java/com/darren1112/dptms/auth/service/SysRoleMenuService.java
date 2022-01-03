@@ -1,6 +1,6 @@
 package com.darren1112.dptms.auth.service;
 
-import com.darren1112.dptms.common.spi.sys.dto.SysMenuDto;
+import com.darren1112.dptms.common.spi.auth.dto.SysMenuDto;
 
 /**
  * 角色菜单Service

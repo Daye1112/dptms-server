@@ -3,7 +3,7 @@
 <mapper namespace="com.darren1112.dptms.auth.dao.SysMenuPermissionDao">
     <!--查询菜单关联的权限list-->
     <select id="listMenuAssigned" parameterType="java.lang.Long"
-            resultType="com.darren1112.dptms.common.spi.sys.dto.SysPermissionDto">
+            resultType="com.darren1112.dptms.common.spi.auth.dto.SysPermissionDto">
         SELECT t1.id,
                t1.per_name  AS perName,
                t1.per_code  AS perCode,
@@ -39,7 +39,7 @@
         </foreach>
     </insert>
     <!--根据菜单id查询权限list-->
-    <select id="listByMenuId" resultType="com.darren1112.dptms.common.spi.sys.dto.SysPermissionDto">
+    <select id="listByMenuId" resultType="com.darren1112.dptms.common.spi.auth.dto.SysPermissionDto">
         SELECT t1.id,
                t1.per_name  AS perName,
                t1.per_code  AS perCode,

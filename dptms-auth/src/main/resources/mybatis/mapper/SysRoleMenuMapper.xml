@@ -3,7 +3,7 @@
 <mapper namespace="com.darren1112.dptms.auth.dao.SysRoleMenuDao">
     <!--查询角色关联的菜单list-->
     <select id="listRoleAssigned" parameterType="java.lang.Long"
-            resultType="com.darren1112.dptms.common.spi.sys.dto.SysMenuDto">
+            resultType="com.darren1112.dptms.common.spi.auth.dto.SysMenuDto">
         SELECT t1.id,
                t1.menu_name      AS menuName,
                t1.menu_code      AS menuCode,

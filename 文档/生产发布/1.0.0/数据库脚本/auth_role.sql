@@ -1,4 +1,4 @@
-CREATE TABLE sys_role
+CREATE TABLE auth_role
 (
   id        BIGINT NOT NULL AUTO_INCREMENT COMMENT 'id',
   role_name VARCHAR(32) COMMENT '角色名称',
@@ -13,6 +13,6 @@ CREATE TABLE sys_role
   PRIMARY KEY (id)
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci;
 
-ALTER TABLE sys_role
+ALTER TABLE auth_role
   COMMENT '角色表';
 

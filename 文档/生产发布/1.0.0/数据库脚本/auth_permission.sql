@@ -1,4 +1,4 @@
-CREATE TABLE sys_permission
+CREATE TABLE auth_permission
 (
   id        BIGINT NOT NULL AUTO_INCREMENT COMMENT 'id',
   per_name  VARCHAR(64) COMMENT '权限名',
@@ -14,6 +14,6 @@ CREATE TABLE sys_permission
   PRIMARY KEY (id)
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci;
 
-ALTER TABLE sys_permission
+ALTER TABLE auth_permission
   COMMENT '权限表';
 

@@ -16,7 +16,7 @@ import com.darren1112.dptms.common.redis.starter.core.RedisUtil;
 import com.darren1112.dptms.common.security.starter.core.DptmsTokenStore;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 import com.darren1112.dptms.common.spi.common.dto.LoginParam;
-import com.darren1112.dptms.common.spi.sys.dto.SysUserDto;
+import com.darren1112.dptms.common.spi.auth.dto.SysUserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

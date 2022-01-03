@@ -1,4 +1,4 @@
-CREATE TABLE sys_user_organization
+CREATE TABLE auth_user_organization
 (
   id      BIGINT NOT NULL AUTO_INCREMENT COMMENT 'id',
   org_id  BIGINT COMMENT '组织id',
@@ -12,6 +12,6 @@ CREATE TABLE sys_user_organization
   PRIMARY KEY (id)
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci;
 
-ALTER TABLE sys_user_organization
+ALTER TABLE auth_user_organization
   COMMENT '用户组织表';
 

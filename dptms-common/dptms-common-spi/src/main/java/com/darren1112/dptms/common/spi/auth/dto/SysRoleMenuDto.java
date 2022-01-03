@@ -1,6 +1,6 @@
-package com.darren1112.dptms.common.spi.sys.dto;
+package com.darren1112.dptms.common.spi.auth.dto;
 
-import com.darren1112.dptms.common.spi.sys.entity.SysRoleMenuEntity;
+import com.darren1112.dptms.common.spi.auth.entity.SysRoleMenuEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;

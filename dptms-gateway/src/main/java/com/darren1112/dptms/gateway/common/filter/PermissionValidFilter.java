@@ -11,11 +11,10 @@ import com.darren1112.dptms.common.security.starter.enums.SecurityEnum;
 import com.darren1112.dptms.common.security.starter.properties.SecurityProperties;
 import com.darren1112.dptms.common.security.starter.util.DptmsSecurityUtil;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
-import com.darren1112.dptms.common.spi.sys.dto.SysPermissionDto;
-import com.darren1112.dptms.common.spi.sys.dto.SysUserDto;
+import com.darren1112.dptms.common.spi.auth.dto.SysPermissionDto;
+import com.darren1112.dptms.common.spi.auth.dto.SysUserDto;
 import com.darren1112.dptms.component.remoting.AuthRemoting;
 import com.darren1112.dptms.gateway.common.enums.GatewayErrorCodeEnum;
-import com.netflix.client.ClientException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.filter.OncePerRequestFilter;
 

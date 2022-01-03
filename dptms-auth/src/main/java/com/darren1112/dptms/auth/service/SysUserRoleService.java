@@ -1,6 +1,6 @@
 package com.darren1112.dptms.auth.service;
 
-import com.darren1112.dptms.common.spi.sys.dto.SysRoleDto;
+import com.darren1112.dptms.common.spi.auth.dto.SysRoleDto;
 
 import java.util.List;
 

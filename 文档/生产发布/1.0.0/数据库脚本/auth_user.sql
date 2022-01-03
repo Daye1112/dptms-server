@@ -1,4 +1,4 @@
-CREATE TABLE sys_user
+CREATE TABLE auth_user
 (
   id              BIGINT NOT NULL AUTO_INCREMENT COMMENT 'id',
   username        VARCHAR(64) COMMENT '用户名',
@@ -21,5 +21,5 @@ CREATE TABLE sys_user
   PRIMARY KEY (id)
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci;
 
-ALTER TABLE sys_user
+ALTER TABLE auth_user
   COMMENT '用户表';

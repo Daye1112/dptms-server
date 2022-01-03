@@ -1,7 +1,7 @@
 package com.darren1112.dptms.auth.common.util;
 
 import com.darren1112.dptms.common.core.util.CollectionUtil;
-import com.darren1112.dptms.common.spi.sys.dto.SysMenuDto;
+import com.darren1112.dptms.common.spi.auth.dto.SysMenuDto;
 
 import java.util.ArrayList;
 import java.util.List;

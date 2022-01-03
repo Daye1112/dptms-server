@@ -1,4 +1,4 @@
-package com.darren1112.dptms.common.spi.sys.entity;
+package com.darren1112.dptms.common.spi.auth.entity;
 
 import com.darren1112.dptms.common.spi.common.base.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;

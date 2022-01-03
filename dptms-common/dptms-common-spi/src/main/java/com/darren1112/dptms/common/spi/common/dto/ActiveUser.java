@@ -1,6 +1,6 @@
 package com.darren1112.dptms.common.spi.common.dto;
 
-import com.darren1112.dptms.common.spi.sys.dto.SysUserDto;
+import com.darren1112.dptms.common.spi.auth.dto.SysUserDto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

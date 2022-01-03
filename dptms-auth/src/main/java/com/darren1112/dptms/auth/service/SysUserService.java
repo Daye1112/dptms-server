@@ -2,8 +2,8 @@ package com.darren1112.dptms.auth.service;
 
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
-import com.darren1112.dptms.common.spi.sys.dto.SysUserDto;
-import com.darren1112.dptms.common.spi.sys.entity.SysUserEntity;
+import com.darren1112.dptms.common.spi.auth.dto.SysUserDto;
+import com.darren1112.dptms.common.spi.auth.entity.SysUserEntity;
 
 /**
  * 系统用户Service

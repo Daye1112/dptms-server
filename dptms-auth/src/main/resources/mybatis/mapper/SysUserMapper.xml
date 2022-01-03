@@ -3,13 +3,13 @@
 <mapper namespace="com.darren1112.dptms.auth.dao.SysUserDao">
     <!--新增用户-->
     <insert id="insert" keyColumn="id" keyProperty="id"
-            parameterType="com.darren1112.dptms.common.spi.sys.entity.SysUserEntity" useGeneratedKeys="true">
+            parameterType="com.darren1112.dptms.common.spi.auth.entity.SysUserEntity" useGeneratedKeys="true">
         INSERT INTO sys_user(username, password, salt, real_name, gender, phone_number, email, last_login_time,
                              pwd_update_time, file_id, is_locked, remark, isvalid, ctime, creater, mtime, updater)
         VALUES (#{username}, #{password}, #{salt}, #{realName}, #{gender}, #{phoneNumber},
                 #{email}, null, now(), #{fileId}, #{isLocked}, #{remark}, 1, now(), #{creater}, now(), #{updater})
     </insert>
-    <select id="getByUsername" resultType="com.darren1112.dptms.common.spi.sys.dto.SysUserDto">
+    <select id="getByUsername" resultType="com.darren1112.dptms.common.spi.auth.dto.SysUserDto">
         SELECT id,
                username,
                password,
@@ -40,7 +40,7 @@
         WHERE isvalid = 1
           AND id = #{id}
     </update>
-    <select id="getById" resultType="com.darren1112.dptms.common.spi.sys.dto.SysUserDto">
+    <select id="getById" resultType="com.darren1112.dptms.common.spi.auth.dto.SysUserDto">
         SELECT id,
                username,
                password,
@@ -64,7 +64,7 @@
           AND id = #{id}
     </select>
     <!--统计是否重复-->
-    <select id="countByRepeat" parameterType="com.darren1112.dptms.common.spi.sys.dto.SysUserDto"
+    <select id="countByRepeat" parameterType="com.darren1112.dptms.common.spi.auth.dto.SysUserDto"
             resultType="java.lang.Long">
         SELECT count(1)
         FROM sys_user
@@ -75,7 +75,7 @@
         </if>
     </select>
     <!--分页查询用户信息-->
-    <select id="listPage" resultType="com.darren1112.dptms.common.spi.sys.dto.SysUserDto">
+    <select id="listPage" resultType="com.darren1112.dptms.common.spi.auth.dto.SysUserDto">
         SELECT id,
         username,
         real_name       AS realName,
@@ -104,7 +104,7 @@
         LIMIT #{pageParam.startIndex}, #{pageParam.pageSize}
     </select>
     <!--分页查询用户信息-记录数-->
-    <select id="listPageCount" parameterType="com.darren1112.dptms.common.spi.sys.dto.SysUserDto"
+    <select id="listPageCount" parameterType="com.darren1112.dptms.common.spi.auth.dto.SysUserDto"
             resultType="java.lang.Long">
         SELECT count(1)
         FROM sys_user
@@ -118,7 +118,7 @@
     </select>
     <!--更新用户信息-->
     <update id="update"
-            parameterType="com.darren1112.dptms.common.spi.sys.entity.SysUserEntity">
+            parameterType="com.darren1112.dptms.common.spi.auth.entity.SysUserEntity">
         UPDATE sys_user
         SET mtime        = now(),
             updater      = #{updater},
@@ -141,7 +141,7 @@
           AND id = #{id}
     </delete>
     <!--更新用户锁定状态-->
-    <update id="updateLock" parameterType="com.darren1112.dptms.common.spi.sys.entity.SysUserEntity">
+    <update id="updateLock" parameterType="com.darren1112.dptms.common.spi.auth.entity.SysUserEntity">
         UPDATE sys_user
         SET mtime     = now(),
             updater   = #{updater},

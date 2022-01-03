@@ -1,8 +1,8 @@
 package com.darren1112.dptms.auth.dao;
 
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
-import com.darren1112.dptms.common.spi.sys.dto.SysPermissionDto;
-import com.darren1112.dptms.common.spi.sys.entity.SysPermissionEntity;
+import com.darren1112.dptms.common.spi.auth.dto.SysPermissionDto;
+import com.darren1112.dptms.common.spi.auth.entity.SysPermissionEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;

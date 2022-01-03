@@ -1,4 +1,4 @@
-package com.darren1112.dptms.common.spi.sys.entity;
+package com.darren1112.dptms.common.spi.auth.entity;
 
 import com.darren1112.dptms.common.spi.common.base.BaseEntity;
 import io.swagger.annotations.ApiModelProperty;
@@ -7,26 +7,25 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
- * 角色菜单Entity
+ * 组织Entity
  *
  * @author luyuhao
- * @since 20/12/13 23:04
+ * @since 20/08/16 01:35
  */
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class SysRoleMenuEntity extends BaseEntity {
+public class SysOrganizationEntity extends BaseEntity {
 
     /**
-     * 菜单id
+     * 组织名称
      */
-    @ApiModelProperty(value = "菜单id")
-    private Long menuId;
+    @ApiModelProperty("组织名称")
+    private String orgName;
 
     /**
-     * 角色id
+     * 组织编号
      */
-    @ApiModelProperty(value = "角色id")
-    private Long roleId;
-
+    @ApiModelProperty("组织编号")
+    private String orgCode;
 }

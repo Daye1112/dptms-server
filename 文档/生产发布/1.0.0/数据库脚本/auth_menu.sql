@@ -1,4 +1,4 @@
-CREATE TABLE sys_menu
+CREATE TABLE auth_menu
 (
   id             BIGINT NOT NULL AUTO_INCREMENT COMMENT 'id',
   menu_name      VARCHAR(64) COMMENT '菜单名称',
@@ -14,5 +14,5 @@ CREATE TABLE sys_menu
   PRIMARY KEY (id)
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci;
 
-ALTER TABLE sys_menu
+ALTER TABLE auth_menu
   COMMENT '菜单表';

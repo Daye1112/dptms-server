@@ -3,7 +3,7 @@
 <mapper namespace="com.darren1112.dptms.auth.dao.SysUserOrganizationDao">
     <!--查询用户关联的组织list-->
     <select id="listUserAssigned" parameterType="java.lang.Long"
-            resultType="com.darren1112.dptms.common.spi.sys.dto.SysOrganizationDto">
+            resultType="com.darren1112.dptms.common.spi.auth.dto.SysOrganizationDto">
         SELECT t1.id,
                t1.org_name     AS orgName,
                t1.org_code     AS orgCode,

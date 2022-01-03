@@ -1,8 +1,8 @@
-CREATE TABLE sys_menu_permission
+CREATE TABLE auth_user_role
 (
   id      BIGINT NOT NULL AUTO_INCREMENT COMMENT 'id',
-  per_id  BIGINT COMMENT '权限id',
-  menu_id BIGINT COMMENT '菜单id',
+  role_id BIGINT COMMENT '角色id',
+  user_id BIGINT COMMENT '用户id',
   remark  VARCHAR(256) COMMENT '备注',
   isvalid TINYINT COMMENT '是否有效',
   ctime   DATETIME COMMENT '创建时间',
@@ -12,6 +12,5 @@ CREATE TABLE sys_menu_permission
   PRIMARY KEY (id)
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci;
 
-ALTER TABLE sys_menu_permission
-  COMMENT '菜单权限表';
-
+ALTER TABLE auth_user_role
+  COMMENT '用户角色表';

@@ -1,7 +1,7 @@
 package com.darren1112.dptms.auth.service;
 
-import com.darren1112.dptms.common.spi.sys.dto.SysMenuDto;
-import com.darren1112.dptms.common.spi.sys.entity.SysMenuEntity;
+import com.darren1112.dptms.common.spi.auth.dto.SysMenuDto;
+import com.darren1112.dptms.common.spi.auth.entity.SysMenuEntity;
 
 import java.util.List;
 
