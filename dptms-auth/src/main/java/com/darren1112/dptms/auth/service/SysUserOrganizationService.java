@@ -1,6 +1,6 @@
 package com.darren1112.dptms.auth.service;
 
-import com.darren1112.dptms.common.spi.auth.dto.SysOrganizationDto;
+import com.darren1112.dptms.common.spi.auth.dto.AuthOrganizationDto;
 
 import java.util.List;
 
@@ -16,11 +16,11 @@ public interface SysUserOrganizationService {
      * 查询用户关联的组织list
      *
      * @param userId 用户id
-     * @return {@link SysOrganizationDto}
+     * @return {@link AuthOrganizationDto}
      * @author luyuhao
      * @since 20/12/13 21:43
      */
-    List<SysOrganizationDto> listUserAssigned(Long userId);
+    List<AuthOrganizationDto> listUserAssigned(Long userId);
 
     /**
      * 分配组织

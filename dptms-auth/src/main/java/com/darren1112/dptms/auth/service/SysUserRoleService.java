@@ -1,6 +1,6 @@
 package com.darren1112.dptms.auth.service;
 
-import com.darren1112.dptms.common.spi.auth.dto.SysRoleDto;
+import com.darren1112.dptms.common.spi.auth.dto.AuthRoleDto;
 
 import java.util.List;
 
@@ -27,9 +27,9 @@ public interface SysUserRoleService {
      * 查询用户关联的角色list
      *
      * @param userId 用户id
-     * @return {@link SysRoleDto}
+     * @return {@link AuthRoleDto}
      * @author luyuhao
      * @since 20/12/13 21:43
      */
-    List<SysRoleDto> listUserAssigned(Long userId);
+    List<AuthRoleDto> listUserAssigned(Long userId);
 }

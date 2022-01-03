@@ -1,7 +1,7 @@
 package com.darren1112.dptms.auth.dao;
 
-import com.darren1112.dptms.common.spi.auth.dto.SysOrganizationDto;
-import com.darren1112.dptms.common.spi.auth.entity.SysUserOrganizationEntity;
+import com.darren1112.dptms.common.spi.auth.dto.AuthOrganizationDto;
+import com.darren1112.dptms.common.spi.auth.entity.AuthUserOrganizationEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -22,11 +22,11 @@ public interface SysUserOrganizationDao {
      * 查询用户关联的组织list
      *
      * @param userId 用户id
-     * @return {@link SysOrganizationDto}
+     * @return {@link AuthOrganizationDto}
      * @author luyuhao
      * @since 20/12/13 21:43
      */
-    List<SysOrganizationDto> listUserAssigned(@Param("userId") Long userId);
+    List<AuthOrganizationDto> listUserAssigned(@Param("userId") Long userId);
 
     /**
      * 根据用户id删除记录
@@ -45,5 +45,5 @@ public interface SysUserOrganizationDao {
      * @author luyuhao
      * @since 20/12/13 22:42
      */
-    void batchInsert(@Param("list") List<SysUserOrganizationEntity> list);
+    void batchInsert(@Param("list") List<AuthUserOrganizationEntity> list);
 }

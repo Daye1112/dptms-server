@@ -2,7 +2,7 @@ package com.darren1112.dptms.component.remoting;
 
 import com.darren1112.dptms.common.core.message.JsonResult;
 import com.darren1112.dptms.common.spi.monitor.dto.DruidStatDto;
-import com.darren1112.dptms.common.spi.auth.dto.SysUserDto;
+import com.darren1112.dptms.common.spi.auth.dto.AuthUserDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,10 +32,10 @@ public interface AuthRemoting {
     /**
      * 获取用户的权限
      *
-     * @return {@link SysUserDto}
+     * @return {@link AuthUserDto}
      * @author luyuhao
      * @since 2021/01/17 19:34
      */
     @GetMapping("/activeUser/getNewInfo")
-    JsonResult<SysUserDto> getNewInfo();
+    JsonResult<AuthUserDto> getNewInfo();
 }

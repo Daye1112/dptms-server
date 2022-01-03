@@ -15,7 +15,7 @@ import lombok.ToString;
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class SysOrganizationEntity extends BaseEntity {
+public class AuthOrganizationEntity extends BaseEntity {
 
     /**
      * 组织名称

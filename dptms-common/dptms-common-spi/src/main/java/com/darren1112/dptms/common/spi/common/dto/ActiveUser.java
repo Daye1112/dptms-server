@@ -1,6 +1,6 @@
 package com.darren1112.dptms.common.spi.common.dto;
 
-import com.darren1112.dptms.common.spi.auth.dto.SysUserDto;
+import com.darren1112.dptms.common.spi.auth.dto.AuthUserDto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -111,7 +111,7 @@ public class ActiveUser {
      * @author luyuhao
      * @since 2021/01/31 19:50
      */
-    public static ActiveUser convert(SysUserDto sysUserDto) {
+    public static ActiveUser convert(AuthUserDto sysUserDto) {
         ActiveUser activeUser = new ActiveUser();
         convert(activeUser, sysUserDto);
         return activeUser;
@@ -125,7 +125,7 @@ public class ActiveUser {
      * @author luyuhao
      * @since 2021/01/31 19:50
      */
-    public static void convert(ActiveUser activeUser, SysUserDto sysUserDto) {
+    public static void convert(ActiveUser activeUser, AuthUserDto sysUserDto) {
         activeUser.setId(sysUserDto.getId());
         activeUser.setUsername(sysUserDto.getUsername());
         activeUser.setRealName(sysUserDto.getRealName());

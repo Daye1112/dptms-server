@@ -1,6 +1,6 @@
 package com.darren1112.dptms.auth.service;
 
-import com.darren1112.dptms.common.spi.auth.dto.SysMenuDto;
+import com.darren1112.dptms.common.spi.auth.dto.AuthMenuDto;
 
 /**
  * 角色菜单Service
@@ -14,11 +14,11 @@ public interface SysRoleMenuService {
      * 查询角色关联的菜单list
      *
      * @param roleId 角色id
-     * @return {@link SysMenuDto}
+     * @return {@link AuthMenuDto}
      * @author luyuhao
      * @since 20/12/13 21:43
      */
-    SysMenuDto listRoleAssigned(Long roleId);
+    AuthMenuDto listRoleAssigned(Long roleId);
 
     /**
      * 分配菜单

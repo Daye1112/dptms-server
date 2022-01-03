@@ -11,8 +11,8 @@ import com.darren1112.dptms.common.security.starter.enums.SecurityEnum;
 import com.darren1112.dptms.common.security.starter.properties.SecurityProperties;
 import com.darren1112.dptms.common.security.starter.util.DptmsSecurityUtil;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
-import com.darren1112.dptms.common.spi.auth.dto.SysPermissionDto;
-import com.darren1112.dptms.common.spi.auth.dto.SysUserDto;
+import com.darren1112.dptms.common.spi.auth.dto.AuthPermissionDto;
+import com.darren1112.dptms.common.spi.auth.dto.AuthUserDto;
 import com.darren1112.dptms.component.remoting.AuthRemoting;
 import com.darren1112.dptms.gateway.common.enums.GatewayErrorCodeEnum;
 import lombok.extern.slf4j.Slf4j;
@@ -73,7 +73,7 @@ public class PermissionValidFilter extends OncePerRequestFilter {
             // 获取redis中的用户信息
             ActiveUser activeUser = DptmsSecurityUtil.get();
             // 查询权限list
-            SysUserDto userInfo = authRemoting.getNewInfo().getData();
+            AuthUserDto userInfo = authRemoting.getNewInfo().getData();
             // 账号被删除
             if (userInfo == null) {
                 ResponseUtil.setJsonResult(response, JsonResult.buildErrorEnum(GatewayErrorCodeEnum.USER_ALREADY_DELETE));
@@ -115,11 +115,11 @@ public class PermissionValidFilter extends OncePerRequestFilter {
      * @author luyuhao
      * @since 2021/01/17 23:25
      */
-    private boolean checkPermission(List<SysPermissionDto> permissionList, String uri) {
+    private boolean checkPermission(List<AuthPermissionDto> permissionList, String uri) {
         if (CollectionUtil.isEmpty(permissionList)) {
             return false;
         }
-        List<String> permissionUrlList = permissionList.stream().map(SysPermissionDto::getPerUrl).collect(Collectors.toList());
+        List<String> permissionUrlList = permissionList.stream().map(AuthPermissionDto::getPerUrl).collect(Collectors.toList());
         return UrlUtil.matchUri(uri, permissionUrlList);
     }
 }

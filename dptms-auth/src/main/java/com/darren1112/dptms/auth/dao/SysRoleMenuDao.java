@@ -1,7 +1,7 @@
 package com.darren1112.dptms.auth.dao;
 
-import com.darren1112.dptms.common.spi.auth.dto.SysMenuDto;
-import com.darren1112.dptms.common.spi.auth.entity.SysRoleMenuEntity;
+import com.darren1112.dptms.common.spi.auth.dto.AuthMenuDto;
+import com.darren1112.dptms.common.spi.auth.entity.AuthRoleMenuEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -22,11 +22,11 @@ public interface SysRoleMenuDao {
      * 查询角色关联的菜单list
      *
      * @param roleId 角色id
-     * @return {@link SysMenuDto}
+     * @return {@link AuthMenuDto}
      * @author luyuhao
      * @since 20/12/13 21:43
      */
-    List<SysMenuDto> listRoleAssigned(@Param("roleId") Long roleId);
+    List<AuthMenuDto> listRoleAssigned(@Param("roleId") Long roleId);
 
     /**
      * 清空角色已分配的组织
@@ -45,5 +45,5 @@ public interface SysRoleMenuDao {
      * @author luyuhao
      * @since 20/12/21 01:04
      */
-    void batchInsert(@Param("list") List<SysRoleMenuEntity> list);
+    void batchInsert(@Param("list") List<AuthRoleMenuEntity> list);
 }

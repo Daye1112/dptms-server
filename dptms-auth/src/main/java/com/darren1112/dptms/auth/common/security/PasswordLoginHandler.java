@@ -16,7 +16,7 @@ import com.darren1112.dptms.common.redis.starter.core.RedisUtil;
 import com.darren1112.dptms.common.security.starter.core.DptmsTokenStore;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 import com.darren1112.dptms.common.spi.common.dto.LoginParam;
-import com.darren1112.dptms.common.spi.auth.dto.SysUserDto;
+import com.darren1112.dptms.common.spi.auth.dto.AuthUserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -79,7 +79,7 @@ public class PasswordLoginHandler extends BaseUserDetails {
     @Override
     public ActiveUser handler(LoginParam loginParam, HttpServletRequest request, HttpServletResponse response) throws BaseException {
         //查询用户信息
-        SysUserDto sysUserDto = sysUserService.getByUsername(loginParam.getUsername());
+        AuthUserDto sysUserDto = sysUserService.getByUsername(loginParam.getUsername());
         //用户不存在
         if (Objects.isNull(sysUserDto)) {
             throw new BadRequestException(AuthErrorCodeEnum.LOGIN_FAILURE);

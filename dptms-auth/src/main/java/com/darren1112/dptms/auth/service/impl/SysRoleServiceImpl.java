@@ -7,8 +7,8 @@ import com.darren1112.dptms.common.core.base.BaseService;
 import com.darren1112.dptms.common.core.exception.BadRequestException;
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
-import com.darren1112.dptms.common.spi.auth.dto.SysRoleDto;
-import com.darren1112.dptms.common.spi.auth.entity.SysRoleEntity;
+import com.darren1112.dptms.common.spi.auth.dto.AuthRoleDto;
+import com.darren1112.dptms.common.spi.auth.entity.AuthRoleEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -43,7 +43,7 @@ public class SysRoleServiceImpl extends BaseService implements SysRoleService {
     @Override
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Throwable.class)
-    public Long insert(SysRoleEntity entity) {
+    public Long insert(AuthRoleEntity entity) {
         validRepeat(entity, false);
         sysRoleDao.insert(entity);
         return entity.getId();
@@ -60,7 +60,7 @@ public class SysRoleServiceImpl extends BaseService implements SysRoleService {
     @Override
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Throwable.class)
-    public Long update(SysRoleEntity entity) {
+    public Long update(AuthRoleEntity entity) {
         validRepeat(entity, true);
         return sysRoleDao.update(entity);
     }
@@ -70,14 +70,14 @@ public class SysRoleServiceImpl extends BaseService implements SysRoleService {
      *
      * @param pageParam 分页参数
      * @param dto       筛选参数
-     * @return {@link SysRoleDto)
+     * @return {@link AuthRoleDto )
      * @author baojiazhong
      * @since 2020/12/19 21:10
      */
     @Override
     @Cacheable
-    public PageBean<SysRoleDto> listPage(PageParam pageParam, SysRoleDto dto) {
-        List<SysRoleDto> list = sysRoleDao.listPage(pageParam, dto);
+    public PageBean<AuthRoleDto> listPage(PageParam pageParam, AuthRoleDto dto) {
+        List<AuthRoleDto> list = sysRoleDao.listPage(pageParam, dto);
         Long count = sysRoleDao.listPageCount(dto);
         return createPageBean(pageParam, count, list);
     }
@@ -105,8 +105,8 @@ public class SysRoleServiceImpl extends BaseService implements SysRoleService {
      * @author baojiazhong
      * @since 2020/12/19 1:12
      */
-    private void validRepeat(SysRoleEntity entity, boolean isUpdate) {
-        SysRoleDto param = new SysRoleDto();
+    private void validRepeat(AuthRoleEntity entity, boolean isUpdate) {
+        AuthRoleDto param = new AuthRoleDto();
         param.setId(entity.getId());
         param.setRoleCode(entity.getRoleCode());
         param.setIsUpdate(isUpdate);

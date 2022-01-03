@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.darren1112.dptms.auth.dao.SysOrganizationDao">
     <!--查询重复记录数-->
-    <select id="countByRepeat" parameterType="com.darren1112.dptms.common.spi.auth.entity.SysOrganizationEntity"
+    <select id="countByRepeat" parameterType="com.darren1112.dptms.common.spi.auth.entity.AuthOrganizationEntity"
             resultType="java.lang.Long">
         SELECT count(1)
         FROM sys_organization
@@ -14,12 +14,12 @@
     </select>
     <!--插入组织信息-->
     <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id"
-            parameterType="com.darren1112.dptms.common.spi.auth.entity.SysOrganizationEntity">
+            parameterType="com.darren1112.dptms.common.spi.auth.entity.AuthOrganizationEntity">
         INSERT INTO sys_organization(org_name, org_code, remark, isvalid, ctime, creater, mtime, updater)
         VALUES (#{orgName}, #{orgCode}, #{remark}, 1, now(), #{creater}, now(), #{updater})
     </insert>
     <!--更新组织信息-->
-    <update id="update" parameterType="com.darren1112.dptms.common.spi.auth.entity.SysOrganizationEntity">
+    <update id="update" parameterType="com.darren1112.dptms.common.spi.auth.entity.AuthOrganizationEntity">
         UPDATE sys_organization
         SET mtime    = now(),
             org_name = #{orgName},
@@ -38,7 +38,7 @@
           AND id = #{id}
     </update>
     <!--分页查询组织记录-->
-    <select id="listPage" resultType="com.darren1112.dptms.common.spi.auth.dto.SysOrganizationDto">
+    <select id="listPage" resultType="com.darren1112.dptms.common.spi.auth.dto.AuthOrganizationDto">
         SELECT id,
                org_name AS orgName,
                org_code AS orgCode,
@@ -60,7 +60,7 @@
         LIMIT #{pageParam.startIndex}, #{pageParam.pageSize}
     </select>
     <!--分页查询组织记录-总记录数-->
-    <select id="listPageCount" parameterType="com.darren1112.dptms.common.spi.auth.dto.SysOrganizationDto"
+    <select id="listPageCount" parameterType="com.darren1112.dptms.common.spi.auth.dto.AuthOrganizationDto"
             resultType="java.lang.Long">
         SELECT count(1)
         FROM sys_organization

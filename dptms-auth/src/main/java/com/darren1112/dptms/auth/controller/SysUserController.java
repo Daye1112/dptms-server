@@ -19,8 +19,8 @@ import com.darren1112.dptms.common.security.starter.util.DptmsSecurityUtil;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
-import com.darren1112.dptms.common.spi.auth.dto.SysUserDto;
-import com.darren1112.dptms.common.spi.auth.entity.SysUserEntity;
+import com.darren1112.dptms.common.spi.auth.dto.AuthUserDto;
+import com.darren1112.dptms.common.spi.auth.entity.AuthUserEntity;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -53,18 +53,18 @@ public class SysUserController extends BaseController {
      * 根据id查询用户
      *
      * @param id id
-     * @return {@link SysUserDto}
+     * @return {@link AuthUserDto}
      * @author luyuhao
      * @since 20/11/30 23:12
      */
     @Log(value = "根据id查询用户", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     @ApiOperation("根据id查询用户")
     @GetMapping("/getById")
-    public ResponseEntity<JsonResult<SysUserDto>> getById(Long id) {
+    public ResponseEntity<JsonResult<AuthUserDto>> getById(Long id) {
         ValidatorBuilder.build()
                 .on(id, new NotNullValidatorCallback(AuthErrorCodeEnum.ID_NOT_NULL))
                 .doValidate().checkResult();
-        SysUserDto result = sysUserService.getById(id);
+        AuthUserDto result = sysUserService.getById(id);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(result));
     }
 
@@ -101,7 +101,7 @@ public class SysUserController extends BaseController {
     @Log(value = "插入用户", businessType = BusinessType.INSERT)
     @ApiOperation("插入用户")
     @PostMapping("/insert")
-    public ResponseEntity<JsonResult<Long>> insert(SysUserEntity entity) {
+    public ResponseEntity<JsonResult<Long>> insert(AuthUserEntity entity) {
         ValidatorBuilder.build()
                 .on(entity.getUsername(), new NotEmptyValidatorCallback(AuthErrorCodeEnum.USER_USERNAME_NOT_NULL))
                 .doValidate().checkResult();
@@ -131,9 +131,9 @@ public class SysUserController extends BaseController {
     @Log(value = "分页查询用户", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     @ApiOperation("分页查询用户")
     @GetMapping("/listPage")
-    public ResponseEntity<JsonResult<PageBean<SysUserDto>>> listPage(PageParam pageParam,
-                                                                     SysUserDto dto) {
-        PageBean<SysUserDto> pageBean = sysUserService.listPage(getPageParam(pageParam), dto);
+    public ResponseEntity<JsonResult<PageBean<AuthUserDto>>> listPage(PageParam pageParam,
+                                                                      AuthUserDto dto) {
+        PageBean<AuthUserDto> pageBean = sysUserService.listPage(getPageParam(pageParam), dto);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(pageBean));
     }
 
@@ -148,7 +148,7 @@ public class SysUserController extends BaseController {
     @Log(value = "更新用户", businessType = BusinessType.UPDATE)
     @ApiOperation("更新用户")
     @PostMapping("/update")
-    public ResponseEntity<JsonResult<Long>> update(SysUserEntity entity) {
+    public ResponseEntity<JsonResult<Long>> update(AuthUserEntity entity) {
         ValidatorBuilder.build()
                 .on(entity.getId(), new NotNullValidatorCallback(AuthErrorCodeEnum.ID_NOT_NULL))
                 .on(entity.getUsername(), new NotEmptyValidatorCallback(AuthErrorCodeEnum.USER_USERNAME_NOT_NULL))
@@ -190,7 +190,7 @@ public class SysUserController extends BaseController {
     @Log(value = "更新用户锁定状态", logLevel = LogLevel.WARN, businessType = BusinessType.UPDATE)
     @ApiOperation("更新用户锁定状态")
     @GetMapping("/updateLock")
-    public ResponseEntity<JsonResult> updateLock(SysUserEntity entity) {
+    public ResponseEntity<JsonResult> updateLock(AuthUserEntity entity) {
         ValidatorBuilder.build()
                 .on(entity.getId(), new NotNullValidatorCallback(AuthErrorCodeEnum.ID_NOT_NULL))
                 .on(entity.getIsLocked(), new NotNullValidatorCallback(AuthErrorCodeEnum.USER_IS_LOCKED_NOT_NULL))

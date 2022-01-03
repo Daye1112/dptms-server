@@ -1,8 +1,8 @@
 package com.darren1112.dptms.auth.dao;
 
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
-import com.darren1112.dptms.common.spi.auth.dto.SysUserDto;
-import com.darren1112.dptms.common.spi.auth.entity.SysUserEntity;
+import com.darren1112.dptms.common.spi.auth.dto.AuthUserDto;
+import com.darren1112.dptms.common.spi.auth.entity.AuthUserEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -22,11 +22,11 @@ public interface SysUserDao {
     /**
      * 插入数据
      *
-     * @param sysUserEntity 用户实体类
+     * @param authUserEntity 用户实体类
      * @author luyuhao
      * @since 20/07/23 02:26
      */
-    void insert(SysUserEntity sysUserEntity);
+    void insert(AuthUserEntity authUserEntity);
 
     /**
      * 根据用户名查询用户信息
@@ -36,7 +36,7 @@ public interface SysUserDao {
      * @author luyuhao
      * @since 20/07/23 02:49
      */
-    SysUserDto getByUsername(@Param("username") String username);
+    AuthUserDto getByUsername(@Param("username") String username);
 
     /**
      * 更新登录时间
@@ -51,11 +51,11 @@ public interface SysUserDao {
      * 根据id查询用户
      *
      * @param id id
-     * @return {@link SysUserDto}
+     * @return {@link AuthUserDto}
      * @author luyuhao
      * @since 20/11/30 23:12
      */
-    SysUserDto getById(@Param("id") Long id);
+    AuthUserDto getById(@Param("id") Long id);
 
     /**
      * 统计是否重复
@@ -65,18 +65,18 @@ public interface SysUserDao {
      * @author luyuhao
      * @since 20/12/22 01:06
      */
-    Long countByRepeat(SysUserDto param);
+    Long countByRepeat(AuthUserDto param);
 
     /**
      * 分页查询用户信息
      *
      * @param pageParam 分页参数
      * @param dto       查询条件
-     * @return {@link SysUserDto}
+     * @return {@link AuthUserDto}
      * @author luyuhao
      * @since 20/12/22 01:12
      */
-    List<SysUserDto> listPage(@Param("pageParam") PageParam pageParam, @Param("dto") SysUserDto dto);
+    List<AuthUserDto> listPage(@Param("pageParam") PageParam pageParam, @Param("dto") AuthUserDto dto);
 
     /**
      * 分页查询用户信息-记录数
@@ -86,7 +86,7 @@ public interface SysUserDao {
      * @author luyuhao
      * @since 20/12/22 01:12
      */
-    Long listPageCount(SysUserDto dto);
+    Long listPageCount(AuthUserDto dto);
 
     /**
      * 更新用户信息
@@ -96,7 +96,7 @@ public interface SysUserDao {
      * @author luyuhao
      * @since 20/12/10 01:08
      */
-    Long update(SysUserEntity entity);
+    Long update(AuthUserEntity entity);
 
     /**
      * 根据id删除记录
@@ -115,7 +115,7 @@ public interface SysUserDao {
      * @author luyuhao
      * @since 2021/01/14 00:19
      */
-    void updateLock(SysUserEntity entity);
+    void updateLock(AuthUserEntity entity);
 
     /**
      * 更新用户密码
@@ -124,5 +124,5 @@ public interface SysUserDao {
      * @author luyuhao
      * @since 2021/11/24
      */
-    void updatePassword(SysUserDto dto);
+    void updatePassword(AuthUserDto dto);
 }

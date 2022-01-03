@@ -1,7 +1,7 @@
 package com.darren1112.dptms.auth.dao;
 
-import com.darren1112.dptms.common.spi.auth.dto.SysMenuDto;
-import com.darren1112.dptms.common.spi.auth.entity.SysMenuEntity;
+import com.darren1112.dptms.common.spi.auth.dto.AuthMenuDto;
+import com.darren1112.dptms.common.spi.auth.entity.AuthMenuEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -22,11 +22,11 @@ public interface SysMenuDao {
      * 获取用户的菜单
      *
      * @param userId 用户id
-     * @return {@link SysMenuDto}
+     * @return {@link AuthMenuDto}
      * @author luyuhao
      * @since 2021/01/17 19:34
      */
-    List<SysMenuDto> listMenuByUserId(Long userId);
+    List<AuthMenuDto> listMenuByUserId(Long userId);
 
     /**
      * 插入菜单信息
@@ -36,7 +36,7 @@ public interface SysMenuDao {
      * @author baojiazhong
      * @since 2020/12/15 16:53
      */
-    Long insert(SysMenuEntity entity);
+    Long insert(AuthMenuEntity entity);
 
     /**
      * 查询是否重复
@@ -46,7 +46,7 @@ public interface SysMenuDao {
      * @author baojiazhong
      * @since 2020/12/16 11:08
      */
-    Long countByRepeat(SysMenuDto param);
+    Long countByRepeat(AuthMenuDto param);
 
     /**
      * 根据id删除记录
@@ -66,14 +66,14 @@ public interface SysMenuDao {
      * @author baojiazhong
      * @since 2020/12/16 18:35
      */
-    Long update(SysMenuEntity entity);
+    Long update(AuthMenuEntity entity);
 
     /**
      * 查询菜单list
      *
-     * @return {@link SysMenuDto}
+     * @return {@link AuthMenuDto}
      * @author luyuhao
      * @since 2021/01/03 23:44
      */
-    List<SysMenuDto> list();
+    List<AuthMenuDto> list();
 }

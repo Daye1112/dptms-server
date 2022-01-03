@@ -16,8 +16,8 @@ import com.darren1112.dptms.common.security.starter.util.DptmsSecurityUtil;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
-import com.darren1112.dptms.common.spi.auth.dto.SysOrganizationDto;
-import com.darren1112.dptms.common.spi.auth.entity.SysOrganizationEntity;
+import com.darren1112.dptms.common.spi.auth.dto.AuthOrganizationDto;
+import com.darren1112.dptms.common.spi.auth.entity.AuthOrganizationEntity;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -57,9 +57,9 @@ public class SysOrganizationController extends BaseController {
     @Log(value = "分页查询组织", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     @ApiOperation("分页查询组织")
     @GetMapping("/listPage")
-    public ResponseEntity<JsonResult<PageBean<SysOrganizationDto>>> listPage(PageParam pageParam,
-                                                                             SysOrganizationDto dto) {
-        PageBean<SysOrganizationDto> pageBean = sysOrganizationService.listPage(getPageParam(pageParam), dto);
+    public ResponseEntity<JsonResult<PageBean<AuthOrganizationDto>>> listPage(PageParam pageParam,
+                                                                              AuthOrganizationDto dto) {
+        PageBean<AuthOrganizationDto> pageBean = sysOrganizationService.listPage(getPageParam(pageParam), dto);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(pageBean));
     }
 
@@ -74,7 +74,7 @@ public class SysOrganizationController extends BaseController {
     @Log(value = "插入组织", businessType = BusinessType.INSERT)
     @ApiOperation("插入组织")
     @PostMapping("/insert")
-    public ResponseEntity<JsonResult<Long>> insert(SysOrganizationEntity entity) {
+    public ResponseEntity<JsonResult<Long>> insert(AuthOrganizationEntity entity) {
         ValidatorBuilder.build()
                 .on(entity.getOrgCode(), new NotEmptyValidatorCallback(AuthErrorCodeEnum.ORG_CODE_NOT_NULL))
                 .on(entity.getOrgName(), new NotEmptyValidatorCallback(AuthErrorCodeEnum.ORG_NAME_NOT_NULL))
@@ -97,7 +97,7 @@ public class SysOrganizationController extends BaseController {
     @Log(value = "更新组织", businessType = BusinessType.UPDATE)
     @ApiOperation("更新组织")
     @PostMapping("/update")
-    public ResponseEntity<JsonResult<Long>> update(SysOrganizationEntity entity) {
+    public ResponseEntity<JsonResult<Long>> update(AuthOrganizationEntity entity) {
         ValidatorBuilder.build()
                 .on(entity.getId(), new NotNullValidatorCallback(AuthErrorCodeEnum.ID_NOT_NULL))
                 .on(entity.getOrgCode(), new NotEmptyValidatorCallback(AuthErrorCodeEnum.ORG_CODE_NOT_NULL))
@@ -133,18 +133,18 @@ public class SysOrganizationController extends BaseController {
      * 查询用户关联的组织list
      *
      * @param userId 用户id
-     * @return {@link SysOrganizationDto}
+     * @return {@link AuthOrganizationDto}
      * @author luyuhao
      * @since 20/12/13 21:43
      */
     @Log(value = "查询用户关联的组织list", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     @ApiOperation("查询用户关联的组织list")
     @GetMapping("/listUserAssigned")
-    public ResponseEntity<JsonResult<List<SysOrganizationDto>>> listUserAssigned(@RequestParam(value = "userId", required = false) Long userId) {
+    public ResponseEntity<JsonResult<List<AuthOrganizationDto>>> listUserAssigned(@RequestParam(value = "userId", required = false) Long userId) {
         ValidatorBuilder.build()
                 .on(userId, new NotNullValidatorCallback(AuthErrorCodeEnum.USER_ID_NOT_NULL))
                 .doValidate().checkResult();
-        List<SysOrganizationDto> resultList = sysUserOrganizationService.listUserAssigned(userId);
+        List<AuthOrganizationDto> resultList = sysUserOrganizationService.listUserAssigned(userId);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(resultList));
     }
 }

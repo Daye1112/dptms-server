@@ -1,7 +1,7 @@
 package com.darren1112.dptms.auth.service;
 
-import com.darren1112.dptms.common.spi.auth.dto.SysMenuDto;
-import com.darren1112.dptms.common.spi.auth.entity.SysMenuEntity;
+import com.darren1112.dptms.common.spi.auth.dto.AuthMenuDto;
+import com.darren1112.dptms.common.spi.auth.entity.AuthMenuEntity;
 
 import java.util.List;
 
@@ -17,11 +17,11 @@ public interface SysMenuService {
      * 获取用户的菜单
      *
      * @param userId 用户id
-     * @return {@link SysMenuDto}
+     * @return {@link AuthMenuDto}
      * @author luyuhao
      * @since 2021/01/17 19:34
      */
-    List<SysMenuDto> listMenuByUserId(Long userId);
+    List<AuthMenuDto> listMenuByUserId(Long userId);
 
     /**
      * 插入菜单信息
@@ -31,7 +31,7 @@ public interface SysMenuService {
      * @author baojiazhong
      * @since 2020/12/16 11:00
      */
-    Long insert(SysMenuEntity entity);
+    Long insert(AuthMenuEntity entity);
 
     /**
      * 根据id删除记录
@@ -51,14 +51,14 @@ public interface SysMenuService {
      * @author baojiazhong
      * @since 2020/12/16 15:29
      */
-    Long update(SysMenuEntity entity);
+    Long update(AuthMenuEntity entity);
 
     /**
      * 查询菜单树
      *
-     * @return {@link SysMenuDto}
+     * @return {@link AuthMenuDto}
      * @author luyuhao
      * @since 2021/01/03 23:29
      */
-    SysMenuDto listTree();
+    AuthMenuDto listTree();
 }

@@ -7,26 +7,25 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
- * 角色菜单Entity
+ * 菜单权限Entity
  *
- * @author luyuhao
- * @since 20/12/13 23:04
+ * @author baojiazhong
+ * @since 2020/12/22 23:20
  */
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class SysRoleMenuEntity extends BaseEntity {
+public class AuthMenuPermissionEntity extends BaseEntity {
+
+    /**
+     * 权限id
+     */
+    @ApiModelProperty("权限id")
+    private Long perId;
 
     /**
      * 菜单id
      */
-    @ApiModelProperty(value = "菜单id")
+    @ApiModelProperty("菜单id")
     private Long menuId;
-
-    /**
-     * 角色id
-     */
-    @ApiModelProperty(value = "角色id")
-    private Long roleId;
-
 }

@@ -10,9 +10,9 @@ import com.darren1112.dptms.common.core.util.Md5Util;
 import com.darren1112.dptms.common.core.validate.handler.ValidateHandler;
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
-import com.darren1112.dptms.common.spi.auth.dto.SysPermissionDto;
-import com.darren1112.dptms.common.spi.auth.dto.SysUserDto;
-import com.darren1112.dptms.common.spi.auth.entity.SysUserEntity;
+import com.darren1112.dptms.common.spi.auth.dto.AuthPermissionDto;
+import com.darren1112.dptms.common.spi.auth.dto.AuthUserDto;
+import com.darren1112.dptms.common.spi.auth.entity.AuthUserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -49,7 +49,7 @@ public class SysUserServiceImpl extends BaseService implements SysUserService {
      */
     @Override
     @Cacheable
-    public SysUserDto getByUsername(String username) {
+    public AuthUserDto getByUsername(String username) {
         return sysUserDao.getByUsername(username);
     }
 
@@ -71,13 +71,13 @@ public class SysUserServiceImpl extends BaseService implements SysUserService {
      * 根据id查询用户
      *
      * @param id id
-     * @return {@link SysUserDto}
+     * @return {@link AuthUserDto}
      * @author luyuhao
      * @since 20/11/30 23:12
      */
     @Override
     @Cacheable
-    public SysUserDto getById(Long id) {
+    public AuthUserDto getById(Long id) {
         return sysUserDao.getById(id);
     }
 
@@ -92,7 +92,7 @@ public class SysUserServiceImpl extends BaseService implements SysUserService {
     @Override
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Throwable.class)
-    public Long insert(SysUserEntity entity) {
+    public Long insert(AuthUserEntity entity) {
         validRepeat(entity, false);
         sysUserDao.insert(entity);
         return entity.getId();
@@ -106,8 +106,8 @@ public class SysUserServiceImpl extends BaseService implements SysUserService {
      * @author luyuhao
      * @since 2020/12/12 11:06
      */
-    private void validRepeat(SysUserEntity entity, boolean isUpdate) {
-        SysUserDto param = new SysUserDto();
+    private void validRepeat(AuthUserEntity entity, boolean isUpdate) {
+        AuthUserDto param = new AuthUserDto();
         param.setId(entity.getId());
         param.setUsername(entity.getUsername());
         param.setIsUpdate(isUpdate);
@@ -122,14 +122,14 @@ public class SysUserServiceImpl extends BaseService implements SysUserService {
      *
      * @param dto       筛选参数
      * @param pageParam 分页参数
-     * @return {@link SysUserDto}
+     * @return {@link AuthUserDto}
      * @author luyuhao
      * @since 20/12/10 01:08
      */
     @Override
     @Cacheable
-    public PageBean<SysUserDto> listPage(PageParam pageParam, SysUserDto dto) {
-        List<SysUserDto> list = sysUserDao.listPage(pageParam, dto);
+    public PageBean<AuthUserDto> listPage(PageParam pageParam, AuthUserDto dto) {
+        List<AuthUserDto> list = sysUserDao.listPage(pageParam, dto);
         Long count = sysUserDao.listPageCount(dto);
         return createPageBean(pageParam, count, list);
     }
@@ -145,7 +145,7 @@ public class SysUserServiceImpl extends BaseService implements SysUserService {
     @Override
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Throwable.class)
-    public Long update(SysUserEntity entity) {
+    public Long update(AuthUserEntity entity) {
         validRepeat(entity, true);
         return sysUserDao.update(entity);
     }
@@ -175,7 +175,7 @@ public class SysUserServiceImpl extends BaseService implements SysUserService {
     @Override
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Throwable.class)
-    public void updateLock(SysUserEntity entity) {
+    public void updateLock(AuthUserEntity entity) {
         sysUserDao.updateLock(entity);
     }
 
@@ -183,15 +183,15 @@ public class SysUserServiceImpl extends BaseService implements SysUserService {
      * 根据用户id查询用户信息和权限list
      *
      * @param id 用户id
-     * @return {@link SysUserDto}
+     * @return {@link AuthUserDto}
      * @author luyuhao
      * @since 2021/01/31 19:39
      */
     @Override
-    public SysUserDto getUserInfoAndPermissionByUserId(Long id) {
-        SysUserDto userInfo = this.getById(id);
+    public AuthUserDto getUserInfoAndPermissionByUserId(Long id) {
+        AuthUserDto userInfo = this.getById(id);
         if (userInfo != null) {
-            List<SysPermissionDto> permissionList = sysPermissionDao.listByUserId(id);
+            List<AuthPermissionDto> permissionList = sysPermissionDao.listByUserId(id);
             userInfo.setPermissionList(permissionList);
         }
         return userInfo;
@@ -207,9 +207,9 @@ public class SysUserServiceImpl extends BaseService implements SysUserService {
     @Override
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Throwable.class)
-    public void updatePassword(SysUserDto dto) {
+    public void updatePassword(AuthUserDto dto) {
         // 查询旧用户信息
-        SysUserDto userDto = sysUserDao.getById(dto.getId());
+        AuthUserDto userDto = sysUserDao.getById(dto.getId());
         // 判断用户是否存在
         ValidateHandler.checkNull(userDto, AuthErrorCodeEnum.USER_NOT_EXIST);
         // 加密输入的旧密码

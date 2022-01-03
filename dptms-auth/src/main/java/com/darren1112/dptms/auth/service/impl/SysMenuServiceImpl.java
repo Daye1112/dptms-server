@@ -6,8 +6,8 @@ import com.darren1112.dptms.auth.dao.SysMenuDao;
 import com.darren1112.dptms.auth.service.SysMenuService;
 import com.darren1112.dptms.common.core.base.BaseService;
 import com.darren1112.dptms.common.core.exception.BadRequestException;
-import com.darren1112.dptms.common.spi.auth.dto.SysMenuDto;
-import com.darren1112.dptms.common.spi.auth.entity.SysMenuEntity;
+import com.darren1112.dptms.common.spi.auth.dto.AuthMenuDto;
+import com.darren1112.dptms.common.spi.auth.entity.AuthMenuEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -35,12 +35,12 @@ public class SysMenuServiceImpl extends BaseService implements SysMenuService {
      * 获取用户的菜单
      *
      * @param userId 用户id
-     * @return {@link SysMenuDto}
+     * @return {@link AuthMenuDto}
      * @author luyuhao
      * @since 2021/01/17 19:34
      */
     @Override
-    public List<SysMenuDto> listMenuByUserId(Long userId) {
+    public List<AuthMenuDto> listMenuByUserId(Long userId) {
         return sysMenuDao.listMenuByUserId(userId);
     }
 
@@ -55,7 +55,7 @@ public class SysMenuServiceImpl extends BaseService implements SysMenuService {
     @Override
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Throwable.class)
-    public Long insert(SysMenuEntity entity) {
+    public Long insert(AuthMenuEntity entity) {
         validRepeat(entity, false);
         sysMenuDao.insert(entity);
         return entity.getId();
@@ -87,7 +87,7 @@ public class SysMenuServiceImpl extends BaseService implements SysMenuService {
     @Override
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Throwable.class)
-    public Long update(SysMenuEntity entity) {
+    public Long update(AuthMenuEntity entity) {
         validRepeat(entity, true);
         return sysMenuDao.update(entity);
     }
@@ -100,8 +100,8 @@ public class SysMenuServiceImpl extends BaseService implements SysMenuService {
      * @author baojiazhong
      * @since 2020/12/16 11:05
      */
-    private void validRepeat(SysMenuEntity entity, boolean isUpdate) {
-        SysMenuDto param = new SysMenuDto();
+    private void validRepeat(AuthMenuEntity entity, boolean isUpdate) {
+        AuthMenuDto param = new AuthMenuDto();
         param.setId(entity.getId());
         param.setMenuCode(entity.getMenuCode());
         param.setIsUpdate(isUpdate);
@@ -114,14 +114,14 @@ public class SysMenuServiceImpl extends BaseService implements SysMenuService {
     /**
      * 查询菜单树
      *
-     * @return {@link SysMenuDto}
+     * @return {@link AuthMenuDto}
      * @author luyuhao
      * @since 2021/01/03 23:29
      */
     @Override
     @Cacheable
-    public SysMenuDto listTree() {
-        List<SysMenuDto> sysMenuList = sysMenuDao.list();
+    public AuthMenuDto listTree() {
+        List<AuthMenuDto> sysMenuList = sysMenuDao.list();
         return MenuUtil.buildTree(sysMenuList);
     }
 }

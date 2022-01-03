@@ -16,8 +16,8 @@ import com.darren1112.dptms.common.security.starter.util.DptmsSecurityUtil;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
-import com.darren1112.dptms.common.spi.auth.dto.SysPermissionDto;
-import com.darren1112.dptms.common.spi.auth.entity.SysPermissionEntity;
+import com.darren1112.dptms.common.spi.auth.dto.AuthPermissionDto;
+import com.darren1112.dptms.common.spi.auth.entity.AuthPermissionEntity;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -56,7 +56,7 @@ public class SysPermissionController extends BaseController {
     @Log(value = "插入权限", businessType = BusinessType.INSERT)
     @ApiOperation("插入权限")
     @PostMapping("/insert")
-    public ResponseEntity<JsonResult<Long>> insert(SysPermissionEntity entity) {
+    public ResponseEntity<JsonResult<Long>> insert(AuthPermissionEntity entity) {
         ValidatorBuilder.build()
                 .on(entity.getPerName(), new NotEmptyValidatorCallback(AuthErrorCodeEnum.PER_NAME_NOT_NULL))
                 .on(entity.getPerCode(), new NotEmptyValidatorCallback(AuthErrorCodeEnum.PER_CODE_NOT_NULL))
@@ -82,9 +82,9 @@ public class SysPermissionController extends BaseController {
     @Log(value = "分页查询权限", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     @ApiOperation("分页查询权限")
     @GetMapping("/listPage")
-    public ResponseEntity<JsonResult<PageBean<SysPermissionDto>>> listPage(PageParam pageParam,
-                                                                           SysPermissionDto dto) {
-        PageBean<SysPermissionDto> pageBean = sysPermissionService.listPage(getPageParam(pageParam), dto);
+    public ResponseEntity<JsonResult<PageBean<AuthPermissionDto>>> listPage(PageParam pageParam,
+                                                                            AuthPermissionDto dto) {
+        PageBean<AuthPermissionDto> pageBean = sysPermissionService.listPage(getPageParam(pageParam), dto);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(pageBean));
     }
 
@@ -99,7 +99,7 @@ public class SysPermissionController extends BaseController {
     @Log(value = "更新权限", businessType = BusinessType.UPDATE)
     @ApiOperation("更新权限")
     @PostMapping("/update")
-    public ResponseEntity<JsonResult<Long>> update(SysPermissionEntity entity) {
+    public ResponseEntity<JsonResult<Long>> update(AuthPermissionEntity entity) {
         ValidatorBuilder.build()
                 .on(entity.getId(), new NotNullValidatorCallback(AuthErrorCodeEnum.ID_NOT_NULL))
                 .on(entity.getPerName(), new NotEmptyValidatorCallback(AuthErrorCodeEnum.PER_NAME_NOT_NULL))
@@ -137,33 +137,33 @@ public class SysPermissionController extends BaseController {
      * 查询与菜单关联的权限list
      *
      * @param menuId 菜单id
-     * @return {@link SysPermissionDto)
+     * @return {@link AuthPermissionDto )
      * @author baojiazhong
      * @since 2020/12/22 23:09
      */
     @Log(value = "查询菜单绑定的权限list", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     @ApiOperation("查询菜单绑定的权限list")
     @GetMapping("/listMenuAssigned")
-    public ResponseEntity<JsonResult<List<SysPermissionDto>>> listMenuAssigned(@RequestParam(value = "menuId", required = false) Long menuId) {
+    public ResponseEntity<JsonResult<List<AuthPermissionDto>>> listMenuAssigned(@RequestParam(value = "menuId", required = false) Long menuId) {
         ValidatorBuilder.build()
                 .on(menuId, new NotNullValidatorCallback(AuthErrorCodeEnum.MENU_ID_NOT_NULL))
                 .doValidate().checkResult();
-        List<SysPermissionDto> list = sysMenuPermissionService.listMenuAssigned(menuId);
+        List<AuthPermissionDto> list = sysMenuPermissionService.listMenuAssigned(menuId);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(list));
     }
 
     /**
      * 查询权限组list
      *
-     * @return {@link SysPermissionDto}
+     * @return {@link AuthPermissionDto}
      * @author luyuhao
      * @since 2020/12/28 01:10
      */
     @Log(value = "查询权限组list", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     @ApiOperation("查询权限组list")
     @GetMapping("/listGroup")
-    public ResponseEntity<JsonResult<List<SysPermissionDto>>> listGroup() {
-        List<SysPermissionDto> list = sysPermissionService.listGroup();
+    public ResponseEntity<JsonResult<List<AuthPermissionDto>>> listGroup() {
+        List<AuthPermissionDto> list = sysPermissionService.listGroup();
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(list));
     }
 
@@ -171,18 +171,18 @@ public class SysPermissionController extends BaseController {
      * 根据菜单id查询权限list
      *
      * @param menuId 菜单id
-     * @return {@link SysPermissionDto}
+     * @return {@link AuthPermissionDto}
      * @author luyuhao
      * @since 2021/01/04 23:52
      */
     @Log(value = "根据菜单id查询权限list", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     @ApiOperation("根据菜单id查询权限list")
     @GetMapping("/listByMenuId")
-    public ResponseEntity<JsonResult<List<SysPermissionDto>>> listByMenuId(@RequestParam(value = "menuId", required = false) Long menuId) {
+    public ResponseEntity<JsonResult<List<AuthPermissionDto>>> listByMenuId(@RequestParam(value = "menuId", required = false) Long menuId) {
         ValidatorBuilder.build()
                 .on(menuId, new NotNullValidatorCallback(AuthErrorCodeEnum.MENU_ID_NOT_NULL))
                 .doValidate().checkResult();
-        List<SysPermissionDto> list = sysMenuPermissionService.listByMenuId(menuId);
+        List<AuthPermissionDto> list = sysMenuPermissionService.listByMenuId(menuId);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(list));
     }
 }

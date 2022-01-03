@@ -1,8 +1,8 @@
 package com.darren1112.dptms.auth.dao;
 
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
-import com.darren1112.dptms.common.spi.auth.dto.SysRoleDto;
-import com.darren1112.dptms.common.spi.auth.entity.SysRoleEntity;
+import com.darren1112.dptms.common.spi.auth.dto.AuthRoleDto;
+import com.darren1112.dptms.common.spi.auth.entity.AuthRoleEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -28,7 +28,7 @@ public interface SysRoleDao {
      * @author baojiazhong
      * @since 2020/12/19 1:19
      */
-    Long insert(SysRoleEntity entity);
+    Long insert(AuthRoleEntity entity);
 
     /**
      * 查询是否重复
@@ -38,7 +38,7 @@ public interface SysRoleDao {
      * @author baojiazhong
      * @since 2020/12/19 1:20
      */
-    Long countByRepeat(SysRoleDto param);
+    Long countByRepeat(AuthRoleDto param);
 
     /**
      * 更新角色信息
@@ -48,18 +48,18 @@ public interface SysRoleDao {
      * @author baojiazhong
      * @since 2020/12/19 20:32
      */
-    Long update(SysRoleEntity entity);
+    Long update(AuthRoleEntity entity);
 
     /**
      * 分页查询角色
      *
      * @param pageParam 分页参数
      * @param dto       筛选参数
-     * @return {@link SysRoleDto)
+     * @return {@link AuthRoleDto )
      * @author baojiazhong
      * @since 2020/12/19 23:19
      */
-    List<SysRoleDto> listPage(@Param("pageParam") PageParam pageParam, @Param("dto") SysRoleDto dto);
+    List<AuthRoleDto> listPage(@Param("pageParam") PageParam pageParam, @Param("dto") AuthRoleDto dto);
 
     /**
      * 分页查询角色-查询总数
@@ -69,7 +69,7 @@ public interface SysRoleDao {
      * @author baojiazhong
      * @since 2020/12/19 23:21
      */
-    Long listPageCount(@Param("dto") SysRoleDto dto);
+    Long listPageCount(@Param("dto") AuthRoleDto dto);
 
     /**
      * 根据id删除记录

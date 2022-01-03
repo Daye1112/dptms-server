@@ -3,8 +3,8 @@ package com.darren1112.dptms.auth.service.impl;
 import com.darren1112.dptms.auth.dao.SysUserRoleDao;
 import com.darren1112.dptms.auth.service.SysUserRoleService;
 import com.darren1112.dptms.common.core.util.StringUtil;
-import com.darren1112.dptms.common.spi.auth.dto.SysRoleDto;
-import com.darren1112.dptms.common.spi.auth.entity.SysUserRoleEntity;
+import com.darren1112.dptms.common.spi.auth.dto.AuthRoleDto;
+import com.darren1112.dptms.common.spi.auth.entity.AuthUserRoleEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -47,10 +47,10 @@ public class SysUserRoleServiceImpl implements SysUserRoleService {
             return;
         }
         // 封装list
-        List<SysUserRoleEntity> list = new ArrayList<>();
+        List<AuthUserRoleEntity> list = new ArrayList<>();
         String[] roleIdArr = roleIds.split(",");
         for (String roleId : roleIdArr) {
-            SysUserRoleEntity entity = new SysUserRoleEntity();
+            AuthUserRoleEntity entity = new AuthUserRoleEntity();
             entity.setUserId(userId);
             entity.setRoleId(Long.valueOf(roleId));
             entity.setCreater(updater);
@@ -65,12 +65,12 @@ public class SysUserRoleServiceImpl implements SysUserRoleService {
      * 查询用户关联的角色list
      *
      * @param userId 用户id
-     * @return {@link SysRoleDto}
+     * @return {@link AuthRoleDto}
      * @author luyuhao
      * @since 20/12/13 21:43
      */
     @Override
-    public List<SysRoleDto> listUserAssigned(Long userId) {
+    public List<AuthRoleDto> listUserAssigned(Long userId) {
         return sysUserRoleDao.listUserAssigned(userId);
     }
 }

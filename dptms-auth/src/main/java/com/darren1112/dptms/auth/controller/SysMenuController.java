@@ -15,8 +15,8 @@ import com.darren1112.dptms.common.log.starter.enums.BusinessType;
 import com.darren1112.dptms.common.log.starter.enums.LogLevel;
 import com.darren1112.dptms.common.security.starter.util.DptmsSecurityUtil;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
-import com.darren1112.dptms.common.spi.auth.dto.SysMenuDto;
-import com.darren1112.dptms.common.spi.auth.entity.SysMenuEntity;
+import com.darren1112.dptms.common.spi.auth.dto.AuthMenuDto;
+import com.darren1112.dptms.common.spi.auth.entity.AuthMenuEntity;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -56,7 +56,7 @@ public class SysMenuController extends BaseController {
     @Log(value = "插入菜单", businessType = BusinessType.INSERT)
     @ApiOperation("插入菜单")
     @PostMapping("/insert")
-    public ResponseEntity<JsonResult<Long>> insert(SysMenuEntity entity) {
+    public ResponseEntity<JsonResult<Long>> insert(AuthMenuEntity entity) {
         ValidatorBuilder.build()
                 .on(entity.getMenuCode(), new NotEmptyValidatorCallback(AuthErrorCodeEnum.MENU_CODE_NOT_NULL))
                 .on(entity.getMenuName(), new NotEmptyValidatorCallback(AuthErrorCodeEnum.MENU_NAME_NOT_NULL))
@@ -100,8 +100,8 @@ public class SysMenuController extends BaseController {
     @Log(value = "查询菜单树", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     @ApiOperation("查询菜单树")
     @GetMapping("/listTree")
-    public ResponseEntity<JsonResult<SysMenuDto>> listTree() {
-        SysMenuDto result = sysMenuService.listTree();
+    public ResponseEntity<JsonResult<AuthMenuDto>> listTree() {
+        AuthMenuDto result = sysMenuService.listTree();
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(result));
     }
 
@@ -116,7 +116,7 @@ public class SysMenuController extends BaseController {
     @Log(value = "更新菜单", businessType = BusinessType.UPDATE)
     @ApiOperation("更新菜单")
     @PostMapping("/update")
-    public ResponseEntity<JsonResult<Long>> update(SysMenuEntity entity) {
+    public ResponseEntity<JsonResult<Long>> update(AuthMenuEntity entity) {
         ValidatorBuilder.build()
                 .on(entity.getId(), new NotNullValidatorCallback(AuthErrorCodeEnum.ID_NOT_NULL))
                 .on(entity.getMenuCode(), new NotEmptyValidatorCallback(AuthErrorCodeEnum.MENU_CODE_NOT_NULL))
@@ -134,18 +134,18 @@ public class SysMenuController extends BaseController {
      * 查询角色关联的菜单树
      *
      * @param roleId 角色id
-     * @return {@link SysMenuDto}
+     * @return {@link AuthMenuDto}
      * @author luyuhao
      * @since 20/12/13 21:43
      */
     @Log(value = "查询角色关联的菜单树", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     @ApiOperation("查询角色关联的菜单树")
     @GetMapping("/listRoleAssigned")
-    public ResponseEntity<JsonResult<SysMenuDto>> listRoleAssigned(@RequestParam(value = "roleId", required = false) Long roleId) {
+    public ResponseEntity<JsonResult<AuthMenuDto>> listRoleAssigned(@RequestParam(value = "roleId", required = false) Long roleId) {
         ValidatorBuilder.build()
                 .on(roleId, new NotNullValidatorCallback(AuthErrorCodeEnum.ROLE_ID_NOT_NULL))
                 .doValidate().checkResult();
-        SysMenuDto result = sysRoleMenuService.listRoleAssigned(roleId);
+        AuthMenuDto result = sysRoleMenuService.listRoleAssigned(roleId);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(result));
     }
 

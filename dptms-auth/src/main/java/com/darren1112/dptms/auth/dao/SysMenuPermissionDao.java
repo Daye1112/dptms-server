@@ -1,7 +1,7 @@
 package com.darren1112.dptms.auth.dao;
 
-import com.darren1112.dptms.common.spi.auth.dto.SysPermissionDto;
-import com.darren1112.dptms.common.spi.auth.entity.SysMenuPermissionEntity;
+import com.darren1112.dptms.common.spi.auth.dto.AuthPermissionDto;
+import com.darren1112.dptms.common.spi.auth.entity.AuthMenuPermissionEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -22,11 +22,11 @@ public interface SysMenuPermissionDao {
      * 查询菜单关联的权限list
      *
      * @param menuId 菜单id
-     * @return {@link SysPermissionDto)
+     * @return {@link AuthPermissionDto )
      * @author baojiazhong
      * @since 2020/12/22 22:48
      */
-    List<SysPermissionDto> listMenuAssigned(@Param("menuId") Long menuId);
+    List<AuthPermissionDto> listMenuAssigned(@Param("menuId") Long menuId);
 
     /**
      * 根据菜单id删除记录
@@ -45,15 +45,15 @@ public interface SysMenuPermissionDao {
      * @author baojiazhong
      * @since 2020/12/22 23:27
      */
-    void batchInsert(@Param("list") List<SysMenuPermissionEntity> list);
+    void batchInsert(@Param("list") List<AuthMenuPermissionEntity> list);
 
     /**
      * 根据菜单id查询权限list
      *
      * @param menuId 菜单id
-     * @return {@link SysPermissionDto}
+     * @return {@link AuthPermissionDto}
      * @author luyuhao
      * @since 2021/01/04 23:53
      */
-    List<SysPermissionDto> listByMenuId(@Param("menuId") Long menuId);
+    List<AuthPermissionDto> listByMenuId(@Param("menuId") Long menuId);
 }

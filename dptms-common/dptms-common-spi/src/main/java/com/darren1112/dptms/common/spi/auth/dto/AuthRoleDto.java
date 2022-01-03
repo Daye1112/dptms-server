@@ -1,6 +1,6 @@
 package com.darren1112.dptms.common.spi.auth.dto;
 
-import com.darren1112.dptms.common.spi.auth.entity.SysRoleEntity;
+import com.darren1112.dptms.common.spi.auth.entity.AuthRoleEntity;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -15,7 +15,7 @@ import lombok.ToString;
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class SysRoleDto extends SysRoleEntity {
+public class AuthRoleDto extends AuthRoleEntity {
 
     /**
      * 是否更新

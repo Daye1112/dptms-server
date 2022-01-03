@@ -17,8 +17,8 @@ import com.darren1112.dptms.common.security.starter.util.DptmsSecurityUtil;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
-import com.darren1112.dptms.common.spi.auth.dto.SysRoleDto;
-import com.darren1112.dptms.common.spi.auth.entity.SysRoleEntity;
+import com.darren1112.dptms.common.spi.auth.dto.AuthRoleDto;
+import com.darren1112.dptms.common.spi.auth.entity.AuthRoleEntity;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -82,7 +82,7 @@ public class SysRoleController extends BaseController {
     @Log(value = "插入角色", businessType = BusinessType.INSERT)
     @ApiOperation("插入角色")
     @PostMapping("/insert")
-    public ResponseEntity<JsonResult<Long>> insert(SysRoleEntity entity) {
+    public ResponseEntity<JsonResult<Long>> insert(AuthRoleEntity entity) {
         ValidatorBuilder.build()
                 .on(entity.getRoleName(), new NotEmptyValidatorCallback(AuthErrorCodeEnum.ROLE_NAME_NOT_NULL))
                 .on(entity.getRoleCode(), new NotEmptyValidatorCallback(AuthErrorCodeEnum.ROLE_CODE_NOT_NULL))
@@ -107,9 +107,9 @@ public class SysRoleController extends BaseController {
     @Log(value = "分页查询角色", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     @ApiOperation("分页查询")
     @GetMapping("/listPage")
-    public ResponseEntity<JsonResult<PageBean<SysRoleDto>>> listPage(PageParam pageParam,
-                                                                     SysRoleDto dto) {
-        PageBean<SysRoleDto> pageBean = sysRoleService.listPage(getPageParam(pageParam), dto);
+    public ResponseEntity<JsonResult<PageBean<AuthRoleDto>>> listPage(PageParam pageParam,
+                                                                      AuthRoleDto dto) {
+        PageBean<AuthRoleDto> pageBean = sysRoleService.listPage(getPageParam(pageParam), dto);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(pageBean));
     }
 
@@ -124,7 +124,7 @@ public class SysRoleController extends BaseController {
     @Log(value = "更新角色", businessType = BusinessType.UPDATE)
     @ApiOperation("更新角色")
     @PostMapping("/update")
-    public ResponseEntity<JsonResult<Long>> update(SysRoleEntity entity) {
+    public ResponseEntity<JsonResult<Long>> update(AuthRoleEntity entity) {
         ValidatorBuilder.build()
                 .on(entity.getRoleName(), new NotEmptyValidatorCallback(AuthErrorCodeEnum.ROLE_NAME_NOT_NULL))
                 .on(entity.getRoleCode(), new NotEmptyValidatorCallback(AuthErrorCodeEnum.ROLE_CODE_NOT_NULL))
@@ -160,18 +160,18 @@ public class SysRoleController extends BaseController {
      * 查询用户关联的角色list
      *
      * @param userId 用户id
-     * @return {@link SysRoleDto}
+     * @return {@link AuthRoleDto}
      * @author luyuhao
      * @since 20/12/13 21:43
      */
     @Log(value = "查询用户关联的角色list", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     @ApiOperation("查询用户关联的角色list")
     @GetMapping("/listUserAssigned")
-    public ResponseEntity<JsonResult<List<SysRoleDto>>> listUserAssigned(@RequestParam(value = "userId", required = false) Long userId) {
+    public ResponseEntity<JsonResult<List<AuthRoleDto>>> listUserAssigned(@RequestParam(value = "userId", required = false) Long userId) {
         ValidatorBuilder.build()
                 .on(userId, new NotNullValidatorCallback(AuthErrorCodeEnum.USER_ID_NOT_NULL))
                 .doValidate().checkResult();
-        List<SysRoleDto> resultList = sysUserRoleService.listUserAssigned(userId);
+        List<AuthRoleDto> resultList = sysUserRoleService.listUserAssigned(userId);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(resultList));
     }
 }

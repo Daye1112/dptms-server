@@ -7,8 +7,8 @@ import com.darren1112.dptms.common.core.base.BaseService;
 import com.darren1112.dptms.common.core.exception.BadRequestException;
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
-import com.darren1112.dptms.common.spi.auth.dto.SysPermissionDto;
-import com.darren1112.dptms.common.spi.auth.entity.SysPermissionEntity;
+import com.darren1112.dptms.common.spi.auth.dto.AuthPermissionDto;
+import com.darren1112.dptms.common.spi.auth.entity.AuthPermissionEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -43,7 +43,7 @@ public class SysPermissionServiceImpl extends BaseService implements SysPermissi
     @Override
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Throwable.class)
-    public Long insert(SysPermissionEntity entity) {
+    public Long insert(AuthPermissionEntity entity) {
         validRepeat(entity, false);
         sysPermissionDao.insert(entity);
         return entity.getId();
@@ -54,14 +54,14 @@ public class SysPermissionServiceImpl extends BaseService implements SysPermissi
      *
      * @param dto       筛选参数
      * @param pageParam 分页参数
-     * @return {@link SysPermissionDto}
+     * @return {@link AuthPermissionDto}
      * @author luyuhao
      * @since 20/12/10 01:08
      */
     @Override
     @Cacheable
-    public PageBean<SysPermissionDto> listPage(PageParam pageParam, SysPermissionDto dto) {
-        List<SysPermissionDto> list = sysPermissionDao.listPage(pageParam, dto);
+    public PageBean<AuthPermissionDto> listPage(PageParam pageParam, AuthPermissionDto dto) {
+        List<AuthPermissionDto> list = sysPermissionDao.listPage(pageParam, dto);
         Long count = sysPermissionDao.listPageCount(dto);
         return createPageBean(pageParam, count, list);
     }
@@ -77,7 +77,7 @@ public class SysPermissionServiceImpl extends BaseService implements SysPermissi
     @Override
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Throwable.class)
-    public Long update(SysPermissionEntity entity) {
+    public Long update(AuthPermissionEntity entity) {
         validRepeat(entity, true);
         return sysPermissionDao.update(entity);
     }
@@ -90,8 +90,8 @@ public class SysPermissionServiceImpl extends BaseService implements SysPermissi
      * @author luyuhao
      * @since 2020/12/12 11:06
      */
-    private void validRepeat(SysPermissionEntity entity, boolean isUpdate) {
-        SysPermissionDto param = new SysPermissionDto();
+    private void validRepeat(AuthPermissionEntity entity, boolean isUpdate) {
+        AuthPermissionDto param = new AuthPermissionDto();
         param.setId(entity.getId());
         param.setPerCode(entity.getPerCode());
         param.setPerUrl(entity.getPerUrl());
@@ -120,13 +120,13 @@ public class SysPermissionServiceImpl extends BaseService implements SysPermissi
     /**
      * 查询权限组list
      *
-     * @return {@link SysPermissionDto}
+     * @return {@link AuthPermissionDto}
      * @author luyuhao
      * @since 2020/12/28 01:10
      */
     @Override
     @Cacheable
-    public List<SysPermissionDto> listGroup() {
+    public List<AuthPermissionDto> listGroup() {
         return sysPermissionDao.listGroup();
     }
 }

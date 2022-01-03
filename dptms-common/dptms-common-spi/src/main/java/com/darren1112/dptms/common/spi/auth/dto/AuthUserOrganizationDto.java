@@ -1,18 +1,18 @@
 package com.darren1112.dptms.common.spi.auth.dto;
 
-import com.darren1112.dptms.common.spi.auth.entity.SysRoleMenuEntity;
+import com.darren1112.dptms.common.spi.auth.entity.AuthUserOrganizationEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
- * 角色菜单Dto
+ * 用户组织Dto
  *
  * @author luyuhao
- * @since 2020/12/13 23:06
+ * @since 2020/12/13 18:06
  */
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class SysRoleMenuDto extends SysRoleMenuEntity {
+public class AuthUserOrganizationDto extends AuthUserOrganizationEntity {
 }

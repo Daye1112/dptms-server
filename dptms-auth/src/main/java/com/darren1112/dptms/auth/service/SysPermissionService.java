@@ -2,8 +2,8 @@ package com.darren1112.dptms.auth.service;
 
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
-import com.darren1112.dptms.common.spi.auth.dto.SysPermissionDto;
-import com.darren1112.dptms.common.spi.auth.entity.SysPermissionEntity;
+import com.darren1112.dptms.common.spi.auth.dto.AuthPermissionDto;
+import com.darren1112.dptms.common.spi.auth.entity.AuthPermissionEntity;
 
 import java.util.List;
 
@@ -23,18 +23,18 @@ public interface SysPermissionService {
      * @author luyuhao
      * @since 20/12/10 01:08
      */
-    Long insert(SysPermissionEntity entity);
+    Long insert(AuthPermissionEntity entity);
 
     /**
      * 分页查询权限
      *
      * @param dto       筛选参数
      * @param pageParam 分页参数
-     * @return {@link SysPermissionDto}
+     * @return {@link AuthPermissionDto}
      * @author luyuhao
      * @since 20/12/10 01:08
      */
-    PageBean<SysPermissionDto> listPage(PageParam pageParam, SysPermissionDto dto);
+    PageBean<AuthPermissionDto> listPage(PageParam pageParam, AuthPermissionDto dto);
 
     /**
      * 更新权限信息
@@ -44,7 +44,7 @@ public interface SysPermissionService {
      * @author luyuhao
      * @since 20/12/10 01:08
      */
-    Long update(SysPermissionEntity entity);
+    Long update(AuthPermissionEntity entity);
 
     /**
      * 根据id删除记录
@@ -59,9 +59,9 @@ public interface SysPermissionService {
     /**
      * 查询权限组list
      *
-     * @return {@link SysPermissionDto}
+     * @return {@link AuthPermissionDto}
      * @author luyuhao
      * @since 2020/12/28 01:10
      */
-    List<SysPermissionDto> listGroup();
+    List<AuthPermissionDto> listGroup();
 }

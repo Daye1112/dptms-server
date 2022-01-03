@@ -1,7 +1,7 @@
 package com.darren1112.dptms.auth.dao;
 
-import com.darren1112.dptms.common.spi.auth.dto.SysRoleDto;
-import com.darren1112.dptms.common.spi.auth.entity.SysUserRoleEntity;
+import com.darren1112.dptms.common.spi.auth.dto.AuthRoleDto;
+import com.darren1112.dptms.common.spi.auth.entity.AuthUserRoleEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -35,15 +35,15 @@ public interface SysUserRoleDao {
      * @author luyuhao
      * @since 20/12/23 01:56
      */
-    void batchInsert(@Param("list") List<SysUserRoleEntity> list);
+    void batchInsert(@Param("list") List<AuthUserRoleEntity> list);
 
     /**
      * 查询用户关联的角色list
      *
      * @param userId 用户id
-     * @return {@link SysRoleDto}
+     * @return {@link AuthRoleDto}
      * @author luyuhao
      * @since 20/12/23 02:00
      */
-    List<SysRoleDto> listUserAssigned(Long userId);
+    List<AuthRoleDto> listUserAssigned(Long userId);
 }

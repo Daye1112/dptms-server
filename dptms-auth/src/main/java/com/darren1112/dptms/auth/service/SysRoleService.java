@@ -2,8 +2,8 @@ package com.darren1112.dptms.auth.service;
 
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
-import com.darren1112.dptms.common.spi.auth.dto.SysRoleDto;
-import com.darren1112.dptms.common.spi.auth.entity.SysRoleEntity;
+import com.darren1112.dptms.common.spi.auth.dto.AuthRoleDto;
+import com.darren1112.dptms.common.spi.auth.entity.AuthRoleEntity;
 
 /**
  * 角色Service
@@ -21,7 +21,7 @@ public interface SysRoleService {
      * @author baojiazhong
      * @since 2020/12/19 1:07
      */
-    Long insert(SysRoleEntity entity);
+    Long insert(AuthRoleEntity entity);
 
     /**
      * 更新角色信息
@@ -31,18 +31,18 @@ public interface SysRoleService {
      * @author baojiazhong
      * @since 2020/12/19 20:05
      */
-    Long update(SysRoleEntity entity);
+    Long update(AuthRoleEntity entity);
 
     /**
      * 分页查询角色
      *
      * @param pageParam 分页参数
      * @param dto       筛选参数
-     * @return {@link SysRoleDto)
+     * @return {@link AuthRoleDto )
      * @author baojiazhong
      * @since 2020/12/19 20:33
      */
-    PageBean<SysRoleDto> listPage(PageParam pageParam, SysRoleDto dto);
+    PageBean<AuthRoleDto> listPage(PageParam pageParam, AuthRoleDto dto);
 
     /**
      * 根据id删除记录

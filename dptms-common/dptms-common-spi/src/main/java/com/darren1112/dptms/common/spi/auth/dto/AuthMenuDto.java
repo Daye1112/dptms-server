@@ -1,6 +1,6 @@
 package com.darren1112.dptms.common.spi.auth.dto;
 
-import com.darren1112.dptms.common.spi.auth.entity.SysMenuEntity;
+import com.darren1112.dptms.common.spi.auth.entity.AuthMenuEntity;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -17,7 +17,7 @@ import java.util.List;
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class SysMenuDto extends SysMenuEntity {
+public class AuthMenuDto extends AuthMenuEntity {
 
     /**
      * 是否更新
@@ -35,7 +35,7 @@ public class SysMenuDto extends SysMenuEntity {
      * 子节点
      */
     @ApiModelProperty("子节点")
-    private List<SysMenuDto> children;
+    private List<AuthMenuDto> children;
 
     /**
      * 已分配的ids

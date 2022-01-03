@@ -20,7 +20,7 @@
     </insert>
     <!--查询用户关联的角色list-->
     <select id="listUserAssigned" parameterType="java.lang.Long"
-            resultType="com.darren1112.dptms.common.spi.auth.dto.SysRoleDto">
+            resultType="com.darren1112.dptms.common.spi.auth.dto.AuthRoleDto">
         SELECT t1.id,
                t1.role_name    AS roleName,
                t1.role_code    AS roleCode,

@@ -15,7 +15,7 @@ import lombok.ToString;
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class SysMenuEntity extends BaseEntity {
+public class AuthMenuEntity extends BaseEntity {
 
     /**
      * 菜单名称

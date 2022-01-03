@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.darren1112.dptms.auth.dao.SysMenuDao">
     <!--获取用户的菜单-->
-    <select id="listMenuByUserId" resultType="com.darren1112.dptms.common.spi.auth.dto.SysMenuDto">
+    <select id="listMenuByUserId" resultType="com.darren1112.dptms.common.spi.auth.dto.AuthMenuDto">
         SELECT DISTINCT t5.id,
                         t5.menu_name      AS menuName,
                         t5.menu_code      AS menuCode,
@@ -24,7 +24,7 @@
     </select>
     <!--插入菜单信息-->
     <insert id="insert" useGeneratedKeys="true" keyColumn="id"
-            parameterType="com.darren1112.dptms.common.spi.auth.entity.SysMenuEntity">
+            parameterType="com.darren1112.dptms.common.spi.auth.entity.AuthMenuEntity">
         INSERT INTO sys_menu(menu_name, menu_code, menu_type, menu_parent_id, remark,
                              isvalid, ctime, creater, mtime, updater)
         VALUES (#{menuName}, #{menuCode}, #{menuType}, #{menuParentId}, #{remark},
@@ -32,7 +32,7 @@
     </insert>
     <!--查询是否重复-->
     <select id="countByRepeat" resultType="java.lang.Long"
-            parameterType="com.darren1112.dptms.common.spi.auth.dto.SysMenuDto">
+            parameterType="com.darren1112.dptms.common.spi.auth.dto.AuthMenuDto">
         SELECT COUNT(1)
         FROM sys_menu
         WHERE isvalid = 1
@@ -63,7 +63,7 @@
           AND id = #{id}
     </update>
     <!--查询菜单list-->
-    <select id="list" resultType="com.darren1112.dptms.common.spi.auth.dto.SysMenuDto">
+    <select id="list" resultType="com.darren1112.dptms.common.spi.auth.dto.AuthMenuDto">
         SELECT id,
                menu_name      AS menuName,
                menu_code      AS menuCode,

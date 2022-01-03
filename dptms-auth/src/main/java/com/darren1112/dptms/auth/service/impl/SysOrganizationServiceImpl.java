@@ -7,8 +7,8 @@ import com.darren1112.dptms.common.core.base.BaseService;
 import com.darren1112.dptms.common.core.exception.BadRequestException;
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
-import com.darren1112.dptms.common.spi.auth.dto.SysOrganizationDto;
-import com.darren1112.dptms.common.spi.auth.entity.SysOrganizationEntity;
+import com.darren1112.dptms.common.spi.auth.dto.AuthOrganizationDto;
+import com.darren1112.dptms.common.spi.auth.entity.AuthOrganizationEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -37,14 +37,14 @@ public class SysOrganizationServiceImpl extends BaseService implements SysOrgani
      *
      * @param pageParam 分页参数
      * @param param     筛选参数
-     * @return {@link SysOrganizationDto}
+     * @return {@link AuthOrganizationDto}
      * @author luyuhao
      * @since 20/12/10 01:08
      */
     @Override
     @Cacheable
-    public PageBean<SysOrganizationDto> listPage(PageParam pageParam, SysOrganizationDto param) {
-        List<SysOrganizationDto> list = sysOrganizationDao.listPage(pageParam, param);
+    public PageBean<AuthOrganizationDto> listPage(PageParam pageParam, AuthOrganizationDto param) {
+        List<AuthOrganizationDto> list = sysOrganizationDao.listPage(pageParam, param);
         Long count = sysOrganizationDao.listPageCount(param);
         return createPageBean(pageParam, count, list);
     }
@@ -60,7 +60,7 @@ public class SysOrganizationServiceImpl extends BaseService implements SysOrgani
     @Override
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Throwable.class)
-    public Long insert(SysOrganizationEntity entity) {
+    public Long insert(AuthOrganizationEntity entity) {
         validRepeat(entity, false);
         sysOrganizationDao.insert(entity);
         return entity.getId();
@@ -74,8 +74,8 @@ public class SysOrganizationServiceImpl extends BaseService implements SysOrgani
      * @author luyuhao
      * @since 20/12/12 22:04
      */
-    private void validRepeat(SysOrganizationEntity entity, boolean isUpdate) {
-        SysOrganizationDto param = new SysOrganizationDto();
+    private void validRepeat(AuthOrganizationEntity entity, boolean isUpdate) {
+        AuthOrganizationDto param = new AuthOrganizationDto();
         param.setIsUpdate(isUpdate);
         param.setOrgCode(entity.getOrgCode());
         param.setOrgName(entity.getOrgName());
@@ -97,7 +97,7 @@ public class SysOrganizationServiceImpl extends BaseService implements SysOrgani
     @Override
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Throwable.class)
-    public Long update(SysOrganizationEntity entity) {
+    public Long update(AuthOrganizationEntity entity) {
         validRepeat(entity, true);
         return sysOrganizationDao.update(entity);
     }

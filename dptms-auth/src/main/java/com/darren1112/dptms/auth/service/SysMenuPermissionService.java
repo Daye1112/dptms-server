@@ -1,6 +1,6 @@
 package com.darren1112.dptms.auth.service;
 
-import com.darren1112.dptms.common.spi.auth.dto.SysPermissionDto;
+import com.darren1112.dptms.common.spi.auth.dto.AuthPermissionDto;
 
 import java.util.List;
 
@@ -16,11 +16,11 @@ public interface SysMenuPermissionService {
      * 查询菜单关联的权限list
      *
      * @param menuId 菜单id
-     * @return {@link SysPermissionDto)
+     * @return {@link AuthPermissionDto )
      * @author baojiazhong
      * @since 2020/12/22 22:41
      */
-    List<SysPermissionDto> listMenuAssigned(Long menuId);
+    List<AuthPermissionDto> listMenuAssigned(Long menuId);
 
     /**
      * 绑定权限
@@ -37,9 +37,9 @@ public interface SysMenuPermissionService {
      * 根据菜单id查询权限list
      *
      * @param menuId 菜单id
-     * @return {@link SysPermissionDto}
+     * @return {@link AuthPermissionDto}
      * @author luyuhao
      * @since 2021/01/04 23:53
      */
-    List<SysPermissionDto> listByMenuId(Long menuId);
+    List<AuthPermissionDto> listByMenuId(Long menuId);
 }

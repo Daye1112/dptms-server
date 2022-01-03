@@ -3,8 +3,8 @@ package com.darren1112.dptms.auth.service.impl;
 import com.darren1112.dptms.auth.dao.SysUserOrganizationDao;
 import com.darren1112.dptms.auth.service.SysUserOrganizationService;
 import com.darren1112.dptms.common.core.util.StringUtil;
-import com.darren1112.dptms.common.spi.auth.dto.SysOrganizationDto;
-import com.darren1112.dptms.common.spi.auth.entity.SysUserOrganizationEntity;
+import com.darren1112.dptms.common.spi.auth.dto.AuthOrganizationDto;
+import com.darren1112.dptms.common.spi.auth.entity.AuthUserOrganizationEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -32,12 +32,12 @@ public class SysUserOrganizationServiceImpl implements SysUserOrganizationServic
      * 查询用户关联的组织list
      *
      * @param userId 用户id
-     * @return {@link SysOrganizationDto}
+     * @return {@link AuthOrganizationDto}
      * @author luyuhao
      * @since 20/12/13 21:43
      */
     @Override
-    public List<SysOrganizationDto> listUserAssigned(Long userId) {
+    public List<AuthOrganizationDto> listUserAssigned(Long userId) {
         return sysUserOrganizationDao.listUserAssigned(userId);
     }
 
@@ -60,10 +60,10 @@ public class SysUserOrganizationServiceImpl implements SysUserOrganizationServic
             return;
         }
         // 封装list
-        List<SysUserOrganizationEntity> list = new ArrayList<>();
+        List<AuthUserOrganizationEntity> list = new ArrayList<>();
         String[] orgIdArr = orgIds.split(",");
         for (String orgId : orgIdArr) {
-            SysUserOrganizationEntity entity = new SysUserOrganizationEntity();
+            AuthUserOrganizationEntity entity = new AuthUserOrganizationEntity();
             entity.setUserId(userId);
             entity.setOrgId(Long.valueOf(orgId));
             entity.setCreater(updater);

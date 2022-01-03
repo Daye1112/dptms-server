@@ -13,10 +13,10 @@ import com.darren1112.dptms.common.log.starter.enums.LogLevel;
 import com.darren1112.dptms.common.security.starter.core.DptmsTokenStore;
 import com.darren1112.dptms.common.security.starter.util.DptmsSecurityUtil;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
-import com.darren1112.dptms.common.spi.auth.dto.SysMenuDto;
-import com.darren1112.dptms.common.spi.auth.dto.SysPermissionDto;
-import com.darren1112.dptms.common.spi.auth.dto.SysUserDto;
-import com.darren1112.dptms.common.spi.auth.entity.SysUserEntity;
+import com.darren1112.dptms.common.spi.auth.dto.AuthMenuDto;
+import com.darren1112.dptms.common.spi.auth.dto.AuthPermissionDto;
+import com.darren1112.dptms.common.spi.auth.dto.AuthUserDto;
+import com.darren1112.dptms.common.spi.auth.entity.AuthUserEntity;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -67,32 +67,32 @@ public class ActiveUserController {
     /**
      * 获取用户最新信息
      *
-     * @return {@link SysPermissionDto}
+     * @return {@link AuthPermissionDto}
      * @author luyuhao
      * @since 2021/01/17 19:34
      */
     @GetMapping("/getNewInfo")
     @ApiOperation("获取用户最新信息")
     @Log(value = "获取用户最新信息", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
-    public ResponseEntity<JsonResult<SysUserDto>> getNewInfo() {
+    public ResponseEntity<JsonResult<AuthUserDto>> getNewInfo() {
         ActiveUser activeUser = DptmsSecurityUtil.get();
-        SysUserDto result = sysUserService.getUserInfoAndPermissionByUserId(activeUser.getId());
+        AuthUserDto result = sysUserService.getUserInfoAndPermissionByUserId(activeUser.getId());
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(result));
     }
 
     /**
      * 获取用户的菜单
      *
-     * @return {@link SysMenuDto}
+     * @return {@link AuthMenuDto}
      * @author luyuhao
      * @since 2021/01/17 19:34
      */
     @GetMapping("/listMenu")
     @ApiOperation("获取用户的菜单")
     @Log(value = "获取用户的菜单", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
-    public ResponseEntity<JsonResult<List<SysMenuDto>>> listMenu() {
+    public ResponseEntity<JsonResult<List<AuthMenuDto>>> listMenu() {
         ActiveUser activeUser = DptmsSecurityUtil.get();
-        List<SysMenuDto> resultList = sysMenuService.listMenuByUserId(activeUser.getId());
+        List<AuthMenuDto> resultList = sysMenuService.listMenuByUserId(activeUser.getId());
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(resultList));
     }
 
@@ -107,7 +107,7 @@ public class ActiveUserController {
     @PostMapping("/updateInfo")
     @ApiOperation("更新个人信息")
     @Log(value = "更新个人信息", logLevel = LogLevel.INFO, businessType = BusinessType.UPDATE)
-    public ResponseEntity<JsonResult> updateInfo(SysUserEntity entity) {
+    public ResponseEntity<JsonResult> updateInfo(AuthUserEntity entity) {
         ValidatorBuilder.build()
                 .on(entity.getUsername(), new NotBlankValidatorCallback(AuthErrorCodeEnum.USER_USERNAME_NOT_NULL))
                 .doValidate().checkResult();
@@ -119,7 +119,7 @@ public class ActiveUserController {
         Long count = sysUserService.update(entity);
 
         // 获取新的用户信息
-        SysUserDto dto = sysUserService.getById(entity.getId());
+        AuthUserDto dto = sysUserService.getById(entity.getId());
         // 更新到现有用户中
         ActiveUser.convert(activeUser, dto);
         // 更新redis中的用户信息
@@ -138,7 +138,7 @@ public class ActiveUserController {
     @PostMapping("/updatePassword")
     @ApiOperation("更新密码")
     @Log(value = "更新密码", logLevel = LogLevel.INFO, businessType = BusinessType.UPDATE)
-    public ResponseEntity<JsonResult> updatePassword(SysUserDto dto) {
+    public ResponseEntity<JsonResult> updatePassword(AuthUserDto dto) {
         ValidatorBuilder.build()
                 .on(dto.getOldPassword(), new NotBlankValidatorCallback(AuthErrorCodeEnum.USER_OLD_PASSWORD_NOT_NULL))
                 .on(dto.getNewPassword(), new NotBlankValidatorCallback(AuthErrorCodeEnum.USER_NEW_PASSWORD_NOT_NULL))

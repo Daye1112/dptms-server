@@ -2,8 +2,8 @@ package com.darren1112.dptms.auth.service;
 
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
-import com.darren1112.dptms.common.spi.auth.dto.SysOrganizationDto;
-import com.darren1112.dptms.common.spi.auth.entity.SysOrganizationEntity;
+import com.darren1112.dptms.common.spi.auth.dto.AuthOrganizationDto;
+import com.darren1112.dptms.common.spi.auth.entity.AuthOrganizationEntity;
 
 /**
  * 组织Service
@@ -21,7 +21,7 @@ public interface SysOrganizationService {
      * @author luyuhao
      * @since 20/12/10 01:08
      */
-    Long insert(SysOrganizationEntity entity);
+    Long insert(AuthOrganizationEntity entity);
 
     /**
      * 更新组织信息
@@ -31,7 +31,7 @@ public interface SysOrganizationService {
      * @author luyuhao
      * @since 20/12/10 01:08
      */
-    Long update(SysOrganizationEntity entity);
+    Long update(AuthOrganizationEntity entity);
 
     /**
      * 根据id删除记录
@@ -48,9 +48,9 @@ public interface SysOrganizationService {
      *
      * @param pageParam 分页参数
      * @param param     筛选参数
-     * @return {@link SysOrganizationDto}
+     * @return {@link AuthOrganizationDto}
      * @author luyuhao
      * @since 20/12/10 01:08
      */
-    PageBean<SysOrganizationDto> listPage(PageParam pageParam, SysOrganizationDto param);
+    PageBean<AuthOrganizationDto> listPage(PageParam pageParam, AuthOrganizationDto param);
 }

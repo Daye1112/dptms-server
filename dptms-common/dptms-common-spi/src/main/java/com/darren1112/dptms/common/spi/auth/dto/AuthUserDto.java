@@ -1,6 +1,6 @@
 package com.darren1112.dptms.common.spi.auth.dto;
 
-import com.darren1112.dptms.common.spi.auth.entity.SysUserEntity;
+import com.darren1112.dptms.common.spi.auth.entity.AuthUserEntity;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -17,7 +17,7 @@ import java.util.List;
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class SysUserDto extends SysUserEntity {
+public class AuthUserDto extends AuthUserEntity {
 
     /**
      * 是否更新 true/false
@@ -27,7 +27,7 @@ public class SysUserDto extends SysUserEntity {
     /**
      * 权限list
      */
-    private List<SysPermissionDto> permissionList;
+    private List<AuthPermissionDto> permissionList;
 
     /**
      * 旧密码

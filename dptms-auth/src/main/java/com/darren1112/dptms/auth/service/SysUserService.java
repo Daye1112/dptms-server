@@ -2,8 +2,8 @@ package com.darren1112.dptms.auth.service;
 
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
-import com.darren1112.dptms.common.spi.auth.dto.SysUserDto;
-import com.darren1112.dptms.common.spi.auth.entity.SysUserEntity;
+import com.darren1112.dptms.common.spi.auth.dto.AuthUserDto;
+import com.darren1112.dptms.common.spi.auth.entity.AuthUserEntity;
 
 /**
  * 系统用户Service
@@ -21,7 +21,7 @@ public interface SysUserService {
      * @author luyuhao
      * @since 20/07/23 02:58
      */
-    SysUserDto getByUsername(String username);
+    AuthUserDto getByUsername(String username);
 
     /**
      * 更新登录时间
@@ -36,11 +36,11 @@ public interface SysUserService {
      * 根据id查询用户
      *
      * @param id id
-     * @return {@link SysUserDto}
+     * @return {@link AuthUserDto}
      * @author luyuhao
      * @since 20/11/30 23:12
      */
-    SysUserDto getById(Long id);
+    AuthUserDto getById(Long id);
 
     /**
      * 插入用户信息
@@ -50,18 +50,18 @@ public interface SysUserService {
      * @author luyuhao
      * @since 20/12/10 01:08
      */
-    Long insert(SysUserEntity entity);
+    Long insert(AuthUserEntity entity);
 
     /**
      * 分页查询用户
      *
      * @param dto       筛选参数
      * @param pageParam 分页参数
-     * @return {@link SysUserDto}
+     * @return {@link AuthUserDto}
      * @author luyuhao
      * @since 20/12/10 01:08
      */
-    PageBean<SysUserDto> listPage(PageParam pageParam, SysUserDto dto);
+    PageBean<AuthUserDto> listPage(PageParam pageParam, AuthUserDto dto);
 
     /**
      * 更新用户信息
@@ -71,7 +71,7 @@ public interface SysUserService {
      * @author luyuhao
      * @since 20/12/10 01:08
      */
-    Long update(SysUserEntity entity);
+    Long update(AuthUserEntity entity);
 
     /**
      * 根据id删除记录
@@ -90,17 +90,17 @@ public interface SysUserService {
      * @author luyuhao
      * @since 2021/01/14 00:19
      */
-    void updateLock(SysUserEntity entity);
+    void updateLock(AuthUserEntity entity);
 
     /**
      * 根据用户id查询用户信息和权限list
      *
      * @param id 用户id
-     * @return {@link SysUserDto}
+     * @return {@link AuthUserDto}
      * @author luyuhao
      * @since 2021/01/31 19:39
      */
-    SysUserDto getUserInfoAndPermissionByUserId(Long id);
+    AuthUserDto getUserInfoAndPermissionByUserId(Long id);
 
     /**
      * 更新密码
@@ -109,5 +109,5 @@ public interface SysUserService {
      * @author luyuhao
      * @since 2021/11/24
      */
-    void updatePassword(SysUserDto dto);
+    void updatePassword(AuthUserDto dto);
 }

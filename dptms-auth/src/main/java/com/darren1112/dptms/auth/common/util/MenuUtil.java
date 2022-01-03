@@ -1,7 +1,7 @@
 package com.darren1112.dptms.auth.common.util;
 
 import com.darren1112.dptms.common.core.util.CollectionUtil;
-import com.darren1112.dptms.common.spi.auth.dto.SysMenuDto;
+import com.darren1112.dptms.common.spi.auth.dto.AuthMenuDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,20 +18,20 @@ public class MenuUtil {
      * 生成树对象
      *
      * @param sysMenuList 菜单list
-     * @return {@link SysMenuDto}
+     * @return {@link AuthMenuDto}
      * @author luyuhao
      * @since 2021/01/13 00:57
      */
-    public static SysMenuDto buildTree(List<SysMenuDto> sysMenuList) {
+    public static AuthMenuDto buildTree(List<AuthMenuDto> sysMenuList) {
         if (CollectionUtil.isEmpty(sysMenuList)) {
             return null;
         }
-        for (SysMenuDto dto : sysMenuList) {
+        for (AuthMenuDto dto : sysMenuList) {
             Long menuParentId = dto.getId();
             if (dto.getChildren() == null) {
                 dto.setChildren(new ArrayList<>());
             }
-            for (SysMenuDto subDto : sysMenuList) {
+            for (AuthMenuDto subDto : sysMenuList) {
                 if (subDto.getMenuParentId().equals(menuParentId)) {
                     dto.getChildren().add(subDto);
                 }
