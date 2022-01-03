@@ -3,7 +3,7 @@ package com.darren1112.dptms.auth.service.impl;
 import com.darren1112.dptms.auth.common.enums.AuthErrorCodeEnum;
 import com.darren1112.dptms.auth.common.util.MenuUtil;
 import com.darren1112.dptms.auth.dao.AuthMenuDao;
-import com.darren1112.dptms.auth.service.SysMenuService;
+import com.darren1112.dptms.auth.service.AuthMenuService;
 import com.darren1112.dptms.common.core.base.BaseService;
 import com.darren1112.dptms.common.core.exception.BadRequestException;
 import com.darren1112.dptms.common.spi.auth.dto.AuthMenuDto;
@@ -26,7 +26,7 @@ import java.util.List;
 @Service
 @CacheConfig(cacheNames = "sysMenu", keyGenerator = "keyGenerator")
 @Transactional(rollbackFor = Throwable.class, readOnly = true)
-public class SysMenuServiceImpl extends BaseService implements SysMenuService {
+public class AuthMenuServiceImpl extends BaseService implements AuthMenuService {
 
     @Autowired
     private AuthMenuDao authMenuDao;

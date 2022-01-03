@@ -1,8 +1,8 @@
 package com.darren1112.dptms.auth.controller;
 
 import com.darren1112.dptms.auth.common.enums.AuthErrorCodeEnum;
-import com.darren1112.dptms.auth.service.SysOrganizationService;
-import com.darren1112.dptms.auth.service.SysUserOrganizationService;
+import com.darren1112.dptms.auth.service.AuthOrganizationService;
+import com.darren1112.dptms.auth.service.AuthUserOrganizationService;
 import com.darren1112.dptms.common.core.base.BaseController;
 import com.darren1112.dptms.common.core.message.JsonResult;
 import com.darren1112.dptms.common.core.util.ResponseEntityUtil;
@@ -40,10 +40,10 @@ import java.util.List;
 public class SysOrganizationController extends BaseController {
 
     @Autowired
-    private SysOrganizationService sysOrganizationService;
+    private AuthOrganizationService authOrganizationService;
 
     @Autowired
-    private SysUserOrganizationService sysUserOrganizationService;
+    private AuthUserOrganizationService authUserOrganizationService;
 
     /**
      * 分页查询组织信息
@@ -59,7 +59,7 @@ public class SysOrganizationController extends BaseController {
     @GetMapping("/listPage")
     public ResponseEntity<JsonResult<PageBean<AuthOrganizationDto>>> listPage(PageParam pageParam,
                                                                               AuthOrganizationDto dto) {
-        PageBean<AuthOrganizationDto> pageBean = sysOrganizationService.listPage(getPageParam(pageParam), dto);
+        PageBean<AuthOrganizationDto> pageBean = authOrganizationService.listPage(getPageParam(pageParam), dto);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(pageBean));
     }
 
@@ -82,7 +82,7 @@ public class SysOrganizationController extends BaseController {
         ActiveUser activeUser = DptmsSecurityUtil.get();
         entity.setCreater(activeUser.getId());
         entity.setUpdater(activeUser.getId());
-        Long id = sysOrganizationService.insert(entity);
+        Long id = authOrganizationService.insert(entity);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(id));
     }
 
@@ -105,7 +105,7 @@ public class SysOrganizationController extends BaseController {
                 .doValidate().checkResult();
         ActiveUser activeUser = DptmsSecurityUtil.get();
         entity.setUpdater(activeUser.getId());
-        Long count = sysOrganizationService.update(entity);
+        Long count = authOrganizationService.update(entity);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(count));
     }
 
@@ -125,7 +125,7 @@ public class SysOrganizationController extends BaseController {
                 .on(id, new NotNullValidatorCallback(AuthErrorCodeEnum.ID_NOT_NULL))
                 .doValidate().checkResult();
         ActiveUser activeUser = DptmsSecurityUtil.get();
-        sysOrganizationService.deleteById(id, activeUser.getId());
+        authOrganizationService.deleteById(id, activeUser.getId());
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }
 
@@ -144,7 +144,7 @@ public class SysOrganizationController extends BaseController {
         ValidatorBuilder.build()
                 .on(userId, new NotNullValidatorCallback(AuthErrorCodeEnum.USER_ID_NOT_NULL))
                 .doValidate().checkResult();
-        List<AuthOrganizationDto> resultList = sysUserOrganizationService.listUserAssigned(userId);
+        List<AuthOrganizationDto> resultList = authUserOrganizationService.listUserAssigned(userId);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(resultList));
     }
 }

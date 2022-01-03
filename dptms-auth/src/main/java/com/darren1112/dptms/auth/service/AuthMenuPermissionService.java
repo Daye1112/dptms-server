@@ -10,7 +10,7 @@ import java.util.List;
  * @author baojiazhong
  * @since 2020/12/22 22:38
  */
-public interface SysMenuPermissionService {
+public interface AuthMenuPermissionService {
 
     /**
      * 查询菜单关联的权限list

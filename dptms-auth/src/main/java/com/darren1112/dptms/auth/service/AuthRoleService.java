@@ -11,7 +11,7 @@ import com.darren1112.dptms.common.spi.auth.entity.AuthRoleEntity;
  * @author luyuhao
  * @since 2020/12/13 23:09
  */
-public interface SysRoleService {
+public interface AuthRoleService {
 
     /**
      * 插入角色信息

@@ -1,9 +1,9 @@
 package com.darren1112.dptms.auth.controller;
 
 import com.darren1112.dptms.auth.common.enums.AuthErrorCodeEnum;
-import com.darren1112.dptms.auth.service.SysMenuPermissionService;
-import com.darren1112.dptms.auth.service.SysMenuService;
-import com.darren1112.dptms.auth.service.SysRoleMenuService;
+import com.darren1112.dptms.auth.service.AuthMenuPermissionService;
+import com.darren1112.dptms.auth.service.AuthMenuService;
+import com.darren1112.dptms.auth.service.AuthRoleMenuService;
 import com.darren1112.dptms.common.core.base.BaseController;
 import com.darren1112.dptms.common.core.message.JsonResult;
 import com.darren1112.dptms.common.core.util.ResponseEntityUtil;
@@ -37,13 +37,13 @@ import org.springframework.web.bind.annotation.*;
 public class SysMenuController extends BaseController {
 
     @Autowired
-    private SysMenuService sysMenuService;
+    private AuthMenuService authMenuService;
 
     @Autowired
-    private SysRoleMenuService sysRoleMenuService;
+    private AuthRoleMenuService authRoleMenuService;
 
     @Autowired
-    private SysMenuPermissionService sysMenuPermissionService;
+    private AuthMenuPermissionService authMenuPermissionService;
 
     /**
      * 插入菜单信息
@@ -66,7 +66,7 @@ public class SysMenuController extends BaseController {
         ActiveUser activeUser = DptmsSecurityUtil.get();
         entity.setCreater(activeUser.getId());
         entity.setUpdater(activeUser.getId());
-        Long id = sysMenuService.insert(entity);
+        Long id = authMenuService.insert(entity);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(id));
     }
 
@@ -86,7 +86,7 @@ public class SysMenuController extends BaseController {
                 .on(id, new NotNullValidatorCallback(AuthErrorCodeEnum.ID_NOT_NULL))
                 .doValidate().checkResult();
         ActiveUser activeUser = DptmsSecurityUtil.get();
-        sysMenuService.deleteById(id, activeUser.getId());
+        authMenuService.deleteById(id, activeUser.getId());
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }
 
@@ -101,7 +101,7 @@ public class SysMenuController extends BaseController {
     @ApiOperation("查询菜单树")
     @GetMapping("/listTree")
     public ResponseEntity<JsonResult<AuthMenuDto>> listTree() {
-        AuthMenuDto result = sysMenuService.listTree();
+        AuthMenuDto result = authMenuService.listTree();
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(result));
     }
 
@@ -126,7 +126,7 @@ public class SysMenuController extends BaseController {
                 .doValidate().checkResult();
         ActiveUser activeUser = DptmsSecurityUtil.get();
         entity.setUpdater(activeUser.getId());
-        Long count = sysMenuService.update(entity);
+        Long count = authMenuService.update(entity);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(count));
     }
 
@@ -145,7 +145,7 @@ public class SysMenuController extends BaseController {
         ValidatorBuilder.build()
                 .on(roleId, new NotNullValidatorCallback(AuthErrorCodeEnum.ROLE_ID_NOT_NULL))
                 .doValidate().checkResult();
-        AuthMenuDto result = sysRoleMenuService.listRoleAssigned(roleId);
+        AuthMenuDto result = authRoleMenuService.listRoleAssigned(roleId);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(result));
     }
 
@@ -167,7 +167,7 @@ public class SysMenuController extends BaseController {
                 .on(menuId, new NotNullValidatorCallback(AuthErrorCodeEnum.MENU_ID_NOT_NULL))
                 .doValidate().checkResult();
         ActiveUser activeUser = DptmsSecurityUtil.get();
-        sysMenuPermissionService.assignedPer(menuId, perIds, activeUser.getId());
+        authMenuPermissionService.assignedPer(menuId, perIds, activeUser.getId());
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }
 

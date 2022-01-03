@@ -1,9 +1,9 @@
 package com.darren1112.dptms.auth.controller;
 
 import com.darren1112.dptms.auth.common.enums.AuthErrorCodeEnum;
-import com.darren1112.dptms.auth.service.SysRoleMenuService;
-import com.darren1112.dptms.auth.service.SysRoleService;
-import com.darren1112.dptms.auth.service.SysUserRoleService;
+import com.darren1112.dptms.auth.service.AuthRoleMenuService;
+import com.darren1112.dptms.auth.service.AuthRoleService;
+import com.darren1112.dptms.auth.service.AuthUserRoleService;
 import com.darren1112.dptms.common.core.base.BaseController;
 import com.darren1112.dptms.common.core.message.JsonResult;
 import com.darren1112.dptms.common.core.util.ResponseEntityUtil;
@@ -41,13 +41,13 @@ import java.util.List;
 public class SysRoleController extends BaseController {
 
     @Autowired
-    private SysRoleService sysRoleService;
+    private AuthRoleService authRoleService;
 
     @Autowired
-    private SysRoleMenuService sysRoleMenuService;
+    private AuthRoleMenuService authRoleMenuService;
 
     @Autowired
-    private SysUserRoleService sysUserRoleService;
+    private AuthUserRoleService authUserRoleService;
 
     /**
      * 分配菜单
@@ -67,7 +67,7 @@ public class SysRoleController extends BaseController {
                 .on(roleId, new NotNullValidatorCallback(AuthErrorCodeEnum.USER_ID_NOT_NULL))
                 .doValidate().checkResult();
         ActiveUser activeUser = DptmsSecurityUtil.get();
-        sysRoleMenuService.assignedMenu(roleId, menuIds, activeUser.getId());
+        authRoleMenuService.assignedMenu(roleId, menuIds, activeUser.getId());
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }
 
@@ -91,7 +91,7 @@ public class SysRoleController extends BaseController {
         ActiveUser activeUser = DptmsSecurityUtil.get();
         entity.setCreater(activeUser.getId());
         entity.setUpdater(activeUser.getId());
-        Long id = sysRoleService.insert(entity);
+        Long id = authRoleService.insert(entity);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(id));
     }
 
@@ -109,7 +109,7 @@ public class SysRoleController extends BaseController {
     @GetMapping("/listPage")
     public ResponseEntity<JsonResult<PageBean<AuthRoleDto>>> listPage(PageParam pageParam,
                                                                       AuthRoleDto dto) {
-        PageBean<AuthRoleDto> pageBean = sysRoleService.listPage(getPageParam(pageParam), dto);
+        PageBean<AuthRoleDto> pageBean = authRoleService.listPage(getPageParam(pageParam), dto);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(pageBean));
     }
 
@@ -132,7 +132,7 @@ public class SysRoleController extends BaseController {
                 .doValidate().checkResult();
         ActiveUser activeUser = DptmsSecurityUtil.get();
         entity.setUpdater(activeUser.getId());
-        Long count = sysRoleService.update(entity);
+        Long count = authRoleService.update(entity);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(count));
     }
 
@@ -152,7 +152,7 @@ public class SysRoleController extends BaseController {
                 .on(id, new NotNullValidatorCallback(AuthErrorCodeEnum.ID_NOT_NULL))
                 .doValidate().checkResult();
         ActiveUser activeUser = DptmsSecurityUtil.get();
-        sysRoleService.deleteById(id, activeUser.getId());
+        authRoleService.deleteById(id, activeUser.getId());
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }
 
@@ -171,7 +171,7 @@ public class SysRoleController extends BaseController {
         ValidatorBuilder.build()
                 .on(userId, new NotNullValidatorCallback(AuthErrorCodeEnum.USER_ID_NOT_NULL))
                 .doValidate().checkResult();
-        List<AuthRoleDto> resultList = sysUserRoleService.listUserAssigned(userId);
+        List<AuthRoleDto> resultList = authUserRoleService.listUserAssigned(userId);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(resultList));
     }
 }

@@ -2,7 +2,7 @@ package com.darren1112.dptms.auth.service.impl;
 
 import com.darren1112.dptms.auth.common.enums.AuthErrorCodeEnum;
 import com.darren1112.dptms.auth.dao.AuthOrganizationDao;
-import com.darren1112.dptms.auth.service.SysOrganizationService;
+import com.darren1112.dptms.auth.service.AuthOrganizationService;
 import com.darren1112.dptms.common.core.base.BaseService;
 import com.darren1112.dptms.common.core.exception.BadRequestException;
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
@@ -27,7 +27,7 @@ import java.util.List;
 @Service
 @CacheConfig(cacheNames = "sysOrganization", keyGenerator = "keyGenerator")
 @Transactional(rollbackFor = Throwable.class, readOnly = true)
-public class SysOrganizationServiceImpl extends BaseService implements SysOrganizationService {
+public class AuthOrganizationServiceImpl extends BaseService implements AuthOrganizationService {
 
     @Autowired
     private AuthOrganizationDao authOrganizationDao;

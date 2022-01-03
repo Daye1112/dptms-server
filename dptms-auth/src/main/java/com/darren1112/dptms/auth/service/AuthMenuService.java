@@ -11,7 +11,7 @@ import java.util.List;
  * @author luyuhao
  * @since 2020/12/12 17:25
  */
-public interface SysMenuService {
+public interface AuthMenuService {
 
     /**
      * 获取用户的菜单

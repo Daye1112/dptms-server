@@ -1,7 +1,7 @@
 package com.darren1112.dptms.auth.service.impl;
 
 import com.darren1112.dptms.auth.dao.AuthUserOrganizationDao;
-import com.darren1112.dptms.auth.service.SysUserOrganizationService;
+import com.darren1112.dptms.auth.service.AuthUserOrganizationService;
 import com.darren1112.dptms.common.core.util.StringUtil;
 import com.darren1112.dptms.common.spi.auth.dto.AuthOrganizationDto;
 import com.darren1112.dptms.common.spi.auth.entity.AuthUserOrganizationEntity;
@@ -23,7 +23,7 @@ import java.util.List;
 @Service
 @CacheConfig(cacheNames = "sysUserOrganization", keyGenerator = "keyGenerator")
 @Transactional(rollbackFor = Throwable.class, readOnly = true)
-public class SysUserOrganizationServiceImpl implements SysUserOrganizationService {
+public class AuthUserOrganizationServiceImpl implements AuthUserOrganizationService {
 
     @Autowired
     private AuthUserOrganizationDao authUserOrganizationDao;

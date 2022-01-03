@@ -2,7 +2,7 @@ package com.darren1112.dptms.auth.service.impl;
 
 import com.darren1112.dptms.auth.common.enums.AuthErrorCodeEnum;
 import com.darren1112.dptms.auth.dao.AuthRoleDao;
-import com.darren1112.dptms.auth.service.SysRoleService;
+import com.darren1112.dptms.auth.service.AuthRoleService;
 import com.darren1112.dptms.common.core.base.BaseService;
 import com.darren1112.dptms.common.core.exception.BadRequestException;
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
@@ -27,7 +27,7 @@ import java.util.List;
 @Service
 @CacheConfig(cacheNames = "sysRole", keyGenerator = "keyGenerator")
 @Transactional(rollbackFor = Throwable.class, readOnly = true)
-public class SysRoleServiceImpl extends BaseService implements SysRoleService {
+public class AuthRoleServiceImpl extends BaseService implements AuthRoleService {
 
     @Autowired
     private AuthRoleDao authRoleDao;

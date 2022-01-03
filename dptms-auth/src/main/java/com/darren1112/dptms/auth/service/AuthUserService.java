@@ -11,7 +11,7 @@ import com.darren1112.dptms.common.spi.auth.entity.AuthUserEntity;
  * @author luyuhao
  * @since 2020/07/23 02:42
  */
-public interface SysUserService {
+public interface AuthUserService {
 
     /**
      * 根据用户名查询用户信息

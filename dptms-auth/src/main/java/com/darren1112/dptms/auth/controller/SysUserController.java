@@ -1,9 +1,9 @@
 package com.darren1112.dptms.auth.controller;
 
 import com.darren1112.dptms.auth.common.enums.AuthErrorCodeEnum;
-import com.darren1112.dptms.auth.service.SysUserOrganizationService;
-import com.darren1112.dptms.auth.service.SysUserRoleService;
-import com.darren1112.dptms.auth.service.SysUserService;
+import com.darren1112.dptms.auth.service.AuthUserOrganizationService;
+import com.darren1112.dptms.auth.service.AuthUserRoleService;
+import com.darren1112.dptms.auth.service.AuthUserService;
 import com.darren1112.dptms.common.core.base.BaseController;
 import com.darren1112.dptms.common.core.constants.AccountConstant;
 import com.darren1112.dptms.common.core.message.JsonResult;
@@ -41,13 +41,13 @@ import org.springframework.web.bind.annotation.*;
 public class SysUserController extends BaseController {
 
     @Autowired
-    private SysUserService sysUserService;
+    private AuthUserService authUserService;
 
     @Autowired
-    private SysUserOrganizationService sysUserOrganizationService;
+    private AuthUserOrganizationService authUserOrganizationService;
 
     @Autowired
-    private SysUserRoleService sysUserRoleService;
+    private AuthUserRoleService authUserRoleService;
 
     /**
      * 根据id查询用户
@@ -64,7 +64,7 @@ public class SysUserController extends BaseController {
         ValidatorBuilder.build()
                 .on(id, new NotNullValidatorCallback(AuthErrorCodeEnum.ID_NOT_NULL))
                 .doValidate().checkResult();
-        AuthUserDto result = sysUserService.getById(id);
+        AuthUserDto result = authUserService.getById(id);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(result));
     }
 
@@ -86,7 +86,7 @@ public class SysUserController extends BaseController {
                 .on(userId, new NotNullValidatorCallback(AuthErrorCodeEnum.USER_ID_NOT_NULL))
                 .doValidate().checkResult();
         ActiveUser activeUser = DptmsSecurityUtil.get();
-        sysUserOrganizationService.assignedOrg(userId, orgIds, activeUser.getId());
+        authUserOrganizationService.assignedOrg(userId, orgIds, activeUser.getId());
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }
 
@@ -115,7 +115,7 @@ public class SysUserController extends BaseController {
         entity.setSalt(salt);
         entity.setPassword(password);
         entity.setIsLocked(AccountConstant.UN_LOCKED);
-        Long id = sysUserService.insert(entity);
+        Long id = authUserService.insert(entity);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(id));
     }
 
@@ -133,7 +133,7 @@ public class SysUserController extends BaseController {
     @GetMapping("/listPage")
     public ResponseEntity<JsonResult<PageBean<AuthUserDto>>> listPage(PageParam pageParam,
                                                                       AuthUserDto dto) {
-        PageBean<AuthUserDto> pageBean = sysUserService.listPage(getPageParam(pageParam), dto);
+        PageBean<AuthUserDto> pageBean = authUserService.listPage(getPageParam(pageParam), dto);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(pageBean));
     }
 
@@ -155,7 +155,7 @@ public class SysUserController extends BaseController {
                 .doValidate().checkResult();
         ActiveUser activeUser = DptmsSecurityUtil.get();
         entity.setUpdater(activeUser.getId());
-        Long count = sysUserService.update(entity);
+        Long count = authUserService.update(entity);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(count));
     }
 
@@ -175,7 +175,7 @@ public class SysUserController extends BaseController {
                 .on(id, new NotNullValidatorCallback(AuthErrorCodeEnum.ID_NOT_NULL))
                 .doValidate().checkResult();
         ActiveUser activeUser = DptmsSecurityUtil.get();
-        sysUserService.deleteById(id, activeUser.getId());
+        authUserService.deleteById(id, activeUser.getId());
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }
 
@@ -197,7 +197,7 @@ public class SysUserController extends BaseController {
                 .doValidate().checkResult();
         ActiveUser activeUser = DptmsSecurityUtil.get();
         entity.setUpdater(activeUser.getId());
-        sysUserService.updateLock(entity);
+        authUserService.updateLock(entity);
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }
 
@@ -219,7 +219,7 @@ public class SysUserController extends BaseController {
                 .on(userId, new NotNullValidatorCallback(AuthErrorCodeEnum.USER_ID_NOT_NULL))
                 .doValidate().checkResult();
         ActiveUser activeUser = DptmsSecurityUtil.get();
-        sysUserRoleService.assignedRole(userId, roleIds, activeUser.getId());
+        authUserRoleService.assignedRole(userId, roleIds, activeUser.getId());
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }
 }

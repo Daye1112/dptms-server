@@ -1,7 +1,7 @@
 package com.darren1112.dptms.auth.service.impl;
 
 import com.darren1112.dptms.auth.dao.AuthMenuPermissionDao;
-import com.darren1112.dptms.auth.service.SysMenuPermissionService;
+import com.darren1112.dptms.auth.service.AuthMenuPermissionService;
 import com.darren1112.dptms.common.core.util.StringUtil;
 import com.darren1112.dptms.common.spi.auth.dto.AuthPermissionDto;
 import com.darren1112.dptms.common.spi.auth.entity.AuthMenuPermissionEntity;
@@ -23,7 +23,7 @@ import java.util.List;
 @Service
 @CacheConfig(cacheNames = "sysMenuPermission", keyGenerator = "keyGenerator")
 @Transactional(rollbackFor = Throwable.class, readOnly = true)
-public class SysMenuPermissionServiceImpl implements SysMenuPermissionService {
+public class AuthMenuPermissionServiceImpl implements AuthMenuPermissionService {
 
     @Autowired
     private AuthMenuPermissionDao authMenuPermissionDao;

@@ -1,8 +1,8 @@
 package com.darren1112.dptms.auth.controller;
 
 import com.darren1112.dptms.auth.common.enums.AuthErrorCodeEnum;
-import com.darren1112.dptms.auth.service.SysMenuPermissionService;
-import com.darren1112.dptms.auth.service.SysPermissionService;
+import com.darren1112.dptms.auth.service.AuthMenuPermissionService;
+import com.darren1112.dptms.auth.service.AuthPermissionService;
 import com.darren1112.dptms.common.core.base.BaseController;
 import com.darren1112.dptms.common.core.message.JsonResult;
 import com.darren1112.dptms.common.core.util.ResponseEntityUtil;
@@ -40,10 +40,10 @@ import java.util.List;
 public class SysPermissionController extends BaseController {
 
     @Autowired
-    private SysPermissionService sysPermissionService;
+    private AuthPermissionService authPermissionService;
 
     @Autowired
-    private SysMenuPermissionService sysMenuPermissionService;
+    private AuthMenuPermissionService authMenuPermissionService;
 
     /**
      * 插入权限信息
@@ -66,7 +66,7 @@ public class SysPermissionController extends BaseController {
         ActiveUser activeUser = DptmsSecurityUtil.get();
         entity.setCreater(activeUser.getId());
         entity.setUpdater(activeUser.getId());
-        Long id = sysPermissionService.insert(entity);
+        Long id = authPermissionService.insert(entity);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(id));
     }
 
@@ -84,7 +84,7 @@ public class SysPermissionController extends BaseController {
     @GetMapping("/listPage")
     public ResponseEntity<JsonResult<PageBean<AuthPermissionDto>>> listPage(PageParam pageParam,
                                                                             AuthPermissionDto dto) {
-        PageBean<AuthPermissionDto> pageBean = sysPermissionService.listPage(getPageParam(pageParam), dto);
+        PageBean<AuthPermissionDto> pageBean = authPermissionService.listPage(getPageParam(pageParam), dto);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(pageBean));
     }
 
@@ -109,7 +109,7 @@ public class SysPermissionController extends BaseController {
                 .doValidate().checkResult();
         ActiveUser activeUser = DptmsSecurityUtil.get();
         entity.setUpdater(activeUser.getId());
-        Long count = sysPermissionService.update(entity);
+        Long count = authPermissionService.update(entity);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(count));
     }
 
@@ -129,7 +129,7 @@ public class SysPermissionController extends BaseController {
                 .on(id, new NotNullValidatorCallback(AuthErrorCodeEnum.ID_NOT_NULL))
                 .doValidate().checkResult();
         ActiveUser activeUser = DptmsSecurityUtil.get();
-        sysPermissionService.deleteById(id, activeUser.getId());
+        authPermissionService.deleteById(id, activeUser.getId());
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }
 
@@ -148,7 +148,7 @@ public class SysPermissionController extends BaseController {
         ValidatorBuilder.build()
                 .on(menuId, new NotNullValidatorCallback(AuthErrorCodeEnum.MENU_ID_NOT_NULL))
                 .doValidate().checkResult();
-        List<AuthPermissionDto> list = sysMenuPermissionService.listMenuAssigned(menuId);
+        List<AuthPermissionDto> list = authMenuPermissionService.listMenuAssigned(menuId);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(list));
     }
 
@@ -163,7 +163,7 @@ public class SysPermissionController extends BaseController {
     @ApiOperation("查询权限组list")
     @GetMapping("/listGroup")
     public ResponseEntity<JsonResult<List<AuthPermissionDto>>> listGroup() {
-        List<AuthPermissionDto> list = sysPermissionService.listGroup();
+        List<AuthPermissionDto> list = authPermissionService.listGroup();
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(list));
     }
 
@@ -182,7 +182,7 @@ public class SysPermissionController extends BaseController {
         ValidatorBuilder.build()
                 .on(menuId, new NotNullValidatorCallback(AuthErrorCodeEnum.MENU_ID_NOT_NULL))
                 .doValidate().checkResult();
-        List<AuthPermissionDto> list = sysMenuPermissionService.listByMenuId(menuId);
+        List<AuthPermissionDto> list = authMenuPermissionService.listByMenuId(menuId);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(list));
     }
 }

@@ -1,7 +1,7 @@
 package com.darren1112.dptms.auth.service.impl;
 
 import com.darren1112.dptms.auth.dao.AuthUserRoleDao;
-import com.darren1112.dptms.auth.service.SysUserRoleService;
+import com.darren1112.dptms.auth.service.AuthUserRoleService;
 import com.darren1112.dptms.common.core.util.StringUtil;
 import com.darren1112.dptms.common.spi.auth.dto.AuthRoleDto;
 import com.darren1112.dptms.common.spi.auth.entity.AuthUserRoleEntity;
@@ -23,7 +23,7 @@ import java.util.List;
 @Service
 @CacheConfig(cacheNames = "sysUserRole", keyGenerator = "keyGenerator")
 @Transactional(rollbackFor = Throwable.class, readOnly = true)
-public class SysUserRoleServiceImpl implements SysUserRoleService {
+public class AuthUserRoleServiceImpl implements AuthUserRoleService {
 
     @Autowired
     private AuthUserRoleDao authUserRoleDao;

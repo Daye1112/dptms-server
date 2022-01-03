@@ -10,7 +10,7 @@ import java.util.List;
  * @author luyuhao
  * @since 2020/12/23 01:51
  */
-public interface SysUserRoleService {
+public interface AuthUserRoleService {
 
     /**
      * 分配角色

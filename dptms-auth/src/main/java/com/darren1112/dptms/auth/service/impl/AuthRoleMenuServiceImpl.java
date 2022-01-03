@@ -2,7 +2,7 @@ package com.darren1112.dptms.auth.service.impl;
 
 import com.darren1112.dptms.auth.common.util.MenuUtil;
 import com.darren1112.dptms.auth.dao.AuthRoleMenuDao;
-import com.darren1112.dptms.auth.service.SysRoleMenuService;
+import com.darren1112.dptms.auth.service.AuthRoleMenuService;
 import com.darren1112.dptms.common.core.util.StringUtil;
 import com.darren1112.dptms.common.spi.auth.dto.AuthMenuDto;
 import com.darren1112.dptms.common.spi.auth.entity.AuthRoleMenuEntity;
@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 @Service
 @CacheConfig(cacheNames = "sysRoleMenu", keyGenerator = "keyGenerator")
 @Transactional(rollbackFor = Throwable.class, readOnly = true)
-public class SysRoleMenuServiceImpl implements SysRoleMenuService {
+public class AuthRoleMenuServiceImpl implements AuthRoleMenuService {
 
     @Autowired
     private AuthRoleMenuDao authRoleMenuDao;

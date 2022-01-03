@@ -2,7 +2,7 @@ package com.darren1112.dptms.auth.service.impl;
 
 import com.darren1112.dptms.auth.common.enums.AuthErrorCodeEnum;
 import com.darren1112.dptms.auth.dao.AuthPermissionDao;
-import com.darren1112.dptms.auth.service.SysPermissionService;
+import com.darren1112.dptms.auth.service.AuthPermissionService;
 import com.darren1112.dptms.common.core.base.BaseService;
 import com.darren1112.dptms.common.core.exception.BadRequestException;
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
@@ -27,7 +27,7 @@ import java.util.List;
 @Service
 @CacheConfig(cacheNames = "sysPermission", keyGenerator = "keyGenerator")
 @Transactional(rollbackFor = Throwable.class, readOnly = true)
-public class SysPermissionServiceImpl extends BaseService implements SysPermissionService {
+public class AuthPermissionServiceImpl extends BaseService implements AuthPermissionService {
 
     @Autowired
     private AuthPermissionDao authPermissionDao;

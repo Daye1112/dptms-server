@@ -1,8 +1,8 @@
 package com.darren1112.dptms.auth.controller;
 
 import com.darren1112.dptms.auth.common.enums.AuthErrorCodeEnum;
-import com.darren1112.dptms.auth.service.SysMenuService;
-import com.darren1112.dptms.auth.service.SysUserService;
+import com.darren1112.dptms.auth.service.AuthMenuService;
+import com.darren1112.dptms.auth.service.AuthUserService;
 import com.darren1112.dptms.common.core.message.JsonResult;
 import com.darren1112.dptms.common.core.util.ResponseEntityUtil;
 import com.darren1112.dptms.common.core.validate.ValidatorBuilder;
@@ -42,10 +42,10 @@ import java.util.List;
 public class ActiveUserController {
 
     @Autowired
-    private SysMenuService sysMenuService;
+    private AuthMenuService authMenuService;
 
     @Autowired
-    private SysUserService sysUserService;
+    private AuthUserService authUserService;
 
     @Autowired
     private DptmsTokenStore dptmsTokenStore;
@@ -76,7 +76,7 @@ public class ActiveUserController {
     @Log(value = "获取用户最新信息", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     public ResponseEntity<JsonResult<AuthUserDto>> getNewInfo() {
         ActiveUser activeUser = DptmsSecurityUtil.get();
-        AuthUserDto result = sysUserService.getUserInfoAndPermissionByUserId(activeUser.getId());
+        AuthUserDto result = authUserService.getUserInfoAndPermissionByUserId(activeUser.getId());
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(result));
     }
 
@@ -92,7 +92,7 @@ public class ActiveUserController {
     @Log(value = "获取用户的菜单", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     public ResponseEntity<JsonResult<List<AuthMenuDto>>> listMenu() {
         ActiveUser activeUser = DptmsSecurityUtil.get();
-        List<AuthMenuDto> resultList = sysMenuService.listMenuByUserId(activeUser.getId());
+        List<AuthMenuDto> resultList = authMenuService.listMenuByUserId(activeUser.getId());
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(resultList));
     }
 
@@ -116,10 +116,10 @@ public class ActiveUserController {
         entity.setId(activeUser.getId());
         entity.setUpdater(activeUser.getId());
         // 更新用户
-        Long count = sysUserService.update(entity);
+        Long count = authUserService.update(entity);
 
         // 获取新的用户信息
-        AuthUserDto dto = sysUserService.getById(entity.getId());
+        AuthUserDto dto = authUserService.getById(entity.getId());
         // 更新到现有用户中
         ActiveUser.convert(activeUser, dto);
         // 更新redis中的用户信息
@@ -148,7 +148,7 @@ public class ActiveUserController {
         dto.setId(activeUser.getId());
         dto.setUpdater(activeUser.getId());
         // 更新密码
-        sysUserService.updatePassword(dto);
+        authUserService.updatePassword(dto);
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }
 }

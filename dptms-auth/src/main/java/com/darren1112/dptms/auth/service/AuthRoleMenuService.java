@@ -8,7 +8,7 @@ import com.darren1112.dptms.common.spi.auth.dto.AuthMenuDto;
  * @author luyuhao
  * @since 2020/12/13 23:09
  */
-public interface SysRoleMenuService {
+public interface AuthRoleMenuService {
 
     /**
      * 查询角色关联的菜单list

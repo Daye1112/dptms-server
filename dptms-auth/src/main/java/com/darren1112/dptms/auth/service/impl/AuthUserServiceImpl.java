@@ -3,7 +3,7 @@ package com.darren1112.dptms.auth.service.impl;
 import com.darren1112.dptms.auth.common.enums.AuthErrorCodeEnum;
 import com.darren1112.dptms.auth.dao.AuthPermissionDao;
 import com.darren1112.dptms.auth.dao.AuthUserDao;
-import com.darren1112.dptms.auth.service.SysUserService;
+import com.darren1112.dptms.auth.service.AuthUserService;
 import com.darren1112.dptms.common.core.base.BaseService;
 import com.darren1112.dptms.common.core.exception.BadRequestException;
 import com.darren1112.dptms.common.core.util.Md5Util;
@@ -31,7 +31,7 @@ import java.util.List;
 @Service
 @CacheConfig(cacheNames = "sysUser", keyGenerator = "keyGenerator")
 @Transactional(rollbackFor = Throwable.class, readOnly = true)
-public class SysUserServiceImpl extends BaseService implements SysUserService {
+public class AuthUserServiceImpl extends BaseService implements AuthUserService {
 
     @Autowired
     private AuthUserDao authUserDao;

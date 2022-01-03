@@ -13,7 +13,7 @@ import java.util.List;
  * @author luyuhao
  * @since 2020/12/09 23:43
  */
-public interface SysPermissionService {
+public interface AuthPermissionService {
 
     /**
      * 插入权限信息

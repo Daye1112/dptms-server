@@ -10,7 +10,7 @@ import java.util.List;
  * @author luyuhao
  * @since 2020/12/13 22:19
  */
-public interface SysUserOrganizationService {
+public interface AuthUserOrganizationService {
 
     /**
      * 查询用户关联的组织list

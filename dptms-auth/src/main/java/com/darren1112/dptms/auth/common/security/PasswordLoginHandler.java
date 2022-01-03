@@ -2,7 +2,7 @@ package com.darren1112.dptms.auth.common.security;
 
 import com.darren1112.dptms.auth.common.enums.AuthErrorCodeEnum;
 import com.darren1112.dptms.auth.common.security.base.BaseUserDetails;
-import com.darren1112.dptms.auth.service.SysUserService;
+import com.darren1112.dptms.auth.service.AuthUserService;
 import com.darren1112.dptms.common.core.constants.AccountConstant;
 import com.darren1112.dptms.common.core.constants.RedisConstant;
 import com.darren1112.dptms.common.core.exception.BadRequestException;
@@ -38,7 +38,7 @@ public class PasswordLoginHandler extends BaseUserDetails {
     private RedisUtil redisUtil;
 
     @Autowired
-    private SysUserService sysUserService;
+    private AuthUserService authUserService;
 
     @Autowired
     private DptmsTokenStore dptmsTokenStore;
@@ -79,7 +79,7 @@ public class PasswordLoginHandler extends BaseUserDetails {
     @Override
     public ActiveUser handler(LoginParam loginParam, HttpServletRequest request, HttpServletResponse response) throws BaseException {
         //查询用户信息
-        AuthUserDto sysUserDto = sysUserService.getByUsername(loginParam.getUsername());
+        AuthUserDto sysUserDto = authUserService.getByUsername(loginParam.getUsername());
         //用户不存在
         if (Objects.isNull(sysUserDto)) {
             throw new BadRequestException(AuthErrorCodeEnum.LOGIN_FAILURE);
@@ -113,7 +113,7 @@ public class PasswordLoginHandler extends BaseUserDetails {
         activeUser.setOs(WebUtil.getOs());
         activeUser.setLoginTime(new Date());
         // 更新登录时间
-        sysUserService.updateLoginTime(activeUser.getId());
+        authUserService.updateLoginTime(activeUser.getId());
         // 生成token并保存到redis和cookie中
         dptmsTokenStore.generateToken(activeUser, response);
         // 登录日志收集

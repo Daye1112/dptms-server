@@ -11,7 +11,7 @@ import com.darren1112.dptms.common.spi.auth.entity.AuthOrganizationEntity;
  * @author luyuhao
  * @since 2020/08/16 01:42
  */
-public interface SysOrganizationService {
+public interface AuthOrganizationService {
 
     /**
      * 插入组织信息
