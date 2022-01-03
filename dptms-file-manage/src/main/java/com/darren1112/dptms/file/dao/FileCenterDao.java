@@ -26,4 +26,13 @@ public interface FileCenterDao {
      * @since 2021/12/18
      */
     List<FileCenterDto> list(@Param("parentId") Long parentId);
+
+    /**
+     * 新增文件/文件夹
+     *
+     * @param dto 文件信息
+     * @author luyuhao
+     * @since 2022/01/03
+     */
+    void insert(FileCenterDto dto);
 }

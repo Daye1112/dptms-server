@@ -25,4 +25,15 @@
         WHERE t1.isvalid = 1
           AND t1.file_parent_id = #{parentId}
     </select>
+
+    <!--新增文件/文件夹-->
+    <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id"
+            parameterType="com.darren1112.dptms.common.spi.file.dto.FileCenterDto">
+        INSERT INTO file_center(org_id, file_name, file_desc, file_type,
+                                file_parent_id, file_parent_path, file_order,
+                                file_id, remark, isvalid, ctime, creater, mtime, updater)
+        VALUES (#{orgId}, #{fileName}, #{fileDesc}, #{fileType},
+                #{fileParentId}, #{fileParentPath}, #{fileOrder},
+                #{fileId}, #{remark}, 1, now(), #{creater}, now(), #{updater})
+    </insert>
 </mapper>
