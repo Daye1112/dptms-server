@@ -2,8 +2,8 @@ package com.darren1112.dptms.common.log.starter.collect.impl;
 
 import com.darren1112.dptms.common.log.starter.collect.LogCollectService;
 import com.darren1112.dptms.component.remoting.MonitorManageRemoting;
-import com.darren1112.dptms.common.spi.sys.dto.SysLoginLogDto;
-import com.darren1112.dptms.common.spi.sys.dto.SysOperateLogDto;
+import com.darren1112.dptms.common.spi.monitor.dto.MonitorLoginLogDto;
+import com.darren1112.dptms.common.spi.monitor.dto.MonitorOperateLogDto;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -29,7 +29,7 @@ public class FeignLogCollectServiceImpl implements LogCollectService {
      * @since 2021/02/07 00:32
      */
     @Override
-    public void operateLogCollect(SysOperateLogDto dto) {
+    public void operateLogCollect(MonitorOperateLogDto dto) {
         try {
             monitorManageRemoting.insert(dto);
             log.info("日志采集成功, 用户: {}, 操作内容: {}", dto.getUsername(), dto.getContent());
@@ -46,7 +46,7 @@ public class FeignLogCollectServiceImpl implements LogCollectService {
      * @since 2021/02/06 20:50
      */
     @Override
-    public void loginLogCollect(SysLoginLogDto dto) {
+    public void loginLogCollect(MonitorLoginLogDto dto) {
         try {
             monitorManageRemoting.insert(dto);
             log.info("登录日志采集成功, 用户: {}, 登录ip: {}", dto.getUsername(), dto.getIp());

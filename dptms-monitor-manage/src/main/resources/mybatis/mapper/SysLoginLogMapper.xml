@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.darren1112.dptms.monitor.dao.SysLoginLogDao">
     <!--插入登录日志信息-->
-    <insert id="insert" parameterType="com.darren1112.dptms.common.spi.sys.dto.SysLoginLogDto">
+    <insert id="insert" parameterType="com.darren1112.dptms.common.spi.monitor.dto.MonitorLoginLogDto">
         INSERT INTO sys_login_log(username, os, browser, ip, ip_address, remark, isvalid, ctime, creater, mtime, updater)
         VALUES (#{username}, #{os}, #{browser}, #{ip}, #{ipAddress}, #{remark}, 1, #{ctime}, #{creater}, #{mtime}, #{updater})
     </insert>
     <!--分页查询登录日志-->
-    <select id="listPage" resultType="com.darren1112.dptms.common.spi.sys.dto.SysLoginLogDto">
+    <select id="listPage" resultType="com.darren1112.dptms.common.spi.monitor.dto.MonitorLoginLogDto">
         SELECT id,
                username,
                os,
@@ -64,7 +64,7 @@
 
     <!--查询用户id和数量的登录信息-->
     <select id="listByUserIdAndNumber"
-            resultType="com.darren1112.dptms.common.spi.sys.dto.SysLoginLogDto">
+            resultType="com.darren1112.dptms.common.spi.monitor.dto.MonitorLoginLogDto">
         SELECT t1.id,
                t1.username,
                t1.os,

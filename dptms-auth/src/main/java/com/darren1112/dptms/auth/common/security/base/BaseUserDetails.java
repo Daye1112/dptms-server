@@ -6,7 +6,7 @@ import com.darren1112.dptms.common.core.exception.BaseException;
 import com.darren1112.dptms.common.log.starter.collect.LogCollectService;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 import com.darren1112.dptms.common.spi.common.dto.LoginParam;
-import com.darren1112.dptms.common.spi.sys.dto.SysLoginLogDto;
+import com.darren1112.dptms.common.spi.monitor.dto.MonitorLoginLogDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -119,7 +119,7 @@ public abstract class BaseUserDetails implements UserDetailsService {
      * @since 2021/2/9 14:09
      */
     protected void loginLogCollect(ActiveUser activeUser) {
-        SysLoginLogDto loginLogDto = new SysLoginLogDto();
+        MonitorLoginLogDto loginLogDto = new MonitorLoginLogDto();
         loginLogDto.setUsername(activeUser.getUsername());
         loginLogDto.setOs(activeUser.getOs());
         loginLogDto.setBrowser(activeUser.getBrowser());

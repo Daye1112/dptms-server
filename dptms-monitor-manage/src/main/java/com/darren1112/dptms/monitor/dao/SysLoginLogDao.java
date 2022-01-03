@@ -1,7 +1,7 @@
 package com.darren1112.dptms.monitor.dao;
 
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
-import com.darren1112.dptms.common.spi.sys.dto.SysLoginLogDto;
+import com.darren1112.dptms.common.spi.monitor.dto.MonitorLoginLogDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -25,18 +25,18 @@ public interface SysLoginLogDao {
      * @author luyuhao
      * @since 2021/02/06 21:04
      */
-    void insert(SysLoginLogDto dto);
+    void insert(MonitorLoginLogDto dto);
 
     /**
      * 分页查询登录日志
      *
      * @param pageParam 分页参数
      * @param dto       筛选条件
-     * @return {@link SysLoginLogDto}
+     * @return {@link MonitorLoginLogDto}
      * @author luyuhao
      * @since 2021/02/10 00:15
      */
-    List<SysLoginLogDto> listPage(@Param("pageParam") PageParam pageParam, @Param("dto") SysLoginLogDto dto);
+    List<MonitorLoginLogDto> listPage(@Param("pageParam") PageParam pageParam, @Param("dto") MonitorLoginLogDto dto);
 
     /**
      * 分页查询登录日志记录数
@@ -46,16 +46,16 @@ public interface SysLoginLogDao {
      * @author luyuhao
      * @since 2021/02/10 00:19
      */
-    Long listPageCount(@Param("dto") SysLoginLogDto dto);
+    Long listPageCount(@Param("dto") MonitorLoginLogDto dto);
 
     /**
      * 查询用户id和数量的登录信息
      *
      * @param userId 用户id
      * @param number 查询条数
-     * @return {@link SysLoginLogDto}
+     * @return {@link MonitorLoginLogDto}
      * @author luyuhao
      * @since 2021/11/27
      */
-    List<SysLoginLogDto> listByUserIdAndNumber(@Param("userId") Long userId, @Param("number") Integer number);
+    List<MonitorLoginLogDto> listByUserIdAndNumber(@Param("userId") Long userId, @Param("number") Integer number);
 }

@@ -1,6 +1,6 @@
-package com.darren1112.dptms.common.spi.sys.dto;
+package com.darren1112.dptms.common.spi.monitor.dto;
 
-import com.darren1112.dptms.common.spi.sys.entity.SysLoginLogEntity;
+import com.darren1112.dptms.common.spi.monitor.entity.MonitorLoginLogEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -14,5 +14,5 @@ import lombok.ToString;
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class SysLoginLogDto extends SysLoginLogEntity {
+public class MonitorLoginLogDto extends MonitorLoginLogEntity {
 }

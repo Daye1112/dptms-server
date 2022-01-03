@@ -10,7 +10,7 @@ import com.darren1112.dptms.common.security.starter.util.DptmsSecurityUtil;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
-import com.darren1112.dptms.common.spi.sys.dto.SysLoginLogDto;
+import com.darren1112.dptms.common.spi.monitor.dto.MonitorLoginLogDto;
 import com.darren1112.dptms.monitor.service.SysLoginLogService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -46,7 +46,7 @@ public class SysLoginLogController extends BaseController {
      */
     @PostMapping("/insert")
     @ApiOperation(value = "插入登录日志", hidden = true)
-    public ResponseEntity<JsonResult> insert(@RequestBody SysLoginLogDto dto) {
+    public ResponseEntity<JsonResult> insert(@RequestBody MonitorLoginLogDto dto) {
         sysLoginLogService.insert(dto);
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }
@@ -63,25 +63,25 @@ public class SysLoginLogController extends BaseController {
     @GetMapping("/listPage")
     @ApiOperation("分页查询登录日志")
     @Log(value = "分页查询登录日志", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
-    public ResponseEntity<JsonResult<PageBean<SysLoginLogDto>>> listPage(PageParam pageParam,
-                                                                         SysLoginLogDto dto) {
-        PageBean<SysLoginLogDto> pageBean = sysLoginLogService.listPage(getPageParam(pageParam), dto);
+    public ResponseEntity<JsonResult<PageBean<MonitorLoginLogDto>>> listPage(PageParam pageParam,
+                                                                             MonitorLoginLogDto dto) {
+        PageBean<MonitorLoginLogDto> pageBean = sysLoginLogService.listPage(getPageParam(pageParam), dto);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(pageBean));
     }
 
     /**
      * 查询当前用户的登录日志
      *
-     * @return {@link SysLoginLogDto}
+     * @return {@link MonitorLoginLogDto}
      * @author luyuhao
      * @since 2021/11/27
      */
     @GetMapping("/listCurrentUser")
     @ApiOperation("查询当前用户的登录日志")
     @Log(value = "查询当前用户的登录日志", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
-    public ResponseEntity<JsonResult<List<SysLoginLogDto>>> listCurrentUser() {
+    public ResponseEntity<JsonResult<List<MonitorLoginLogDto>>> listCurrentUser() {
         ActiveUser activeUser = DptmsSecurityUtil.get();
-        List<SysLoginLogDto> list = sysLoginLogService.listLastSevenByUserId(activeUser.getId());
+        List<MonitorLoginLogDto> list = sysLoginLogService.listLastSevenByUserId(activeUser.getId());
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(list));
     }
 }

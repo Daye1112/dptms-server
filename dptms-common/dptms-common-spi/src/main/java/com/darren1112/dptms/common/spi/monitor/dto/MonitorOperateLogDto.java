@@ -1,6 +1,6 @@
-package com.darren1112.dptms.common.spi.sys.dto;
+package com.darren1112.dptms.common.spi.monitor.dto;
 
-import com.darren1112.dptms.common.spi.sys.entity.SysOperateLogEntity;
+import com.darren1112.dptms.common.spi.monitor.entity.MonitorOperateLogEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -14,5 +14,5 @@ import lombok.ToString;
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class SysOperateLogDto extends SysOperateLogEntity {
+public class MonitorOperateLogDto extends MonitorOperateLogEntity {
 }

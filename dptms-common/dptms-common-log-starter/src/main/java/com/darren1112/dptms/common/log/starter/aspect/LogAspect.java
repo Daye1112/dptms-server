@@ -8,7 +8,7 @@ import com.darren1112.dptms.common.log.starter.enums.LogLevel;
 import com.darren1112.dptms.common.log.starter.properties.LogProperties;
 import com.darren1112.dptms.common.security.starter.util.DptmsSecurityUtil;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
-import com.darren1112.dptms.common.spi.sys.dto.SysOperateLogDto;
+import com.darren1112.dptms.common.spi.monitor.dto.MonitorOperateLogDto;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -76,7 +76,7 @@ public class LogAspect extends BaseAop {
         if (logAnnotation.logLevel().getCode() >= logProperties.getLogLevel().getCode()) {
             try {
                 // 创建日志对象
-                SysOperateLogDto dto = buildDto(joinPoint, logAnnotation, null);
+                MonitorOperateLogDto dto = buildDto(joinPoint, logAnnotation, null);
                 // 日志收集
                 logCollectService.operateLogCollect(dto);
             } catch (Exception e) {
@@ -98,7 +98,7 @@ public class LogAspect extends BaseAop {
     public void logAfterThrowing(JoinPoint joinPoint, Throwable e) {
         // 获取日志注解
         Log logAnnotation = ((MethodSignature) joinPoint.getSignature()).getMethod().getAnnotation(Log.class);
-        SysOperateLogDto dto = buildDto(joinPoint, logAnnotation, e);
+        MonitorOperateLogDto dto = buildDto(joinPoint, logAnnotation, e);
         logCollectService.operateLogCollect(dto);
     }
 
@@ -106,16 +106,16 @@ public class LogAspect extends BaseAop {
      * 创建日志对象
      *
      * @param logAnnotation 日志注解
-     * @return {@link SysOperateLogDto}
+     * @return {@link MonitorOperateLogDto}
      * @author luyuhao
      * @since 2021/02/07 00:41
      */
-    private SysOperateLogDto buildDto(JoinPoint joinPoint, Log logAnnotation, Throwable e) {
+    private MonitorOperateLogDto buildDto(JoinPoint joinPoint, Log logAnnotation, Throwable e) {
         // 获取请求域、用户信息等
         HttpServletRequest request = RequestUtil.getHttpServletRequest();
         ActiveUser activeUser = DptmsSecurityUtil.get();
         // 初始化对象
-        SysOperateLogDto dto = new SysOperateLogDto();
+        MonitorOperateLogDto dto = new MonitorOperateLogDto();
         // 用户名
         dto.setUsername(activeUser.getUsername());
         // 操作内容

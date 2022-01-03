@@ -3,7 +3,7 @@ package com.darren1112.dptms.monitor.service.impl;
 import com.darren1112.dptms.common.core.base.BaseService;
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
-import com.darren1112.dptms.common.spi.sys.dto.SysLoginLogDto;
+import com.darren1112.dptms.common.spi.monitor.dto.MonitorLoginLogDto;
 import com.darren1112.dptms.monitor.dao.SysLoginLogDao;
 import com.darren1112.dptms.monitor.service.SysLoginLogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,7 @@ public class SysLoginLogServiceImpl extends BaseService implements SysLoginLogSe
      */
     @Override
     @Transactional(rollbackFor = Throwable.class)
-    public void insert(SysLoginLogDto dto) {
+    public void insert(MonitorLoginLogDto dto) {
         sysLoginLogDao.insert(dto);
     }
 
@@ -43,13 +43,13 @@ public class SysLoginLogServiceImpl extends BaseService implements SysLoginLogSe
      *
      * @param pageParam 分页参数
      * @param dto       查询条件
-     * @return {@link SysLoginLogDto}
+     * @return {@link MonitorLoginLogDto}
      * @author luyuhao
      * @since 2021/02/10 00:13
      */
     @Override
-    public PageBean<SysLoginLogDto> listPage(PageParam pageParam, SysLoginLogDto dto) {
-        List<SysLoginLogDto> list = sysLoginLogDao.listPage(pageParam, dto);
+    public PageBean<MonitorLoginLogDto> listPage(PageParam pageParam, MonitorLoginLogDto dto) {
+        List<MonitorLoginLogDto> list = sysLoginLogDao.listPage(pageParam, dto);
         Long count = sysLoginLogDao.listPageCount(dto);
         return createPageBean(pageParam, count, list);
     }
@@ -58,12 +58,12 @@ public class SysLoginLogServiceImpl extends BaseService implements SysLoginLogSe
      * 查询最后7条登录记录
      *
      * @param userId 用户id
-     * @return {@link SysLoginLogDto}
+     * @return {@link MonitorLoginLogDto}
      * @author luyuhao
      * @since 2021/11/27
      */
     @Override
-    public List<SysLoginLogDto> listLastSevenByUserId(Long userId) {
+    public List<MonitorLoginLogDto> listLastSevenByUserId(Long userId) {
         return sysLoginLogDao.listByUserIdAndNumber(userId, 7);
     }
 }

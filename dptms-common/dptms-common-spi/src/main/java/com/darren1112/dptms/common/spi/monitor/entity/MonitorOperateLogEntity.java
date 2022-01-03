@@ -1,4 +1,4 @@
-package com.darren1112.dptms.common.spi.sys.entity;
+package com.darren1112.dptms.common.spi.monitor.entity;
 
 import com.darren1112.dptms.common.spi.common.base.BaseEntity;
 import io.swagger.annotations.ApiModelProperty;
@@ -15,7 +15,7 @@ import lombok.ToString;
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class SysOperateLogEntity extends BaseEntity {
+public class MonitorOperateLogEntity extends BaseEntity {
 
     /**
      * 用户名

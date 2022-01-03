@@ -3,7 +3,7 @@ package com.darren1112.dptms.monitor.service.impl;
 import com.darren1112.dptms.common.core.base.BaseService;
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
-import com.darren1112.dptms.common.spi.sys.dto.SysOperateLogDto;
+import com.darren1112.dptms.common.spi.monitor.dto.MonitorOperateLogDto;
 import com.darren1112.dptms.monitor.dao.SysOperateLogDao;
 import com.darren1112.dptms.monitor.service.SysOperateLogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,7 @@ public class SysOperateLogServiceImpl extends BaseService implements SysOperateL
      */
     @Override
     @Transactional(rollbackFor = Throwable.class)
-    public void insert(SysOperateLogDto dto) {
+    public void insert(MonitorOperateLogDto dto) {
         sysOperateLogDao.insert(dto);
     }
 
@@ -43,13 +43,13 @@ public class SysOperateLogServiceImpl extends BaseService implements SysOperateL
      *
      * @param dto       筛选参数
      * @param pageParam 分页参数
-     * @return {@link SysOperateLogDto}
+     * @return {@link MonitorOperateLogDto}
      * @author luyuhao
      * @since 20/12/10 01:08
      */
     @Override
-    public PageBean<SysOperateLogDto> listPage(PageParam pageParam, SysOperateLogDto dto) {
-        List<SysOperateLogDto> list = sysOperateLogDao.listPage(pageParam, dto);
+    public PageBean<MonitorOperateLogDto> listPage(PageParam pageParam, MonitorOperateLogDto dto) {
+        List<MonitorOperateLogDto> list = sysOperateLogDao.listPage(pageParam, dto);
         Long count = sysOperateLogDao.listPageCount(dto);
         return createPageBean(pageParam, count, list);
     }

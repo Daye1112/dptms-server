@@ -1,7 +1,7 @@
 package com.darren1112.dptms.monitor.dao;
 
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
-import com.darren1112.dptms.common.spi.sys.dto.SysOperateLogDto;
+import com.darren1112.dptms.common.spi.monitor.dto.MonitorOperateLogDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -25,18 +25,18 @@ public interface SysOperateLogDao {
      * @author luyuhao
      * @since 2021/02/06 21:08
      */
-    void insert(SysOperateLogDto dto);
+    void insert(MonitorOperateLogDto dto);
 
     /**
      * 分页查询操作日志
      *
      * @param dto       筛选参数
      * @param pageParam 分页参数
-     * @return {@link SysOperateLogDto}
+     * @return {@link MonitorOperateLogDto}
      * @author luyuhao
      * @since 20/12/10 01:08
      */
-    List<SysOperateLogDto> listPage(@Param("pageParam") PageParam pageParam, @Param("dto") SysOperateLogDto dto);
+    List<MonitorOperateLogDto> listPage(@Param("pageParam") PageParam pageParam, @Param("dto") MonitorOperateLogDto dto);
 
     /**
      * 分页查询操作日志-记录数
@@ -46,5 +46,5 @@ public interface SysOperateLogDao {
      * @author luyuhao
      * @since 20/12/10 01:08
      */
-    Long listPageCount(@Param("dto") SysOperateLogDto dto);
+    Long listPageCount(@Param("dto") MonitorOperateLogDto dto);
 }

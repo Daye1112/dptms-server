@@ -2,7 +2,7 @@ package com.darren1112.dptms.monitor.service;
 
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
-import com.darren1112.dptms.common.spi.sys.dto.SysOperateLogDto;
+import com.darren1112.dptms.common.spi.monitor.dto.MonitorOperateLogDto;
 
 /**
  * 操作日志Service
@@ -19,16 +19,16 @@ public interface SysOperateLogService {
      * @author luyuhao
      * @since 2021/02/06 21:08
      */
-    void insert(SysOperateLogDto dto);
+    void insert(MonitorOperateLogDto dto);
 
     /**
      * 分页查询操作日志
      *
      * @param dto       筛选参数
      * @param pageParam 分页参数
-     * @return {@link SysOperateLogDto}
+     * @return {@link MonitorOperateLogDto}
      * @author luyuhao
      * @since 20/12/10 01:08
      */
-    PageBean<SysOperateLogDto> listPage(PageParam pageParam, SysOperateLogDto dto);
+    PageBean<MonitorOperateLogDto> listPage(PageParam pageParam, MonitorOperateLogDto dto);
 }

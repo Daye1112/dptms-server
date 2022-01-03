@@ -8,7 +8,7 @@ import com.darren1112.dptms.common.log.starter.enums.BusinessType;
 import com.darren1112.dptms.common.log.starter.enums.LogLevel;
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
-import com.darren1112.dptms.common.spi.sys.dto.SysOperateLogDto;
+import com.darren1112.dptms.common.spi.monitor.dto.MonitorOperateLogDto;
 import com.darren1112.dptms.monitor.service.SysOperateLogService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -42,7 +42,7 @@ public class SysOperateLogController extends BaseController {
      */
     @ApiOperation(value = "插入操作日志", hidden = true)
     @PostMapping("/insert")
-    public ResponseEntity<JsonResult> insert(@RequestBody SysOperateLogDto dto) {
+    public ResponseEntity<JsonResult> insert(@RequestBody MonitorOperateLogDto dto) {
         sysOperateLogService.insert(dto);
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }
@@ -59,9 +59,9 @@ public class SysOperateLogController extends BaseController {
     @Log(value = "分页查询操作日志", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     @ApiOperation("分页查询操作日志")
     @GetMapping("/listPage")
-    public ResponseEntity<JsonResult<PageBean<SysOperateLogDto>>> listPage(PageParam pageParam,
-                                                                           SysOperateLogDto dto) {
-        PageBean<SysOperateLogDto> pageBean = sysOperateLogService.listPage(getPageParam(pageParam), dto);
+    public ResponseEntity<JsonResult<PageBean<MonitorOperateLogDto>>> listPage(PageParam pageParam,
+                                                                               MonitorOperateLogDto dto) {
+        PageBean<MonitorOperateLogDto> pageBean = sysOperateLogService.listPage(getPageParam(pageParam), dto);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(pageBean));
     }
 }
