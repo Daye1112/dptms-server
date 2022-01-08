@@ -37,4 +37,10 @@ public class FileCenterDto extends FileCenterEntity {
      */
     @ApiModelProperty(value = "文件类型名")
     private String fileExt;
+
+    /**
+     * 创建者姓名
+     */
+    @ApiModelProperty(value = "创建者姓名")
+    private String creatorName;
 }

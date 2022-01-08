@@ -17,10 +17,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -47,10 +44,10 @@ public class FileCenterController {
      * @author luyuhao
      * @since 2021/12/18
      */
-    @PostMapping("/list")
+    @GetMapping("/list")
     @ApiOperation(value = "查询文件列表")
     @Log(value = "查询文件列表", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
-    public ResponseEntity<JsonResult> list(@RequestParam(value = "parentId", required = false) Long parentId) {
+    public ResponseEntity<JsonResult<List<FileCenterDto>>> list(@RequestParam(value = "parentId", required = false) Long parentId) {
         ValidateHandler.checkNull(parentId, FileManageErrorCodeEnum.FILE_PARENT_ID_NOT_NULL);
         List<FileCenterDto> list = fileCenterService.list(parentId);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(list));

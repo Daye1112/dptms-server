@@ -11,9 +11,12 @@
                t1.file_parent_path    AS fileParentPath,
                t1.file_order          AS fileOrder,
                t1.file_id             AS fileId,
+               t1.mtime,
+               t1.ctime,
                t2.file_type           AS fileInfoType,
                t2.file_size           AS fileSize,
                t2.file_ext            AS fileExt,
+               t3.real_name           AS creatorName,
                (SELECT COALESCE(SUM(t4.file_size), 0)
                 FROM file_center t3
                          LEFT JOIN file_info t4 ON t4.isvalid = 1 AND t3.file_id = t4.id
@@ -22,6 +25,7 @@
                         LIKE concat(t1.file_parent_path, '/', t1.id)) AS fileSizeCount
         FROM file_center t1
                  LEFT JOIN file_info t2 ON t2.isvalid = 1 AND t2.id = t1.file_id
+                 LEFT JOIN auth_user t3 ON t3.isvalid = 1 AND t3.id = t1.creater
         WHERE t1.isvalid = 1
           AND t1.file_parent_id = #{parentId}
     </select>
