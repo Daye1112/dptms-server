@@ -2,6 +2,7 @@ package com.darren1112.dptms.common.redis.starter.masterSalve;
 
 import cn.hutool.core.util.RandomUtil;
 import com.darren1112.dptms.common.core.util.CollectionUtil;
+import com.darren1112.dptms.common.core.util.MapUtil;
 import com.darren1112.dptms.common.core.util.StringUtil;
 import com.darren1112.dptms.common.redis.starter.hint.RedisHintRouteManager;
 import com.darren1112.dptms.common.redis.starter.masterSalve.entry.MasterSlavePoolEntry;
@@ -106,7 +107,7 @@ public class MasterSlaveHolder implements MasterSlaveOperationCallback {
         if (enableHeartbeat && this.scheduler != null) {
             scheduler.shutdownNow();
         }
-        if (CollectionUtil.isNotEmpty(allMasterSlavePoolEntryMap)) {
+        if (MapUtil.isNotEmpty(allMasterSlavePoolEntryMap)) {
             for (MasterSlavePoolEntry masterSlavePoolEntry : allMasterSlavePoolEntryMap.values()) {
                 if (masterSlavePoolEntry != null) {
                     masterSlavePoolEntry.close();

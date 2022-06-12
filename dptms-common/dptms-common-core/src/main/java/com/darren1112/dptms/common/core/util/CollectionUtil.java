@@ -68,30 +68,6 @@ public class CollectionUtil extends CollectionUtils {
     }
 
     /**
-     * 判断map不为空
-     *
-     * @param map map
-     * @return true/false
-     * @author luyuhao
-     * @since 2021/8/6
-     */
-    public static boolean isNotEmpty(Map<?, ?> map) {
-        return !isEmpty(map);
-    }
-
-    /**
-     * 判断map为空
-     *
-     * @param map map
-     * @return true/false
-     * @author luyuhao
-     * @since 2021/8/6
-     */
-    private static boolean isEmpty(Map<?, ?> map) {
-        return map == null || map.isEmpty();
-    }
-
-    /**
      * 将单个对象封装为集合
      *
      * @param obj 单个对象
