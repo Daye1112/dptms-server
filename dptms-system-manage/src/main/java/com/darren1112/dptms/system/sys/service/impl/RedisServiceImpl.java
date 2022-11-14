@@ -1,7 +1,7 @@
 package com.darren1112.dptms.system.sys.service.impl;
 
 import com.darren1112.dptms.common.core.base.BaseService;
-import com.darren1112.dptms.common.redis.starter.core.RedisUtil;
+import com.darren1112.dptms.sdk.starter.redis.core.RedisUtil;
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
 import com.darren1112.dptms.common.spi.sys.dto.SysRedisDto;

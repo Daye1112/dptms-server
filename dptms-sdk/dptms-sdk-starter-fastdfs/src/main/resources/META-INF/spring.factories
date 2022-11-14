@@ -1,4 +1,4 @@
 # Auto Configure
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.darren1112.dptms.common.fastdfs.starter.config.FastDfsAutoConfig,\
-com.darren1112.dptms.common.fastdfs.starter.config.FileAutoConfig
+com.darren1112.dptms.sdk.starter.fastdfs.config.FastDfsAutoConfig,\
+com.darren1112.dptms.sdk.starter.fastdfs.config.FileAutoConfig

@@ -1,4 +1,4 @@
 # Auto Configure
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.darren1112.dptms.common.redis.starter.config.RedisAutoConfig, \
-com.darren1112.dptms.common.security.starter.config.SecurityAutoConfig
+com.darren1112.dptms.sdk.starter.redis.config.RedisAutoConfig, \
+com.darren1112.dptms.sdk.starter.security.config.SecurityAutoConfig

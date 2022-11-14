@@ -3,7 +3,7 @@ package com.darren1112.dptms.auth.common.security.base;
 import com.darren1112.dptms.auth.common.security.UserDetailsService;
 import com.darren1112.dptms.common.core.exception.BadRequestException;
 import com.darren1112.dptms.common.core.exception.BaseException;
-import com.darren1112.dptms.common.log.starter.collect.LogCollectService;
+import com.darren1112.dptms.sdk.starter.log.collect.LogCollectService;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 import com.darren1112.dptms.common.spi.common.dto.LoginParam;
 import com.darren1112.dptms.common.spi.monitor.dto.MonitorLoginLogDto;

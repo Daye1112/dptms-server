@@ -2,7 +2,7 @@ package com.darren1112.dptms.file.service.impl;
 
 import com.darren1112.dptms.common.core.exception.BadRequestException;
 import com.darren1112.dptms.common.core.exception.ServiceHandleException;
-import com.darren1112.dptms.common.fastdfs.starter.core.file.client.FileClient;
+import com.darren1112.dptms.sdk.starter.fastdfs.core.file.client.FileClient;
 import com.darren1112.dptms.common.spi.file.dto.FileDfsInfoDto;
 import com.darren1112.dptms.common.spi.file.dto.FileInfoDto;
 import com.darren1112.dptms.file.common.enums.FileManageErrorCodeEnum;

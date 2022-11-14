@@ -1,7 +1,7 @@
 package com.darren1112.dptms.gateway;
 
 import com.darren1112.dptms.common.core.util.EnvironmentAwareUtil;
-import com.darren1112.dptms.common.doc.starter.annotation.EnableGatewayDoc;
+import com.darren1112.dptms.sdk.starter.doc.annotation.EnableGatewayDoc;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;

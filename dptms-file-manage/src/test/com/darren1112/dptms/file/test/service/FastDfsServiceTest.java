@@ -1,7 +1,7 @@
 package com.darren1112.dptms.file.test.service;
 
 import com.darren1112.dptms.common.core.util.EnvironmentAwareUtil;
-import com.darren1112.dptms.common.fastdfs.starter.core.file.client.FileClient;
+import com.darren1112.dptms.sdk.starter.fastdfs.core.file.client.FileClient;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
