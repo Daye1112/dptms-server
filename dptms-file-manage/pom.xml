@@ -15,6 +15,41 @@
     <description>文件管理服务模块</description>
 
     <dependencies>
+        <!-- [dptms] Start-->
+        <dependency>
+            <groupId>com.darren1112</groupId>
+            <artifactId>dptms-common-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.darren1112</groupId>
+            <artifactId>dptms-sdk-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.darren1112</groupId>
+            <artifactId>dptms-sdk-starter-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.darren1112</groupId>
+            <artifactId>dptms-sdk-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.darren1112</groupId>
+            <artifactId>dptms-sdk-starter-doc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.darren1112</groupId>
+            <artifactId>dptms-sdk-starter-log</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.darren1112</groupId>
+            <artifactId>dptms-sdk-starter-fastdfs</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.darren1112</groupId>
+            <artifactId>dptms-sdk-component</artifactId>
+        </dependency>
+        <!-- [dptms] End-->
+
         <!-- [Spring Boot] Start -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -89,41 +124,6 @@
         </dependency>
         <!-- [fastjson] End -->
         <!-- [Plugins] End -->
-
-        <!-- [dptms] Start-->
-        <dependency>
-            <groupId>com.darren1112</groupId>
-            <artifactId>dptms-common-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.darren1112</groupId>
-            <artifactId>dptms-common-web-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.darren1112</groupId>
-            <artifactId>dptms-common-redis-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.darren1112</groupId>
-            <artifactId>dptms-common-security-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.darren1112</groupId>
-            <artifactId>dptms-common-doc-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.darren1112</groupId>
-            <artifactId>dptms-common-log-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.darren1112</groupId>
-            <artifactId>dptms-common-fastdfs-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.darren1112</groupId>
-            <artifactId>dptms-common-component</artifactId>
-        </dependency>
-        <!-- [dptms] End-->
     </dependencies>
 
     <build>

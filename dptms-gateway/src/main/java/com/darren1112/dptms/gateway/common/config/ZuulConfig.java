@@ -5,7 +5,7 @@ import com.darren1112.dptms.common.security.starter.core.DptmsTokenStore;
 import com.darren1112.dptms.common.security.starter.core.DptmsTokenValidator;
 import com.darren1112.dptms.common.security.starter.filter.DptmsTokenValidFilter;
 import com.darren1112.dptms.common.security.starter.properties.SecurityProperties;
-import com.darren1112.dptms.component.remoting.AuthRemoting;
+import com.darren1112.dptms.sdk.component.remoting.AuthRemoting;
 import com.darren1112.dptms.gateway.common.filter.PermissionValidFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;

@@ -15,6 +15,13 @@
     <description>SBA服务监控面板</description>
 
     <dependencies>
+        <!-- [dptms] Start-->
+        <dependency>
+            <groupId>com.darren1112</groupId>
+            <artifactId>dptms-common-core</artifactId>
+        </dependency>
+        <!-- [dptms] End-->
+
         <!-- [Spring Boot] Start -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -63,13 +70,6 @@
 
         <!-- [Plugins] Start -->
         <!-- [Plugins] End -->
-
-        <!-- [dptms] Start-->
-        <dependency>
-            <groupId>com.darren1112</groupId>
-            <artifactId>dptms-common-core</artifactId>
-        </dependency>
-        <!-- [dptms] End-->
     </dependencies>
 
     <build>

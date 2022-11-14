@@ -21,6 +21,7 @@
         <module>dptms-file-manage</module>
         <module>dptms-common</module>
         <module>dptms-admin</module>
+        <module>dptms-sdk</module>
     </modules>
 
 

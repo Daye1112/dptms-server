@@ -16,6 +16,13 @@
     <description>配置中心服务模块</description>
 
     <dependencies>
+        <!-- [dptms] Start-->
+        <dependency>
+            <groupId>com.darren1112</groupId>
+            <artifactId>dptms-common-core</artifactId>
+        </dependency>
+        <!-- [dptms] End-->
+
         <!-- [Spring Boot] Start -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -66,13 +73,6 @@
             <artifactId>spring-cloud-starter-security</artifactId>
         </dependency>
         <!-- [Spring Cloud] End -->
-
-        <!-- [dptms] Start-->
-        <dependency>
-            <groupId>com.darren1112</groupId>
-            <artifactId>dptms-common-core</artifactId>
-        </dependency>
-        <!-- [dptms] End-->
     </dependencies>
 
     <build>

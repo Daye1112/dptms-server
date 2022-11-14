@@ -14,6 +14,13 @@
     <description>公共模块</description>
 
     <dependencies>
+        <!-- [dptms] Start-->
+        <dependency>
+            <groupId>com.darren1112</groupId>
+            <artifactId>dptms-common-spi</artifactId>
+        </dependency>
+        <!-- [dptms] End-->
+
         <!-- [Spring Boot] Start -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -93,12 +100,5 @@
         </dependency>
         <!-- [easy-captcha] End -->
         <!-- [Plugins] End -->
-
-        <!-- [dptms] Start-->
-        <dependency>
-            <groupId>com.darren1112</groupId>
-            <artifactId>dptms-common-spi</artifactId>
-        </dependency>
-        <!-- [dptms] End-->
     </dependencies>
 </project>

@@ -13,7 +13,7 @@ import com.darren1112.dptms.common.security.starter.util.DptmsSecurityUtil;
 import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 import com.darren1112.dptms.common.spi.auth.dto.AuthPermissionDto;
 import com.darren1112.dptms.common.spi.auth.dto.AuthUserDto;
-import com.darren1112.dptms.component.remoting.AuthRemoting;
+import com.darren1112.dptms.sdk.component.remoting.AuthRemoting;
 import com.darren1112.dptms.gateway.common.enums.GatewayErrorCodeEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.filter.OncePerRequestFilter;

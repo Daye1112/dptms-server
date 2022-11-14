@@ -16,6 +16,13 @@
     <description>服务注册中心模块</description>
 
     <dependencies>
+        <!-- [dptms] Start-->
+        <dependency>
+            <groupId>com.darren1112</groupId>
+            <artifactId>dptms-common-core</artifactId>
+        </dependency>
+        <!-- [dptms] End-->
+
         <!-- Spring Boot Begin -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -49,13 +56,6 @@
             <artifactId>spring-cloud-starter-security</artifactId>
         </dependency>
         <!-- Spring Cloud End -->
-
-        <!-- [dptms] Start-->
-        <dependency>
-            <groupId>com.darren1112</groupId>
-            <artifactId>dptms-common-core</artifactId>
-        </dependency>
-        <!-- [dptms] End-->
     </dependencies>
 
     <build>

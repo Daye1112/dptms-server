@@ -49,6 +49,55 @@
 
     <dependencyManagement>
         <dependencies>
+
+            <!-- [dptms] Start-->
+            <dependency>
+                <groupId>com.darren1112</groupId>
+                <artifactId>dptms-common-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.darren1112</groupId>
+                <artifactId>dptms-common-spi</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.darren1112</groupId>
+                <artifactId>dptms-sdk-component</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.darren1112</groupId>
+                <artifactId>dptms-sdk-starter-doc</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.darren1112</groupId>
+                <artifactId>dptms-sdk-starter-fastdfs</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.darren1112</groupId>
+                <artifactId>dptms-sdk-starter-log</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.darren1112</groupId>
+                <artifactId>dptms-sdk-starter-redis</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.darren1112</groupId>
+                <artifactId>dptms-sdk-starter-security</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.darren1112</groupId>
+                <artifactId>dptms-sdk-starter-web</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!-- [dptms] End-->
+
             <!-- [Spring cloud] Start -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
@@ -207,94 +256,6 @@
             </dependency>
             <!-- FastDFS-Client End -->
             <!-- [Plugins] End -->
-
-            <!-- [dptms] Start-->
-            <dependency>
-                <groupId>com.darren1112</groupId>
-                <artifactId>dptms-auth</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.darren1112</groupId>
-                <artifactId>dptms-config</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.darren1112</groupId>
-                <artifactId>dptms-eureka</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.darren1112</groupId>
-                <artifactId>dptms-file-manage</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.darren1112</groupId>
-                <artifactId>dptms-gateway</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.darren1112</groupId>
-                <artifactId>dptms-monitor-manage</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.darren1112</groupId>
-                <artifactId>dptms-system-manage</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.darren1112</groupId>
-                <artifactId>dptms-common</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.darren1112</groupId>
-                <artifactId>dptms-common-core</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.darren1112</groupId>
-                <artifactId>dptms-common-spi</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.darren1112</groupId>
-                <artifactId>dptms-common-web-starter</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.darren1112</groupId>
-                <artifactId>dptms-common-security-starter</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.darren1112</groupId>
-                <artifactId>dptms-common-redis-starter</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.darren1112</groupId>
-                <artifactId>dptms-common-doc-starter</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.darren1112</groupId>
-                <artifactId>dptms-common-log-starter</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.darren1112</groupId>
-                <artifactId>dptms-common-component</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.darren1112</groupId>
-                <artifactId>dptms-common-fastdfs-starter</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <!-- [dptms] End-->
         </dependencies>
     </dependencyManagement>
 
