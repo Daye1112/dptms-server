@@ -1,7 +1,7 @@
 package com.darren1112.dptms.sdk.starter.security.base.processing.base;
 
 
-import com.darren1112.dptms.sdk.starter.security.base.processing.token.BaseAuthenticationToken;
+import com.darren1112.dptms.sdk.starter.security.core.security.token.base.BaseAuthenticationToken;
 
 /**
  * 认证类型

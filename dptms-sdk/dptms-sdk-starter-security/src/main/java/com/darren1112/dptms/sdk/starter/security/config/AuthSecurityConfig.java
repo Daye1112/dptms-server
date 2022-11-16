@@ -1,9 +1,9 @@
 package com.darren1112.dptms.sdk.starter.security.config;
 
-import com.darren1112.dptms.sdk.starter.security.core.security.SimpleAccessDeniedHandler;
-import com.darren1112.dptms.sdk.starter.security.core.security.SimpleAuthenticationEntryPoint;
-import com.darren1112.dptms.sdk.starter.security.core.security.SimpleAuthenticationFailureHandler;
-import com.darren1112.dptms.sdk.starter.security.core.security.SimpleSessionInformationExpiredStrategy;
+import com.darren1112.dptms.sdk.starter.security.core.security.handler.SimpleAccessDeniedHandler;
+import com.darren1112.dptms.sdk.starter.security.core.security.handler.SimpleAuthenticationEntryPoint;
+import com.darren1112.dptms.sdk.starter.security.core.security.handler.SimpleAuthenticationFailureHandler;
+import com.darren1112.dptms.sdk.starter.security.core.security.handler.SimpleSessionInformationExpiredStrategy;
 import com.darren1112.dptms.sdk.starter.security.core.security.encoder.Md5PasswordEncoder;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;

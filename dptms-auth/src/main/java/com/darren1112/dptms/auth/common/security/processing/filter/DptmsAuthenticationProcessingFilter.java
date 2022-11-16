@@ -1,10 +1,10 @@
-package com.darren1112.dptms.auth.common.security.filter;
+package com.darren1112.dptms.auth.common.security.processing.filter;
 
 import com.darren1112.dptms.common.core.constants.FilterOrderConstant;
 import com.darren1112.dptms.common.core.util.StringUtil;
-import com.darren1112.dptms.sdk.starter.security.base.processing.factory.AuthTypeFactory;
+import com.darren1112.dptms.sdk.starter.security.core.security.factory.base.AuthTypeFactory;
 import com.darren1112.dptms.sdk.starter.security.base.processing.filter.BaseAuthenticationProcessingFilter;
-import com.darren1112.dptms.sdk.starter.security.base.processing.token.BaseAuthenticationToken;
+import com.darren1112.dptms.sdk.starter.security.core.security.token.base.BaseAuthenticationToken;
 import com.darren1112.dptms.sdk.starter.security.properties.SecurityProperties;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;

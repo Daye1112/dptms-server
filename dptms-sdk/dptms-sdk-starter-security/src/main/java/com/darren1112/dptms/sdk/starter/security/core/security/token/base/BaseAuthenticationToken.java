@@ -1,4 +1,4 @@
-package com.darren1112.dptms.sdk.starter.security.base.processing.token;
+package com.darren1112.dptms.sdk.starter.security.core.security.token.base;
 
 import com.darren1112.dptms.sdk.starter.security.base.processing.base.AuthType;
 import org.springframework.security.authentication.AbstractAuthenticationToken;

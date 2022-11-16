@@ -1,9 +1,9 @@
-package com.darren1112.dptms.auth.common.security.enums;
+package com.darren1112.dptms.sdk.starter.security.enums;
 
 
-import com.darren1112.dptms.auth.common.security.processing.token.PwdAuthenticationToken;
 import com.darren1112.dptms.sdk.starter.security.base.processing.base.AuthType;
-import com.darren1112.dptms.sdk.starter.security.base.processing.token.BaseAuthenticationToken;
+import com.darren1112.dptms.sdk.starter.security.core.security.token.PwdAuthenticationToken;
+import com.darren1112.dptms.sdk.starter.security.core.security.token.base.BaseAuthenticationToken;
 
 import java.util.Arrays;
 
@@ -13,7 +13,7 @@ import java.util.Arrays;
  * @author luyuhao
  * @since 2022/6/6
  */
-public enum AuthTypeEnums implements AuthType {
+public enum AuthTypeEnum implements AuthType {
 
     /**
      * 认证枚举
@@ -35,7 +35,7 @@ public enum AuthTypeEnums implements AuthType {
      */
     private Class<? extends BaseAuthenticationToken> tokenClass;
 
-    AuthTypeEnums(Integer authType, String authDesc, Class<? extends BaseAuthenticationToken> tokenClass) {
+    AuthTypeEnum(Integer authType, String authDesc, Class<? extends BaseAuthenticationToken> tokenClass) {
         this.authType = authType;
         this.authDesc = authDesc;
         this.tokenClass = tokenClass;
@@ -45,15 +45,15 @@ public enum AuthTypeEnums implements AuthType {
      * 根据认证类型匹配认证枚举
      *
      * @param authType 认证类型
-     * @return {@link AuthTypeEnums}
+     * @return {@link AuthTypeEnum}
      * @author luyuhao
      * @since 2022/6/6
      */
-    public static AuthTypeEnums matchByAuthType(Integer authType) {
+    public static AuthTypeEnum matchByAuthType(Integer authType) {
         if (authType == null) {
             return null;
         }
-        return Arrays.stream(AuthTypeEnums.values())
+        return Arrays.stream(AuthTypeEnum.values())
                 .filter(item -> item.getAuthType().equals(authType))
                 .findFirst().orElse(null);
     }

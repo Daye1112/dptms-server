@@ -3,7 +3,8 @@ package com.darren1112.dptms.sdk.starter.security.config;
 import com.darren1112.dptms.common.core.constants.FilterOrderConstant;
 import com.darren1112.dptms.common.core.constants.SecurityConstant;
 import com.darren1112.dptms.sdk.starter.redis.core.RedisUtil;
-import com.darren1112.dptms.sdk.starter.security.base.processing.factory.AuthTypeFactory;
+import com.darren1112.dptms.sdk.starter.security.core.security.factory.BasicAuthTypeFactory;
+import com.darren1112.dptms.sdk.starter.security.core.security.factory.base.AuthTypeFactory;
 import com.darren1112.dptms.sdk.starter.security.core.token.generator.UuidTokenGenerator;
 import com.darren1112.dptms.sdk.starter.security.core.token.generator.base.TokenGenerator;
 import com.darren1112.dptms.sdk.starter.security.core.token.store.TokenStore;
@@ -58,7 +59,13 @@ public class SecurityAutoConfig {
     }
 
     @Bean
-    public FilterRegistrationBean addCommonInfoFilter(TokenStore tokenStore, AuthTypeFactory authTypeFactory) {
+    @ConditionalOnMissingBean(AuthTypeFactory.class)
+    public AuthTypeFactory authTypeFactory() {
+        return new BasicAuthTypeFactory();
+    }
+
+    @Bean
+    public FilterRegistrationBean securityUserFilter(TokenStore tokenStore, AuthTypeFactory authTypeFactory) {
         SecurityUserFilter securityUserFilter = new SecurityUserFilter(tokenStore, authTypeFactory);
         FilterRegistrationBean<SecurityUserFilter> filterRegistrationBean = new FilterRegistrationBean<>();
         filterRegistrationBean.setFilter(securityUserFilter);

@@ -1,7 +1,7 @@
 package com.darren1112.dptms.auth.common.security.processing.provider;
 
-import com.darren1112.dptms.auth.common.security.enums.AuthTypeEnums;
-import com.darren1112.dptms.auth.common.security.processing.token.PwdAuthenticationToken;
+import com.darren1112.dptms.sdk.starter.security.core.security.token.PwdAuthenticationToken;
+import com.darren1112.dptms.sdk.starter.security.enums.AuthTypeEnum;
 import com.darren1112.dptms.auth.service.AuthUserService;
 import com.darren1112.dptms.common.core.constants.AccountConstant;
 import com.darren1112.dptms.common.core.constants.RedisConstant;
@@ -9,7 +9,7 @@ import com.darren1112.dptms.common.core.util.StringUtil;
 import com.darren1112.dptms.common.spi.auth.dto.AuthUserDto;
 import com.darren1112.dptms.sdk.starter.redis.core.RedisUtil;
 import com.darren1112.dptms.sdk.starter.security.base.processing.base.AuthType;
-import com.darren1112.dptms.sdk.starter.security.base.processing.factory.AuthTypeFactory;
+import com.darren1112.dptms.sdk.starter.security.core.security.factory.base.AuthTypeFactory;
 import com.darren1112.dptms.sdk.starter.security.base.processing.provider.BaseAuthenticationProvider;
 import com.darren1112.dptms.sdk.starter.security.enums.SecurityEnum;
 import com.darren1112.dptms.sdk.starter.security.exceptions.CaptchaCodeErrorException;
@@ -47,7 +47,7 @@ public class PwdAuthenticationProvider extends BaseAuthenticationProvider {
     private AuthUserService authUserService;
 
     @Autowired
-    private AuthTypeFactory<ActiveUser> authTypeFactory;
+    private AuthTypeFactory authTypeFactory;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -115,6 +115,6 @@ public class PwdAuthenticationProvider extends BaseAuthenticationProvider {
      */
     @Override
     public AuthType authType() {
-        return AuthTypeEnums.USERNAME_AND_PASSWORD;
+        return AuthTypeEnum.USERNAME_AND_PASSWORD;
     }
 }

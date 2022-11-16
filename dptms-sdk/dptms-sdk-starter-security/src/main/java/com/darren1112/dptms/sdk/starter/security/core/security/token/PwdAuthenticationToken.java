@@ -1,8 +1,8 @@
-package com.darren1112.dptms.auth.common.security.processing.token;
+package com.darren1112.dptms.sdk.starter.security.core.security.token;
 
-import com.darren1112.dptms.auth.common.security.enums.AuthTypeEnums;
 import com.darren1112.dptms.sdk.starter.security.base.processing.base.AuthType;
-import com.darren1112.dptms.sdk.starter.security.base.processing.token.BaseAuthenticationToken;
+import com.darren1112.dptms.sdk.starter.security.core.security.token.base.BaseAuthenticationToken;
+import com.darren1112.dptms.sdk.starter.security.enums.AuthTypeEnum;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.SpringSecurityCoreVersion;
@@ -114,6 +114,6 @@ public class PwdAuthenticationToken extends BaseAuthenticationToken {
      */
     @Override
     public AuthType authType() {
-        return AuthTypeEnums.USERNAME_AND_PASSWORD;
+        return AuthTypeEnum.USERNAME_AND_PASSWORD;
     }
 }

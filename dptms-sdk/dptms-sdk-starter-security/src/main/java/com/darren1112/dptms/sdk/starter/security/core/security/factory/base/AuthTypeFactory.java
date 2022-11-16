@@ -1,7 +1,7 @@
-package com.darren1112.dptms.sdk.starter.security.base.processing.factory;
+package com.darren1112.dptms.sdk.starter.security.core.security.factory.base;
 
 import com.darren1112.dptms.sdk.starter.security.base.model.BaseSecurityUser;
-import com.darren1112.dptms.sdk.starter.security.base.processing.token.BaseAuthenticationToken;
+import com.darren1112.dptms.sdk.starter.security.core.security.token.base.BaseAuthenticationToken;
 
 /**
  * 认证类型工厂-基础类
@@ -9,7 +9,7 @@ import com.darren1112.dptms.sdk.starter.security.base.processing.token.BaseAuthe
  * @author luyuhao
  * @since 2022/11/15
  */
-public interface AuthTypeFactory<T extends BaseSecurityUser> {
+public interface AuthTypeFactory {
 
     /**
      * 创建参数token
@@ -30,5 +30,5 @@ public interface AuthTypeFactory<T extends BaseSecurityUser> {
      * @author luyuhao
      * @since 2022/6/6
      */
-    BaseAuthenticationToken createAuthToken(T user);
+    <T extends BaseSecurityUser> BaseAuthenticationToken createAuthToken(T user);
 }

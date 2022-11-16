@@ -1,13 +1,13 @@
-package com.darren1112.dptms.auth.common.security.processing.factory;
+package com.darren1112.dptms.sdk.starter.security.core.security.factory;
 
-import com.darren1112.dptms.auth.common.security.enums.AuthTypeEnums;
-import com.darren1112.dptms.auth.common.security.processing.token.PwdAuthenticationToken;
-import com.darren1112.dptms.sdk.starter.security.base.processing.factory.AuthTypeFactory;
-import com.darren1112.dptms.sdk.starter.security.base.processing.token.BaseAuthenticationToken;
+import com.darren1112.dptms.sdk.starter.security.base.model.BaseSecurityUser;
+import com.darren1112.dptms.sdk.starter.security.core.security.factory.base.AuthTypeFactory;
+import com.darren1112.dptms.sdk.starter.security.core.security.token.PwdAuthenticationToken;
+import com.darren1112.dptms.sdk.starter.security.core.security.token.base.BaseAuthenticationToken;
+import com.darren1112.dptms.sdk.starter.security.enums.AuthTypeEnum;
 import com.darren1112.dptms.sdk.starter.security.exceptions.AuthTokenErrorException;
 import com.darren1112.dptms.sdk.starter.security.model.ActiveUser;
 import org.springframework.security.authentication.ProviderNotFoundException;
-import org.springframework.stereotype.Component;
 
 /**
  * 认证类型工厂
@@ -15,8 +15,7 @@ import org.springframework.stereotype.Component;
  * @author luyuhao
  * @since 2022/6/6
  */
-@Component
-public class DptmsAuthTypeFactory implements AuthTypeFactory<ActiveUser> {
+public class BasicAuthTypeFactory implements AuthTypeFactory {
 
     /**
      * 创建参数token
@@ -28,12 +27,12 @@ public class DptmsAuthTypeFactory implements AuthTypeFactory<ActiveUser> {
      */
     @Override
     public BaseAuthenticationToken createParamToken(Integer authType) {
-        AuthTypeEnums authTypeEnums = AuthTypeEnums.matchByAuthType(authType);
-        if (authTypeEnums == null) {
+        AuthTypeEnum authTypeEnum = AuthTypeEnum.matchByAuthType(authType);
+        if (authTypeEnum == null) {
             throw new ProviderNotFoundException("认证类型错误!");
         }
         BaseAuthenticationToken token = null;
-        switch (authTypeEnums) {
+        switch (authTypeEnum) {
             case USERNAME_AND_PASSWORD:
                 token = new PwdAuthenticationToken();
                 break;
@@ -53,16 +52,16 @@ public class DptmsAuthTypeFactory implements AuthTypeFactory<ActiveUser> {
      * @since 2022/6/6
      */
     @Override
-    public BaseAuthenticationToken createAuthToken(ActiveUser user) {
+    public <T extends BaseSecurityUser> BaseAuthenticationToken createAuthToken(T user) {
         if (user == null) {
             throw new AuthTokenErrorException("用户信息为空!");
         }
-        AuthTypeEnums authTypeEnums = AuthTypeEnums.matchByAuthType(user.getAuthType());
-        if (authTypeEnums == null) {
+        AuthTypeEnum authTypeEnum = AuthTypeEnum.matchByAuthType(user.getAuthType());
+        if (authTypeEnum == null) {
             throw new AuthTokenErrorException("认证类型错误!");
         }
         BaseAuthenticationToken token = null;
-        switch (authTypeEnums) {
+        switch (authTypeEnum) {
             case USERNAME_AND_PASSWORD:
                 token = new PwdAuthenticationToken(user, user.getPassword(), user.getAuthorities());
                 break;

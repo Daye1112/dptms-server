@@ -2,8 +2,8 @@ package com.darren1112.dptms.sdk.starter.security.filter;
 
 import com.darren1112.dptms.common.core.web.ParameterRequestWrapper;
 import com.darren1112.dptms.sdk.starter.security.base.model.BaseSecurityUser;
-import com.darren1112.dptms.sdk.starter.security.base.processing.factory.AuthTypeFactory;
-import com.darren1112.dptms.sdk.starter.security.base.processing.token.BaseAuthenticationToken;
+import com.darren1112.dptms.sdk.starter.security.core.security.factory.base.AuthTypeFactory;
+import com.darren1112.dptms.sdk.starter.security.core.security.token.base.BaseAuthenticationToken;
 import com.darren1112.dptms.sdk.starter.security.core.token.store.TokenStore;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -35,7 +35,7 @@ public class SecurityUserFilter extends OncePerRequestFilter {
     }
 
     @Override
-    @SuppressWarnings({"NullableProblems", "unchecked"})
+    @SuppressWarnings("NullableProblems")
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
         // 获取用户信息
         BaseSecurityUser activeUser = tokenStore.getActiveUser(request);
