@@ -9,15 +9,15 @@ import com.darren1112.dptms.common.core.util.ResponseEntityUtil;
 import com.darren1112.dptms.common.core.validate.ValidatorBuilder;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotEmptyValidatorCallback;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotNullValidatorCallback;
+import com.darren1112.dptms.common.spi.auth.dto.AuthPermissionDto;
+import com.darren1112.dptms.common.spi.auth.entity.AuthPermissionEntity;
+import com.darren1112.dptms.common.spi.common.dto.PageBean;
+import com.darren1112.dptms.common.spi.common.dto.PageParam;
 import com.darren1112.dptms.sdk.starter.log.annotation.Log;
 import com.darren1112.dptms.sdk.starter.log.enums.BusinessType;
 import com.darren1112.dptms.sdk.starter.log.enums.LogLevel;
-import com.darren1112.dptms.sdk.starter.security.util.DptmsSecurityUtil;
-import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
-import com.darren1112.dptms.common.spi.common.dto.PageBean;
-import com.darren1112.dptms.common.spi.common.dto.PageParam;
-import com.darren1112.dptms.common.spi.auth.dto.AuthPermissionDto;
-import com.darren1112.dptms.common.spi.auth.entity.AuthPermissionEntity;
+import com.darren1112.dptms.sdk.starter.security.model.ActiveUser;
+import com.darren1112.dptms.sdk.starter.security.util.SecurityUserUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -63,7 +63,7 @@ public class AuthPermissionController extends BaseController {
                 .on(entity.getPerGroup(), new NotEmptyValidatorCallback(AuthErrorCodeEnum.PER_GROUP_NOT_NULL))
                 .on(entity.getPerUrl(), new NotEmptyValidatorCallback(AuthErrorCodeEnum.PER_URL_NOT_NULL))
                 .doValidate().checkResult();
-        ActiveUser activeUser = DptmsSecurityUtil.get();
+        ActiveUser activeUser = SecurityUserUtil.getActiveUser();
         entity.setCreater(activeUser.getId());
         entity.setUpdater(activeUser.getId());
         Long id = authPermissionService.insert(entity);
@@ -107,7 +107,7 @@ public class AuthPermissionController extends BaseController {
                 .on(entity.getPerGroup(), new NotEmptyValidatorCallback(AuthErrorCodeEnum.PER_GROUP_NOT_NULL))
                 .on(entity.getPerUrl(), new NotEmptyValidatorCallback(AuthErrorCodeEnum.PER_URL_NOT_NULL))
                 .doValidate().checkResult();
-        ActiveUser activeUser = DptmsSecurityUtil.get();
+        ActiveUser activeUser = SecurityUserUtil.getActiveUser();
         entity.setUpdater(activeUser.getId());
         Long count = authPermissionService.update(entity);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(count));
@@ -128,7 +128,7 @@ public class AuthPermissionController extends BaseController {
         ValidatorBuilder.build()
                 .on(id, new NotNullValidatorCallback(AuthErrorCodeEnum.ID_NOT_NULL))
                 .doValidate().checkResult();
-        ActiveUser activeUser = DptmsSecurityUtil.get();
+        ActiveUser activeUser = SecurityUserUtil.getActiveUser();
         authPermissionService.deleteById(id, activeUser.getId());
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }

@@ -6,15 +6,15 @@ import com.darren1112.dptms.common.core.util.CollectionUtil;
 import com.darren1112.dptms.common.core.util.DateUtil;
 import com.darren1112.dptms.common.core.util.ResponseUtil;
 import com.darren1112.dptms.common.core.util.UrlUtil;
-import com.darren1112.dptms.sdk.starter.security.core.DptmsTokenStore;
-import com.darren1112.dptms.sdk.starter.security.enums.SecurityEnum;
-import com.darren1112.dptms.sdk.starter.security.properties.SecurityProperties;
-import com.darren1112.dptms.sdk.starter.security.util.DptmsSecurityUtil;
-import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 import com.darren1112.dptms.common.spi.auth.dto.AuthPermissionDto;
 import com.darren1112.dptms.common.spi.auth.dto.AuthUserDto;
-import com.darren1112.dptms.sdk.component.remoting.AuthRemoting;
 import com.darren1112.dptms.gateway.common.enums.GatewayErrorCodeEnum;
+import com.darren1112.dptms.sdk.component.remoting.AuthRemoting;
+import com.darren1112.dptms.sdk.starter.security.core.token.store.TokenStore;
+import com.darren1112.dptms.sdk.starter.security.enums.SecurityEnum;
+import com.darren1112.dptms.sdk.starter.security.model.ActiveUser;
+import com.darren1112.dptms.sdk.starter.security.properties.SecurityProperties;
+import com.darren1112.dptms.sdk.starter.security.util.SecurityUserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -39,12 +39,12 @@ public class PermissionValidFilter extends OncePerRequestFilter {
 
     private AuthRemoting authRemoting;
 
-    private DptmsTokenStore dptmsTokenStore;
+    private TokenStore tokenStore;
 
-    public PermissionValidFilter(SecurityProperties securityProperties, AuthRemoting authRemoting, DptmsTokenStore dptmsTokenStore) {
+    public PermissionValidFilter(SecurityProperties securityProperties, AuthRemoting authRemoting, TokenStore tokenStore) {
         this.securityProperties = securityProperties;
         this.authRemoting = authRemoting;
-        this.dptmsTokenStore = dptmsTokenStore;
+        this.tokenStore = tokenStore;
     }
 
     /**
@@ -71,38 +71,37 @@ public class PermissionValidFilter extends OncePerRequestFilter {
         }
         try {
             // 获取redis中的用户信息
-            ActiveUser activeUser = DptmsSecurityUtil.get();
+            ActiveUser activeUser = SecurityUserUtil.getActiveUser();
             // 查询权限list
             AuthUserDto userInfo = authRemoting.getNewInfo().getData();
             // 账号被删除
             if (userInfo == null) {
-                ResponseUtil.setJsonResult(response, JsonResult.buildErrorEnum(GatewayErrorCodeEnum.USER_ALREADY_DELETE));
+                ResponseUtil.writeJson(response, JsonResult.buildErrorEnum(GatewayErrorCodeEnum.USER_ALREADY_DELETE));
                 return;
             }
             // 账号被锁定
             if (userInfo.getIsLocked().equals(1)) {
-                ResponseUtil.setJsonResult(response, JsonResult.buildErrorEnum(GatewayErrorCodeEnum.USER_IS_LOCKED));
+                ResponseUtil.writeJson(response, JsonResult.buildErrorEnum(GatewayErrorCodeEnum.USER_IS_LOCKED));
                 return;
             }
             // 密码修改
             if (DateUtil.compare(userInfo.getPwdUpdateTime(), activeUser.getPwdUpdateTime()) != 0) {
-                ResponseUtil.setJsonResult(response, JsonResult.buildErrorEnum(GatewayErrorCodeEnum.PASSWORD_UPDATE));
+                ResponseUtil.writeJson(response, JsonResult.buildErrorEnum(GatewayErrorCodeEnum.PASSWORD_UPDATE));
                 return;
             }
             // 判断uri是否在权限list中
             if (!checkPermission(userInfo.getPermissionList(), uri)) {
                 log.info("用户: {} 访问无权限接口 {}", activeUser.getUsername(), uri);
-                ResponseUtil.setJsonResult(response, JsonResult.buildErrorEnum(GatewayErrorCodeEnum.FORBIDDEN));
+                ResponseUtil.writeJson(response, JsonResult.buildErrorEnum(GatewayErrorCodeEnum.FORBIDDEN));
                 return;
             }
             // 重新设置用户信息
             ActiveUser.convert(activeUser, userInfo);
-            dptmsTokenStore.updateActiveUser(activeUser);
-            DptmsSecurityUtil.set(activeUser);
+            tokenStore.updateActiveUser(activeUser);
             chain.doFilter(request, response);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
-            ResponseUtil.setJsonResult(response, JsonResult.buildErrorEnum(SecurityEnum.PERMISSION_VALID_ERROR));
+            ResponseUtil.writeJson(response, JsonResult.buildErrorEnum(SecurityEnum.PERMISSION_VALID_ERROR));
         }
     }
 

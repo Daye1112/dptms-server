@@ -4,14 +4,14 @@ import com.darren1112.dptms.common.core.message.JsonResult;
 import com.darren1112.dptms.common.core.util.ResponseEntityUtil;
 import com.darren1112.dptms.common.core.util.WebUtil;
 import com.darren1112.dptms.common.core.validate.handler.ValidateHandler;
-import com.darren1112.dptms.sdk.starter.log.annotation.Log;
-import com.darren1112.dptms.sdk.starter.log.enums.BusinessType;
-import com.darren1112.dptms.sdk.starter.log.enums.LogLevel;
-import com.darren1112.dptms.sdk.starter.security.util.DptmsSecurityUtil;
-import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 import com.darren1112.dptms.common.spi.file.dto.FileInfoDto;
 import com.darren1112.dptms.file.common.enums.FileManageErrorCodeEnum;
 import com.darren1112.dptms.file.service.FileInfoService;
+import com.darren1112.dptms.sdk.starter.log.annotation.Log;
+import com.darren1112.dptms.sdk.starter.log.enums.BusinessType;
+import com.darren1112.dptms.sdk.starter.log.enums.LogLevel;
+import com.darren1112.dptms.sdk.starter.security.model.ActiveUser;
+import com.darren1112.dptms.sdk.starter.security.util.SecurityUserUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -50,7 +50,7 @@ public class FileController {
     @Log(value = "文件上传", logLevel = LogLevel.INFO, businessType = BusinessType.INSERT)
     public ResponseEntity<JsonResult> uploadFile(MultipartFile file) {
         ValidateHandler.checkNull(file, FileManageErrorCodeEnum.FILE_NOT_NULL);
-        ActiveUser activeUser = DptmsSecurityUtil.get();
+        ActiveUser activeUser = SecurityUserUtil.getActiveUser();
         FileInfoDto fileInfoDto = fileInfoService.uploadFile(file, activeUser.getId());
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(fileInfoDto));
     }

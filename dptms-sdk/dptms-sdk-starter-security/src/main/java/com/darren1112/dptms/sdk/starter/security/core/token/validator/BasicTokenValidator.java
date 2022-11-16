@@ -1,9 +1,11 @@
-package com.darren1112.dptms.sdk.starter.security.core;
+package com.darren1112.dptms.sdk.starter.security.core.token.validator;
 
 import com.darren1112.dptms.common.core.constants.SecurityConstant;
 import com.darren1112.dptms.common.core.util.StringUtil;
-import com.darren1112.dptms.sdk.starter.security.util.DptmsSecurityUtil;
-import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
+import com.darren1112.dptms.sdk.starter.security.base.model.BaseSecurityUser;
+import com.darren1112.dptms.sdk.starter.security.core.token.store.TokenStore;
+import com.darren1112.dptms.sdk.starter.security.core.token.validator.base.TokenValidator;
+import com.darren1112.dptms.sdk.starter.security.model.ActiveUser;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,12 +17,12 @@ import java.util.Objects;
  * @author luyuhao
  * @since 2021/01/16 19:01
  */
-public class DptmsTokenValidator {
+public class BasicTokenValidator implements TokenValidator {
 
-    private DptmsTokenStore dptmsTokenStore;
+    private TokenStore tokenStore;
 
-    public DptmsTokenValidator(DptmsTokenStore dptmsTokenStore) {
-        this.dptmsTokenStore = dptmsTokenStore;
+    public BasicTokenValidator(TokenStore tokenStore) {
+        this.tokenStore = tokenStore;
     }
 
     /**
@@ -32,16 +34,17 @@ public class DptmsTokenValidator {
      * @author luyuhao
      * @since 2020/11/28 10:47
      */
-    public boolean tokenValidHandle(HttpServletRequest request, HttpServletResponse response) {
-        String accessToken = dptmsTokenStore.getAccessToken(request);
-        String refreshToken = dptmsTokenStore.getRefreshToken(request);
+    @Override
+    public boolean doValidate(HttpServletRequest request, HttpServletResponse response) {
+        String accessToken = tokenStore.getAccessToken(request);
+        String refreshToken = tokenStore.getRefreshToken(request);
         if (StringUtil.isBlank(accessToken) || StringUtil.isBlank(refreshToken)) {
             return false;
         }
         boolean flag;
         // token存在，校验是否合法
-        String redisRefreshToken = dptmsTokenStore.getRefreshToken(accessToken);
-        ActiveUser activeUser = dptmsTokenStore.getActiveUser(refreshToken);
+        String redisRefreshToken = tokenStore.getRefreshToken(accessToken);
+        BaseSecurityUser activeUser = tokenStore.getActiveUser(refreshToken);
         if (StringUtil.isNotBlank(redisRefreshToken)
                 && redisRefreshToken.equals(refreshToken)
                 && Objects.nonNull(activeUser)) {
@@ -49,16 +52,15 @@ public class DptmsTokenValidator {
             flag = true;
         } else if (StringUtil.isBlank(redisRefreshToken) && Objects.nonNull(activeUser)) {
             // accessToken无效, refreshToken有效 => 刷新accessToken，重置cookie
-            dptmsTokenStore.refreshAccessTokenAndCookie(refreshToken, response);
+            tokenStore.refreshAccessTokenAndCookie(refreshToken, response);
             flag = true;
         } else {
             // accessToken和refreshToken均无效 => 打回
             // accessToken有效, refreshToken无效 => 打回
-            dptmsTokenStore.removeTokenAndCookie(request, response);
+            tokenStore.removeTokenAndCookie(request, response);
             flag = false;
         }
         if (flag) {
-            DptmsSecurityUtil.set(activeUser);
             request.setAttribute(SecurityConstant.ACCESS_TOKEN_KEY, accessToken);
             request.setAttribute(SecurityConstant.REFRESH_TOKEN_KEY, refreshToken);
         }
@@ -75,15 +77,15 @@ public class DptmsTokenValidator {
      * @since 2021/01/31 19:08
      */
     public boolean repeatLoginValidHandle(HttpServletRequest request, HttpServletResponse response) {
-        String refreshToken = dptmsTokenStore.getRefreshToken(request);
+        String refreshToken = tokenStore.getRefreshToken(request);
         if (StringUtil.isBlank(refreshToken)) {
             return false;
         }
-        ActiveUser activeUser = dptmsTokenStore.getActiveUser(refreshToken);
-        String userRefreshToken = dptmsTokenStore.getUserRefreshToken(activeUser);
+        ActiveUser activeUser = tokenStore.getActiveUser(refreshToken);
+        String userRefreshToken = tokenStore.getUserRefreshToken(activeUser);
         if (StringUtil.isBlank(userRefreshToken) || !userRefreshToken.equals(refreshToken)) {
             // 当前用户被挤下线，删除当前的token
-            dptmsTokenStore.removeTokenAndCookie(request, response);
+            tokenStore.removeTokenAndCookie(request, response);
             return false;
         } else {
             return true;

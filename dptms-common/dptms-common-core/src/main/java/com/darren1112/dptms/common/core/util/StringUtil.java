@@ -160,4 +160,16 @@ public class StringUtil extends StringUtils {
         }
         return Arrays.stream(split(str, delimiter)).collect(Collectors.toSet());
     }
+
+    /**
+     * 字符串是否为空
+     *
+     * @param str 待校验串
+     * @return {@link boolean}
+     * @author luyuhao
+     * @since 2022/11/15
+     */
+    public static boolean isEmpty(CharSequence str) {
+        return str == null || str.length() == 0;
+    }
 }

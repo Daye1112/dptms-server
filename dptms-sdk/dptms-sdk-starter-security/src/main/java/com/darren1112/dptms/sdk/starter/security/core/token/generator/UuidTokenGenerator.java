@@ -1,6 +1,7 @@
-package com.darren1112.dptms.sdk.starter.security.core;
+package com.darren1112.dptms.sdk.starter.security.core.token.generator;
 
 import com.darren1112.dptms.common.core.util.UuidUtil;
+import com.darren1112.dptms.sdk.starter.security.core.token.generator.base.TokenGenerator;
 
 /**
  * token生成类
@@ -8,7 +9,7 @@ import com.darren1112.dptms.common.core.util.UuidUtil;
  * @author luyuhao
  * @since 2021/01/16 17:10
  */
-public class DptmsTokenGenerator {
+public class UuidTokenGenerator implements TokenGenerator {
 
     /**
      * 生成默认token
@@ -17,7 +18,8 @@ public class DptmsTokenGenerator {
      * @author luyuhao
      * @since 2021/01/16 17:11
      */
-    public static String generateDefaultToken() {
+    @Override
+    public <T> String generate(T param) {
         return UuidUtil.generateDefault();
     }
 }

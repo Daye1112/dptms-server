@@ -5,12 +5,12 @@ import com.darren1112.dptms.common.core.util.ResponseEntityUtil;
 import com.darren1112.dptms.common.core.validate.ValidatorBuilder;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotEmptyValidatorCallback;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotNullValidatorCallback;
+import com.darren1112.dptms.common.spi.service.dto.ServiceConfigProfileDto;
 import com.darren1112.dptms.sdk.starter.log.annotation.Log;
 import com.darren1112.dptms.sdk.starter.log.enums.BusinessType;
 import com.darren1112.dptms.sdk.starter.log.enums.LogLevel;
-import com.darren1112.dptms.sdk.starter.security.util.DptmsSecurityUtil;
-import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
-import com.darren1112.dptms.common.spi.service.dto.ServiceConfigProfileDto;
+import com.darren1112.dptms.sdk.starter.security.model.ActiveUser;
+import com.darren1112.dptms.sdk.starter.security.util.SecurityUserUtil;
 import com.darren1112.dptms.system.common.enums.SystemManageErrorCodeEnum;
 import com.darren1112.dptms.system.service.service.ServiceConfigProfileService;
 import io.swagger.annotations.Api;
@@ -74,7 +74,7 @@ public class ServiceConfigProfileController {
                 .on(dto.getProfileName(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.PROFILE_NAME_NOT_NULL))
                 .doValidate().checkResult();
         // 设置创建者信息
-        ActiveUser activeUser = DptmsSecurityUtil.get();
+        ActiveUser activeUser = SecurityUserUtil.getActiveUser();
         dto.setCreater(activeUser.getId());
         dto.setUpdater(activeUser.getId());
         Long id = serviceConfigProfileService.insert(dto);
@@ -100,7 +100,7 @@ public class ServiceConfigProfileController {
                 .on(dto.getProfileName(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.PROFILE_NAME_NOT_NULL))
                 .doValidate().checkResult();
         // 设置创建者信息
-        ActiveUser activeUser = DptmsSecurityUtil.get();
+        ActiveUser activeUser = SecurityUserUtil.getActiveUser();
         dto.setCreater(activeUser.getId());
         dto.setUpdater(activeUser.getId());
         serviceConfigProfileService.update(dto);
@@ -123,7 +123,7 @@ public class ServiceConfigProfileController {
                 .on(id, new NotNullValidatorCallback(SystemManageErrorCodeEnum.ID_NOT_NULL))
                 .doValidate().checkResult();
         // 设置创建者信息
-        ActiveUser activeUser = DptmsSecurityUtil.get();
+        ActiveUser activeUser = SecurityUserUtil.getActiveUser();
         serviceConfigProfileService.deleteById(id, activeUser.getId());
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }

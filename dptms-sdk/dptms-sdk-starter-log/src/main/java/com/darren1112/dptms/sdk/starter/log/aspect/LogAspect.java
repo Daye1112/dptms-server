@@ -2,13 +2,13 @@ package com.darren1112.dptms.sdk.starter.log.aspect;
 
 import com.darren1112.dptms.common.core.base.BaseAop;
 import com.darren1112.dptms.common.core.util.RequestUtil;
+import com.darren1112.dptms.common.spi.monitor.dto.MonitorOperateLogDto;
 import com.darren1112.dptms.sdk.starter.log.annotation.Log;
 import com.darren1112.dptms.sdk.starter.log.collect.LogCollectService;
 import com.darren1112.dptms.sdk.starter.log.enums.LogLevel;
 import com.darren1112.dptms.sdk.starter.log.properties.LogProperties;
-import com.darren1112.dptms.sdk.starter.security.util.DptmsSecurityUtil;
-import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
-import com.darren1112.dptms.common.spi.monitor.dto.MonitorOperateLogDto;
+import com.darren1112.dptms.sdk.starter.security.model.ActiveUser;
+import com.darren1112.dptms.sdk.starter.security.util.SecurityUserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -113,7 +113,7 @@ public class LogAspect extends BaseAop {
     private MonitorOperateLogDto buildDto(JoinPoint joinPoint, Log logAnnotation, Throwable e) {
         // 获取请求域、用户信息等
         HttpServletRequest request = RequestUtil.getHttpServletRequest();
-        ActiveUser activeUser = DptmsSecurityUtil.get();
+        ActiveUser activeUser = SecurityUserUtil.getDefaultActiveUser();
         // 初始化对象
         MonitorOperateLogDto dto = new MonitorOperateLogDto();
         // 用户名

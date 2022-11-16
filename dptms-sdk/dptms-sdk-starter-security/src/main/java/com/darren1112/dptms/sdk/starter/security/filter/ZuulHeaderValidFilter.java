@@ -54,7 +54,7 @@ public class ZuulHeaderValidFilter extends OncePerRequestFilter {
         String realZuulTokenValue = new String(Base64Utils.encode(securityProperties.getHeaderValue().getBytes()));
         if (!StringUtil.equal(zuulTokenValue, realZuulTokenValue)) {
             JsonResult jsonResult = JsonResult.buildErrorEnum(MicroErrorCodeEnum.INVALID_ACCESS);
-            ResponseUtil.setJsonResult(response, jsonResult);
+            ResponseUtil.writeJson(response, jsonResult);
             return;
         }
         chain.doFilter(request, response);

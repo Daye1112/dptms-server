@@ -3,15 +3,15 @@ package com.darren1112.dptms.monitor.controller;
 import com.darren1112.dptms.common.core.base.BaseController;
 import com.darren1112.dptms.common.core.message.JsonResult;
 import com.darren1112.dptms.common.core.util.ResponseEntityUtil;
-import com.darren1112.dptms.sdk.starter.log.annotation.Log;
-import com.darren1112.dptms.sdk.starter.log.enums.BusinessType;
-import com.darren1112.dptms.sdk.starter.log.enums.LogLevel;
-import com.darren1112.dptms.sdk.starter.security.util.DptmsSecurityUtil;
-import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
 import com.darren1112.dptms.common.spi.monitor.dto.MonitorLoginLogDto;
 import com.darren1112.dptms.monitor.service.MonitorLoginLogService;
+import com.darren1112.dptms.sdk.starter.log.annotation.Log;
+import com.darren1112.dptms.sdk.starter.log.enums.BusinessType;
+import com.darren1112.dptms.sdk.starter.log.enums.LogLevel;
+import com.darren1112.dptms.sdk.starter.security.model.ActiveUser;
+import com.darren1112.dptms.sdk.starter.security.util.SecurityUserUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -80,7 +80,7 @@ public class MonitorLoginLogController extends BaseController {
     @ApiOperation("查询当前用户的登录日志")
     @Log(value = "查询当前用户的登录日志", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     public ResponseEntity<JsonResult<List<MonitorLoginLogDto>>> listCurrentUser() {
-        ActiveUser activeUser = DptmsSecurityUtil.get();
+        ActiveUser activeUser = SecurityUserUtil.getActiveUser();
         List<MonitorLoginLogDto> list = monitorLoginLogService.listLastSevenByUserId(activeUser.getId());
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(list));
     }

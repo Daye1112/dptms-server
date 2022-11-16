@@ -4,10 +4,9 @@ import com.darren1112.dptms.common.core.constants.FileConstant;
 import com.darren1112.dptms.common.core.message.JsonResult;
 import com.darren1112.dptms.common.core.util.ResponseUtil;
 import com.darren1112.dptms.common.core.util.UrlUtil;
-import com.darren1112.dptms.sdk.starter.security.core.DptmsTokenValidator;
+import com.darren1112.dptms.sdk.starter.security.core.token.validator.BasicTokenValidator;
 import com.darren1112.dptms.sdk.starter.security.enums.SecurityEnum;
 import com.darren1112.dptms.sdk.starter.security.properties.SecurityProperties;
-import com.darren1112.dptms.sdk.starter.security.util.DptmsSecurityUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -25,15 +24,15 @@ import java.io.IOException;
  * @since 2021/01/16 18:59
  */
 @Slf4j
-public class DptmsTokenValidFilter extends OncePerRequestFilter {
+public class AccessTokenValidFilter extends OncePerRequestFilter {
 
     private SecurityProperties securityProperties;
 
-    private DptmsTokenValidator dptmsTokenValidator;
+    private BasicTokenValidator basicTokenValidator;
 
-    public DptmsTokenValidFilter(SecurityProperties securityProperties, DptmsTokenValidator dptmsTokenValidator) {
+    public AccessTokenValidFilter(SecurityProperties securityProperties, BasicTokenValidator basicTokenValidator) {
         this.securityProperties = securityProperties;
-        this.dptmsTokenValidator = dptmsTokenValidator;
+        this.basicTokenValidator = basicTokenValidator;
     }
 
     /**
@@ -71,21 +70,19 @@ public class DptmsTokenValidFilter extends OncePerRequestFilter {
         }
         try {
             // token校验
-            if (!dptmsTokenValidator.tokenValidHandle(request, response)) {
-                ResponseUtil.setJsonResult(response, JsonResult.buildErrorEnum(SecurityEnum.NOT_LOGIN));
+            if (!basicTokenValidator.doValidate(request, response)) {
+                ResponseUtil.writeJson(response, JsonResult.buildErrorEnum(SecurityEnum.NOT_LOGIN));
                 return;
             }
             // 重复登录校验
-            if (!dptmsTokenValidator.repeatLoginValidHandle(request, response)) {
-                ResponseUtil.setJsonResult(response, JsonResult.buildErrorEnum(SecurityEnum.REPEAT_LOGIN));
+            if (!basicTokenValidator.repeatLoginValidHandle(request, response)) {
+                ResponseUtil.writeJson(response, JsonResult.buildErrorEnum(SecurityEnum.REPEAT_LOGIN));
                 return;
             }
             chain.doFilter(request, response);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
-            ResponseUtil.setJsonResult(response, JsonResult.buildErrorEnum(SecurityEnum.TOKEN_VALID_ERROR));
-        } finally {
-            DptmsSecurityUtil.remove();
+            ResponseUtil.writeJson(response, JsonResult.buildErrorEnum(SecurityEnum.TOKEN_VALID_ERROR));
         }
     }
 }

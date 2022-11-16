@@ -27,13 +27,14 @@ public class SecurityProperties {
      * 免认证资源路径，支持通配符
      * 多个值时使用逗号分隔
      */
-    private String[] anonUris;
+    private String[] anonUris = new String[0];
 
     /**
      * 免权限认证资源路径，支持通配符
      * 多个值时使用逗号分隔
      */
-    private String[] anonPermissionUris;
+    private String[] anonPermissionUris = new String[0];
+    ;
 
     /**
      * token有效期(s)
@@ -44,4 +45,14 @@ public class SecurityProperties {
      * 刷新token有效期(s)
      */
     private int refreshTokenExpired = 60 * 60 * 24 * 7;
+
+    /**
+     * 登录路径
+     */
+    private String loginPath = "/login";
+
+    /**
+     * 登出路径
+     */
+    private String logoutPath = "/logout";
 }

@@ -1,12 +1,12 @@
 package com.darren1112.dptms.gateway.common.config;
 
 import com.darren1112.dptms.common.core.constants.FilterOrderConstant;
-import com.darren1112.dptms.sdk.starter.security.core.DptmsTokenStore;
-import com.darren1112.dptms.sdk.starter.security.core.DptmsTokenValidator;
-import com.darren1112.dptms.sdk.starter.security.filter.DptmsTokenValidFilter;
-import com.darren1112.dptms.sdk.starter.security.properties.SecurityProperties;
-import com.darren1112.dptms.sdk.component.remoting.AuthRemoting;
 import com.darren1112.dptms.gateway.common.filter.PermissionValidFilter;
+import com.darren1112.dptms.sdk.component.remoting.AuthRemoting;
+import com.darren1112.dptms.sdk.starter.security.core.token.store.TokenStore;
+import com.darren1112.dptms.sdk.starter.security.core.token.validator.BasicTokenValidator;
+import com.darren1112.dptms.sdk.starter.security.filter.AccessTokenValidFilter;
+import com.darren1112.dptms.sdk.starter.security.properties.SecurityProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -49,9 +49,9 @@ public class ZuulConfig {
     }
 
     @Bean
-    public FilterRegistrationBean dptmsTokenFilter(SecurityProperties securityProperties, DptmsTokenValidator dptmsTokenValidator) {
-        DptmsTokenValidFilter dptmsTokenFilter = new DptmsTokenValidFilter(securityProperties, dptmsTokenValidator);
-        FilterRegistrationBean<DptmsTokenValidFilter> filterRegistrationBean = new FilterRegistrationBean<>();
+    public FilterRegistrationBean dptmsTokenFilter(SecurityProperties securityProperties, BasicTokenValidator basicTokenValidator) {
+        AccessTokenValidFilter dptmsTokenFilter = new AccessTokenValidFilter(securityProperties, basicTokenValidator);
+        FilterRegistrationBean<AccessTokenValidFilter> filterRegistrationBean = new FilterRegistrationBean<>();
         filterRegistrationBean.setFilter(dptmsTokenFilter);
         filterRegistrationBean.addUrlPatterns("/*");
         //order的数值越小 则优先级越高
@@ -61,8 +61,8 @@ public class ZuulConfig {
     }
 
     @Bean
-    public FilterRegistrationBean permissionValidateFilterBean(SecurityProperties securityProperties, AuthRemoting authRemoting, DptmsTokenStore dptmsTokenStore) {
-        PermissionValidFilter permissionValidateFilter = new PermissionValidFilter(securityProperties, authRemoting, dptmsTokenStore);
+    public FilterRegistrationBean permissionValidateFilterBean(SecurityProperties securityProperties, AuthRemoting authRemoting, TokenStore tokenStore) {
+        PermissionValidFilter permissionValidateFilter = new PermissionValidFilter(securityProperties, authRemoting, tokenStore);
         FilterRegistrationBean<PermissionValidFilter> filterRegistrationBean = new FilterRegistrationBean<>();
         filterRegistrationBean.setFilter(permissionValidateFilter);
         filterRegistrationBean.addUrlPatterns("/*");

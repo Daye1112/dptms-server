@@ -53,8 +53,6 @@ public enum AuthErrorCodeEnum implements BaseErrorEnum {
     CAPTCHA_GENERATE_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "验证码生成异常"),
     CAPTCHA_KEY_NOT_NULL(HttpStatus.BAD_REQUEST, "验证码key不能为空"),
     CAPTCHA_CODE_NOT_NULL(HttpStatus.BAD_REQUEST, "验证码code不能为空"),
-    CAPTCHA_INVALID(HttpStatus.BAD_REQUEST, "验证码已失效，请刷新验证码"),
-    CAPTCHA_CODE_ERROR(HttpStatus.BAD_REQUEST, "验证码错误")
     ;
 
     private Integer code;

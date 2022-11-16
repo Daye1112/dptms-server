@@ -17,6 +17,19 @@ import java.util.Objects;
 public class ResponseUtil {
 
     /**
+     * 向响应域中写入jsonResult字符串
+     *
+     * @param response   响应域
+     * @param jsonString jsonResult
+     * @author luyuhao
+     * @since 2022/03/31
+     */
+    public static void writeJson(HttpServletResponse response, String jsonString) {
+        JsonResult jsonResult = JsonUtil.parseObject(jsonString, JsonResult.class);
+        writeJson(response, jsonResult);
+    }
+
+    /**
      * 设置jsonResult响应
      *
      * @param response   响应域
@@ -24,7 +37,7 @@ public class ResponseUtil {
      * @author luyuhao
      * @since 20/08/02 02:50
      */
-    public static void setJsonResult(HttpServletResponse response, JsonResult jsonResult) {
+    public static void writeJson(HttpServletResponse response, JsonResult jsonResult) {
         PrintWriter out = null;
         try {
             String jsonString = JsonUtil.toJsonString(jsonResult);

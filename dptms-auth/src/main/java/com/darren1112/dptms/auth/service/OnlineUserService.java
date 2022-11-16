@@ -1,8 +1,8 @@
 package com.darren1112.dptms.auth.service;
 
-import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
+import com.darren1112.dptms.sdk.starter.security.model.ActiveUser;
 
 /**
  * 在线用户管理Service

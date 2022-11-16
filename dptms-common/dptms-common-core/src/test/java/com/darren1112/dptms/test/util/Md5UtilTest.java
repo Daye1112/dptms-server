@@ -10,10 +10,19 @@ import org.junit.Test;
 public class Md5UtilTest {
 
     @Test
-    public void test01(){
+    public void test01() {
         String salt = String.valueOf(System.currentTimeMillis());
         String encrypt = Md5Util.encrypt("123456", salt);
         System.out.println(salt);
         System.out.println(encrypt);
+    }
+
+    @Test
+    public void test02() {
+        String salt = "123456789";
+        String encrypt1 = Md5Util.encrypt("admin", salt);
+        String encrypt2 = Md5Util.encrypt(salt + "admin", "");
+        System.out.println(encrypt1);
+        System.out.println(encrypt2);
     }
 }

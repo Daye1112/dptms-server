@@ -2,27 +2,20 @@ package com.darren1112.dptms.auth.controller;
 
 import com.darren1112.dptms.auth.common.constants.AuthConstant;
 import com.darren1112.dptms.auth.common.enums.AuthErrorCodeEnum;
-import com.darren1112.dptms.auth.common.security.PasswordLoginHandler;
 import com.darren1112.dptms.common.core.captcha.CaptchaUtil;
 import com.darren1112.dptms.common.core.captcha.context.CaptchaParam;
 import com.darren1112.dptms.common.core.captcha.context.CaptchaResult;
 import com.darren1112.dptms.common.core.constants.RedisConstant;
 import com.darren1112.dptms.common.core.message.JsonResult;
 import com.darren1112.dptms.common.core.util.ResponseEntityUtil;
-import com.darren1112.dptms.common.core.validate.ValidatorBuilder;
-import com.darren1112.dptms.common.core.validate.validator.callback.common.NotEmptyValidatorCallback;
-import com.darren1112.dptms.common.core.validate.validator.callback.common.NotNullValidatorCallback;
 import com.darren1112.dptms.sdk.starter.redis.core.RedisUtil;
-import com.darren1112.dptms.sdk.starter.security.core.DptmsTokenStore;
-import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
-import com.darren1112.dptms.common.spi.common.dto.LoginParam;
+import com.darren1112.dptms.sdk.starter.security.core.token.store.TokenStore;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -45,10 +38,7 @@ public class LoginController {
     private RedisUtil redisUtil;
 
     @Autowired
-    private PasswordLoginHandler passwordLoginHandler;
-
-    @Autowired
-    private DptmsTokenStore dptmsTokenStore;
+    private TokenStore tokenStore;
 
     /**
      * 生成验证码
@@ -73,31 +63,31 @@ public class LoginController {
         }
     }
 
-    /**
-     * 登录系统
-     *
-     * @param loginParam 登录参数
-     * @param request    请求域
-     * @param response   响应域
-     * @return {@link ActiveUser}
-     * @author luyuhao
-     * @since 20/11/22 21:55
-     */
-    @ApiOperation("登录系统")
-    @PostMapping("/login")
-    public ResponseEntity<JsonResult<ActiveUser>> login(LoginParam loginParam,
-                                                        HttpServletRequest request,
-                                                        HttpServletResponse response) {
-        ValidatorBuilder.build()
-                .on(loginParam.getUsername(), new NotEmptyValidatorCallback(AuthErrorCodeEnum.USERNAME_NOT_NULL))
-                .on(loginParam.getPassword(), new NotEmptyValidatorCallback(AuthErrorCodeEnum.PASSWORD_NOT_NULL))
-                .on(loginParam.getLoginType(), new NotNullValidatorCallback(AuthErrorCodeEnum.LOGIN_TYPE_NOT_NULL))
-                .on(loginParam.getCaptchaKey(), new NotEmptyValidatorCallback(AuthErrorCodeEnum.CAPTCHA_KEY_NOT_NULL))
-                .on(loginParam.getCaptchaCode(), new NotEmptyValidatorCallback(AuthErrorCodeEnum.CAPTCHA_CODE_NOT_NULL))
-                .doValidate().checkResult();
-        ActiveUser activeUser = passwordLoginHandler.loginHandler(loginParam, request, response);
-        return ResponseEntityUtil.ok(JsonResult.buildSuccessData(activeUser));
-    }
+    // /**
+    //  * 登录系统
+    //  *
+    //  * @param loginParam 登录参数
+    //  * @param request    请求域
+    //  * @param response   响应域
+    //  * @return {@link ActiveUser}
+    //  * @author luyuhao
+    //  * @since 20/11/22 21:55
+    //  */
+    // @ApiOperation("登录系统")
+    // @PostMapping("/login")
+    // public ResponseEntity<JsonResult<ActiveUser>> login(LoginParam loginParam,
+    //                                                     HttpServletRequest request,
+    //                                                     HttpServletResponse response) {
+    //     ValidatorBuilder.build()
+    //             .on(loginParam.getUsername(), new NotEmptyValidatorCallback(AuthErrorCodeEnum.USERNAME_NOT_NULL))
+    //             .on(loginParam.getPassword(), new NotEmptyValidatorCallback(AuthErrorCodeEnum.PASSWORD_NOT_NULL))
+    //             .on(loginParam.getLoginType(), new NotNullValidatorCallback(AuthErrorCodeEnum.LOGIN_TYPE_NOT_NULL))
+    //             .on(loginParam.getCaptchaKey(), new NotEmptyValidatorCallback(AuthErrorCodeEnum.CAPTCHA_KEY_NOT_NULL))
+    //             .on(loginParam.getCaptchaCode(), new NotEmptyValidatorCallback(AuthErrorCodeEnum.CAPTCHA_CODE_NOT_NULL))
+    //             .doValidate().checkResult();
+    //     ActiveUser activeUser = passwordLoginHandler.loginHandler(loginParam, request, response);
+    //     return ResponseEntityUtil.ok(JsonResult.buildSuccessData(activeUser));
+    // }
 
     /**
      * 登出系统
@@ -112,7 +102,7 @@ public class LoginController {
     @GetMapping("/logout")
     public ResponseEntity<JsonResult> logout(HttpServletRequest request,
                                              HttpServletResponse response) {
-        dptmsTokenStore.removeTokenAndCookie(request, response);
+        tokenStore.removeTokenAndCookie(request, response);
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }
 

@@ -10,13 +10,13 @@ import com.darren1112.dptms.common.core.util.ResponseEntityUtil;
 import com.darren1112.dptms.common.core.validate.ValidatorBuilder;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotEmptyValidatorCallback;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotNullValidatorCallback;
+import com.darren1112.dptms.common.spi.auth.dto.AuthMenuDto;
+import com.darren1112.dptms.common.spi.auth.entity.AuthMenuEntity;
 import com.darren1112.dptms.sdk.starter.log.annotation.Log;
 import com.darren1112.dptms.sdk.starter.log.enums.BusinessType;
 import com.darren1112.dptms.sdk.starter.log.enums.LogLevel;
-import com.darren1112.dptms.sdk.starter.security.util.DptmsSecurityUtil;
-import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
-import com.darren1112.dptms.common.spi.auth.dto.AuthMenuDto;
-import com.darren1112.dptms.common.spi.auth.entity.AuthMenuEntity;
+import com.darren1112.dptms.sdk.starter.security.model.ActiveUser;
+import com.darren1112.dptms.sdk.starter.security.util.SecurityUserUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -63,7 +63,7 @@ public class AuthMenuController extends BaseController {
                 .on(entity.getMenuType(), new NotNullValidatorCallback(AuthErrorCodeEnum.MENU_TYPE_NOT_NULL))
                 .on(entity.getMenuParentId(), new NotNullValidatorCallback(AuthErrorCodeEnum.MENU_PARENT_ID_NOT_NULL))
                 .doValidate().checkResult();
-        ActiveUser activeUser = DptmsSecurityUtil.get();
+        ActiveUser activeUser = SecurityUserUtil.getActiveUser();
         entity.setCreater(activeUser.getId());
         entity.setUpdater(activeUser.getId());
         Long id = authMenuService.insert(entity);
@@ -85,7 +85,7 @@ public class AuthMenuController extends BaseController {
         ValidatorBuilder.build()
                 .on(id, new NotNullValidatorCallback(AuthErrorCodeEnum.ID_NOT_NULL))
                 .doValidate().checkResult();
-        ActiveUser activeUser = DptmsSecurityUtil.get();
+        ActiveUser activeUser = SecurityUserUtil.getActiveUser();
         authMenuService.deleteById(id, activeUser.getId());
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }
@@ -124,7 +124,7 @@ public class AuthMenuController extends BaseController {
                 .on(entity.getMenuType(), new NotNullValidatorCallback(AuthErrorCodeEnum.MENU_TYPE_NOT_NULL))
                 .on(entity.getMenuParentId(), new NotNullValidatorCallback(AuthErrorCodeEnum.MENU_PARENT_ID_NOT_NULL))
                 .doValidate().checkResult();
-        ActiveUser activeUser = DptmsSecurityUtil.get();
+        ActiveUser activeUser = SecurityUserUtil.getActiveUser();
         entity.setUpdater(activeUser.getId());
         Long count = authMenuService.update(entity);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(count));
@@ -166,7 +166,7 @@ public class AuthMenuController extends BaseController {
         ValidatorBuilder.build()
                 .on(menuId, new NotNullValidatorCallback(AuthErrorCodeEnum.MENU_ID_NOT_NULL))
                 .doValidate().checkResult();
-        ActiveUser activeUser = DptmsSecurityUtil.get();
+        ActiveUser activeUser = SecurityUserUtil.getActiveUser();
         authMenuPermissionService.assignedPer(menuId, perIds, activeUser.getId());
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }

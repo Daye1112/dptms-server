@@ -17,7 +17,12 @@ public enum SecurityEnum implements BaseErrorEnum {
     NOT_LOGIN(HttpStatus.UNAUTHORIZED, "请先登录"),
     REPEAT_LOGIN(HttpStatus.UNAUTHORIZED, "账号已在其他地方登录"),
     TOKEN_VALID_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "token校验异常，请联系管理员"),
-    PERMISSION_VALID_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "权限校验异常，请联系管理员")
+    PERMISSION_VALID_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "权限校验异常，请联系管理员"),
+    HAS_NO_PERMISSION(HttpStatus.FORBIDDEN, "权限不足"),
+    USERNAME_PASSWORD_ERROR(HttpStatus.BAD_REQUEST, "账号或密码错误"),
+    CAPTCHA_INVALID(HttpStatus.BAD_REQUEST, "验证码已失效，请刷新验证码"),
+    CAPTCHA_CODE_ERROR(HttpStatus.BAD_REQUEST, "验证码错误"),
+    LOCKED(HttpStatus.BAD_REQUEST, "用户已被锁定，请联系管理员"),
     ;
 
     private Integer code;

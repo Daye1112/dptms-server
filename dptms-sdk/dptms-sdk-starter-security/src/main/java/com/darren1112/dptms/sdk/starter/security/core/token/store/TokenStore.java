@@ -1,10 +1,12 @@
-package com.darren1112.dptms.sdk.starter.security.core;
+package com.darren1112.dptms.sdk.starter.security.core.token.store;
 
 import com.darren1112.dptms.common.core.util.RequestUtil;
 import com.darren1112.dptms.common.core.util.StringUtil;
 import com.darren1112.dptms.sdk.starter.redis.core.RedisUtil;
+import com.darren1112.dptms.sdk.starter.security.base.model.BaseSecurityUser;
+import com.darren1112.dptms.sdk.starter.security.core.token.generator.base.TokenGenerator;
+import com.darren1112.dptms.sdk.starter.security.core.token.store.base.BaseTokenStore;
 import com.darren1112.dptms.sdk.starter.security.properties.SecurityProperties;
-import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,10 +17,14 @@ import javax.servlet.http.HttpServletResponse;
  * @author luyuhao
  * @since 2021/01/16 19:06
  */
-public class DptmsTokenStore extends BaseDptmsTokenStore {
+public class TokenStore extends BaseTokenStore {
 
-    public DptmsTokenStore(RedisUtil redisUtil, SecurityProperties securityProperties) {
-        super(redisUtil, securityProperties);
+    private TokenGenerator tokenGenerator;
+
+    public TokenStore(RedisUtil redisUtil, SecurityProperties securityProperties, TokenGenerator tokenGenerator,
+                      Class<? extends BaseSecurityUser> userClass) {
+        super(redisUtil, securityProperties, userClass);
+        this.tokenGenerator = tokenGenerator;
     }
 
     /**
@@ -30,7 +36,7 @@ public class DptmsTokenStore extends BaseDptmsTokenStore {
      * @author luyuhao
      * @since 20/11/25 00:25
      */
-    private void saveToken(ActiveUser activeUser, String accessToken, String refreshToken) {
+    private <T extends BaseSecurityUser> void saveToken(T activeUser, String accessToken, String refreshToken) {
         // 设置accessToken
         super.saveAccessToken(accessToken, refreshToken);
         // 设置refreshToken
@@ -45,11 +51,11 @@ public class DptmsTokenStore extends BaseDptmsTokenStore {
      * 获取用户信息
      *
      * @param request 请求域
-     * @return {@link ActiveUser 用户信息}
+     * @return {@link T 用户信息}
      * @author luyuhao
      * @since 20/11/28 01:22
      */
-    public ActiveUser getActiveUser(HttpServletRequest request) {
+    public <T extends BaseSecurityUser> T getActiveUser(HttpServletRequest request) {
         return super.getActiveUser(request, getRefreshToken(request));
     }
 
@@ -62,7 +68,7 @@ public class DptmsTokenStore extends BaseDptmsTokenStore {
      * @since 2021/01/16 19:15
      */
     public void refreshAccessTokenAndCookie(String refreshToken, HttpServletResponse response) {
-        String newAccessToken = DptmsTokenGenerator.generateDefaultToken();
+        String newAccessToken = tokenGenerator.generate(null);
         // 设置access token
         super.saveAccessToken(newAccessToken, refreshToken);
         // 设置access token cookie
@@ -101,10 +107,10 @@ public class DptmsTokenStore extends BaseDptmsTokenStore {
      * @author luyuhao
      * @since 2021/01/17 01:11
      */
-    public void generateToken(ActiveUser activeUser, HttpServletResponse response) {
+    public <T extends BaseSecurityUser> void generateToken(T activeUser, HttpServletResponse response) {
         // 生成token
-        String accessToken = DptmsTokenGenerator.generateDefaultToken();
-        String refreshToken = DptmsTokenGenerator.generateDefaultToken();
+        String accessToken = tokenGenerator.generate(null);
+        String refreshToken = tokenGenerator.generate(null);
         // 保存到redis
         saveToken(activeUser, accessToken, refreshToken);
         // 保存到cookie
@@ -173,7 +179,7 @@ public class DptmsTokenStore extends BaseDptmsTokenStore {
      * @author luyuhao
      * @since 2021/01/31 20:00
      */
-    public void updateActiveUser(ActiveUser activeUser) {
+    public <T extends BaseSecurityUser> void updateActiveUser(T activeUser) {
         String refreshToken = getRefreshToken();
         super.updateActiveUser(activeUser, refreshToken);
     }
@@ -185,9 +191,9 @@ public class DptmsTokenStore extends BaseDptmsTokenStore {
      * @author luyuhao
      * @since 2021/07/28
      */
-    private void removeUserRefreshToken(String refreshToken) {
+    private <T extends BaseSecurityUser> void removeUserRefreshToken(String refreshToken) {
         if (StringUtil.isNotBlank(refreshToken)) {
-            ActiveUser activeUser = super.getActiveUser(refreshToken);
+            T activeUser = super.getActiveUser(refreshToken);
             if (activeUser != null) {
                 super.removeUserRefreshToken(activeUser);
             }

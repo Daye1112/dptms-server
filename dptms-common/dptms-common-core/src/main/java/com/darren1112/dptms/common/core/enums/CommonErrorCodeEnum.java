@@ -17,7 +17,7 @@ public enum CommonErrorCodeEnum implements BaseErrorEnum {
     OBJECT_NOT_NULL(HttpStatus.BAD_REQUEST, "对象不能为空"),
     STRING_NOT_EMPTY(HttpStatus.BAD_REQUEST, "字符串不能为空"),
     STRING_TOO_LONG(HttpStatus.BAD_REQUEST, "字符串长度过长"),
-    ;
+    ACTIVE_USER_NULL(HttpStatus.BAD_REQUEST, "当前用户信息不存在");
 
     private Integer code;
     private String message;

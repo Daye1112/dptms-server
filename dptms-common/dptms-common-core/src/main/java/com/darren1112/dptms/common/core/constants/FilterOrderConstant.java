@@ -24,8 +24,13 @@ public class FilterOrderConstant {
     public static final int PERMISSION_VALID_FILTER = 11;
 
     /**
-     * 添加用户信息filter
+     * 用户信息过滤器
      */
-    public static final int ADD_USER_FILTER = 12;
+    public static final int SECURITY_USER_FILTER = 12;
+
+    /**
+     * 登录流程过滤器
+     */
+    public static final int LOGIN_PROCESSING_FILTER = 13;
 
 }

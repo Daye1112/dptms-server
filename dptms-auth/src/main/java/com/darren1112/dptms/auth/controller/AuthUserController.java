@@ -12,15 +12,15 @@ import com.darren1112.dptms.common.core.util.ResponseEntityUtil;
 import com.darren1112.dptms.common.core.validate.ValidatorBuilder;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotEmptyValidatorCallback;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotNullValidatorCallback;
+import com.darren1112.dptms.common.spi.auth.dto.AuthUserDto;
+import com.darren1112.dptms.common.spi.auth.entity.AuthUserEntity;
+import com.darren1112.dptms.common.spi.common.dto.PageBean;
+import com.darren1112.dptms.common.spi.common.dto.PageParam;
 import com.darren1112.dptms.sdk.starter.log.annotation.Log;
 import com.darren1112.dptms.sdk.starter.log.enums.BusinessType;
 import com.darren1112.dptms.sdk.starter.log.enums.LogLevel;
-import com.darren1112.dptms.sdk.starter.security.util.DptmsSecurityUtil;
-import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
-import com.darren1112.dptms.common.spi.common.dto.PageBean;
-import com.darren1112.dptms.common.spi.common.dto.PageParam;
-import com.darren1112.dptms.common.spi.auth.dto.AuthUserDto;
-import com.darren1112.dptms.common.spi.auth.entity.AuthUserEntity;
+import com.darren1112.dptms.sdk.starter.security.model.ActiveUser;
+import com.darren1112.dptms.sdk.starter.security.util.SecurityUserUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -85,7 +85,7 @@ public class AuthUserController extends BaseController {
         ValidatorBuilder.build()
                 .on(userId, new NotNullValidatorCallback(AuthErrorCodeEnum.USER_ID_NOT_NULL))
                 .doValidate().checkResult();
-        ActiveUser activeUser = DptmsSecurityUtil.get();
+        ActiveUser activeUser = SecurityUserUtil.getActiveUser();
         authUserOrganizationService.assignedOrg(userId, orgIds, activeUser.getId());
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }
@@ -106,7 +106,7 @@ public class AuthUserController extends BaseController {
                 .on(entity.getUsername(), new NotEmptyValidatorCallback(AuthErrorCodeEnum.USER_USERNAME_NOT_NULL))
                 .doValidate().checkResult();
         // 设置创建者信息
-        ActiveUser activeUser = DptmsSecurityUtil.get();
+        ActiveUser activeUser = SecurityUserUtil.getActiveUser();
         entity.setCreater(activeUser.getId());
         entity.setUpdater(activeUser.getId());
         // 初始化entity信息
@@ -153,7 +153,7 @@ public class AuthUserController extends BaseController {
                 .on(entity.getId(), new NotNullValidatorCallback(AuthErrorCodeEnum.ID_NOT_NULL))
                 .on(entity.getUsername(), new NotEmptyValidatorCallback(AuthErrorCodeEnum.USER_USERNAME_NOT_NULL))
                 .doValidate().checkResult();
-        ActiveUser activeUser = DptmsSecurityUtil.get();
+        ActiveUser activeUser = SecurityUserUtil.getActiveUser();
         entity.setUpdater(activeUser.getId());
         Long count = authUserService.update(entity);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(count));
@@ -174,7 +174,7 @@ public class AuthUserController extends BaseController {
         ValidatorBuilder.build()
                 .on(id, new NotNullValidatorCallback(AuthErrorCodeEnum.ID_NOT_NULL))
                 .doValidate().checkResult();
-        ActiveUser activeUser = DptmsSecurityUtil.get();
+        ActiveUser activeUser = SecurityUserUtil.getActiveUser();
         authUserService.deleteById(id, activeUser.getId());
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }
@@ -195,7 +195,7 @@ public class AuthUserController extends BaseController {
                 .on(entity.getId(), new NotNullValidatorCallback(AuthErrorCodeEnum.ID_NOT_NULL))
                 .on(entity.getIsLocked(), new NotNullValidatorCallback(AuthErrorCodeEnum.USER_IS_LOCKED_NOT_NULL))
                 .doValidate().checkResult();
-        ActiveUser activeUser = DptmsSecurityUtil.get();
+        ActiveUser activeUser = SecurityUserUtil.getActiveUser();
         entity.setUpdater(activeUser.getId());
         authUserService.updateLock(entity);
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
@@ -218,7 +218,7 @@ public class AuthUserController extends BaseController {
         ValidatorBuilder.build()
                 .on(userId, new NotNullValidatorCallback(AuthErrorCodeEnum.USER_ID_NOT_NULL))
                 .doValidate().checkResult();
-        ActiveUser activeUser = DptmsSecurityUtil.get();
+        ActiveUser activeUser = SecurityUserUtil.getActiveUser();
         authUserRoleService.assignedRole(userId, roleIds, activeUser.getId());
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }

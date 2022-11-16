@@ -7,12 +7,12 @@ import com.darren1112.dptms.common.core.validate.ValidatorBuilder;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.LengthValidatorCallback;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotEmptyValidatorCallback;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotNullValidatorCallback;
+import com.darren1112.dptms.common.spi.service.dto.ServiceConfigProfilePropDto;
 import com.darren1112.dptms.sdk.starter.log.annotation.Log;
 import com.darren1112.dptms.sdk.starter.log.enums.BusinessType;
 import com.darren1112.dptms.sdk.starter.log.enums.LogLevel;
-import com.darren1112.dptms.sdk.starter.security.util.DptmsSecurityUtil;
-import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
-import com.darren1112.dptms.common.spi.service.dto.ServiceConfigProfilePropDto;
+import com.darren1112.dptms.sdk.starter.security.model.ActiveUser;
+import com.darren1112.dptms.sdk.starter.security.util.SecurityUserUtil;
 import com.darren1112.dptms.system.common.enums.SystemManageErrorCodeEnum;
 import com.darren1112.dptms.system.service.service.ServiceConfigProfilePropService;
 import io.swagger.annotations.Api;
@@ -77,7 +77,7 @@ public class ServiceConfigProfilePropController {
                 .on(dto.getPropValue(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.PROP_VALUE_NOT_NULL))
                 .doValidate().checkResult();
         // 设置创建者信息
-        ActiveUser activeUser = DptmsSecurityUtil.get();
+        ActiveUser activeUser = SecurityUserUtil.getActiveUser();
         dto.setCreater(activeUser.getId());
         dto.setUpdater(activeUser.getId());
         Long id = serviceConfigProfilePropService.insert(dto);
@@ -103,7 +103,7 @@ public class ServiceConfigProfilePropController {
                 .on(dto.getPropValue(), new NotEmptyValidatorCallback(SystemManageErrorCodeEnum.PROP_VALUE_NOT_NULL))
                 .doValidate().checkResult();
         // 设置创建者信息
-        ActiveUser activeUser = DptmsSecurityUtil.get();
+        ActiveUser activeUser = SecurityUserUtil.getActiveUser();
         dto.setCreater(activeUser.getId());
         dto.setUpdater(activeUser.getId());
         serviceConfigProfilePropService.update(dto);
@@ -126,7 +126,7 @@ public class ServiceConfigProfilePropController {
                 .on(id, new NotNullValidatorCallback(SystemManageErrorCodeEnum.ID_NOT_NULL))
                 .doValidate().checkResult();
         // 设置创建者信息
-        ActiveUser activeUser = DptmsSecurityUtil.get();
+        ActiveUser activeUser = SecurityUserUtil.getActiveUser();
         serviceConfigProfilePropService.deleteById(id, activeUser.getId());
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }
@@ -150,7 +150,7 @@ public class ServiceConfigProfilePropController {
                 .doValidate().checkResult();
         dto.setContent(EncodeUtil.decodeUrl(dto.getContent()));
         // 设置创建者信息
-        ActiveUser activeUser = DptmsSecurityUtil.get();
+        ActiveUser activeUser = SecurityUserUtil.getActiveUser();
         dto.setCreater(activeUser.getId());
         dto.setUpdater(activeUser.getId());
         serviceConfigProfilePropService.batchInsert(dto);

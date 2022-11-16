@@ -60,6 +60,6 @@ public class ZuulRequestUtil {
         RequestContext ctx = getRequestContext();
         // 直接打回
         ctx.setSendZuulResponse(false);
-        ResponseUtil.setJsonResult(ctx.getResponse(), JsonResult.buildErrorEnum(baseErrorEnum));
+        ResponseUtil.writeJson(ctx.getResponse(), JsonResult.buildErrorEnum(baseErrorEnum));
     }
 }

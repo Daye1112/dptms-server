@@ -2,11 +2,11 @@ package com.darren1112.dptms.auth.service.impl;
 
 import com.darren1112.dptms.auth.service.OnlineUserService;
 import com.darren1112.dptms.common.core.base.BaseService;
-import com.darren1112.dptms.sdk.starter.redis.core.RedisUtil;
-import com.darren1112.dptms.sdk.starter.security.core.DptmsTokenStore;
-import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
+import com.darren1112.dptms.sdk.starter.redis.core.RedisUtil;
+import com.darren1112.dptms.sdk.starter.security.core.token.store.TokenStore;
+import com.darren1112.dptms.sdk.starter.security.model.ActiveUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,7 +26,7 @@ import java.util.Optional;
 public class OnlineUserServiceImpl extends BaseService implements OnlineUserService {
 
     @Autowired
-    private DptmsTokenStore dptmsTokenStore;
+    private TokenStore tokenStore;
 
     @Autowired
     private RedisUtil redisUtil;
@@ -43,7 +43,7 @@ public class OnlineUserServiceImpl extends BaseService implements OnlineUserServ
     @Override
     public PageBean<ActiveUser> listPage(ActiveUser activeUser, PageParam pageParam) {
         // 查询所有用户的refreshToken的user key
-        List<String> keyList = dptmsTokenStore.listAllUserRefreshKeys();
+        List<String> keyList = tokenStore.listAllUserRefreshKeys();
         // 排序、总记录数、分页
         keyList.sort(String::compareTo);
         Long count = (long) keyList.size();
@@ -56,7 +56,7 @@ public class OnlineUserServiceImpl extends BaseService implements OnlineUserServ
         for (String key : keyList) {
             String refreshToken = Optional.ofNullable(redisUtil.getWithPrefix("", key))
                     .map(Object::toString).orElse("");
-            ActiveUser subActiveUser = dptmsTokenStore.getActiveUser(refreshToken);
+            ActiveUser subActiveUser = tokenStore.getActiveUser(refreshToken);
             if (subActiveUser != null) {
                 activeUserList.add(subActiveUser);
             }
@@ -75,10 +75,10 @@ public class OnlineUserServiceImpl extends BaseService implements OnlineUserServ
     public void forcedOffline(Long userId) {
         ActiveUser activeUser = new ActiveUser();
         activeUser.setId(userId);
-        String userRefreshToken = dptmsTokenStore.getUserRefreshToken(activeUser);
+        String userRefreshToken = tokenStore.getUserRefreshToken(activeUser);
         // 移除用户在线信息
-        dptmsTokenStore.removeUserRefreshToken(activeUser);
+        tokenStore.removeUserRefreshToken(activeUser);
         // 移除刷新token
-        dptmsTokenStore.removeRefreshToken(userRefreshToken);
+        tokenStore.removeRefreshToken(userRefreshToken);
     }
 }

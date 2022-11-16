@@ -3,12 +3,17 @@ package com.darren1112.dptms.sdk.starter.security.config;
 import com.darren1112.dptms.common.core.constants.FilterOrderConstant;
 import com.darren1112.dptms.common.core.constants.SecurityConstant;
 import com.darren1112.dptms.sdk.starter.redis.core.RedisUtil;
-import com.darren1112.dptms.sdk.starter.security.core.DptmsTokenStore;
-import com.darren1112.dptms.sdk.starter.security.core.DptmsTokenValidator;
-import com.darren1112.dptms.sdk.starter.security.filter.AddCommonInfoFilter;
+import com.darren1112.dptms.sdk.starter.security.base.processing.factory.AuthTypeFactory;
+import com.darren1112.dptms.sdk.starter.security.core.token.generator.UuidTokenGenerator;
+import com.darren1112.dptms.sdk.starter.security.core.token.generator.base.TokenGenerator;
+import com.darren1112.dptms.sdk.starter.security.core.token.store.TokenStore;
+import com.darren1112.dptms.sdk.starter.security.core.token.validator.BasicTokenValidator;
+import com.darren1112.dptms.sdk.starter.security.filter.SecurityUserFilter;
+import com.darren1112.dptms.sdk.starter.security.model.ActiveUser;
 import com.darren1112.dptms.sdk.starter.security.properties.SecurityProperties;
 import feign.RequestInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -27,34 +32,40 @@ public class SecurityAutoConfig {
     private SecurityProperties securityProperties;
 
     @Bean
-    public RequestInterceptor feignRequestInterceptor(DptmsTokenStore dptmsTokenStore) {
+    public RequestInterceptor feignRequestInterceptor(TokenStore tokenStore) {
         return requestTemplate -> {
             String gatewayToken = new String(Base64Utils.encode(securityProperties.getHeaderValue().getBytes()));
             requestTemplate.header(securityProperties.getHeaderKey(), gatewayToken);
-            requestTemplate.header(SecurityConstant.REFRESH_TOKEN_KEY, dptmsTokenStore.getRefreshToken());
-            requestTemplate.header(SecurityConstant.ACCESS_TOKEN_KEY, dptmsTokenStore.getAccessToken());
+            requestTemplate.header(SecurityConstant.REFRESH_TOKEN_KEY, tokenStore.getRefreshToken());
+            requestTemplate.header(SecurityConstant.ACCESS_TOKEN_KEY, tokenStore.getAccessToken());
         };
     }
 
     @Bean
-    public DptmsTokenStore dptmsTokenStore(RedisUtil redisUtil) {
-        return new DptmsTokenStore(redisUtil, securityProperties);
+    @ConditionalOnMissingBean(TokenGenerator.class)
+    public TokenGenerator tokenGenerator() {
+        return new UuidTokenGenerator();
     }
 
     @Bean
-    public DptmsTokenValidator dptmsTokenValidator(DptmsTokenStore dptmsTokenStore) {
-        return new DptmsTokenValidator(dptmsTokenStore);
+    public TokenStore tokenStore(RedisUtil redisUtil, TokenGenerator tokenGenerator) {
+        return new TokenStore(redisUtil, securityProperties, tokenGenerator, ActiveUser.class);
     }
 
     @Bean
-    public FilterRegistrationBean addCommonInfoFilter(DptmsTokenStore dptmsTokenStore) {
-        AddCommonInfoFilter addCommonInfoFilter = new AddCommonInfoFilter(dptmsTokenStore);
-        FilterRegistrationBean<AddCommonInfoFilter> filterRegistrationBean = new FilterRegistrationBean<>();
-        filterRegistrationBean.setFilter(addCommonInfoFilter);
+    public BasicTokenValidator basicTokenValidator(TokenStore tokenStore) {
+        return new BasicTokenValidator(tokenStore);
+    }
+
+    @Bean
+    public FilterRegistrationBean addCommonInfoFilter(TokenStore tokenStore, AuthTypeFactory authTypeFactory) {
+        SecurityUserFilter securityUserFilter = new SecurityUserFilter(tokenStore, authTypeFactory);
+        FilterRegistrationBean<SecurityUserFilter> filterRegistrationBean = new FilterRegistrationBean<>();
+        filterRegistrationBean.setFilter(securityUserFilter);
         filterRegistrationBean.addUrlPatterns("/*");
         //order的数值越小 则优先级越高
-        filterRegistrationBean.setOrder(FilterOrderConstant.ADD_USER_FILTER);
-        filterRegistrationBean.setName("addCommonInfoFilter");
+        filterRegistrationBean.setOrder(FilterOrderConstant.SECURITY_USER_FILTER);
+        filterRegistrationBean.setName("securityUserFilter");
         return filterRegistrationBean;
     }
 }

@@ -7,16 +7,16 @@ import com.darren1112.dptms.common.core.message.JsonResult;
 import com.darren1112.dptms.common.core.util.ResponseEntityUtil;
 import com.darren1112.dptms.common.core.validate.ValidatorBuilder;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotBlankValidatorCallback;
-import com.darren1112.dptms.sdk.starter.log.annotation.Log;
-import com.darren1112.dptms.sdk.starter.log.enums.BusinessType;
-import com.darren1112.dptms.sdk.starter.log.enums.LogLevel;
-import com.darren1112.dptms.sdk.starter.security.core.DptmsTokenStore;
-import com.darren1112.dptms.sdk.starter.security.util.DptmsSecurityUtil;
-import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 import com.darren1112.dptms.common.spi.auth.dto.AuthMenuDto;
 import com.darren1112.dptms.common.spi.auth.dto.AuthPermissionDto;
 import com.darren1112.dptms.common.spi.auth.dto.AuthUserDto;
 import com.darren1112.dptms.common.spi.auth.entity.AuthUserEntity;
+import com.darren1112.dptms.sdk.starter.log.annotation.Log;
+import com.darren1112.dptms.sdk.starter.log.enums.BusinessType;
+import com.darren1112.dptms.sdk.starter.log.enums.LogLevel;
+import com.darren1112.dptms.sdk.starter.security.core.token.store.TokenStore;
+import com.darren1112.dptms.sdk.starter.security.model.ActiveUser;
+import com.darren1112.dptms.sdk.starter.security.util.SecurityUserUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -48,7 +48,7 @@ public class ActiveUserController {
     private AuthUserService authUserService;
 
     @Autowired
-    private DptmsTokenStore dptmsTokenStore;
+    private TokenStore tokenStore;
 
     /**
      * 获取用户信息
@@ -61,7 +61,7 @@ public class ActiveUserController {
     @ApiOperation("获取用户信息")
     @Log(value = "获取用户信息", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     public ResponseEntity<JsonResult<ActiveUser>> getInfo() {
-        return ResponseEntityUtil.ok(JsonResult.buildSuccessData(DptmsSecurityUtil.get()));
+        return ResponseEntityUtil.ok(JsonResult.buildSuccessData(SecurityUserUtil.getActiveUser()));
     }
 
     /**
@@ -75,7 +75,7 @@ public class ActiveUserController {
     @ApiOperation("获取用户最新信息")
     @Log(value = "获取用户最新信息", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     public ResponseEntity<JsonResult<AuthUserDto>> getNewInfo() {
-        ActiveUser activeUser = DptmsSecurityUtil.get();
+        ActiveUser activeUser = SecurityUserUtil.getActiveUser();
         AuthUserDto result = authUserService.getUserInfoAndPermissionByUserId(activeUser.getId());
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(result));
     }
@@ -91,7 +91,7 @@ public class ActiveUserController {
     @ApiOperation("获取用户的菜单")
     @Log(value = "获取用户的菜单", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     public ResponseEntity<JsonResult<List<AuthMenuDto>>> listMenu() {
-        ActiveUser activeUser = DptmsSecurityUtil.get();
+        ActiveUser activeUser = SecurityUserUtil.getActiveUser();
         List<AuthMenuDto> resultList = authMenuService.listMenuByUserId(activeUser.getId());
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(resultList));
     }
@@ -112,7 +112,7 @@ public class ActiveUserController {
                 .on(entity.getUsername(), new NotBlankValidatorCallback(AuthErrorCodeEnum.USER_USERNAME_NOT_NULL))
                 .doValidate().checkResult();
         // 设置更新者
-        ActiveUser activeUser = DptmsSecurityUtil.get();
+        ActiveUser activeUser = SecurityUserUtil.getActiveUser();
         entity.setId(activeUser.getId());
         entity.setUpdater(activeUser.getId());
         // 更新用户
@@ -123,7 +123,7 @@ public class ActiveUserController {
         // 更新到现有用户中
         ActiveUser.convert(activeUser, dto);
         // 更新redis中的用户信息
-        dptmsTokenStore.updateActiveUser(activeUser);
+        tokenStore.updateActiveUser(activeUser);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(count));
     }
 
@@ -144,7 +144,7 @@ public class ActiveUserController {
                 .on(dto.getNewPassword(), new NotBlankValidatorCallback(AuthErrorCodeEnum.USER_NEW_PASSWORD_NOT_NULL))
                 .doValidate().checkResult();
         // 设置更新者
-        ActiveUser activeUser = DptmsSecurityUtil.get();
+        ActiveUser activeUser = SecurityUserUtil.getActiveUser();
         dto.setId(activeUser.getId());
         dto.setUpdater(activeUser.getId());
         // 更新密码

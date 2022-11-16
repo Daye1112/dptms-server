@@ -1,4 +1,4 @@
-package com.darren1112.dptms.sdk.starter.security.core;
+package com.darren1112.dptms.sdk.starter.security.core.token.store.base;
 
 import com.darren1112.dptms.common.core.constants.SecurityConstant;
 import com.darren1112.dptms.common.core.util.CookieUtil;
@@ -6,8 +6,8 @@ import com.darren1112.dptms.common.core.util.JsonUtil;
 import com.darren1112.dptms.common.core.util.RequestUtil;
 import com.darren1112.dptms.common.core.util.StringUtil;
 import com.darren1112.dptms.sdk.starter.redis.core.RedisUtil;
+import com.darren1112.dptms.sdk.starter.security.base.model.BaseSecurityUser;
 import com.darren1112.dptms.sdk.starter.security.properties.SecurityProperties;
-import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,15 +22,19 @@ import java.util.Set;
  * @author luyuhao
  * @since 2021/8/3
  */
-public abstract class BaseDptmsTokenStore {
+public abstract class BaseTokenStore {
+
+    private Class<? extends BaseSecurityUser> userClass;
 
     private RedisUtil redisUtil;
 
     private SecurityProperties securityProperties;
 
-    public BaseDptmsTokenStore(RedisUtil redisUtil, SecurityProperties securityProperties) {
+    public BaseTokenStore(RedisUtil redisUtil, SecurityProperties securityProperties,
+                          Class<? extends BaseSecurityUser> userClass) {
         this.redisUtil = redisUtil;
         this.securityProperties = securityProperties;
+        this.userClass = userClass;
     }
 
     /**
@@ -54,7 +58,7 @@ public abstract class BaseDptmsTokenStore {
      * @author luyuhao
      * @since 20/11/25 00:25
      */
-    public void saveRefreshToken(String refreshToken, ActiveUser activeUser) {
+    public <T extends BaseSecurityUser> void saveRefreshToken(String refreshToken, T activeUser) {
         // 设置refreshToken
         redisUtil.set(SecurityConstant.REDIS_REFRESH_TOKEN_PREFIX + refreshToken, JsonUtil.toJsonString(activeUser), securityProperties.getRefreshTokenExpired());
     }
@@ -67,9 +71,9 @@ public abstract class BaseDptmsTokenStore {
      * @author luyuhao
      * @since 2021/01/30 23:36
      */
-    public void saveUserRefreshToken(ActiveUser activeUser, String refreshToken) {
+    public <T extends BaseSecurityUser> void saveUserRefreshToken(T activeUser, String refreshToken) {
         // 设置当前用户的最新refreshToken
-        redisUtil.set(SecurityConstant.REDIS_USER_REFRESH_TOKEN_PREFIX + activeUser.getId(), refreshToken, securityProperties.getRefreshTokenExpired());
+        redisUtil.set(SecurityConstant.REDIS_USER_REFRESH_TOKEN_PREFIX + activeUser.getUserId(), refreshToken, securityProperties.getRefreshTokenExpired());
     }
 
     /**
@@ -79,23 +83,24 @@ public abstract class BaseDptmsTokenStore {
      * @author luyuhao
      * @since 2021/01/30 23:36
      */
-    public String getUserRefreshToken(ActiveUser activeUser) {
+    public <T extends BaseSecurityUser> String getUserRefreshToken(T activeUser) {
         // 设置当前用户的最新refreshToken
-        return Optional.ofNullable(redisUtil.get(SecurityConstant.REDIS_USER_REFRESH_TOKEN_PREFIX + activeUser.getId())).map(Object::toString).orElse(null);
+        return Optional.ofNullable(redisUtil.get(SecurityConstant.REDIS_USER_REFRESH_TOKEN_PREFIX + activeUser.getUserId())).map(Object::toString).orElse(null);
     }
 
     /**
      * 获取用户信息
      *
      * @param refreshToken refreshToken
-     * @return {@link ActiveUser 用户信息}
+     * @return {@link BaseSecurityUser 用户信息}
      * @author luyuhao
      * @since 20/11/28 01:22
      */
-    public ActiveUser getActiveUser(String refreshToken) {
+    @SuppressWarnings("unchecked")
+    public <T extends BaseSecurityUser> T getActiveUser(String refreshToken) {
         return Optional.ofNullable(redisUtil.get(SecurityConstant.REDIS_REFRESH_TOKEN_PREFIX + refreshToken))
                 .map(Object::toString)
-                .map(item -> JsonUtil.parseObject(item, ActiveUser.class))
+                .map(item -> (T) JsonUtil.parseObject(item, userClass))
                 .orElse(null);
     }
 
@@ -104,14 +109,15 @@ public abstract class BaseDptmsTokenStore {
      *
      * @param request      请求域
      * @param refreshToken 刷新token
-     * @return {@link ActiveUser 用户信息}
+     * @return {@link BaseSecurityUser 用户信息}
      * @author luyuhao
      * @since 20/11/28 01:22
      */
-    public ActiveUser getActiveUser(HttpServletRequest request, String refreshToken) {
+    @SuppressWarnings("unchecked")
+    public <T extends BaseSecurityUser> T getActiveUser(HttpServletRequest request, String refreshToken) {
         return Optional.ofNullable(redisUtil.get(SecurityConstant.REDIS_REFRESH_TOKEN_PREFIX + refreshToken))
                 .map(Object::toString)
-                .map(item -> JsonUtil.parseObject(item, ActiveUser.class))
+                .map(item -> (T) JsonUtil.parseObject(item, userClass))
                 .orElse(null);
     }
 
@@ -242,7 +248,7 @@ public abstract class BaseDptmsTokenStore {
      * @author luyuhao
      * @since 2021/01/31 20:00
      */
-    public void updateActiveUser(ActiveUser activeUser, String refreshToken) {
+    public <T extends BaseSecurityUser> void updateActiveUser(T activeUser, String refreshToken) {
         long expired = redisUtil.ttl(SecurityConstant.REDIS_REFRESH_TOKEN_PREFIX + refreshToken);
         if (expired > 0) {
             // 设置refreshToken
@@ -269,8 +275,8 @@ public abstract class BaseDptmsTokenStore {
      * @author luyuhao
      * @since 2021/01/31 23:22
      */
-    public void removeUserRefreshToken(ActiveUser activeUser) {
-        redisUtil.removeKey(SecurityConstant.REDIS_USER_REFRESH_TOKEN_PREFIX + activeUser.getId());
+    public <T extends BaseSecurityUser> void removeUserRefreshToken(T activeUser) {
+        redisUtil.removeKey(SecurityConstant.REDIS_USER_REFRESH_TOKEN_PREFIX + activeUser.getUserId());
     }
 
 }

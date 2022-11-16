@@ -10,15 +10,15 @@ import com.darren1112.dptms.common.core.util.ResponseEntityUtil;
 import com.darren1112.dptms.common.core.validate.ValidatorBuilder;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotEmptyValidatorCallback;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotNullValidatorCallback;
+import com.darren1112.dptms.common.spi.auth.dto.AuthRoleDto;
+import com.darren1112.dptms.common.spi.auth.entity.AuthRoleEntity;
+import com.darren1112.dptms.common.spi.common.dto.PageBean;
+import com.darren1112.dptms.common.spi.common.dto.PageParam;
 import com.darren1112.dptms.sdk.starter.log.annotation.Log;
 import com.darren1112.dptms.sdk.starter.log.enums.BusinessType;
 import com.darren1112.dptms.sdk.starter.log.enums.LogLevel;
-import com.darren1112.dptms.sdk.starter.security.util.DptmsSecurityUtil;
-import com.darren1112.dptms.common.spi.common.dto.ActiveUser;
-import com.darren1112.dptms.common.spi.common.dto.PageBean;
-import com.darren1112.dptms.common.spi.common.dto.PageParam;
-import com.darren1112.dptms.common.spi.auth.dto.AuthRoleDto;
-import com.darren1112.dptms.common.spi.auth.entity.AuthRoleEntity;
+import com.darren1112.dptms.sdk.starter.security.model.ActiveUser;
+import com.darren1112.dptms.sdk.starter.security.util.SecurityUserUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -66,7 +66,7 @@ public class AuthRoleController extends BaseController {
         ValidatorBuilder.build()
                 .on(roleId, new NotNullValidatorCallback(AuthErrorCodeEnum.USER_ID_NOT_NULL))
                 .doValidate().checkResult();
-        ActiveUser activeUser = DptmsSecurityUtil.get();
+        ActiveUser activeUser = SecurityUserUtil.getActiveUser();
         authRoleMenuService.assignedMenu(roleId, menuIds, activeUser.getId());
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }
@@ -88,7 +88,7 @@ public class AuthRoleController extends BaseController {
                 .on(entity.getRoleCode(), new NotEmptyValidatorCallback(AuthErrorCodeEnum.ROLE_CODE_NOT_NULL))
                 .on(entity.getIsAdmin(), new NotNullValidatorCallback(AuthErrorCodeEnum.ROLE_IS_ADMIN_NOT_NULL))
                 .doValidate().checkResult();
-        ActiveUser activeUser = DptmsSecurityUtil.get();
+        ActiveUser activeUser = SecurityUserUtil.getActiveUser();
         entity.setCreater(activeUser.getId());
         entity.setUpdater(activeUser.getId());
         Long id = authRoleService.insert(entity);
@@ -130,7 +130,7 @@ public class AuthRoleController extends BaseController {
                 .on(entity.getRoleCode(), new NotEmptyValidatorCallback(AuthErrorCodeEnum.ROLE_CODE_NOT_NULL))
                 .on(entity.getIsAdmin(), new NotNullValidatorCallback(AuthErrorCodeEnum.ROLE_IS_ADMIN_NOT_NULL))
                 .doValidate().checkResult();
-        ActiveUser activeUser = DptmsSecurityUtil.get();
+        ActiveUser activeUser = SecurityUserUtil.getActiveUser();
         entity.setUpdater(activeUser.getId());
         Long count = authRoleService.update(entity);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(count));
@@ -151,7 +151,7 @@ public class AuthRoleController extends BaseController {
         ValidatorBuilder.build()
                 .on(id, new NotNullValidatorCallback(AuthErrorCodeEnum.ID_NOT_NULL))
                 .doValidate().checkResult();
-        ActiveUser activeUser = DptmsSecurityUtil.get();
+        ActiveUser activeUser = SecurityUserUtil.getActiveUser();
         authRoleService.deleteById(id, activeUser.getId());
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
     }

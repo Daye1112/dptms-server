@@ -11,6 +11,19 @@ import cn.hutool.crypto.digest.MD5;
 public class Md5Util {
 
     /**
+     * 加密
+     *
+     * @param data 加密串
+     * @return {@link String 加密结果}
+     * @author luyuhao
+     * @since 20/11/22 23:15
+     */
+    public static String encrypt(String data) {
+        MD5 md5 = new MD5();
+        return md5.digestHex(data);
+    }
+
+    /**
      * 带盐加密
      *
      * @param data 加密串
