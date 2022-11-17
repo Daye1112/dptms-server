@@ -4,7 +4,8 @@ import com.darren1112.dptms.common.core.constants.FileConstant;
 import com.darren1112.dptms.common.core.message.JsonResult;
 import com.darren1112.dptms.common.core.util.ResponseUtil;
 import com.darren1112.dptms.common.core.util.UrlUtil;
-import com.darren1112.dptms.sdk.starter.security.core.token.validator.BasicTokenValidator;
+import com.darren1112.dptms.sdk.starter.security.core.token.manager.TokenValidatorManager;
+import com.darren1112.dptms.sdk.starter.security.core.token.validator.base.TokenValidator;
 import com.darren1112.dptms.sdk.starter.security.enums.SecurityErrorEnum;
 import com.darren1112.dptms.sdk.starter.security.properties.SecurityProperties;
 import lombok.extern.slf4j.Slf4j;
@@ -28,11 +29,11 @@ public class AccessTokenValidFilter extends OncePerRequestFilter {
 
     private SecurityProperties securityProperties;
 
-    private BasicTokenValidator basicTokenValidator;
+    private TokenValidatorManager tokenValidatorManager;
 
-    public AccessTokenValidFilter(SecurityProperties securityProperties, BasicTokenValidator basicTokenValidator) {
+    public AccessTokenValidFilter(SecurityProperties securityProperties, TokenValidatorManager tokenValidatorManager) {
         this.securityProperties = securityProperties;
-        this.basicTokenValidator = basicTokenValidator;
+        this.tokenValidatorManager = tokenValidatorManager;
     }
 
     /**
@@ -69,14 +70,11 @@ public class AccessTokenValidFilter extends OncePerRequestFilter {
         }
         try {
             // token校验
-            if (!basicTokenValidator.doValidate(request, response)) {
-                ResponseUtil.writeJson(response, JsonResult.buildErrorEnum(SecurityErrorEnum.NOT_LOGIN));
-                return;
-            }
-            // 重复登录校验
-            if (!basicTokenValidator.repeatLoginValidHandle(request, response)) {
-                ResponseUtil.writeJson(response, JsonResult.buildErrorEnum(SecurityErrorEnum.REPEAT_LOGIN));
-                return;
+            for (TokenValidator tokenValidator : tokenValidatorManager.getTokenValidatorList()) {
+                if (!tokenValidator.doValidate(request, response)) {
+                    ResponseUtil.writeJson(response, JsonResult.buildErrorEnum(tokenValidator.validateError()));
+                    return;
+                }
             }
             chain.doFilter(request, response);
         } catch (Exception e) {

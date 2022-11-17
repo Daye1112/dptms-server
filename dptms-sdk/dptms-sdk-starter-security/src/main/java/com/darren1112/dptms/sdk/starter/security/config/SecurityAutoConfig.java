@@ -7,8 +7,10 @@ import com.darren1112.dptms.sdk.starter.security.core.security.factory.BasicAuth
 import com.darren1112.dptms.sdk.starter.security.core.security.factory.base.AuthTypeFactory;
 import com.darren1112.dptms.sdk.starter.security.core.token.generator.UuidTokenGenerator;
 import com.darren1112.dptms.sdk.starter.security.core.token.generator.base.TokenGenerator;
+import com.darren1112.dptms.sdk.starter.security.core.token.manager.TokenValidatorManager;
 import com.darren1112.dptms.sdk.starter.security.core.token.store.TokenStore;
 import com.darren1112.dptms.sdk.starter.security.core.token.validator.BasicTokenValidator;
+import com.darren1112.dptms.sdk.starter.security.core.token.validator.RepeatTokenValidator;
 import com.darren1112.dptms.sdk.starter.security.filter.SecurityUserFilter;
 import com.darren1112.dptms.sdk.starter.security.model.ActiveUser;
 import com.darren1112.dptms.sdk.starter.security.properties.SecurityProperties;
@@ -18,6 +20,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.util.Base64Utils;
 
 /**
@@ -56,6 +59,17 @@ public class SecurityAutoConfig {
     @Bean
     public BasicTokenValidator basicTokenValidator(TokenStore tokenStore) {
         return new BasicTokenValidator(tokenStore);
+    }
+
+    @Bean
+    public RepeatTokenValidator repeatTokenValidator(TokenStore tokenStore) {
+        return new RepeatTokenValidator(tokenStore);
+    }
+
+    @Lazy
+    @Bean(initMethod = "init", destroyMethod = "destroy")
+    public TokenValidatorManager tokenValidatorManager() {
+        return new TokenValidatorManager();
     }
 
     @Bean

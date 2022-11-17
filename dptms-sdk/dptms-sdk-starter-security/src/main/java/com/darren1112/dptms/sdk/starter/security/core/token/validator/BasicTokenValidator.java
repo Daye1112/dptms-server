@@ -3,9 +3,10 @@ package com.darren1112.dptms.sdk.starter.security.core.token.validator;
 import com.darren1112.dptms.common.core.constants.SecurityConstant;
 import com.darren1112.dptms.common.core.util.StringUtil;
 import com.darren1112.dptms.sdk.starter.security.base.model.BaseSecurityUser;
+import com.darren1112.dptms.sdk.starter.security.constants.TokenValidatorConstant;
 import com.darren1112.dptms.sdk.starter.security.core.token.store.TokenStore;
 import com.darren1112.dptms.sdk.starter.security.core.token.validator.base.TokenValidator;
-import com.darren1112.dptms.sdk.starter.security.model.ActiveUser;
+import com.darren1112.dptms.sdk.starter.security.enums.SecurityErrorEnum;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -68,27 +69,26 @@ public class BasicTokenValidator implements TokenValidator {
     }
 
     /**
-     * 重复登录校验
+     * 校验失败时的错误码
      *
-     * @param request  请求域
-     * @param response 响应域
-     * @return true/false
+     * @return {@link SecurityErrorEnum}
      * @author luyuhao
-     * @since 2021/01/31 19:08
+     * @since 2022/11/17
      */
-    public boolean repeatLoginValidHandle(HttpServletRequest request, HttpServletResponse response) {
-        String refreshToken = tokenStore.getRefreshToken(request);
-        if (StringUtil.isBlank(refreshToken)) {
-            return false;
-        }
-        ActiveUser activeUser = tokenStore.getActiveUser(refreshToken);
-        String userRefreshToken = tokenStore.getUserRefreshToken(activeUser);
-        if (StringUtil.isBlank(userRefreshToken) || !userRefreshToken.equals(refreshToken)) {
-            // 当前用户被挤下线，删除当前的token
-            tokenStore.removeTokenAndCookie(request, response);
-            return false;
-        } else {
-            return true;
-        }
+    @Override
+    public SecurityErrorEnum validateError() {
+        return SecurityErrorEnum.NOT_LOGIN;
+    }
+
+    /**
+     * 校验器执行顺序
+     *
+     * @return {@link Integer}
+     * @author luyuhao
+     * @since 2022/11/17
+     */
+    @Override
+    public Integer getOrder() {
+        return TokenValidatorConstant.BASIC_TOKEN_VALIDATOR_ORDER;
     }
 }
