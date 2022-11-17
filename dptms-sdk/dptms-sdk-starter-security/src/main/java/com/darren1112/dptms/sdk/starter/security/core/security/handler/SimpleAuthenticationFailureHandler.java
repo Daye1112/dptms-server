@@ -3,7 +3,7 @@ package com.darren1112.dptms.sdk.starter.security.core.security.handler;
 import com.darren1112.dptms.common.core.message.JsonResult;
 import com.darren1112.dptms.common.core.util.IpUtil;
 import com.darren1112.dptms.common.core.util.ResponseUtil;
-import com.darren1112.dptms.sdk.starter.security.enums.SecurityEnum;
+import com.darren1112.dptms.sdk.starter.security.enums.SecurityErrorEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.AuthenticationException;
@@ -36,7 +36,7 @@ public class SimpleAuthenticationFailureHandler implements AuthenticationFailure
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
         log.warn("失败信息: 登录失败, ip: {}, 请求接口: {}", IpUtil.getIp(request), request.getRequestURI());
-        ResponseUtil.writeJson(response, JsonResult.buildErrorEnum(SecurityEnum.USERNAME_PASSWORD_ERROR));
+        ResponseUtil.writeJson(response, JsonResult.buildErrorEnum(SecurityErrorEnum.USERNAME_PASSWORD_ERROR));
     }
 
 }

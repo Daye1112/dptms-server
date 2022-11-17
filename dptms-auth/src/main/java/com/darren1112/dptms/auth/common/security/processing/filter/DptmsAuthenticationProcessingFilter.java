@@ -2,10 +2,11 @@ package com.darren1112.dptms.auth.common.security.processing.filter;
 
 import com.darren1112.dptms.common.core.constants.FilterOrderConstant;
 import com.darren1112.dptms.common.core.util.StringUtil;
-import com.darren1112.dptms.sdk.starter.security.core.security.factory.base.AuthTypeFactory;
 import com.darren1112.dptms.sdk.starter.security.base.processing.filter.BaseAuthenticationProcessingFilter;
+import com.darren1112.dptms.sdk.starter.security.core.security.factory.base.AuthTypeFactory;
 import com.darren1112.dptms.sdk.starter.security.core.security.token.base.BaseAuthenticationToken;
 import com.darren1112.dptms.sdk.starter.security.properties.SecurityProperties;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderNotFoundException;
@@ -21,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author luyuhao
  * @since 2022/11/15
  */
+@Slf4j
 @Order(FilterOrderConstant.LOGIN_PROCESSING_FILTER)
 public class DptmsAuthenticationProcessingFilter extends BaseAuthenticationProcessingFilter {
 
@@ -45,6 +47,7 @@ public class DptmsAuthenticationProcessingFilter extends BaseAuthenticationProce
      */
     @Override
     protected Authentication handle(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
+        log.info("DptmsAuthenticationProcessingFilter, uri:{}", request.getRequestURI());
         // 获取认证类型
         String authTypeParam = request.getParameter("authType");
         if (StringUtil.isBlank(authTypeParam)) {

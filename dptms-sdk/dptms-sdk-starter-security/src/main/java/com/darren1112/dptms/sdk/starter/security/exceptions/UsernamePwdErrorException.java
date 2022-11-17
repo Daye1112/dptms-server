@@ -1,6 +1,6 @@
 package com.darren1112.dptms.sdk.starter.security.exceptions;
 
-import com.darren1112.dptms.sdk.starter.security.enums.SecurityEnum;
+import com.darren1112.dptms.sdk.starter.security.enums.SecurityErrorEnum;
 import org.springframework.security.core.AuthenticationException;
 
 /**
@@ -20,6 +20,6 @@ public class UsernamePwdErrorException extends AuthenticationException {
     }
 
     public UsernamePwdErrorException() {
-        super(SecurityEnum.USERNAME_PASSWORD_ERROR.getMessage());
+        super(SecurityErrorEnum.USERNAME_PASSWORD_ERROR.getMessage());
     }
 }

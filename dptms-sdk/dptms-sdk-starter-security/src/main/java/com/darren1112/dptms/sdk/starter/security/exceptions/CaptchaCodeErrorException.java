@@ -1,6 +1,6 @@
 package com.darren1112.dptms.sdk.starter.security.exceptions;
 
-import com.darren1112.dptms.sdk.starter.security.enums.SecurityEnum;
+import com.darren1112.dptms.sdk.starter.security.enums.SecurityErrorEnum;
 import org.springframework.security.core.AuthenticationException;
 
 /**
@@ -20,6 +20,6 @@ public class CaptchaCodeErrorException extends AuthenticationException {
     }
 
     public CaptchaCodeErrorException() {
-        super(SecurityEnum.CAPTCHA_CODE_ERROR.getMessage());
+        super(SecurityErrorEnum.CAPTCHA_CODE_ERROR.getMessage());
     }
 }

@@ -5,6 +5,7 @@ import com.darren1112.dptms.sdk.starter.security.base.model.BaseSecurityUser;
 import com.darren1112.dptms.sdk.starter.security.core.security.factory.base.AuthTypeFactory;
 import com.darren1112.dptms.sdk.starter.security.core.security.token.base.BaseAuthenticationToken;
 import com.darren1112.dptms.sdk.starter.security.core.token.store.TokenStore;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -23,6 +24,7 @@ import java.util.Map;
  * @author luyuhao
  * @since 2021/01/17 01:25
  */
+@Slf4j
 public class SecurityUserFilter extends OncePerRequestFilter {
 
     private TokenStore tokenStore;

@@ -135,7 +135,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .accessDeniedHandler(accessDeniedHandler);
 
         http.addFilterBefore(dptmsAuthenticationProcessingFilter(), UsernamePasswordAuthenticationFilter.class);
-        // .addFilterBefore(tokenValidateFilter, StudyAuthenticationProcessingFilter.class);
     }
 
     @Bean

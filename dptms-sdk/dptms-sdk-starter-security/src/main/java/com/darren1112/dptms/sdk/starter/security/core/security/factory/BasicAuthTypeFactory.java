@@ -6,7 +6,6 @@ import com.darren1112.dptms.sdk.starter.security.core.security.token.PwdAuthenti
 import com.darren1112.dptms.sdk.starter.security.core.security.token.base.BaseAuthenticationToken;
 import com.darren1112.dptms.sdk.starter.security.enums.AuthTypeEnum;
 import com.darren1112.dptms.sdk.starter.security.exceptions.AuthTokenErrorException;
-import com.darren1112.dptms.sdk.starter.security.model.ActiveUser;
 import org.springframework.security.authentication.ProviderNotFoundException;
 
 /**
@@ -58,7 +57,7 @@ public class BasicAuthTypeFactory implements AuthTypeFactory {
         }
         AuthTypeEnum authTypeEnum = AuthTypeEnum.matchByAuthType(user.getAuthType());
         if (authTypeEnum == null) {
-            throw new AuthTokenErrorException("认证类型错误!");
+            throw new ProviderNotFoundException("认证类型错误!");
         }
         BaseAuthenticationToken token = null;
         switch (authTypeEnum) {

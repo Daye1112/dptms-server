@@ -1,7 +1,5 @@
 package com.darren1112.dptms.auth.common.security.processing.provider;
 
-import com.darren1112.dptms.sdk.starter.security.core.security.token.PwdAuthenticationToken;
-import com.darren1112.dptms.sdk.starter.security.enums.AuthTypeEnum;
 import com.darren1112.dptms.auth.service.AuthUserService;
 import com.darren1112.dptms.common.core.constants.AccountConstant;
 import com.darren1112.dptms.common.core.constants.RedisConstant;
@@ -9,9 +7,11 @@ import com.darren1112.dptms.common.core.util.StringUtil;
 import com.darren1112.dptms.common.spi.auth.dto.AuthUserDto;
 import com.darren1112.dptms.sdk.starter.redis.core.RedisUtil;
 import com.darren1112.dptms.sdk.starter.security.base.processing.base.AuthType;
-import com.darren1112.dptms.sdk.starter.security.core.security.factory.base.AuthTypeFactory;
 import com.darren1112.dptms.sdk.starter.security.base.processing.provider.BaseAuthenticationProvider;
-import com.darren1112.dptms.sdk.starter.security.enums.SecurityEnum;
+import com.darren1112.dptms.sdk.starter.security.core.security.factory.base.AuthTypeFactory;
+import com.darren1112.dptms.sdk.starter.security.core.security.token.PwdAuthenticationToken;
+import com.darren1112.dptms.sdk.starter.security.enums.AuthTypeEnum;
+import com.darren1112.dptms.sdk.starter.security.enums.SecurityErrorEnum;
 import com.darren1112.dptms.sdk.starter.security.exceptions.CaptchaCodeErrorException;
 import com.darren1112.dptms.sdk.starter.security.exceptions.CaptchaInvalidException;
 import com.darren1112.dptms.sdk.starter.security.exceptions.UsernamePwdErrorException;
@@ -70,7 +70,7 @@ public class PwdAuthenticationProvider extends BaseAuthenticationProvider {
         }
         // 锁定校验
         if (sysUserDto.getIsLocked().equals(AccountConstant.IS_LOCKED)) {
-            throw new LockedException(SecurityEnum.LOCKED.getMessage());
+            throw new LockedException(SecurityErrorEnum.LOCKED.getMessage());
         }
         ActiveUser activeUser = ActiveUser.convert(sysUserDto);
         activeUser.setAuthType(authType().getAuthType());
@@ -85,8 +85,8 @@ public class PwdAuthenticationProvider extends BaseAuthenticationProvider {
      * @since 2022/11/15
      */
     private void captchaValid(PwdAuthenticationToken token) {
-        String captchaCode = token.getCaptchaCode();
-        String captchaKey = token.getCaptchaKey();
+        String captchaCode = Optional.ofNullable(token.getCaptchaCode()).orElse("");
+        String captchaKey = Optional.ofNullable(token.getCaptchaKey()).orElse("");
         // 验证码验证
         String realCode = redisUtil.get(RedisConstant.CAPTCHA_PREFIX + captchaKey);
         // 移除验证码

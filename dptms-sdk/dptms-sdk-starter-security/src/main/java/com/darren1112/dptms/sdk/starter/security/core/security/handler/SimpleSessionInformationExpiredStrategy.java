@@ -3,7 +3,7 @@ package com.darren1112.dptms.sdk.starter.security.core.security.handler;
 import com.darren1112.dptms.common.core.message.JsonResult;
 import com.darren1112.dptms.common.core.util.IpUtil;
 import com.darren1112.dptms.common.core.util.ResponseUtil;
-import com.darren1112.dptms.sdk.starter.security.enums.SecurityEnum;
+import com.darren1112.dptms.sdk.starter.security.enums.SecurityErrorEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.web.session.SessionInformationExpiredEvent;
@@ -32,6 +32,6 @@ public class SimpleSessionInformationExpiredStrategy implements SessionInformati
     @Override
     public void onExpiredSessionDetected(SessionInformationExpiredEvent event) throws IOException, ServletException {
         log.warn("失败信息: 异地登录, ip: {}, 请求接口: {}", IpUtil.getIp(event.getRequest()), event.getRequest().getRequestURI());
-        ResponseUtil.writeJson(event.getResponse(), JsonResult.buildErrorEnum(SecurityEnum.REPEAT_LOGIN));
+        ResponseUtil.writeJson(event.getResponse(), JsonResult.buildErrorEnum(SecurityErrorEnum.REPEAT_LOGIN));
     }
 }

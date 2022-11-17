@@ -3,7 +3,7 @@ package com.darren1112.dptms.sdk.starter.security.core.security.handler;
 import com.darren1112.dptms.common.core.message.JsonResult;
 import com.darren1112.dptms.common.core.util.IpUtil;
 import com.darren1112.dptms.common.core.util.ResponseUtil;
-import com.darren1112.dptms.sdk.starter.security.enums.SecurityEnum;
+import com.darren1112.dptms.sdk.starter.security.enums.SecurityErrorEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.AuthenticationException;
@@ -36,6 +36,6 @@ public class SimpleAuthenticationEntryPoint implements AuthenticationEntryPoint 
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
         log.warn("失败信息: 未登录, ip: {}, 请求接口: {}", IpUtil.getIp(request), request.getRequestURI());
-        ResponseUtil.writeJson(response, JsonResult.buildErrorEnum(SecurityEnum.NOT_LOGIN));
+        ResponseUtil.writeJson(response, JsonResult.buildErrorEnum(SecurityErrorEnum.NOT_LOGIN));
     }
 }

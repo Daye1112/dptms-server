@@ -46,7 +46,7 @@ public class ZuulErrorFilter extends SendErrorFilter {
                 String host = IpUtil.getIp(request);
                 String method = request.getMethod();
                 String uri = request.getRequestURI();
-                log.error("请求失败，请求URI：" + uri + "，请求Method：" + method + "，请求IP：" + host + "，ServiceId：" + serviceId + "\n失败原因：" + ctx.getThrowable().getMessage());
+                log.error("请求失败，URI: {}, Method: {}, IP: {}, ServiceId: {}, ErrorMessage: {}", uri, method, host, serviceId, ctx.getThrowable().getMessage());
 
                 //阻止SendErrorFilter
                 ctx.set(SEND_ERROR_FILTER_RAN, true);

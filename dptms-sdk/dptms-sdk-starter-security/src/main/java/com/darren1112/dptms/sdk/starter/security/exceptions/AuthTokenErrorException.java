@@ -1,5 +1,6 @@
 package com.darren1112.dptms.sdk.starter.security.exceptions;
 
+import com.darren1112.dptms.sdk.starter.security.enums.SecurityErrorEnum;
 import org.springframework.security.core.AuthenticationException;
 
 /**
@@ -19,6 +20,6 @@ public class AuthTokenErrorException extends AuthenticationException {
     }
 
     public AuthTokenErrorException() {
-        super("认证token异常");
+        super(SecurityErrorEnum.TOKEN_VALID_ERROR.getMessage());
     }
 }

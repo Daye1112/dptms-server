@@ -11,7 +11,7 @@ import com.darren1112.dptms.common.spi.auth.dto.AuthUserDto;
 import com.darren1112.dptms.gateway.common.enums.GatewayErrorCodeEnum;
 import com.darren1112.dptms.sdk.component.remoting.AuthRemoting;
 import com.darren1112.dptms.sdk.starter.security.core.token.store.TokenStore;
-import com.darren1112.dptms.sdk.starter.security.enums.SecurityEnum;
+import com.darren1112.dptms.sdk.starter.security.enums.SecurityErrorEnum;
 import com.darren1112.dptms.sdk.starter.security.model.ActiveUser;
 import com.darren1112.dptms.sdk.starter.security.properties.SecurityProperties;
 import com.darren1112.dptms.sdk.starter.security.util.SecurityUserUtil;
@@ -101,7 +101,7 @@ public class PermissionValidFilter extends OncePerRequestFilter {
             chain.doFilter(request, response);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
-            ResponseUtil.writeJson(response, JsonResult.buildErrorEnum(SecurityEnum.PERMISSION_VALID_ERROR));
+            ResponseUtil.writeJson(response, JsonResult.buildErrorEnum(SecurityErrorEnum.PERMISSION_VALID_ERROR));
         }
     }
 

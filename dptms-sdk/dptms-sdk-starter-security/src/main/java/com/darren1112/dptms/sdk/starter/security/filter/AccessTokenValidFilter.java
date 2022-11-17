@@ -5,7 +5,7 @@ import com.darren1112.dptms.common.core.message.JsonResult;
 import com.darren1112.dptms.common.core.util.ResponseUtil;
 import com.darren1112.dptms.common.core.util.UrlUtil;
 import com.darren1112.dptms.sdk.starter.security.core.token.validator.BasicTokenValidator;
-import com.darren1112.dptms.sdk.starter.security.enums.SecurityEnum;
+import com.darren1112.dptms.sdk.starter.security.enums.SecurityErrorEnum;
 import com.darren1112.dptms.sdk.starter.security.properties.SecurityProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -63,7 +63,6 @@ public class AccessTokenValidFilter extends OncePerRequestFilter {
     @SuppressWarnings("NullableProblems")
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
         String uri = request.getRequestURI();
-
         if (shouldNotFilter(uri)) {
             chain.doFilter(request, response);
             return;
@@ -71,18 +70,18 @@ public class AccessTokenValidFilter extends OncePerRequestFilter {
         try {
             // token校验
             if (!basicTokenValidator.doValidate(request, response)) {
-                ResponseUtil.writeJson(response, JsonResult.buildErrorEnum(SecurityEnum.NOT_LOGIN));
+                ResponseUtil.writeJson(response, JsonResult.buildErrorEnum(SecurityErrorEnum.NOT_LOGIN));
                 return;
             }
             // 重复登录校验
             if (!basicTokenValidator.repeatLoginValidHandle(request, response)) {
-                ResponseUtil.writeJson(response, JsonResult.buildErrorEnum(SecurityEnum.REPEAT_LOGIN));
+                ResponseUtil.writeJson(response, JsonResult.buildErrorEnum(SecurityErrorEnum.REPEAT_LOGIN));
                 return;
             }
             chain.doFilter(request, response);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
-            ResponseUtil.writeJson(response, JsonResult.buildErrorEnum(SecurityEnum.TOKEN_VALID_ERROR));
+            ResponseUtil.writeJson(response, JsonResult.buildErrorEnum(SecurityErrorEnum.TOKEN_VALID_ERROR));
         }
     }
 }

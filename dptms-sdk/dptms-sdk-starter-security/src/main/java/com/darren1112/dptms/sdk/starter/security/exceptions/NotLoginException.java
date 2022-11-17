@@ -4,22 +4,22 @@ import com.darren1112.dptms.sdk.starter.security.enums.SecurityErrorEnum;
 import org.springframework.security.core.AuthenticationException;
 
 /**
- * 验证码无效异常
+ * 未登录异常
  *
  * @author luyuhao
  * @since 2022/11/15
  */
-public class CaptchaInvalidException extends AuthenticationException {
+public class NotLoginException extends AuthenticationException {
 
-    public CaptchaInvalidException(String msg, Throwable t) {
+    public NotLoginException(String msg, Throwable t) {
         super(msg, t);
     }
 
-    public CaptchaInvalidException(String msg) {
+    public NotLoginException(String msg) {
         super(msg);
     }
 
-    public CaptchaInvalidException() {
-        super(SecurityErrorEnum.CAPTCHA_INVALID.getMessage());
+    public NotLoginException() {
+        super(SecurityErrorEnum.NOT_LOGIN.getMessage());
     }
 }

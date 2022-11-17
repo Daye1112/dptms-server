@@ -42,7 +42,6 @@ public class DptmsLogoutSuccessHandler extends BaseLogoutSuccessHandler {
      */
     @Override
     protected void handle(Authentication authentication, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        log.info("登出成功, 用户信息: {}", authentication);
         tokenStore.removeTokenAndCookie(request, response);
         ResponseUtil.writeJson(response, JsonResult.buildSuccessData("登出成功"));
     }
