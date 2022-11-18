@@ -1,5 +1,6 @@
 package com.darren1112.dptms.auth.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
 import com.darren1112.dptms.common.spi.auth.dto.AuthOrganizationDto;
 import com.darren1112.dptms.common.spi.auth.entity.AuthOrganizationEntity;
@@ -17,7 +18,7 @@ import java.util.List;
  */
 @Mapper
 @Repository
-public interface AuthOrganizationDao {
+public interface AuthOrganizationDao extends BaseMapper<AuthOrganizationDto> {
 
     /**
      * 查询重复记录数
@@ -29,15 +30,15 @@ public interface AuthOrganizationDao {
      */
     Long countByRepeat(AuthOrganizationDto param);
 
-    /**
-     * 插入组织信息
-     *
-     * @param entity 组织参数
-     * @return {@link Long}
-     * @author luyuhao
-     * @since 20/12/10 01:08
-     */
-    Long insert(AuthOrganizationEntity entity);
+    // /**
+    //  * 插入组织信息
+    //  *
+    //  * @param entity 组织参数
+    //  * @return {@link Long}
+    //  * @author luyuhao
+    //  * @since 20/12/10 01:08
+    //  */
+    // Long insert(AuthOrganizationEntity entity);
 
     /**
      * 更新组织信息

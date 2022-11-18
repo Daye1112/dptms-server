@@ -14,7 +14,7 @@
     </select>
     <!--插入组织信息-->
     <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id"
-            parameterType="com.darren1112.dptms.common.spi.auth.entity.AuthOrganizationEntity">
+            parameterType="com.darren1112.dptms.common.spi.auth.dto.AuthOrganizationDto">
         INSERT INTO auth_organization(org_name, org_code, remark, isvalid, ctime, creater, mtime, updater)
         VALUES (#{orgName}, #{orgCode}, #{remark}, 1, now(), #{creater}, now(), #{updater})
     </insert>

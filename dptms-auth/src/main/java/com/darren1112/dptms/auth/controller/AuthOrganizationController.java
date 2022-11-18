@@ -66,7 +66,7 @@ public class AuthOrganizationController extends BaseController {
     /**
      * 插入组织信息
      *
-     * @param entity 组织参数
+     * @param dto 组织参数
      * @return {@link JsonResult}
      * @author luyuhao
      * @since 20/12/10 01:08
@@ -74,15 +74,15 @@ public class AuthOrganizationController extends BaseController {
     @Log(value = "插入组织", businessType = BusinessType.INSERT)
     @ApiOperation("插入组织")
     @PostMapping("/insert")
-    public ResponseEntity<JsonResult<Long>> insert(AuthOrganizationEntity entity) {
+    public ResponseEntity<JsonResult<Long>> insert(AuthOrganizationDto dto) {
         ValidatorBuilder.build()
-                .on(entity.getOrgCode(), new NotEmptyValidatorCallback(AuthErrorCodeEnum.ORG_CODE_NOT_NULL))
-                .on(entity.getOrgName(), new NotEmptyValidatorCallback(AuthErrorCodeEnum.ORG_NAME_NOT_NULL))
+                .on(dto.getOrgCode(), new NotEmptyValidatorCallback(AuthErrorCodeEnum.ORG_CODE_NOT_NULL))
+                .on(dto.getOrgName(), new NotEmptyValidatorCallback(AuthErrorCodeEnum.ORG_NAME_NOT_NULL))
                 .doValidate().checkResult();
         ActiveUser activeUser = SecurityUserUtil.getActiveUser();
-        entity.setCreater(activeUser.getId());
-        entity.setUpdater(activeUser.getId());
-        Long id = authOrganizationService.insert(entity);
+        dto.setCreater(activeUser.getId());
+        dto.setUpdater(activeUser.getId());
+        Long id = authOrganizationService.insert(dto);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(id));
     }
 

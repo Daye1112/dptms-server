@@ -5,10 +5,10 @@ import com.darren1112.dptms.auth.dao.AuthOrganizationDao;
 import com.darren1112.dptms.auth.service.AuthOrganizationService;
 import com.darren1112.dptms.common.core.base.BaseService;
 import com.darren1112.dptms.common.core.exception.BadRequestException;
-import com.darren1112.dptms.common.spi.common.dto.PageBean;
-import com.darren1112.dptms.common.spi.common.dto.PageParam;
 import com.darren1112.dptms.common.spi.auth.dto.AuthOrganizationDto;
 import com.darren1112.dptms.common.spi.auth.entity.AuthOrganizationEntity;
+import com.darren1112.dptms.common.spi.common.dto.PageBean;
+import com.darren1112.dptms.common.spi.common.dto.PageParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -52,7 +52,7 @@ public class AuthOrganizationServiceImpl extends BaseService implements AuthOrga
     /**
      * 插入组织信息
      *
-     * @param entity 组织参数
+     * @param dto 组织参数
      * @return {@link Long}
      * @author luyuhao
      * @since 20/12/10 01:08
@@ -60,10 +60,10 @@ public class AuthOrganizationServiceImpl extends BaseService implements AuthOrga
     @Override
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Throwable.class)
-    public Long insert(AuthOrganizationEntity entity) {
-        validRepeat(entity, false);
-        authOrganizationDao.insert(entity);
-        return entity.getId();
+    public Long insert(AuthOrganizationDto dto) {
+        validRepeat(dto, false);
+        authOrganizationDao.insert(dto);
+        return dto.getId();
     }
 
     /**

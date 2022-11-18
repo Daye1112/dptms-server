@@ -47,7 +47,6 @@ public class DptmsAuthenticationProcessingFilter extends BaseAuthenticationProce
      */
     @Override
     protected Authentication handle(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-        log.info("DptmsAuthenticationProcessingFilter, uri:{}", request.getRequestURI());
         // 获取认证类型
         String authTypeParam = request.getParameter("authType");
         if (StringUtil.isBlank(authTypeParam)) {

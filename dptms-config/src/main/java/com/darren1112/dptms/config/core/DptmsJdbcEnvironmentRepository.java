@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.config.environment.Environment;
 import org.springframework.cloud.config.environment.PropertySource;
 import org.springframework.cloud.config.server.environment.EnvironmentRepository;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -24,6 +25,7 @@ import java.util.stream.Collectors;
  * @since 2021/7/22
  */
 @Component
+@Profile("!native")
 public class DptmsJdbcEnvironmentRepository implements EnvironmentRepository {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DptmsJdbcEnvironmentRepository.class);

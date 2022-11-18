@@ -47,6 +47,13 @@
             <artifactId>swagger-models</artifactId>
         </dependency>
         <!-- [knife4j] End -->
+        <!-- [mybatis-plus] Start -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>${mybatis-plus.version}</version>
+        </dependency>
+        <!-- [mybatis-plus] End -->
         <!-- [Plugins] End -->
     </dependencies>
 </project>

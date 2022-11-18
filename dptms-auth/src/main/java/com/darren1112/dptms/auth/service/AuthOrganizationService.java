@@ -1,9 +1,9 @@
 package com.darren1112.dptms.auth.service;
 
-import com.darren1112.dptms.common.spi.common.dto.PageBean;
-import com.darren1112.dptms.common.spi.common.dto.PageParam;
 import com.darren1112.dptms.common.spi.auth.dto.AuthOrganizationDto;
 import com.darren1112.dptms.common.spi.auth.entity.AuthOrganizationEntity;
+import com.darren1112.dptms.common.spi.common.dto.PageBean;
+import com.darren1112.dptms.common.spi.common.dto.PageParam;
 
 /**
  * 组织Service
@@ -16,12 +16,12 @@ public interface AuthOrganizationService {
     /**
      * 插入组织信息
      *
-     * @param entity 组织参数
+     * @param dto 组织参数
      * @return {@link Long}
      * @author luyuhao
      * @since 20/12/10 01:08
      */
-    Long insert(AuthOrganizationEntity entity);
+    Long insert(AuthOrganizationDto dto);
 
     /**
      * 更新组织信息
