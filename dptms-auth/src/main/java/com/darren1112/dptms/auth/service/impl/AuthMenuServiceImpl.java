@@ -25,7 +25,7 @@ import java.util.List;
  * @since 2020/12/12 17:25
  */
 @Service
-@CacheConfig(cacheNames = "sysMenu", keyGenerator = "keyGenerator")
+@CacheConfig(cacheNames = "authMenu", keyGenerator = "keyGenerator")
 @Transactional(rollbackFor = Throwable.class, readOnly = true)
 public class AuthMenuServiceImpl extends BaseService implements AuthMenuService {
 

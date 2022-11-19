@@ -22,7 +22,7 @@ import java.util.List;
  * @since 2020/12/23 01:51
  */
 @Service
-@CacheConfig(cacheNames = "sysUserRole", keyGenerator = "keyGenerator")
+@CacheConfig(cacheNames = "authUserRole", keyGenerator = "keyGenerator")
 @Transactional(rollbackFor = Throwable.class, readOnly = true)
 public class AuthUserRoleServiceImpl implements AuthUserRoleService {
 

@@ -25,7 +25,7 @@ import java.util.List;
  * @since 2020/08/16 01:43
  */
 @Service
-@CacheConfig(cacheNames = "sysOrganization", keyGenerator = "keyGenerator")
+@CacheConfig(cacheNames = "authOrganization", keyGenerator = "keyGenerator")
 @Transactional(rollbackFor = Throwable.class, readOnly = true)
 public class AuthOrganizationServiceImpl extends BaseService implements AuthOrganizationService {
 

@@ -1,7 +1,6 @@
 package com.darren1112.dptms.auth.service.impl;
 
 import com.darren1112.dptms.auth.common.enums.AuthErrorCodeEnum;
-import com.darren1112.dptms.auth.repository.AuthPermissionRepository;
 import com.darren1112.dptms.auth.repository.AuthUserRepository;
 import com.darren1112.dptms.auth.service.AuthUserService;
 import com.darren1112.dptms.common.core.base.BaseService;
@@ -28,15 +27,12 @@ import java.util.List;
  * @since 2020/07/23 02:43
  */
 @Service
-@CacheConfig(cacheNames = "sysUser", keyGenerator = "keyGenerator")
+@CacheConfig(cacheNames = "authUser", keyGenerator = "keyGenerator")
 @Transactional(rollbackFor = Throwable.class, readOnly = true)
 public class AuthUserServiceImpl extends BaseService implements AuthUserService {
 
     @Autowired
     private AuthUserRepository authUserRepository;
-
-    @Autowired
-    private AuthPermissionRepository authPermissionRepository;
 
     /**
      * 根据用户名查询用户信息
