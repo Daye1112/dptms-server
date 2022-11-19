@@ -3,6 +3,7 @@ package com.darren1112.dptms.auth.service.impl;
 import com.darren1112.dptms.auth.common.enums.AuthErrorCodeEnum;
 import com.darren1112.dptms.auth.common.util.MenuUtil;
 import com.darren1112.dptms.auth.dao.AuthMenuDao;
+import com.darren1112.dptms.auth.repository.AuthMenuRepository;
 import com.darren1112.dptms.auth.service.AuthMenuService;
 import com.darren1112.dptms.common.core.base.BaseService;
 import com.darren1112.dptms.common.core.exception.BadRequestException;
@@ -29,7 +30,7 @@ import java.util.List;
 public class AuthMenuServiceImpl extends BaseService implements AuthMenuService {
 
     @Autowired
-    private AuthMenuDao authMenuDao;
+    private AuthMenuRepository authMenuRepository;
 
     /**
      * 获取用户的菜单
@@ -41,7 +42,7 @@ public class AuthMenuServiceImpl extends BaseService implements AuthMenuService 
      */
     @Override
     public List<AuthMenuDto> listMenuByUserId(Long userId) {
-        return authMenuDao.listMenuByUserId(userId);
+        return authMenuRepository.getBaseMapper().listMenuByUserId(userId);
     }
 
     /**
@@ -57,7 +58,7 @@ public class AuthMenuServiceImpl extends BaseService implements AuthMenuService 
     @Transactional(rollbackFor = Throwable.class)
     public Long insert(AuthMenuEntity entity) {
         validRepeat(entity, false);
-        authMenuDao.insert(entity);
+        authMenuRepository.getBaseMapper().insert(entity);
         return entity.getId();
     }
 
@@ -73,7 +74,7 @@ public class AuthMenuServiceImpl extends BaseService implements AuthMenuService 
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Throwable.class)
     public void deleteById(Long id, Long updater) {
-        authMenuDao.deleteById(id, updater);
+        authMenuRepository.getBaseMapper().deleteById(id, updater);
     }
 
     /**
@@ -89,7 +90,7 @@ public class AuthMenuServiceImpl extends BaseService implements AuthMenuService 
     @Transactional(rollbackFor = Throwable.class)
     public Long update(AuthMenuEntity entity) {
         validRepeat(entity, true);
-        return authMenuDao.update(entity);
+        return authMenuRepository.getBaseMapper().update(entity);
     }
 
     /**
@@ -105,7 +106,7 @@ public class AuthMenuServiceImpl extends BaseService implements AuthMenuService 
         param.setId(entity.getId());
         param.setMenuCode(entity.getMenuCode());
         param.setIsUpdate(isUpdate);
-        Long count = authMenuDao.countByRepeat(param);
+        Long count = authMenuRepository.getBaseMapper().countByRepeat(param);
         if (count != null && count > 0) {
             throw new BadRequestException(AuthErrorCodeEnum.MENU_CODE_REPEAT);
         }
@@ -121,7 +122,7 @@ public class AuthMenuServiceImpl extends BaseService implements AuthMenuService 
     @Override
     @Cacheable
     public AuthMenuDto listTree() {
-        List<AuthMenuDto> sysMenuList = authMenuDao.list();
+        List<AuthMenuDto> sysMenuList = authMenuRepository.getBaseMapper().list();
         return MenuUtil.buildTree(sysMenuList);
     }
 }

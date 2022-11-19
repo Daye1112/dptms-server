@@ -1,8 +1,9 @@
 package com.darren1112.dptms.auth.service.impl;
 
 import com.darren1112.dptms.auth.common.util.MenuUtil;
-import com.darren1112.dptms.auth.dao.AuthRoleMenuDao;
+import com.darren1112.dptms.auth.repository.AuthRoleMenuRepository;
 import com.darren1112.dptms.auth.service.AuthRoleMenuService;
+import com.darren1112.dptms.common.core.util.DatabaseUtil;
 import com.darren1112.dptms.common.core.util.StringUtil;
 import com.darren1112.dptms.common.spi.auth.dto.AuthMenuDto;
 import com.darren1112.dptms.common.spi.auth.entity.AuthRoleMenuEntity;
@@ -28,7 +29,7 @@ import java.util.stream.Collectors;
 public class AuthRoleMenuServiceImpl implements AuthRoleMenuService {
 
     @Autowired
-    private AuthRoleMenuDao authRoleMenuDao;
+    private AuthRoleMenuRepository authRoleMenuRepository;
 
     /**
      * 查询角色关联的菜单list
@@ -40,8 +41,11 @@ public class AuthRoleMenuServiceImpl implements AuthRoleMenuService {
      */
     @Override
     public AuthMenuDto listRoleAssigned(Long roleId) {
-        List<AuthMenuDto> sysMenuList = authRoleMenuDao.listRoleAssigned(roleId);
-        List<Long> assignedIdList = sysMenuList.stream().filter(AuthMenuDto::getIsAssigned).map(AuthMenuDto::getId).collect(Collectors.toList());
+        List<AuthMenuDto> sysMenuList = authRoleMenuRepository.getBaseMapper().listRoleAssigned(roleId);
+        List<Long> assignedIdList = sysMenuList.stream()
+                .filter(AuthMenuDto::getIsAssigned)
+                .map(AuthMenuDto::getId)
+                .collect(Collectors.toList());
         AuthMenuDto sysMenuDto = MenuUtil.buildTree(sysMenuList);
         if (sysMenuDto != null) {
             sysMenuDto.setAssignedIdList(assignedIdList);
@@ -63,7 +67,7 @@ public class AuthRoleMenuServiceImpl implements AuthRoleMenuService {
     @Transactional(rollbackFor = Throwable.class)
     public void assignedMenu(Long roleId, String menuIds, Long updater) {
         // 清空角色已分配的组织
-        authRoleMenuDao.deleteByRoleId(roleId, updater);
+        authRoleMenuRepository.getBaseMapper().deleteByRoleId(roleId, updater);
         if (StringUtil.isBlank(menuIds)) {
             return;
         }
@@ -79,6 +83,6 @@ public class AuthRoleMenuServiceImpl implements AuthRoleMenuService {
             list.add(entity);
         }
         // 批量插入
-        authRoleMenuDao.batchInsert(list);
+        DatabaseUtil.batchHandle(list, authRoleMenuRepository.getBaseMapper()::batchInsert);
     }
 }

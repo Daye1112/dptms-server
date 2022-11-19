@@ -2,6 +2,7 @@ package com.darren1112.dptms.auth.service.impl;
 
 import com.darren1112.dptms.auth.common.enums.AuthErrorCodeEnum;
 import com.darren1112.dptms.auth.dao.AuthPermissionDao;
+import com.darren1112.dptms.auth.repository.AuthPermissionRepository;
 import com.darren1112.dptms.auth.service.AuthPermissionService;
 import com.darren1112.dptms.common.core.base.BaseService;
 import com.darren1112.dptms.common.core.exception.BadRequestException;
@@ -30,7 +31,7 @@ import java.util.List;
 public class AuthPermissionServiceImpl extends BaseService implements AuthPermissionService {
 
     @Autowired
-    private AuthPermissionDao authPermissionDao;
+    private AuthPermissionRepository authPermissionRepository;
 
     /**
      * 插入权限信息
@@ -45,7 +46,7 @@ public class AuthPermissionServiceImpl extends BaseService implements AuthPermis
     @Transactional(rollbackFor = Throwable.class)
     public Long insert(AuthPermissionEntity entity) {
         validRepeat(entity, false);
-        authPermissionDao.insert(entity);
+        authPermissionRepository.getBaseMapper().insert(entity);
         return entity.getId();
     }
 
@@ -61,8 +62,8 @@ public class AuthPermissionServiceImpl extends BaseService implements AuthPermis
     @Override
     @Cacheable
     public PageBean<AuthPermissionDto> listPage(PageParam pageParam, AuthPermissionDto dto) {
-        List<AuthPermissionDto> list = authPermissionDao.listPage(pageParam, dto);
-        Long count = authPermissionDao.listPageCount(dto);
+        List<AuthPermissionDto> list = authPermissionRepository.getBaseMapper().listPage(pageParam, dto);
+        Long count = authPermissionRepository.getBaseMapper().listPageCount(dto);
         return createPageBean(pageParam, count, list);
     }
 
@@ -79,7 +80,7 @@ public class AuthPermissionServiceImpl extends BaseService implements AuthPermis
     @Transactional(rollbackFor = Throwable.class)
     public Long update(AuthPermissionEntity entity) {
         validRepeat(entity, true);
-        return authPermissionDao.update(entity);
+        return authPermissionRepository.getBaseMapper().update(entity);
     }
 
     /**
@@ -96,7 +97,7 @@ public class AuthPermissionServiceImpl extends BaseService implements AuthPermis
         param.setPerCode(entity.getPerCode());
         param.setPerUrl(entity.getPerUrl());
         param.setIsUpdate(isUpdate);
-        Long count = authPermissionDao.countByRepeat(param);
+        Long count = authPermissionRepository.getBaseMapper().countByRepeat(param);
         if (count != null && count > 0) {
             throw new BadRequestException(AuthErrorCodeEnum.PER_NOT_REPEAT);
         }
@@ -114,7 +115,7 @@ public class AuthPermissionServiceImpl extends BaseService implements AuthPermis
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Throwable.class)
     public void deleteById(Long id, Long updater) {
-        authPermissionDao.deleteById(id, updater);
+        authPermissionRepository.getBaseMapper().deleteById(id, updater);
     }
 
     /**
@@ -127,6 +128,20 @@ public class AuthPermissionServiceImpl extends BaseService implements AuthPermis
     @Override
     @Cacheable
     public List<AuthPermissionDto> listGroup() {
-        return authPermissionDao.listGroup();
+        return authPermissionRepository.getBaseMapper().listGroup();
+    }
+
+    /**
+     * 根据用户id获取权限集合
+     *
+     * @param userId 用户id
+     * @return {@link AuthPermissionDto}
+     * @author luyuhao
+     * @since 2022/11/19
+     */
+    @Override
+    @Cacheable
+    public List<AuthPermissionDto> listByUserId(Long userId) {
+        return authPermissionRepository.getBaseMapper().listByUserId(userId);
     }
 }

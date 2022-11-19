@@ -1,8 +1,9 @@
 package com.darren1112.dptms.auth.dao;
 
-import com.darren1112.dptms.common.spi.common.dto.PageParam;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.darren1112.dptms.common.spi.auth.dto.AuthUserDto;
 import com.darren1112.dptms.common.spi.auth.entity.AuthUserEntity;
+import com.darren1112.dptms.common.spi.common.dto.PageParam;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -17,7 +18,7 @@ import java.util.List;
  */
 @Mapper
 @Repository
-public interface AuthUserDao {
+public interface AuthUserDao extends BaseMapper<AuthUserDto> {
 
     /**
      * 插入数据

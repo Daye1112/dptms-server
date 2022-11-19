@@ -1,6 +1,8 @@
 package com.darren1112.dptms.auth.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.darren1112.dptms.common.spi.auth.dto.AuthOrganizationDto;
+import com.darren1112.dptms.common.spi.auth.dto.AuthUserOrganizationDto;
 import com.darren1112.dptms.common.spi.auth.entity.AuthUserOrganizationEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -16,7 +18,7 @@ import java.util.List;
  */
 @Mapper
 @Repository
-public interface AuthUserOrganizationDao {
+public interface AuthUserOrganizationDao extends BaseMapper<AuthUserOrganizationDto> {
 
     /**
      * 查询用户关联的组织list

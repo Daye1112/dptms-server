@@ -1,7 +1,8 @@
 package com.darren1112.dptms.auth.service.impl;
 
-import com.darren1112.dptms.auth.dao.AuthUserOrganizationDao;
+import com.darren1112.dptms.auth.repository.AuthUserOrganizationRepository;
 import com.darren1112.dptms.auth.service.AuthUserOrganizationService;
+import com.darren1112.dptms.common.core.util.DatabaseUtil;
 import com.darren1112.dptms.common.core.util.StringUtil;
 import com.darren1112.dptms.common.spi.auth.dto.AuthOrganizationDto;
 import com.darren1112.dptms.common.spi.auth.entity.AuthUserOrganizationEntity;
@@ -26,7 +27,7 @@ import java.util.List;
 public class AuthUserOrganizationServiceImpl implements AuthUserOrganizationService {
 
     @Autowired
-    private AuthUserOrganizationDao authUserOrganizationDao;
+    private AuthUserOrganizationRepository authUserOrganizationRepository;
 
     /**
      * 查询用户关联的组织list
@@ -38,7 +39,7 @@ public class AuthUserOrganizationServiceImpl implements AuthUserOrganizationServ
      */
     @Override
     public List<AuthOrganizationDto> listUserAssigned(Long userId) {
-        return authUserOrganizationDao.listUserAssigned(userId);
+        return authUserOrganizationRepository.getBaseMapper().listUserAssigned(userId);
     }
 
     /**
@@ -55,7 +56,7 @@ public class AuthUserOrganizationServiceImpl implements AuthUserOrganizationServ
     @Transactional(rollbackFor = Throwable.class)
     public void assignedOrg(Long userId, String orgIds, Long updater) {
         // 清空用户已分配的组织
-        authUserOrganizationDao.deleteByUserId(userId, updater);
+        authUserOrganizationRepository.getBaseMapper().deleteByUserId(userId, updater);
         if (StringUtil.isBlank(orgIds)) {
             return;
         }
@@ -71,6 +72,6 @@ public class AuthUserOrganizationServiceImpl implements AuthUserOrganizationServ
             list.add(entity);
         }
         // 批量插入
-        authUserOrganizationDao.batchInsert(list);
+        DatabaseUtil.batchHandle(list, authUserOrganizationRepository.getBaseMapper()::batchInsert);
     }
 }

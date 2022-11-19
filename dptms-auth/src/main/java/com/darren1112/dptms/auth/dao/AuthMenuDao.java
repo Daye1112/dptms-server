@@ -1,5 +1,6 @@
 package com.darren1112.dptms.auth.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.darren1112.dptms.common.spi.auth.dto.AuthMenuDto;
 import com.darren1112.dptms.common.spi.auth.entity.AuthMenuEntity;
 import org.apache.ibatis.annotations.Mapper;
@@ -16,7 +17,7 @@ import java.util.List;
  */
 @Mapper
 @Repository
-public interface AuthMenuDao {
+public interface AuthMenuDao extends BaseMapper<AuthMenuDto> {
 
     /**
      * 获取用户的菜单

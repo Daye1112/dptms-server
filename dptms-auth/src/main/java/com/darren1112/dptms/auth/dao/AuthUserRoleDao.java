@@ -1,6 +1,8 @@
 package com.darren1112.dptms.auth.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.darren1112.dptms.common.spi.auth.dto.AuthRoleDto;
+import com.darren1112.dptms.common.spi.auth.dto.AuthUserRoleDto;
 import com.darren1112.dptms.common.spi.auth.entity.AuthUserRoleEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -16,7 +18,7 @@ import java.util.List;
  */
 @Mapper
 @Repository
-public interface AuthUserRoleDao {
+public interface AuthUserRoleDao extends BaseMapper<AuthUserRoleDto> {
 
     /**
      * 清空用户已分配的角色

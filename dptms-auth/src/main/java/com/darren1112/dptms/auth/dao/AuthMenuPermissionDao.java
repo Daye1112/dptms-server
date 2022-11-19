@@ -1,5 +1,8 @@
 package com.darren1112.dptms.auth.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.darren1112.dptms.common.spi.auth.dto.AuthMenuPermissionDto;
+import com.darren1112.dptms.common.spi.auth.dto.AuthOrganizationDto;
 import com.darren1112.dptms.common.spi.auth.dto.AuthPermissionDto;
 import com.darren1112.dptms.common.spi.auth.entity.AuthMenuPermissionEntity;
 import org.apache.ibatis.annotations.Mapper;
@@ -16,7 +19,7 @@ import java.util.List;
  */
 @Mapper
 @Repository
-public interface AuthMenuPermissionDao {
+public interface AuthMenuPermissionDao extends BaseMapper<AuthMenuPermissionDto> {
 
     /**
      * 查询菜单关联的权限list

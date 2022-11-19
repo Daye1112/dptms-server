@@ -1,7 +1,8 @@
 package com.darren1112.dptms.auth.service.impl;
 
-import com.darren1112.dptms.auth.dao.AuthUserRoleDao;
+import com.darren1112.dptms.auth.repository.AuthUserRoleRepository;
 import com.darren1112.dptms.auth.service.AuthUserRoleService;
+import com.darren1112.dptms.common.core.util.DatabaseUtil;
 import com.darren1112.dptms.common.core.util.StringUtil;
 import com.darren1112.dptms.common.spi.auth.dto.AuthRoleDto;
 import com.darren1112.dptms.common.spi.auth.entity.AuthUserRoleEntity;
@@ -26,7 +27,7 @@ import java.util.List;
 public class AuthUserRoleServiceImpl implements AuthUserRoleService {
 
     @Autowired
-    private AuthUserRoleDao authUserRoleDao;
+    private AuthUserRoleRepository authUserRoleRepository;
 
     /**
      * 分配角色
@@ -42,7 +43,7 @@ public class AuthUserRoleServiceImpl implements AuthUserRoleService {
     @Transactional(rollbackFor = Throwable.class)
     public void assignedRole(Long userId, String roleIds, Long updater) {
         // 清空用户已分配的角色
-        authUserRoleDao.deleteByUserId(userId, updater);
+        authUserRoleRepository.getBaseMapper().deleteByUserId(userId, updater);
         if (StringUtil.isBlank(roleIds)) {
             return;
         }
@@ -58,7 +59,7 @@ public class AuthUserRoleServiceImpl implements AuthUserRoleService {
             list.add(entity);
         }
         // 批量插入
-        authUserRoleDao.batchInsert(list);
+        DatabaseUtil.batchHandle(list, authUserRoleRepository.getBaseMapper()::batchInsert);
     }
 
     /**
@@ -71,6 +72,6 @@ public class AuthUserRoleServiceImpl implements AuthUserRoleService {
      */
     @Override
     public List<AuthRoleDto> listUserAssigned(Long userId) {
-        return authUserRoleDao.listUserAssigned(userId);
+        return authUserRoleRepository.getBaseMapper().listUserAssigned(userId);
     }
 }

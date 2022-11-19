@@ -1,18 +1,17 @@
 package com.darren1112.dptms.auth.service.impl;
 
 import com.darren1112.dptms.auth.common.enums.AuthErrorCodeEnum;
-import com.darren1112.dptms.auth.dao.AuthPermissionDao;
-import com.darren1112.dptms.auth.dao.AuthUserDao;
+import com.darren1112.dptms.auth.repository.AuthPermissionRepository;
+import com.darren1112.dptms.auth.repository.AuthUserRepository;
 import com.darren1112.dptms.auth.service.AuthUserService;
 import com.darren1112.dptms.common.core.base.BaseService;
 import com.darren1112.dptms.common.core.exception.BadRequestException;
 import com.darren1112.dptms.common.core.util.Md5Util;
 import com.darren1112.dptms.common.core.validate.handler.ValidateHandler;
-import com.darren1112.dptms.common.spi.common.dto.PageBean;
-import com.darren1112.dptms.common.spi.common.dto.PageParam;
-import com.darren1112.dptms.common.spi.auth.dto.AuthPermissionDto;
 import com.darren1112.dptms.common.spi.auth.dto.AuthUserDto;
 import com.darren1112.dptms.common.spi.auth.entity.AuthUserEntity;
+import com.darren1112.dptms.common.spi.common.dto.PageBean;
+import com.darren1112.dptms.common.spi.common.dto.PageParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -34,10 +33,10 @@ import java.util.List;
 public class AuthUserServiceImpl extends BaseService implements AuthUserService {
 
     @Autowired
-    private AuthUserDao authUserDao;
+    private AuthUserRepository authUserRepository;
 
     @Autowired
-    private AuthPermissionDao authPermissionDao;
+    private AuthPermissionRepository authPermissionRepository;
 
     /**
      * 根据用户名查询用户信息
@@ -50,7 +49,7 @@ public class AuthUserServiceImpl extends BaseService implements AuthUserService 
     @Override
     @Cacheable
     public AuthUserDto getByUsername(String username) {
-        return authUserDao.getByUsername(username);
+        return authUserRepository.getBaseMapper().getByUsername(username);
     }
 
     /**
@@ -64,7 +63,7 @@ public class AuthUserServiceImpl extends BaseService implements AuthUserService 
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Throwable.class)
     public void updateLoginTime(Long id) {
-        authUserDao.updateLastLoginTime(id);
+        authUserRepository.getBaseMapper().updateLastLoginTime(id);
     }
 
     /**
@@ -78,7 +77,7 @@ public class AuthUserServiceImpl extends BaseService implements AuthUserService 
     @Override
     @Cacheable
     public AuthUserDto getById(Long id) {
-        return authUserDao.getById(id);
+        return authUserRepository.getBaseMapper().getById(id);
     }
 
     /**
@@ -94,7 +93,7 @@ public class AuthUserServiceImpl extends BaseService implements AuthUserService 
     @Transactional(rollbackFor = Throwable.class)
     public Long insert(AuthUserEntity entity) {
         validRepeat(entity, false);
-        authUserDao.insert(entity);
+        authUserRepository.getBaseMapper().insert(entity);
         return entity.getId();
     }
 
@@ -111,7 +110,7 @@ public class AuthUserServiceImpl extends BaseService implements AuthUserService 
         param.setId(entity.getId());
         param.setUsername(entity.getUsername());
         param.setIsUpdate(isUpdate);
-        Long count = authUserDao.countByRepeat(param);
+        Long count = authUserRepository.getBaseMapper().countByRepeat(param);
         if (count != null && count > 0) {
             throw new BadRequestException(AuthErrorCodeEnum.USER_NOT_REPEAT);
         }
@@ -129,8 +128,8 @@ public class AuthUserServiceImpl extends BaseService implements AuthUserService 
     @Override
     @Cacheable
     public PageBean<AuthUserDto> listPage(PageParam pageParam, AuthUserDto dto) {
-        List<AuthUserDto> list = authUserDao.listPage(pageParam, dto);
-        Long count = authUserDao.listPageCount(dto);
+        List<AuthUserDto> list = authUserRepository.getBaseMapper().listPage(pageParam, dto);
+        Long count = authUserRepository.getBaseMapper().listPageCount(dto);
         return createPageBean(pageParam, count, list);
     }
 
@@ -147,7 +146,7 @@ public class AuthUserServiceImpl extends BaseService implements AuthUserService 
     @Transactional(rollbackFor = Throwable.class)
     public Long update(AuthUserEntity entity) {
         validRepeat(entity, true);
-        return authUserDao.update(entity);
+        return authUserRepository.getBaseMapper().update(entity);
     }
 
     /**
@@ -162,7 +161,7 @@ public class AuthUserServiceImpl extends BaseService implements AuthUserService 
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Throwable.class)
     public void deleteById(Long id, Long updater) {
-        authUserDao.deleteById(id, updater);
+        authUserRepository.getBaseMapper().deleteById(id, updater);
     }
 
     /**
@@ -176,25 +175,7 @@ public class AuthUserServiceImpl extends BaseService implements AuthUserService 
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Throwable.class)
     public void updateLock(AuthUserEntity entity) {
-        authUserDao.updateLock(entity);
-    }
-
-    /**
-     * 根据用户id查询用户信息和权限list
-     *
-     * @param id 用户id
-     * @return {@link AuthUserDto}
-     * @author luyuhao
-     * @since 2021/01/31 19:39
-     */
-    @Override
-    public AuthUserDto getUserInfoAndPermissionByUserId(Long id) {
-        AuthUserDto userInfo = this.getById(id);
-        if (userInfo != null) {
-            List<AuthPermissionDto> permissionList = authPermissionDao.listByUserId(id);
-            userInfo.setPermissionList(permissionList);
-        }
-        return userInfo;
+        authUserRepository.getBaseMapper().updateLock(entity);
     }
 
     /**
@@ -209,7 +190,7 @@ public class AuthUserServiceImpl extends BaseService implements AuthUserService 
     @Transactional(rollbackFor = Throwable.class)
     public void updatePassword(AuthUserDto dto) {
         // 查询旧用户信息
-        AuthUserDto userDto = authUserDao.getById(dto.getId());
+        AuthUserDto userDto = authUserRepository.getBaseMapper().getById(dto.getId());
         // 判断用户是否存在
         ValidateHandler.checkNull(userDto, AuthErrorCodeEnum.USER_NOT_EXIST);
         // 加密输入的旧密码
@@ -219,6 +200,6 @@ public class AuthUserServiceImpl extends BaseService implements AuthUserService 
         // 新密码加密
         String newEncPassword = Md5Util.encrypt(dto.getNewPassword(), userDto.getSalt());
         dto.setNewPassword(newEncPassword);
-        authUserDao.updatePassword(dto);
+        authUserRepository.getBaseMapper().updatePassword(dto);
     }
 }

@@ -1,8 +1,9 @@
 package com.darren1112.dptms.auth.dao;
 
-import com.darren1112.dptms.common.spi.common.dto.PageParam;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.darren1112.dptms.common.spi.auth.dto.AuthPermissionDto;
 import com.darren1112.dptms.common.spi.auth.entity.AuthPermissionEntity;
+import com.darren1112.dptms.common.spi.common.dto.PageParam;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -17,7 +18,7 @@ import java.util.List;
  */
 @Mapper
 @Repository
-public interface AuthPermissionDao {
+public interface AuthPermissionDao extends BaseMapper<AuthPermissionDto> {
 
     /**
      * 根据用户id查询权限list

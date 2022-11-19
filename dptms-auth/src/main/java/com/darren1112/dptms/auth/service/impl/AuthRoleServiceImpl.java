@@ -2,6 +2,7 @@ package com.darren1112.dptms.auth.service.impl;
 
 import com.darren1112.dptms.auth.common.enums.AuthErrorCodeEnum;
 import com.darren1112.dptms.auth.dao.AuthRoleDao;
+import com.darren1112.dptms.auth.repository.AuthRoleRepository;
 import com.darren1112.dptms.auth.service.AuthRoleService;
 import com.darren1112.dptms.common.core.base.BaseService;
 import com.darren1112.dptms.common.core.exception.BadRequestException;
@@ -30,7 +31,7 @@ import java.util.List;
 public class AuthRoleServiceImpl extends BaseService implements AuthRoleService {
 
     @Autowired
-    private AuthRoleDao authRoleDao;
+    private AuthRoleRepository authRoleRepository;
 
     /**
      * 插入角色信息
@@ -45,7 +46,7 @@ public class AuthRoleServiceImpl extends BaseService implements AuthRoleService 
     @Transactional(rollbackFor = Throwable.class)
     public Long insert(AuthRoleEntity entity) {
         validRepeat(entity, false);
-        authRoleDao.insert(entity);
+        authRoleRepository.getBaseMapper().insert(entity);
         return entity.getId();
     }
 
@@ -62,7 +63,7 @@ public class AuthRoleServiceImpl extends BaseService implements AuthRoleService 
     @Transactional(rollbackFor = Throwable.class)
     public Long update(AuthRoleEntity entity) {
         validRepeat(entity, true);
-        return authRoleDao.update(entity);
+        return authRoleRepository.getBaseMapper().update(entity);
     }
 
     /**
@@ -77,8 +78,8 @@ public class AuthRoleServiceImpl extends BaseService implements AuthRoleService 
     @Override
     @Cacheable
     public PageBean<AuthRoleDto> listPage(PageParam pageParam, AuthRoleDto dto) {
-        List<AuthRoleDto> list = authRoleDao.listPage(pageParam, dto);
-        Long count = authRoleDao.listPageCount(dto);
+        List<AuthRoleDto> list = authRoleRepository.getBaseMapper().listPage(pageParam, dto);
+        Long count = authRoleRepository.getBaseMapper().listPageCount(dto);
         return createPageBean(pageParam, count, list);
     }
 
@@ -94,7 +95,7 @@ public class AuthRoleServiceImpl extends BaseService implements AuthRoleService 
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Throwable.class)
     public void deleteById(Long id, Long updater) {
-        authRoleDao.deleteById(id, updater);
+        authRoleRepository.getBaseMapper().deleteById(id, updater);
     }
 
     /**
@@ -110,7 +111,7 @@ public class AuthRoleServiceImpl extends BaseService implements AuthRoleService 
         param.setId(entity.getId());
         param.setRoleCode(entity.getRoleCode());
         param.setIsUpdate(isUpdate);
-        Long count = authRoleDao.countByRepeat(param);
+        Long count = authRoleRepository.getBaseMapper().countByRepeat(param);
         if (count != null && count > 0) {
             throw new BadRequestException(AuthErrorCodeEnum.ROLE_NOT_REPEAT);
         }

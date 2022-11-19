@@ -1,9 +1,9 @@
 package com.darren1112.dptms.auth.service;
 
-import com.darren1112.dptms.common.spi.common.dto.PageBean;
-import com.darren1112.dptms.common.spi.common.dto.PageParam;
 import com.darren1112.dptms.common.spi.auth.dto.AuthPermissionDto;
 import com.darren1112.dptms.common.spi.auth.entity.AuthPermissionEntity;
+import com.darren1112.dptms.common.spi.common.dto.PageBean;
+import com.darren1112.dptms.common.spi.common.dto.PageParam;
 
 import java.util.List;
 
@@ -64,4 +64,14 @@ public interface AuthPermissionService {
      * @since 2020/12/28 01:10
      */
     List<AuthPermissionDto> listGroup();
+
+    /**
+     * 根据用户id获取权限集合
+     *
+     * @param userId 用户id
+     * @return {@link AuthPermissionDto}
+     * @author luyuhao
+     * @since 2022/11/19
+     */
+    List<AuthPermissionDto> listByUserId(Long userId);
 }

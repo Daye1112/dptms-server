@@ -17,6 +17,8 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper = true)
 public class AuthUserRoleEntity extends BaseEntity {
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * 角色id
      */

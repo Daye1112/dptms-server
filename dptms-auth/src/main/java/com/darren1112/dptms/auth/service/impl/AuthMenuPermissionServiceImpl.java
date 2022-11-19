@@ -1,7 +1,8 @@
 package com.darren1112.dptms.auth.service.impl;
 
-import com.darren1112.dptms.auth.dao.AuthMenuPermissionDao;
+import com.darren1112.dptms.auth.repository.AuthMenuPermissionRepository;
 import com.darren1112.dptms.auth.service.AuthMenuPermissionService;
+import com.darren1112.dptms.common.core.util.DatabaseUtil;
 import com.darren1112.dptms.common.core.util.StringUtil;
 import com.darren1112.dptms.common.spi.auth.dto.AuthPermissionDto;
 import com.darren1112.dptms.common.spi.auth.entity.AuthMenuPermissionEntity;
@@ -26,7 +27,7 @@ import java.util.List;
 public class AuthMenuPermissionServiceImpl implements AuthMenuPermissionService {
 
     @Autowired
-    private AuthMenuPermissionDao authMenuPermissionDao;
+    private AuthMenuPermissionRepository authMenuPermissionRepository;
 
     /**
      * 查询菜单关联的权限list
@@ -38,7 +39,7 @@ public class AuthMenuPermissionServiceImpl implements AuthMenuPermissionService 
      */
     @Override
     public List<AuthPermissionDto> listMenuAssigned(Long menuId) {
-        return authMenuPermissionDao.listMenuAssigned(menuId);
+        return authMenuPermissionRepository.getBaseMapper().listMenuAssigned(menuId);
     }
 
     /**
@@ -54,7 +55,7 @@ public class AuthMenuPermissionServiceImpl implements AuthMenuPermissionService 
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Throwable.class)
     public void assignedPer(Long menuId, String perIds, Long updater) {
-        authMenuPermissionDao.deleteByMenuId(menuId, updater);
+        authMenuPermissionRepository.getBaseMapper().deleteByMenuId(menuId, updater);
         if (StringUtil.isBlank(perIds)) {
             return;
         }
@@ -68,7 +69,7 @@ public class AuthMenuPermissionServiceImpl implements AuthMenuPermissionService 
             entity.setUpdater(updater);
             list.add(entity);
         }
-        authMenuPermissionDao.batchInsert(list);
+        DatabaseUtil.batchHandle(list, authMenuPermissionRepository.getBaseMapper()::batchInsert);
     }
 
     /**
@@ -81,6 +82,6 @@ public class AuthMenuPermissionServiceImpl implements AuthMenuPermissionService 
      */
     @Override
     public List<AuthPermissionDto> listByMenuId(Long menuId) {
-        return authMenuPermissionDao.listByMenuId(menuId);
+        return authMenuPermissionRepository.getBaseMapper().listByMenuId(menuId);
     }
 }

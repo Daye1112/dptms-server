@@ -1,7 +1,7 @@
 package com.darren1112.dptms.auth.service.impl;
 
 import com.darren1112.dptms.auth.common.enums.AuthErrorCodeEnum;
-import com.darren1112.dptms.auth.dao.AuthOrganizationDao;
+import com.darren1112.dptms.auth.repository.AuthOrganizationRepository;
 import com.darren1112.dptms.auth.service.AuthOrganizationService;
 import com.darren1112.dptms.common.core.base.BaseService;
 import com.darren1112.dptms.common.core.exception.BadRequestException;
@@ -30,7 +30,7 @@ import java.util.List;
 public class AuthOrganizationServiceImpl extends BaseService implements AuthOrganizationService {
 
     @Autowired
-    private AuthOrganizationDao authOrganizationDao;
+    private AuthOrganizationRepository authOrganizationRepository;
 
     /**
      * 分页查询组织信息
@@ -44,8 +44,8 @@ public class AuthOrganizationServiceImpl extends BaseService implements AuthOrga
     @Override
     @Cacheable
     public PageBean<AuthOrganizationDto> listPage(PageParam pageParam, AuthOrganizationDto param) {
-        List<AuthOrganizationDto> list = authOrganizationDao.listPage(pageParam, param);
-        Long count = authOrganizationDao.listPageCount(param);
+        List<AuthOrganizationDto> list = authOrganizationRepository.getBaseMapper().listPage(pageParam, param);
+        Long count = authOrganizationRepository.getBaseMapper().listPageCount(param);
         return createPageBean(pageParam, count, list);
     }
 
@@ -62,7 +62,7 @@ public class AuthOrganizationServiceImpl extends BaseService implements AuthOrga
     @Transactional(rollbackFor = Throwable.class)
     public Long insert(AuthOrganizationDto dto) {
         validRepeat(dto, false);
-        authOrganizationDao.insert(dto);
+        authOrganizationRepository.getBaseMapper().insert(dto);
         return dto.getId();
     }
 
@@ -80,7 +80,7 @@ public class AuthOrganizationServiceImpl extends BaseService implements AuthOrga
         param.setOrgCode(entity.getOrgCode());
         param.setOrgName(entity.getOrgName());
         param.setId(entity.getId());
-        Long count = authOrganizationDao.countByRepeat(param);
+        Long count = authOrganizationRepository.getBaseMapper().countByRepeat(param);
         if (count != null && count > 0) {
             throw new BadRequestException(AuthErrorCodeEnum.ORG_NOT_REPEAT);
         }
@@ -99,7 +99,7 @@ public class AuthOrganizationServiceImpl extends BaseService implements AuthOrga
     @Transactional(rollbackFor = Throwable.class)
     public Long update(AuthOrganizationEntity entity) {
         validRepeat(entity, true);
-        return authOrganizationDao.update(entity);
+        return authOrganizationRepository.getBaseMapper().update(entity);
     }
 
     /**
@@ -114,6 +114,6 @@ public class AuthOrganizationServiceImpl extends BaseService implements AuthOrga
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Throwable.class)
     public void deleteById(Long id, Long updater) {
-        authOrganizationDao.deleteById(id, updater);
+        authOrganizationRepository.getBaseMapper().deleteById(id, updater);
     }
 }

@@ -1,9 +1,9 @@
 package com.darren1112.dptms.auth.service;
 
-import com.darren1112.dptms.common.spi.common.dto.PageBean;
-import com.darren1112.dptms.common.spi.common.dto.PageParam;
 import com.darren1112.dptms.common.spi.auth.dto.AuthUserDto;
 import com.darren1112.dptms.common.spi.auth.entity.AuthUserEntity;
+import com.darren1112.dptms.common.spi.common.dto.PageBean;
+import com.darren1112.dptms.common.spi.common.dto.PageParam;
 
 /**
  * 系统用户Service
@@ -91,16 +91,6 @@ public interface AuthUserService {
      * @since 2021/01/14 00:19
      */
     void updateLock(AuthUserEntity entity);
-
-    /**
-     * 根据用户id查询用户信息和权限list
-     *
-     * @param id 用户id
-     * @return {@link AuthUserDto}
-     * @author luyuhao
-     * @since 2021/01/31 19:39
-     */
-    AuthUserDto getUserInfoAndPermissionByUserId(Long id);
 
     /**
      * 更新密码

@@ -2,6 +2,7 @@ package com.darren1112.dptms.auth.controller;
 
 import com.darren1112.dptms.auth.common.enums.AuthErrorCodeEnum;
 import com.darren1112.dptms.auth.service.AuthMenuService;
+import com.darren1112.dptms.auth.service.AuthPermissionService;
 import com.darren1112.dptms.auth.service.AuthUserService;
 import com.darren1112.dptms.common.core.message.JsonResult;
 import com.darren1112.dptms.common.core.util.ResponseEntityUtil;
@@ -48,6 +49,9 @@ public class ActiveUserController {
     private AuthUserService authUserService;
 
     @Autowired
+    private AuthPermissionService authPermissionService;
+
+    @Autowired
     private TokenStore tokenStore;
 
     /**
@@ -76,7 +80,13 @@ public class ActiveUserController {
     @Log(value = "获取用户最新信息", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
     public ResponseEntity<JsonResult<AuthUserDto>> getNewInfo() {
         ActiveUser activeUser = SecurityUserUtil.getActiveUser();
-        AuthUserDto result = authUserService.getUserInfoAndPermissionByUserId(activeUser.getId());
+        // 查询用户信息
+        AuthUserDto result = authUserService.getById(activeUser.getId());
+        // 查询用户权限
+        if (result != null) {
+            List<AuthPermissionDto> permissionList = authPermissionService.listByUserId(activeUser.getId());
+            result.setPermissionList(permissionList);
+        }
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(result));
     }
 

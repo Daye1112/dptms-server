@@ -1,6 +1,8 @@
 package com.darren1112.dptms.auth.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.darren1112.dptms.common.spi.auth.dto.AuthMenuDto;
+import com.darren1112.dptms.common.spi.auth.dto.AuthRoleMenuDto;
 import com.darren1112.dptms.common.spi.auth.entity.AuthRoleMenuEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -16,7 +18,7 @@ import java.util.List;
  */
 @Mapper
 @Repository
-public interface AuthRoleMenuDao {
+public interface AuthRoleMenuDao extends BaseMapper<AuthRoleMenuDto> {
 
     /**
      * 查询角色关联的菜单list

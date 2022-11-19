@@ -1,5 +1,7 @@
 package com.darren1112.dptms.auth.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.darren1112.dptms.common.spi.auth.dto.AuthOrganizationDto;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
 import com.darren1112.dptms.common.spi.auth.dto.AuthRoleDto;
 import com.darren1112.dptms.common.spi.auth.entity.AuthRoleEntity;
@@ -17,7 +19,7 @@ import java.util.List;
  */
 @Mapper
 @Repository
-public interface AuthRoleDao {
+public interface AuthRoleDao extends BaseMapper<AuthRoleDto> {
 
 
     /**
