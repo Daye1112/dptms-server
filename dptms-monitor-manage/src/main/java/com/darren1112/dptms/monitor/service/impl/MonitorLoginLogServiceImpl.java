@@ -4,7 +4,7 @@ import com.darren1112.dptms.common.core.base.BaseService;
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
 import com.darren1112.dptms.common.spi.monitor.dto.MonitorLoginLogDto;
-import com.darren1112.dptms.monitor.dao.MonitorLoginLogDao;
+import com.darren1112.dptms.monitor.repository.MonitorLoginLogRepository;
 import com.darren1112.dptms.monitor.service.MonitorLoginLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,7 @@ import java.util.List;
 public class MonitorLoginLogServiceImpl extends BaseService implements MonitorLoginLogService {
 
     @Autowired
-    private MonitorLoginLogDao monitorLoginLogDao;
+    private MonitorLoginLogRepository monitorLoginLogRepository;
 
     /**
      * 插入登录日志信息
@@ -35,7 +35,7 @@ public class MonitorLoginLogServiceImpl extends BaseService implements MonitorLo
     @Override
     @Transactional(rollbackFor = Throwable.class)
     public void insert(MonitorLoginLogDto dto) {
-        monitorLoginLogDao.insert(dto);
+        monitorLoginLogRepository.getBaseMapper().insert(dto);
     }
 
     /**
@@ -49,8 +49,8 @@ public class MonitorLoginLogServiceImpl extends BaseService implements MonitorLo
      */
     @Override
     public PageBean<MonitorLoginLogDto> listPage(PageParam pageParam, MonitorLoginLogDto dto) {
-        List<MonitorLoginLogDto> list = monitorLoginLogDao.listPage(pageParam, dto);
-        Long count = monitorLoginLogDao.listPageCount(dto);
+        List<MonitorLoginLogDto> list = monitorLoginLogRepository.getBaseMapper().listPage(pageParam, dto);
+        Long count = monitorLoginLogRepository.getBaseMapper().listPageCount(dto);
         return createPageBean(pageParam, count, list);
     }
 
@@ -64,6 +64,6 @@ public class MonitorLoginLogServiceImpl extends BaseService implements MonitorLo
      */
     @Override
     public List<MonitorLoginLogDto> listLastSevenByUserId(Long userId) {
-        return monitorLoginLogDao.listByUserIdAndNumber(userId, 7);
+        return monitorLoginLogRepository.getBaseMapper().listByUserIdAndNumber(userId, 7);
     }
 }

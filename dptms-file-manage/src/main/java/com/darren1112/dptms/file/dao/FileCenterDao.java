@@ -1,5 +1,6 @@
 package com.darren1112.dptms.file.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.darren1112.dptms.common.spi.file.dto.FileCenterDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -15,7 +16,7 @@ import java.util.List;
  */
 @Mapper
 @Repository
-public interface FileCenterDao {
+public interface FileCenterDao extends BaseMapper<FileCenterDto> {
 
     /**
      * 根据父节点id查询
@@ -27,12 +28,4 @@ public interface FileCenterDao {
      */
     List<FileCenterDto> list(@Param("parentId") Long parentId);
 
-    /**
-     * 新增文件/文件夹
-     *
-     * @param dto 文件信息
-     * @author luyuhao
-     * @since 2022/01/03
-     */
-    void insert(FileCenterDto dto);
 }

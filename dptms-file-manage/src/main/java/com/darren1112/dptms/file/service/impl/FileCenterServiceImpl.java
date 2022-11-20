@@ -1,7 +1,7 @@
 package com.darren1112.dptms.file.service.impl;
 
 import com.darren1112.dptms.common.spi.file.dto.FileCenterDto;
-import com.darren1112.dptms.file.dao.FileCenterDao;
+import com.darren1112.dptms.file.repository.FileCenterRepository;
 import com.darren1112.dptms.file.service.FileCenterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
@@ -24,7 +24,7 @@ import java.util.List;
 public class FileCenterServiceImpl implements FileCenterService {
 
     @Autowired
-    private FileCenterDao fileCenterDao;
+    private FileCenterRepository fileCenterRepository;
 
     /**
      * 根据父节点id查询
@@ -37,7 +37,7 @@ public class FileCenterServiceImpl implements FileCenterService {
     @Override
     @Cacheable
     public List<FileCenterDto> list(Long parentId) {
-        return fileCenterDao.list(parentId);
+        return fileCenterRepository.getBaseMapper().list(parentId);
     }
 
     /**
@@ -51,6 +51,6 @@ public class FileCenterServiceImpl implements FileCenterService {
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Throwable.class)
     public void insert(FileCenterDto dto) {
-        fileCenterDao.insert(dto);
+        fileCenterRepository.getBaseMapper().insert(dto);
     }
 }

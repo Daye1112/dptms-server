@@ -4,7 +4,7 @@ import com.darren1112.dptms.common.core.base.BaseService;
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
 import com.darren1112.dptms.common.spi.monitor.dto.MonitorOperateLogDto;
-import com.darren1112.dptms.monitor.dao.MonitorOperateLogDao;
+import com.darren1112.dptms.monitor.repository.MonitorOperateLogRepository;
 import com.darren1112.dptms.monitor.service.MonitorOperateLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,7 @@ import java.util.List;
 public class MonitorOperateLogServiceImpl extends BaseService implements MonitorOperateLogService {
 
     @Autowired
-    private MonitorOperateLogDao monitorOperateLogDao;
+    private MonitorOperateLogRepository monitorOperateLogRepository;
 
     /**
      * 插入操作日志信息
@@ -35,7 +35,7 @@ public class MonitorOperateLogServiceImpl extends BaseService implements Monitor
     @Override
     @Transactional(rollbackFor = Throwable.class)
     public void insert(MonitorOperateLogDto dto) {
-        monitorOperateLogDao.insert(dto);
+        monitorOperateLogRepository.getBaseMapper().insert(dto);
     }
 
     /**
@@ -49,8 +49,8 @@ public class MonitorOperateLogServiceImpl extends BaseService implements Monitor
      */
     @Override
     public PageBean<MonitorOperateLogDto> listPage(PageParam pageParam, MonitorOperateLogDto dto) {
-        List<MonitorOperateLogDto> list = monitorOperateLogDao.listPage(pageParam, dto);
-        Long count = monitorOperateLogDao.listPageCount(dto);
+        List<MonitorOperateLogDto> list = monitorOperateLogRepository.getBaseMapper().listPage(pageParam, dto);
+        Long count = monitorOperateLogRepository.getBaseMapper().listPageCount(dto);
         return createPageBean(pageParam, count, list);
     }
 }

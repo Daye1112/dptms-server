@@ -2,14 +2,14 @@ package com.darren1112.dptms.file.service.impl;
 
 import com.darren1112.dptms.common.core.exception.BadRequestException;
 import com.darren1112.dptms.common.core.exception.ServiceHandleException;
-import com.darren1112.dptms.sdk.starter.fastdfs.core.file.client.FileClient;
 import com.darren1112.dptms.common.spi.file.dto.FileDfsInfoDto;
 import com.darren1112.dptms.common.spi.file.dto.FileInfoDto;
 import com.darren1112.dptms.file.common.enums.FileManageErrorCodeEnum;
 import com.darren1112.dptms.file.common.util.FileInfoUtil;
-import com.darren1112.dptms.file.dao.FileDfsInfoDao;
-import com.darren1112.dptms.file.dao.FileInfoDao;
+import com.darren1112.dptms.file.repository.FileDfsInfoRepository;
+import com.darren1112.dptms.file.repository.FileInfoRepository;
 import com.darren1112.dptms.file.service.FileInfoService;
+import com.darren1112.dptms.sdk.starter.fastdfs.core.file.client.FileClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,10 +30,10 @@ import java.util.List;
 public class FileInfoServiceImpl implements FileInfoService {
 
     @Autowired
-    private FileInfoDao fileInfoDao;
+    private FileInfoRepository fileInfoRepository;
 
     @Autowired
-    private FileDfsInfoDao fileDfsInfoDao;
+    private FileDfsInfoRepository fileDfsInfoRepository;
 
     @Autowired
     private FileClient fileClient;
@@ -56,7 +56,7 @@ public class FileInfoServiceImpl implements FileInfoService {
             // 上传文件
             List<FileDfsInfoDto> fileDfsInfoList = fileClient.uploadFile(file.getInputStream(), fileInfoDto.getFileName(), null);
             // 保存结果
-            fileInfoDao.insert(fileInfoDto);
+            fileInfoRepository.getBaseMapper().insert(fileInfoDto);
             // 设置存储关联信息
             fileDfsInfoList.forEach(item -> {
                 item.setFileInfoId(fileInfoDto.getId());
@@ -64,7 +64,7 @@ public class FileInfoServiceImpl implements FileInfoService {
                 item.setUpdater(fileInfoDto.getUpdater());
             });
             // 批量新增存储信息
-            fileDfsInfoDao.batchInsert(fileDfsInfoList);
+            fileDfsInfoRepository.getBaseMapper().batchInsert(fileDfsInfoList);
             return fileInfoDto;
         } catch (Exception e) {
             log.error("文件上传失败, 失败原因：" + e.getMessage(), e);
@@ -103,11 +103,11 @@ public class FileInfoServiceImpl implements FileInfoService {
      */
     @Override
     public FileInfoDto getFullInfoById(Long fileId) {
-        FileInfoDto fileInfo = fileInfoDao.getById(fileId);
+        FileInfoDto fileInfo = fileInfoRepository.getBaseMapper().getById(fileId);
         if (null == fileInfo) {
             throw new BadRequestException(FileManageErrorCodeEnum.FILE_NOT_EXIST);
         }
-        List<FileDfsInfoDto> fileDfsInfoList = fileDfsInfoDao.listByFileInfoId(fileId);
+        List<FileDfsInfoDto> fileDfsInfoList = fileDfsInfoRepository.getBaseMapper().listByFileInfoId(fileId);
         fileInfo.setFileDfsInfoList(fileDfsInfoList);
         return fileInfo;
     }

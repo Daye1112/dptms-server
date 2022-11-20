@@ -1,5 +1,6 @@
 package com.darren1112.dptms.file.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.darren1112.dptms.common.spi.file.dto.FileDfsInfoDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -15,7 +16,7 @@ import java.util.List;
  */
 @Mapper
 @Repository
-public interface FileDfsInfoDao {
+public interface FileDfsInfoDao extends BaseMapper<FileDfsInfoDto> {
 
     /**
      * 批量新增

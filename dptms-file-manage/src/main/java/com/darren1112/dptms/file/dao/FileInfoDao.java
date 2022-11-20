@@ -1,5 +1,6 @@
 package com.darren1112.dptms.file.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.darren1112.dptms.common.spi.file.dto.FileInfoDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -13,16 +14,7 @@ import org.springframework.stereotype.Repository;
  */
 @Mapper
 @Repository
-public interface FileInfoDao {
-
-    /**
-     * 新增文件信息
-     *
-     * @param fileInfoDto 文件信息
-     * @author luyuhao
-     * @since 2021/12/6
-     */
-    void insert(FileInfoDto fileInfoDto);
+public interface FileInfoDao extends BaseMapper<FileInfoDto> {
 
     /**
      * 根据文件id查询文件信息

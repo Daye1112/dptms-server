@@ -1,5 +1,6 @@
 package com.darren1112.dptms.monitor.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
 import com.darren1112.dptms.common.spi.monitor.dto.MonitorLoginLogDto;
 import org.apache.ibatis.annotations.Mapper;
@@ -16,16 +17,7 @@ import java.util.List;
  */
 @Mapper
 @Repository
-public interface MonitorLoginLogDao {
-
-    /**
-     * 插入登录日志信息
-     *
-     * @param dto 日志信息
-     * @author luyuhao
-     * @since 2021/02/06 21:04
-     */
-    void insert(MonitorLoginLogDto dto);
+public interface MonitorLoginLogDao extends BaseMapper<MonitorLoginLogDto> {
 
     /**
      * 分页查询登录日志

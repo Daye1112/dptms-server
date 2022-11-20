@@ -3,7 +3,7 @@ package com.darren1112.dptms.config.core;
 import com.darren1112.dptms.common.core.util.CollectionUtil;
 import com.darren1112.dptms.common.core.util.StringUtil;
 import com.darren1112.dptms.common.spi.service.dto.ServiceConfigReleasePropDto;
-import com.darren1112.dptms.config.dao.ServiceConfigReleasePropDao;
+import com.darren1112.dptms.config.repository.ServiceConfigReleasePropRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +33,11 @@ public class DptmsJdbcEnvironmentRepository implements EnvironmentRepository {
     private static final String LABEL_LATEST = "latest";
 
     @Autowired
-    private ServiceConfigReleasePropDao serviceConfigReleasePropDao;
+    private ServiceConfigReleasePropRepository serviceConfigReleasePropRepository;
+
+    public DptmsJdbcEnvironmentRepository() {
+        LOGGER.info("DptmsJdbcEnvironmentRepository init");
+    }
 
     /**
      * 查询相关配置
@@ -64,9 +68,9 @@ public class DptmsJdbcEnvironmentRepository implements EnvironmentRepository {
                 List<ServiceConfigReleasePropDto> releasePropList;
                 // label为空或latest则读取最新的配置
                 if (StringUtil.isEmpty(label) || LABEL_LATEST.equals(label)) {
-                    releasePropList = serviceConfigReleasePropDao.listLatest(app, pro);
+                    releasePropList = serviceConfigReleasePropRepository.getBaseMapper().listLatest(app, pro);
                 } else {
-                    releasePropList = serviceConfigReleasePropDao.listBy(app, pro, label);
+                    releasePropList = serviceConfigReleasePropRepository.getBaseMapper().listBy(app, pro, label);
                 }
                 LOGGER.info("environment: name={}, profile={}, label={}, propSize={}", app, pro, label, CollectionUtil.isEmpty(releasePropList) ? 0 : releasePropList.size());
                 // 查询结果集组装

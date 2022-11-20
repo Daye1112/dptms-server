@@ -1,5 +1,6 @@
 package com.darren1112.dptms.monitor.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
 import com.darren1112.dptms.common.spi.monitor.dto.MonitorOperateLogDto;
 import org.apache.ibatis.annotations.Mapper;
@@ -16,16 +17,7 @@ import java.util.List;
  */
 @Mapper
 @Repository
-public interface MonitorOperateLogDao {
-
-    /**
-     * 插入操作日志信息
-     *
-     * @param dto 日志信息
-     * @author luyuhao
-     * @since 2021/02/06 21:08
-     */
-    void insert(MonitorOperateLogDto dto);
+public interface MonitorOperateLogDao extends BaseMapper<MonitorOperateLogDto> {
 
     /**
      * 分页查询操作日志
