@@ -1,5 +1,6 @@
 package com.darren1112.dptms.system.service.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
 import com.darren1112.dptms.common.spi.service.dto.ServiceApplicationDto;
 import org.apache.ibatis.annotations.Mapper;
@@ -16,7 +17,7 @@ import java.util.List;
  */
 @Mapper
 @Repository
-public interface ServiceApplicationDao {
+public interface ServiceApplicationDao extends BaseMapper<ServiceApplicationDto> {
 
     /**
      * 分页查询服务应用
@@ -48,15 +49,6 @@ public interface ServiceApplicationDao {
      * @since 2021/03/12 23:32
      */
     Long countByRepeat(ServiceApplicationDto param);
-
-    /**
-     * 新增服务应用
-     *
-     * @param dto 服务信息
-     * @author luyuhao
-     * @since 2021/03/12 23:35
-     */
-    void insert(ServiceApplicationDto dto);
 
     /**
      * 更新服务应用

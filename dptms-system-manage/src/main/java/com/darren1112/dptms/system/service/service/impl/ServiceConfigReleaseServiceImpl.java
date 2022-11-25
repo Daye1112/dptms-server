@@ -10,7 +10,7 @@ import com.darren1112.dptms.common.spi.service.dto.ServiceConfigProfilePropDto;
 import com.darren1112.dptms.common.spi.service.dto.ServiceConfigReleaseDto;
 import com.darren1112.dptms.common.spi.service.dto.ServiceConfigReleasePropDto;
 import com.darren1112.dptms.system.common.enums.SystemManageErrorCodeEnum;
-import com.darren1112.dptms.system.service.dao.ServiceConfigReleaseDao;
+import com.darren1112.dptms.system.service.repository.ServiceConfigReleaseRepository;
 import com.darren1112.dptms.system.service.service.ServiceConfigProfilePropService;
 import com.darren1112.dptms.system.service.service.ServiceConfigReleasePropService;
 import com.darren1112.dptms.system.service.service.ServiceConfigReleaseService;
@@ -38,7 +38,7 @@ import java.util.List;
 public class ServiceConfigReleaseServiceImpl extends BaseService implements ServiceConfigReleaseService {
 
     @Autowired
-    private ServiceConfigReleaseDao serviceConfigReleaseDao;
+    private ServiceConfigReleaseRepository serviceConfigReleaseRepository;
 
     @Lazy
     @Autowired
@@ -60,8 +60,8 @@ public class ServiceConfigReleaseServiceImpl extends BaseService implements Serv
     @Override
     @Cacheable
     public PageBean<ServiceConfigReleaseDto> listPage(PageParam pageParam, ServiceConfigReleaseDto dto) {
-        List<ServiceConfigReleaseDto> list = serviceConfigReleaseDao.listPage(pageParam, dto);
-        Long count = serviceConfigReleaseDao.listPageCount(dto);
+        List<ServiceConfigReleaseDto> list = serviceConfigReleaseRepository.getBaseMapper().listPage(pageParam, dto);
+        Long count = serviceConfigReleaseRepository.getBaseMapper().listPageCount(dto);
         return createPageBean(pageParam, count, list);
     }
 
@@ -84,7 +84,7 @@ public class ServiceConfigReleaseServiceImpl extends BaseService implements Serv
         }
         // 新增发布信息
         dto.setReleaseVersion(DateUtil.format(new Date(), "yyyyMMddHHmmss"));
-        serviceConfigReleaseDao.insert(dto);
+        serviceConfigReleaseRepository.getBaseMapper().insert(dto);
 
         // 拷贝属性到发布属性表
         List<ServiceConfigReleasePropDto> releasePropList = new ArrayList<>();
@@ -114,6 +114,6 @@ public class ServiceConfigReleaseServiceImpl extends BaseService implements Serv
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Throwable.class)
     public void deleteById(Long id, Long updater) {
-        serviceConfigReleaseDao.deleteById(id, updater);
+        serviceConfigReleaseRepository.getBaseMapper().deleteById(id, updater);
     }
 }

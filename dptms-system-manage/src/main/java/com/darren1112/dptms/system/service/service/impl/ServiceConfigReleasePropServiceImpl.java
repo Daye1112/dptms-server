@@ -1,7 +1,7 @@
 package com.darren1112.dptms.system.service.service.impl;
 
 import com.darren1112.dptms.common.spi.service.dto.ServiceConfigReleasePropDto;
-import com.darren1112.dptms.system.service.dao.ServiceConfigReleasePropDao;
+import com.darren1112.dptms.system.service.repository.ServiceConfigReleasePropRepository;
 import com.darren1112.dptms.system.service.service.ServiceConfigReleasePropService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
@@ -24,7 +24,7 @@ import java.util.List;
 public class ServiceConfigReleasePropServiceImpl implements ServiceConfigReleasePropService {
 
     @Autowired
-    private ServiceConfigReleasePropDao serviceConfigReleasePropDao;
+    private ServiceConfigReleasePropRepository serviceConfigReleasePropRepository;
 
     /**
      * 查询配置发布属性list
@@ -37,7 +37,7 @@ public class ServiceConfigReleasePropServiceImpl implements ServiceConfigRelease
     @Override
     @Cacheable
     public List<ServiceConfigReleasePropDto> list(ServiceConfigReleasePropDto dto) {
-        return serviceConfigReleasePropDao.list(dto);
+        return serviceConfigReleasePropRepository.getBaseMapper().list(dto);
     }
 
     /**
@@ -51,6 +51,6 @@ public class ServiceConfigReleasePropServiceImpl implements ServiceConfigRelease
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Throwable.class)
     public void batchInsert(List<ServiceConfigReleasePropDto> releasePropList) {
-        serviceConfigReleasePropDao.batchInsert(releasePropList);
+        serviceConfigReleasePropRepository.getBaseMapper().batchInsert(releasePropList);
     }
 }

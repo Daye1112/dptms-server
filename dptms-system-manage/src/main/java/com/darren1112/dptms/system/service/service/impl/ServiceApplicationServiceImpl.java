@@ -6,7 +6,7 @@ import com.darren1112.dptms.common.spi.common.dto.PageBean;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
 import com.darren1112.dptms.common.spi.service.dto.ServiceApplicationDto;
 import com.darren1112.dptms.system.common.enums.SystemManageErrorCodeEnum;
-import com.darren1112.dptms.system.service.dao.ServiceApplicationDao;
+import com.darren1112.dptms.system.service.repository.ServiceApplicationRepository;
 import com.darren1112.dptms.system.service.service.ServiceApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
@@ -29,7 +29,7 @@ import java.util.List;
 public class ServiceApplicationServiceImpl extends BaseService implements ServiceApplicationService {
 
     @Autowired
-    private ServiceApplicationDao serviceApplicationDao;
+    private ServiceApplicationRepository serviceApplicationRepository;
 
     /**
      * 分页查询服务应用
@@ -43,8 +43,8 @@ public class ServiceApplicationServiceImpl extends BaseService implements Servic
     @Override
     @Cacheable
     public PageBean<ServiceApplicationDto> listPage(PageParam pageParam, ServiceApplicationDto dto) {
-        List<ServiceApplicationDto> list = serviceApplicationDao.listPage(pageParam, dto);
-        Long count = serviceApplicationDao.listPageCount(dto);
+        List<ServiceApplicationDto> list = serviceApplicationRepository.getBaseMapper().listPage(pageParam, dto);
+        Long count = serviceApplicationRepository.getBaseMapper().listPageCount(dto);
         return createPageBean(pageParam, count, list);
     }
 
@@ -61,7 +61,7 @@ public class ServiceApplicationServiceImpl extends BaseService implements Servic
     @Transactional(rollbackFor = Throwable.class)
     public Long insert(ServiceApplicationDto dto) {
         validRepeat(dto, false);
-        serviceApplicationDao.insert(dto);
+        serviceApplicationRepository.getBaseMapper().insert(dto);
         return dto.getId();
     }
 
@@ -79,7 +79,7 @@ public class ServiceApplicationServiceImpl extends BaseService implements Servic
         param.setAppCode(dto.getAppCode());
         param.setAppName(dto.getAppName());
         param.setIsUpdate(isUpdate);
-        Long count = serviceApplicationDao.countByRepeat(param);
+        Long count = serviceApplicationRepository.getBaseMapper().countByRepeat(param);
         if (count != null && count > 0) {
             throw new BadRequestException(SystemManageErrorCodeEnum.APP_NOT_REPEAT);
         }
@@ -97,7 +97,7 @@ public class ServiceApplicationServiceImpl extends BaseService implements Servic
     @Transactional(rollbackFor = Throwable.class)
     public void update(ServiceApplicationDto dto) {
         validRepeat(dto, true);
-        serviceApplicationDao.update(dto);
+        serviceApplicationRepository.getBaseMapper().update(dto);
     }
 
     /**
@@ -112,6 +112,6 @@ public class ServiceApplicationServiceImpl extends BaseService implements Servic
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Throwable.class)
     public void deleteById(Long id, Long updater) {
-        serviceApplicationDao.deleteById(id, updater);
+        serviceApplicationRepository.getBaseMapper().deleteById(id, updater);
     }
 }

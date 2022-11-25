@@ -3,7 +3,7 @@ package com.darren1112.dptms.system.service.service.impl;
 import com.darren1112.dptms.common.core.exception.BadRequestException;
 import com.darren1112.dptms.common.spi.service.dto.ServiceConfigProfileDto;
 import com.darren1112.dptms.system.common.enums.SystemManageErrorCodeEnum;
-import com.darren1112.dptms.system.service.dao.ServiceConfigProfileDao;
+import com.darren1112.dptms.system.service.repository.ServiceConfigProfileRepository;
 import com.darren1112.dptms.system.service.service.ServiceConfigProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
@@ -26,7 +26,7 @@ import java.util.List;
 public class ServiceConfigProfileServiceImpl implements ServiceConfigProfileService {
 
     @Autowired
-    private ServiceConfigProfileDao serviceConfigProfileDao;
+    private ServiceConfigProfileRepository serviceConfigProfileRepository;
 
     /**
      * 查询服务应用list
@@ -39,7 +39,7 @@ public class ServiceConfigProfileServiceImpl implements ServiceConfigProfileServ
     @Override
     @Cacheable
     public List<ServiceConfigProfileDto> list(ServiceConfigProfileDto dto) {
-        return serviceConfigProfileDao.list(dto);
+        return serviceConfigProfileRepository.getBaseMapper().list(dto);
     }
 
     /**
@@ -55,7 +55,7 @@ public class ServiceConfigProfileServiceImpl implements ServiceConfigProfileServ
     @Transactional(rollbackFor = Throwable.class)
     public Long insert(ServiceConfigProfileDto dto) {
         validRepeat(dto, false);
-        serviceConfigProfileDao.insert(dto);
+        serviceConfigProfileRepository.getBaseMapper().insert(dto);
         return dto.getId();
     }
 
@@ -73,7 +73,7 @@ public class ServiceConfigProfileServiceImpl implements ServiceConfigProfileServ
         param.setApplicationId(dto.getApplicationId());
         param.setProfileCode(dto.getProfileCode());
         param.setIsUpdate(isUpdate);
-        Long count = serviceConfigProfileDao.countByRepeat(param);
+        Long count = serviceConfigProfileRepository.getBaseMapper().countByRepeat(param);
         if (count != null && count > 0) {
             throw new BadRequestException(SystemManageErrorCodeEnum.PROFILE_NOT_REPEAT);
         }
@@ -91,7 +91,7 @@ public class ServiceConfigProfileServiceImpl implements ServiceConfigProfileServ
     @Transactional(rollbackFor = Throwable.class)
     public void update(ServiceConfigProfileDto dto) {
         validRepeat(dto, true);
-        serviceConfigProfileDao.update(dto);
+        serviceConfigProfileRepository.getBaseMapper().update(dto);
     }
 
     /**
@@ -106,6 +106,6 @@ public class ServiceConfigProfileServiceImpl implements ServiceConfigProfileServ
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Throwable.class)
     public void deleteById(Long id, Long updater) {
-        serviceConfigProfileDao.deleteById(id, updater);
+        serviceConfigProfileRepository.getBaseMapper().deleteById(id, updater);
     }
 }

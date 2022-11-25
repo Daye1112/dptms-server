@@ -1,5 +1,6 @@
 package com.darren1112.dptms.system.service.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.darren1112.dptms.common.spi.service.dto.ServiceConfigProfileDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -15,7 +16,7 @@ import java.util.List;
  */
 @Mapper
 @Repository
-public interface ServiceConfigProfileDao {
+public interface ServiceConfigProfileDao extends BaseMapper<ServiceConfigProfileDto> {
 
     /**
      * 查询服务应用list
@@ -36,15 +37,6 @@ public interface ServiceConfigProfileDao {
      * @since 2021/03/14 02:05
      */
     Long countByRepeat(ServiceConfigProfileDto param);
-
-    /**
-     * 插入配置环境
-     *
-     * @param dto 配置环境信息
-     * @author luyuhao
-     * @since 2021/03/14 02:08
-     */
-    void insert(ServiceConfigProfileDto dto);
 
     /**
      * 更新配置环境

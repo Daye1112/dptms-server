@@ -1,5 +1,6 @@
 package com.darren1112.dptms.system.service.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.darren1112.dptms.common.spi.service.dto.ServiceConfigReleasePropDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -14,7 +15,7 @@ import java.util.List;
  */
 @Mapper
 @Repository
-public interface ServiceConfigReleasePropDao {
+public interface ServiceConfigReleasePropDao extends BaseMapper<ServiceConfigReleasePropDto> {
 
     /**
      * 查询配置发布属性list

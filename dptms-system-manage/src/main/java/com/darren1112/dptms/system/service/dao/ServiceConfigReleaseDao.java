@@ -1,5 +1,6 @@
 package com.darren1112.dptms.system.service.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
 import com.darren1112.dptms.common.spi.service.dto.ServiceConfigReleaseDto;
 import org.apache.ibatis.annotations.Mapper;
@@ -16,7 +17,7 @@ import java.util.List;
  */
 @Mapper
 @Repository
-public interface ServiceConfigReleaseDao {
+public interface ServiceConfigReleaseDao extends BaseMapper<ServiceConfigReleaseDto> {
 
     /**
      * 分页查询发布列表
@@ -48,15 +49,6 @@ public interface ServiceConfigReleaseDao {
      * @since 2021/3/16 8:52
      */
     Long countByRepeat(ServiceConfigReleaseDto param);
-
-    /**
-     * 插入发布信息
-     *
-     * @param dto 发布信息
-     * @author luyuhao
-     * @since 2021/3/16 8:55
-     */
-    void insert(ServiceConfigReleaseDto dto);
 
     /**
      * 删除发布信息

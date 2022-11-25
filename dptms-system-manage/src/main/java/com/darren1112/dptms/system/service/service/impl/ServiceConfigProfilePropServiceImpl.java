@@ -6,7 +6,7 @@ import com.darren1112.dptms.common.core.util.PropertiesUtil;
 import com.darren1112.dptms.common.core.util.StringUtil;
 import com.darren1112.dptms.common.spi.service.dto.ServiceConfigProfilePropDto;
 import com.darren1112.dptms.system.common.enums.SystemManageErrorCodeEnum;
-import com.darren1112.dptms.system.service.dao.ServiceConfigProfilePropDao;
+import com.darren1112.dptms.system.service.repository.ServiceConfigProfilePropRepository;
 import com.darren1112.dptms.system.service.service.ServiceConfigProfilePropService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
@@ -30,7 +30,7 @@ import java.util.stream.Collectors;
 public class ServiceConfigProfilePropServiceImpl implements ServiceConfigProfilePropService {
 
     @Autowired
-    private ServiceConfigProfilePropDao serviceConfigProfilePropDao;
+    private ServiceConfigProfilePropRepository serviceConfigProfilePropRepository;
 
     /**
      * 查询配置环境属性list
@@ -43,7 +43,7 @@ public class ServiceConfigProfilePropServiceImpl implements ServiceConfigProfile
     @Override
     @Cacheable
     public List<ServiceConfigProfilePropDto> list(ServiceConfigProfilePropDto dto) {
-        return serviceConfigProfilePropDao.list(dto);
+        return serviceConfigProfilePropRepository.getBaseMapper().list(dto);
     }
 
     /**
@@ -59,7 +59,7 @@ public class ServiceConfigProfilePropServiceImpl implements ServiceConfigProfile
     @Transactional(rollbackFor = Throwable.class)
     public Long insert(ServiceConfigProfilePropDto dto) {
         validRepeat(dto, false);
-        serviceConfigProfilePropDao.insert(dto);
+        serviceConfigProfilePropRepository.getBaseMapper().insert(dto);
         return dto.getId();
     }
 
@@ -77,7 +77,7 @@ public class ServiceConfigProfilePropServiceImpl implements ServiceConfigProfile
         param.setProfileId(dto.getProfileId());
         param.setPropKey(dto.getPropKey());
         param.setIsUpdate(isUpdate);
-        Long count = serviceConfigProfilePropDao.countByRepeat(param);
+        Long count = serviceConfigProfilePropRepository.getBaseMapper().countByRepeat(param);
         if (count != null && count > 0) {
             throw new BadRequestException(SystemManageErrorCodeEnum.PROP_NOT_REPEAT);
         }
@@ -95,7 +95,7 @@ public class ServiceConfigProfilePropServiceImpl implements ServiceConfigProfile
     @Transactional(rollbackFor = Throwable.class)
     public void update(ServiceConfigProfilePropDto dto) {
         validRepeat(dto, true);
-        serviceConfigProfilePropDao.update(dto);
+        serviceConfigProfilePropRepository.getBaseMapper().update(dto);
     }
 
     /**
@@ -110,7 +110,7 @@ public class ServiceConfigProfilePropServiceImpl implements ServiceConfigProfile
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Throwable.class)
     public void deleteById(Long id, Long updater) {
-        serviceConfigProfilePropDao.deleteById(id, updater);
+        serviceConfigProfilePropRepository.getBaseMapper().deleteById(id, updater);
     }
 
     /**
@@ -126,7 +126,7 @@ public class ServiceConfigProfilePropServiceImpl implements ServiceConfigProfile
     public List<ServiceConfigProfilePropDto> listByProfileId(Long profileId) {
         ServiceConfigProfilePropDto dto = new ServiceConfigProfilePropDto();
         dto.setProfileId(profileId);
-        return serviceConfigProfilePropDao.list(dto);
+        return serviceConfigProfilePropRepository.getBaseMapper().list(dto);
     }
 
     /**
@@ -179,7 +179,7 @@ public class ServiceConfigProfilePropServiceImpl implements ServiceConfigProfile
             }
 
             // 批量新增
-            serviceConfigProfilePropDao.batchInsert(newPropList);
+            serviceConfigProfilePropRepository.getBaseMapper().batchInsert(newPropList);
         }
 
         // 更新属性
@@ -192,7 +192,7 @@ public class ServiceConfigProfilePropServiceImpl implements ServiceConfigProfile
                         item.setUpdater(dto.getUpdater());
 
                         // 更新属性
-                        serviceConfigProfilePropDao.update(item);
+                        serviceConfigProfilePropRepository.getBaseMapper().update(item);
                     });
         }
     }
