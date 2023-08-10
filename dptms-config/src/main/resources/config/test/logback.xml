@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
 
-    <property name="logback.logDir" value="./logs/dptms-config/sys"/>
+    <property name="logback.logDir" value="./logs/sys"/>
     <property name="logback.appName" value="dptms-config"/>
     <!-- 日志最大的历史 90天 -->
     <property name="logback.maxHistory" value="90"/>
@@ -42,6 +42,7 @@
     <root level="INFO">
         <!--appender将会添加到这个loger-->
         <appender-ref ref="fileLog"/>
+        <appender-ref ref="consoleLog"/>
     </root>
 
 </configuration>
