@@ -41,7 +41,7 @@ public class FileCenterEntity extends BaseEntity {
      * 文件类型 1：文件 2：文件夹
      */
     @ApiModelProperty(value = "文件类型 1：文件 2：文件夹")
-    private Byte fileType;
+    private Integer fileType;
 
     /**
      * 父文件夹id，0表示根目录

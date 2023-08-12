@@ -17,11 +17,11 @@
                t2.file_size           AS fileSize,
                t2.file_ext            AS fileExt,
                t3.real_name           AS creatorName,
-               (SELECT COALESCE(SUM(t4.file_size), 0)
-                FROM file_center t3
-                         LEFT JOIN file_info t4 ON t4.isvalid = 1 AND t3.file_id = t4.id
-                WHERE t3.isvalid = 1
-                  AND concat(t3.file_parent_path, '/')
+               (SELECT COALESCE(SUM(t5.file_size), 0)
+                FROM file_center t4
+                         LEFT JOIN file_info t5 ON t4.isvalid = 1 AND t4.file_id = t5.id
+                WHERE t4.isvalid = 1
+                  AND t4.file_parent_path
                         LIKE concat(t1.file_parent_path, '/', t1.id)) AS fileSizeCount
         FROM file_center t1
                  LEFT JOIN file_info t2 ON t2.isvalid = 1 AND t2.id = t1.file_id

@@ -30,4 +30,22 @@ public interface FileCenterService {
      * @since 2021/12/19
      */
     void insert(FileCenterDto dto);
+
+    /**
+     * 更新文件/文件夹
+     *
+     * @param dto 文件/文件夹信息
+     * @author darren
+     * @since 2023/08/12
+     */
+    void update(FileCenterDto dto);
+
+    /**
+     * 删除文件/文件夹
+     *
+     * @param dto 文件/文件夹信息
+     * @author darren
+     * @since 2023/08/12
+     */
+    void deleteById(FileCenterDto dto);
 }
