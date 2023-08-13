@@ -1,6 +1,8 @@
 package com.darren1112.dptms.common.core.util;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.helpers.FormattingTuple;
+import org.slf4j.helpers.MessageFormatter;
 
 import java.util.*;
 import java.util.regex.Matcher;
@@ -171,5 +173,24 @@ public class StringUtil extends StringUtils {
      */
     public static boolean isEmpty(CharSequence str) {
         return str == null || str.length() == 0;
+    }
+
+    /**
+     * 字符串格式化
+     * <p>
+     * input ==>
+     * "aaa {} bbb {} ccc", "111", "222"
+     * result <==
+     * "aaa 111 bbb 222 ccc"
+     *
+     * @param pattern 占位符字符串
+     * @param args    占位属性
+     * @return {@link String}
+     * @author darren
+     * @since 2023/08/13
+     */
+    public static String format(String pattern, Object... args) {
+        FormattingTuple ft = MessageFormatter.arrayFormat(pattern, args);
+        return ft.getMessage();
     }
 }

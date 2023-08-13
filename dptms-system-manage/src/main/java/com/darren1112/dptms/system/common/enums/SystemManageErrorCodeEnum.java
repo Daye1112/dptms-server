@@ -39,7 +39,7 @@ public enum SystemManageErrorCodeEnum implements BaseErrorEnum {
     RELEASE_TYPE_NOT_NULL(HttpStatus.BAD_REQUEST, "发布类型不能为空"),
     RELEASE_NOT_REPEAT(HttpStatus.BAD_REQUEST, "发布版本重复"),
     RELEASE_ID_NOT_NULL(HttpStatus.BAD_REQUEST, "发布id不能为空"),
-    ;
+    PROJECT_NAME_NOT_NULL(HttpStatus.BAD_REQUEST, "项目名称不能为空");
 
     private Integer code;
     private String message;

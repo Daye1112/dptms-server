@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.darren1112.dptms.system.project.dao.ProjectInfoDao">
+
+    <!--新增项目-->
+    <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id"
+            parameterType="com.darren1112.dptms.common.spi.project.dto.ProjectInfoDto">
+        INSERT INTO project_info(org_id, project_name, project_desc,
+                                 project_app_key, remark, isvalid, ctime,
+                                 creater, mtime, updater)
+        VALUES (#{orgId}, #{projectName}, #{projectDesc}, #{projectAppKey},
+                remark, 1, NOW(), #{creater}, NOW(), #{updater})
+    </insert>
+</mapper>
