@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * 菜单工具类
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/01/13 00:56
  */
 public class MenuUtil {
@@ -19,7 +19,7 @@ public class MenuUtil {
      *
      * @param sysMenuList 菜单list
      * @return {@link AuthMenuDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/13 00:57
      */
     public static AuthMenuDto buildTree(List<AuthMenuDto> sysMenuList) {

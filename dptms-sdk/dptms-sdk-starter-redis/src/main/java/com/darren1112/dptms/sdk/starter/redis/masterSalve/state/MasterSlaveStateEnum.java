@@ -1,7 +1,7 @@
 package com.darren1112.dptms.sdk.starter.redis.masterSalve.state;
 
 /**
- * @author luyuhao
+ * @author darren
  * @since 2021/8/5
  */
 public enum MasterSlaveStateEnum {

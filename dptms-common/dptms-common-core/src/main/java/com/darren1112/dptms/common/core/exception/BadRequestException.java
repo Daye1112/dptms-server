@@ -6,7 +6,7 @@ import lombok.Getter;
 /**
  * 客户端请求错误异常
  *
- * @author luyuhao
+ * @author darren
  * @since 2019/12/7 10:52
  */
 @Getter

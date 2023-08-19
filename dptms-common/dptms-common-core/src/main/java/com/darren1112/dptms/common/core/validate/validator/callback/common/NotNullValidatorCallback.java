@@ -6,7 +6,7 @@ import com.darren1112.dptms.common.core.validate.validator.ValidatorContext;
 import com.darren1112.dptms.common.core.validate.validator.callback.BaseValidatorCallback;
 
 /**
- * @author luyuhao
+ * @author darren
  * @since 2020/11/28 14:25
  */
 public class NotNullValidatorCallback extends BaseValidatorCallback<Object> {

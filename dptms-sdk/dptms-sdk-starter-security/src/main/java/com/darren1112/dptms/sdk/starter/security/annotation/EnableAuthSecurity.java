@@ -8,7 +8,7 @@ import java.lang.annotation.*;
 /**
  * 启动认证服务配置
  *
- * @author luyuhao
+ * @author darren
  * @since 2020/12/06 23:08
  */
 @Target({ElementType.TYPE})

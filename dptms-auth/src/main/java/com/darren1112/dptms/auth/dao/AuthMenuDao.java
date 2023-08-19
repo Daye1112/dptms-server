@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * 菜单Dao
  *
- * @author luyuhao
+ * @author darren
  * @since 2020/12/12 17:23
  */
 @Mapper
@@ -24,7 +24,7 @@ public interface AuthMenuDao extends BaseMapper<AuthMenuDto> {
      *
      * @param userId 用户id
      * @return {@link AuthMenuDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/17 19:34
      */
     List<AuthMenuDto> listMenuByUserId(Long userId);
@@ -73,7 +73,7 @@ public interface AuthMenuDao extends BaseMapper<AuthMenuDto> {
      * 查询菜单list
      *
      * @return {@link AuthMenuDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/03 23:44
      */
     List<AuthMenuDto> list();

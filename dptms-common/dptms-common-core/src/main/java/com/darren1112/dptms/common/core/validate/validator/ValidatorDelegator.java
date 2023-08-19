@@ -5,7 +5,7 @@ import com.darren1112.dptms.common.core.validate.element.ValidatorElement;
 import java.util.List;
 
 /**
- * @author luyuhao
+ * @author darren
  * @since 2020/11/28 13:47
  */
 public class ValidatorDelegator {

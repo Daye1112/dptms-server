@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * 文件类型枚举
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/12/3
  */
 public enum FileTypeEnum {
@@ -43,7 +43,7 @@ public enum FileTypeEnum {
      *
      * @param extName 文件后缀名
      * @return {@link int}
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/4
      */
     public static int matchTypeByExtName(String extName) {

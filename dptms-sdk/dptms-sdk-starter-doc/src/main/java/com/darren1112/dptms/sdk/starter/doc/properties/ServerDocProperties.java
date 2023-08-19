@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 /**
  * 文档信息配置
  *
- * @author luyuhao
+ * @author darren
  * @since 2020/08/06 02:37
  */
 @Data

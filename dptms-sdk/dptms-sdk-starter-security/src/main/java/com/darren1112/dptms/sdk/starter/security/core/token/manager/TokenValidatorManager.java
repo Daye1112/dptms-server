@@ -13,7 +13,7 @@ import java.util.Map;
 /**
  * token校验器管理者
  *
- * @author luyuhao
+ * @author darren
  * @since 2022/11/17
  */
 @Slf4j
@@ -25,7 +25,7 @@ public class TokenValidatorManager extends BaseManager {
      * 初始方法
      *
      * @throws Exception 异常
-     * @author luyuhao
+     * @author darren
      * @since 2022/11/17
      */
     @Override

@@ -17,7 +17,7 @@ import java.io.IOException;
 /**
  * 无访问权限处理器
  *
- * @author luyuhao
+ * @author darren
  * @since 2022/06/05
  */
 public class SimpleAccessDeniedHandler implements AccessDeniedHandler {
@@ -30,7 +30,7 @@ public class SimpleAccessDeniedHandler implements AccessDeniedHandler {
      * @param request               请求域
      * @param response              响应域
      * @param accessDeniedException 访问限制异常
-     * @author luyuhao
+     * @author darren
      * @since 2022/06/05
      */
     @Override

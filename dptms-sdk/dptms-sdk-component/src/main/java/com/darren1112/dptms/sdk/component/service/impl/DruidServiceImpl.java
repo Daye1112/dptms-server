@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * druid service impl
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/02/15 23:31
  */
 public class DruidServiceImpl implements DruidService {
@@ -22,7 +22,7 @@ public class DruidServiceImpl implements DruidService {
      * 查询接口统计list
      *
      * @return {@link DruidStatDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/02/15 23:32
      */
     @Override

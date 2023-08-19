@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 /**
  * 基于数据库的配置中心
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/7/22
  */
 @Component
@@ -46,7 +46,7 @@ public class DptmsJdbcEnvironmentRepository implements EnvironmentRepository {
      * @param profile     环境，逗号分隔
      * @param label       分支
      * @return {@link Environment}
-     * @author luyuhao
+     * @author darren
      * @since 2021/7/22
      */
     @Override

@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 
 /**
- * @author luyuhao
+ * @author darren
  * @since 2020/07/18 23:46
  */
 @EnableEurekaServer

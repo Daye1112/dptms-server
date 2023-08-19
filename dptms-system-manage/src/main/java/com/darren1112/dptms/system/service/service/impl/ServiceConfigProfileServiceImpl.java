@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * 配置环境表ServiceImpl
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/03/12 01:47
  */
 @Service
@@ -33,7 +33,7 @@ public class ServiceConfigProfileServiceImpl implements ServiceConfigProfileServ
      *
      * @param dto 查询条件
      * @return {@link ServiceConfigProfileDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/03/13 01:50
      */
     @Override
@@ -47,7 +47,7 @@ public class ServiceConfigProfileServiceImpl implements ServiceConfigProfileServ
      *
      * @param dto 配置环境信息
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/03/14 02:03
      */
     @Override
@@ -64,7 +64,7 @@ public class ServiceConfigProfileServiceImpl implements ServiceConfigProfileServ
      *
      * @param dto      验证对象
      * @param isUpdate 是否更新
-     * @author luyuhao
+     * @author darren
      * @since 2021/03/14 02:04
      */
     private void validRepeat(ServiceConfigProfileDto dto, boolean isUpdate) {
@@ -83,7 +83,7 @@ public class ServiceConfigProfileServiceImpl implements ServiceConfigProfileServ
      * 更新配置环境
      *
      * @param dto 配置环境信息
-     * @author luyuhao
+     * @author darren
      * @since 2021/03/14 02:14
      */
     @Override
@@ -99,7 +99,7 @@ public class ServiceConfigProfileServiceImpl implements ServiceConfigProfileServ
      *
      * @param id      配置环境id
      * @param updater 更新者id
-     * @author luyuhao
+     * @author darren
      * @since 2021/03/14 02:18
      */
     @Override

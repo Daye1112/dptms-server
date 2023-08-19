@@ -9,7 +9,7 @@ import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
 /**
- * @author luyuhao
+ * @author darren
  * @since 2021/8/6
  */
 public class MasterSlavePoolEntryImpl implements MasterSlavePoolEntry {

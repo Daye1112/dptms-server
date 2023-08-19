@@ -10,7 +10,7 @@ import java.io.IOException;
 /**
  * 验证码工具类
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/11/16
  */
 public class CaptchaUtil {
@@ -20,7 +20,7 @@ public class CaptchaUtil {
      *
      * @param param 生成参数
      * @return {@link CaptchaResult}
-     * @author luyuhao
+     * @author darren
      * @since 2021/11/16
      */
     public static CaptchaResult picCaptchaGenerate(CaptchaParam param) throws IOException, FontFormatException {

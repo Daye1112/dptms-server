@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 /**
  * 字符串操作
  *
- * @author luyuhao
+ * @author darren
  * @since 19/12/15 14:40
  */
 public class StringUtil extends StringUtils {
@@ -92,7 +92,7 @@ public class StringUtil extends StringUtils {
      * @param str    字符串
      * @param subStr 子串
      * @return true/false
-     * @author luyuhao
+     * @author darren
      * @since 20/08/02 01:43
      */
     public static boolean containsIgnoreCase(String str, String subStr) {
@@ -115,7 +115,7 @@ public class StringUtil extends StringUtils {
      * @param str1 字符串1
      * @param str2 字符串2
      * @return true/false
-     * @author luyuhao
+     * @author darren
      * @since 20/08/02 19:52
      */
     public static boolean equal(String str1, String str2) {
@@ -128,7 +128,7 @@ public class StringUtil extends StringUtils {
      * @param str1 字符串1
      * @param str2 字符串2
      * @return true/false
-     * @author luyuhao
+     * @author darren
      * @since 2020/8/7 14:43
      */
     public static boolean equalsIgnoreCase(String str1, String str2) {
@@ -140,7 +140,7 @@ public class StringUtil extends StringUtils {
      *
      * @param str 字符串
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/7/22
      */
     public static Set<String> splitToSet(String str) {
@@ -153,7 +153,7 @@ public class StringUtil extends StringUtils {
      * @param str       字符串
      * @param delimiter 分隔符
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/7/22
      */
     private static Set<String> splitToSet(String str, String delimiter) {
@@ -168,7 +168,7 @@ public class StringUtil extends StringUtils {
      *
      * @param str 待校验串
      * @return {@link boolean}
-     * @author luyuhao
+     * @author darren
      * @since 2022/11/15
      */
     public static boolean isEmpty(CharSequence str) {

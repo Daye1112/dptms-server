@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 /**
  * 服务整体错误码
  *
- * @author luyuhao
+ * @author darren
  * @since 19/12/15 14:54
  */
 public enum MicroErrorCodeEnum implements BaseErrorEnum {

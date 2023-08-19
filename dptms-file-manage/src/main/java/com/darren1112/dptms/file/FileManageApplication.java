@@ -12,7 +12,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 /**
  * 文件管理启动类
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/11/28
  */
 @EnableServerDoc

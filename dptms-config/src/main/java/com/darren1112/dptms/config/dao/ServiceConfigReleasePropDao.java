@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * 配置发布属性表Dao
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/07/22
  */
 @Mapper
@@ -24,7 +24,7 @@ public interface ServiceConfigReleasePropDao extends BaseMapper<ServiceConfigRel
      * @param application 应用
      * @param profile     环境
      * @return {@link ServiceConfigReleasePropDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/7/23
      */
     List<ServiceConfigReleasePropDto> listLatest(@Param("application") String application, @Param("profile") String profile);
@@ -36,7 +36,7 @@ public interface ServiceConfigReleasePropDao extends BaseMapper<ServiceConfigRel
      * @param profile        环境
      * @param releaseVersion 发布版本
      * @return {@link ServiceConfigReleasePropDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/7/23
      */
     List<ServiceConfigReleasePropDto> listBy(@Param("application") String application, @Param("profile") String profile, @Param("releaseVersion") String releaseVersion);

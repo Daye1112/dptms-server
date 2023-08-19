@@ -10,7 +10,7 @@ import java.util.Set;
 /**
  * 文件处理器-接口类
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/12/2
  */
 public interface FileHandler {
@@ -23,7 +23,7 @@ public interface FileHandler {
      * @param metaDataSet 元数据信息
      * @return {@link FileDfsInfoDto}
      * @throws Exception 异常
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/1
      */
     List<FileDfsInfoDto> uploadFile(InputStream fileStream, String fileName, Set<MetaData> metaDataSet) throws Exception;
@@ -34,7 +34,7 @@ public interface FileHandler {
      * @param fileDfsInfoList 文件存储信息集合
      * @return {@link FileDfsInfoDto}
      * @throws Exception 异常
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/1
      */
     byte[] download(List<FileDfsInfoDto> fileDfsInfoList) throws Exception;

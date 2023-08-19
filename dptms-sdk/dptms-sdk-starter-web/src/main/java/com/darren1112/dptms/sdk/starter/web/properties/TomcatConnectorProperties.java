@@ -5,7 +5,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 /**
  * tomcat连接器配置
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/5/8 17:12
  */
 @ConfigurationProperties(prefix = "dptms.tomcat.connector")

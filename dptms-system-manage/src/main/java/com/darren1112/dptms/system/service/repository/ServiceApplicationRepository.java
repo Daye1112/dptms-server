@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 /**
  * 应用表Repository
  *
- * @author luyuhao
+ * @author darren
  * @since 2022/11/25
  */
 @Repository

@@ -8,7 +8,7 @@ import lombok.ToString;
 /**
  * 文件存储信息Dto
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/12/1
  */
 @Data
@@ -30,7 +30,7 @@ public class FileDfsInfoDto extends FileDfsInfoEntity {
      * @param filePath  存储路径
      * @param fileSize  存储大小
      * @return {@link FileDfsInfoDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/4
      */
     public static FileDfsInfoDto create(String fileGroup, String filePath, Long fileSize) {
@@ -44,7 +44,7 @@ public class FileDfsInfoDto extends FileDfsInfoEntity {
      * @param filePath  存储路径
      * @param fileSize  存储大小
      * @return {@link FileDfsInfoDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/4
      */
     public static FileDfsInfoDto create(String fileGroup, String filePath, Long fileSize, Integer fileOrder) {

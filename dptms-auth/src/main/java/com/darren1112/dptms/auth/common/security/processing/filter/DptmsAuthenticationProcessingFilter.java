@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * 认证加工处理器-实现类
  *
- * @author luyuhao
+ * @author darren
  * @since 2022/11/15
  */
 @Slf4j
@@ -42,7 +42,7 @@ public class DptmsAuthenticationProcessingFilter extends BaseAuthenticationProce
      * @param response 响应域
      * @return {@link Authentication}
      * @throws AuthenticationException 认证异常
-     * @author luyuhao
+     * @author darren
      * @since 2022/06/04
      */
     @Override

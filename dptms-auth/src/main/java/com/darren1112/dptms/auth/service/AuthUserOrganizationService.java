@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * 用户组织Service
  *
- * @author luyuhao
+ * @author darren
  * @since 2020/12/13 22:19
  */
 public interface AuthUserOrganizationService {
@@ -17,7 +17,7 @@ public interface AuthUserOrganizationService {
      *
      * @param userId 用户id
      * @return {@link AuthOrganizationDto}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/13 21:43
      */
     List<AuthOrganizationDto> listUserAssigned(Long userId);
@@ -28,7 +28,7 @@ public interface AuthUserOrganizationService {
      * @param userId  用户id
      * @param orgIds  组织ids，逗号分隔
      * @param updater 更新者
-     * @author luyuhao
+     * @author darren
      * @since 20/12/13 22:10
      */
     void assignedOrg(Long userId, String orgIds, Long updater);

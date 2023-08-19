@@ -17,7 +17,7 @@ import org.springframework.security.web.session.SessionInformationExpiredStrateg
 /**
  * 认证服务自动装配
  *
- * @author luyuhao
+ * @author darren
  * @since 2022/11/14
  */
 public class AuthSecurityConfig {
@@ -56,7 +56,7 @@ public class AuthSecurityConfig {
      * 默认角色前缀为"ROLE_", 将其设置为""
      *
      * @return {@link GrantedAuthorityDefaults}
-     * @author luyuhao
+     * @author darren
      * @since 2022/11/15
      */
     @ConditionalOnMissingBean

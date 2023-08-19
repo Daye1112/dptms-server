@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * zuul请求域工具类
  *
- * @author luyuhao
+ * @author darren
  * @since 2020/08/02 15:01
  */
 public class ZuulRequestUtil {
@@ -20,7 +20,7 @@ public class ZuulRequestUtil {
      * 获取请求上下文
      *
      * @return RequestContext
-     * @author luyuhao
+     * @author darren
      * @since 20/08/02 14:53
      */
     public static RequestContext getRequestContext() {
@@ -31,7 +31,7 @@ public class ZuulRequestUtil {
      * 获取请求域
      *
      * @return HttpServletRequest
-     * @author luyuhao
+     * @author darren
      * @since 20/08/02 14:53
      */
     public static HttpServletRequest getRequest() {
@@ -42,7 +42,7 @@ public class ZuulRequestUtil {
      * 获取响应域
      *
      * @return HttpServletResponse
-     * @author luyuhao
+     * @author darren
      * @since 20/08/02 14:53
      */
     public static HttpServletResponse getResponse() {
@@ -53,7 +53,7 @@ public class ZuulRequestUtil {
      * 返回错误信息
      *
      * @param baseErrorEnum 错误信息
-     * @author luyuhao
+     * @author darren
      * @since 20/11/26 23:54
      */
     public static void returnError(BaseErrorEnum baseErrorEnum) {

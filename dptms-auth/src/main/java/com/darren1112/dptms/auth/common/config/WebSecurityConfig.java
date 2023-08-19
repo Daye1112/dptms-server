@@ -25,7 +25,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 /**
  * web端security配置类
  *
- * @author luyuhao
+ * @author darren
  * @since 2022/11/15
  */
 @Configuration
@@ -73,7 +73,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      * 认证校验器配置
      *
      * @param auth 认证器管理中心
-     * @author luyuhao
+     * @author darren
      * @since 2022/06/05
      */
     @Override
@@ -86,7 +86,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      * 安全相关配置
      *
      * @param http http安全类
-     * @author luyuhao
+     * @author darren
      * @since 2022/06/05
      */
     @Override

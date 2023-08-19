@@ -10,7 +10,7 @@
 // /**
 //  * redis封装工具类
 //  *
-//  * @author luyuhao
+//  * @author darren
 //  * @since 20/02/09 17:35
 //  */
 // @Slf4j
@@ -636,7 +636,7 @@
 //      * @param value  值
 //      * @param second 过期时间
 //      * @return true/false
-//      * @author luyuhao
+//      * @author darren
 //      * @since 20/12/04 21:51
 //      */
 //     public boolean tryLock(String key, Object value, long second) {
@@ -648,7 +648,7 @@
 //      *
 //      * @param key   key
 //      * @param value value
-//      * @author luyuhao
+//      * @author darren
 //      * @since 20/12/04 21:59
 //      */
 //     public void releaseLock(String key, Object value) {

@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * 缓存管理
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/01/30 23:41
  */
 @Slf4j
@@ -47,7 +47,7 @@ public class RedisController extends BaseController {
      * @param keyPrefix key前缀
      * @param pageParam 分页参数
      * @return {@link SysRedisDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/31 00:04
      */
     @Log(value = "分页查询缓存", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
@@ -64,7 +64,7 @@ public class RedisController extends BaseController {
      *
      * @param sysRedisDto 缓存信息
      * @return {@link JsonResult}
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/31 00:04
      */
     @Log(value = "新增缓存", logLevel = LogLevel.WARN, businessType = BusinessType.INSERT)
@@ -85,7 +85,7 @@ public class RedisController extends BaseController {
      *
      * @param sysRedisDto 缓存信息
      * @return {@link JsonResult}
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/31 00:04
      */
     @Log(value = "删除缓存", logLevel = LogLevel.WARN, businessType = BusinessType.DELETE)

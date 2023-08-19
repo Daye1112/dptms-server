@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * 登录日志Service
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/02/06 20:43
  */
 public interface MonitorLoginLogService {
@@ -18,7 +18,7 @@ public interface MonitorLoginLogService {
      * 插入登录日志信息
      *
      * @param dto 日志信息
-     * @author luyuhao
+     * @author darren
      * @since 2021/02/06 20:53
      */
     void insert(MonitorLoginLogDto dto);
@@ -29,7 +29,7 @@ public interface MonitorLoginLogService {
      * @param pageParam 分页参数
      * @param dto       查询条件
      * @return {@link MonitorLoginLogDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/02/10 00:13
      */
     PageBean<MonitorLoginLogDto> listPage(PageParam pageParam, MonitorLoginLogDto dto);
@@ -39,7 +39,7 @@ public interface MonitorLoginLogService {
      *
      * @param userId 用户id
      * @return {@link MonitorLoginLogDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/11/27
      */
     List<MonitorLoginLogDto> listLastSevenByUserId(Long userId);

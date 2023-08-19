@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * 系统token存储类
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/01/16 19:06
  */
 public class TokenStore extends BaseTokenStore {
@@ -33,7 +33,7 @@ public class TokenStore extends BaseTokenStore {
      * @param activeUser   用户信息
      * @param accessToken  accessToken
      * @param refreshToken refreshToken
-     * @author luyuhao
+     * @author darren
      * @since 20/11/25 00:25
      */
     private <T extends BaseSecurityUser> void saveToken(T activeUser, String accessToken, String refreshToken) {
@@ -52,7 +52,7 @@ public class TokenStore extends BaseTokenStore {
      *
      * @param request 请求域
      * @return {@link T 用户信息}
-     * @author luyuhao
+     * @author darren
      * @since 20/11/28 01:22
      */
     public <T extends BaseSecurityUser> T getActiveUser(HttpServletRequest request) {
@@ -64,7 +64,7 @@ public class TokenStore extends BaseTokenStore {
      *
      * @param refreshToken 刷新token
      * @param response     响应域
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/16 19:15
      */
     public void refreshAccessTokenAndCookie(String refreshToken, HttpServletResponse response) {
@@ -79,7 +79,7 @@ public class TokenStore extends BaseTokenStore {
      * 从request中获取accessToken
      *
      * @return {@link String accessToken}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/10 02:34
      */
     public String getAccessToken() {
@@ -91,7 +91,7 @@ public class TokenStore extends BaseTokenStore {
      * 从request中获取refresh Token
      *
      * @return {@link String refresh Token}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/10 02:34
      */
     public String getRefreshToken() {
@@ -104,7 +104,7 @@ public class TokenStore extends BaseTokenStore {
      *
      * @param activeUser 用户信息
      * @param response   响应域
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/17 01:11
      */
     public <T extends BaseSecurityUser> void generateToken(T activeUser, HttpServletResponse response) {
@@ -123,7 +123,7 @@ public class TokenStore extends BaseTokenStore {
      * @param accessToken  access token
      * @param refreshToken refresh token
      * @param response     响应域
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/17 01:12
      */
     private void saveTokenCookie(String accessToken, String refreshToken, HttpServletResponse response) {
@@ -136,7 +136,7 @@ public class TokenStore extends BaseTokenStore {
      *
      * @param request  请求域
      * @param response 响应域
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/28 01:03
      */
     public void removeTokenAndCookie(HttpServletRequest request, HttpServletResponse response) {
@@ -151,7 +151,7 @@ public class TokenStore extends BaseTokenStore {
      * 删除cookie中的token
      *
      * @param response 响应域
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/28 01:07
      */
     private void removeTokenCookie(HttpServletResponse response) {
@@ -164,7 +164,7 @@ public class TokenStore extends BaseTokenStore {
      *
      * @param accessToken  accessToken
      * @param refreshToken refreshToken
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/28 01:05
      */
     private void removeToken(String accessToken, String refreshToken) {
@@ -176,7 +176,7 @@ public class TokenStore extends BaseTokenStore {
      * 更新用户信息
      *
      * @param activeUser 用户信息
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/31 20:00
      */
     public <T extends BaseSecurityUser> void updateActiveUser(T activeUser) {
@@ -188,7 +188,7 @@ public class TokenStore extends BaseTokenStore {
      * 根据refreshToken移除ActiveUser
      *
      * @param refreshToken 刷新token
-     * @author luyuhao
+     * @author darren
      * @since 2021/07/28
      */
     private <T extends BaseSecurityUser> void removeUserRefreshToken(String refreshToken) {

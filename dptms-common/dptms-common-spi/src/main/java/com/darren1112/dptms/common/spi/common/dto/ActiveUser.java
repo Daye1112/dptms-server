@@ -10,7 +10,7 @@
 // /**
 //  * 活跃(在线)用户信息
 //  *
-//  * @author luyuhao
+//  * @author darren
 //  * @since 2020/11/22 16:59
 //  */
 // @Data
@@ -108,7 +108,7 @@
 //      *
 //      * @param sysUserDto 用户信息
 //      * @return {@link ActiveUser}
-//      * @author luyuhao
+//      * @author darren
 //      * @since 2021/01/31 19:50
 //      */
 //     public static ActiveUser convert(AuthUserDto sysUserDto) {
@@ -122,7 +122,7 @@
 //      *
 //      * @param activeUser 用户信息
 //      * @param sysUserDto 新用户信息
-//      * @author luyuhao
+//      * @author darren
 //      * @since 2021/01/31 19:50
 //      */
 //     public static void convert(ActiveUser activeUser, AuthUserDto sysUserDto) {

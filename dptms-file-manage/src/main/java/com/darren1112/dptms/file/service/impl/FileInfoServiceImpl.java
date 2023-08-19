@@ -12,6 +12,7 @@ import com.darren1112.dptms.file.service.FileInfoService;
 import com.darren1112.dptms.sdk.starter.fastdfs.core.file.client.FileClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,7 +22,7 @@ import java.util.List;
 /**
  * 文件信息ServiceImpl
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/12/1
  */
 @Slf4j
@@ -44,7 +45,7 @@ public class FileInfoServiceImpl implements FileInfoService {
      * @param file   文件信息
      * @param userId 用户id
      * @return {@link FileInfoDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/05
      */
     @Override
@@ -77,7 +78,7 @@ public class FileInfoServiceImpl implements FileInfoService {
      *
      * @param fileId 文件id
      * @return {@link FileInfoDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/10
      */
     @Override
@@ -98,7 +99,7 @@ public class FileInfoServiceImpl implements FileInfoService {
      *
      * @param fileId 文件id
      * @return {@link FileInfoDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/10
      */
     @Override
@@ -110,5 +111,24 @@ public class FileInfoServiceImpl implements FileInfoService {
         List<FileDfsInfoDto> fileDfsInfoList = fileDfsInfoRepository.getBaseMapper().listByFileInfoId(fileId);
         fileInfo.setFileDfsInfoList(fileDfsInfoList);
         return fileInfo;
+    }
+
+    /**
+     * 更新文件信息
+     *
+     * @param id       文件id
+     * @param fileName 文件名
+     * @param updater  更新者
+     * @author darren
+     * @since 2023/08/16
+     */
+    @Override
+    public void updateFileName(Long id, String fileName, Long updater) {
+        FileInfoDto fileInfoDto = new FileInfoDto();
+        fileInfoDto.setId(id);
+        fileInfoDto.setFileName(fileName);
+        fileInfoDto.setUpdater(updater);
+
+        fileInfoRepository.updateFileName(fileInfoDto);
     }
 }

@@ -3,7 +3,7 @@ package com.darren1112.dptms.sdk.starter.redis.core;
 /**
  * redis相关常量
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/8/4
  */
 public class RedisConstants {

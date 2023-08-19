@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * system manage 模块rpc调用
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/02/15 23:40
  */
 @FeignClient("dptms-system-manage")
@@ -22,7 +22,7 @@ public interface SystemManageRemoting {
      * 接口访问统计
      *
      * @return {@link DruidStatDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/02/17 20:45
      */
     @GetMapping("/druidStat/apiStat")

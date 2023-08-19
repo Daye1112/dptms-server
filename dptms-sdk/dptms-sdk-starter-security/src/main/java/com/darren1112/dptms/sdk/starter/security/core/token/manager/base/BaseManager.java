@@ -10,7 +10,7 @@ import org.springframework.core.env.Environment;
 /**
  * 管理器-抽象类
  *
- * @author luyuhao
+ * @author darren
  * @since 2022/11/17
  */
 public abstract class BaseManager implements BaseBean, ApplicationContextAware, EnvironmentAware {

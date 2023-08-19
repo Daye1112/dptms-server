@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * 配置发布属性表Controller
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/03/12 01:51
  */
 @Slf4j
@@ -41,7 +41,7 @@ public class ServiceConfigReleasePropController {
      *
      * @param dto 筛选参数
      * @return {@link ServiceConfigReleasePropDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/03/13 01:33
      */
     @Log(value = "查询配置发布属性list", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)

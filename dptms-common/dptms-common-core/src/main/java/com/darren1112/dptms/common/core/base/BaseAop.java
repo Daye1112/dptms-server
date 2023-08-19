@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * aop基础类
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/02/06 23:29
  */
 public class BaseAop {
@@ -21,7 +21,7 @@ public class BaseAop {
      *
      * @param joinPoint 切点
      * @return {@link String 参数json格式}
-     * @author luyuhao
+     * @author darren
      * @since 2021/02/06 23:34
      */
     protected static String getParams(JoinPoint joinPoint) {

@@ -10,7 +10,7 @@ import java.util.Set;
 /**
  * fastDfs处理器接口类
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/12/7
  */
 public interface FastDfsHandler {
@@ -23,7 +23,7 @@ public interface FastDfsHandler {
      * @param callback  回调
      * @return {@link T}
      * @throws Exception 异常
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/7
      */
     <T> T downloadFile(String groupName, String path, DownloadCallback<T> callback) throws Exception;
@@ -37,7 +37,7 @@ public interface FastDfsHandler {
      * @param metaDataSet 元信息
      * @return {@link StorePath}
      * @throws Exception 异常
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/7
      */
     StorePath uploadFile(InputStream inputStream, long fileSize, String fileExtName, Set<MetaData> metaDataSet) throws Exception;
@@ -48,7 +48,7 @@ public interface FastDfsHandler {
      * @param groupName 组名
      * @param path      路径
      * @throws Exception 异常
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/7
      */
     void deleteFile(String groupName, String path) throws Exception;

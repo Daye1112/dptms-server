@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * 文件中心Controller
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/12/18
  */
 @Slf4j
@@ -41,7 +41,7 @@ public class FileCenterController {
      *
      * @param parentId 文件夹id
      * @return {@link JsonResult}
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/18
      */
     @GetMapping("/list")
@@ -58,7 +58,7 @@ public class FileCenterController {
      *
      * @param dto 文件/文件夹信息
      * @return {@link JsonResult}
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/18
      */
     @PostMapping("/insert")

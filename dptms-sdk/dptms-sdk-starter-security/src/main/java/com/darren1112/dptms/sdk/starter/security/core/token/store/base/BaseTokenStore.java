@@ -19,7 +19,7 @@ import java.util.Set;
 /**
  * 系统token存储-基础类
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/8/3
  */
 public abstract class BaseTokenStore {
@@ -42,7 +42,7 @@ public abstract class BaseTokenStore {
      *
      * @param accessToken  accessToken
      * @param refreshToken refreshToken
-     * @author luyuhao
+     * @author darren
      * @since 20/11/25 00:25
      */
     public void saveAccessToken(String accessToken, String refreshToken) {
@@ -55,7 +55,7 @@ public abstract class BaseTokenStore {
      *
      * @param refreshToken refreshToken
      * @param activeUser   用户信息
-     * @author luyuhao
+     * @author darren
      * @since 20/11/25 00:25
      */
     public <T extends BaseSecurityUser> void saveRefreshToken(String refreshToken, T activeUser) {
@@ -68,7 +68,7 @@ public abstract class BaseTokenStore {
      *
      * @param activeUser   用户信息
      * @param refreshToken refreshToken
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/30 23:36
      */
     public <T extends BaseSecurityUser> void saveUserRefreshToken(T activeUser, String refreshToken) {
@@ -80,7 +80,7 @@ public abstract class BaseTokenStore {
      * 获取当前用户的最新refreshToken
      *
      * @param activeUser 用户信息
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/30 23:36
      */
     public <T extends BaseSecurityUser> String getUserRefreshToken(T activeUser) {
@@ -93,7 +93,7 @@ public abstract class BaseTokenStore {
      *
      * @param refreshToken refreshToken
      * @return {@link BaseSecurityUser 用户信息}
-     * @author luyuhao
+     * @author darren
      * @since 20/11/28 01:22
      */
     @SuppressWarnings("unchecked")
@@ -110,7 +110,7 @@ public abstract class BaseTokenStore {
      * @param request      请求域
      * @param refreshToken 刷新token
      * @return {@link BaseSecurityUser 用户信息}
-     * @author luyuhao
+     * @author darren
      * @since 20/11/28 01:22
      */
     @SuppressWarnings("unchecked")
@@ -126,7 +126,7 @@ public abstract class BaseTokenStore {
      *
      * @param accessToken accessToken
      * @param response    响应域
-     * @author luyuhao
+     * @author darren
      * @since 20/11/25 00:25
      */
     public void saveAccessTokenCookie(String accessToken, HttpServletResponse response) {
@@ -139,7 +139,7 @@ public abstract class BaseTokenStore {
      *
      * @param refreshToken refreshToken
      * @param response     响应域
-     * @author luyuhao
+     * @author darren
      * @since 20/11/25 00:25
      */
     public void saveRefreshTokenCookie(String refreshToken, HttpServletResponse response) {
@@ -152,7 +152,7 @@ public abstract class BaseTokenStore {
      *
      * @param request 请求域
      * @return {@link String accessToken}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/10 02:34
      */
     public String getAccessToken(HttpServletRequest request) {
@@ -168,7 +168,7 @@ public abstract class BaseTokenStore {
      *
      * @param request 请求域
      * @return {@link String refresh Token}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/10 02:34
      */
     public String getRefreshToken(HttpServletRequest request) {
@@ -184,7 +184,7 @@ public abstract class BaseTokenStore {
      *
      * @param accessToken 访问token
      * @return 刷新token
-     * @author luyuhao
+     * @author darren
      * @since 20/11/27 00:45
      */
     public String getRefreshToken(String accessToken) {
@@ -196,7 +196,7 @@ public abstract class BaseTokenStore {
      * 删除cookie中的refreshToken
      *
      * @param response 响应域
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/28 01:08
      */
     public void removeRefreshTokenCookie(HttpServletResponse response) {
@@ -207,7 +207,7 @@ public abstract class BaseTokenStore {
      * 删除cookie中的accessToken
      *
      * @param response 响应域
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/28 01:08
      */
     public void removeAccessTokenCookie(HttpServletResponse response) {
@@ -218,7 +218,7 @@ public abstract class BaseTokenStore {
      * 删除refreshToken
      *
      * @param refreshToken refreshToken
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/28 01:06
      */
     public void removeRefreshToken(String refreshToken) {
@@ -231,7 +231,7 @@ public abstract class BaseTokenStore {
      * 删除accessToken
      *
      * @param accessToken accessToken
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/28 01:06
      */
     public void removeAccessToken(String accessToken) {
@@ -245,7 +245,7 @@ public abstract class BaseTokenStore {
      *
      * @param activeUser   用户信息
      * @param refreshToken 刷新token
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/31 20:00
      */
     public <T extends BaseSecurityUser> void updateActiveUser(T activeUser, String refreshToken) {
@@ -260,7 +260,7 @@ public abstract class BaseTokenStore {
      * 查询所有用户refreshToken的keys
      *
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/31 22:47
      */
     public List<String> listAllUserRefreshKeys() {
@@ -272,7 +272,7 @@ public abstract class BaseTokenStore {
      * 移除userRefreshToken
      *
      * @param activeUser 用户信息
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/31 23:22
      */
     public <T extends BaseSecurityUser> void removeUserRefreshToken(T activeUser) {

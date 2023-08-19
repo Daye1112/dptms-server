@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * 文件中心Service
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/12/18
  */
 public interface FileCenterService {
@@ -17,7 +17,7 @@ public interface FileCenterService {
      *
      * @param parentId 父节点id
      * @return {@link FileCenterDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/18
      */
     List<FileCenterDto> list(Long parentId);
@@ -26,7 +26,7 @@ public interface FileCenterService {
      * 新增文件/文件夹
      *
      * @param dto 文件/文件夹信息
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/19
      */
     void insert(FileCenterDto dto);

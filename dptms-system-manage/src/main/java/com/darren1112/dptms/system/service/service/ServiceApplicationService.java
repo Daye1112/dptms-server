@@ -7,7 +7,7 @@ import com.darren1112.dptms.common.spi.service.dto.ServiceApplicationDto;
 /**
  * 应用表Service
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/03/12 01:31
  */
 public interface ServiceApplicationService {
@@ -18,7 +18,7 @@ public interface ServiceApplicationService {
      * @param dto       筛选参数
      * @param pageParam 分页参数
      * @return {@link ServiceApplicationDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/03/12 17:33
      */
     PageBean<ServiceApplicationDto> listPage(PageParam pageParam, ServiceApplicationDto dto);
@@ -28,7 +28,7 @@ public interface ServiceApplicationService {
      *
      * @param dto 服务信息
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/03/12 23:28
      */
     Long insert(ServiceApplicationDto dto);
@@ -37,7 +37,7 @@ public interface ServiceApplicationService {
      * 更新服务应用
      *
      * @param dto 服务信息
-     * @author luyuhao
+     * @author darren
      * @since 2021/03/12 23:42
      */
     void update(ServiceApplicationDto dto);
@@ -47,7 +47,7 @@ public interface ServiceApplicationService {
      *
      * @param id      服务id
      * @param updater 更新者
-     * @author luyuhao
+     * @author darren
      * @since 2021/03/13 00:49
      */
     void deleteById(Long id, Long updater);

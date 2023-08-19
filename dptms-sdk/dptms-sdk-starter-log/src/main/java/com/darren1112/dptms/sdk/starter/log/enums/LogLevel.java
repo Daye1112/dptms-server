@@ -5,7 +5,7 @@ import com.darren1112.dptms.common.core.base.BaseCommonEnum;
 /**
  * 日志级别
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/02/02 00:48
  */
 public enum LogLevel implements BaseCommonEnum {
@@ -42,7 +42,7 @@ public enum LogLevel implements BaseCommonEnum {
      *
      * @param name name
      * @return {@link LogLevel}
-     * @author luyuhao
+     * @author darren
      * @since 2021/02/07 01:46
      */
     public static LogLevel matchByName(String name) {

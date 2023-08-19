@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 /**
  * 角色菜单ServiceImpl
  *
- * @author luyuhao
+ * @author darren
  * @since 2020/12/13 23:09
  */
 @Service
@@ -36,7 +36,7 @@ public class AuthRoleMenuServiceImpl implements AuthRoleMenuService {
      *
      * @param roleId 角色id
      * @return {@link AuthMenuDto}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/13 21:43
      */
     @Override
@@ -59,7 +59,7 @@ public class AuthRoleMenuServiceImpl implements AuthRoleMenuService {
      * @param roleId  角色id
      * @param menuIds 菜单ids，逗号分隔
      * @param updater 更新者
-     * @author luyuhao
+     * @author darren
      * @since 20/12/13 22:10
      */
     @Override

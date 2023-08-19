@@ -18,7 +18,7 @@
 // /**
 //  * 用户信息Base
 //  *
-//  * @author luyuhao
+//  * @author darren
 //  * @since 2020/11/22 17:11
 //  */
 // @Slf4j
@@ -34,7 +34,7 @@
 //      * @param request    请求域
 //      * @param response   响应域
 //      * @return {@link ActiveUser 用户信息}
-//      * @author luyuhao
+//      * @author darren
 //      * @since 20/11/22 17:25
 //      */
 //     @Override
@@ -65,7 +65,7 @@
 //      * @param request    请求域
 //      * @param response   响应域
 //      * @throws BaseException 异常
-//      * @author luyuhao
+//      * @author darren
 //      * @since 20/11/22 17:26
 //      */
 //     @Override
@@ -79,7 +79,7 @@
 //      * @param response   响应域
 //      * @return {@link ActiveUser}
 //      * @throws BaseException 异常
-//      * @author luyuhao
+//      * @author darren
 //      * @since 20/11/22 21:07
 //      */
 //     @Override
@@ -92,7 +92,7 @@
 //      * @param request    请求域
 //      * @param response   响应域
 //      * @throws BaseException 异常
-//      * @author luyuhao
+//      * @author darren
 //      * @since 20/11/22 17:42
 //      */
 //     @Override
@@ -103,7 +103,7 @@
 //      *
 //      * @param e 异常
 //      * @return {@link BaseException 处理后的异常}
-//      * @author luyuhao
+//      * @author darren
 //      * @since 20/11/22 21:11
 //      */
 //     @Override
@@ -115,7 +115,7 @@
 //      * 登录日志采集
 //      *
 //      * @param activeUser 登录用户信息
-//      * @author luyuhao
+//      * @author darren
 //      * @since 2021/2/9 14:09
 //      */
 //     protected void loginLogCollect(ActiveUser activeUser) {

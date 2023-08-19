@@ -6,7 +6,7 @@ import lombok.Data;
 /**
  * redis dto
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/01/31 00:02
  */
 @Data

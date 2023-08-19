@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * 文件中心远程调用
  *
- * @author luyuhao
+ * @author darren
  * @since 2022/01/03
  */
 @FeignClient("dptms-file-manage")
@@ -22,7 +22,7 @@ public interface FileManageRemoting {
      * 接口访问统计
      *
      * @return {@link DruidStatDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/02/17 20:45
      */
     @GetMapping("/druidStat/apiStat")

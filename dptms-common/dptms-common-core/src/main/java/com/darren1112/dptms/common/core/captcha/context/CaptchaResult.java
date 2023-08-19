@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 /**
  * 验证码生成结果
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/11/16
  */
 public class CaptchaResult {

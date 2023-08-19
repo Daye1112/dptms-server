@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * druid监控数据处理器
  *
- * @author luyuhao
+ * @author darren
  * @since 2020/3/14 10:29
  */
 @Slf4j
@@ -35,7 +35,7 @@ public class DruidStatController {
      * 接口访问统计
      *
      * @return {@link DruidStatDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/02/17 20:45
      */
     @GetMapping("/apiStat")

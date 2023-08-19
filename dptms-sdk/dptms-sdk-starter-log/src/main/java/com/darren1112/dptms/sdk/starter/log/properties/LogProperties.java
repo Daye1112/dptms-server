@@ -8,7 +8,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 /**
  * 日志采集配置
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/02/07 01:42
  */
 @Data

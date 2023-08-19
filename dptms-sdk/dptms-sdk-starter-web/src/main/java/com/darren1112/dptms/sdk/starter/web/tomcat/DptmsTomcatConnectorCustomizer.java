@@ -9,7 +9,7 @@ import org.springframework.boot.web.embedded.tomcat.TomcatConnectorCustomizer;
 /**
  * 自定义tomcat容器的连接器配置
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/5/10 9:17
  */
 public class DptmsTomcatConnectorCustomizer implements TomcatConnectorCustomizer {

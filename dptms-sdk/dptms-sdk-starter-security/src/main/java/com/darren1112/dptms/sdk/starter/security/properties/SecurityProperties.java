@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 /**
  * 网关配置
  *
- * @author luyuhao
+ * @author darren
  * @since 2020/08/02 18:22
  */
 @Data

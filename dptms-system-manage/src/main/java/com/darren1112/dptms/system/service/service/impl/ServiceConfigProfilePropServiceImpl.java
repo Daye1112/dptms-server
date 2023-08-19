@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 /**
  * 配置环境属性表ServiceImpl
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/03/12 01:47
  */
 @Service
@@ -37,7 +37,7 @@ public class ServiceConfigProfilePropServiceImpl implements ServiceConfigProfile
      *
      * @param dto 配置环境属性
      * @return {@link ServiceConfigProfilePropDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/03/14 22:57
      */
     @Override
@@ -51,7 +51,7 @@ public class ServiceConfigProfilePropServiceImpl implements ServiceConfigProfile
      *
      * @param dto 配置环境属性信息
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/03/14 23:01
      */
     @Override
@@ -68,7 +68,7 @@ public class ServiceConfigProfilePropServiceImpl implements ServiceConfigProfile
      *
      * @param dto      验证对象
      * @param isUpdate 是否更新
-     * @author luyuhao
+     * @author darren
      * @since 2021/03/14 02:04
      */
     private void validRepeat(ServiceConfigProfilePropDto dto, boolean isUpdate) {
@@ -87,7 +87,7 @@ public class ServiceConfigProfilePropServiceImpl implements ServiceConfigProfile
      * 更新配置环境属性
      *
      * @param dto 配置环境属性信息
-     * @author luyuhao
+     * @author darren
      * @since 2021/03/14 23:08
      */
     @Override
@@ -103,7 +103,7 @@ public class ServiceConfigProfilePropServiceImpl implements ServiceConfigProfile
      *
      * @param id      id
      * @param updater 更新者
-     * @author luyuhao
+     * @author darren
      * @since 2021/03/14 23:11
      */
     @Override
@@ -118,7 +118,7 @@ public class ServiceConfigProfilePropServiceImpl implements ServiceConfigProfile
      *
      * @param profileId 环境id
      * @return {@link ServiceConfigProfilePropDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/7/3 10:40
      */
     @Override
@@ -134,7 +134,7 @@ public class ServiceConfigProfilePropServiceImpl implements ServiceConfigProfile
      *
      * @param dto content   文本内容
      *            profileId 环境id
-     * @author luyuhao
+     * @author darren
      * @since 2021/7/21
      */
     @Override

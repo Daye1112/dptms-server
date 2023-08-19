@@ -6,7 +6,7 @@ import com.darren1112.dptms.sdk.starter.fastdfs.properties.FastDfsProperties;
 /**
  * 文件处理工厂类
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/12/2
  */
 public class FileHandlerFactory {
@@ -28,7 +28,7 @@ public class FileHandlerFactory {
      *
      * @param fileSize 文件大小
      * @return {@link FileHandler}
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/4
      */
     public FileHandler uploadCreate(int fileSize) {
@@ -46,7 +46,7 @@ public class FileHandlerFactory {
      * 文件下载-根据文件存储信息集合大小返回处理器
      *
      * @return {@link FileHandler}
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/4
      */
     public FileHandler downloadCreate(int fileDfsSize) {

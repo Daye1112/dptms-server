@@ -11,7 +11,7 @@ import org.springframework.security.authentication.ProviderNotFoundException;
 /**
  * 认证类型工厂
  *
- * @author luyuhao
+ * @author darren
  * @since 2022/6/6
  */
 public class BasicAuthTypeFactory implements AuthTypeFactory {
@@ -21,7 +21,7 @@ public class BasicAuthTypeFactory implements AuthTypeFactory {
      *
      * @param authType 认证类型
      * @return {@link BaseAuthenticationToken}
-     * @author luyuhao
+     * @author darren
      * @since 2022/6/6
      */
     @Override
@@ -47,7 +47,7 @@ public class BasicAuthTypeFactory implements AuthTypeFactory {
      *
      * @param user 用户信息
      * @return {@link BaseAuthenticationToken}
-     * @author luyuhao
+     * @author darren
      * @since 2022/6/6
      */
     @Override

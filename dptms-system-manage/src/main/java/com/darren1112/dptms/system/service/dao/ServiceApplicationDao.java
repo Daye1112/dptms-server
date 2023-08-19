@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * 应用表Dao
  *
- * @author luyuhao
+ * @author darren
  * @since 2020/12/12 17:23
  */
 @Mapper
@@ -25,7 +25,7 @@ public interface ServiceApplicationDao extends BaseMapper<ServiceApplicationDto>
      * @param dto       筛选参数
      * @param pageParam 分页参数
      * @return {@link ServiceApplicationDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/03/12 17:33
      */
     List<ServiceApplicationDto> listPage(@Param("pageParam") PageParam pageParam, @Param("dto") ServiceApplicationDto dto);
@@ -35,7 +35,7 @@ public interface ServiceApplicationDao extends BaseMapper<ServiceApplicationDto>
      *
      * @param dto 筛选参数
      * @return {@link ServiceApplicationDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/03/12 17:33
      */
     Long listPageCount(@Param("dto") ServiceApplicationDto dto);
@@ -45,7 +45,7 @@ public interface ServiceApplicationDao extends BaseMapper<ServiceApplicationDto>
      *
      * @param param 查询条件
      * @return {@link Long 重复数量}
-     * @author luyuhao
+     * @author darren
      * @since 2021/03/12 23:32
      */
     Long countByRepeat(ServiceApplicationDto param);
@@ -54,7 +54,7 @@ public interface ServiceApplicationDao extends BaseMapper<ServiceApplicationDto>
      * 更新服务应用
      *
      * @param dto 服务信息
-     * @author luyuhao
+     * @author darren
      * @since 2021/03/12 23:43
      */
     void update(ServiceApplicationDto dto);
@@ -64,7 +64,7 @@ public interface ServiceApplicationDao extends BaseMapper<ServiceApplicationDto>
      *
      * @param id      服务id
      * @param updater 更新者
-     * @author luyuhao
+     * @author darren
      * @since 2021/03/13 00:49
      */
     void deleteById(@Param("id") Long id, @Param("updater") Long updater);

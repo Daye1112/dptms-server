@@ -15,7 +15,7 @@ import java.util.Set;
 /**
  * redis主从模式实现
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/8/4
  */
 public class MasterSlaveRedisUtil implements RedisUtil {
@@ -73,7 +73,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
     /**
      * 资源初始化
      *
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -97,7 +97,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
     /**
      * 关闭资源
      *
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -114,7 +114,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      *
      * @param key 键
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -128,7 +128,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param prefix 前缀
      * @param key    键
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -146,7 +146,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      *
      * @param key 键
      * @return {@link T}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -160,7 +160,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param prefix 前缀
      * @param key    键
      * @return {@link T}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -180,7 +180,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key   键
      * @param value 值
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -195,7 +195,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key    键
      * @param value  值
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -215,7 +215,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param value   值
      * @param seconds 有效时间（秒）
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -231,7 +231,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param value   值
      * @param seconds 有效时间（秒）
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -249,7 +249,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      *
      * @param keyPrefix 前缀
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/11/14
      */
     @Override
@@ -263,7 +263,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param prefix    前缀
      * @param keyPrefix 查询前缀
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/11/14
      */
     @Override
@@ -287,7 +287,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      *                PX milliseconds: 设定过期时间，单位为毫秒
      * @param seconds 有效时间（秒）
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -307,7 +307,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      *                PX milliseconds: 设定过期时间，单位为毫秒
      * @param seconds 有效时间（秒）
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -326,7 +326,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key   键
      * @param value 值
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -341,7 +341,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key    键
      * @param value  值
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -361,7 +361,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param value   值
      * @param seconds 有效时间（秒）
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -377,7 +377,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param value   值
      * @param seconds 有效时间（秒）
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -397,7 +397,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param value   值
      * @param seconds 有效时间（秒）
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -413,7 +413,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param value   值
      * @param seconds 有效时间（秒）
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -433,7 +433,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param value   值
      * @param seconds 有效时间（秒）
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -449,7 +449,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param value   值
      * @param seconds 有效时间（秒）
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -467,7 +467,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      *
      * @param key 键
      * @return {@link byte[]}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -481,7 +481,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param prefix 前缀
      * @param key    键
      * @return {@link byte[]}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -500,7 +500,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key   键
      * @param value 值
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -515,7 +515,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key    键
      * @param value  值
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -535,7 +535,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param field 域
      * @param value 值
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -551,7 +551,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param field  域
      * @param value  值
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -571,7 +571,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param field 域
      * @param value 值
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -587,7 +587,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param field  域
      * @param value  值
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -607,7 +607,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param field 域
      * @param value 值
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -623,7 +623,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param field  域
      * @param value  值
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -642,7 +642,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key   键
      * @param field 域
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -657,7 +657,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key    键
      * @param field  域
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -676,7 +676,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key   键
      * @param field 域
      * @return {@link T}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -691,7 +691,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key    键
      * @param field  域
      * @return {@link T}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -711,7 +711,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key   键
      * @param field 域
      * @return {@link byte[]}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -726,7 +726,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key    键
      * @param field  域
      * @return {@link byte[]}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -746,7 +746,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param field 域
      * @param value 值
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -762,7 +762,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param field  域
      * @param value  值
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -781,7 +781,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key    键
      * @param fields 域
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -796,7 +796,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key    键
      * @param fields 域
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -815,7 +815,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key     键
      * @param seconds 有效时间（秒）
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -830,7 +830,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key     键
      * @param seconds 有效时间（秒）
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -848,7 +848,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      *
      * @param key 键
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -862,7 +862,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param prefix 前缀
      * @param key    键
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -880,7 +880,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      *
      * @param key 键
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -894,7 +894,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param prefix 前缀
      * @param key    键
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -912,7 +912,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      *
      * @param key 键
      * @return {@link boolean}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -926,7 +926,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param prefix 前缀
      * @param key    键
      * @return {@link boolean}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -945,7 +945,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key   键
      * @param value 值
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -960,7 +960,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key    键
      * @param value  值
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -979,7 +979,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key   键
      * @param value 值
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -994,7 +994,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key    键
      * @param value  值
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1013,7 +1013,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key   键
      * @param value 值
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1028,7 +1028,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key    键
      * @param value  值
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1046,7 +1046,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      *
      * @param pattern 匹配值
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1060,7 +1060,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param prefix  前缀
      * @param pattern 匹配值
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1079,7 +1079,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key    键
      * @param fields 域
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1094,7 +1094,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key    键
      * @param fields 域
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1113,7 +1113,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key  键
      * @param hash map
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1128,7 +1128,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key    键
      * @param hash   map
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1146,7 +1146,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      *
      * @param key 键
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1160,7 +1160,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param prefix 前缀
      * @param key    键
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1179,7 +1179,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key       键
      * @param increment 自增值
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1194,7 +1194,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key       键
      * @param increment 自增值
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1213,7 +1213,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key   键
      * @param field 域
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1228,7 +1228,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key    键
      * @param field  域
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1245,7 +1245,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * 发布
      *
      * @param jedisPubSub 发布
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1258,7 +1258,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      *
      * @param jedisPubSub 发布
      * @param patterns    匹配值
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1273,7 +1273,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      *
      * @param listener 监听器
      * @param channels 频道
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1288,7 +1288,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      *
      * @param key 键
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1302,7 +1302,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param prefix 前缀
      * @param key    键
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1321,7 +1321,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key     键
      * @param strings 值
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1336,7 +1336,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key     键
      * @param strings 值
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1354,7 +1354,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      *
      * @param key 键
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1368,7 +1368,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param prefix 前缀
      * @param key    键
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1387,7 +1387,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key     键
      * @param strings 值
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1402,7 +1402,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key     键
      * @param strings 值
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1420,7 +1420,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      *
      * @param key 键
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1434,7 +1434,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param prefix 前缀
      * @param key    键
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1453,7 +1453,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key   键
      * @param index 索引
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1468,7 +1468,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key    键
      * @param index  索引
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1488,7 +1488,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param start 起始下标
      * @param end   结束下标
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1504,7 +1504,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param start  起始下标
      * @param end    结束下标
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1523,7 +1523,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key     键
      * @param members 值
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1538,7 +1538,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key     键
      * @param members 值
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1557,7 +1557,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key     键
      * @param members 值
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1572,7 +1572,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key     键
      * @param members 值
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1591,7 +1591,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key     键
      * @param members 值
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1606,7 +1606,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key     键
      * @param members 值
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1624,7 +1624,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      *
      * @param key 键
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1638,7 +1638,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param prefix 前缀
      * @param key    键
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1656,7 +1656,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      *
      * @param key 键
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1670,7 +1670,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param prefix 前缀
      * @param key    键
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1689,7 +1689,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key   键
      * @param count 返回的元素数量
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1704,7 +1704,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key    键
      * @param count  返回的元素数量
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1725,7 +1725,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param score  分数
      * @param member 值
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1742,7 +1742,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param score  分数
      * @param member 值
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1761,7 +1761,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key     键
      * @param members 值
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1776,7 +1776,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key     键
      * @param members 值
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1796,7 +1796,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param start 起始下标
      * @param stop  结束下标
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1812,7 +1812,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param start  起始下标
      * @param stop   结束下标
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1832,7 +1832,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param min 最小值
      * @param max 最大值
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1848,7 +1848,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param min    最小值
      * @param max    最大值
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1868,7 +1868,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param start 起始下标
      * @param end   结束下标
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1884,7 +1884,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param start  起始下标
      * @param end    结束下标
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1904,7 +1904,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param min 最小值
      * @param max 最大值
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1920,7 +1920,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param min    最小值
      * @param max    最大值
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1940,7 +1940,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param start 起始下标
      * @param end   结束下标
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1956,7 +1956,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param start  起始下标
      * @param end    结束下标
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1975,7 +1975,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key    键
      * @param member 值
      * @return {@link Double}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -1990,7 +1990,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key    键
      * @param member 值
      * @return {@link Double}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -2011,7 +2011,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param increment 自增值
      * @param member    值
      * @return {@link Double}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -2028,7 +2028,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param increment 自增值
      * @param member    值
      * @return {@link Double}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -2048,7 +2048,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param min 最小值
      * @param max 最大值
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -2064,7 +2064,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param min    最小值
      * @param max    最大值
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -2081,7 +2081,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * jedis信息
      *
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -2098,7 +2098,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param keys   键集合
      * @param args   参数集合
      * @return {@link Object}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -2119,7 +2119,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key    键
      * @param offset 偏移量
      * @return {@link boolean}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -2134,7 +2134,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param key    键
      * @param offset 偏移量
      * @return {@link boolean}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -2154,7 +2154,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param offset 偏移量
      * @param value  值
      * @return {@link boolean}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -2170,7 +2170,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param offset 偏移量
      * @param value  值
      * @return {@link boolean}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -2188,7 +2188,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      *
      * @param key 键
      * @return {@link long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -2202,7 +2202,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * @param prefix 前缀
      * @param key    键
      * @return {@link long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -2227,7 +2227,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * 设置前缀
      *
      * @param prefix 前缀
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -2243,7 +2243,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * 设置最大连接数
      *
      * @param maxTotal 最大连接数
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -2259,7 +2259,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * 设置最大空闲连接数
      *
      * @param maxIdle 最大空闲连接数
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -2275,7 +2275,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * 设置获取连接时的最大等待毫秒数
      *
      * @param maxWaitMills 最大等待毫秒数
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -2291,7 +2291,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * 设置ip
      *
      * @param ip ip
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -2307,7 +2307,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * 设置密码
      *
      * @param password 密码
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -2323,7 +2323,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * 设置库号
      *
      * @param database 库号
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override
@@ -2335,7 +2335,7 @@ public class MasterSlaveRedisUtil implements RedisUtil {
      * 设置是否启用心跳检测
      *
      * @param enableHeartbeat 是否启用心跳检测
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/11
      */
     @Override

@@ -3,7 +3,7 @@ package com.darren1112.dptms.common.core.constants;
 /**
  * 鉴权相关常量
  *
- * @author luyuhao
+ * @author darren
  * @since 2020/11/26 22:51
  */
 public class SecurityConstant {

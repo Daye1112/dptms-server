@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * 权限Dao
  *
- * @author luyuhao
+ * @author darren
  * @since 20/12/09 23:43
  */
 @Mapper
@@ -25,7 +25,7 @@ public interface AuthPermissionDao extends BaseMapper<AuthPermissionDto> {
      *
      * @param userId 用户id
      * @return {@link AuthPermissionDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/17 21:30
      */
     List<AuthPermissionDto> listByUserId(Long userId);
@@ -35,7 +35,7 @@ public interface AuthPermissionDao extends BaseMapper<AuthPermissionDto> {
      *
      * @param entity 权限参数
      * @return {@link Long 权限id}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/10 01:08
      */
     Long insert(AuthPermissionEntity entity);
@@ -46,7 +46,7 @@ public interface AuthPermissionDao extends BaseMapper<AuthPermissionDto> {
      * @param param     筛选参数
      * @param pageParam 分页参数
      * @return {@link AuthPermissionDto}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/10 01:08
      */
     List<AuthPermissionDto> listPage(@Param("pageParam") PageParam pageParam, @Param("param") AuthPermissionDto param);
@@ -56,7 +56,7 @@ public interface AuthPermissionDao extends BaseMapper<AuthPermissionDto> {
      *
      * @param dto 筛选参数
      * @return {@link AuthPermissionDto}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/10 01:08
      */
     Long listPageCount(AuthPermissionDto dto);
@@ -66,7 +66,7 @@ public interface AuthPermissionDao extends BaseMapper<AuthPermissionDto> {
      *
      * @param entity 权限参数
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/10 01:08
      */
     Long update(AuthPermissionEntity entity);
@@ -76,7 +76,7 @@ public interface AuthPermissionDao extends BaseMapper<AuthPermissionDto> {
      *
      * @param entity 筛选参数
      * @return {@link AuthPermissionEntity}
-     * @author luyuhao
+     * @author darren
      * @since 2020/12/12 11:11
      */
     List<AuthPermissionEntity> listBy(AuthPermissionEntity entity);
@@ -86,7 +86,7 @@ public interface AuthPermissionDao extends BaseMapper<AuthPermissionDto> {
      *
      * @param param 查重参数
      * @return {@link Long 重复数量}
-     * @author luyuhao
+     * @author darren
      * @since 2020/12/12 11:14
      */
     Long countByRepeat(AuthPermissionDto param);
@@ -96,7 +96,7 @@ public interface AuthPermissionDao extends BaseMapper<AuthPermissionDto> {
      *
      * @param id      id
      * @param updater 更新者
-     * @author luyuhao
+     * @author darren
      * @since 20/12/12 20:44
      */
     void deleteById(@Param("id") Long id, @Param("updater") Long updater);
@@ -105,7 +105,7 @@ public interface AuthPermissionDao extends BaseMapper<AuthPermissionDto> {
      * 查询权限组list
      *
      * @return {@link AuthPermissionDto}
-     * @author luyuhao
+     * @author darren
      * @since 2020/12/28 01:10
      */
     List<AuthPermissionDto> listGroup();

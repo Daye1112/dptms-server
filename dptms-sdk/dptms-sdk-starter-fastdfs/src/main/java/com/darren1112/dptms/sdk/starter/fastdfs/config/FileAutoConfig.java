@@ -19,7 +19,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 /**
  * 文件相关自动装配类
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/12/8
  */
 @EnableConfigurationProperties(FastDfsProperties.class)
@@ -32,7 +32,7 @@ public class FileAutoConfig {
      * 文件处理线程池配置
      *
      * @return {@link ThreadPoolTaskExecutor}
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/7
      */
     @Bean

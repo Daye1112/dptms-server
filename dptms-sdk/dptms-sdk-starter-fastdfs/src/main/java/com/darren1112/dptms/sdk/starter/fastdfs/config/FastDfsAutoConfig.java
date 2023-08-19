@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Bean;
 /**
  * FastDfs自动装配类
  *
- * @author luyuhao
+ * @author darren
  * @date 2021/11/28 21:12
  */
 @EnableConfigurationProperties(FastDfsProperties.class)

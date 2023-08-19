@@ -6,7 +6,7 @@ import com.darren1112.dptms.sdk.starter.fastdfs.properties.FastDfsProperties;
 /**
  * fastDfs处理器工厂类
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/12/7
  */
 public class FastDfsHandlerFactory {
@@ -30,7 +30,7 @@ public class FastDfsHandlerFactory {
      * 创建fastDfs处理器
      *
      * @return {@link FastDfsHandler}
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/7
      */
     public FastDfsHandler create() {

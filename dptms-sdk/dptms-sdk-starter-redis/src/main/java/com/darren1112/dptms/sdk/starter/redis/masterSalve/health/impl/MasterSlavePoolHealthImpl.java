@@ -13,7 +13,7 @@ import redis.clients.jedis.Jedis;
 import java.util.Properties;
 
 /**
- * @author luyuhao
+ * @author darren
  * @since 2021/8/6
  */
 public class MasterSlavePoolHealthImpl implements MasterSlavePoolHealth {

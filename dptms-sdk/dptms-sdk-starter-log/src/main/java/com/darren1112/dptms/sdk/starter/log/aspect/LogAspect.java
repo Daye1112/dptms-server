@@ -25,7 +25,7 @@ import java.util.Optional;
 /**
  * 操作日志aop
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/02/06 22:31
  */
 @Aspect
@@ -49,7 +49,7 @@ public class LogAspect extends BaseAop {
     /**
      * 配置切入点
      *
-     * @author luyuhao
+     * @author darren
      * @since 2021/02/06 22:32
      */
     @Pointcut("@annotation(com.darren1112.dptms.sdk.starter.log.annotation.Log)")
@@ -62,7 +62,7 @@ public class LogAspect extends BaseAop {
      *
      * @param joinPoint 切入点
      * @return {@link Object}
-     * @author luyuhao
+     * @author darren
      * @since 2021/02/06 22:33
      */
     @Around("pointcut()")
@@ -91,7 +91,7 @@ public class LogAspect extends BaseAop {
      *
      * @param joinPoint 切点
      * @param e         异常
-     * @author luyuhao
+     * @author darren
      * @since 2021/02/06 22:41
      */
     @AfterThrowing(pointcut = "pointcut()", throwing = "e")
@@ -107,7 +107,7 @@ public class LogAspect extends BaseAop {
      *
      * @param logAnnotation 日志注解
      * @return {@link MonitorOperateLogDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/02/07 00:41
      */
     private MonitorOperateLogDto buildDto(JoinPoint joinPoint, Log logAnnotation, Throwable e) {

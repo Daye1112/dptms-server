@@ -14,7 +14,7 @@ import java.util.function.Function;
 /**
  * 用户信息工具类
  *
- * @author luyuhao
+ * @author darren
  * @since 2022/11/15
  */
 public class SecurityUserUtil {
@@ -23,7 +23,7 @@ public class SecurityUserUtil {
      * 获取当前用户
      *
      * @return {@link ActiveUser}
-     * @author luyuhao
+     * @author darren
      * @since 2022/11/15
      */
     public static ActiveUser getDefaultActiveUser() {
@@ -39,7 +39,7 @@ public class SecurityUserUtil {
      * 获取当前用户
      *
      * @return {@link ActiveUser}
-     * @author luyuhao
+     * @author darren
      * @since 2022/11/15
      */
     public static ActiveUser getActiveUser() {
@@ -58,7 +58,7 @@ public class SecurityUserUtil {
      * 【默认值】获取当前用户id
      *
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2022/11/15
      */
     public static Long getUserId() {
@@ -70,7 +70,7 @@ public class SecurityUserUtil {
      *
      * @param getFieldFun get方法
      * @return {@link T}
-     * @author luyuhao
+     * @author darren
      * @since 2022/11/15
      */
     public static <T> T getField(Function<ActiveUser, T> getFieldFun) {

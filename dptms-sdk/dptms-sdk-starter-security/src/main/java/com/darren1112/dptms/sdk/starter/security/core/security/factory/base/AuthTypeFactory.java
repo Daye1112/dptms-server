@@ -6,7 +6,7 @@ import com.darren1112.dptms.sdk.starter.security.core.security.token.base.BaseAu
 /**
  * 认证类型工厂-基础类
  *
- * @author luyuhao
+ * @author darren
  * @since 2022/11/15
  */
 public interface AuthTypeFactory {
@@ -16,7 +16,7 @@ public interface AuthTypeFactory {
      *
      * @param authType 认证类型
      * @return {@link BaseAuthenticationToken}
-     * @author luyuhao
+     * @author darren
      * @since 2022/6/6
      */
     BaseAuthenticationToken createParamToken(Integer authType);
@@ -27,7 +27,7 @@ public interface AuthTypeFactory {
      *
      * @param user 用户信息
      * @return {@link BaseAuthenticationToken}
-     * @author luyuhao
+     * @author darren
      * @since 2022/6/6
      */
     <T extends BaseSecurityUser> BaseAuthenticationToken createAuthToken(T user);

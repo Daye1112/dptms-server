@@ -9,7 +9,7 @@ import lombok.ToString;
 /**
  * 权限Entity
  *
- * @author luyuhao
+ * @author darren
  * @since 20/12/09 23:41
  */
 @Data

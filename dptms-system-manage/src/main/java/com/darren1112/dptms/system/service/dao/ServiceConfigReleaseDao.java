@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * 配置发布表Dao
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/03/12 01:43
  */
 @Mapper
@@ -25,7 +25,7 @@ public interface ServiceConfigReleaseDao extends BaseMapper<ServiceConfigRelease
      * @param pageParam 分页参数
      * @param dto       查询条件
      * @return {@link ServiceConfigReleaseDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/3/16 8:37
      */
     List<ServiceConfigReleaseDto> listPage(@Param("pageParam") PageParam pageParam, @Param("dto") ServiceConfigReleaseDto dto);
@@ -35,7 +35,7 @@ public interface ServiceConfigReleaseDao extends BaseMapper<ServiceConfigRelease
      *
      * @param dto 查询条件
      * @return {@link ServiceConfigReleaseDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/3/16 8:37
      */
     Long listPageCount(@Param("dto") ServiceConfigReleaseDto dto);
@@ -45,7 +45,7 @@ public interface ServiceConfigReleaseDao extends BaseMapper<ServiceConfigRelease
      *
      * @param param 查询条件
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/3/16 8:52
      */
     Long countByRepeat(ServiceConfigReleaseDto param);
@@ -55,7 +55,7 @@ public interface ServiceConfigReleaseDao extends BaseMapper<ServiceConfigRelease
      *
      * @param id      id
      * @param updater 更新者
-     * @author luyuhao
+     * @author darren
      * @since 2021/3/16 9:00
      */
     void deleteById(@Param("id") Long id, @Param("updater") Long updater);

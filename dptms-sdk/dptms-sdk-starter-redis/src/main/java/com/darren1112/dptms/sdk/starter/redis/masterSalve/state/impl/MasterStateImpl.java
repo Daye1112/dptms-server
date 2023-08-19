@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * @author luyuhao
+ * @author darren
  * @since 2021/8/5
  */
 public class MasterStateImpl implements MasterSlaveState {

@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * 文件工具类
  *
- * @author luyuhao
+ * @author darren
  * @since 2020/11/23 00:18
  */
 public class FileUtil extends cn.hutool.core.io.FileUtil {
@@ -25,7 +25,7 @@ public class FileUtil extends cn.hutool.core.io.FileUtil {
      * @param ins  文件流
      * @param name 文件名
      * @return {@link File}
-     * @author luyuhao
+     * @author darren
      * @since 2021/7/22
      */
     public static File createSystemFile(InputStream ins, String name) {
@@ -84,7 +84,7 @@ public class FileUtil extends cn.hutool.core.io.FileUtil {
      * @param in   文件输入流
      * @param size 切割大小
      * @return {@link InputStream}
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/2
      */
     public static List<InputStream> splitInputStream(InputStream in, int size) throws Exception {
@@ -124,7 +124,7 @@ public class FileUtil extends cn.hutool.core.io.FileUtil {
      *
      * @param bytes byte数组
      * @return {@link byte[]}
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/2
      */
     public static byte[] mergeBytes(byte[]... bytes) {

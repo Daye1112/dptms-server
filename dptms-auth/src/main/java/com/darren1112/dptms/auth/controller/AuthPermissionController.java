@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * 权限Controller
  *
- * @author luyuhao
+ * @author darren
  * @since 2020/12/10 00:58
  */
 @Slf4j
@@ -50,7 +50,7 @@ public class AuthPermissionController extends BaseController {
      *
      * @param entity 权限参数
      * @return {@link JsonResult}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/10 01:08
      */
     @Log(value = "插入权限", businessType = BusinessType.INSERT)
@@ -76,7 +76,7 @@ public class AuthPermissionController extends BaseController {
      * @param dto       筛选参数
      * @param pageParam 分页参数
      * @return {@link JsonResult}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/10 01:08
      */
     @Log(value = "分页查询权限", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
@@ -93,7 +93,7 @@ public class AuthPermissionController extends BaseController {
      *
      * @param entity 权限参数
      * @return {@link JsonResult}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/10 01:08
      */
     @Log(value = "更新权限", businessType = BusinessType.UPDATE)
@@ -118,7 +118,7 @@ public class AuthPermissionController extends BaseController {
      *
      * @param id 记录id
      * @return {@link JsonResult}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/10 01:08
      */
     @Log(value = "根据id删除记录", businessType = BusinessType.DELETE)
@@ -156,7 +156,7 @@ public class AuthPermissionController extends BaseController {
      * 查询权限组list
      *
      * @return {@link AuthPermissionDto}
-     * @author luyuhao
+     * @author darren
      * @since 2020/12/28 01:10
      */
     @Log(value = "查询权限组list", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
@@ -172,7 +172,7 @@ public class AuthPermissionController extends BaseController {
      *
      * @param menuId 菜单id
      * @return {@link AuthPermissionDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/04 23:52
      */
     @Log(value = "根据菜单id查询权限list", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)

@@ -3,7 +3,7 @@ package com.darren1112.dptms.sdk.starter.redis.hint;
 /**
  * 基于暗示的路由规则管理
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/8/4
  */
 public class RedisHintRouteManager implements AutoCloseable {

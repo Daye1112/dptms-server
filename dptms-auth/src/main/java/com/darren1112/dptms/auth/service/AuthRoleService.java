@@ -8,7 +8,7 @@ import com.darren1112.dptms.common.spi.auth.entity.AuthRoleEntity;
 /**
  * 角色Service
  *
- * @author luyuhao
+ * @author darren
  * @since 2020/12/13 23:09
  */
 public interface AuthRoleService {

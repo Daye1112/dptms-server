@@ -22,7 +22,7 @@ import java.util.concurrent.Future;
 /**
  * 大文件处理器
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/12/2
  */
 public class LargeFileHandler extends AbstractFileHandler {
@@ -49,7 +49,7 @@ public class LargeFileHandler extends AbstractFileHandler {
      * @param metaDataSet 元数据信息
      * @return {@link FileDfsInfoDto}
      * @throws Exception 异常
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/1
      */
     @Override
@@ -121,7 +121,7 @@ public class LargeFileHandler extends AbstractFileHandler {
      * @param fileDfsInfoList 文件存储信息集合
      * @return {@link FileDfsInfoDto}
      * @throws Exception 异常
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/1
      */
     @Override

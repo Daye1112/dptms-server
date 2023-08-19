@@ -30,7 +30,7 @@ import java.util.Optional;
 /**
  * 账号密码校验器
  *
- * @author luyuhao
+ * @author darren
  * @since 2022/11/15
  */
 @Slf4j
@@ -81,7 +81,7 @@ public class PwdAuthenticationProvider extends BaseAuthenticationProvider {
      * 验证码验证
      *
      * @param token token
-     * @author luyuhao
+     * @author darren
      * @since 2022/11/15
      */
     private void captchaValid(PwdAuthenticationToken token) {
@@ -110,7 +110,7 @@ public class PwdAuthenticationProvider extends BaseAuthenticationProvider {
      * token对应的认证类型
      *
      * @return {@link AuthType}
-     * @author luyuhao
+     * @author darren
      * @since 2022/6/6
      */
     @Override

@@ -6,7 +6,7 @@ import org.jasypt.encryption.pbe.config.SimpleStringPBEConfig;
 /**
  * Jasypt加密工具类
  *
- * @author luyuhao
+ * @author darren
  * @since 2020/08/11 00:33
  */
 public class JasyptUtil {
@@ -21,7 +21,7 @@ public class JasyptUtil {
      * @param str    待加密原文
      * @param secret 密钥
      * @return 加密串
-     * @author luyuhao
+     * @author darren
      * @since 20/08/11 00:33
      */
     public static String defaultEncrypt(String str, String secret) {
@@ -36,7 +36,7 @@ public class JasyptUtil {
      * @param str    待加密原文
      * @param secret 密钥
      * @return 解密串
-     * @author luyuhao
+     * @author darren
      * @since 20/08/11 00:33
      */
     public static String defaultDecrypt(String str, String secret) {
@@ -50,7 +50,7 @@ public class JasyptUtil {
      *
      * @param secret 密钥
      * @return 默认config
-     * @author luyuhao
+     * @author darren
      * @since 20/08/11 01:14
      */
     private static SimpleStringPBEConfig createDefaultConfig(String secret) {

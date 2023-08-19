@@ -4,7 +4,7 @@ package com.darren1112.dptms.sdk.starter.security.core.token.generator.base;
 /**
  * token生成器
  *
- * @author luyuhao
+ * @author darren
  * @since 2022/6/6
  */
 public interface TokenGenerator {
@@ -14,7 +14,7 @@ public interface TokenGenerator {
      *
      * @param param 参数
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2022/6/6
      */
     <T> String generate(T param);

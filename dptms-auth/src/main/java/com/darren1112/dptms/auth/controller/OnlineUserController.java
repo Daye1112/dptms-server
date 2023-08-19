@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 在线用户管理
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/01/31 21:50
  */
 @Slf4j
@@ -44,7 +44,7 @@ public class OnlineUserController extends BaseController {
      * @param activeUser 查询条件
      * @param pageParam  分页参数
      * @return {@link ActiveUser}
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/31 21:52
      */
     @Log(value = "分页查询在线用户", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
@@ -60,7 +60,7 @@ public class OnlineUserController extends BaseController {
      *
      * @param userId 用户id
      * @return {@link JsonResult}
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/31 22:57
      */
     @Log(value = "强制下线用户", logLevel = LogLevel.WARN, businessType = BusinessType.FORCE)

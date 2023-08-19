@@ -4,7 +4,7 @@ import com.darren1112.dptms.sdk.starter.redis.masterSalve.MasterSlaveOperationCa
 import com.darren1112.dptms.sdk.starter.redis.masterSalve.entry.MasterSlavePoolEntry;
 
 /**
- * @author luyuhao
+ * @author darren
  * @since 2021/8/5
  */
 public interface MasterSlaveState {

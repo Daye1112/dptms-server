@@ -7,7 +7,7 @@ import com.darren1112.dptms.sdk.starter.security.model.ActiveUser;
 /**
  * 在线用户管理Service
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/01/31 22:05
  */
 public interface OnlineUserService {
@@ -18,7 +18,7 @@ public interface OnlineUserService {
      * @param activeUser 查询条件
      * @param pageParam  分页参数
      * @return {@link ActiveUser}
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/31 21:52
      */
     PageBean<ActiveUser> listPage(ActiveUser activeUser, PageParam pageParam);
@@ -27,7 +27,7 @@ public interface OnlineUserService {
      * 强制下线用户
      *
      * @param userId 用户id
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/31 22:57
      */
     void forcedOffline(Long userId);

@@ -7,7 +7,7 @@ import com.darren1112.dptms.common.spi.sys.dto.SysRedisDto;
 /**
  * redis service
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/01/31 00:04
  */
 public interface RedisService {
@@ -18,7 +18,7 @@ public interface RedisService {
      * @param keyPrefix key前缀
      * @param pageParam 分页参数
      * @return {@link SysRedisDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/31 00:07
      */
     PageBean<SysRedisDto> listPage(String keyPrefix, PageParam pageParam);
@@ -27,7 +27,7 @@ public interface RedisService {
      * 新增缓存
      *
      * @param sysRedisDto 缓存信息
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/31 01:01
      */
     void insert(SysRedisDto sysRedisDto);
@@ -36,7 +36,7 @@ public interface RedisService {
      * 删除缓存
      *
      * @param sysRedisDto 缓存信息
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/31 00:04
      */
     void deleteByKey(SysRedisDto sysRedisDto);

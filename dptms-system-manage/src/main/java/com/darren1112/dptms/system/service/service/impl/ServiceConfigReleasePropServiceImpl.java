@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * 配置发布属性表ServiceImpl
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/03/12 01:47
  */
 @Service
@@ -31,7 +31,7 @@ public class ServiceConfigReleasePropServiceImpl implements ServiceConfigRelease
      *
      * @param dto 查询条件
      * @return {@link ServiceConfigReleasePropDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/3/17 8:58
      */
     @Override
@@ -44,7 +44,7 @@ public class ServiceConfigReleasePropServiceImpl implements ServiceConfigRelease
      * 批量新增发布属性
      *
      * @param releasePropList 发布熟悉集合
-     * @author luyuhao
+     * @author darren
      * @since 2021/7/3
      */
     @Override

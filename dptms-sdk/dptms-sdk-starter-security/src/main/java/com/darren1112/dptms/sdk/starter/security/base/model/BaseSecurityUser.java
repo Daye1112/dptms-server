@@ -5,7 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 /**
  * 安全用户信息-抽象类
  *
- * @author luyuhao
+ * @author darren
  * @since 2022/6/2
  */
 public abstract class BaseSecurityUser implements UserDetails {

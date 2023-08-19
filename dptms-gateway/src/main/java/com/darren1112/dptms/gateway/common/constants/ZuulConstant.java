@@ -5,7 +5,7 @@ import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 /**
  * zuul 相关常量
  *
- * @author luyuhao
+ * @author darren
  * @since 2020/11/26 23:31
  */
 public class ZuulConstant {

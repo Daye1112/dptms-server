@@ -10,7 +10,7 @@
 // /**
 //  * 用户信息Service
 //  *
-//  * @author luyuhao
+//  * @author darren
 //  * @since 2020/11/22 17:07
 //  */
 // public interface UserDetailsService {
@@ -22,7 +22,7 @@
 //      * @param request    请求域
 //      * @param response   响应域
 //      * @return {@link ActiveUser 用户信息}
-//      * @author luyuhao
+//      * @author darren
 //      * @since 20/11/22 17:25
 //      */
 //     ActiveUser loginHandler(LoginParam loginParam, HttpServletRequest request, HttpServletResponse response);
@@ -34,7 +34,7 @@
 //      * @param request    请求域
 //      * @param response   响应域
 //      * @throws BaseException 异常
-//      * @author luyuhao
+//      * @author darren
 //      * @since 20/11/22 17:26
 //      */
 //     void preHandler(LoginParam loginParam, HttpServletRequest request, HttpServletResponse response) throws BaseException;
@@ -47,7 +47,7 @@
 //      * @param response   响应域
 //      * @return {@link ActiveUser}
 //      * @throws BaseException 异常
-//      * @author luyuhao
+//      * @author darren
 //      * @since 20/11/22 21:07
 //      */
 //     ActiveUser handler(LoginParam loginParam, HttpServletRequest request, HttpServletResponse response) throws BaseException;
@@ -59,7 +59,7 @@
 //      * @param request    请求域
 //      * @param response   响应域
 //      * @throws BaseException 异常
-//      * @author luyuhao
+//      * @author darren
 //      * @since 20/11/22 17:42
 //      */
 //     void afterHandler(ActiveUser activeUser, HttpServletRequest request, HttpServletResponse response) throws BaseException;
@@ -69,7 +69,7 @@
 //      *
 //      * @param e 异常
 //      * @return {@link BaseException 处理后的异常}
-//      * @author luyuhao
+//      * @author darren
 //      * @since 20/11/22 21:11
 //      */
 //     BaseException exceptionHandler(Exception e);

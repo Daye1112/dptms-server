@@ -6,7 +6,7 @@ import com.darren1112.dptms.sdk.starter.security.core.security.token.base.BaseAu
 /**
  * 认证类型
  *
- * @author luyuhao
+ * @author darren
  * @since 2022/6/6
  */
 public interface AuthType {
@@ -15,7 +15,7 @@ public interface AuthType {
      * 认证类型
      *
      * @return {@link Integer}
-     * @author luyuhao
+     * @author darren
      * @since 2022/6/6
      */
     Integer getAuthType();
@@ -24,7 +24,7 @@ public interface AuthType {
      * 认证说明
      *
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2022/6/6
      */
     String getAuthDesc();
@@ -33,7 +33,7 @@ public interface AuthType {
      * 认证对应的token类型
      *
      * @return {@link Class}
-     * @author luyuhao
+     * @author darren
      * @since 2022/6/6
      */
     Class<? extends BaseAuthenticationToken> getTokenClass();

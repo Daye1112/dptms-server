@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
 /**
  * 权限过滤器
  *
- * @author luyuhao
+ * @author darren
  * @since 2020/11/29 02:16
  */
 @Slf4j
@@ -51,7 +51,7 @@ public class PermissionValidFilter extends OncePerRequestFilter {
      * 是否需要过滤
      *
      * @return true/false
-     * @author luyuhao
+     * @author darren
      * @since 20/08/02 14:45
      */
     private boolean shouldNotFilter(String uri) {
@@ -111,7 +111,7 @@ public class PermissionValidFilter extends OncePerRequestFilter {
      * @param permissionList 权限list
      * @param uri            访问uri
      * @return true/false
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/17 23:25
      */
     private boolean checkPermission(List<AuthPermissionDto> permissionList, String uri) {

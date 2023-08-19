@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * 系统用户Dao
  *
- * @author luyuhao
+ * @author darren
  * @since 20/07/23 02:22
  */
 @Mapper
@@ -24,7 +24,7 @@ public interface AuthUserDao extends BaseMapper<AuthUserDto> {
      * 插入数据
      *
      * @param authUserEntity 用户实体类
-     * @author luyuhao
+     * @author darren
      * @since 20/07/23 02:26
      */
     void insert(AuthUserEntity authUserEntity);
@@ -34,7 +34,7 @@ public interface AuthUserDao extends BaseMapper<AuthUserDto> {
      *
      * @param username 用户名
      * @return 用户信息
-     * @author luyuhao
+     * @author darren
      * @since 20/07/23 02:49
      */
     AuthUserDto getByUsername(@Param("username") String username);
@@ -43,7 +43,7 @@ public interface AuthUserDao extends BaseMapper<AuthUserDto> {
      * 更新登录时间
      *
      * @param id 用户id
-     * @author luyuhao
+     * @author darren
      * @since 20/12/09 01:02
      */
     void updateLastLoginTime(@Param("id") Long id);
@@ -53,7 +53,7 @@ public interface AuthUserDao extends BaseMapper<AuthUserDto> {
      *
      * @param id id
      * @return {@link AuthUserDto}
-     * @author luyuhao
+     * @author darren
      * @since 20/11/30 23:12
      */
     AuthUserDto getById(@Param("id") Long id);
@@ -63,7 +63,7 @@ public interface AuthUserDao extends BaseMapper<AuthUserDto> {
      *
      * @param param 查询参数
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/22 01:06
      */
     Long countByRepeat(AuthUserDto param);
@@ -74,7 +74,7 @@ public interface AuthUserDao extends BaseMapper<AuthUserDto> {
      * @param pageParam 分页参数
      * @param dto       查询条件
      * @return {@link AuthUserDto}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/22 01:12
      */
     List<AuthUserDto> listPage(@Param("pageParam") PageParam pageParam, @Param("dto") AuthUserDto dto);
@@ -84,7 +84,7 @@ public interface AuthUserDao extends BaseMapper<AuthUserDto> {
      *
      * @param dto 查询条件
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/22 01:12
      */
     Long listPageCount(AuthUserDto dto);
@@ -94,7 +94,7 @@ public interface AuthUserDao extends BaseMapper<AuthUserDto> {
      *
      * @param entity 用户参数
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/10 01:08
      */
     Long update(AuthUserEntity entity);
@@ -104,7 +104,7 @@ public interface AuthUserDao extends BaseMapper<AuthUserDto> {
      *
      * @param id      记录id
      * @param updater 更新者
-     * @author luyuhao
+     * @author darren
      * @since 20/12/10 01:08
      */
     void deleteById(@Param("id") Long id, @Param("updater") Long updater);
@@ -113,7 +113,7 @@ public interface AuthUserDao extends BaseMapper<AuthUserDto> {
      * 更新用户锁定状态
      *
      * @param entity 更新状态
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/14 00:19
      */
     void updateLock(AuthUserEntity entity);
@@ -122,7 +122,7 @@ public interface AuthUserDao extends BaseMapper<AuthUserDto> {
      * 更新用户密码
      *
      * @param dto 用户信息
-     * @author luyuhao
+     * @author darren
      * @since 2021/11/24
      */
     void updatePassword(AuthUserDto dto);

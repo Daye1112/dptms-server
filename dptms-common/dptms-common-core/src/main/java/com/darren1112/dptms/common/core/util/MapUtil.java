@@ -5,7 +5,7 @@ import java.util.Map;
 /**
  * map工具类
  *
- * @author luyuhao
+ * @author darren
  * @since 2022/06/12
  */
 public class MapUtil {
@@ -15,7 +15,7 @@ public class MapUtil {
      *
      * @param map map
      * @return true/false
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/6
      */
     public static boolean isNotEmpty(Map<?, ?> map) {
@@ -27,7 +27,7 @@ public class MapUtil {
      *
      * @param map map
      * @return true/false
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/6
      */
     public static boolean isEmpty(Map<?, ?> map) {

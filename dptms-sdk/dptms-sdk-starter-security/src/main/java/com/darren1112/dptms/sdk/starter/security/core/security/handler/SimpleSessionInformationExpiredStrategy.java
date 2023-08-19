@@ -15,7 +15,7 @@ import java.io.IOException;
 /**
  * 异地登录处理策略
  *
- * @author luyuhao
+ * @author darren
  * @since 2022/06/05
  */
 public class SimpleSessionInformationExpiredStrategy implements SessionInformationExpiredStrategy {
@@ -26,7 +26,7 @@ public class SimpleSessionInformationExpiredStrategy implements SessionInformati
      * 异地登录处理逻辑
      *
      * @param event 异地登录事件
-     * @author luyuhao
+     * @author darren
      * @since 2022/06/05
      */
     @Override

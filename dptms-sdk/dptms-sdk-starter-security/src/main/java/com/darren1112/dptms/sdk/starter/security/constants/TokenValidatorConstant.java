@@ -3,7 +3,7 @@ package com.darren1112.dptms.sdk.starter.security.constants;
 /**
  * token校验器常量
  *
- * @author luyuhao
+ * @author darren
  * @since 2022/11/17
  */
 public class TokenValidatorConstant {

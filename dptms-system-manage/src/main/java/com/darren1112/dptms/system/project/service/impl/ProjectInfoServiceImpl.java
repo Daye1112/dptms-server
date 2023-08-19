@@ -89,7 +89,7 @@ public class ProjectInfoServiceImpl extends BaseService implements ProjectInfoSe
      *
      * @param dto      验证对象
      * @param isUpdate 是否更新
-     * @author luyuhao
+     * @author darren
      * @since 2021/03/12 23:28
      */
     private void validRepeat(ProjectInfoDto dto, boolean isUpdate) {

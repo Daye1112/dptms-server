@@ -15,7 +15,7 @@ import java.util.Collection;
 /**
  * 账号密码认证token
  *
- * @author luyuhao
+ * @author darren
  * @since 2022/11/15
  */
 public class PwdAuthenticationToken extends BaseAuthenticationToken {
@@ -62,7 +62,7 @@ public class PwdAuthenticationToken extends BaseAuthenticationToken {
      * @param request  请求域
      * @param response 响应域
      * @throws AuthenticationException 认证异常
-     * @author luyuhao
+     * @author darren
      * @since 2022/6/6
      */
     @Override
@@ -109,7 +109,7 @@ public class PwdAuthenticationToken extends BaseAuthenticationToken {
      * token对应的认证类型
      *
      * @return {@link AuthType}
-     * @author luyuhao
+     * @author darren
      * @since 2022/6/6
      */
     @Override

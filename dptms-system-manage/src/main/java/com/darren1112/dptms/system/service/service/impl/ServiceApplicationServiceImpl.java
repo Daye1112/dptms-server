@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * 应用表ServiceImpl
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/03/12 01:31
  */
 @Service
@@ -37,7 +37,7 @@ public class ServiceApplicationServiceImpl extends BaseService implements Servic
      * @param dto       筛选参数
      * @param pageParam 分页参数
      * @return {@link ServiceApplicationDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/03/12 17:33
      */
     @Override
@@ -53,7 +53,7 @@ public class ServiceApplicationServiceImpl extends BaseService implements Servic
      *
      * @param dto 服务信息
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/03/12 23:28
      */
     @Override
@@ -70,7 +70,7 @@ public class ServiceApplicationServiceImpl extends BaseService implements Servic
      *
      * @param dto      验证对象
      * @param isUpdate 是否更新
-     * @author luyuhao
+     * @author darren
      * @since 2021/03/12 23:28
      */
     private void validRepeat(ServiceApplicationDto dto, boolean isUpdate) {
@@ -89,7 +89,7 @@ public class ServiceApplicationServiceImpl extends BaseService implements Servic
      * 更新服务应用
      *
      * @param dto 服务信息
-     * @author luyuhao
+     * @author darren
      * @since 2021/03/12 23:42
      */
     @Override
@@ -105,7 +105,7 @@ public class ServiceApplicationServiceImpl extends BaseService implements Servic
      *
      * @param id      服务id
      * @param updater 更新者
-     * @author luyuhao
+     * @author darren
      * @since 2021/03/13 00:49
      */
     @Override

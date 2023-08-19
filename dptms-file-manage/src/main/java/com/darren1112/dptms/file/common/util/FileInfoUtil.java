@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 /**
  * 文件信息相关工具类
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/12/6
  */
 public class FileInfoUtil {
@@ -19,7 +19,7 @@ public class FileInfoUtil {
      * @param file   文件对象
      * @param userId 用户id
      * @return {@link FileInfoDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/6
      */
     public static FileInfoDto create(MultipartFile file, Long userId) {

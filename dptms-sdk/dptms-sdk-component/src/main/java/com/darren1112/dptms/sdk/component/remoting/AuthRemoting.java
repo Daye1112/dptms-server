@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * auth模块rpc调用
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/02/15 23:39
  */
 @FeignClient("dptms-auth")
@@ -23,7 +23,7 @@ public interface AuthRemoting {
      * 接口访问统计
      *
      * @return {@link DruidStatDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/02/17 20:45
      */
     @GetMapping("/druidStat/apiStat")
@@ -33,7 +33,7 @@ public interface AuthRemoting {
      * 获取用户的权限
      *
      * @return {@link AuthUserDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/17 19:34
      */
     @GetMapping("/activeUser/getNewInfo")

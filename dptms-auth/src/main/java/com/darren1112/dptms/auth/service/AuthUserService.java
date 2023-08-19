@@ -8,7 +8,7 @@ import com.darren1112.dptms.common.spi.common.dto.PageParam;
 /**
  * 系统用户Service
  *
- * @author luyuhao
+ * @author darren
  * @since 2020/07/23 02:42
  */
 public interface AuthUserService {
@@ -18,7 +18,7 @@ public interface AuthUserService {
      *
      * @param username 用户名
      * @return 用户信息
-     * @author luyuhao
+     * @author darren
      * @since 20/07/23 02:58
      */
     AuthUserDto getByUsername(String username);
@@ -27,7 +27,7 @@ public interface AuthUserService {
      * 更新登录时间
      *
      * @param id 用户id
-     * @author luyuhao
+     * @author darren
      * @since 20/12/09 01:02
      */
     void updateLoginTime(Long id);
@@ -37,7 +37,7 @@ public interface AuthUserService {
      *
      * @param id id
      * @return {@link AuthUserDto}
-     * @author luyuhao
+     * @author darren
      * @since 20/11/30 23:12
      */
     AuthUserDto getById(Long id);
@@ -47,7 +47,7 @@ public interface AuthUserService {
      *
      * @param entity 用户参数
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/10 01:08
      */
     Long insert(AuthUserEntity entity);
@@ -58,7 +58,7 @@ public interface AuthUserService {
      * @param dto       筛选参数
      * @param pageParam 分页参数
      * @return {@link AuthUserDto}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/10 01:08
      */
     PageBean<AuthUserDto> listPage(PageParam pageParam, AuthUserDto dto);
@@ -68,7 +68,7 @@ public interface AuthUserService {
      *
      * @param entity 用户参数
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/10 01:08
      */
     Long update(AuthUserEntity entity);
@@ -78,7 +78,7 @@ public interface AuthUserService {
      *
      * @param id      记录id
      * @param updater 更新者
-     * @author luyuhao
+     * @author darren
      * @since 20/12/10 01:08
      */
     void deleteById(Long id, Long updater);
@@ -87,7 +87,7 @@ public interface AuthUserService {
      * 更新用户锁定状态
      *
      * @param entity 更新状态
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/14 00:19
      */
     void updateLock(AuthUserEntity entity);
@@ -96,7 +96,7 @@ public interface AuthUserService {
      * 更新密码
      *
      * @param dto 用户信息
-     * @author luyuhao
+     * @author darren
      * @since 2021/11/24
      */
     void updatePassword(AuthUserDto dto);

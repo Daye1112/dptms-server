@@ -14,7 +14,7 @@ import java.util.Set;
 /**
  * 重试机制fastDfs处理器
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/12/7
  */
 public class RetryFastDfsHandler implements FastDfsHandler {
@@ -39,7 +39,7 @@ public class RetryFastDfsHandler implements FastDfsHandler {
      * @param callback  回调
      * @return {@link T}
      * @throws Exception 异常
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/7
      */
     @Override
@@ -70,7 +70,7 @@ public class RetryFastDfsHandler implements FastDfsHandler {
      * @param metaDataSet 元信息
      * @return {@link StorePath}
      * @throws Exception 异常
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/7
      */
     @Override
@@ -98,7 +98,7 @@ public class RetryFastDfsHandler implements FastDfsHandler {
      * @param groupName 组名
      * @param path      路径
      * @throws Exception 异常
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/7
      */
     @Override

@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 /**
  * 基础异常类
  *
- * @author luyuhao
+ * @author darren
  * @since 2020/01/07 23:50
  */
 public class BaseException extends RuntimeException {

@@ -7,7 +7,7 @@ import java.util.Arrays;
 /**
  * 服务枚举
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/02/17 22:42
  */
 public enum ServerEnum implements BaseCommonEnum {
@@ -33,7 +33,7 @@ public enum ServerEnum implements BaseCommonEnum {
      *
      * @param code code
      * @return {@link ServerEnum}
-     * @author luyuhao
+     * @author darren
      * @since 2021/02/07 01:46
      */
     public static ServerEnum matchByCode(Integer code) {

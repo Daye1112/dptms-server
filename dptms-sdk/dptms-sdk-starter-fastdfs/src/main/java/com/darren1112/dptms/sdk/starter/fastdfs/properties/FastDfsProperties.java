@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 /**
  * FastDfs相关配置
  *
- * @author luyuhao
+ * @author darren
  * @date 2021/11/28 16:22
  */
 @Data

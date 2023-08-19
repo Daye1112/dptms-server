@@ -18,7 +18,7 @@ import java.io.IOException;
 /**
  * 登出处理器
  *
- * @author luyuhao
+ * @author darren
  * @since 2022/11/15
  */
 @Component
@@ -37,7 +37,7 @@ public class DptmsLogoutSuccessHandler extends BaseLogoutSuccessHandler {
      * @param response       响应域
      * @throws IOException      io异常
      * @throws ServletException servlet异常
-     * @author luyuhao
+     * @author darren
      * @since 2022/6/6
      */
     @Override

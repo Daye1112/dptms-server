@@ -21,7 +21,7 @@ import java.io.IOException;
  * 【网关中使用】
  * token过滤器
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/01/16 18:59
  */
 @Slf4j
@@ -40,7 +40,7 @@ public class AccessTokenValidFilter extends OncePerRequestFilter {
      * 是否需要过滤
      *
      * @return true/false
-     * @author luyuhao
+     * @author darren
      * @since 20/08/02 14:45
      */
     private boolean shouldNotFilter(String uri) {
@@ -57,7 +57,7 @@ public class AccessTokenValidFilter extends OncePerRequestFilter {
      * 4. accessToken有效, refreshToken无效 => 打回
      * 5. 适当延长refreshToken有效期
      *
-     * @author luyuhao
+     * @author darren
      * @since 20/08/02 14:46
      */
     @Override

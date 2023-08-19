@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 /**
  * 文件错误异常信息
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/12/05
  */
 public enum FileManageErrorCodeEnum implements BaseErrorEnum {
@@ -37,7 +37,7 @@ public enum FileManageErrorCodeEnum implements BaseErrorEnum {
      * 异常code
      *
      * @return {@link Integer)
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/5
      */
     @Override
@@ -49,7 +49,7 @@ public enum FileManageErrorCodeEnum implements BaseErrorEnum {
      * 异常信息
      *
      * @return {@link String)
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/5
      */
     @Override

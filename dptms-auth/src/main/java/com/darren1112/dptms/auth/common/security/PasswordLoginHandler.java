@@ -28,7 +28,7 @@
 // /**
 //  * 用户信息鉴权
 //  *
-//  * @author luyuhao
+//  * @author darren
 //  * @since 2020/11/22 17:13
 //  */
 // @Component
@@ -50,7 +50,7 @@
 //      * @param request    请求域
 //      * @param response   响应域
 //      * @throws BaseException 异常
-//      * @author luyuhao
+//      * @author darren
 //      * @since 20/11/22 17:26
 //      */
 //     @Override
@@ -73,7 +73,7 @@
 //      * @param response   响应域
 //      * @return {@link ActiveUser}
 //      * @throws BaseException 异常
-//      * @author luyuhao
+//      * @author darren
 //      * @since 20/11/22 21:07
 //      */
 //     @Override
@@ -101,7 +101,7 @@
 //      * @param request    请求域
 //      * @param response   响应域
 //      * @throws BaseException 异常
-//      * @author luyuhao
+//      * @author darren
 //      * @since 20/11/22 17:42
 //      */
 //     @Override

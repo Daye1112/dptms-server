@@ -4,7 +4,7 @@ import com.darren1112.dptms.common.core.exception.enums.BaseErrorEnum;
 import com.darren1112.dptms.common.core.validate.validator.ValidatorContext;
 
 /**
- * @author luyuhao
+ * @author darren
  * @since 2020/11/28 14:20
  */
 public abstract class BaseValidatorCallback<T> implements ValidatorCallback<T> {

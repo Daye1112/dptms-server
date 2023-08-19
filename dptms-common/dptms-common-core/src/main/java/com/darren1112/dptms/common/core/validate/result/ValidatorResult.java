@@ -3,7 +3,7 @@ package com.darren1112.dptms.common.core.validate.result;
 import com.darren1112.dptms.common.core.exception.enums.BaseErrorEnum;
 
 /**
- * @author luyuhao
+ * @author darren
  * @since 2020/11/28 13:32
  */
 public class ValidatorResult {

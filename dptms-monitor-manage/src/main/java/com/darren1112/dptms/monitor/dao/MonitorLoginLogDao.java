@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * 登录日志Dao
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/02/06 20:40
  */
 @Mapper
@@ -25,7 +25,7 @@ public interface MonitorLoginLogDao extends BaseMapper<MonitorLoginLogDto> {
      * @param pageParam 分页参数
      * @param dto       筛选条件
      * @return {@link MonitorLoginLogDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/02/10 00:15
      */
     List<MonitorLoginLogDto> listPage(@Param("pageParam") PageParam pageParam, @Param("dto") MonitorLoginLogDto dto);
@@ -35,7 +35,7 @@ public interface MonitorLoginLogDao extends BaseMapper<MonitorLoginLogDto> {
      *
      * @param dto 筛选条件
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/02/10 00:19
      */
     Long listPageCount(@Param("dto") MonitorLoginLogDto dto);
@@ -46,7 +46,7 @@ public interface MonitorLoginLogDao extends BaseMapper<MonitorLoginLogDto> {
      * @param userId 用户id
      * @param number 查询条数
      * @return {@link MonitorLoginLogDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/11/27
      */
     List<MonitorLoginLogDto> listByUserIdAndNumber(@Param("userId") Long userId, @Param("number") Integer number);

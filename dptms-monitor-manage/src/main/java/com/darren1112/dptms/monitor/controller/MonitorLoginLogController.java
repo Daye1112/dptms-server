@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * 登录日志Controller
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/02/06 20:45
  */
 @Slf4j
@@ -41,7 +41,7 @@ public class MonitorLoginLogController extends BaseController {
      *
      * @param dto 日志参数
      * @return {@link JsonResult)
-     * @author luyuhao
+     * @author darren
      * @since 2021/02/06 20:50
      */
     @PostMapping("/insert")
@@ -57,7 +57,7 @@ public class MonitorLoginLogController extends BaseController {
      * @param dto       筛选参数
      * @param pageParam 分页参数
      * @return {@link JsonResult}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/10 01:08
      */
     @GetMapping("/listPage")
@@ -73,7 +73,7 @@ public class MonitorLoginLogController extends BaseController {
      * 查询当前用户的登录日志
      *
      * @return {@link MonitorLoginLogDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/11/27
      */
     @GetMapping("/listCurrentUser")

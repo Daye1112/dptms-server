@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * druid service
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/02/15 23:30
  */
 public interface DruidService {
@@ -16,7 +16,7 @@ public interface DruidService {
      * 查询接口统计list
      *
      * @return {@link DruidStatDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/02/15 23:32
      */
     List<DruidStatDto> apiStatList();

@@ -21,7 +21,7 @@ import java.util.Optional;
 /**
  * 认证失败处理器
  *
- * @author luyuhao
+ * @author darren
  * @since 2022/11/15
  */
 @Component
@@ -38,7 +38,7 @@ public class DptmsAuthenticationFailureHandler implements AuthenticationFailureH
      * @param request   请求域
      * @param response  响应域
      * @param exception 认证异常
-     * @author luyuhao
+     * @author darren
      * @since 2022/6/2
      */
     @Override

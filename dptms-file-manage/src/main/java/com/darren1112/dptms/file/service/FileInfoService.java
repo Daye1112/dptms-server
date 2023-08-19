@@ -6,7 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 /**
  * 文件信息Service
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/12/1
  */
 public interface FileInfoService {
@@ -17,7 +17,7 @@ public interface FileInfoService {
      * @param file   文件信息
      * @param userId 用户id
      * @return {@link FileInfoDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/05
      */
     FileInfoDto uploadFile(MultipartFile file, Long userId);
@@ -27,7 +27,7 @@ public interface FileInfoService {
      *
      * @param fileId 文件id
      * @return {@link FileInfoDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/10
      */
     FileInfoDto download(Long fileId);
@@ -37,8 +37,19 @@ public interface FileInfoService {
      *
      * @param fileId 文件id
      * @return {@link FileInfoDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/10
      */
     FileInfoDto getFullInfoById(Long fileId);
+
+    /**
+     * 更新文件信息
+     *
+     * @param id       文件id
+     * @param fileName 文件名
+     * @param updater  更新者
+     * @author darren
+     * @since 2023/08/16
+     */
+    void updateFileName(Long id, String fileName, Long updater);
 }

@@ -3,7 +3,7 @@ package com.darren1112.dptms.common.core.captcha.context;
 /**
  * 验证码生产参数
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/11/16
  */
 public class CaptchaParam {

@@ -7,7 +7,7 @@ import com.darren1112.dptms.common.spi.service.dto.ServiceConfigReleaseDto;
 /**
  * 配置发布表Service
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/03/12 01:45
  */
 public interface ServiceConfigReleaseService {
@@ -18,7 +18,7 @@ public interface ServiceConfigReleaseService {
      * @param pageParam 分页参数
      * @param dto       查询条件
      * @return {@link ServiceConfigReleaseDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/3/16 8:34
      */
     PageBean<ServiceConfigReleaseDto> listPage(PageParam pageParam, ServiceConfigReleaseDto dto);
@@ -28,7 +28,7 @@ public interface ServiceConfigReleaseService {
      *
      * @param dto 发布信息
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/3/16 8:46
      */
     Long insert(ServiceConfigReleaseDto dto);
@@ -38,7 +38,7 @@ public interface ServiceConfigReleaseService {
      *
      * @param id      发布id
      * @param updater 更新者
-     * @author luyuhao
+     * @author darren
      * @since 2021/3/16 8:58
      */
     void deleteById(Long id, Long updater);

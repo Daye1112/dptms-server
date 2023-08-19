@@ -12,7 +12,7 @@ import java.util.Set;
 /**
  * 文件ServiceImpl
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/11/28
  */
 public class CommonFileClient implements FileClient {
@@ -31,7 +31,7 @@ public class CommonFileClient implements FileClient {
      * @param metaDataSet 元数据信息
      * @return {@link FileDfsInfoDto}
      * @throws Exception 异常
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/1
      */
     @Override
@@ -46,7 +46,7 @@ public class CommonFileClient implements FileClient {
      * @param fileDfsInfoList 文件存储信息集合
      * @return {@link FileDfsInfoDto}
      * @throws Exception 异常
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/1
      */
     @Override

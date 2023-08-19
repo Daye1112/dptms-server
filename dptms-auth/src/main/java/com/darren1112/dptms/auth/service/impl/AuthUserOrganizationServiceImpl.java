@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * 用户组织Service
  *
- * @author luyuhao
+ * @author darren
  * @since 2020/12/13 22:22
  */
 @Service
@@ -34,7 +34,7 @@ public class AuthUserOrganizationServiceImpl implements AuthUserOrganizationServ
      *
      * @param userId 用户id
      * @return {@link AuthOrganizationDto}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/13 21:43
      */
     @Override
@@ -48,7 +48,7 @@ public class AuthUserOrganizationServiceImpl implements AuthUserOrganizationServ
      * @param userId  用户id
      * @param orgIds  组织ids，逗号分隔
      * @param updater 更新者
-     * @author luyuhao
+     * @author darren
      * @since 20/12/13 22:10
      */
     @Override

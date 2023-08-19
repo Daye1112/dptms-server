@@ -17,7 +17,7 @@ import java.nio.charset.StandardCharsets;
 /**
  * web相关工具类
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/01/31 18:51
  */
 public class WebUtil {
@@ -26,7 +26,7 @@ public class WebUtil {
      * 获取用户使用的操作系统
      *
      * @return 操作信息
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/31 19:02
      */
     public static String getOs() {
@@ -41,7 +41,7 @@ public class WebUtil {
      * 获取用户使用的浏览器
      *
      * @return 浏览器+版本
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/31 19:01
      */
     public static String getBrowser() {
@@ -60,7 +60,7 @@ public class WebUtil {
      * @param fileByte 文件字节流
      * @param request  请求域
      * @return {@link ResponseEntity}
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/11
      */
     public static ResponseEntity<byte[]> download(String fileName, byte[] fileByte, HttpServletRequest request) throws Exception {
@@ -80,7 +80,7 @@ public class WebUtil {
      * @param request  请求域
      * @param fileName 文件名称
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/11
      */
     private static String fileNameEncode(HttpServletRequest request, String fileName) throws UnsupportedEncodingException {
@@ -111,7 +111,7 @@ public class WebUtil {
      * @param fileName  文件名
      * @param fileBytes 文件流
      * @return {@link ResponseEntity}
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/11
      */
     public static ResponseEntity view(String fileName, byte[] fileBytes) {

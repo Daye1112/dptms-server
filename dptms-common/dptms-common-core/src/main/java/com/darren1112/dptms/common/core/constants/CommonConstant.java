@@ -3,7 +3,7 @@ package com.darren1112.dptms.common.core.constants;
 /**
  * 通用常量
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/7/21
  */
 public class CommonConstant {

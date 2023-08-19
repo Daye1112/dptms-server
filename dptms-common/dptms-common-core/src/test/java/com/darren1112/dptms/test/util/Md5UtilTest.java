@@ -4,7 +4,7 @@ import com.darren1112.dptms.common.core.util.Md5Util;
 import org.junit.Test;
 
 /**
- * @author luyuhao
+ * @author darren
  * @since 2020/11/23 00:37
  */
 public class Md5UtilTest {

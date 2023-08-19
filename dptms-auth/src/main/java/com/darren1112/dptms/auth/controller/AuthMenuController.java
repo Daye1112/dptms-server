@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * 菜单Controller
  *
- * @author luyuhao
+ * @author darren
  * @since 2020/12/12 17:28
  */
 @Slf4j
@@ -135,7 +135,7 @@ public class AuthMenuController extends BaseController {
      *
      * @param roleId 角色id
      * @return {@link AuthMenuDto}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/13 21:43
      */
     @Log(value = "查询角色关联的菜单树", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)

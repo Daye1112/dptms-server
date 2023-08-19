@@ -12,7 +12,7 @@ import java.util.Map;
 /**
  * 请求参数重新封装
  *
- * @author luyuhao
+ * @author darren
  * @since 2022/06/12
  */
 public class ParameterRequestWrapper extends HttpServletRequestWrapper {
@@ -26,7 +26,7 @@ public class ParameterRequestWrapper extends HttpServletRequestWrapper {
      * 构造方法
      *
      * @param request 请求域
-     * @author luyuhao
+     * @author darren
      * @since 2022/06/12
      */
     public ParameterRequestWrapper(HttpServletRequest request) {
@@ -38,7 +38,7 @@ public class ParameterRequestWrapper extends HttpServletRequestWrapper {
      * 构造方法
      *
      * @param request 请求域
-     * @author luyuhao
+     * @author darren
      * @since 2022/06/12
      */
     public ParameterRequestWrapper(HttpServletRequest request, Map<String, Object> extParams) {
@@ -52,7 +52,7 @@ public class ParameterRequestWrapper extends HttpServletRequestWrapper {
      *
      * @param name 参数key
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2022/06/12
      */
     @Override
@@ -68,7 +68,7 @@ public class ParameterRequestWrapper extends HttpServletRequestWrapper {
      * 获取参数names
      *
      * @return {@link Enumeration}
-     * @author luyuhao
+     * @author darren
      * @since 2022/06/12
      */
     @Override
@@ -80,7 +80,7 @@ public class ParameterRequestWrapper extends HttpServletRequestWrapper {
      * 获取所有请求参数
      *
      * @return {@link Map}
-     * @author luyuhao
+     * @author darren
      * @since 2022/06/12
      */
     @Override
@@ -93,7 +93,7 @@ public class ParameterRequestWrapper extends HttpServletRequestWrapper {
      *
      * @param name 参数key
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2022/06/12
      */
     @Override
@@ -106,7 +106,7 @@ public class ParameterRequestWrapper extends HttpServletRequestWrapper {
      * 添加参数和参数值
      *
      * @param extParams 额外参数
-     * @author luyuhao
+     * @author darren
      * @since 2022/06/12
      */
     public void addAllParameters(Map<String, Object> extParams) {
@@ -123,7 +123,7 @@ public class ParameterRequestWrapper extends HttpServletRequestWrapper {
      *
      * @param name  参数key
      * @param value 参数值
-     * @author luyuhao
+     * @author darren
      * @since 2022/06/12
      */
     public void addParameter(String name, Object value) {

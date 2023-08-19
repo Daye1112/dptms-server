@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * 角色菜单Dao
  *
- * @author luyuhao
+ * @author darren
  * @since 20/12/13 23:07
  */
 @Mapper
@@ -25,7 +25,7 @@ public interface AuthRoleMenuDao extends BaseMapper<AuthRoleMenuDto> {
      *
      * @param roleId 角色id
      * @return {@link AuthMenuDto}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/13 21:43
      */
     List<AuthMenuDto> listRoleAssigned(@Param("roleId") Long roleId);
@@ -35,7 +35,7 @@ public interface AuthRoleMenuDao extends BaseMapper<AuthRoleMenuDto> {
      *
      * @param roleId  角色id
      * @param updater 更新者
-     * @author luyuhao
+     * @author darren
      * @since 20/12/21 01:02
      */
     void deleteByRoleId(@Param("roleId") Long roleId, @Param("updater") Long updater);
@@ -44,7 +44,7 @@ public interface AuthRoleMenuDao extends BaseMapper<AuthRoleMenuDto> {
      * 批量插入
      *
      * @param list 分配信息
-     * @author luyuhao
+     * @author darren
      * @since 20/12/21 01:04
      */
     void batchInsert(@Param("list") List<AuthRoleMenuEntity> list);

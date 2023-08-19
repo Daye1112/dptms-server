@@ -12,7 +12,7 @@ import java.util.Set;
 /**
  * 小文件简单处理器
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/12/2
  */
 public class SmallFileHandler extends AbstractFileHandler {
@@ -29,7 +29,7 @@ public class SmallFileHandler extends AbstractFileHandler {
      * @param metaDataSet 元数据信息
      * @return {@link FileDfsInfoDto}
      * @throws Exception 异常
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/1
      */
     @Override
@@ -44,7 +44,7 @@ public class SmallFileHandler extends AbstractFileHandler {
      * @param fileDfsInfoList 文件存储信息集合
      * @return {@link FileDfsInfoDto}
      * @throws Exception 异常
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/1
      */
     @Override

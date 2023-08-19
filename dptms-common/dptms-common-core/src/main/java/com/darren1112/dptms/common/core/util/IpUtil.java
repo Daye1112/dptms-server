@@ -13,7 +13,7 @@ import java.lang.reflect.Method;
 /**
  * IP工具类
  *
- * @author luyuhao
+ * @author darren
  * @since 19/12/05 02:31
  */
 @Slf4j
@@ -31,7 +31,7 @@ public class IpUtil {
      *
      * @param request 请求域
      * @return {@link String ip地址}
-     * @author luyuhao
+     * @author darren
      * @since 20/11/23 00:29
      */
     public static String getIp(HttpServletRequest request) {

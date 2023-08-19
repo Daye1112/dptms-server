@@ -3,7 +3,7 @@ package com.darren1112.dptms.common.core.exception.enums;
 /**
  * 异常基础类
  *
- * @author luyuhao
+ * @author darren
  * @since 19/12/06 03:18
  */
 public interface BaseErrorEnum {
@@ -11,7 +11,7 @@ public interface BaseErrorEnum {
      * 异常code
      *
      * @return {@link Integer)
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/5
      */
     Integer getCode();
@@ -20,7 +20,7 @@ public interface BaseErrorEnum {
      * 异常信息
      *
      * @return {@link String)
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/5
      */
     String getMessage();

@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * 系统用户Controller
  *
- * @author luyuhao
+ * @author darren
  * @since 2020/07/25 02:14
  */
 @Slf4j
@@ -54,7 +54,7 @@ public class AuthUserController extends BaseController {
      *
      * @param id id
      * @return {@link AuthUserDto}
-     * @author luyuhao
+     * @author darren
      * @since 20/11/30 23:12
      */
     @Log(value = "根据id查询用户", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
@@ -74,7 +74,7 @@ public class AuthUserController extends BaseController {
      * @param userId 用户id
      * @param orgIds 组织ids，逗号分隔
      * @return {@link JsonResult}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/13 22:10
      */
     @Log(value = "分配用户组织", businessType = BusinessType.UPDATE)
@@ -95,7 +95,7 @@ public class AuthUserController extends BaseController {
      *
      * @param entity 用户参数
      * @return {@link JsonResult}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/10 01:08
      */
     @Log(value = "插入用户", businessType = BusinessType.INSERT)
@@ -125,7 +125,7 @@ public class AuthUserController extends BaseController {
      * @param dto       筛选参数
      * @param pageParam 分页参数
      * @return {@link JsonResult}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/10 01:08
      */
     @Log(value = "分页查询用户", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
@@ -142,7 +142,7 @@ public class AuthUserController extends BaseController {
      *
      * @param entity 用户参数
      * @return {@link JsonResult}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/10 01:08
      */
     @Log(value = "更新用户", businessType = BusinessType.UPDATE)
@@ -164,7 +164,7 @@ public class AuthUserController extends BaseController {
      *
      * @param id 记录id
      * @return {@link JsonResult}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/10 01:08
      */
     @Log(value = "根据id删除用户", logLevel = LogLevel.WARN, businessType = BusinessType.DELETE)
@@ -184,7 +184,7 @@ public class AuthUserController extends BaseController {
      *
      * @param entity 更新信息
      * @return {@link JsonResult}
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/14 00:17
      */
     @Log(value = "更新用户锁定状态", logLevel = LogLevel.WARN, businessType = BusinessType.UPDATE)
@@ -207,7 +207,7 @@ public class AuthUserController extends BaseController {
      * @param userId  用户id
      * @param roleIds 角色ids，逗号分隔
      * @return {@link JsonResult}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/23 01:48
      */
     @Log(value = "分配用户角色", businessType = BusinessType.UPDATE)

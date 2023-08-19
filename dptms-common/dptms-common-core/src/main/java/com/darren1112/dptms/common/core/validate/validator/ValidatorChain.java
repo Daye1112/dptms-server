@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author luyuhao
+ * @author darren
  * @since 2020/11/28 13:37
  */
 public class ValidatorChain {

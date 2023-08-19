@@ -17,7 +17,7 @@ import java.io.IOException;
 /**
  * 未认证处理器
  *
- * @author luyuhao
+ * @author darren
  * @since 2022/6/2
  */
 public class SimpleAuthenticationEntryPoint implements AuthenticationEntryPoint {
@@ -30,7 +30,7 @@ public class SimpleAuthenticationEntryPoint implements AuthenticationEntryPoint 
      * @param request       请求域
      * @param response      响应域
      * @param authException 认证异常
-     * @author luyuhao
+     * @author darren
      * @since 2022/6/2
      */
     @Override

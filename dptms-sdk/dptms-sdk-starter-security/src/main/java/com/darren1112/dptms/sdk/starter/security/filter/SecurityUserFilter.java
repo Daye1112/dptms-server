@@ -21,7 +21,7 @@ import java.util.Map;
 /**
  * 添加用户信息过滤器
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/01/17 01:25
  */
 @Slf4j
@@ -63,7 +63,7 @@ public class SecurityUserFilter extends OncePerRequestFilter {
      *
      * @param activeUser 用户信息
      * @return {@link Map}
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/17 01:34
      */
     private Map<String, Object> getExtParams(BaseSecurityUser activeUser) {

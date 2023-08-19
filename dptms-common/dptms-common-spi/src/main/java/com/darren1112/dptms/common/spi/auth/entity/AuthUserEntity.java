@@ -12,7 +12,7 @@ import java.util.Date;
 /**
  * 系统用户Entity
  *
- * @author luyuhao
+ * @author darren
  * @since 20/07/23 02:19
  */
 @Data

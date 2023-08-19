@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * 应用表Controller
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/03/12 01:33
  */
 @Slf4j
@@ -44,7 +44,7 @@ public class ServiceApplicationController extends BaseController {
      * @param dto       筛选参数
      * @param pageParam 分页参数
      * @return {@link ServiceApplicationDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/03/12 17:33
      */
     @Log(value = "分页查询服务应用", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
@@ -61,7 +61,7 @@ public class ServiceApplicationController extends BaseController {
      *
      * @param dto 服务信息
      * @return {@link JsonResult}
-     * @author luyuhao
+     * @author darren
      * @since 2021/03/12 23:33
      */
     @Log(value = "插入服务应用", businessType = BusinessType.INSERT)
@@ -87,7 +87,7 @@ public class ServiceApplicationController extends BaseController {
      *
      * @param dto 服务信息
      * @return {@link JsonResult}
-     * @author luyuhao
+     * @author darren
      * @since 2021/03/12 23:33
      */
     @Log(value = "更新服务应用", businessType = BusinessType.UPDATE)
@@ -114,7 +114,7 @@ public class ServiceApplicationController extends BaseController {
      *
      * @param id 服务应用id
      * @return {@link JsonResult}
-     * @author luyuhao
+     * @author darren
      * @since 2021/03/12 23:33
      */
     @Log(value = "删除服务应用", businessType = BusinessType.DELETE)

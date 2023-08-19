@@ -5,7 +5,7 @@ import java.util.Arrays;
 /**
  * 各个文件类型的响应头
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/12/11
  */
 public enum FileTypeInfoEnum {
@@ -355,7 +355,7 @@ public enum FileTypeInfoEnum {
      *
      * @param extName 文件后缀名
      * @return {@link FileTypeInfoEnum}
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/11
      */
     public static FileTypeInfoEnum matchByExtName(String extName) {

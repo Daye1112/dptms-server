@@ -31,7 +31,7 @@ import java.util.List;
 /**
  * 角色Controller
  *
- * @author luyuhao
+ * @author darren
  * @since 2020/12/13 23:11
  */
 @Slf4j
@@ -55,7 +55,7 @@ public class AuthRoleController extends BaseController {
      * @param roleId  角色id
      * @param menuIds 菜单ids，逗号分隔
      * @return {@link JsonResult}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/13 22:10
      */
     @Log(value = "分配角色菜单", businessType = BusinessType.UPDATE)
@@ -161,7 +161,7 @@ public class AuthRoleController extends BaseController {
      *
      * @param userId 用户id
      * @return {@link AuthRoleDto}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/13 21:43
      */
     @Log(value = "查询用户关联的角色list", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)

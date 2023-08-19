@@ -7,7 +7,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 /**
  * redis配置类
  *
- * @author luyuhao
+ * @author darren
  * @date 2021/11/14 19:33
  */
 @Data

@@ -4,7 +4,7 @@ import java.io.StringReader;
 import java.util.Properties;
 
 /**
- * @author luyuhao
+ * @author darren
  * @since 2021/8/4
  */
 public class RedisInfoToPropertiesConvert {

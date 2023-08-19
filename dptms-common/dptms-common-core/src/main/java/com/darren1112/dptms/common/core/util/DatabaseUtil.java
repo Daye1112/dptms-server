@@ -6,7 +6,7 @@ import java.util.function.Consumer;
 /**
  * 数据库工具类
  *
- * @author luyuhao
+ * @author darren
  * @since 2022/11/19
  */
 public class DatabaseUtil {
@@ -18,7 +18,7 @@ public class DatabaseUtil {
      *
      * @param list            数据集合
      * @param batchHandleFunc 处理方法
-     * @author luyuhao
+     * @author darren
      * @since 2022/11/19
      */
     public static <T> void batchHandle(List<T> list, Consumer<List<T>> batchHandleFunc) {
@@ -31,7 +31,7 @@ public class DatabaseUtil {
      * @param maxNum          最大处理数
      * @param list            数据集合
      * @param batchHandleFunc 处理方法
-     * @author luyuhao
+     * @author darren
      * @since 2022/11/19
      */
     public static <T> void batchHandle(int maxNum, List<T> list, Consumer<List<T>> batchHandleFunc) {

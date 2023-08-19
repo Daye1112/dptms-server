@@ -5,7 +5,7 @@ import com.darren1112.dptms.common.core.base.BaseCommonEnum;
 /**
  * 日志采集器类型
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/02/08 01:04
  */
 public enum LogCollectType implements BaseCommonEnum {

@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * 文件存储信息Dao
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/12/1
  */
 @Mapper
@@ -22,7 +22,7 @@ public interface FileDfsInfoDao extends BaseMapper<FileDfsInfoDto> {
      * 批量新增
      *
      * @param list 文件存储信息
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/7
      */
     void batchInsert(List<FileDfsInfoDto> list);
@@ -32,7 +32,7 @@ public interface FileDfsInfoDao extends BaseMapper<FileDfsInfoDto> {
      *
      * @param fileId 文件id
      * @return {@link FileDfsInfoDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/11
      */
     List<FileDfsInfoDto> listByFileInfoId(@Param("fileId") Long fileId);

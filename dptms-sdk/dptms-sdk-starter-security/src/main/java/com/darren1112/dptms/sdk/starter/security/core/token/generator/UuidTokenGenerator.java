@@ -6,7 +6,7 @@ import com.darren1112.dptms.sdk.starter.security.core.token.generator.base.Token
 /**
  * token生成类
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/01/16 17:10
  */
 public class UuidTokenGenerator implements TokenGenerator {
@@ -15,7 +15,7 @@ public class UuidTokenGenerator implements TokenGenerator {
      * 生成默认token
      *
      * @return {@link String token}
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/16 17:11
      */
     @Override

@@ -16,7 +16,7 @@ import java.util.Date;
 /**
  * 活跃(在线)用户信息
  *
- * @author luyuhao
+ * @author darren
  * @since 2022/11/15
  */
 @Data
@@ -115,7 +115,7 @@ public class ActiveUser extends BaseSecurityUser {
      *
      * @param sysUserDto 用户信息
      * @return {@link ActiveUser}
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/31 19:50
      */
     public static ActiveUser convert(AuthUserDto sysUserDto) {
@@ -129,7 +129,7 @@ public class ActiveUser extends BaseSecurityUser {
      *
      * @param activeUser 用户信息
      * @param sysUserDto 新用户信息
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/31 19:50
      */
     public static void convert(ActiveUser activeUser, AuthUserDto sysUserDto) {

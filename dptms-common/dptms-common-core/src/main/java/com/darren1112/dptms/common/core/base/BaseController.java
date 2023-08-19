@@ -6,7 +6,7 @@ import com.darren1112.dptms.common.spi.common.dto.PageParam;
 /**
  * 基础controller类，包含controller通用方法
  *
- * @author luyuhao
+ * @author darren
  * @since 20/01/26 16:14
  */
 public class BaseController {
@@ -16,7 +16,7 @@ public class BaseController {
      *
      * @param pageParam 分页参数
      * @return {@link PageParam 分页参数}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/10 01:20
      */
     protected PageParam getPageParam(PageParam pageParam) {

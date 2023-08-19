@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * @author luyuhao
+ * @author darren
  * @since 2020/11/27 00:12
  */
 @Slf4j
@@ -33,7 +33,7 @@ public class ZuulHeaderValidFilter extends OncePerRequestFilter {
      * 是否需要过滤
      *
      * @return true/false
-     * @author luyuhao
+     * @author darren
      * @since 20/08/02 14:45
      */
     private boolean shouldNotFilter(String uri) {

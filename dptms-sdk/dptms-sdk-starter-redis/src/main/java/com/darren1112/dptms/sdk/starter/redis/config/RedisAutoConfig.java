@@ -30,7 +30,7 @@ import java.time.Duration;
  * Redis配置类
  * ConditionalOnClass 自动配置
  *
- * @author luyuhao
+ * @author darren
  * @since 2020/08/05 01:16
  */
 @Slf4j

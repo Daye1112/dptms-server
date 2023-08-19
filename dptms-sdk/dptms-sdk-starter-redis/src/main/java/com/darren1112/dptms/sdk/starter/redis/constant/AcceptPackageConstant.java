@@ -3,7 +3,7 @@ package com.darren1112.dptms.sdk.starter.redis.constant;
 /**
  * 【暂不使用】fastJson解析白名单Constant
  *
- * @author luyuhao
+ * @author darren
  * @since 2020/08/05 01:19
  */
 public class AcceptPackageConstant {

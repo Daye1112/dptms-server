@@ -12,7 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 /**
  * fastdfs测试类
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/11/30
  */
 @SpringBootTest

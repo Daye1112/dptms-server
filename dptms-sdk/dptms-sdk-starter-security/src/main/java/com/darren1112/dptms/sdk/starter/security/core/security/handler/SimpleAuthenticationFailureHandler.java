@@ -17,7 +17,7 @@ import java.io.IOException;
 /**
  * 认证失败处理器
  *
- * @author luyuhao
+ * @author darren
  * @since 2022/6/2
  */
 public class SimpleAuthenticationFailureHandler implements AuthenticationFailureHandler {
@@ -30,7 +30,7 @@ public class SimpleAuthenticationFailureHandler implements AuthenticationFailure
      * @param request   请求域
      * @param response  响应域
      * @param exception 认证异常
-     * @author luyuhao
+     * @author darren
      * @since 2022/6/2
      */
     @Override

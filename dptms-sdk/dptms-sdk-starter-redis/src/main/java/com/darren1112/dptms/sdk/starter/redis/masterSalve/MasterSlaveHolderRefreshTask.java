@@ -6,7 +6,7 @@ import java.util.concurrent.Executor;
 /**
  * 主从切换监控
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/8/5
  */
 public class MasterSlaveHolderRefreshTask extends TimerTask {

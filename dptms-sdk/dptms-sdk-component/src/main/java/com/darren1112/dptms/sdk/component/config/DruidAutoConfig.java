@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 /**
  * druid组件配置
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/02/15 21:55
  */
 public class DruidAutoConfig {

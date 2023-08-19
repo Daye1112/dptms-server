@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 /**
  * mvc的bean管理配置类
  *
- * @author luyuhao
+ * @author darren
  * @since 2020/1/6 18:41
  */
 public class WebMvcBeanAutoConfig {
@@ -22,7 +22,7 @@ public class WebMvcBeanAutoConfig {
      * feign全局异常配置
      *
      * @return 异常信息
-     * @author luyuhao
+     * @author darren
      * @since 20/08/02 21:57
      */
     @Bean

@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * 操作日志ServiceImpl
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/02/06 20:44
  */
 @Service
@@ -29,7 +29,7 @@ public class MonitorOperateLogServiceImpl extends BaseService implements Monitor
      * 插入操作日志信息
      *
      * @param dto 日志信息
-     * @author luyuhao
+     * @author darren
      * @since 2021/02/06 21:08
      */
     @Override
@@ -44,7 +44,7 @@ public class MonitorOperateLogServiceImpl extends BaseService implements Monitor
      * @param dto       筛选参数
      * @param pageParam 分页参数
      * @return {@link MonitorOperateLogDto}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/10 01:08
      */
     @Override

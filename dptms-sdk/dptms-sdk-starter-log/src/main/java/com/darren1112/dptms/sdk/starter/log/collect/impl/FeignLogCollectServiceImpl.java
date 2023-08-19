@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * feign-日志收集
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/02/07 00:32
  */
 @Slf4j
@@ -25,7 +25,7 @@ public class FeignLogCollectServiceImpl implements LogCollectService {
      * 操作日志收集
      *
      * @param dto 日志信息
-     * @author luyuhao
+     * @author darren
      * @since 2021/02/07 00:32
      */
     @Override
@@ -42,7 +42,7 @@ public class FeignLogCollectServiceImpl implements LogCollectService {
      * 插入登录日志信息
      *
      * @param dto 日志参数
-     * @author luyuhao
+     * @author darren
      * @since 2021/02/06 20:50
      */
     @Override

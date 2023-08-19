@@ -6,7 +6,7 @@ import org.springframework.security.core.AuthenticationException;
 /**
  * 验证码code错误异常
  *
- * @author luyuhao
+ * @author darren
  * @since 2022/11/15
  */
 public class CaptchaCodeErrorException extends AuthenticationException {

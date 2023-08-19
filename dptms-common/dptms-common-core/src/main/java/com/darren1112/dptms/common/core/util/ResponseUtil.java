@@ -10,7 +10,7 @@ import java.util.Objects;
 /**
  * 响应工具类
  *
- * @author luyuhao
+ * @author darren
  * @since 2020/08/02 02:47
  */
 @Slf4j
@@ -21,7 +21,7 @@ public class ResponseUtil {
      *
      * @param response   响应域
      * @param jsonString jsonResult
-     * @author luyuhao
+     * @author darren
      * @since 2022/03/31
      */
     public static void writeJson(HttpServletResponse response, String jsonString) {
@@ -34,7 +34,7 @@ public class ResponseUtil {
      *
      * @param response   响应域
      * @param jsonResult 响应结果
-     * @author luyuhao
+     * @author darren
      * @since 20/08/02 02:50
      */
     public static void writeJson(HttpServletResponse response, JsonResult jsonResult) {

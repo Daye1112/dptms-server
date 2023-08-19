@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * 登录日志ServiceImpl
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/02/06 20:44
  */
 @Service
@@ -29,7 +29,7 @@ public class MonitorLoginLogServiceImpl extends BaseService implements MonitorLo
      * 插入登录日志信息
      *
      * @param dto 日志信息
-     * @author luyuhao
+     * @author darren
      * @since 2021/02/06 20:53
      */
     @Override
@@ -44,7 +44,7 @@ public class MonitorLoginLogServiceImpl extends BaseService implements MonitorLo
      * @param pageParam 分页参数
      * @param dto       查询条件
      * @return {@link MonitorLoginLogDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/02/10 00:13
      */
     @Override
@@ -59,7 +59,7 @@ public class MonitorLoginLogServiceImpl extends BaseService implements MonitorLo
      *
      * @param userId 用户id
      * @return {@link MonitorLoginLogDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/11/27
      */
     @Override

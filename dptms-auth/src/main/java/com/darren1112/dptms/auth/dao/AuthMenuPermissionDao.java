@@ -55,7 +55,7 @@ public interface AuthMenuPermissionDao extends BaseMapper<AuthMenuPermissionDto>
      *
      * @param menuId 菜单id
      * @return {@link AuthPermissionDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/04 23:53
      */
     List<AuthPermissionDto> listByMenuId(@Param("menuId") Long menuId);

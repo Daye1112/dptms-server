@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * 文件Controller
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/12/1
  */
 @Slf4j
@@ -42,7 +42,7 @@ public class FileController {
      *
      * @param file 文件信息
      * @return {@link JsonResult)
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/5
      */
     @PostMapping("/uploadFile")
@@ -60,7 +60,7 @@ public class FileController {
      *
      * @param fileId 文件id
      * @return {@link ResponseEntity)
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/10
      */
     @GetMapping("/download")
@@ -85,7 +85,7 @@ public class FileController {
      *
      * @param fileId 文件id
      * @return {@link ResponseEntity)
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/10
      */
     @GetMapping("/view")

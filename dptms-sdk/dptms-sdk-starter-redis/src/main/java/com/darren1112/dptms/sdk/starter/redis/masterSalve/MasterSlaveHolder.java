@@ -26,7 +26,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * MasterSlavePoolHealth解析远程服务器的redis状态，并交由对应的MasterSlavePoolEntry的MasterSlaveState状态对象进行操作
  * MasterSlaveState根据状态变更调用MasterSlavePoolEntry的回调接口MasterSlaveOperationCallback进行操作
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/8/6
  */
 public class MasterSlaveHolder implements MasterSlaveOperationCallback {

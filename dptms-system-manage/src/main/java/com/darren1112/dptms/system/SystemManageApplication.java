@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 /**
- * @author luyuhao
+ * @author darren
  * @since 2020/07/25 01:34
  */
 @EnableServerDoc

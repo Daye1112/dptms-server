@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * 权限ServiceImpl
  *
- * @author luyuhao
+ * @author darren
  * @since 2020/12/09 23:44
  */
 @Service
@@ -38,7 +38,7 @@ public class AuthPermissionServiceImpl extends BaseService implements AuthPermis
      *
      * @param entity 权限参数
      * @return {@link Long 权限id}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/10 01:08
      */
     @Override
@@ -56,7 +56,7 @@ public class AuthPermissionServiceImpl extends BaseService implements AuthPermis
      * @param dto       筛选参数
      * @param pageParam 分页参数
      * @return {@link AuthPermissionDto}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/10 01:08
      */
     @Override
@@ -72,7 +72,7 @@ public class AuthPermissionServiceImpl extends BaseService implements AuthPermis
      *
      * @param entity 权限参数
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/10 01:08
      */
     @Override
@@ -88,7 +88,7 @@ public class AuthPermissionServiceImpl extends BaseService implements AuthPermis
      *
      * @param entity   验证对象
      * @param isUpdate 是否更新
-     * @author luyuhao
+     * @author darren
      * @since 2020/12/12 11:06
      */
     private void validRepeat(AuthPermissionEntity entity, boolean isUpdate) {
@@ -108,7 +108,7 @@ public class AuthPermissionServiceImpl extends BaseService implements AuthPermis
      *
      * @param id      id
      * @param updater 更新者
-     * @author luyuhao
+     * @author darren
      * @since 20/12/12 20:44
      */
     @Override
@@ -122,7 +122,7 @@ public class AuthPermissionServiceImpl extends BaseService implements AuthPermis
      * 查询权限组list
      *
      * @return {@link AuthPermissionDto}
-     * @author luyuhao
+     * @author darren
      * @since 2020/12/28 01:10
      */
     @Override
@@ -136,7 +136,7 @@ public class AuthPermissionServiceImpl extends BaseService implements AuthPermis
      *
      * @param userId 用户id
      * @return {@link AuthPermissionDto}
-     * @author luyuhao
+     * @author darren
      * @since 2022/11/19
      */
     @Override

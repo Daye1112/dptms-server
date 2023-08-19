@@ -11,7 +11,7 @@ import java.util.Date;
 /**
  * 基础实体类
  *
- * @author luyuhao
+ * @author darren
  * @since 2020/07/23 02:19
  */
 @Data

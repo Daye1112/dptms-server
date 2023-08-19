@@ -9,7 +9,7 @@ import lombok.ToString;
 /**
  * 配置环境属性表Entity
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/03/12 01:39
  */
 @Data

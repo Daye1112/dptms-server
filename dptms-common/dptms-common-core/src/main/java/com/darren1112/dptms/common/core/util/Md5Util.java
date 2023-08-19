@@ -5,7 +5,7 @@ import cn.hutool.crypto.digest.MD5;
 /**
  * MD5工具类
  *
- * @author luyuhao
+ * @author darren
  * @since 2020/11/22 23:14
  */
 public class Md5Util {
@@ -15,7 +15,7 @@ public class Md5Util {
      *
      * @param data 加密串
      * @return {@link String 加密结果}
-     * @author luyuhao
+     * @author darren
      * @since 20/11/22 23:15
      */
     public static String encrypt(String data) {
@@ -29,7 +29,7 @@ public class Md5Util {
      * @param data 加密串
      * @param salt 盐
      * @return {@link String 加密结果}
-     * @author luyuhao
+     * @author darren
      * @since 20/11/22 23:15
      */
     public static String encrypt(String data, String salt) {
@@ -44,7 +44,7 @@ public class Md5Util {
      * @param salt       盐
      * @param matchData  匹配串
      * @return false: 不同 true: 相同
-     * @author luyuhao
+     * @author darren
      * @since 20/11/22 23:18
      */
     public static boolean match(String sourceData, String salt, String matchData) {

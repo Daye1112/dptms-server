@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 /**
  * 认证服务配置类型
  *
- * @author luyuhao
+ * @author darren
  * @since 2020/08/01 03:36
  */
 @Data

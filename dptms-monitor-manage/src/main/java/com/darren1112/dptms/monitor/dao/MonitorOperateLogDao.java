@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * 操作日志Dao
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/02/06 20:40
  */
 @Mapper
@@ -25,7 +25,7 @@ public interface MonitorOperateLogDao extends BaseMapper<MonitorOperateLogDto> {
      * @param dto       筛选参数
      * @param pageParam 分页参数
      * @return {@link MonitorOperateLogDto}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/10 01:08
      */
     List<MonitorOperateLogDto> listPage(@Param("pageParam") PageParam pageParam, @Param("dto") MonitorOperateLogDto dto);
@@ -35,7 +35,7 @@ public interface MonitorOperateLogDao extends BaseMapper<MonitorOperateLogDto> {
      *
      * @param dto 筛选参数
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/10 01:08
      */
     Long listPageCount(@Param("dto") MonitorOperateLogDto dto);

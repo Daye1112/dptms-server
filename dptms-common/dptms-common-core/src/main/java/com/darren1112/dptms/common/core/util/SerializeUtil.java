@@ -8,7 +8,7 @@ import java.io.*;
 /**
  * 序列化工具
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/8/13
  */
 public class SerializeUtil {
@@ -20,7 +20,7 @@ public class SerializeUtil {
      *
      * @param object 对象
      * @return {@link byte[]}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/13
      */
     public static byte[] serialize(Object object) {
@@ -61,7 +61,7 @@ public class SerializeUtil {
      *
      * @param bytes 待反序列化数组
      * @return {@link Object}
-     * @author luyuhao
+     * @author darren
      * @since 2021/8/13
      */
     @SuppressWarnings("unchecked")

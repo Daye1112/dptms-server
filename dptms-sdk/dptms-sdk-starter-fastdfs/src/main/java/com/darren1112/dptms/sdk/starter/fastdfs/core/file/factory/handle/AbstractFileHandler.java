@@ -13,7 +13,7 @@ import java.util.Set;
 /**
  * 文件处理抽象类
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/12/8
  */
 public abstract class AbstractFileHandler implements FileHandler {
@@ -29,7 +29,7 @@ public abstract class AbstractFileHandler implements FileHandler {
      *
      * @param fileDfsInfo 文件存储信息
      * @return {@link FileDfsInfoDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/11
      */
     FileDfsInfoDto simpleDownload(FileDfsInfoDto fileDfsInfo) {
@@ -51,7 +51,7 @@ public abstract class AbstractFileHandler implements FileHandler {
      * @param metaDataSet 元信息
      * @param fileOrder   文件排序
      * @return {@link FileDfsInfoDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/8
      */
     FileDfsInfoDto simpleUpload(InputStream fileStream, String fileName, Set<MetaData> metaDataSet, Integer fileOrder) {

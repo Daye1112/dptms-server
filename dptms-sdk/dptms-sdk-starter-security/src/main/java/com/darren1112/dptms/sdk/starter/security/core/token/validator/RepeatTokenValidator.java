@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * 系统token校验器
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/01/16 19:01
  */
 public class RepeatTokenValidator implements TokenValidator {
@@ -30,7 +30,7 @@ public class RepeatTokenValidator implements TokenValidator {
      * @param request  请求域
      * @param response 响应域
      * @return true/false
-     * @author luyuhao
+     * @author darren
      * @since 2020/11/28 10:47
      */
     @Override
@@ -54,7 +54,7 @@ public class RepeatTokenValidator implements TokenValidator {
      * 校验失败时的错误码
      *
      * @return {@link SecurityErrorEnum}
-     * @author luyuhao
+     * @author darren
      * @since 2022/11/17
      */
     @Override
@@ -66,7 +66,7 @@ public class RepeatTokenValidator implements TokenValidator {
      * 校验器执行顺序
      *
      * @return {@link Integer}
-     * @author luyuhao
+     * @author darren
      * @since 2022/11/17
      */
     @Override

@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * 配置发布属性表Service
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/03/12 01:45
  */
 public interface ServiceConfigReleasePropService {
@@ -17,7 +17,7 @@ public interface ServiceConfigReleasePropService {
      *
      * @param dto 查询条件
      * @return {@link ServiceConfigReleasePropDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/3/17 8:58
      */
     List<ServiceConfigReleasePropDto> list(ServiceConfigReleasePropDto dto);
@@ -26,7 +26,7 @@ public interface ServiceConfigReleasePropService {
      * 批量新增发布属性
      *
      * @param releasePropList 发布熟悉集合
-     * @author luyuhao
+     * @author darren
      * @since 2021/7/3
      */
     void batchInsert(List<ServiceConfigReleasePropDto> releasePropList);

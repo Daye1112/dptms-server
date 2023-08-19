@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * 登录管理Controller
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/01/17 19:26
  */
 @Slf4j
@@ -44,7 +44,7 @@ public class LoginController {
      * 生成验证码
      *
      * @return {@link CaptchaResult}
-     * @author luyuhao
+     * @author darren
      * @since 2021/11/17
      */
     @ApiOperation("生成验证码")
@@ -70,7 +70,7 @@ public class LoginController {
     //  * @param request    请求域
     //  * @param response   响应域
     //  * @return {@link ActiveUser}
-    //  * @author luyuhao
+    //  * @author darren
     //  * @since 20/11/22 21:55
     //  */
     // @ApiOperation("登录系统")
@@ -95,7 +95,7 @@ public class LoginController {
     //  * @param request  请求域
     //  * @param response 响应域
     //  * @return {@link JsonResult}
-    //  * @author luyuhao
+    //  * @author darren
     //  * @since 20/11/22 21:55
     //  */
     // @ApiOperation("登出系统")

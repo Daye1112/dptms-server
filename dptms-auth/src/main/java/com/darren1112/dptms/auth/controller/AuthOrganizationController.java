@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * 组织Controller
  *
- * @author luyuhao
+ * @author darren
  * @since 2020/08/16 01:43
  */
 @Slf4j
@@ -51,7 +51,7 @@ public class AuthOrganizationController extends BaseController {
      * @param pageParam 分页参数
      * @param dto       筛选参数
      * @return {@link JsonResult}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/10 01:08
      */
     @Log(value = "分页查询组织", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
@@ -68,7 +68,7 @@ public class AuthOrganizationController extends BaseController {
      *
      * @param dto 组织参数
      * @return {@link JsonResult}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/10 01:08
      */
     @Log(value = "插入组织", businessType = BusinessType.INSERT)
@@ -91,7 +91,7 @@ public class AuthOrganizationController extends BaseController {
      *
      * @param entity 组织参数
      * @return {@link JsonResult}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/10 01:08
      */
     @Log(value = "更新组织", businessType = BusinessType.UPDATE)
@@ -114,7 +114,7 @@ public class AuthOrganizationController extends BaseController {
      *
      * @param id 记录id
      * @return {@link JsonResult}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/10 01:08
      */
     @Log(value = "根据id删除记录", businessType = BusinessType.DELETE)
@@ -134,7 +134,7 @@ public class AuthOrganizationController extends BaseController {
      *
      * @param userId 用户id
      * @return {@link AuthOrganizationDto}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/13 21:43
      */
     @Log(value = "查询用户关联的组织list", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)

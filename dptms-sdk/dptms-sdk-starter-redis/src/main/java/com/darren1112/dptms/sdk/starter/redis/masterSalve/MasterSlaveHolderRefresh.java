@@ -8,7 +8,7 @@ import java.util.concurrent.Executor;
 /**
  * 健康检查
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/8/5
  */
 public class MasterSlaveHolderRefresh {

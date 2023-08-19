@@ -10,7 +10,7 @@ import java.util.Arrays;
 /**
  * 认证类型枚举
  *
- * @author luyuhao
+ * @author darren
  * @since 2022/6/6
  */
 public enum AuthTypeEnum implements AuthType {
@@ -46,7 +46,7 @@ public enum AuthTypeEnum implements AuthType {
      *
      * @param authType 认证类型
      * @return {@link AuthTypeEnum}
-     * @author luyuhao
+     * @author darren
      * @since 2022/6/6
      */
     public static AuthTypeEnum matchByAuthType(Integer authType) {
@@ -62,7 +62,7 @@ public enum AuthTypeEnum implements AuthType {
      * 认证类型
      *
      * @return {@link Integer}
-     * @author luyuhao
+     * @author darren
      * @since 2022/6/6
      */
     @Override
@@ -74,7 +74,7 @@ public enum AuthTypeEnum implements AuthType {
      * 认证说明
      *
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2022/6/6
      */
     @Override
@@ -86,7 +86,7 @@ public enum AuthTypeEnum implements AuthType {
      * 认证对应的token类型
      *
      * @return {@link Class}
-     * @author luyuhao
+     * @author darren
      * @since 2022/6/6
      */
     @Override

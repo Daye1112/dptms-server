@@ -33,7 +33,7 @@ import java.util.Optional;
 /**
  * 服务统计controller
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/02/15 23:25
  */
 @Slf4j
@@ -58,7 +58,7 @@ public class ServerStatController {
      * 查询服务list
      *
      * @return {@link KeyValueDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/02/17 22:48
      */
     @Log(value = "查询服务list", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
@@ -83,7 +83,7 @@ public class ServerStatController {
      *
      * @param module 模块key
      * @return {@link DruidStatDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/02/15 23:36
      */
     @Log(value = "接口统计查询", logLevel = LogLevel.INFO, businessType = BusinessType.QUERY)

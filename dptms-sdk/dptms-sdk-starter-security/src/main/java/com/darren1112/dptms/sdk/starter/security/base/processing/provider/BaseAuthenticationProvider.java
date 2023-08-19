@@ -6,7 +6,7 @@ import org.springframework.security.authentication.AuthenticationProvider;
 /**
  * 认证校验器
  *
- * @author luyuhao
+ * @author darren
  * @since 2022/06/05
  */
 public abstract class BaseAuthenticationProvider implements AuthenticationProvider {
@@ -15,7 +15,7 @@ public abstract class BaseAuthenticationProvider implements AuthenticationProvid
      * token对应的认证类型
      *
      * @return {@link AuthType}
-     * @author luyuhao
+     * @author darren
      * @since 2022/6/6
      */
     public abstract AuthType authType();

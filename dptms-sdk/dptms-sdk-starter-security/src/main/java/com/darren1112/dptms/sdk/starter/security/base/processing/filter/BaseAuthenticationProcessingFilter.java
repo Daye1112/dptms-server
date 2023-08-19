@@ -15,7 +15,7 @@ import java.io.IOException;
 /**
  * 基础认证加工过滤器
  *
- * @author luyuhao
+ * @author darren
  * @since 2022/06/04
  */
 public abstract class BaseAuthenticationProcessingFilter extends AbstractAuthenticationProcessingFilter {
@@ -23,7 +23,7 @@ public abstract class BaseAuthenticationProcessingFilter extends AbstractAuthent
     /**
      * 构造方法
      *
-     * @author luyuhao
+     * @author darren
      * @since 2022/06/04
      */
     public BaseAuthenticationProcessingFilter(String loginPath, String httpMethod) {
@@ -33,7 +33,7 @@ public abstract class BaseAuthenticationProcessingFilter extends AbstractAuthent
     /**
      * 构造方法
      *
-     * @author luyuhao
+     * @author darren
      * @since 2022/06/04
      */
     public BaseAuthenticationProcessingFilter(String loginPath, String httpMethod,
@@ -53,7 +53,7 @@ public abstract class BaseAuthenticationProcessingFilter extends AbstractAuthent
      * @throws AuthenticationException 认证异常
      * @throws IOException             io异常
      * @throws ServletException        servlet异常
-     * @author luyuhao
+     * @author darren
      * @since 2022/06/05
      */
     @Override
@@ -73,7 +73,7 @@ public abstract class BaseAuthenticationProcessingFilter extends AbstractAuthent
      * @param response 响应域
      * @return {@link Authentication}
      * @throws AuthenticationException 认证异常
-     * @author luyuhao
+     * @author darren
      * @since 2022/06/04
      */
     protected abstract Authentication handle(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException;
@@ -85,7 +85,7 @@ public abstract class BaseAuthenticationProcessingFilter extends AbstractAuthent
      * @param token    token
      * @param request  请求域
      * @param response 响应域
-     * @author luyuhao
+     * @author darren
      * @since 2022/06/04
      */
     protected void finallyHandle(Authentication token, HttpServletRequest request, HttpServletResponse response) {

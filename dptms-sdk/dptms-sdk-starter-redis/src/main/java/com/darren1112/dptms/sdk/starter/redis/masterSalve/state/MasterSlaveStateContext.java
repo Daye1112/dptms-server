@@ -5,7 +5,7 @@ import com.darren1112.dptms.sdk.starter.redis.masterSalve.state.impl.MasterState
 import com.darren1112.dptms.sdk.starter.redis.masterSalve.state.impl.SlaveStateImpl;
 
 /**
- * @author luyuhao
+ * @author darren
  * @since 2021/8/5
  */
 public class MasterSlaveStateContext {

@@ -12,7 +12,7 @@ import java.util.Properties;
 /**
  * properties工具类
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/7/21
  */
 public class PropertiesUtil {
@@ -24,7 +24,7 @@ public class PropertiesUtil {
      *
      * @param str 字符串
      * @return {@link Properties}
-     * @author luyuhao
+     * @author darren
      * @since 2021/7/21
      */
     public static Properties buildPropertiesByStr(String str) {

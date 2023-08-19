@@ -9,7 +9,7 @@ import java.net.URLEncoder;
 /**
  * 编码工具类
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/7/21
  */
 public class EncodeUtil {
@@ -19,7 +19,7 @@ public class EncodeUtil {
      *
      * @param str 待编码串
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/7/21
      */
     public static String encodeUrl(String str) {
@@ -38,7 +38,7 @@ public class EncodeUtil {
      *
      * @param str 待解码串
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2021/7/21
      */
     public static String decodeUrl(String str) {

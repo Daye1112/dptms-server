@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * 组织ServiceImpl
  *
- * @author luyuhao
+ * @author darren
  * @since 2020/08/16 01:43
  */
 @Service
@@ -38,7 +38,7 @@ public class AuthOrganizationServiceImpl extends BaseService implements AuthOrga
      * @param pageParam 分页参数
      * @param param     筛选参数
      * @return {@link AuthOrganizationDto}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/10 01:08
      */
     @Override
@@ -54,7 +54,7 @@ public class AuthOrganizationServiceImpl extends BaseService implements AuthOrga
      *
      * @param dto 组织参数
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/10 01:08
      */
     @Override
@@ -71,7 +71,7 @@ public class AuthOrganizationServiceImpl extends BaseService implements AuthOrga
      *
      * @param entity   参数
      * @param isUpdate 是否更新
-     * @author luyuhao
+     * @author darren
      * @since 20/12/12 22:04
      */
     private void validRepeat(AuthOrganizationEntity entity, boolean isUpdate) {
@@ -91,7 +91,7 @@ public class AuthOrganizationServiceImpl extends BaseService implements AuthOrga
      *
      * @param entity 组织参数
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/10 01:08
      */
     @Override
@@ -107,7 +107,7 @@ public class AuthOrganizationServiceImpl extends BaseService implements AuthOrga
      *
      * @param id      记录id
      * @param updater 更新者
-     * @author luyuhao
+     * @author darren
      * @since 20/12/10 01:08
      */
     @Override

@@ -8,7 +8,7 @@ import java.lang.annotation.*;
 /**
  * 是否开启网关接口文档注解
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/02/13 22:20
  */
 @Target({ElementType.TYPE})

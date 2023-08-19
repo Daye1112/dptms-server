@@ -8,7 +8,7 @@ import com.darren1112.dptms.common.spi.common.dto.PageParam;
 /**
  * 组织Service
  *
- * @author luyuhao
+ * @author darren
  * @since 2020/08/16 01:42
  */
 public interface AuthOrganizationService {
@@ -18,7 +18,7 @@ public interface AuthOrganizationService {
      *
      * @param dto 组织参数
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/10 01:08
      */
     Long insert(AuthOrganizationDto dto);
@@ -28,7 +28,7 @@ public interface AuthOrganizationService {
      *
      * @param entity 组织参数
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/10 01:08
      */
     Long update(AuthOrganizationEntity entity);
@@ -38,7 +38,7 @@ public interface AuthOrganizationService {
      *
      * @param id      记录id
      * @param updater 更新者
-     * @author luyuhao
+     * @author darren
      * @since 20/12/10 01:08
      */
     void deleteById(Long id, Long updater);
@@ -49,7 +49,7 @@ public interface AuthOrganizationService {
      * @param pageParam 分页参数
      * @param param     筛选参数
      * @return {@link AuthOrganizationDto}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/10 01:08
      */
     PageBean<AuthOrganizationDto> listPage(PageParam pageParam, AuthOrganizationDto param);

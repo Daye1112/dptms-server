@@ -11,7 +11,7 @@ import java.io.IOException;
 /**
  * 登录成功处理器
  *
- * @author luyuhao
+ * @author darren
  * @since 2022/6/2
  */
 public abstract class BaseAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
@@ -22,7 +22,7 @@ public abstract class BaseAuthenticationSuccessHandler implements Authentication
      * @param request        请求域
      * @param response       响应域
      * @param authentication 认证用户信息
-     * @author luyuhao
+     * @author darren
      * @since 2022/6/2
      */
     @Override
@@ -42,7 +42,7 @@ public abstract class BaseAuthenticationSuccessHandler implements Authentication
      * @param response       响应域
      * @throws IOException      io异常
      * @throws ServletException servlet异常
-     * @author luyuhao
+     * @author darren
      * @since 2022/6/6
      */
     protected abstract void handle(Authentication authentication, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException;
@@ -54,7 +54,7 @@ public abstract class BaseAuthenticationSuccessHandler implements Authentication
      * @param authentication 认证信息
      * @param request        请求域
      * @param response       响应域
-     * @author luyuhao
+     * @author darren
      * @since 2022/06/04
      */
     protected void finallyHandle(Authentication authentication, HttpServletRequest request, HttpServletResponse response) {

@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * 菜单Service
  *
- * @author luyuhao
+ * @author darren
  * @since 2020/12/12 17:25
  */
 public interface AuthMenuService {
@@ -18,7 +18,7 @@ public interface AuthMenuService {
      *
      * @param userId 用户id
      * @return {@link AuthMenuDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/17 19:34
      */
     List<AuthMenuDto> listMenuByUserId(Long userId);
@@ -57,7 +57,7 @@ public interface AuthMenuService {
      * 查询菜单树
      *
      * @return {@link AuthMenuDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/03 23:29
      */
     AuthMenuDto listTree();

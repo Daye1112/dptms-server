@@ -9,7 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 /**
  * md5+动态盐密码加密器
  *
- * @author luyuhao
+ * @author darren
  * @since 2022/11/15
  */
 public class Md5PasswordEncoder implements PasswordEncoder {
@@ -21,7 +21,7 @@ public class Md5PasswordEncoder implements PasswordEncoder {
      *
      * @param rawPassword 盐+原密码
      * @return {@link String}
-     * @author luyuhao
+     * @author darren
      * @since 2022/11/15
      */
     @Override
@@ -38,7 +38,7 @@ public class Md5PasswordEncoder implements PasswordEncoder {
      * @param rawPassword     盐+用户提交密码
      * @param encodedPassword 加密后的密码
      * @return {@link boolean}
-     * @author luyuhao
+     * @author darren
      * @since 2022/11/15
      */
     @Override

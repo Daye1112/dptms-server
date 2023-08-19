@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * cookie工具类
  *
- * @author luyuhao
+ * @author darren
  * @since 2020/11/26 22:46
  */
 public class CookieUtil {
@@ -24,7 +24,7 @@ public class CookieUtil {
      * @param value    value
      * @param maxAge   有效期
      * @param response 响应域
-     * @author luyuhao
+     * @author darren
      * @since 20/11/26 22:57
      */
     public static void setCookie(String key, String value, int maxAge, HttpServletResponse response) {
@@ -40,7 +40,7 @@ public class CookieUtil {
      * @param key      key
      * @param value    value
      * @param response 响应域
-     * @author luyuhao
+     * @author darren
      * @since 20/11/26 22:57
      */
     public static void setCookie(String key, String value, HttpServletResponse response) {
@@ -56,7 +56,7 @@ public class CookieUtil {
      * @param cookieName cookie名
      * @param request    请求域
      * @return cookie值
-     * @author luyuhao
+     * @author darren
      * @since 20/11/26 22:47
      */
     public static String getCookie(String cookieName, HttpServletRequest request) {
@@ -76,7 +76,7 @@ public class CookieUtil {
      *
      * @param cookieName cookie名
      * @param response   响应域
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/28 01:10
      */
     public static void deleteCookie(String cookieName, HttpServletResponse response) {

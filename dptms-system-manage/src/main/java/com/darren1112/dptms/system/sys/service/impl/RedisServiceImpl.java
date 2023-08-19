@@ -16,7 +16,7 @@ import java.util.Set;
 /**
  * redis service impl
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/01/31 00:05
  */
 @Service
@@ -31,7 +31,7 @@ public class RedisServiceImpl extends BaseService implements RedisService {
      * @param keyPrefix key前缀
      * @param pageParam 分页参数
      * @return {@link SysRedisDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/31 00:07
      */
     @Override
@@ -63,7 +63,7 @@ public class RedisServiceImpl extends BaseService implements RedisService {
      * 新增缓存
      *
      * @param sysRedisDto 缓存信息
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/31 01:01
      */
     @Override
@@ -75,7 +75,7 @@ public class RedisServiceImpl extends BaseService implements RedisService {
      * 删除缓存
      *
      * @param sysRedisDto 缓存信息
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/31 00:04
      */
     @Override

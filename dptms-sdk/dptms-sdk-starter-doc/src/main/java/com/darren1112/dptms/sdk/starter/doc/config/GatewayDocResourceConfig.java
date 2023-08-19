@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * 网关资源配置
  *
- * @author luyuhao
+ * @author darren
  * @since 2020/08/07 02:00
  */
 @Slf4j

@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * 文件中心Dao
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/12/18
  */
 @Mapper
@@ -23,7 +23,7 @@ public interface FileCenterDao extends BaseMapper<FileCenterDto> {
      *
      * @param parentId 父节点id
      * @return {@link FileCenterDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/18
      */
     List<FileCenterDto> list(@Param("parentId") Long parentId);

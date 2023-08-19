@@ -26,7 +26,7 @@ import org.springframework.util.Base64Utils;
 /**
  * 安全验证自动配置
  *
- * @author luyuhao
+ * @author darren
  * @since 2020/12/07 00:54
  */
 @EnableConfigurationProperties(SecurityProperties.class)

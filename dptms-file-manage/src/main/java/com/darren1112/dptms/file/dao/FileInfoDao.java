@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 /**
  * 文件信息Dao
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/12/1
  */
 @Mapper
@@ -21,7 +21,7 @@ public interface FileInfoDao extends BaseMapper<FileInfoDto> {
      *
      * @param fileId 文件id
      * @return {@link FileInfoDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/12/10
      */
     FileInfoDto getById(@Param("fileId") Long fileId);

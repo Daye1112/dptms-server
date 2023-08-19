@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 /**
  * 响应对象工具类
  *
- * @author luyuhao
+ * @author darren
  * @since 19/12/14 16:49
  */
 public class ResponseEntityUtil {

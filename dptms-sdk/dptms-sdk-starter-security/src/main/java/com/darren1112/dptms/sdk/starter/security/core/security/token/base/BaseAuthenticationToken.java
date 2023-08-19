@@ -13,7 +13,7 @@ import java.util.Collection;
 /**
  * 基础token
  *
- * @author luyuhao
+ * @author darren
  * @since 2022/06/05
  */
 public abstract class BaseAuthenticationToken extends AbstractAuthenticationToken {
@@ -31,7 +31,7 @@ public abstract class BaseAuthenticationToken extends AbstractAuthenticationToke
      * @param response 响应域
      * @return {@link BaseAuthenticationToken}
      * @throws AuthenticationException 认证异常
-     * @author luyuhao
+     * @author darren
      * @since 2022/6/6
      */
     public abstract BaseAuthenticationToken buildParamToken(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException;
@@ -40,7 +40,7 @@ public abstract class BaseAuthenticationToken extends AbstractAuthenticationToke
      * token对应的认证类型
      *
      * @return {@link AuthType}
-     * @author luyuhao
+     * @author darren
      * @since 2022/6/6
      */
     public abstract AuthType authType();

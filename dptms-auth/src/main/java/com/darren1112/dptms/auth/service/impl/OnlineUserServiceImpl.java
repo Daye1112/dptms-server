@@ -18,7 +18,7 @@ import java.util.Optional;
 /**
  * 在线用户管理ServiceImpl
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/01/31 22:05
  */
 @Service
@@ -37,7 +37,7 @@ public class OnlineUserServiceImpl extends BaseService implements OnlineUserServ
      * @param activeUser 查询条件
      * @param pageParam  分页参数
      * @return {@link ActiveUser}
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/31 21:52
      */
     @Override
@@ -68,7 +68,7 @@ public class OnlineUserServiceImpl extends BaseService implements OnlineUserServ
      * 强制下线用户
      *
      * @param userId 用户id
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/31 22:57
      */
     @Override

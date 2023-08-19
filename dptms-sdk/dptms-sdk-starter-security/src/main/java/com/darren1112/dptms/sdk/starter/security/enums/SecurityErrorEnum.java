@@ -11,7 +11,7 @@ import java.util.Arrays;
 /**
  * 安全校验enum
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/01/17 00:50
  */
 public enum SecurityErrorEnum implements BaseErrorEnum {
@@ -46,7 +46,7 @@ public enum SecurityErrorEnum implements BaseErrorEnum {
      *
      * @param authenticationException 认证异常
      * @return {@link SecurityErrorEnum}
-     * @author luyuhao
+     * @author darren
      * @since 2022/11/16
      */
     public static SecurityErrorEnum matchByAuthException(AuthenticationException authenticationException) {

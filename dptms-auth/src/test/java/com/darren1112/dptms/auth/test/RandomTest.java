@@ -5,7 +5,7 @@ import org.junit.Test;
 import java.util.UUID;
 
 /**
- * @author luyuhao
+ * @author darren
  * @since 2020/11/23 00:04
  */
 public class RandomTest {

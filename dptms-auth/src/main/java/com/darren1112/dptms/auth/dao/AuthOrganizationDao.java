@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * 组织Dao
  *
- * @author luyuhao
+ * @author darren
  * @since 20/08/16 01:35
  */
 @Mapper
@@ -25,7 +25,7 @@ public interface AuthOrganizationDao extends BaseMapper<AuthOrganizationDto> {
      *
      * @param param 查询参数
      * @return 记录数
-     * @author luyuhao
+     * @author darren
      * @since 20/12/12 22:08
      */
     Long countByRepeat(AuthOrganizationDto param);
@@ -35,7 +35,7 @@ public interface AuthOrganizationDao extends BaseMapper<AuthOrganizationDto> {
     //  *
     //  * @param entity 组织参数
     //  * @return {@link Long}
-    //  * @author luyuhao
+    //  * @author darren
     //  * @since 20/12/10 01:08
     //  */
     // Long insert(AuthOrganizationEntity entity);
@@ -45,7 +45,7 @@ public interface AuthOrganizationDao extends BaseMapper<AuthOrganizationDto> {
      *
      * @param entity 组织参数
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/10 01:08
      */
     Long update(AuthOrganizationEntity entity);
@@ -55,7 +55,7 @@ public interface AuthOrganizationDao extends BaseMapper<AuthOrganizationDto> {
      *
      * @param id      记录id
      * @param updater 更新者
-     * @author luyuhao
+     * @author darren
      * @since 20/12/10 01:08
      */
     void deleteById(@Param("id") Long id, @Param("updater") Long updater);
@@ -66,7 +66,7 @@ public interface AuthOrganizationDao extends BaseMapper<AuthOrganizationDto> {
      * @param pageParam 分页参数
      * @param param     筛选条件
      * @return {@link AuthOrganizationDto}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/12 22:47
      */
     List<AuthOrganizationDto> listPage(@Param("pageParam") PageParam pageParam, @Param("param") AuthOrganizationDto param);
@@ -76,7 +76,7 @@ public interface AuthOrganizationDao extends BaseMapper<AuthOrganizationDto> {
      *
      * @param param 筛选条件
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 20/12/12 22:47
      */
     Long listPageCount(AuthOrganizationDto param);

@@ -12,7 +12,7 @@ import java.util.Date;
 /**
  * 配置发布表Entity
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/03/12 01:40
  */
 @Data

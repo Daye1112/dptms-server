@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * 配置环境表Dao
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/03/12 01:43
  */
 @Mapper
@@ -23,7 +23,7 @@ public interface ServiceConfigProfileDao extends BaseMapper<ServiceConfigProfile
      *
      * @param dto 查询条件
      * @return {@link ServiceConfigProfileDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/03/13 01:50
      */
     List<ServiceConfigProfileDto> list(ServiceConfigProfileDto dto);
@@ -33,7 +33,7 @@ public interface ServiceConfigProfileDao extends BaseMapper<ServiceConfigProfile
      *
      * @param param 参数
      * @return {@link Long}
-     * @author luyuhao
+     * @author darren
      * @since 2021/03/14 02:05
      */
     Long countByRepeat(ServiceConfigProfileDto param);
@@ -42,7 +42,7 @@ public interface ServiceConfigProfileDao extends BaseMapper<ServiceConfigProfile
      * 更新配置环境
      *
      * @param dto 配置环境信息
-     * @author luyuhao
+     * @author darren
      * @since 2021/03/14 02:14
      */
     void update(ServiceConfigProfileDto dto);
@@ -52,7 +52,7 @@ public interface ServiceConfigProfileDao extends BaseMapper<ServiceConfigProfile
      *
      * @param id      配置环境id
      * @param updater 更新者id
-     * @author luyuhao
+     * @author darren
      * @since 2021/03/14 02:18
      */
     void deleteById(@Param("id") Long id, @Param("updater") Long updater);

@@ -7,7 +7,7 @@ import com.darren1112.dptms.sdk.component.remoting.MonitorManageRemoting;
 /**
  * 日志收集器工厂
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/7/30
  */
 public class LogCollectFactory {
@@ -19,7 +19,7 @@ public class LogCollectFactory {
      *
      * @param logCollectType 日志收集类型
      * @return {@link LogCollectService}
-     * @author luyuhao
+     * @author darren
      * @since 2021/7/30
      */
     public LogCollectService create(LogCollectType logCollectType) {

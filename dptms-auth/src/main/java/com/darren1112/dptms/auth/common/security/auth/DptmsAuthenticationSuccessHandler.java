@@ -25,7 +25,7 @@ import java.util.Date;
 /**
  * 登录成功处理器
  *
- * @author luyuhao
+ * @author darren
  * @since 2022/11/15
  */
 @Component
@@ -50,7 +50,7 @@ public class DptmsAuthenticationSuccessHandler extends BaseAuthenticationSuccess
      * @param response       响应域
      * @throws IOException      io异常
      * @throws ServletException servlet异常
-     * @author luyuhao
+     * @author darren
      * @since 2022/6/6
      */
     @Override
@@ -73,7 +73,7 @@ public class DptmsAuthenticationSuccessHandler extends BaseAuthenticationSuccess
      *
      * @param activeUser 用户信息
      * @param request    请求域
-     * @author luyuhao
+     * @author darren
      * @since 2022/11/15
      */
     private void setExtAttr(ActiveUser activeUser, HttpServletRequest request) {
@@ -88,7 +88,7 @@ public class DptmsAuthenticationSuccessHandler extends BaseAuthenticationSuccess
      * 登录日志采集
      *
      * @param activeUser 登录用户信息
-     * @author luyuhao
+     * @author darren
      * @since 2021/2/9 14:09
      */
     private void loginLogCollect(ActiveUser activeUser) {

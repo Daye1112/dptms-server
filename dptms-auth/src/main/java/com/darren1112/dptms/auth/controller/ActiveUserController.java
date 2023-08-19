@@ -33,7 +33,7 @@ import java.util.List;
 /**
  * 认证管理Controller
  *
- * @author luyuhao
+ * @author darren
  * @since 2020/07/20 00:06
  */
 @Slf4j
@@ -58,7 +58,7 @@ public class ActiveUserController {
      * 获取用户信息
      *
      * @return {@link ActiveUser}
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/17 19:24
      */
     @GetMapping("/getInfo")
@@ -72,7 +72,7 @@ public class ActiveUserController {
      * 获取用户最新信息
      *
      * @return {@link AuthPermissionDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/17 19:34
      */
     @GetMapping("/getNewInfo")
@@ -94,7 +94,7 @@ public class ActiveUserController {
      * 获取用户的菜单
      *
      * @return {@link AuthMenuDto}
-     * @author luyuhao
+     * @author darren
      * @since 2021/01/17 19:34
      */
     @GetMapping("/listMenu")
@@ -111,7 +111,7 @@ public class ActiveUserController {
      *
      * @param entity 用户信息
      * @return {@link JsonResult}
-     * @author luyuhao
+     * @author darren
      * @since 2021/11/24
      */
     @PostMapping("/updateInfo")
@@ -142,7 +142,7 @@ public class ActiveUserController {
      *
      * @param dto 用户信息
      * @return {@link JsonResult}
-     * @author luyuhao
+     * @author darren
      * @since 2021/11/24
      */
     @PostMapping("/updatePassword")

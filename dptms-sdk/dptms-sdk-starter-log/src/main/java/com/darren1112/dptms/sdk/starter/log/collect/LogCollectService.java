@@ -7,7 +7,7 @@ import org.springframework.scheduling.annotation.Async;
 /**
  * 日志收集基础类
  *
- * @author luyuhao
+ * @author darren
  * @since 2021/02/07 00:29
  */
 public interface LogCollectService {
@@ -16,7 +16,7 @@ public interface LogCollectService {
      * 操作日志收集
      *
      * @param dto 日志细信息
-     * @author luyuhao
+     * @author darren
      * @since 2021/02/07 00:31
      */
     @Async("logCollectThreadPool")
@@ -26,7 +26,7 @@ public interface LogCollectService {
      * 插入登录日志信息
      *
      * @param dto 日志参数
-     * @author luyuhao
+     * @author darren
      * @since 2021/02/06 20:50
      */
     @Async("logCollectThreadPool")
