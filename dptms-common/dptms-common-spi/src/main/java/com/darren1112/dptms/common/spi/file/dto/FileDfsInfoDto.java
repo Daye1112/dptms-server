@@ -1,5 +1,6 @@
 package com.darren1112.dptms.common.spi.file.dto;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.darren1112.dptms.common.spi.file.entity.FileDfsInfoEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -12,6 +13,7 @@ import lombok.ToString;
  * @since 2021/12/1
  */
 @Data
+@TableName("file_dfs_info")
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public class FileDfsInfoDto extends FileDfsInfoEntity {

@@ -58,4 +58,15 @@ public class FileHandlerFactory {
             throw new RuntimeException("文件下载-存储大小小于1");
         }
     }
+
+    /**
+     * 默认处理器
+     *
+     * @return {@link FileHandler}
+     * @author darren
+     * @since 2023/08/19
+     */
+    public FileHandler defaultCreate() {
+        return smallFileHandler;
+    }
 }

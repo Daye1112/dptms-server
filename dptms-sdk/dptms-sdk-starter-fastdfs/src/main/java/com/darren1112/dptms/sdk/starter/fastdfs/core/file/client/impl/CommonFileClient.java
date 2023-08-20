@@ -1,8 +1,8 @@
 package com.darren1112.dptms.sdk.starter.fastdfs.core.file.client.impl;
 
+import com.darren1112.dptms.common.spi.file.dto.FileDfsInfoDto;
 import com.darren1112.dptms.sdk.starter.fastdfs.core.file.client.FileClient;
 import com.darren1112.dptms.sdk.starter.fastdfs.core.file.factory.FileHandlerFactory;
-import com.darren1112.dptms.common.spi.file.dto.FileDfsInfoDto;
 import com.github.tobato.fastdfs.domain.fdfs.MetaData;
 
 import java.io.InputStream;
@@ -53,5 +53,18 @@ public class CommonFileClient implements FileClient {
     public byte[] download(List<FileDfsInfoDto> fileDfsInfoList) throws Exception {
         return fileHandlerFactory.downloadCreate(fileDfsInfoList.size())
                 .download(fileDfsInfoList);
+    }
+
+    /**
+     * 批量删除文件
+     *
+     * @param fileDfsInfoList 文件存储信息集合
+     * @author darren
+     * @since 2023/08/19
+     */
+    @Override
+    public void delete(List<FileDfsInfoDto> fileDfsInfoList) throws Exception {
+        fileHandlerFactory.defaultCreate()
+                .delete(fileDfsInfoList);
     }
 }

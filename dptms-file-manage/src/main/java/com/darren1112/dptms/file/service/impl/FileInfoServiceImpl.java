@@ -2,6 +2,7 @@ package com.darren1112.dptms.file.service.impl;
 
 import com.darren1112.dptms.common.core.exception.BadRequestException;
 import com.darren1112.dptms.common.core.exception.ServiceHandleException;
+import com.darren1112.dptms.common.core.util.CollectionUtil;
 import com.darren1112.dptms.common.spi.file.dto.FileDfsInfoDto;
 import com.darren1112.dptms.common.spi.file.dto.FileInfoDto;
 import com.darren1112.dptms.file.common.enums.FileManageErrorCodeEnum;
@@ -12,12 +13,12 @@ import com.darren1112.dptms.file.service.FileInfoService;
 import com.darren1112.dptms.sdk.starter.fastdfs.core.file.client.FileClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 文件信息ServiceImpl
@@ -130,5 +131,39 @@ public class FileInfoServiceImpl implements FileInfoService {
         fileInfoDto.setUpdater(updater);
 
         fileInfoRepository.updateFileName(fileInfoDto);
+    }
+
+    /**
+     * 删除文件
+     *
+     * @param id      文件id
+     * @param updater 更新者
+     * @author darren
+     * @since 2023/08/19
+     */
+    @Override
+    public void deleteById(Long id, Long updater) {
+        try {
+            // 获取文件信息
+            FileInfoDto fileInfo = getFullInfoById(id);
+            // 判断文件存储信息是否为空
+            if (CollectionUtil.isEmpty(fileInfo.getFileDfsInfoList())) {
+                return;
+            }
+            //批量删除文件
+            fileClient.delete(fileInfo.getFileDfsInfoList());
+
+            // 存储信息ids
+            List<Long> fileDfsInfoIdList = fileInfo.getFileDfsInfoList().stream()
+                    .map(FileDfsInfoDto::getId)
+                    .collect(Collectors.toList());
+
+            // 更新数据库
+            fileInfoRepository.deleteById(id, updater);
+            fileDfsInfoRepository.batchDeleteByIds(fileDfsInfoIdList, updater);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            throw new BadRequestException(FileManageErrorCodeEnum.FILE_DELETE_ERROR);
+        }
     }
 }

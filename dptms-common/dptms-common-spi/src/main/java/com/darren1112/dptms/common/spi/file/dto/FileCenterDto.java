@@ -1,5 +1,6 @@
 package com.darren1112.dptms.common.spi.file.dto;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.darren1112.dptms.common.spi.file.entity.FileCenterEntity;
 import io.swagger.annotations.ApiModelProperty;
@@ -24,42 +25,49 @@ public class FileCenterDto extends FileCenterEntity {
     /**
      * 文件类型
      */
+    @TableField(exist = false)
     @ApiModelProperty(value = "文件类型")
     private Integer fileInfoType;
 
     /**
      * 文件大小
      */
+    @TableField(exist = false)
     @ApiModelProperty(value = "文件大小")
     private Long fileSize;
 
     /**
      * 文件大小-自适应
      */
+    @TableField(exist = false)
     @ApiModelProperty(value = "文件大小-自适应")
     private String fileSizeStr;
 
     /**
      * 文件夹大小
      */
+    @TableField(exist = false)
     @ApiModelProperty(value = "文件夹大小")
     private Long fileSizeCount;
 
     /**
      * 文件夹大小-自适应
      */
+    @TableField(exist = false)
     @ApiModelProperty(value = "文件夹大小-自适应")
     private String fileSizeCountStr;
 
     /**
      * 文件类型名
      */
+    @TableField(exist = false)
     @ApiModelProperty(value = "文件类型名")
     private String fileExt;
 
     /**
      * 创建者姓名
      */
+    @TableField(exist = false)
     @ApiModelProperty(value = "创建者姓名")
     private String creatorName;
 }

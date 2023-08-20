@@ -1,6 +1,7 @@
 package com.darren1112.dptms.file.service.impl;
 
 import com.darren1112.dptms.common.core.exception.BadRequestException;
+import com.darren1112.dptms.common.core.util.CollectionUtil;
 import com.darren1112.dptms.common.core.util.FileUtil;
 import com.darren1112.dptms.common.spi.file.dto.FileCenterDto;
 import com.darren1112.dptms.file.common.enums.FileManageErrorCodeEnum;
@@ -15,8 +16,10 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * 文件中心ServiceImpl
@@ -112,8 +115,30 @@ public class FileCenterServiceImpl implements FileCenterService {
         if (dataInfo == null) {
             throw new BadRequestException(FileManageErrorCodeEnum.FILE_NOT_EXIST);
         }
-        fileCenterRepository.deleteById(dto);
-        // TODO 删除文件/文件夹下的所有文件
-        List<FileCenterDto> subFIleList = fileCenterRepository.listSubFileList(dataInfo.getFileParentPath()+ "/" + dataInfo.getId());
+
+        // 批量删除文件/文件夹下的所有文件
+        List<FileCenterDto> subFileList = fileCenterRepository.listSubFileList(dataInfo.getFileParentPath() + "/" + dataInfo.getId());
+
+        // 抽取文件id集合
+        List<Long> idList = Optional.ofNullable(subFileList).orElse(new ArrayList<>())
+                .stream().map(FileCenterDto::getId)
+                .collect(Collectors.toList());
+        idList.add(dto.getId());
+
+        // 批量删除文件
+        fileCenterRepository.deleteByIds(idList, dto.getUpdater());
+
+        List<Long> fileIdList = Optional.ofNullable(subFileList).orElse(new ArrayList<>())
+                .stream()
+                .filter(item -> item.getFileId() != null)
+                .map(FileCenterDto::getFileId)
+                .collect(Collectors.toList());
+        if(dataInfo.getFileId() != null ){
+            fileIdList.add(dataInfo.getFileId());
+        }
+        // 删除文件信息
+        if (CollectionUtil.isNotEmpty(fileIdList)) {
+            fileIdList.forEach(item -> fileInfoService.deleteById(item, dto.getUpdater()));
+        }
     }
 }

@@ -31,4 +31,21 @@ public class FileInfoRepository extends ServiceImpl<FileInfoDao, FileInfoDto> {
                 .eq(FileInfoDto::getId, fileInfoDto.getId())
                 .update();
     }
+
+    /**
+     * 根据id删除数据
+     *
+     * @param id      数据id
+     * @param updater 更新者
+     * @author darren
+     * @since 2023/08/19
+     */
+    public void deleteById(Long id, Long updater) {
+        this.lambdaUpdate()
+                .set(FileInfoDto::getIsvalid, 0)
+                .set(FileInfoDto::getUpdater, updater)
+                .set(FileInfoDto::getMtime, new Date())
+                .eq(FileInfoDto::getId, id)
+                .update();
+    }
 }

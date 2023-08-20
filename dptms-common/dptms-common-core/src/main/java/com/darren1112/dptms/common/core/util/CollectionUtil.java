@@ -3,6 +3,7 @@ package com.darren1112.dptms.common.core.util;
 import org.apache.commons.collections.CollectionUtils;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -79,5 +80,49 @@ public class CollectionUtil extends CollectionUtils {
         List<T> result = new ArrayList<>();
         result.add(obj);
         return result;
+    }
+
+    /**
+     * 将集合中的属性进行join
+     *
+     * @param list 集合
+     * @return {@link String}
+     * @author darren
+     * @since 2023/08/19
+     */
+    public static <T> String joinField(Collection<T> list) {
+        return joinField(list, String::valueOf, ",");
+    }
+
+    /**
+     * 将集合中的属性进行join
+     *
+     * @param list      集合
+     * @param fieldFunc 属性func
+     * @return {@link String}
+     * @author darren
+     * @since 2023/08/19
+     */
+    public static <T> String joinField(Collection<T> list, Function<T, String> fieldFunc) {
+        return joinField(list, fieldFunc, ",");
+    }
+
+    /**
+     * 将集合中的属性进行join
+     *
+     * @param list      集合
+     * @param fieldFunc 属性func
+     * @param delimiter 分隔符
+     * @return {@link String}
+     * @author darren
+     * @since 2023/08/19
+     */
+    public static <T> String joinField(Collection<T> list, Function<T, String> fieldFunc, String delimiter) {
+        if (isEmpty(list)) {
+            return "";
+        }
+        return list.stream()
+                .map(fieldFunc)
+                .collect(Collectors.joining(delimiter));
     }
 }

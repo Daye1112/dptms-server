@@ -22,7 +22,7 @@
                          LEFT JOIN file_info t5 ON t4.isvalid = 1 AND t4.file_id = t5.id
                 WHERE t4.isvalid = 1
                   AND t4.file_parent_path
-                        LIKE concat(t1.file_parent_path, '/', t1.id)) AS fileSizeCount
+                        LIKE concat(t1.file_parent_path, '/', t1.id, '%')) AS fileSizeCount
         FROM file_center t1
                  LEFT JOIN file_info t2 ON t2.isvalid = 1 AND t2.id = t1.file_id
                  LEFT JOIN auth_user t3 ON t3.isvalid = 1 AND t3.id = t1.creater

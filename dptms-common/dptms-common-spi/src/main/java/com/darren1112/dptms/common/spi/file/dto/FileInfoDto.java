@@ -1,5 +1,6 @@
 package com.darren1112.dptms.common.spi.file.dto;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.darren1112.dptms.common.spi.file.entity.FileInfoEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -14,6 +15,7 @@ import java.util.List;
  * @since 2021/12/1
  */
 @Data
+@TableName("file_info")
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public class FileInfoDto extends FileInfoEntity {

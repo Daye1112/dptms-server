@@ -52,4 +52,14 @@ public interface FileInfoService {
      * @since 2023/08/16
      */
     void updateFileName(Long id, String fileName, Long updater);
+
+    /**
+     * 删除文件
+     *
+     * @param id      文件id
+     * @param updater 更新者
+     * @author darren
+     * @since 2023/08/19
+     */
+    void deleteById(Long id, Long updater);
 }

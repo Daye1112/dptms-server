@@ -1,13 +1,16 @@
 package com.darren1112.dptms.sdk.starter.fastdfs.core.file.factory.handle;
 
+import com.darren1112.dptms.common.core.util.CollectionUtil;
 import com.darren1112.dptms.common.core.util.FileUtil;
-import com.darren1112.dptms.sdk.starter.fastdfs.core.fastdfs.factory.FastDfsHandlerFactory;
 import com.darren1112.dptms.common.spi.file.dto.FileDfsInfoDto;
+import com.darren1112.dptms.sdk.starter.fastdfs.core.fastdfs.factory.FastDfsHandlerFactory;
+import com.darren1112.dptms.sdk.starter.fastdfs.core.fastdfs.factory.handle.FastDfsHandler;
 import com.github.tobato.fastdfs.domain.fdfs.MetaData;
 import com.github.tobato.fastdfs.domain.fdfs.StorePath;
 import com.github.tobato.fastdfs.domain.proto.storage.DownloadByteArray;
 
 import java.io.InputStream;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -64,6 +67,29 @@ public abstract class AbstractFileHandler implements FileHandler {
             return FileDfsInfoDto.create(storePath.getGroup(), storePath.getPath(), fileSize, fileOrder);
         } catch (Exception e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * 文件删除
+     *
+     * @param fileDfsInfoList 文件存储信息集合
+     * @throws Exception 异常
+     * @author darren
+     * @since 2021/12/1
+     */
+    @Override
+    public void delete(List<FileDfsInfoDto> fileDfsInfoList) throws Exception {
+        // 为空则不进行处理
+        if (CollectionUtil.isEmpty(fileDfsInfoList)) {
+            return;
+        }
+
+        FastDfsHandler fastDfsHandler = fastDfsHandlerFactory.create();
+
+        // 批量删除
+        for (FileDfsInfoDto dto : fileDfsInfoList) {
+            fastDfsHandler.deleteFile(dto.getFileGroup(), dto.getFilePath());
         }
     }
 }

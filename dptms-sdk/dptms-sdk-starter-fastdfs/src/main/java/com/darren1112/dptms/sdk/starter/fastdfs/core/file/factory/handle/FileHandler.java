@@ -38,4 +38,14 @@ public interface FileHandler {
      * @since 2021/12/1
      */
     byte[] download(List<FileDfsInfoDto> fileDfsInfoList) throws Exception;
+
+    /**
+     * 文件删除
+     *
+     * @param fileDfsInfoList 文件存储信息集合
+     * @throws Exception 异常
+     * @author darren
+     * @since 2021/12/1
+     */
+    void delete(List<FileDfsInfoDto> fileDfsInfoList) throws Exception;
 }

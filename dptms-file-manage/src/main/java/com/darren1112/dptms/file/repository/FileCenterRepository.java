@@ -59,5 +59,25 @@ public class FileCenterRepository extends ServiceImpl<FileCenterDao, FileCenterD
      * @since 2023/08/19
      */
     public List<FileCenterDto> listSubFileList(String fileParentPath) {
+        return this.lambdaQuery()
+                .likeRight(FileCenterDto::getFileParentPath, fileParentPath)
+                .list();
+    }
+
+    /**
+     * 批量删除文件
+     *
+     * @param fileIdList 文件id集合
+     * @param updater    更新者
+     * @author darren
+     * @since 2023/08/19
+     */
+    public void deleteByIds(List<Long> fileIdList, Long updater) {
+        this.lambdaUpdate()
+                .set(FileCenterDto::getIsvalid, 0)
+                .set(FileCenterDto::getUpdater, updater)
+                .set(FileCenterDto::getMtime, new Date())
+                .in(FileCenterDto::getId, fileIdList)
+                .update();
     }
 }
