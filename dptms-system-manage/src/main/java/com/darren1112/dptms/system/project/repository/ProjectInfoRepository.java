@@ -32,6 +32,7 @@ public class ProjectInfoRepository extends ServiceImpl<ProjectInfoDao, ProjectIn
         return this.lambdaQuery()
                 .like(StringUtil.isNotBlank(dto.getResearchKey()),
                         ProjectInfoDto::getProjectName, dto.getResearchKey())
+                .eq(ProjectInfoDto::getOrgId, dto.getOrgId())
                 .orderByDesc(ProjectInfoDto::getMtime)
                 .last(StringUtil.format("LIMIT {}, {}", pageParam.getStartIndex(), pageParam.getPageSize()))
                 .list();
@@ -50,6 +51,7 @@ public class ProjectInfoRepository extends ServiceImpl<ProjectInfoDao, ProjectIn
                 .select(ProjectInfoDto::getId)
                 .like(StringUtil.isNotBlank(dto.getResearchKey()),
                         ProjectInfoDto::getProjectName, dto.getResearchKey())
+                .eq(ProjectInfoDto::getOrgId, dto.getOrgId())
                 .count().longValue();
     }
 
@@ -68,6 +70,7 @@ public class ProjectInfoRepository extends ServiceImpl<ProjectInfoDao, ProjectIn
                         ProjectInfoDto::getProjectName, param.getProjectName())
                 .eq(StringUtil.isNotBlank(param.getProjectAppKey()),
                         ProjectInfoDto::getProjectAppKey, param.getProjectAppKey())
+                .eq(ProjectInfoDto::getOrgId, param.getOrgId())
                 .ne(param.getIsUpdate(),
                         ProjectInfoDto::getId, param.getId())
                 .count().longValue();

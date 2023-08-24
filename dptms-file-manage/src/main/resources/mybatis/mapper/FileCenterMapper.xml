@@ -27,6 +27,7 @@
                  LEFT JOIN file_info t2 ON t2.isvalid = 1 AND t2.id = t1.file_id
                  LEFT JOIN auth_user t3 ON t3.isvalid = 1 AND t3.id = t1.creater
         WHERE t1.isvalid = 1
+          AND t1.org_id = #{param.orgId}
           AND t1.file_parent_id = #{param.parentId}
         <if test="param.fileName != null and param.fileName != ''">
             AND t1.file_name LIKE concat('%', #{param.fileName}, '%')

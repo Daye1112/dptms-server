@@ -17,9 +17,7 @@
                updater
         FROM service_application
         WHERE isvalid = 1
-        <if test="dto.orgId != null">
             AND org_id = #{dto.orgId}
-        </if>
         <if test="dto.researchKey != null and dto.researchKey != ''">
             AND (app_code LIKE concat('%', #{dto.researchKey}, '%')
                   OR app_name LIKE concat('%', #{dto.researchKey}, '%'))
@@ -35,9 +33,7 @@
         SELECT count(1)
         FROM service_application
         WHERE isvalid = 1
-        <if test="dto.orgId != null">
             AND org_id = #{dto.orgId}
-        </if>
         <if test="dto.appCode != null and dto.appCode != ''">
             AND app_code LIKE concat('%', #{dto.appCode}, '%')
         </if>
@@ -54,6 +50,7 @@
         SELECT count(1)
         FROM service_application
         WHERE isvalid = 1
+          AND org_id = #{orgId}
           AND app_code = #{appCode}
           AND app_name = #{appName}
         <if test="isUpdate != null and isUpdate == true">

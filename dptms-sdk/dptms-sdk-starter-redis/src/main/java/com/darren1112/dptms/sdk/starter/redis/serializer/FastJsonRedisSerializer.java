@@ -1,5 +1,6 @@
 package com.darren1112.dptms.sdk.starter.redis.serializer;
 
+import com.alibaba.fastjson.parser.Feature;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.darren1112.dptms.common.core.util.JsonUtil;
 import lombok.extern.slf4j.Slf4j;

@@ -4,6 +4,7 @@ import com.darren1112.dptms.common.core.exception.enums.BaseErrorEnum;
 import com.darren1112.dptms.sdk.starter.security.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.LockedException;
+import org.springframework.security.authentication.ProviderNotFoundException;
 import org.springframework.security.core.AuthenticationException;
 
 import java.util.Arrays;
@@ -28,6 +29,7 @@ public enum SecurityErrorEnum implements BaseErrorEnum {
     CAPTCHA_INVALID(HttpStatus.BAD_REQUEST, "验证码已失效，请刷新验证码", CaptchaInvalidException.class),
     CAPTCHA_CODE_ERROR(HttpStatus.BAD_REQUEST, "验证码错误", CaptchaCodeErrorException.class),
     LOCKED(HttpStatus.BAD_REQUEST, "用户已被锁定，请联系管理员", LockedException.class),
+    LOGIN_TYPE_ERROR(HttpStatus.BAD_REQUEST, "认证类型错误，请联系管理员", ProviderNotFoundException.class),
     ;
 
     private Integer code;

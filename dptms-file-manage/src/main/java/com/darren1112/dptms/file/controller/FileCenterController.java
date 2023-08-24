@@ -39,7 +39,7 @@ public class FileCenterController {
     /**
      * 查询文件列表
      *
-     * @param parentId 文件夹id
+     * @param dto 查询条件
      * @return {@link JsonResult}
      * @author darren
      * @since 2021/12/18

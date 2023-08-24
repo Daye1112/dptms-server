@@ -76,6 +76,7 @@ public class ServiceApplicationServiceImpl extends BaseService implements Servic
     private void validRepeat(ServiceApplicationDto dto, boolean isUpdate) {
         ServiceApplicationDto param = new ServiceApplicationDto();
         param.setId(dto.getId());
+        param.setOrgId(dto.getOrgId());
         param.setAppCode(dto.getAppCode());
         param.setAppName(dto.getAppName());
         param.setIsUpdate(isUpdate);
