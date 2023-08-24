@@ -22,7 +22,7 @@ import java.util.List;
  * @since 2020/12/13 22:22
  */
 @Service
-@CacheConfig(cacheNames = "authUserOrganization", keyGenerator = "keyGenerator")
+@CacheConfig(cacheNames = "auth", keyGenerator = "keyGenerator")
 @Transactional(rollbackFor = Throwable.class, readOnly = true)
 public class AuthUserOrganizationServiceImpl implements AuthUserOrganizationService {
 

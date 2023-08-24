@@ -5,6 +5,8 @@ import com.darren1112.dptms.common.spi.auth.entity.AuthOrganizationEntity;
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
 
+import java.util.List;
+
 /**
  * 组织Service
  *
@@ -53,4 +55,14 @@ public interface AuthOrganizationService {
      * @since 20/12/10 01:08
      */
     PageBean<AuthOrganizationDto> listPage(PageParam pageParam, AuthOrganizationDto param);
+
+    /**
+     * 根据用户id查询组织集合
+     *
+     * @param userId 用户id
+     * @return {@link AuthOrganizationDto}
+     * @author darren
+     * @since 2023/08/20
+     */
+    List<AuthOrganizationDto> listByUserId(Long userId);
 }

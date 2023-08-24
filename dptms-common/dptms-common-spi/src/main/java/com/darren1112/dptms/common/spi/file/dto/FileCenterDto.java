@@ -70,4 +70,11 @@ public class FileCenterDto extends FileCenterEntity {
     @TableField(exist = false)
     @ApiModelProperty(value = "创建者姓名")
     private String creatorName;
+
+    /**
+     * 父节点id
+     */
+    @TableField(exist = false)
+    @ApiModelProperty(value = "父节点id")
+    private Long parentId;
 }

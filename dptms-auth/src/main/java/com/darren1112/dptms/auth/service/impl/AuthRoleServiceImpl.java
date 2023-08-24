@@ -26,7 +26,7 @@ import java.util.List;
  * @since 2020/12/13 23:09
  */
 @Service
-@CacheConfig(cacheNames = "authRole", keyGenerator = "keyGenerator")
+@CacheConfig(cacheNames = "auth", keyGenerator = "keyGenerator")
 @Transactional(rollbackFor = Throwable.class, readOnly = true)
 public class AuthRoleServiceImpl extends BaseService implements AuthRoleService {
 

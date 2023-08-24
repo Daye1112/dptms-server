@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
  * @since 2020/12/13 23:09
  */
 @Service
-@CacheConfig(cacheNames = "authRoleMenu", keyGenerator = "keyGenerator")
+@CacheConfig(cacheNames = "auth", keyGenerator = "keyGenerator")
 @Transactional(rollbackFor = Throwable.class, readOnly = true)
 public class AuthRoleMenuServiceImpl implements AuthRoleMenuService {
 

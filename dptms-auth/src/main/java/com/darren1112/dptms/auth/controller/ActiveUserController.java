@@ -2,6 +2,7 @@ package com.darren1112.dptms.auth.controller;
 
 import com.darren1112.dptms.auth.common.enums.AuthErrorCodeEnum;
 import com.darren1112.dptms.auth.service.AuthMenuService;
+import com.darren1112.dptms.auth.service.AuthOrganizationService;
 import com.darren1112.dptms.auth.service.AuthPermissionService;
 import com.darren1112.dptms.auth.service.AuthUserService;
 import com.darren1112.dptms.common.core.message.JsonResult;
@@ -9,6 +10,7 @@ import com.darren1112.dptms.common.core.util.ResponseEntityUtil;
 import com.darren1112.dptms.common.core.validate.ValidatorBuilder;
 import com.darren1112.dptms.common.core.validate.validator.callback.common.NotBlankValidatorCallback;
 import com.darren1112.dptms.common.spi.auth.dto.AuthMenuDto;
+import com.darren1112.dptms.common.spi.auth.dto.AuthOrganizationDto;
 import com.darren1112.dptms.common.spi.auth.dto.AuthPermissionDto;
 import com.darren1112.dptms.common.spi.auth.dto.AuthUserDto;
 import com.darren1112.dptms.common.spi.auth.entity.AuthUserEntity;
@@ -50,6 +52,9 @@ public class ActiveUserController {
 
     @Autowired
     private AuthPermissionService authPermissionService;
+
+    @Autowired
+    private AuthOrganizationService authOrganizationService;
 
     @Autowired
     private TokenStore tokenStore;
@@ -160,5 +165,22 @@ public class ActiveUserController {
         // 更新密码
         authUserService.updatePassword(dto);
         return ResponseEntityUtil.ok(JsonResult.buildSuccess());
+    }
+
+    /**
+     * 获取用户的组织
+     *
+     * @return {@link AuthOrganizationDto}
+     * @author darren
+     * @since 2023/08/20
+     */
+    @GetMapping("/listOrg")
+    @ApiOperation("获取用户的组织")
+    @Log(value = "获取用户的组织", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
+    public ResponseEntity<JsonResult<List<AuthOrganizationDto>>> listOrg() {
+        ActiveUser activeUser = SecurityUserUtil.getActiveUser();
+
+        List<AuthOrganizationDto> resultList = authOrganizationService.listByUserId(activeUser.getId());
+        return ResponseEntityUtil.ok(JsonResult.buildSuccessData(resultList));
     }
 }

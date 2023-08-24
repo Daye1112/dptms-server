@@ -42,15 +42,15 @@ public class FileCenterServiceImpl implements FileCenterService {
     /**
      * 根据父节点id查询
      *
-     * @param parentId 父节点id
+     * @param dto 查询条件
      * @return {@link FileCenterDto}
      * @author darren
      * @since 2021/12/18
      */
     @Override
     @Cacheable
-    public List<FileCenterDto> list(Long parentId) {
-        List<FileCenterDto> list = fileCenterRepository.getBaseMapper().list(parentId);
+    public List<FileCenterDto> list(FileCenterDto dto) {
+        List<FileCenterDto> list = fileCenterRepository.getBaseMapper().list(dto);
         list.forEach(item -> {
             String fileSizeStr = Optional.ofNullable(item.getFileSize())
                     .map(subItem -> FileUtil.readableFileSize(subItem).toUpperCase())
@@ -133,7 +133,7 @@ public class FileCenterServiceImpl implements FileCenterService {
                 .filter(item -> item.getFileId() != null)
                 .map(FileCenterDto::getFileId)
                 .collect(Collectors.toList());
-        if(dataInfo.getFileId() != null ){
+        if (dataInfo.getFileId() != null) {
             fileIdList.add(dataInfo.getFileId());
         }
         // 删除文件信息

@@ -1,9 +1,9 @@
 package com.darren1112.dptms.auth.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.darren1112.dptms.common.spi.common.dto.PageParam;
 import com.darren1112.dptms.common.spi.auth.dto.AuthOrganizationDto;
 import com.darren1112.dptms.common.spi.auth.entity.AuthOrganizationEntity;
+import com.darren1112.dptms.common.spi.common.dto.PageParam;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -80,4 +80,14 @@ public interface AuthOrganizationDao extends BaseMapper<AuthOrganizationDto> {
      * @since 20/12/12 22:47
      */
     Long listPageCount(AuthOrganizationDto param);
+
+    /**
+     * 根据用户id查询组织集合
+     *
+     * @param userId 用户id
+     * @return {@link AuthOrganizationDto}
+     * @author darren
+     * @since 2023/08/20
+     */
+    List<AuthOrganizationDto> listByUserId(@Param("userId") Long userId);
 }

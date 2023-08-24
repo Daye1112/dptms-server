@@ -15,12 +15,12 @@ public interface FileCenterService {
     /**
      * 根据父节点id查询
      *
-     * @param parentId 父节点id
+     * @param dto 查询条件
      * @return {@link FileCenterDto}
      * @author darren
      * @since 2021/12/18
      */
-    List<FileCenterDto> list(Long parentId);
+    List<FileCenterDto> list(FileCenterDto dto);
 
     /**
      * 新增文件/文件夹

@@ -25,7 +25,7 @@ import java.util.List;
  * @since 2020/08/16 01:43
  */
 @Service
-@CacheConfig(cacheNames = "authOrganization", keyGenerator = "keyGenerator")
+@CacheConfig(cacheNames = "auth", keyGenerator = "keyGenerator")
 @Transactional(rollbackFor = Throwable.class, readOnly = true)
 public class AuthOrganizationServiceImpl extends BaseService implements AuthOrganizationService {
 
@@ -115,5 +115,18 @@ public class AuthOrganizationServiceImpl extends BaseService implements AuthOrga
     @Transactional(rollbackFor = Throwable.class)
     public void deleteById(Long id, Long updater) {
         authOrganizationRepository.getBaseMapper().deleteById(id, updater);
+    }
+
+    /**
+     * 根据用户id查询组织集合
+     *
+     * @param userId 用户id
+     * @return {@link AuthOrganizationDto}
+     * @author darren
+     * @since 2023/08/20
+     */
+    @Override
+    public List<AuthOrganizationDto> listByUserId(Long userId) {
+        return authOrganizationRepository.getBaseMapper().listByUserId(userId);
     }
 }

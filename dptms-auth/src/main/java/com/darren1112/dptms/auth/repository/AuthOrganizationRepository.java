@@ -13,4 +13,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class AuthOrganizationRepository extends ServiceImpl<AuthOrganizationDao, AuthOrganizationDto> {
+
 }

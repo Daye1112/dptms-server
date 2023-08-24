@@ -47,9 +47,9 @@ public class FileCenterController {
     @GetMapping("/list")
     @ApiOperation(value = "查询文件列表")
     @Log(value = "查询文件列表", logLevel = LogLevel.DEBUG, businessType = BusinessType.QUERY)
-    public ResponseEntity<JsonResult<List<FileCenterDto>>> list(@RequestParam(value = "parentId", required = false) Long parentId) {
-        ValidateHandler.checkNull(parentId, FileManageErrorCodeEnum.FILE_PARENT_ID_NOT_NULL);
-        List<FileCenterDto> list = fileCenterService.list(parentId);
+    public ResponseEntity<JsonResult<List<FileCenterDto>>> list(FileCenterDto dto) {
+        ValidateHandler.checkNull(dto.getParentId(), FileManageErrorCodeEnum.FILE_PARENT_ID_NOT_NULL);
+        List<FileCenterDto> list = fileCenterService.list(dto);
         return ResponseEntityUtil.ok(JsonResult.buildSuccessData(list));
     }
 

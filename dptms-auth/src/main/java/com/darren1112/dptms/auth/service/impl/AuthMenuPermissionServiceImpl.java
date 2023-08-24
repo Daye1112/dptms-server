@@ -22,7 +22,7 @@ import java.util.List;
  * @since 2020/12/22 22:43
  */
 @Service
-@CacheConfig(cacheNames = "authMenuPermission", keyGenerator = "keyGenerator")
+@CacheConfig(cacheNames = "auth", keyGenerator = "keyGenerator")
 @Transactional(rollbackFor = Throwable.class, readOnly = true)
 public class AuthMenuPermissionServiceImpl implements AuthMenuPermissionService {
 

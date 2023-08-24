@@ -72,4 +72,16 @@
             AND org_name LIKE concat('%', #{orgName}, '%')
         </if>
     </select>
+    <!--根据用户id查询组织集合-->
+    <select id="listByUserId" parameterType="java.lang.Long"
+            resultType="com.darren1112.dptms.common.spi.auth.dto.AuthOrganizationDto">
+        SELECT t2.id,
+               t2.org_name AS orgName,
+               t2.org_code AS orgCode,
+               t2.remark
+        FROM auth_user_organization t1
+                 INNER JOIN auth_organization t2 ON t2.isvalid = 1 AND t2.id = t1.org_id
+        WHERE t1.isvalid = 1
+          AND t1.user_id = #{userId}
+    </select>
 </mapper>

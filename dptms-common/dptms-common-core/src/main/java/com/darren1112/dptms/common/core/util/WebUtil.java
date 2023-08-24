@@ -6,6 +6,7 @@ import eu.bitwalker.useragentutils.OperatingSystem;
 import eu.bitwalker.useragentutils.UserAgent;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;
 
@@ -70,7 +71,8 @@ public class WebUtil {
         HttpHeaders headers = new HttpHeaders();
         //文件的属性名
         headers.add("Content-Disposition", "attachment;fileName=" + fileName);
-        headers.add("Content-Type", "application/octet-stream;charset=UTF-8");
+        headers.setContentType(MediaType.valueOf("application/octet-stream;charset=UTF-8"));
+        headers.setContentLength(fileByte.length);
         return ResponseEntityUtil.ok(headers, fileByte);
     }
 
