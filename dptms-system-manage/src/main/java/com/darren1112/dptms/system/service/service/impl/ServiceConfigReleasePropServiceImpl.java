@@ -1,12 +1,11 @@
 package com.darren1112.dptms.system.service.service.impl;
 
 import com.darren1112.dptms.common.spi.service.dto.ServiceConfigReleasePropDto;
+import com.darren1112.dptms.sdk.starter.redis.annotation.RedisCacheEvict;
+import com.darren1112.dptms.sdk.starter.redis.annotation.RedisCacheable;
 import com.darren1112.dptms.system.service.repository.ServiceConfigReleasePropRepository;
 import com.darren1112.dptms.system.service.service.ServiceConfigReleasePropService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,7 +18,7 @@ import java.util.List;
  * @since 2021/03/12 01:47
  */
 @Service
-@CacheConfig(cacheNames = "serviceConfigReleaseProp", keyGenerator = "keyGenerator")
+@RedisCacheable("serviceConfigReleaseProp")
 @Transactional(rollbackFor = Throwable.class, readOnly = true)
 public class ServiceConfigReleasePropServiceImpl implements ServiceConfigReleasePropService {
 
@@ -35,7 +34,7 @@ public class ServiceConfigReleasePropServiceImpl implements ServiceConfigRelease
      * @since 2021/3/17 8:58
      */
     @Override
-    @Cacheable
+    @RedisCacheable
     public List<ServiceConfigReleasePropDto> list(ServiceConfigReleasePropDto dto) {
         return serviceConfigReleasePropRepository.getBaseMapper().list(dto);
     }
@@ -48,7 +47,7 @@ public class ServiceConfigReleasePropServiceImpl implements ServiceConfigRelease
      * @since 2021/7/3
      */
     @Override
-    @CacheEvict(allEntries = true)
+    @RedisCacheEvict
     @Transactional(rollbackFor = Throwable.class)
     public void batchInsert(List<ServiceConfigReleasePropDto> releasePropList) {
         serviceConfigReleasePropRepository.getBaseMapper().batchInsert(releasePropList);

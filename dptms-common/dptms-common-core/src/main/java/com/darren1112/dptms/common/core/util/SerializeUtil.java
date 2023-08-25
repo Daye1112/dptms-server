@@ -32,6 +32,7 @@ public class SerializeUtil {
         try {
             baos = new ByteArrayOutputStream();
             oos = new ObjectOutputStream(baos);
+            oos.writeObject(object);
             return baos.toByteArray();
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);

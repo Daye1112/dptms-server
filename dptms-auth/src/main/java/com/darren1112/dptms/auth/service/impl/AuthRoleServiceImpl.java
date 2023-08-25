@@ -1,19 +1,17 @@
 package com.darren1112.dptms.auth.service.impl;
 
 import com.darren1112.dptms.auth.common.enums.AuthErrorCodeEnum;
-import com.darren1112.dptms.auth.dao.AuthRoleDao;
 import com.darren1112.dptms.auth.repository.AuthRoleRepository;
 import com.darren1112.dptms.auth.service.AuthRoleService;
 import com.darren1112.dptms.common.core.base.BaseService;
 import com.darren1112.dptms.common.core.exception.BadRequestException;
-import com.darren1112.dptms.common.spi.common.dto.PageBean;
-import com.darren1112.dptms.common.spi.common.dto.PageParam;
 import com.darren1112.dptms.common.spi.auth.dto.AuthRoleDto;
 import com.darren1112.dptms.common.spi.auth.entity.AuthRoleEntity;
+import com.darren1112.dptms.common.spi.common.dto.PageBean;
+import com.darren1112.dptms.common.spi.common.dto.PageParam;
+import com.darren1112.dptms.sdk.starter.redis.annotation.RedisCacheEvict;
+import com.darren1112.dptms.sdk.starter.redis.annotation.RedisCacheable;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,7 +24,7 @@ import java.util.List;
  * @since 2020/12/13 23:09
  */
 @Service
-@CacheConfig(cacheNames = "auth", keyGenerator = "keyGenerator")
+@RedisCacheable("auth")
 @Transactional(rollbackFor = Throwable.class, readOnly = true)
 public class AuthRoleServiceImpl extends BaseService implements AuthRoleService {
 
@@ -42,7 +40,7 @@ public class AuthRoleServiceImpl extends BaseService implements AuthRoleService 
      * @since 2020/12/19 1:08
      */
     @Override
-    @CacheEvict(allEntries = true)
+    @RedisCacheEvict
     @Transactional(rollbackFor = Throwable.class)
     public Long insert(AuthRoleEntity entity) {
         validRepeat(entity, false);
@@ -59,7 +57,7 @@ public class AuthRoleServiceImpl extends BaseService implements AuthRoleService 
      * @since 2020/12/19 20:07
      */
     @Override
-    @CacheEvict(allEntries = true)
+    @RedisCacheEvict
     @Transactional(rollbackFor = Throwable.class)
     public Long update(AuthRoleEntity entity) {
         validRepeat(entity, true);
@@ -76,7 +74,7 @@ public class AuthRoleServiceImpl extends BaseService implements AuthRoleService 
      * @since 2020/12/19 21:10
      */
     @Override
-    @Cacheable
+    @RedisCacheable
     public PageBean<AuthRoleDto> listPage(PageParam pageParam, AuthRoleDto dto) {
         List<AuthRoleDto> list = authRoleRepository.getBaseMapper().listPage(pageParam, dto);
         Long count = authRoleRepository.getBaseMapper().listPageCount(dto);
@@ -92,7 +90,7 @@ public class AuthRoleServiceImpl extends BaseService implements AuthRoleService 
      * @since 2020/12/19 21:11
      */
     @Override
-    @CacheEvict(allEntries = true)
+    @RedisCacheEvict
     @Transactional(rollbackFor = Throwable.class)
     public void deleteById(Long id, Long updater) {
         authRoleRepository.getBaseMapper().deleteById(id, updater);

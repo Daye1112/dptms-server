@@ -24,7 +24,7 @@ public class BaseRedisCacheAop extends BaseAop {
         StringBuilder sb = new StringBuilder();
         sb.append(joinPoint.getTarget().getClass().getSimpleName());
         sb.append(":");
-        sb.append(((MethodSignature) joinPoint.getSignature()).getMethod());
+        sb.append(((MethodSignature) joinPoint.getSignature()).getMethod().getName());
         int index = 0;
         //参数值
         Object[] params = joinPoint.getArgs();

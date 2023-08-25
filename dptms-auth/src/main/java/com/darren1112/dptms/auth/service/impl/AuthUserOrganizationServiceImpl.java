@@ -6,9 +6,9 @@ import com.darren1112.dptms.common.core.util.DatabaseUtil;
 import com.darren1112.dptms.common.core.util.StringUtil;
 import com.darren1112.dptms.common.spi.auth.dto.AuthOrganizationDto;
 import com.darren1112.dptms.common.spi.auth.entity.AuthUserOrganizationEntity;
+import com.darren1112.dptms.sdk.starter.redis.annotation.RedisCacheEvict;
+import com.darren1112.dptms.sdk.starter.redis.annotation.RedisCacheable;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,7 +22,7 @@ import java.util.List;
  * @since 2020/12/13 22:22
  */
 @Service
-@CacheConfig(cacheNames = "auth", keyGenerator = "keyGenerator")
+@RedisCacheable("auth")
 @Transactional(rollbackFor = Throwable.class, readOnly = true)
 public class AuthUserOrganizationServiceImpl implements AuthUserOrganizationService {
 
@@ -38,6 +38,7 @@ public class AuthUserOrganizationServiceImpl implements AuthUserOrganizationServ
      * @since 20/12/13 21:43
      */
     @Override
+    @RedisCacheable
     public List<AuthOrganizationDto> listUserAssigned(Long userId) {
         return authUserOrganizationRepository.getBaseMapper().listUserAssigned(userId);
     }
@@ -52,7 +53,7 @@ public class AuthUserOrganizationServiceImpl implements AuthUserOrganizationServ
      * @since 20/12/13 22:10
      */
     @Override
-    @CacheEvict(allEntries = true)
+    @RedisCacheEvict
     @Transactional(rollbackFor = Throwable.class)
     public void assignedOrg(Long userId, String orgIds, Long updater) {
         // 清空用户已分配的组织

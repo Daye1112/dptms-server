@@ -9,15 +9,14 @@ import com.darren1112.dptms.common.spi.common.dto.PageParam;
 import com.darren1112.dptms.common.spi.service.dto.ServiceConfigProfilePropDto;
 import com.darren1112.dptms.common.spi.service.dto.ServiceConfigReleaseDto;
 import com.darren1112.dptms.common.spi.service.dto.ServiceConfigReleasePropDto;
+import com.darren1112.dptms.sdk.starter.redis.annotation.RedisCacheEvict;
+import com.darren1112.dptms.sdk.starter.redis.annotation.RedisCacheable;
 import com.darren1112.dptms.system.common.enums.SystemManageErrorCodeEnum;
 import com.darren1112.dptms.system.service.repository.ServiceConfigReleaseRepository;
 import com.darren1112.dptms.system.service.service.ServiceConfigProfilePropService;
 import com.darren1112.dptms.system.service.service.ServiceConfigReleasePropService;
 import com.darren1112.dptms.system.service.service.ServiceConfigReleaseService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,7 +32,7 @@ import java.util.List;
  * @since 2021/03/12 01:47
  */
 @Service
-@CacheConfig(cacheNames = "serviceConfigRelease", keyGenerator = "keyGenerator")
+@RedisCacheable("serviceConfigRelease")
 @Transactional(rollbackFor = Throwable.class, readOnly = true)
 public class ServiceConfigReleaseServiceImpl extends BaseService implements ServiceConfigReleaseService {
 
@@ -58,7 +57,7 @@ public class ServiceConfigReleaseServiceImpl extends BaseService implements Serv
      * @since 2021/3/16 8:34
      */
     @Override
-    @Cacheable
+    @RedisCacheable
     public PageBean<ServiceConfigReleaseDto> listPage(PageParam pageParam, ServiceConfigReleaseDto dto) {
         List<ServiceConfigReleaseDto> list = serviceConfigReleaseRepository.getBaseMapper().listPage(pageParam, dto);
         Long count = serviceConfigReleaseRepository.getBaseMapper().listPageCount(dto);
@@ -74,7 +73,7 @@ public class ServiceConfigReleaseServiceImpl extends BaseService implements Serv
      * @since 2021/3/16 8:46
      */
     @Override
-    @CacheEvict(allEntries = true)
+    @RedisCacheEvict
     @Transactional(rollbackFor = Throwable.class)
     public Long insert(ServiceConfigReleaseDto dto) {
         // 查询环境属性集合
@@ -111,7 +110,7 @@ public class ServiceConfigReleaseServiceImpl extends BaseService implements Serv
      * @since 2021/3/16 8:58
      */
     @Override
-    @CacheEvict(allEntries = true)
+    @RedisCacheEvict
     @Transactional(rollbackFor = Throwable.class)
     public void deleteById(Long id, Long updater) {
         serviceConfigReleaseRepository.getBaseMapper().deleteById(id, updater);

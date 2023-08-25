@@ -5,13 +5,12 @@ import com.darren1112.dptms.common.core.exception.BadRequestException;
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
 import com.darren1112.dptms.common.spi.service.dto.ServiceApplicationDto;
+import com.darren1112.dptms.sdk.starter.redis.annotation.RedisCacheEvict;
+import com.darren1112.dptms.sdk.starter.redis.annotation.RedisCacheable;
 import com.darren1112.dptms.system.common.enums.SystemManageErrorCodeEnum;
 import com.darren1112.dptms.system.service.repository.ServiceApplicationRepository;
 import com.darren1112.dptms.system.service.service.ServiceApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,7 +23,7 @@ import java.util.List;
  * @since 2021/03/12 01:31
  */
 @Service
-@CacheConfig(cacheNames = "serviceApplication", keyGenerator = "keyGenerator")
+@RedisCacheable("serviceApplication")
 @Transactional(rollbackFor = Throwable.class, readOnly = true)
 public class ServiceApplicationServiceImpl extends BaseService implements ServiceApplicationService {
 
@@ -41,7 +40,7 @@ public class ServiceApplicationServiceImpl extends BaseService implements Servic
      * @since 2021/03/12 17:33
      */
     @Override
-    @Cacheable
+    @RedisCacheable
     public PageBean<ServiceApplicationDto> listPage(PageParam pageParam, ServiceApplicationDto dto) {
         List<ServiceApplicationDto> list = serviceApplicationRepository.getBaseMapper().listPage(pageParam, dto);
         Long count = serviceApplicationRepository.getBaseMapper().listPageCount(dto);
@@ -57,7 +56,7 @@ public class ServiceApplicationServiceImpl extends BaseService implements Servic
      * @since 2021/03/12 23:28
      */
     @Override
-    @CacheEvict(allEntries = true)
+    @RedisCacheEvict
     @Transactional(rollbackFor = Throwable.class)
     public Long insert(ServiceApplicationDto dto) {
         validRepeat(dto, false);
@@ -94,7 +93,7 @@ public class ServiceApplicationServiceImpl extends BaseService implements Servic
      * @since 2021/03/12 23:42
      */
     @Override
-    @CacheEvict(allEntries = true)
+    @RedisCacheEvict
     @Transactional(rollbackFor = Throwable.class)
     public void update(ServiceApplicationDto dto) {
         validRepeat(dto, true);
@@ -110,7 +109,7 @@ public class ServiceApplicationServiceImpl extends BaseService implements Servic
      * @since 2021/03/13 00:49
      */
     @Override
-    @CacheEvict(allEntries = true)
+    @RedisCacheEvict
     @Transactional(rollbackFor = Throwable.class)
     public void deleteById(Long id, Long updater) {
         serviceApplicationRepository.getBaseMapper().deleteById(id, updater);

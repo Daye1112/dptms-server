@@ -2,13 +2,12 @@ package com.darren1112.dptms.system.service.service.impl;
 
 import com.darren1112.dptms.common.core.exception.BadRequestException;
 import com.darren1112.dptms.common.spi.service.dto.ServiceConfigProfileDto;
+import com.darren1112.dptms.sdk.starter.redis.annotation.RedisCacheEvict;
+import com.darren1112.dptms.sdk.starter.redis.annotation.RedisCacheable;
 import com.darren1112.dptms.system.common.enums.SystemManageErrorCodeEnum;
 import com.darren1112.dptms.system.service.repository.ServiceConfigProfileRepository;
 import com.darren1112.dptms.system.service.service.ServiceConfigProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,7 +20,7 @@ import java.util.List;
  * @since 2021/03/12 01:47
  */
 @Service
-@CacheConfig(cacheNames = "serviceConfigProfile", keyGenerator = "keyGenerator")
+@RedisCacheable("serviceConfigProfile")
 @Transactional(rollbackFor = Throwable.class, readOnly = true)
 public class ServiceConfigProfileServiceImpl implements ServiceConfigProfileService {
 
@@ -37,7 +36,7 @@ public class ServiceConfigProfileServiceImpl implements ServiceConfigProfileServ
      * @since 2021/03/13 01:50
      */
     @Override
-    @Cacheable
+    @RedisCacheable
     public List<ServiceConfigProfileDto> list(ServiceConfigProfileDto dto) {
         return serviceConfigProfileRepository.getBaseMapper().list(dto);
     }
@@ -51,7 +50,7 @@ public class ServiceConfigProfileServiceImpl implements ServiceConfigProfileServ
      * @since 2021/03/14 02:03
      */
     @Override
-    @CacheEvict(allEntries = true)
+    @RedisCacheEvict
     @Transactional(rollbackFor = Throwable.class)
     public Long insert(ServiceConfigProfileDto dto) {
         validRepeat(dto, false);
@@ -87,7 +86,7 @@ public class ServiceConfigProfileServiceImpl implements ServiceConfigProfileServ
      * @since 2021/03/14 02:14
      */
     @Override
-    @CacheEvict(allEntries = true)
+    @RedisCacheEvict
     @Transactional(rollbackFor = Throwable.class)
     public void update(ServiceConfigProfileDto dto) {
         validRepeat(dto, true);
@@ -103,7 +102,7 @@ public class ServiceConfigProfileServiceImpl implements ServiceConfigProfileServ
      * @since 2021/03/14 02:18
      */
     @Override
-    @CacheEvict(allEntries = true)
+    @RedisCacheEvict
     @Transactional(rollbackFor = Throwable.class)
     public void deleteById(Long id, Long updater) {
         serviceConfigProfileRepository.getBaseMapper().deleteById(id, updater);

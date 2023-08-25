@@ -6,6 +6,8 @@ import com.darren1112.dptms.common.core.util.DatabaseUtil;
 import com.darren1112.dptms.common.core.util.StringUtil;
 import com.darren1112.dptms.common.spi.auth.dto.AuthPermissionDto;
 import com.darren1112.dptms.common.spi.auth.entity.AuthMenuPermissionEntity;
+import com.darren1112.dptms.sdk.starter.redis.annotation.RedisCacheEvict;
+import com.darren1112.dptms.sdk.starter.redis.annotation.RedisCacheable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -22,7 +24,7 @@ import java.util.List;
  * @since 2020/12/22 22:43
  */
 @Service
-@CacheConfig(cacheNames = "auth", keyGenerator = "keyGenerator")
+@RedisCacheable("auth")
 @Transactional(rollbackFor = Throwable.class, readOnly = true)
 public class AuthMenuPermissionServiceImpl implements AuthMenuPermissionService {
 
@@ -33,11 +35,12 @@ public class AuthMenuPermissionServiceImpl implements AuthMenuPermissionService 
      * 查询菜单关联的权限list
      *
      * @param menuId 菜单id
-     * @return {@link AuthPermissionDto )
+     * @return {@link AuthPermissionDto}
      * @author baojiazhong
      * @since 2020/12/22 22:47
      */
     @Override
+    @RedisCacheable
     public List<AuthPermissionDto> listMenuAssigned(Long menuId) {
         return authMenuPermissionRepository.getBaseMapper().listMenuAssigned(menuId);
     }
@@ -52,7 +55,7 @@ public class AuthMenuPermissionServiceImpl implements AuthMenuPermissionService 
      * @since 2020/12/22 23:10
      */
     @Override
-    @CacheEvict(allEntries = true)
+    @RedisCacheEvict
     @Transactional(rollbackFor = Throwable.class)
     public void assignedPer(Long menuId, String perIds, Long updater) {
         authMenuPermissionRepository.getBaseMapper().deleteByMenuId(menuId, updater);
@@ -81,6 +84,7 @@ public class AuthMenuPermissionServiceImpl implements AuthMenuPermissionService 
      * @since 2021/01/04 23:53
      */
     @Override
+    @RedisCacheable
     public List<AuthPermissionDto> listByMenuId(Long menuId) {
         return authMenuPermissionRepository.getBaseMapper().listByMenuId(menuId);
     }

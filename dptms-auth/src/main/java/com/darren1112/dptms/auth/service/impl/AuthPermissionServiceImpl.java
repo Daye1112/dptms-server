@@ -1,19 +1,17 @@
 package com.darren1112.dptms.auth.service.impl;
 
 import com.darren1112.dptms.auth.common.enums.AuthErrorCodeEnum;
-import com.darren1112.dptms.auth.dao.AuthPermissionDao;
 import com.darren1112.dptms.auth.repository.AuthPermissionRepository;
 import com.darren1112.dptms.auth.service.AuthPermissionService;
 import com.darren1112.dptms.common.core.base.BaseService;
 import com.darren1112.dptms.common.core.exception.BadRequestException;
-import com.darren1112.dptms.common.spi.common.dto.PageBean;
-import com.darren1112.dptms.common.spi.common.dto.PageParam;
 import com.darren1112.dptms.common.spi.auth.dto.AuthPermissionDto;
 import com.darren1112.dptms.common.spi.auth.entity.AuthPermissionEntity;
+import com.darren1112.dptms.common.spi.common.dto.PageBean;
+import com.darren1112.dptms.common.spi.common.dto.PageParam;
+import com.darren1112.dptms.sdk.starter.redis.annotation.RedisCacheEvict;
+import com.darren1112.dptms.sdk.starter.redis.annotation.RedisCacheable;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,7 +24,7 @@ import java.util.List;
  * @since 2020/12/09 23:44
  */
 @Service
-@CacheConfig(cacheNames = "auth", keyGenerator = "keyGenerator")
+@RedisCacheable("auth")
 @Transactional(rollbackFor = Throwable.class, readOnly = true)
 public class AuthPermissionServiceImpl extends BaseService implements AuthPermissionService {
 
@@ -42,7 +40,7 @@ public class AuthPermissionServiceImpl extends BaseService implements AuthPermis
      * @since 20/12/10 01:08
      */
     @Override
-    @CacheEvict(allEntries = true)
+    @RedisCacheEvict
     @Transactional(rollbackFor = Throwable.class)
     public Long insert(AuthPermissionEntity entity) {
         validRepeat(entity, false);
@@ -60,7 +58,7 @@ public class AuthPermissionServiceImpl extends BaseService implements AuthPermis
      * @since 20/12/10 01:08
      */
     @Override
-    @Cacheable
+    @RedisCacheable
     public PageBean<AuthPermissionDto> listPage(PageParam pageParam, AuthPermissionDto dto) {
         List<AuthPermissionDto> list = authPermissionRepository.getBaseMapper().listPage(pageParam, dto);
         Long count = authPermissionRepository.getBaseMapper().listPageCount(dto);
@@ -76,7 +74,7 @@ public class AuthPermissionServiceImpl extends BaseService implements AuthPermis
      * @since 20/12/10 01:08
      */
     @Override
-    @CacheEvict(allEntries = true)
+    @RedisCacheEvict
     @Transactional(rollbackFor = Throwable.class)
     public Long update(AuthPermissionEntity entity) {
         validRepeat(entity, true);
@@ -112,7 +110,7 @@ public class AuthPermissionServiceImpl extends BaseService implements AuthPermis
      * @since 20/12/12 20:44
      */
     @Override
-    @CacheEvict(allEntries = true)
+    @RedisCacheEvict
     @Transactional(rollbackFor = Throwable.class)
     public void deleteById(Long id, Long updater) {
         authPermissionRepository.getBaseMapper().deleteById(id, updater);
@@ -126,7 +124,7 @@ public class AuthPermissionServiceImpl extends BaseService implements AuthPermis
      * @since 2020/12/28 01:10
      */
     @Override
-    @Cacheable
+    @RedisCacheable
     public List<AuthPermissionDto> listGroup() {
         return authPermissionRepository.getBaseMapper().listGroup();
     }
@@ -140,7 +138,7 @@ public class AuthPermissionServiceImpl extends BaseService implements AuthPermis
      * @since 2022/11/19
      */
     @Override
-    @Cacheable
+    @RedisCacheable
     public List<AuthPermissionDto> listByUserId(Long userId) {
         return authPermissionRepository.getBaseMapper().listByUserId(userId);
     }

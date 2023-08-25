@@ -6,13 +6,12 @@ import com.darren1112.dptms.common.core.exception.BadRequestException;
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
 import com.darren1112.dptms.common.spi.project.dto.ProjectInfoDto;
+import com.darren1112.dptms.sdk.starter.redis.annotation.RedisCacheEvict;
+import com.darren1112.dptms.sdk.starter.redis.annotation.RedisCacheable;
 import com.darren1112.dptms.system.common.enums.SystemManageErrorCodeEnum;
 import com.darren1112.dptms.system.project.repository.ProjectInfoRepository;
 import com.darren1112.dptms.system.project.service.ProjectInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,7 +24,7 @@ import java.util.List;
  * @since 2023/08/13
  */
 @Service
-@CacheConfig(cacheNames = "projectInfo", keyGenerator = "keyGenerator")
+@RedisCacheable("projectInfo")
 @Transactional(rollbackFor = Throwable.class, readOnly = true)
 public class ProjectInfoServiceImpl extends BaseService implements ProjectInfoService {
 
@@ -42,7 +41,7 @@ public class ProjectInfoServiceImpl extends BaseService implements ProjectInfoSe
      * @since 2023/08/13
      */
     @Override
-    @Cacheable
+    @RedisCacheable
     public PageBean<ProjectInfoDto> listPage(PageParam pageParam, ProjectInfoDto dto) {
         List<ProjectInfoDto> list = projectInfoRepository.listPage(pageParam, dto);
         Long count = projectInfoRepository.listPageCount(dto);
@@ -58,7 +57,7 @@ public class ProjectInfoServiceImpl extends BaseService implements ProjectInfoSe
      * @since 2023/08/13
      */
     @Override
-    @CacheEvict(allEntries = true)
+    @RedisCacheEvict
     @Transactional(rollbackFor = Throwable.class)
     public Long insert(ProjectInfoDto dto) {
         // 生成appKey
@@ -77,7 +76,7 @@ public class ProjectInfoServiceImpl extends BaseService implements ProjectInfoSe
      * @since 2023/08/13
      */
     @Override
-    @CacheEvict(allEntries = true)
+    @RedisCacheEvict
     @Transactional(rollbackFor = Throwable.class)
     public void update(ProjectInfoDto dto) {
         validRepeat(dto, true);
@@ -113,7 +112,7 @@ public class ProjectInfoServiceImpl extends BaseService implements ProjectInfoSe
      * @since 2023/08/13
      */
     @Override
-    @CacheEvict(allEntries = true)
+    @RedisCacheEvict
     @Transactional(rollbackFor = Throwable.class)
     public void deleteById(Long id, Long updater) {
         projectInfoRepository.deleteById(id, updater);

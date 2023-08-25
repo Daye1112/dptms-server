@@ -71,7 +71,7 @@ public class RedisCacheEvictAspect extends BaseRedisCacheAop {
         Set<String> keys = redisUtil.getKeys(prefix);
 
         if (CollectionUtil.isNotEmpty(keys)) {
-            redisUtil.removeKeys(keys);
+            redisUtil.removeKeysWithPrefix("", keys);
         }
         return joinPoint.proceed();
     }

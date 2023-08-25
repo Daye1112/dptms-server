@@ -2,15 +2,15 @@ package com.darren1112.dptms.auth.service.impl;
 
 import com.darren1112.dptms.auth.common.enums.AuthErrorCodeEnum;
 import com.darren1112.dptms.auth.common.util.MenuUtil;
-import com.darren1112.dptms.auth.dao.AuthMenuDao;
 import com.darren1112.dptms.auth.repository.AuthMenuRepository;
 import com.darren1112.dptms.auth.service.AuthMenuService;
 import com.darren1112.dptms.common.core.base.BaseService;
 import com.darren1112.dptms.common.core.exception.BadRequestException;
 import com.darren1112.dptms.common.spi.auth.dto.AuthMenuDto;
 import com.darren1112.dptms.common.spi.auth.entity.AuthMenuEntity;
+import com.darren1112.dptms.sdk.starter.redis.annotation.RedisCacheEvict;
+import com.darren1112.dptms.sdk.starter.redis.annotation.RedisCacheable;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -25,7 +25,7 @@ import java.util.List;
  * @since 2020/12/12 17:25
  */
 @Service
-@CacheConfig(cacheNames = "auth", keyGenerator = "keyGenerator")
+@RedisCacheable("auth")
 @Transactional(rollbackFor = Throwable.class, readOnly = true)
 public class AuthMenuServiceImpl extends BaseService implements AuthMenuService {
 
@@ -41,6 +41,7 @@ public class AuthMenuServiceImpl extends BaseService implements AuthMenuService 
      * @since 2021/01/17 19:34
      */
     @Override
+    @RedisCacheable
     public List<AuthMenuDto> listMenuByUserId(Long userId) {
         return authMenuRepository.getBaseMapper().listMenuByUserId(userId);
     }
@@ -54,7 +55,7 @@ public class AuthMenuServiceImpl extends BaseService implements AuthMenuService 
      * @since 2020/12/16 11:02
      */
     @Override
-    @CacheEvict(allEntries = true)
+    @RedisCacheEvict
     @Transactional(rollbackFor = Throwable.class)
     public Long insert(AuthMenuEntity entity) {
         validRepeat(entity, false);
@@ -71,7 +72,7 @@ public class AuthMenuServiceImpl extends BaseService implements AuthMenuService 
      * @since 2020/12/16 14:39
      */
     @Override
-    @CacheEvict(allEntries = true)
+    @RedisCacheEvict
     @Transactional(rollbackFor = Throwable.class)
     public void deleteById(Long id, Long updater) {
         authMenuRepository.getBaseMapper().deleteById(id, updater);
@@ -86,7 +87,7 @@ public class AuthMenuServiceImpl extends BaseService implements AuthMenuService 
      * @since 2020/12/16 15:49
      */
     @Override
-    @CacheEvict(allEntries = true)
+    @RedisCacheEvict
     @Transactional(rollbackFor = Throwable.class)
     public Long update(AuthMenuEntity entity) {
         validRepeat(entity, true);
@@ -120,7 +121,7 @@ public class AuthMenuServiceImpl extends BaseService implements AuthMenuService 
      * @since 2021/01/03 23:29
      */
     @Override
-    @Cacheable
+    @RedisCacheable
     public AuthMenuDto listTree() {
         List<AuthMenuDto> sysMenuList = authMenuRepository.getBaseMapper().list();
         return MenuUtil.buildTree(sysMenuList);

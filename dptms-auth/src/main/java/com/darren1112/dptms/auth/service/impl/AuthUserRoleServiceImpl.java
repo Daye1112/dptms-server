@@ -6,9 +6,9 @@ import com.darren1112.dptms.common.core.util.DatabaseUtil;
 import com.darren1112.dptms.common.core.util.StringUtil;
 import com.darren1112.dptms.common.spi.auth.dto.AuthRoleDto;
 import com.darren1112.dptms.common.spi.auth.entity.AuthUserRoleEntity;
+import com.darren1112.dptms.sdk.starter.redis.annotation.RedisCacheEvict;
+import com.darren1112.dptms.sdk.starter.redis.annotation.RedisCacheable;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,7 +22,7 @@ import java.util.List;
  * @since 2020/12/23 01:51
  */
 @Service
-@CacheConfig(cacheNames = "auth", keyGenerator = "keyGenerator")
+@RedisCacheable("auth")
 @Transactional(rollbackFor = Throwable.class, readOnly = true)
 public class AuthUserRoleServiceImpl implements AuthUserRoleService {
 
@@ -39,7 +39,7 @@ public class AuthUserRoleServiceImpl implements AuthUserRoleService {
      * @since 20/12/23 01:48
      */
     @Override
-    @CacheEvict(allEntries = true)
+    @RedisCacheEvict
     @Transactional(rollbackFor = Throwable.class)
     public void assignedRole(Long userId, String roleIds, Long updater) {
         // 清空用户已分配的角色
@@ -71,6 +71,7 @@ public class AuthUserRoleServiceImpl implements AuthUserRoleService {
      * @since 20/12/13 21:43
      */
     @Override
+    @RedisCacheable
     public List<AuthRoleDto> listUserAssigned(Long userId) {
         return authUserRoleRepository.getBaseMapper().listUserAssigned(userId);
     }

@@ -9,10 +9,9 @@ import com.darren1112.dptms.common.spi.auth.dto.AuthOrganizationDto;
 import com.darren1112.dptms.common.spi.auth.entity.AuthOrganizationEntity;
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
+import com.darren1112.dptms.sdk.starter.redis.annotation.RedisCacheEvict;
+import com.darren1112.dptms.sdk.starter.redis.annotation.RedisCacheable;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,7 +24,7 @@ import java.util.List;
  * @since 2020/08/16 01:43
  */
 @Service
-@CacheConfig(cacheNames = "auth", keyGenerator = "keyGenerator")
+@RedisCacheable("auth")
 @Transactional(rollbackFor = Throwable.class, readOnly = true)
 public class AuthOrganizationServiceImpl extends BaseService implements AuthOrganizationService {
 
@@ -42,7 +41,7 @@ public class AuthOrganizationServiceImpl extends BaseService implements AuthOrga
      * @since 20/12/10 01:08
      */
     @Override
-    @Cacheable
+    @RedisCacheable
     public PageBean<AuthOrganizationDto> listPage(PageParam pageParam, AuthOrganizationDto param) {
         List<AuthOrganizationDto> list = authOrganizationRepository.getBaseMapper().listPage(pageParam, param);
         Long count = authOrganizationRepository.getBaseMapper().listPageCount(param);
@@ -58,7 +57,7 @@ public class AuthOrganizationServiceImpl extends BaseService implements AuthOrga
      * @since 20/12/10 01:08
      */
     @Override
-    @CacheEvict(allEntries = true)
+    @RedisCacheEvict
     @Transactional(rollbackFor = Throwable.class)
     public Long insert(AuthOrganizationDto dto) {
         validRepeat(dto, false);
@@ -95,7 +94,7 @@ public class AuthOrganizationServiceImpl extends BaseService implements AuthOrga
      * @since 20/12/10 01:08
      */
     @Override
-    @CacheEvict(allEntries = true)
+    @RedisCacheEvict
     @Transactional(rollbackFor = Throwable.class)
     public Long update(AuthOrganizationEntity entity) {
         validRepeat(entity, true);
@@ -111,7 +110,7 @@ public class AuthOrganizationServiceImpl extends BaseService implements AuthOrga
      * @since 20/12/10 01:08
      */
     @Override
-    @CacheEvict(allEntries = true)
+    @RedisCacheEvict
     @Transactional(rollbackFor = Throwable.class)
     public void deleteById(Long id, Long updater) {
         authOrganizationRepository.getBaseMapper().deleteById(id, updater);
@@ -126,6 +125,7 @@ public class AuthOrganizationServiceImpl extends BaseService implements AuthOrga
      * @since 2023/08/20
      */
     @Override
+    @RedisCacheable
     public List<AuthOrganizationDto> listByUserId(Long userId) {
         return authOrganizationRepository.getBaseMapper().listByUserId(userId);
     }

@@ -8,6 +8,8 @@ import com.darren1112.dptms.file.common.enums.FileManageErrorCodeEnum;
 import com.darren1112.dptms.file.repository.FileCenterRepository;
 import com.darren1112.dptms.file.service.FileCenterService;
 import com.darren1112.dptms.file.service.FileInfoService;
+import com.darren1112.dptms.sdk.starter.redis.annotation.RedisCacheEvict;
+import com.darren1112.dptms.sdk.starter.redis.annotation.RedisCacheable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -28,8 +30,8 @@ import java.util.stream.Collectors;
  * @since 2021/12/18
  */
 @Service
+@RedisCacheable("fileCenter")
 @Transactional(rollbackFor = Throwable.class, readOnly = true)
-@CacheConfig(cacheNames = "fileCenter", keyGenerator = "keyGenerator")
 public class FileCenterServiceImpl implements FileCenterService {
 
     @Autowired
@@ -48,7 +50,7 @@ public class FileCenterServiceImpl implements FileCenterService {
      * @since 2021/12/18
      */
     @Override
-    @Cacheable
+    @RedisCacheable
     public List<FileCenterDto> list(FileCenterDto dto) {
         List<FileCenterDto> list = fileCenterRepository.getBaseMapper().list(dto);
         list.forEach(item -> {
@@ -72,7 +74,7 @@ public class FileCenterServiceImpl implements FileCenterService {
      * @since 2021/12/19
      */
     @Override
-    @CacheEvict(allEntries = true)
+    @RedisCacheEvict
     @Transactional(rollbackFor = Throwable.class)
     public void insert(FileCenterDto dto) {
         fileCenterRepository.getBaseMapper().insert(dto);
@@ -86,7 +88,7 @@ public class FileCenterServiceImpl implements FileCenterService {
      * @since 2023/08/12
      */
     @Override
-    @CacheEvict(allEntries = true)
+    @RedisCacheEvict
     @Transactional(rollbackFor = Throwable.class)
     public void update(FileCenterDto dto) {
         FileCenterDto dataInfo = fileCenterRepository.getById(dto.getId());
@@ -108,7 +110,7 @@ public class FileCenterServiceImpl implements FileCenterService {
      * @since 2023/08/12
      */
     @Override
-    @CacheEvict(allEntries = true)
+    @RedisCacheEvict
     @Transactional(rollbackFor = Throwable.class)
     public void deleteById(FileCenterDto dto) {
         FileCenterDto dataInfo = fileCenterRepository.getById(dto.getId());

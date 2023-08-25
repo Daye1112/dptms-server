@@ -1,7 +1,7 @@
 package com.darren1112.dptms.sdk.starter.redis.aspect;
 
 import com.darren1112.dptms.common.core.constants.AopOrderConstant;
-import com.darren1112.dptms.common.core.constants.RedisConstant;
+import com.darren1112.dptms.common.core.util.JsonUtil;
 import com.darren1112.dptms.common.core.util.StringUtil;
 import com.darren1112.dptms.sdk.starter.redis.annotation.RedisCacheable;
 import com.darren1112.dptms.sdk.starter.redis.core.RedisUtil;
@@ -74,21 +74,19 @@ public class RedisCacheableAspect extends BaseRedisCacheAop {
         String key = keyGenerator(joinPoint);
         String redisKey = prefix + key;
 
-        // 总请求数+1
-        redisUtil.incr(RedisConstant.CACHE_TOTAL);
-
         // 判断是否存在缓存
         boolean exists = redisUtil.exists(redisKey);
         if (exists) {
-            // 从缓存中获取
-            result = redisUtil.getObject(redisKey);
-            // 命中次数+1
-            redisUtil.incr(RedisConstant.CACHE_HIT_TOTAL);
+            // // 从缓存中获取
+            Class<?> returnType = ((MethodSignature) joinPoint.getSignature()).getMethod().getReturnType();
+            String resultStr = redisUtil.get(redisKey);
+            result = JsonUtil.parseObject(resultStr, returnType);
         } else {
             // 调用接口获取结果
             result = joinPoint.proceed();
+            String resultStr = JsonUtil.toJsonString(result);
             // 设置redis缓存
-            redisUtil.setExObject(redisKey, result, (int) dptmsRedisProperties.getCacheTtl());
+            redisUtil.setEx(redisKey, resultStr, (int) dptmsRedisProperties.getCacheTtl() * 60);
         }
 
         return result;

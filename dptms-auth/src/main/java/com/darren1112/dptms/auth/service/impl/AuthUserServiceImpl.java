@@ -11,10 +11,9 @@ import com.darren1112.dptms.common.spi.auth.dto.AuthUserDto;
 import com.darren1112.dptms.common.spi.auth.entity.AuthUserEntity;
 import com.darren1112.dptms.common.spi.common.dto.PageBean;
 import com.darren1112.dptms.common.spi.common.dto.PageParam;
+import com.darren1112.dptms.sdk.starter.redis.annotation.RedisCacheEvict;
+import com.darren1112.dptms.sdk.starter.redis.annotation.RedisCacheable;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,7 +26,7 @@ import java.util.List;
  * @since 2020/07/23 02:43
  */
 @Service
-@CacheConfig(cacheNames = "auth", keyGenerator = "keyGenerator")
+@RedisCacheable("auth")
 @Transactional(rollbackFor = Throwable.class, readOnly = true)
 public class AuthUserServiceImpl extends BaseService implements AuthUserService {
 
@@ -43,7 +42,7 @@ public class AuthUserServiceImpl extends BaseService implements AuthUserService 
      * @since 20/07/23 02:58
      */
     @Override
-    @Cacheable
+    @RedisCacheable
     public AuthUserDto getByUsername(String username) {
         return authUserRepository.getBaseMapper().getByUsername(username);
     }
@@ -56,7 +55,7 @@ public class AuthUserServiceImpl extends BaseService implements AuthUserService 
      * @since 20/12/09 01:02
      */
     @Override
-    @CacheEvict(allEntries = true)
+    @RedisCacheEvict
     @Transactional(rollbackFor = Throwable.class)
     public void updateLoginTime(Long id) {
         authUserRepository.getBaseMapper().updateLastLoginTime(id);
@@ -71,7 +70,7 @@ public class AuthUserServiceImpl extends BaseService implements AuthUserService 
      * @since 20/11/30 23:12
      */
     @Override
-    @Cacheable
+    @RedisCacheable
     public AuthUserDto getById(Long id) {
         return authUserRepository.getBaseMapper().getById(id);
     }
@@ -85,7 +84,7 @@ public class AuthUserServiceImpl extends BaseService implements AuthUserService 
      * @since 20/12/10 01:08
      */
     @Override
-    @CacheEvict(allEntries = true)
+    @RedisCacheEvict
     @Transactional(rollbackFor = Throwable.class)
     public Long insert(AuthUserEntity entity) {
         validRepeat(entity, false);
@@ -122,7 +121,7 @@ public class AuthUserServiceImpl extends BaseService implements AuthUserService 
      * @since 20/12/10 01:08
      */
     @Override
-    @Cacheable
+    @RedisCacheable
     public PageBean<AuthUserDto> listPage(PageParam pageParam, AuthUserDto dto) {
         List<AuthUserDto> list = authUserRepository.getBaseMapper().listPage(pageParam, dto);
         Long count = authUserRepository.getBaseMapper().listPageCount(dto);
@@ -138,7 +137,7 @@ public class AuthUserServiceImpl extends BaseService implements AuthUserService 
      * @since 20/12/10 01:08
      */
     @Override
-    @CacheEvict(allEntries = true)
+    @RedisCacheEvict
     @Transactional(rollbackFor = Throwable.class)
     public Long update(AuthUserEntity entity) {
         validRepeat(entity, true);
@@ -154,7 +153,7 @@ public class AuthUserServiceImpl extends BaseService implements AuthUserService 
      * @since 20/12/10 01:08
      */
     @Override
-    @CacheEvict(allEntries = true)
+    @RedisCacheEvict
     @Transactional(rollbackFor = Throwable.class)
     public void deleteById(Long id, Long updater) {
         authUserRepository.getBaseMapper().deleteById(id, updater);
@@ -168,7 +167,7 @@ public class AuthUserServiceImpl extends BaseService implements AuthUserService 
      * @since 2021/01/14 00:19
      */
     @Override
-    @CacheEvict(allEntries = true)
+    @RedisCacheEvict
     @Transactional(rollbackFor = Throwable.class)
     public void updateLock(AuthUserEntity entity) {
         authUserRepository.getBaseMapper().updateLock(entity);
@@ -182,7 +181,7 @@ public class AuthUserServiceImpl extends BaseService implements AuthUserService 
      * @since 2021/11/24
      */
     @Override
-    @CacheEvict(allEntries = true)
+    @RedisCacheEvict
     @Transactional(rollbackFor = Throwable.class)
     public void updatePassword(AuthUserDto dto) {
         // 查询旧用户信息
