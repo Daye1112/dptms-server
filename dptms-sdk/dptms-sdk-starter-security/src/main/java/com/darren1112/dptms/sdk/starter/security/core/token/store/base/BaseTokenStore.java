@@ -84,6 +84,9 @@ public abstract class BaseTokenStore {
      * @since 2021/01/30 23:36
      */
     public <T extends BaseSecurityUser> String getUserRefreshToken(T activeUser) {
+        if (activeUser == null) {
+            return null;
+        }
         // 设置当前用户的最新refreshToken
         return Optional.ofNullable(redisUtil.get(SecurityConstant.REDIS_USER_REFRESH_TOKEN_PREFIX + activeUser.getUserId())).map(Object::toString).orElse(null);
     }
@@ -98,23 +101,9 @@ public abstract class BaseTokenStore {
      */
     @SuppressWarnings("unchecked")
     public <T extends BaseSecurityUser> T getActiveUser(String refreshToken) {
-        return Optional.ofNullable(redisUtil.get(SecurityConstant.REDIS_REFRESH_TOKEN_PREFIX + refreshToken))
-                .map(Object::toString)
-                .map(item -> (T) JsonUtil.parseObject(item, userClass))
-                .orElse(null);
-    }
-
-    /**
-     * 获取用户信息
-     *
-     * @param request      请求域
-     * @param refreshToken 刷新token
-     * @return {@link BaseSecurityUser 用户信息}
-     * @author darren
-     * @since 20/11/28 01:22
-     */
-    @SuppressWarnings("unchecked")
-    public <T extends BaseSecurityUser> T getActiveUser(HttpServletRequest request, String refreshToken) {
+        if (StringUtil.isBlank(refreshToken)) {
+            return null;
+        }
         return Optional.ofNullable(redisUtil.get(SecurityConstant.REDIS_REFRESH_TOKEN_PREFIX + refreshToken))
                 .map(Object::toString)
                 .map(item -> (T) JsonUtil.parseObject(item, userClass))
@@ -188,6 +177,9 @@ public abstract class BaseTokenStore {
      * @since 20/11/27 00:45
      */
     public String getRefreshToken(String accessToken) {
+        if (StringUtil.isBlank(accessToken)) {
+            return null;
+        }
         return Optional.ofNullable(redisUtil.get(SecurityConstant.REDIS_ACCESS_TOKEN_PREFIX + accessToken))
                 .map(Object::toString).orElse(null);
     }

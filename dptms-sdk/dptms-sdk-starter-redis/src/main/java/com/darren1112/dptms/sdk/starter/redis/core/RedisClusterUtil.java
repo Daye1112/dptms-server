@@ -856,6 +856,40 @@ public class RedisClusterUtil implements RedisUtil {
     }
 
     /**
+     * 移除key
+     *
+     * @param keys 键
+     * @return {@link Long}
+     * @author darren
+     * @since 2021/8/11
+     */
+    @Override
+    public Long removeKeys(Set<String> keys) {
+        return removeKeysWithPrefix(this.prefix, keys);
+    }
+
+    /**
+     * 含前缀-移除key
+     *
+     * @param prefix 前缀
+     * @param keys   键
+     * @return {@link Long}
+     * @author darren
+     * @since 2021/8/11
+     */
+    @Override
+    public Long removeKeysWithPrefix(String prefix, Set<String> keys) {
+        String[] keysArr = new String[keys.size()];
+        if (prefix != null) {
+            int index = 0;
+            for (String key : keys) {
+                keysArr[index++] = prefix + key;
+            }
+        }
+        return this.jedisCluster.del(keysArr);
+    }
+
+    /**
      * 判断key是否存在
      *
      * @param key 键

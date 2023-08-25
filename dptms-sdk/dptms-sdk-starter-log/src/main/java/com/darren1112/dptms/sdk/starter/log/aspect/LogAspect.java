@@ -1,6 +1,7 @@
 package com.darren1112.dptms.sdk.starter.log.aspect;
 
 import com.darren1112.dptms.common.core.base.BaseAop;
+import com.darren1112.dptms.common.core.constants.AopOrderConstant;
 import com.darren1112.dptms.common.core.util.RequestUtil;
 import com.darren1112.dptms.common.spi.monitor.dto.MonitorOperateLogDto;
 import com.darren1112.dptms.sdk.starter.log.annotation.Log;
@@ -17,6 +18,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.core.annotation.Order;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
@@ -30,6 +32,7 @@ import java.util.Optional;
  */
 @Aspect
 @Slf4j
+@Order(AopOrderConstant.LOG_AOP)
 public class LogAspect extends BaseAop {
 
     private LogProperties logProperties;

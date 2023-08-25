@@ -1,6 +1,8 @@
 package com.darren1112.dptms.sdk.starter.redis.config;
 
 import com.alibaba.fastjson.parser.ParserConfig;
+import com.darren1112.dptms.sdk.starter.redis.aspect.RedisCacheEvictAspect;
+import com.darren1112.dptms.sdk.starter.redis.aspect.RedisCacheableAspect;
 import com.darren1112.dptms.sdk.starter.redis.core.MasterSlaveRedisUtil;
 import com.darren1112.dptms.sdk.starter.redis.core.RedisClusterUtil;
 import com.darren1112.dptms.sdk.starter.redis.core.RedisConstants;
@@ -88,6 +90,34 @@ public class RedisAutoConfig {
         } else {
             return null;
         }
+    }
+
+    /**
+     * 缓存aop
+     *
+     * @param redisUtil            redis工具
+     * @param dptmsRedisProperties 配置类
+     * @return {@link RedisCacheableAspect}
+     * @author darren
+     * @since 2023/8/25
+     */
+    @Bean
+    public RedisCacheableAspect redisCacheableAspect(RedisUtil redisUtil,
+                                                     DptmsRedisProperties dptmsRedisProperties) {
+        return new RedisCacheableAspect(redisUtil, dptmsRedisProperties);
+    }
+
+    /**
+     * 缓存清除aop
+     *
+     * @param redisUtil redis工具
+     * @return {@link RedisCacheableAspect}
+     * @author darren
+     * @since 2023/8/25
+     */
+    @Bean
+    public RedisCacheEvictAspect redisCacheEvictAspect(RedisUtil redisUtil) {
+        return new RedisCacheEvictAspect(redisUtil);
     }
 
     @Bean(name = "redisTemplate")

@@ -574,6 +574,27 @@ public interface RedisUtil {
     Long removeKeyWithPrefix(String prefix, String key);
 
     /**
+     * 移除key
+     *
+     * @param keys 键
+     * @return {@link Long}
+     * @author darren
+     * @since 2021/8/11
+     */
+    Long removeKeys(Set<String> keys);
+
+    /**
+     * 含前缀-移除key
+     *
+     * @param prefix 前缀
+     * @param keys   键
+     * @return {@link Long}
+     * @author darren
+     * @since 2021/8/11
+     */
+    Long removeKeysWithPrefix(String prefix, Set<String> keys);
+
+    /**
      * 判断key是否存在
      *
      * @param key 键

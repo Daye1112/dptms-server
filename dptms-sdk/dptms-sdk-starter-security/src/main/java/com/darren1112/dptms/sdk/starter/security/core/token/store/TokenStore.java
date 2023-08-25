@@ -56,7 +56,7 @@ public class TokenStore extends BaseTokenStore {
      * @since 20/11/28 01:22
      */
     public <T extends BaseSecurityUser> T getActiveUser(HttpServletRequest request) {
-        return super.getActiveUser(request, getRefreshToken(request));
+        return super.getActiveUser(getRefreshToken(request));
     }
 
     /**
